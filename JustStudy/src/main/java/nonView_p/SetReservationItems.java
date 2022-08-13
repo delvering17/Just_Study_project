@@ -35,12 +35,15 @@ public class SetReservationItems implements NonViewService {
                             e.printStackTrace();
                         }
                     }
+
+                    res += ","+dto.getPrice();
                 }
             } else if((request.getParameter("type")+"").equals("setTime")){
                 if(((String) request.getParameter("branchName")).equals(dto.getName())){
                     for(int i = dto.getOpen(); i < dto.getClose(); i++){
                         try {
-                            res += "<div><div class=\"studyroom-reserv-possible\">"+URLEncoder.encode("예약가능", "UTF-8")+"</div>"+(i < 10 ? "0" : "")+i+":00 ~ "+(i < 9 ? "0" : "")+(i+1)+":00</div>";
+                            res += "<input type=\"checkbox\" name=\"time\" id=\"" + i + "\" hidden/>";
+                            res += "<label for=\"" + i + "\"><div><div class=\"studyroom-reserv-possible\">"+URLEncoder.encode("예약가능", "UTF-8")+"</div><div>"+(i < 10 ? "0" : "")+i+":00 ~ "+(i < 9 ? "0" : "")+(i+1)+":00</div></div></label>";
                         } catch (UnsupportedEncodingException e) {
                             throw new RuntimeException(e);
                         }

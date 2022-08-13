@@ -73,7 +73,7 @@
         }
 
         .studyroom-reserv-innerlist > label > div,
-        .studyroom-reserv-innerlist-time > div {
+        .studyroom-reserv-innerlist-time > label > div {
             border-bottom: 1px solid lightgray;
             height: 60px;
             padding-left: 20px;
@@ -88,8 +88,16 @@
             background: lightgray;
         }
 
-        .studyroom-reserv-innerlist-time > div {
+        .studyroom-reserv-innerlist-time > label > div {
             justify-content: left;
+        }
+
+        .studyroom-reserv-innerlist-time > label > div >div:last-of-type {
+            width: fit-content;
+        }
+
+        .studyroom-reserv-innerlist-time > input[type=checkbox]:checked + label > div {
+            background: lightgray;
         }
 
         .studyroom-reserv-time > div:first-of-type {
@@ -463,7 +471,8 @@
                         $(".studyroom-reserv-time>.studyroom-reserv-innerlist-time").html("")
                         $(".studyroom-reserv-branch>.studyroom-reserv-innerlist").html(decodeURIComponent(data))
                         $("input[type=radio][name=cityName]:checked+label>div>div").html($(".studyroom-reserv-branch>.studyroom-reserv-innerlist>label").length)
-
+                        $(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(1)>b").html(document.querySelector('input[type=radio][name=cityName]:checked').getAttribute("id"))
+                        $(".studyroom-reserv-totalprice").html("0")
                     },
                     error: function (e){
                         console.log(e.responseText)
@@ -473,6 +482,8 @@
 
             $(document).on("change", "input[name=\"branchName\"]", function(){
 
+                console.log($(".studyroom-reserv-headcount:first-of-type+b").html())
+
                 $.ajax({
                     url: '<c:url value="/nonView/SetReservationItems"/>',
                     type: "GET",
@@ -480,7 +491,10 @@
                     data: "type=setRoom&branchName="+document.querySelector('input[type=radio][name=branchName]:checked').getAttribute("id"),
                     success: function(data){
                         $(".studyroom-reserv-time>.studyroom-reserv-innerlist-time").html("")
-                        $(".studyroom-reserv-room>.studyroom-reserv-innerlist").html(decodeURIComponent(data))
+                        $(".studyroom-reserv-room>.studyroom-reserv-innerlist").html(decodeURIComponent(data.split(",")[0]))
+                        $(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(2)>b").html(document.querySelector('input[type=radio][name=branchName]:checked').getAttribute("id"))
+                        $(".studyroom-reserv-headcount:last-of-type+font").html("*인당 1시간 <b>"+data.split(",")[1]+"</b>원")
+                        $(".studyroom-reserv-totalprice").html("0")
                     },
                     error: function (e){
                         console.log(e.responseText)
@@ -493,6 +507,7 @@
                 nowDate.setDate(nowDate.getDate() - 1);
                 if(nowDate >= new Date().setDate(new Date().getDate()-1)){
                     $(".studyroom-reserv-time > div > .fa-angle-left + div").html(nowDate.getFullYear()+"-"+(nowDate.getMonth() > 8 ? "" : "0")+(nowDate.getMonth()+1)+"-"+(nowDate.getDate() > 9 ? "" : "0")+nowDate.getDate()+" ("+"일월화수목금토".split("")[nowDate.getDay()]+")")
+                    $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(1)>b").html($(".studyroom-reserv-time > div > .fa-angle-left + div").html())
                 } else{
 
                 }
@@ -502,6 +517,7 @@
                 let nowDate = new Date($(".studyroom-reserv-time > div > .fa-angle-left + div").html())
                 nowDate.setDate(nowDate.getDate() + 1);
                 $(".studyroom-reserv-time > div > .fa-angle-left + div").html(nowDate.getFullYear()+"-"+(nowDate.getMonth() > 8 ? "" : "0")+(nowDate.getMonth()+1)+"-"+(nowDate.getDate() > 9 ? "" : "0")+nowDate.getDate()+" ("+"일월화수목금토".split("")[nowDate.getDay()]+")")
+                $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(1)>b").html($(".studyroom-reserv-time > div > .fa-angle-left + div").html())
             })
 
             $(document).on("change", "input[name=\"roomName\"]", function(){
@@ -514,14 +530,27 @@
                     data: "type=setTime&roomName="+document.querySelector('input[type=radio][name=roomName]:checked').getAttribute("id")
                         +"&branchName="+document.querySelector('input[type=radio][name=branchName]:checked').getAttribute("id"),
                     success: function(data){
-                        console.log(data)
                         $(".studyroom-reserv-time>.studyroom-reserv-innerlist-time").html(decodeURIComponent(data))
+                        $(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(3)>b").html(document.querySelector('input[type=radio][name=roomName]:checked').getAttribute("id"))
                     },
                     error: function (e){
                         console.log(e.responseText)
                     }
                 })
             });
+
+            $(document).on("change", "input[name=\"time\"]", function (){
+                console.log(document.querySelectorAll('input[type=checkbox][name=time]:checked').length)
+
+                let str = document.querySelector('input[type=checkbox][name=time]:checked+label>div>div:last-of-type').innerHTML
+                    + ((document.querySelectorAll('input[type=checkbox][name=time]:checked').length - 1) > 0 ? " 외 "+(document.querySelectorAll('input[type=checkbox][name=time]:checked').length - 1)+"건" : "")
+
+                $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(2)>b").html(str)
+
+                $(".studyroom-reserv-totalprice").html($(".studyroom-reserv-headcount:last-of-type+font>b").html()
+                    * document.querySelectorAll('input[type=checkbox][name=time]:checked').length
+                    * $(".studyroom-reserv-headcount:first-of-type+b").html())
+            })
 
         }
     </script>
@@ -581,23 +610,23 @@
 
     <div class="studyroom-reserv-selected">
         <div>
-            <div>지역명<b>서울</b></div>
-            <div>지점명<b>강남역점</b></div>
-            <div>룸타입<b>룸2 | 6인실</b></div>
+            <div>지역명<b></b></div>
+            <div>지점명<b></b></div>
+            <div>룸타입<b></b></div>
         </div>
         <div>
-            <div>날짜<b>2022-08-11</b></div>
-            <div>시간<b>16:00~17:00</b></div>
+            <div>날짜<b><fmt:formatDate value="<%=new Date()%>" pattern="yyyy-MM-d (E)"/></b></div>
+            <div>시간<b></b></div>
         </div>
         <i class="fa-solid fa-chevron-right fa-2x"></i>
         <div>
             인원
             <button class="studyroom-reserv-headcount">-</button>
-            <b>2명</b>
+            <b>2</b><b>명</b>
             <button class="studyroom-reserv-headcount">+</button>
             <font size="2px" color="darkred">*인당 1시간 2000원</font>
             <div>총
-                <div>8,000</div>
+                <div class="studyroom-reserv-totalprice">0</div>
                 원
             </div>
         </div>

@@ -218,7 +218,7 @@
         }
 
         .studyroom-reserv-headcount:first-of-type {
-            margin-left: 20px;
+            margin-left: 10px;
         }
 
         .studyroom-reserv-headcount:last-of-type {
@@ -547,6 +547,20 @@
 
                 $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(2)>b").html(str)
 
+                $(".studyroom-reserv-totalprice").html($(".studyroom-reserv-headcount:last-of-type+font>b").html()
+                    * document.querySelectorAll('input[type=checkbox][name=time]:checked').length
+                    * $(".studyroom-reserv-headcount:first-of-type+b").html())
+            })
+
+            $(".studyroom-reserv-headcount:first-of-type").click(function (){
+                $(".studyroom-reserv-headcount:first-of-type+b").html($(".studyroom-reserv-headcount:first-of-type+b").html() - 1)
+                $(".studyroom-reserv-totalprice").html($(".studyroom-reserv-headcount:last-of-type+font>b").html()
+                    * document.querySelectorAll('input[type=checkbox][name=time]:checked').length
+                    * $(".studyroom-reserv-headcount:first-of-type+b").html())
+            })
+
+            $(".studyroom-reserv-headcount:last-of-type").click(function (){
+                $(".studyroom-reserv-headcount:first-of-type+b").html(parseInt($(".studyroom-reserv-headcount:first-of-type+b").html()) + 1)
                 $(".studyroom-reserv-totalprice").html($(".studyroom-reserv-headcount:last-of-type+font>b").html()
                     * document.querySelectorAll('input[type=checkbox][name=time]:checked').length
                     * $(".studyroom-reserv-headcount:first-of-type+b").html())

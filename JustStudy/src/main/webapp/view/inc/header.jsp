@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 
@@ -179,6 +180,8 @@
     }
 
 
+
+
 </style>
 
 
@@ -211,9 +214,10 @@
                         <li>
                             <a>HELP</a>
                         </li>
-                        <li><a href="?" style="">회원가입</a></li>
-                        <li><a id="login" href="?"><i class="fa-solid fa-user"></i></a></li>
+                        <li><a href="../member/MemberLoginForm" ><i class="fa-solid fa-user"></i></a></li>
 
+
+                        <li><a href="?" style="">회원가입</a></li>
                     </ul>
                 </div>
 
@@ -255,6 +259,11 @@
     </div>
 </div>
 
+
+
+</body>
+</html>
+
 <script type="text/javascript">
 
     const nav = document.querySelector("nav");
@@ -288,4 +297,24 @@
             }
         }
     }
+
+    function goLogin() {
+        $.ajax({
+            url:'<c:url value="/memberNonView/MemberLoginReg"/>',
+            type:'GET',
+            // data:{pname:$("#pname").val()},
+            async:false,
+            // dataType:'json',  //지정하지 않으면 문자열로 처리
+            success:function(dd){
+                // var ttt = decodeURIComponent(dd.name)
+                alert("성공");
+            },
+            error:function(e){
+                console.log(e.responseText)
+            }
+        })
+    }
+
+
+
 </script>

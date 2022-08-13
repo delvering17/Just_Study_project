@@ -2,10 +2,12 @@ package memberNonView_p;
 
 
 import model_p.MemberDAO;
+import model_p.MemberDTO;
 import org.json.simple.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
@@ -21,13 +23,17 @@ public class MemberLoginReg implements MemberNonViewService{
         System.out.println(input_password);
 
 
-        String member_nickname = new MemberDAO().login(input_email,input_password);
+        MemberDTO memberDTO = new MemberDAO().login(input_email,input_password);
 
 
         JSONObject jj = new JSONObject();
 
         try {
-            if(member_nickname != null) {
+            if(memberDTO != null) {
+
+                HttpSession session = request.getSession();
+//                session.setAttribute("user");
+
 
                 jj.put("loginResult", "success");
 

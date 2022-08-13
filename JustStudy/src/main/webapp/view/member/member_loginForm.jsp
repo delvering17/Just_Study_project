@@ -2,6 +2,35 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
+
+<script type="text/javascript">
+
+    function goLogin() {
+        let form_data = {
+            input_email:$('#input-email').val(),
+            input_password:$('#input-password').val()
+        }
+
+        $.ajax({
+            url:'<c:url value="/memberNonView/MemberLoginReg"/>',
+            type:'GET',
+            data: form_data,
+            async:false,
+            dataType:'JSON',
+            success:function(response){
+                // alert(response.member_nickname)
+                if(response.loginResult === 'success') {
+                    alert('로그인에 성공했습니다.')
+                } else {
+                    alert(response.loginResult)
+                }
+            },
+            error:function(e){
+                console.log(e.responseText)
+            }
+        })
+    }
+</script>
 <style type="text/css">
     .btn-login {
         display: flex;
@@ -14,53 +43,29 @@
         margin-top: 5px;
     }
 </style>
-<script type="text/javascript">
-
-    function goLogin() {
-        let form_data = {
-            input_id:$('#input-id').val(),
-            input_password:$('#input-password').val()
-        }
-
-        $.ajax({
-            url:'<c:url value="/memberNonView/MemberLoginReg"/>',
-            type:'GET',
-            data: form_data,
-            async:false,
-            dataType:'JSON',  //지정하지 않으면 문자열로 처리
-            success:function(aa){
-                alert(aa.id)
-            },
-            error:function(e){
-                console.log(e.responseText)
-            }
-        })
-    }
-</script>
-<div id="box-login">
+<div id="wrapper-login">
     <div>
-        <h4>로그인</h4>
-        <button class="btn-close"></button>
+        <p>로그인</p>
     </div>
     <div>
         <div>
-            <span><i ></i></span>
-            <input type="text" id="input-id" name="memberId" placeholder="아이디" aria-label="아이디" required/>
+            <span><i class="fa-solid fa-key"></i></span>
+            <input type="text" id="input-email" name="input-email" placeholder="이메일" aria-label="이메일" required/>
         </div>
         <div>
             <span><i class="fa-solid fa-key"></i></span>
             <input type="password" id="input-password"  placeholder="비밀번호" aria-label="비밀번호" required/>
         </div>
-        <div>
-            <input type="checkbox" id="exampleCheck1"/>
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div>
+<%--        <div>--%>
+<%--            <input type="checkbox" id="exampleCheck1"/>--%>
+<%--            <label class="form-check-label" for="exampleCheck1">Check me out</label>--%>
+<%--        </div>--%>
         <div class="wrapper-login">
             <div class="btn-login">
                 <button onclick="goLogin()" class="btn btn-dark">로그인</button>
             </div>
             <div class="btn-login">
-                <button type="button" onclick="goLogin()" class="btn" style="padding: 0px">
+                <button onclick="goLogin()" class="btn" style="padding: 0px">
                     <img src="<c:url value="/img/member/kakao_login.png"/>" alt=""/>
                 </button>
             </div>

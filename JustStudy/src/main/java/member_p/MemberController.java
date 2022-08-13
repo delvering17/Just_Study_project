@@ -20,6 +20,7 @@ public class MemberController extends HttpServlet {
         super();
 
         nonService.put("MemberLoginForm","member/member_loginForm.jsp");
+        nonService.put("MemberSigninForm","member/member_signinForm.jsp");
     }
 
     @Override

@@ -187,7 +187,11 @@
 
     <div class="header-wrapper">
 
-
+        <div class="header-logo">
+            <a href="MainPage">
+                <img id="logo" src="<c:url value="/img/inc/logo.png"/>" style="width: 150px; height: 150px">
+            </a>
+        </div>
 
         <div class="nav-wrapper">
 

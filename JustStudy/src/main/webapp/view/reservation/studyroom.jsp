@@ -443,8 +443,10 @@
                     async: false,
                     data: "cityName="+document.querySelector('input[type=radio][name=cityName]:checked').getAttribute("id"),
                     success: function(data){
+                        $(".studyroom-reserv-room>.studyroom-reserv-innerlist").html("")
                         $(".studyroom-reserv-branch>.studyroom-reserv-innerlist").html(decodeURIComponent(data))
                         $("input[type=radio][name=cityName]:checked+label>div>div").html($(".studyroom-reserv-branch>.studyroom-reserv-innerlist>label").length)
+
                     },
                     error: function (e){
                         console.log(e.responseText)
@@ -452,7 +454,22 @@
                 })
             })
 
-            
+            $(document).on("change", "input[name=\"branchName\"]", function(){
+
+                $.ajax({
+                    url: '<c:url value="/nonView/SetReservationItems"/>',
+                    type: "GET",
+                    async: false,
+                    data: "branchName="+document.querySelector('input[type=radio][name=branchName]:checked').getAttribute("id"),
+                    success: function(data){
+                        $(".studyroom-reserv-room>.studyroom-reserv-innerlist").html(decodeURIComponent(data))
+                    },
+                    error: function (e){
+                        console.log(e.responseText)
+                    }
+                })
+            });
+
         }
     </script>
 </head>

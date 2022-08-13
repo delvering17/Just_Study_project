@@ -19,8 +19,8 @@ public class MemberLoginReg implements MemberNonViewService{
 
         String input_email = request.getParameter("input_email");
         String input_password = request.getParameter("input_password");
-        System.out.println(input_email);
-        System.out.println(input_password);
+//        System.out.println(input_email);
+//        System.out.println(input_password);
 
 
         MemberDTO memberDTO = new MemberDAO().login(input_email,input_password);

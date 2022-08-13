@@ -2,7 +2,9 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model_p.DAO" %>
 <%@ page import="java.util.HashMap" %>
-<%@ page import="reservation_p.Studyroom" %><%--
+<%@ page import="reservation_p.Studyroom" %>
+<%@ page import="java.util.Calendar" %>
+<%@ page import="java.util.Date" %><%--
   Created by IntelliJ IDEA.
   User: dieun
   Date: 2022-08-11
@@ -11,6 +13,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 
 <head>
@@ -78,6 +81,7 @@
             justify-content: space-between;
             align-items: center;
             font-weight: bold;
+            cursor: pointer;
         }
 
         .studyroom-reserv-innerlist > input[type=radio]:checked + label > div {
@@ -95,6 +99,18 @@
             text-align: center;
             font-weight: bold;
             border-bottom: 1px solid lightgray;
+        }
+
+        .studyroom-reserv-time > div:first-of-type > div{
+            width: fit-content;
+            display: inline-block;
+            margin: 0px 10px 0px 10px;
+        }
+
+        .studyroom-reserv-time > div > .fa-angle-left,
+        .studyroom-reserv-time > div > .fa-angle-right{
+            width: fit-content;
+            cursor: pointer;
         }
 
         .fa-calendar-days {
@@ -470,6 +486,22 @@
                 })
             });
 
+            $(".studyroom-reserv-time > div > .fa-angle-left").click(function (){
+                let nowDate = new Date($(".studyroom-reserv-time > div > .fa-angle-left + div").html())
+                nowDate.setDate(nowDate.getDate() - 1);
+                if(nowDate >= new Date().setDate(new Date().getDate()-1)){
+                    $(".studyroom-reserv-time > div > .fa-angle-left + div").html(nowDate.getFullYear()+"-"+(nowDate.getMonth() > 8 ? "" : "0")+(nowDate.getMonth()+1)+"-"+(nowDate.getDate() > 9 ? "" : "0")+nowDate.getDate()+" ("+"일월화수목금토".split("")[nowDate.getDay()]+")")
+                } else{
+
+                }
+            })
+
+            $(".studyroom-reserv-time > div > .fa-angle-right").click(function (){
+                let nowDate = new Date($(".studyroom-reserv-time > div > .fa-angle-left + div").html())
+                nowDate.setDate(nowDate.getDate() + 1);
+                $(".studyroom-reserv-time > div > .fa-angle-left + div").html(nowDate.getFullYear()+"-"+(nowDate.getMonth() > 8 ? "" : "0")+(nowDate.getMonth()+1)+"-"+(nowDate.getDate() > 9 ? "" : "0")+nowDate.getDate()+" ("+"일월화수목금토".split("")[nowDate.getDay()]+")")
+            })
+
         }
     </script>
 </head>
@@ -516,7 +548,9 @@
                 <div>시간은 복수선택 가능합니다.</div>
             </h4>
             <div>
-                < 2022. 08. 09 화 >
+                <i class="fa-solid fa-angle-left"></i>
+                <div><fmt:formatDate value="<%=new Date()%>" pattern="yyyy-MM-d (E)"/></div>
+                <i class="fa-solid fa-angle-right"></i>
                 <i class="fa-solid fa-calendar-days fa-2x"></i>
             </div>
             <div class="studyroom-reserv-innerlist-time">

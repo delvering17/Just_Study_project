@@ -188,7 +188,7 @@
     <div class="header-wrapper">
 
         <div class="header-logo">
-            <a href="MainPage">
+            <a href="<c:url value="/board/MainPage"/>">
                 <img id="logo" src="<c:url value="/img/inc/logo.png"/>" style="width: 150px; height: 150px">
             </a>
         </div>
@@ -244,9 +244,11 @@
                             <li><a href="?">성FAQ</a></li>
                         </ul>
                         <ul class="gnb-sub-list">
-                            <li><a href="../member/MemberLoginForm" >로그인</a></li>
+                                <li><a href="../member/MemberLoginForm" >로그인</a></li>
+                            <c:if test="${sessionScope.memberDTO != null}">
+                                <li><a href="../member/MemberLogoutForm" >로그아웃</a></li>
+                            </c:if>
                             <li><a href="#" >관리자로그인</a></li>
-                            <li><a href="../member/MemberLoginForm" >로그아웃</a></li>
                         </ul>
                         <ul class="gnb-sub-list">
                             <li><a href="?" >마이페이지</a></li>

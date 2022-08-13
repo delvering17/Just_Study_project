@@ -21,6 +21,7 @@
                 // alert(response.member_nickname)
                 if(response.loginResult === 'success') {
                     alert('로그인에 성공했습니다.')
+                    location.href = '<c:url value="/board/MainPage"/>'
                 } else {
                     alert(response.loginResult)
                 }

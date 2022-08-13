@@ -26,14 +26,14 @@
 
 
     .header-logo {
-        /*width: 150px;*/
-        /*height: 150px;*/
+        width: 150px;
+        height: 150px;
         /*margin-right: 30px;*/
         /*display: flex;*/
         /*align-items: center;*/
         /*background-color: #fff;*/
-        /*margin-top: -25px;*/
-        /*z-index: 3;*/
+        margin-top: -25px;
+        z-index: 3;
     }
 
     #logo {
@@ -47,9 +47,8 @@
         height: 130px;
         background: white;
         /*border: solid 1px #ff00ff;*/
-
         position: fixed;
-        animation: down 0.5s ease;
+        /*animation: down 0.5s ease;*/
         z-index: 2;
     }
 
@@ -68,7 +67,6 @@
         position: relative;
         width: 100%;
         height: 0px;
-        background: red;
         margin-top: -25px;
         background: transparent;
         /*overflow: hidden;*/
@@ -189,14 +187,12 @@
 
     <div class="header-wrapper">
 
-        <div class="header-logo">
-            <a href="header.jsp">
-                <%--<img id="logo" src="<%=request.getContextPath()%>/img/logo3.jpg">--%>
-            </a>
-        </div>
+
 
         <div class="nav-wrapper">
+
             <nav>
+
                 <div class="gnb">
                     <ul>
                         <li>
@@ -244,8 +240,13 @@
                             <li><a href="?">성FAQ</a></li>
                         </ul>
                         <ul class="gnb-sub-list">
+                            <li><a href="../member/MemberLoginForm" >로그인</a></li>
+                            <li><a href="#" >관리자로그인</a></li>
+                            <li><a href="../member/MemberLoginForm" >로그아웃</a></li>
                         </ul>
                         <ul class="gnb-sub-list">
+                            <li><a href="?" >마이페이지</a></li>
+                            <li><a href="?" >회원가입</a></li>
                         </ul>
                     </div>
                 </div>

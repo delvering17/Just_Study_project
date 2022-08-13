@@ -1,7 +1,8 @@
 <%@ page import="model_p.BranchDTO" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model_p.DAO" %>
-<%@ page import="java.util.HashMap" %><%--
+<%@ page import="java.util.HashMap" %>
+<%@ page import="reservation_p.Studyroom" %><%--
   Created by IntelliJ IDEA.
   User: dieun
   Date: 2022-08-11
@@ -430,39 +431,32 @@
         }
 
     </style>
-</head>
-<%
-    int[] ww = new int[]{1, 2, 3};
-    ArrayList<BranchDTO> branch = new DAO().branchList();
 
-    HashMap<String, Integer> branchMap = new HashMap<String, Integer>();
-    for (String city : "서울,경기,부산,대구,인천,광주,대전,울산,세종,강원,충북,충남,전북,전남,경북,경남,제주".split(",")) {
-        branchMap.put(city, 0);
-    }
+    <script type="text/javascript">
+        window.onload = function () {
 
-    for (BranchDTO dto : branch) {
-        if (branchMap.containsKey(dto.getCity())) {
-            branchMap.put(dto.getCity(), branchMap.get(dto.getCity()) + 1);
+            $('input[name="cityName"]').change(function () {
+
+                $.ajax({
+                    url: '<c:url value="/nonView/SetReservationItems"/>',
+                    type: "GET",
+                    async: false,
+                    data: "cityName="+document.querySelector('input[type=radio][name=cityName]:checked').getAttribute("id"),
+                    success: function(data){
+                        console.log(data)
+                        $(".studyroom-reserv-branch>.studyroom-reserv-innerlist").html(decodeURIComponent(data))
+                    },
+                    error: function (e){
+                        console.log(e.responseText)
+                    }
+                })
+            })
         }
-    }
-%>
-
-<script type="text/javascript">
-    window.onload = function () {
-
-        $('input[name="cityName"]').change(function () {
-            $(".studyroom-reserv-branch>.studyroom-reserv-innerlist").html("")
-            <%for (BranchDTO dto : branch) {%>
-                if(document.querySelector('input[type=radio][name=cityName]:checked').getAttribute("id") == "<%=dto.getCity()%>"){
-                    $(".studyroom-reserv-branch>.studyroom-reserv-innerlist").append("<input type=\"radio\" name=\"branchName\" id=\"<%=dto.getName()%>\" hidden/>")
-                    $(".studyroom-reserv-branch>.studyroom-reserv-innerlist").append("<label for=\"<%=dto.getName()%>\"><div>"+"<%=dto.getName()%>"+"</div></label>")
-                }
-          <%}%>
-        })
-    }
-</script>
+    </script>
+</head>
 
 <body>
+
 <div class="studyroom-reserv-bg">
 
     <h1>스터디룸예약</h1>
@@ -472,12 +466,12 @@
             <h4>지역</h4>
             <div class="studyroom-reserv-innerlist">
                 <%for (String city : "서울,경기,부산,대구,인천,광주,대전,울산,세종,강원,충북,충남,전북,전남,경북,경남,제주".split(",")) {
-                    if(branchMap.get(city)!=0){%>
+                    if(((HashMap<String, Integer>)request.getAttribute("branchMap")).get(city)!=0){%>
                         <input type="radio" name="cityName" id="<%=city%>" hidden/>
                         <label for="<%=city%>">
                             <div>
                                 <%= city%>
-                                <div><%=branchMap.get(city)%>
+                                <div><%=((HashMap<String, Integer>)request.getAttribute("branchMap")).get(city)%>
                                 </div>
                             </div>
                         </label>
@@ -607,4 +601,5 @@
 </div>
 
 </body>
+
 </html>

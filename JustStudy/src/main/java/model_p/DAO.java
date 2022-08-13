@@ -43,6 +43,8 @@ public class DAO {
                 BranchDTO dto = new BranchDTO();
                 dto.setCity(rs.getString("city"));
                 dto.setName(rs.getString("name"));
+                dto.setRooms(rs.getString("rooms"));
+                dto.setPrice(rs.getInt("price"));
                 res.add(dto);
             }
         } catch (SQLException e) {

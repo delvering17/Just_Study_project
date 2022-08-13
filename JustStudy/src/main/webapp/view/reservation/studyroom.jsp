@@ -443,14 +443,16 @@
                     async: false,
                     data: "cityName="+document.querySelector('input[type=radio][name=cityName]:checked').getAttribute("id"),
                     success: function(data){
-                        console.log(data)
                         $(".studyroom-reserv-branch>.studyroom-reserv-innerlist").html(decodeURIComponent(data))
+                        $("input[type=radio][name=cityName]:checked+label>div>div").html($(".studyroom-reserv-branch>.studyroom-reserv-innerlist>label").length)
                     },
                     error: function (e){
                         console.log(e.responseText)
                     }
                 })
             })
+
+            
         }
     </script>
 </head>
@@ -471,8 +473,7 @@
                         <label for="<%=city%>">
                             <div>
                                 <%= city%>
-                                <div><%=((HashMap<String, Integer>)request.getAttribute("branchMap")).get(city)%>
-                                </div>
+                                <div><%=((HashMap<String, Integer>)request.getAttribute("branchMap")).get(city)%></div>
                             </div>
                         </label>
                   <%}%>

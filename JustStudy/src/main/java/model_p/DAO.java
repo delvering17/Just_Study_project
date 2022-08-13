@@ -45,6 +45,8 @@ public class DAO {
                 dto.setName(rs.getString("name"));
                 dto.setRooms(rs.getString("rooms"));
                 dto.setPrice(rs.getInt("price"));
+                dto.setOpen(rs.getInt("open"));
+                dto.setClose(rs.getInt("close"));
                 res.add(dto);
             }
         } catch (SQLException e) {

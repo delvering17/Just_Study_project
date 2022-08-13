@@ -144,12 +144,12 @@
             line-height: 40px;
         }
 
-        .studyroom-reserv-innerlist-time > div > div {
+        .studyroom-reserv-possible {
             width: 70px;
             height: 30px;
             margin-right: 20px;
             border-radius: 30px;
-            background: darkred;
+            background: #B1997A;
             line-height: 30px;
             text-align: center;
             color: white;
@@ -457,9 +457,10 @@
                     url: '<c:url value="/nonView/SetReservationItems"/>',
                     type: "GET",
                     async: false,
-                    data: "cityName="+document.querySelector('input[type=radio][name=cityName]:checked').getAttribute("id"),
+                    data: "type=setBranch&cityName="+document.querySelector('input[type=radio][name=cityName]:checked').getAttribute("id"),
                     success: function(data){
                         $(".studyroom-reserv-room>.studyroom-reserv-innerlist").html("")
+                        $(".studyroom-reserv-time>.studyroom-reserv-innerlist-time").html("")
                         $(".studyroom-reserv-branch>.studyroom-reserv-innerlist").html(decodeURIComponent(data))
                         $("input[type=radio][name=cityName]:checked+label>div>div").html($(".studyroom-reserv-branch>.studyroom-reserv-innerlist>label").length)
 
@@ -476,8 +477,9 @@
                     url: '<c:url value="/nonView/SetReservationItems"/>',
                     type: "GET",
                     async: false,
-                    data: "branchName="+document.querySelector('input[type=radio][name=branchName]:checked').getAttribute("id"),
+                    data: "type=setRoom&branchName="+document.querySelector('input[type=radio][name=branchName]:checked').getAttribute("id"),
                     success: function(data){
+                        $(".studyroom-reserv-time>.studyroom-reserv-innerlist-time").html("")
                         $(".studyroom-reserv-room>.studyroom-reserv-innerlist").html(decodeURIComponent(data))
                     },
                     error: function (e){
@@ -501,6 +503,25 @@
                 nowDate.setDate(nowDate.getDate() + 1);
                 $(".studyroom-reserv-time > div > .fa-angle-left + div").html(nowDate.getFullYear()+"-"+(nowDate.getMonth() > 8 ? "" : "0")+(nowDate.getMonth()+1)+"-"+(nowDate.getDate() > 9 ? "" : "0")+nowDate.getDate()+" ("+"일월화수목금토".split("")[nowDate.getDay()]+")")
             })
+
+            $(document).on("change", "input[name=\"roomName\"]", function(){
+
+                console.log(document.querySelector('input[type=radio][name=roomName]:checked').getAttribute("id"))
+                $.ajax({
+                    url: '<c:url value="/nonView/SetReservationItems"/>',
+                    type: "GET",
+                    async: false,
+                    data: "type=setTime&roomName="+document.querySelector('input[type=radio][name=roomName]:checked').getAttribute("id")
+                        +"&branchName="+document.querySelector('input[type=radio][name=branchName]:checked').getAttribute("id"),
+                    success: function(data){
+                        console.log(data)
+                        $(".studyroom-reserv-time>.studyroom-reserv-innerlist-time").html(decodeURIComponent(data))
+                    },
+                    error: function (e){
+                        console.log(e.responseText)
+                    }
+                })
+            });
 
         }
     </script>
@@ -554,10 +575,6 @@
                 <i class="fa-solid fa-calendar-days fa-2x"></i>
             </div>
             <div class="studyroom-reserv-innerlist-time">
-                <div>
-                    <div></div>
-                    시간
-                </div>
             </div>
         </div>
     </div>

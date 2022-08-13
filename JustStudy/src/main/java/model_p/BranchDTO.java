@@ -6,7 +6,7 @@ import java.net.URLEncoder;
 public class BranchDTO {
 
     String city, name, rooms;
-    int price;
+    int price, open, close;
 
     public String getCity() {
         return city;
@@ -65,6 +65,22 @@ public class BranchDTO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public int getOpen() {
+        return open;
+    }
+
+    public void setOpen(int open) {
+        this.open = open;
+    }
+
+    public int getClose() {
+        return close;
+    }
+
+    public void setClose(int close) {
+        this.close = close;
     }
 
     public void setPrice(int price) {

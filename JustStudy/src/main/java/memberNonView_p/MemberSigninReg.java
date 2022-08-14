@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.lang.reflect.Member;
 
 
 public class MemberSigninReg implements MemberNonViewService{
@@ -19,18 +20,34 @@ public class MemberSigninReg implements MemberNonViewService{
         String input_userid = request.getParameter("input_userid");
         String input_password1 = request.getParameter("input_password1");
         String input_password2 = request.getParameter("input_password2");
+        String input_nickname = request.getParameter("input_nickname");
         String input_phone = request.getParameter("input_phone");
-        String input_name = request.getParameter("input_name");
+        String input_realname = request.getParameter("input_realname");
         String input_address1 = request.getParameter("input_address1");
         String input_address2 = request.getParameter("input_address2");
 
-        System.out.println(input_name);
-        System.out.println(input_address2);
+        // 여기 유효성 검사 다 해줘야함 찬욱아 까먹지마라
+
+        MemberDTO memberDTO = new MemberDTO();
+
+        memberDTO.setMem_social(1); // 나중에 바꿔라
+        memberDTO.setMem_userid(input_userid);
+        memberDTO.setMem_password(input_password1);
+        memberDTO.setMem_nickname(input_nickname);
+        memberDTO.setMem_phone(input_phone);
+        memberDTO.setMem_realname(input_realname);
+        memberDTO.setMem_address1(input_address1);
+        memberDTO.setMem_address2(input_address2);
+        memberDTO.setMem_level(1);
+        memberDTO.setMem_socialid(null);
+
+
+        //  TODO - 유효성 검사 필요
+
+
+        new MemberDAO().signIn(memberDTO);
 
         JSONObject jj = new JSONObject();
-
-
-        // 여기 유효성 검사 다 해줘야함 찬욱아 까먹지마라
         try {
                 jj.put("msg", "success");
             response.getWriter().append(jj.toJSONString());

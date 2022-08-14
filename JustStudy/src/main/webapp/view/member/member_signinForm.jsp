@@ -64,7 +64,7 @@
       input_password2:$('#input-password2').val(),
       input_nickname:$('#input-nickname').val(),
       input_phone:$('#input-phone').val(),
-      input_name:$('#input-name').val(),
+      input_realname:$('#input-realname').val(),
       input_address1:$('#input-address1').val(),
       input_address2:$('#input-address2').val()
     }
@@ -178,7 +178,7 @@
   </div>
   <div class="wrapper-signin">
     <p>이름</p>
-    <input type="text" class="input-signin" id="input-name"/>
+    <input type="text" class="input-signin" id="input-realname"/>
   </div>
 
   <div class="wrapper-signin" id="wrapper-address">

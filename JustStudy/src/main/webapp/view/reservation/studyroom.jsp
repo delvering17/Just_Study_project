@@ -14,9 +14,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<html>
-
-<head>
     <style>
         .studyroom-reserv-bg {
             width: 100%;
@@ -334,37 +331,40 @@
         }
 
         #studyroom-reserv-receipt > div > div {
-            background: #F5F5F5;
-            padding: 20px 20px 20px 20px;
-        }
+             background: #F5F5F5;
+             padding: 20px 20px 20px 20px;
+         }
 
-        #studyroom-reserv-receipt > div > div > div:first-of-type {
-            height: 100px;
-            border: none;
-        }
+         #studyroom-reserv-receipt .modal-header {
+             height: 100px;
+             border: none;
+         }
 
-        #studyroom-reserv-receipt .modal-body > div:nth-of-type(1) {
-            margin-top: 10px;
-            margin-bottom: 30px;
-            border-top: 1px solid lightgray;
-            border-bottom: 1px solid lightgray;
-            background: white;
-            padding: 20px;
-        }
+         #studyroom-reserv-receipt .modal-body > .studyroom-reserv-paylist > div:nth-of-type(1) {
+             margin-top: 10px;
+             margin-bottom: 30px;
+             border-top: 1px solid lightgray;
+             border-bottom: 1px solid lightgray;
+             background: white;
+             padding: 20px;
+         }
 
-        #studyroom-reserv-receipt .modal-body > div:nth-of-type(1) > div:first-of-type {
-            font-size: 1.3rem;
+
+        #studyroom-reserv-receipt .modal-body > .studyroom-reserv-paylist > div> div:first-of-type {
+            font-size: 1.2rem;
             font-weight: bold;
             margin-bottom: 10px;
         }
 
-        #studyroom-reserv-receipt .modal-body > div:nth-of-type(1) > ul > li {
+
+        #studyroom-reserv-receipt .modal-body > .studyroom-reserv-paylist > div> ul > li {
             font-size: 1rem;
             font-weight: bold;
             height: 30px;
         }
 
-        #studyroom-reserv-receipt .modal-body > div:nth-of-type(1) > div:last-of-type {
+
+        #studyroom-reserv-receipt .modal-body > .studyroom-reserv-paylist > div > div:last-of-type {
             text-align: right;
             font-size: 1.3rem;
             font-weight: bold;
@@ -567,6 +567,14 @@
             })
 
             $(".studyroom-reserv-selected > button").click(function(){
+
+                const selectedTime = document.querySelectorAll('input[type=checkbox][name=time]:checked')
+                let selectedTimeList = new Array()
+
+                for(let i = 0; i < selectedTime.length; i++){
+                    selectedTimeList.push(selectedTime.item(i).id)
+                }
+
                 $(".studyroom-reserv-result").append("<div>" +
                     "<div>"+($(".studyroom-reserv-result>div").length+1)+"</div>" +
                     "<div>" +
@@ -574,7 +582,7 @@
                         $(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(2)>b").html() + " | "+
                         $(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(3)>b").html() + " | "+
                         $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(1)>b").html() + " | "+
-                        $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(2)>b").html() + " | "+
+                        selectedTimeList.join (", ")+ " | "+
                         $(".studyroom-reserv-headcount:first-of-type+b").html()+"인"+
                     "</div>" +
                     "<button><i class=\"fa-regular fa-x fa-2x\"></i></button>" +
@@ -595,12 +603,13 @@
                 removeDiv.remove()
             })
 
+            $(".studyroom-reserv-done>button").click(function (){
+                
+            })
+
 
         }
     </script>
-</head>
-
-<body>
 
 <div class="studyroom-reserv-bg">
 
@@ -695,19 +704,22 @@
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <font size="5px"><b>서울 | 천호점</b></font>
-                <div>
-                    <div>2022.08.11(목)</div>
-                    <ul>
-                        <li>룸2(4인실)</li>
-                        <li>예약시간 | 22:00, 23:00</li>
-                    </ul>
-                    <div>총 2시간 | 10,000원</div>
+                <div class="studyroom-reserv-paylist">
+                    <font size="4px"><b>서울 | 천호점</b></font>
+                    <div>
+                        <div>2022.08.11(목)</div>
+                        <ul>
+                            <li>룸2(4인실)</li>
+                            <li>예약시간 | 22:00, 23:00</li>
+                        </ul>
+                        <div>총 2시간 | 10,000원</div>
+                    </div>
                 </div>
-                <div>
-                    <div>총 예약 금액</div>
-                    <div>10,000원</div>
-                </div>
+                    <div>
+                        <div>총 예약 금액</div>
+                        <div>10,000원</div>
+                    </div>
+
                 <div>
                     <div>총 예약 건수</div>
                     <div>2건</div>
@@ -735,7 +747,3 @@
         </div>
     </div>
 </div>
-
-</body>
-
-</html>

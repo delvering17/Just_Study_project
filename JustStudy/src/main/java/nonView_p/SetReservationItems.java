@@ -42,8 +42,8 @@ public class SetReservationItems implements NonViewService {
                 if(((String) request.getParameter("branchName")).equals(dto.getName())){
                     for(int i = dto.getOpen(); i < dto.getClose(); i++){
                         try {
-                            res += "<input type=\"checkbox\" name=\"time\" id=\"" + i + "\" hidden/>";
-                            res += "<label for=\"" + i + "\"><div><div class=\"studyroom-reserv-possible\">"+URLEncoder.encode("예약가능", "UTF-8")+"</div><div>"+(i < 10 ? "0" : "")+i+":00 ~ "+(i < 9 ? "0" : "")+(i+1)+":00</div></div></label>";
+                            res += "<input type=\"checkbox\" name=\"time\" id=\""+ (i > 9 ? "" : "0") + i + ":00" +"\" hidden/>";
+                            res += "<label for=\""+ (i > 9 ? "" : "0") + i + ":00" +"\"><div><div class=\"studyroom-reserv-possible\">"+URLEncoder.encode("예약가능", "UTF-8")+"</div><div>"+(i < 10 ? "0" : "")+i+":00 ~ "+(i < 9 ? "0" : "")+(i+1)+":00</div></div></label>";
                         } catch (UnsupportedEncodingException e) {
                             throw new RuntimeException(e);
                         }

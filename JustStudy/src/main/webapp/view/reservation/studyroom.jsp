@@ -1,6 +1,6 @@
 <%@ page import="model_p.BranchDTO" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="model_p.DAO" %>
+<%@ page import="model_p.ReservationDAO" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="reservation_p.Studyroom" %>
 <%@ page import="java.util.Calendar" %>
@@ -595,7 +595,7 @@
                 $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='city' value='"+$(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(1)>b").html()+"'></input>")
                 $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='branch' value='"+$(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(2)>b").html()+"'></input>")
                 $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='room' value='"+$(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(3)>b").html()+"'></input>")
-                $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='resDay' value='"+$(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(1)>b").html()+"'></input>")
+                $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='resDate' value='"+$(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(1)>b").html()+"'></input>")
                 $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='time' value='"+selectedTimeList.join (", ")+"'></input>")
                 $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='headcount' value='"+$(".studyroom-reserv-headcount:first-of-type+b").html()+"'></input>")
                 $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='pay' value='"+$(".studyroom-reserv-totalprice").html()+"'></input>")
@@ -622,7 +622,7 @@
                         $(".studyroom-reserv-form>div").eq(i).children("input[name=\"city\"]").val()+" | "+
                         $(".studyroom-reserv-form>div").eq(i).children("input[name=\"branch\"]").val()+ "</b></p>")
                     $(".studyroom-reserv-paylist>div").eq(i).append("<div>")
-                    $(".studyroom-reserv-paylist>div").eq(i).children("div").append("<div>"+$(".studyroom-reserv-form>div").eq(i).children("input[name=\"resDay\"]").val()+"</div>")
+                    $(".studyroom-reserv-paylist>div").eq(i).children("div").append("<div>"+$(".studyroom-reserv-form>div").eq(i).children("input[name=\"resDate\"]").val()+"</div>")
                     $(".studyroom-reserv-paylist>div").eq(i).children("div").append("<ul><li>" +
                         ""+$(".studyroom-reserv-form>div").eq(i).children("input[name=\"room\"]").val()+"</li>" +
                         "<li>예약시간) "+$(".studyroom-reserv-form>div").eq(i).children("input[name=\"time\"]").val()+"</li></ul>")

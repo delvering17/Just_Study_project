@@ -29,13 +29,13 @@ public class MemberDAO {
         }
     }
 
-    public MemberDTO login(String input_email, String input_password) {
+    public MemberDTO login(String input_id, String input_password) {
         MemberDTO memberDTO = null;
-        sql = "select * from member where mem_email = ? and mem_password = ?";
+        sql = "select * from member where mem_userid = ? and mem_password = ?";
         try {
 
             ptmt = con.prepareStatement(sql);
-            ptmt.setString(1,input_email);
+            ptmt.setString(1,input_id);
             ptmt.setString(2,input_password);
             rs = ptmt.executeQuery();
             if(rs.next()) {
@@ -43,7 +43,7 @@ public class MemberDAO {
 
                 memberDTO.setMem_id(rs.getInt("mem_id"));
                 memberDTO.setMem_social(rs.getInt("mem_social"));
-                memberDTO.setMem_email(rs.getString("mem_email"));
+                memberDTO.setMem_userid(rs.getString("mem_userid"));
                 memberDTO.setMem_password(rs.getString("mem_password"));
                 memberDTO.setMem_nickname(rs.getString("mem_nickname"));
                 memberDTO.setMem_realname(rs.getString("mem_realname"));
@@ -62,8 +62,67 @@ public class MemberDAO {
         return memberDTO;
     }
 
+    public boolean idDoubleCheck(String input_userid) {
+        boolean res = false;
+
+        sql = "select * from member where mem_userid = ?";
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, input_userid);
+            rs = ptmt.executeQuery();
+
+            res = rs.next();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return  res;
+    }
+
+    public boolean nicknameDoubleCheck(String input_nickname) {
+        boolean res = false;
+
+        sql = "select * from member where mem_nickname = ?";
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, input_nickname);
+            rs = ptmt.executeQuery();
+
+            res = rs.next();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return  res;
+    }
+
+    public void signIn(MemberDTO memberDTO) {
+        sql = " insert into member (mem_social , mem_userid , mem_password , mem_nickname , mem_realname , mem_phone, mem_address1, mem_address2,  mem_level, mem_socialid) values " +
+                "(?,?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            ptmt = con.prepareStatement(sql);
+
+            ptmt.setInt(1,memberDTO.getMem_social());
+            ptmt.setString(2, memberDTO.getMem_userid());
+            ptmt.setString(3, memberDTO.getMem_password());
+            ptmt.setString(4, memberDTO.getMem_nickname());
+            ptmt.setString(5, memberDTO.getMem_realname());
+            ptmt.setString(6, memberDTO.getMem_phone());
+            ptmt.setString(7, memberDTO.getMem_address1());
+            ptmt.setString(8, memberDTO.getMem_address2());
+            ptmt.setInt(9, memberDTO.getMem_level());
+            ptmt.setString(10, memberDTO.getMem_socialid());
+
+            ptmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
 
+    }
 
 
 }

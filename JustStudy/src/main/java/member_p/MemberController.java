@@ -20,6 +20,7 @@ public class MemberController extends HttpServlet {
         super();
 
         nonService.put("MemberLoginForm","member/member_loginForm.jsp");
+        nonService.put("MemberSigninForm","member/member_signinForm.jsp");
     }
 
     @Override
@@ -32,11 +33,12 @@ public class MemberController extends HttpServlet {
         }
 
         String service = request.getRequestURI().substring((request.getContextPath()+"/member/").length());
-
+        System.out.println(service);
+        System.out.println(service);
         try {
 
 
-            if(nonService.containsKey(service)) {
+            if(nonService.containsKey("MemberSigninForm")) {
                 request.setAttribute("mainUrl",nonService.get(service));
             } else {
                 MemberService bs = (MemberService) Class.forName("member_p."+service).newInstance();

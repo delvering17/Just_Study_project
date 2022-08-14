@@ -7,7 +7,7 @@
 
     function goLogin() {
         let form_data = {
-            input_email:$('#input-email').val(),
+            input_userid:$('#input-userid').val(),
             input_password:$('#input-password').val()
         }
 
@@ -51,7 +51,7 @@
     <div>
         <div>
             <span><i class="fa-solid fa-key"></i></span>
-            <input type="text" id="input-email" name="input-email" placeholder="이메일" aria-label="이메일" required/>
+            <input type="text" id="input-userid" name="input-userid" placeholder="아이디" aria-label="아이디" required/>
         </div>
         <div>
             <span><i class="fa-solid fa-key"></i></span>

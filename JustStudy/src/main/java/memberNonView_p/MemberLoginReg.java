@@ -17,13 +17,13 @@ public class MemberLoginReg implements MemberNonViewService{
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
 
-        String input_email = request.getParameter("input_email");
+        String input_userid = request.getParameter("input_userid");
         String input_password = request.getParameter("input_password");
-//        System.out.println(input_email);
+//        System.out.println(input_userid);
 //        System.out.println(input_password);
 
 
-        MemberDTO memberDTO = new MemberDAO().login(input_email,input_password);
+        MemberDTO memberDTO = new MemberDAO().login(input_userid,input_password);
 
 
         JSONObject jj = new JSONObject();

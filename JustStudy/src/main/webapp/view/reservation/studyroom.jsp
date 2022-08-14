@@ -566,6 +566,20 @@
                     * $(".studyroom-reserv-headcount:first-of-type+b").html())
             })
 
+            $(".studyroom-reserv-selected > button").click(function(){
+                $(".studyroom-reserv-result").append("<div>" +
+                    "<div>"+($(".studyroom-reserv-result>div").length+1)+"</div>" +
+                    "<div>" +
+                        $(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(1)>b").html() + " | "+
+                        $(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(2)>b").html() + " | "+
+                        $(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(3)>b").html() + " | "+
+                        $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(1)>b").html() + " | "+
+                        $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(2)>b").html() + " | "+
+                        $(".studyroom-reserv-headcount:first-of-type+b").html()+"인"+
+                    "</div>" +
+                    "<button><i class=\"fa-regular fa-x fa-2x\"></i></button>" +
+                    "<div>"+$(".studyroom-reserv-totalprice").html()+"원"+"</div></div>")
+            })
         }
     </script>
 </head>
@@ -649,12 +663,6 @@
 
     <div class="studyroom-reserv-result">
         <h5><b>예약 확인</b></h5>
-        <div>
-            <div>1</div>
-            <div>서울 | 천호점 | 룸2(4인실) | 2022-08-11 | 22:00~23:00 | 3인</div>
-            <button><i class="fa-regular fa-x fa-2x"></i></button>
-            <div>4,500원</div>
-        </div>
     </div>
 
     <div class="studyroom-reserv-done">

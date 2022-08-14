@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: song-chanwook
@@ -9,15 +10,10 @@
 
 
 <style type="text/css">
-  * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-  }
 
   #form-signin {
     width: 600px;
-    height: 100%;
+    height: fit-content;
     background: rgb(245, 245, 245);
     padding: 30px;
     margin: 0 auto;
@@ -73,43 +69,94 @@
   }
 
 </style>
-<form id="form-signin">
+<div id="form-signin">
   <p id="signin-logo">회원가입</p>
   <div class="wrapper-signin">
-    <p>이메일</p>
-    <input type="text" class="input-signin" placeholder="ex) juststudy@gmail.com"/>
-    <button type="button" class="btn-signin">인증</button>
+    <p>아이디</p>
+    <input type="text" class="input-signin" placeholder="ex) juststudy"/>
+    <button type="button" class="btn-signin" id="input-id" onclick="goIDdoubleCheck()">중복체크</button>
   </div>
   <div class="wrapper-signin" id="wrapper-password">
     <p>비밀번호</p>
-    <input type="text" class="input-signin" placeholder="비밀번호를 입력하세요."/>
+    <input type="text" class="input-signin" id="input-password1" placeholder="비밀번호를 입력하세요."/>
     <p class="signin-notice">영문,숫자, 특수문자를 혼합하여 공백없이 8자리 ~ 20자리 이내로 입력해주세요. </p>
-    <input type="text" class="input-signin" placeholder="비밀번호를 다시 한 번 입력해 주세요."/>
+    <input type="text" class="input-signin" id="input-password2" placeholder="비밀번호를 다시 한 번 입력해 주세요."/>
     <p class="signin-notice">비밀번호가 일치하지 않습니다.</p>
   </div>
   <div class="wrapper-signin">
     <p>닉네임</p>
-    <input type="text" class="input-signin" placeholder="커뮤니티 활동에 사용할 닉네임을 입력해 주세요."/>
+    <input type="text" class="input-signin" id="input-nickname" placeholder="커뮤니티 활동에 사용할 닉네임을 입력해 주세요."/>
     <button type="button" class="btn-signin">중복체크</button>
   </div>
   <div class="wrapper-signin">
-    <p>이름</p>
-    <input type="text" class="input-signin"/>
+    <p>휴대번호</p>
+    <input type="text" class="input-signin" id="input-phone" readonly>
+    <button type="button" class="btn-signin">인증</button>
   </div>
   <div class="wrapper-signin">
-    <p>생년월일</p>
-    <input type="date" class="input-signin" id="datePicker" value="2019-06-27">
+    <p>이름</p>
+    <input type="text" class="input-signin" id="input-name"/>
   </div>
+
   <div class="wrapper-signin" id="wrapper-address">
     <p>주소</p>
     <div>
-      <input type="text" class="input-signin" readonly/>
+      <input type="text" class="input-signin" id="input-address1" readonly/>
       <button type="button" class="btn-signin" id="btn-findaddress">검색</button>
     </div>
-    <input type="text" class="input-signin" id="user-address2" placeholder="상세 주소를 입력해주세요."/>
+    <input type="text" class="input-signin" id="input-address2" placeholder="상세 주소를 입력해주세요."/>
   </div>
   <div>
-    <button type="submit" class="btn-signin" id="submit-signin">회원 가입</button>
+    <button class="btn-signin" id="submit-signin">회원 가입</button>
   </div>
+</div>
+<script type="text/javascript">
 
-</form>
+  function goIDdoubleCheck() {
+      let input_id = $('#input-id').val()
+
+
+      $.ajax({
+        url:'<c:url value="/memberNonView/MemberSigninDoubleCheck"/>',
+        type: 'GET',
+        data: input_id,
+        async: false,
+        dataType: 'text',
+        success:function (response){
+          alert('와우 더블쳌쳌암더코리안')
+        },
+        error:function(e){
+          console.log(e.responseText)
+        }
+      });
+  }
+
+  function goSignin() {
+
+      let form_data = {
+        input_email:$('#input-email').val(),
+        input_password:$('#input-password').val()
+      }
+
+      $.ajax({
+        url:'<c:url value="/memberNonView/MemberLoginReg"/>',
+        type:'GET',
+        data: form_data,
+        async:false,
+        dataType:'JSON',
+        success:function(response){
+          // alert(response.member_nickname)
+          if(response.loginResult === 'success') {
+            alert('로그인에 성공했습니다.')
+            location.href = '<c:url value="/board/MainPage"/>'
+          } else {
+            alert(response.loginResult)
+          }
+        },
+        error:function(e){
+          console.log(e.responseText)
+        }
+      })
+
+  }
+</script>

@@ -4,6 +4,7 @@
 
 <style type="text/css">
     * {
+        width: 100%;
         box-sizing: border-box;
         margin: 0;
         padding: 0;
@@ -252,6 +253,7 @@
                         </ul>
                         <ul class="gnb-sub-list">
                             <li><a href="?" >마이페이지</a></li>
+                            <li><a href="../member/MemberSigninForm" >회원가입</a></li>
                             <li><a href="../member/MemberSigninForm" >회원가입</a></li>
                         </ul>
                     </div>

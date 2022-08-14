@@ -37,11 +37,12 @@ public class MypageController extends HttpServlet {
 
 
             if(nonService.containsKey(service)) {
-                request.setAttribute("mainUrl",nonService.get(service));
+//                request.setAttribute("mainUrl",nonService.get(service));
             } else {
                 MypageService bs = (MypageService) Class.forName("mypage_p."+service).newInstance();
                 bs.execute(request, response);
             }
+
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("/view/template.jsp");
             dispatcher.forward(request, response);

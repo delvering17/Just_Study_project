@@ -10,7 +10,7 @@
 <style>
     .mypage-menu-bg {
         width: 100%;
-        padding-top: 100px;
+        padding-top: 40px;
         background: #F5F5F5;
         display: flex;
         flex-direction: row;
@@ -149,31 +149,7 @@
         </div>
     </div>
     <div class="mypage-main">
-        <div class="mypage-change-password">
-            <form>
-                <div class="change-password-items">
-                    <p>현재 비밀번호</p>
-                    <input type="text" class="input-user-password"/>
-                </div>
-                <div class="change-password-items">
-                    <p>새 비밀번호</p>
-                    <input type="text" class="input-user-password"/>
-                </div>
-                <div class="change-password-items">
-                    <p>새 비밀번호 확인</p>
-                    <input type="text" class="input-user-password"/>
-                </div>
-
-                <div class="change-password-items">
-                    <p></p>
-                    <button type="submit" id="btn-submit">수정하기</button>
-                </div>
-            </form>
-
-        </div>
-
-
-
+        <jsp:include page="${subUrl}"/>
 
     </div>
 </div>

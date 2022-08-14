@@ -229,7 +229,7 @@
                         </ul>
                         <ul class="gnb-sub-list">
                             <li><a href="?">이용안내</a></li>
-                            <li><a href="?">스터디룸예약</a></li>
+                            <li><a href="../reservation/Studyroom">스터디룸예약</a></li>
                         </ul>
                         <ul class="gnb-sub-list">
                             <li><a href="?">스터디모집</a></li>

@@ -4,7 +4,7 @@ public class MemberDTO {
 
     int mem_id;
     int mem_social;
-    String mem_email;
+    String mem_userid;
     String mem_password;
     String mem_nickname;
     String mem_realname;
@@ -34,12 +34,12 @@ public class MemberDTO {
         this.mem_social = mem_social;
     }
 
-    public String getMem_email() {
-        return mem_email;
+    public String getMem_userid() {
+        return mem_userid;
     }
 
-    public void setMem_email(String mem_email) {
-        this.mem_email = mem_email;
+    public void setMem_userid(String mem_userid) {
+        this.mem_userid = mem_userid;
     }
 
     public String getMem_password() {
@@ -111,7 +111,7 @@ public class MemberDTO {
         return "MemberDTO{" +
                 "mem_id=" + mem_id +
                 ", mem_social=" + mem_social +
-                ", mem_email='" + mem_email + '\'' +
+                ", mem_userid='" + mem_userid + '\'' +
                 ", mem_password='" + mem_password + '\'' +
                 ", mem_nickname='" + mem_nickname + '\'' +
                 ", mem_realname='" + mem_realname + '\'' +

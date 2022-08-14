@@ -29,13 +29,13 @@ public class MemberDAO {
         }
     }
 
-    public MemberDTO login(String input_email, String input_password) {
+    public MemberDTO login(String input_id, String input_password) {
         MemberDTO memberDTO = null;
-        sql = "select * from member where mem_email = ? and mem_password = ?";
+        sql = "select * from member where mem_userid = ? and mem_password = ?";
         try {
 
             ptmt = con.prepareStatement(sql);
-            ptmt.setString(1,input_email);
+            ptmt.setString(1,input_id);
             ptmt.setString(2,input_password);
             rs = ptmt.executeQuery();
             if(rs.next()) {
@@ -43,7 +43,7 @@ public class MemberDAO {
 
                 memberDTO.setMem_id(rs.getInt("mem_id"));
                 memberDTO.setMem_social(rs.getInt("mem_social"));
-                memberDTO.setMem_email(rs.getString("mem_email"));
+                memberDTO.setMem_userid(rs.getString("mem_userid"));
                 memberDTO.setMem_password(rs.getString("mem_password"));
                 memberDTO.setMem_nickname(rs.getString("mem_nickname"));
                 memberDTO.setMem_realname(rs.getString("mem_realname"));
@@ -60,6 +60,11 @@ public class MemberDAO {
         }
 
         return memberDTO;
+    }
+
+    public int idDoubleCheck(String input_id) {
+
+
     }
 
 

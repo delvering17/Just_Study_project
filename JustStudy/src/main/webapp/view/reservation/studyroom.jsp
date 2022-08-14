@@ -340,7 +340,11 @@
              border: none;
          }
 
-         #studyroom-reserv-receipt .modal-body > .studyroom-reserv-paylist > div:nth-of-type(1) {
+        .studyroom-reserv-paylist > div > p{
+            font-size: 20px;
+        }
+
+        .studyroom-reserv-paylist > div > div{
              margin-top: 10px;
              margin-bottom: 30px;
              border-top: 1px solid lightgray;
@@ -350,29 +354,28 @@
          }
 
 
-        #studyroom-reserv-receipt .modal-body > .studyroom-reserv-paylist > div> div:first-of-type {
+        .studyroom-reserv-paylist > div > div > div:first-of-type {
             font-size: 1.2rem;
             font-weight: bold;
             margin-bottom: 10px;
         }
 
 
-        #studyroom-reserv-receipt .modal-body > .studyroom-reserv-paylist > div> ul > li {
+        .studyroom-reserv-paylist > div > div> ul > li {
             font-size: 1rem;
             font-weight: bold;
             height: 30px;
         }
 
 
-        #studyroom-reserv-receipt .modal-body > .studyroom-reserv-paylist > div > div:last-of-type {
+        .studyroom-reserv-paylist > div > div > div:last-of-type {
             text-align: right;
             font-size: 1.3rem;
             font-weight: bold;
         }
 
         #studyroom-reserv-receipt .modal-body > div:nth-of-type(2),
-        #studyroom-reserv-receipt .modal-body > div:nth-of-type(3),
-        #studyroom-reserv-receipt .modal-body > div:nth-of-type(4) {
+        #studyroom-reserv-receipt .modal-body > div:nth-of-type(3){
             width: 100%;
             display: flex;
             flex-direction: row;
@@ -381,18 +384,12 @@
             margin-bottom: 10px;
         }
 
-        #studyroom-reserv-receipt .modal-body > div:nth-of-type(4) {
+        #studyroom-reserv-receipt .modal-body > div:nth-of-type(3) {
             margin-bottom: 40px;
         }
 
-        #studyroom-reserv-receipt .modal-body > div:nth-of-type(2) > div {
-            width: fit-content;
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
-
-        #studyroom-reserv-receipt .modal-body > div:nth-of-type(3) > div,
-        #studyroom-reserv-receipt .modal-body > div:nth-of-type(4) > div {
+        #studyroom-reserv-receipt .modal-body > div:nth-of-type(2) > div,
+        #studyroom-reserv-receipt .modal-body > div:nth-of-type(3) > div {
             width: fit-content;
             font-size: 1.3rem;
             font-weight: bold;
@@ -482,8 +479,6 @@
 
             $(document).on("change", "input[name=\"branchName\"]", function(){
 
-                console.log($(".studyroom-reserv-headcount:first-of-type+b").html())
-
                 $.ajax({
                     url: '<c:url value="/nonView/SetReservationItems"/>',
                     type: "GET",
@@ -522,7 +517,6 @@
 
             $(document).on("change", "input[name=\"roomName\"]", function(){
 
-                console.log(document.querySelector('input[type=radio][name=roomName]:checked').getAttribute("id"))
                 $.ajax({
                     url: '<c:url value="/nonView/SetReservationItems"/>',
                     type: "GET",
@@ -540,7 +534,6 @@
             });
 
             $(document).on("change", "input[name=\"time\"]", function (){
-                console.log(document.querySelectorAll('input[type=checkbox][name=time]:checked').length)
 
                 let str = document.querySelector('input[type=checkbox][name=time]:checked+label>div>div:last-of-type').innerHTML
                     + ((document.querySelectorAll('input[type=checkbox][name=time]:checked').length - 1) > 0 ? " 외 "+(document.querySelectorAll('input[type=checkbox][name=time]:checked').length - 1)+"건" : "")
@@ -604,10 +597,33 @@
             })
 
             $(".studyroom-reserv-done>button").click(function (){
-                
+
+                const payList = new Array()
+
+                for(let i = 0; i < $(".studyroom-reserv-result>div").length; i++){
+                    payList.push($(".studyroom-reserv-result>div").eq(i).children("div").eq(1).html()+" | "+$(".studyroom-reserv-result>div").eq(i).children("div").eq(2).html())
+                }
+
+                $.ajax({
+                    url: '<c:url value="/nonView/SetPayList"/>',
+                    type: "GET",
+                    contentType: 'application/json; charset=utf-8',
+                    async: false,
+                    traditional: true,
+                    data: {"paylist": payList},
+                    dataType: 'json',
+                    success: function(data){
+                        $(".studyroom-reserv-paylist").html(decodeURIComponent(data.res))
+                        $(".studyroom-reserv-paylist+div>div:last-of-type").html($(".studyroom-reserv-paylist>div").length+"건")
+                        $(".studyroom-reserv-paylist+div+div>div:last-of-type").html(data.total+"원")
+                    },
+                    error: function (e){
+                        console.log(e.responseText)
+                    }
+                })
+
+
             })
-
-
         }
     </script>
 
@@ -704,21 +720,7 @@
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <div class="studyroom-reserv-paylist">
-                    <font size="4px"><b>서울 | 천호점</b></font>
-                    <div>
-                        <div>2022.08.11(목)</div>
-                        <ul>
-                            <li>룸2(4인실)</li>
-                            <li>예약시간 | 22:00, 23:00</li>
-                        </ul>
-                        <div>총 2시간 | 10,000원</div>
-                    </div>
-                </div>
-                    <div>
-                        <div>총 예약 금액</div>
-                        <div>10,000원</div>
-                    </div>
+                <div class="studyroom-reserv-paylist"></div>
 
                 <div>
                     <div>총 예약 건수</div>

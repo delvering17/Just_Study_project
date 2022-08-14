@@ -252,7 +252,7 @@
                             <li><a href="#" >관리자로그인</a></li>
                         </ul>
                         <ul class="gnb-sub-list">
-                            <li><a href="?" >마이페이지</a></li>
+                            <li><a href="../mypage/asdf" >마이페이지</a></li>
                             <li><a href="../member/MemberSigninForm" >회원가입</a></li>
                             <li><a href="../member/MemberSigninForm" >회원가입</a></li>
                         </ul>

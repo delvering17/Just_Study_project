@@ -29,16 +29,16 @@
     ></script>
 </head>
 <body>
-<div>
+<header>
 <jsp:include page="inc/header.jsp"/>
-</div>
+</header>
 <%--    <jsp:include page="view/mypage/template.jsp"/>--%>
-<div>
+<main>
 <jsp:include page="${mainUrl}"/>
-</div>
-<div>
+</main>
+<footer>
 
 <jsp:include page="inc/footer.jsp"/>
-</div>
+</footer>
 </body>
 </html>

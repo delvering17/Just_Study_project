@@ -1,4 +1,4 @@
-package member_p;
+package mypage_p;
 
 
 import javax.servlet.RequestDispatcher;
@@ -11,16 +11,15 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
-@WebServlet("/member/*")
-public class MemberController extends HttpServlet {
+@WebServlet("/mypage/*")
+public class MypageController extends HttpServlet {
     private static final long serialVersionUID = 1L;
+
     HashMap<String, String> nonService = new HashMap<String, String>();
 
-    public MemberController() {
+    public MypageController() {
         super();
-
-        nonService.put("MemberLoginForm","member/member_loginForm.jsp");
-        nonService.put("MemberSigninForm","member/member_signinForm.jsp");
+        nonService.put("asdf", "mypage/mypageTemplete.jsp");
     }
 
     @Override
@@ -29,20 +28,18 @@ public class MemberController extends HttpServlet {
         try {
             request.setCharacterEncoding("UTF-8");
         } catch (UnsupportedEncodingException e) {
-
             e.printStackTrace();
         }
 
-        String service = request.getRequestURI().substring((request.getContextPath()+"/member/").length());
-        System.out.println(service);
-        System.out.println(service);
+        String service = request.getRequestURI().substring((request.getContextPath()+"/mypage/").length());
+
         try {
 
 
             if(nonService.containsKey(service)) {
                 request.setAttribute("mainUrl",nonService.get(service));
             } else {
-                MemberService bs = (MemberService) Class.forName("member_p."+service).newInstance();
+                MypageService bs = (MypageService) Class.forName("mypage_p."+service).newInstance();
                 bs.execute(request, response);
             }
 

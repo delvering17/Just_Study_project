@@ -589,17 +589,29 @@
                 }
 
                 $(".studyroom-reserv-done>button").html("총 "+$(".studyroom-reserv-result>div").length+"건 | "+realTotalWon+"원 결제하기")
+
+                const reserveNum = $(".studyroom-reserv-form>div").length
+                $(".studyroom-reserv-form").append("<div></div>")
+                $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='city' value='"+$(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(1)>b").html()+"'></input>")
+                $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='branch' value='"+$(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(2)>b").html()+"'></input>")
+                $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='room' value='"+$(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(3)>b").html()+"'></input>")
+                $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='resDay' value='"+$(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(1)>b").html()+"'></input>")
+                $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='time' value='"+selectedTimeList.join (", ")+"'></input>")
+                $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='headcount' value='"+$(".studyroom-reserv-headcount:first-of-type+b").html()+"'></input>")
+                $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='pay' value='"+$(".studyroom-reserv-totalprice").html()+"'></input>")
+
             })
 
             $(document).on("click", ".fa-x", function (){
                 const removeDiv = $(this).parent().parent()
+                $(".studyroom-reserv-form").children("div").eq($(this).index(".fa-x")).remove()
                 removeDiv.html("")
                 removeDiv.remove()
             })
 
-            $(".studyroom-reserv-done>button").click(function (){
+            const payList = new Array()
 
-                const payList = new Array()
+            $(".studyroom-reserv-done>button").click(function (){
 
                 for(let i = 0; i < $(".studyroom-reserv-result>div").length; i++){
                     payList.push($(".studyroom-reserv-result>div").eq(i).children("div").eq(1).html()+" | "+$(".studyroom-reserv-result>div").eq(i).children("div").eq(2).html())
@@ -642,8 +654,7 @@
                     }, function(rsp) {
                         if ( rsp.success ) {
                             var msg = '결제가 완료되었습니다.';
-                            
-                            location.href = '<c:url value="/nonView/PaySuccess"/>'
+                            $(".studyroom-reserv-form").submit()
                         } else {
                             var msg = '결제에 실패하였습니다.';
                             msg += '에러내용 : ' + rsp.error_msg;
@@ -779,3 +790,7 @@
         </div>
     </div>
 </div>
+<form class="studyroom-reserv-form" method="post" action="PaySuccess">
+    <button type="submit"></button>
+</form>
+

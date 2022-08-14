@@ -23,10 +23,8 @@ public class Studyroom implements ReservationService{
                 branchMap.put(dto.getCity(), branchMap.get(dto.getCity()) + 1);
             }
         }
-
         request.setAttribute("branchList", branch);
         request.setAttribute("branchMap", branchMap);
         request.setAttribute("mainUrl", "reservation/studyroom.jsp");
     }
-
 }

@@ -11,6 +11,7 @@ public class ReservationController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
 
+        request.setCharacterEncoding("UTF-8");
         String service = request.getRequestURI().substring((request.getContextPath()+"/reservation/").length());
         try {
             ReservationService rs = (ReservationService) Class.forName("reservation_p."+service).newInstance();
@@ -21,12 +22,11 @@ public class ReservationController extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
-
+        doGet(request, response);
     }
 }

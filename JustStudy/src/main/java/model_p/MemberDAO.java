@@ -80,7 +80,23 @@ public class MemberDAO {
         return  res;
     }
 
+    public boolean nicknameDoubleCheck(String input_nickname) {
+        boolean res = false;
 
+        sql = "select * from member where mem_nickname = ?";
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, input_nickname);
+            rs = ptmt.executeQuery();
+
+            res = rs.next();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return  res;
+    }
 
 
 

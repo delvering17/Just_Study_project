@@ -19,13 +19,42 @@
       data: 'input_userid='+input_userid,
       async: false,
       success:function (response){
-        alert(response)
+        if(response === 'success') {
+          alert('사용가능한 아이디 입니다')
+        } else {
+          alert('중복된 아이디 입니다.')
+        }
+
+
       },
       error:function(e){
         console.log(e.responseText)
       }
     });
   }
+
+  function goNicknamedoubleCheck() {
+    let input_nickname = $('#input-nickname').val()
+
+    $.ajax({
+      url:'<c:url value="/memberNonView/MemberSigninDoubleCheck"/>',
+      type: 'GET',
+      data: 'input_nickname='+input_nickname,
+      async: false,
+      success:function (response){
+        if(response === 'success') {
+          alert('사용가능한 닉네임 입니다')
+        } else {
+          alert('중복된 닉네임 입니다.')
+        }
+
+      },
+      error:function(e){
+        console.log(e.responseText)
+      }
+    });
+  }
+
 
   function goSignin() {
 
@@ -133,7 +162,7 @@
   <div class="wrapper-signin">
     <p>닉네임</p>
     <input type="text" class="input-signin" id="input-nickname" placeholder="커뮤니티 활동에 사용할 닉네임을 입력해 주세요."/>
-    <button type="button" class="btn-signin">중복체크</button>
+    <button type="button" onclick="goNicknamedoubleCheck()" class="btn-signin">중복체크</button>
   </div>
   <div class="wrapper-signin">
     <p>휴대번호</p>

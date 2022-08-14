@@ -11,15 +11,22 @@ public class MemberSigninDoubleCheck implements MemberNonViewService {
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
         String input_userid = request.getParameter("input_userid");
-        String input_nickname = request.getParameter("input_id");
+        String input_nickname = request.getParameter("input_nickname");
 
         System.out.println(input_userid);
+        System.out.println(input_nickname);
 
-        Boolean go = new MemberDAO().idDoubleCheck(input_userid);
+        Boolean go = false;
 
-        String check_result = "fail";
+        if(input_userid != null) {
+            go = new MemberDAO().idDoubleCheck(input_userid);
+        } else {
+            go = new MemberDAO().nicknameDoubleCheck(input_nickname);
+        }
+
+        String check_result = "success";
         if(go) {
-            check_result = "success";
+            check_result = "fail";
         }
         try {
             response.getWriter().write(check_result);

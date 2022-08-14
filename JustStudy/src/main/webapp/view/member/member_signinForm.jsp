@@ -60,23 +60,29 @@
 
     let form_data = {
       input_userid:$('#input-userid').val(),
-      input_password:$('#input-password').val()
+      input_password1:$('#input-password1').val(),
+      input_password2:$('#input-password2').val(),
+      input_nickname:$('#input-nickname').val(),
+      input_phone:$('#input-phone').val(),
+      input_name:$('#input-name').val(),
+      input_address1:$('#input-address1').val(),
+      input_address2:$('#input-address2').val()
     }
 
     $.ajax({
-      url:'<c:url value="/memberNonView/MemberLoginReg"/>',
+      url:'<c:url value="/memberNonView/MemberSigninReg"/>',
       type:'GET',
       data: form_data,
       async:false,
       dataType:'JSON',
       success:function(response){
-        // alert(response.member_nickname)
-        if(response.loginResult === 'success') {
-          alert('로그인에 성공했습니다.')
-          location.href = '<c:url value="/board/MainPage"/>'
-        } else {
-          alert(response.loginResult)
-        }
+        alert(response.msg)
+        <%--if(response.loginResult === 'success') {--%>
+        <%--  alert('로그인에 성공했습니다.')--%>
+        <%--  location.href = '<c:url value="/board/MainPage"/>'--%>
+        <%--} else {--%>
+        <%--  alert(response.loginResult)--%>
+        <%--}--%>
       },
       error:function(e){
         console.log(e.responseText)
@@ -166,7 +172,8 @@
   </div>
   <div class="wrapper-signin">
     <p>휴대번호</p>
-    <input type="text" class="input-signin" id="input-phone" readonly>
+    <input type="text" class="input-signin" id="input-phone" >
+<%--    <input type="text" class="input-signin" id="input-phone" readonly>--%>
     <button type="button" class="btn-signin">인증</button>
   </div>
   <div class="wrapper-signin">
@@ -177,12 +184,13 @@
   <div class="wrapper-signin" id="wrapper-address">
     <p>주소</p>
     <div>
-      <input type="text" class="input-signin" id="input-address1" readonly/>
+      <input type="text" class="input-signin" id="input-address1" />
+<%--      <input type="text" class="input-signin" id="input-address1" readonly/>--%>
       <button type="button" class="btn-signin" id="btn-findaddress">검색</button>
     </div>
     <input type="text" class="input-signin" id="input-address2" placeholder="상세 주소를 입력해주세요."/>
   </div>
   <div>
-    <button class="btn-signin" id="submit-signin">회원 가입</button>
+    <button class="btn-signin" onclick="goSignin()" id="submit-signin">회원 가입</button>
   </div>
 </div>

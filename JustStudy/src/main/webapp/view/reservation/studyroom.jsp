@@ -580,6 +580,12 @@
                     "<button><i class=\"fa-regular fa-x fa-2x\"></i></button>" +
                     "<div>"+$(".studyroom-reserv-totalprice").html()+"원"+"</div></div>")
             })
+
+            $(document).on("click", ".fa-x", function (){
+                const removeDiv = $(this).parent().parent()
+                removeDiv.html("")
+                removeDiv.remove()
+            })
         }
     </script>
 </head>

@@ -8,7 +8,54 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<script type="text/javascript">
 
+  function goIDdoubleCheck() {
+    let input_id = $('#input-id').val()
+
+    $.ajax({
+      url:'<c:url value="/memberNonView/MemberSigninDoubleCheck"/>',
+      type: 'GET',
+      data: 'input_id='+input_id,
+      async: false,
+      success:function (response){
+        alert(response)
+      },
+      error:function(e){
+        console.log(e.responseText)
+      }
+    });
+  }
+
+  function goSignin() {
+
+    let form_data = {
+      input_email:$('#input-email').val(),
+      input_password:$('#input-password').val()
+    }
+
+    $.ajax({
+      url:'<c:url value="/memberNonView/MemberLoginReg"/>',
+      type:'GET',
+      data: form_data,
+      async:false,
+      dataType:'JSON',
+      success:function(response){
+        // alert(response.member_nickname)
+        if(response.loginResult === 'success') {
+          alert('로그인에 성공했습니다.')
+          location.href = '<c:url value="/board/MainPage"/>'
+        } else {
+          alert(response.loginResult)
+        }
+      },
+      error:function(e){
+        console.log(e.responseText)
+      }
+    })
+
+  }
+</script>
 <style type="text/css">
 
   #form-signin {
@@ -73,8 +120,8 @@
   <p id="signin-logo">회원가입</p>
   <div class="wrapper-signin">
     <p>아이디</p>
-    <input type="text" class="input-signin" placeholder="ex) juststudy"/>
-    <button type="button" class="btn-signin" id="input-id" onclick="goIDdoubleCheck()">중복체크</button>
+    <input type="text" class="input-signin" id="input-id" placeholder="ex) juststudy"/>
+    <button type="button" class="btn-signin" onclick="goIDdoubleCheck()">중복체크</button>
   </div>
   <div class="wrapper-signin" id="wrapper-password">
     <p>비밀번호</p>
@@ -110,53 +157,3 @@
     <button class="btn-signin" id="submit-signin">회원 가입</button>
   </div>
 </div>
-<script type="text/javascript">
-
-  function goIDdoubleCheck() {
-      let input_id = $('#input-id').val()
-
-
-      $.ajax({
-        url:'<c:url value="/memberNonView/MemberSigninDoubleCheck"/>',
-        type: 'GET',
-        data: input_id,
-        async: false,
-        dataType: 'text',
-        success:function (response){
-          alert('와우 더블쳌쳌암더코리안')
-        },
-        error:function(e){
-          console.log(e.responseText)
-        }
-      });
-  }
-
-  function goSignin() {
-
-      let form_data = {
-        input_email:$('#input-email').val(),
-        input_password:$('#input-password').val()
-      }
-
-      $.ajax({
-        url:'<c:url value="/memberNonView/MemberLoginReg"/>',
-        type:'GET',
-        data: form_data,
-        async:false,
-        dataType:'JSON',
-        success:function(response){
-          // alert(response.member_nickname)
-          if(response.loginResult === 'success') {
-            alert('로그인에 성공했습니다.')
-            location.href = '<c:url value="/board/MainPage"/>'
-          } else {
-            alert(response.loginResult)
-          }
-        },
-        error:function(e){
-          console.log(e.responseText)
-        }
-      })
-
-  }
-</script>

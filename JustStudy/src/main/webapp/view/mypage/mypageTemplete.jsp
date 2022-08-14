@@ -6,23 +6,22 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%-- 갈아 엎기--%>
 <style>
     .mypage-menu-bg {
-        width: 100%;
-        padding-top: 40px;
+        width: 500px;
         background: #F5F5F5;
         display: flex;
         flex-direction: row;
-        /* align-items: end; */
-        position: relative;
+
     }
 
     .mypage-menu-wrapper {
         width: 300px;
+        height: fit-content;
         margin-left: 100px;
-        top: 50px;
-        position: relative;
+        /*top: 50px;*/
+
     }
 
     .fa-circle-user {
@@ -31,7 +30,7 @@
     }
 
     .mypage-menu-user-info {
-        width: fit-content;
+        /*width: fit-content;*/
         display: inline-block;
         margin-bottom: 50px;
         margin-right: 40px;
@@ -68,10 +67,10 @@
     }
 
     .mypage-main {
-        width: 100%;
+        width: 1200px;
 
         background: #F5F5F5;
-        margin-top: 100px;
+        /*margin-top: 100px;*/
         margin-left: 40px;
 
         /*position: relative;*/
@@ -152,4 +151,4 @@
         <jsp:include page="${subUrl}"/>
 
     </div>
-</div>
+<%--</div>--%>

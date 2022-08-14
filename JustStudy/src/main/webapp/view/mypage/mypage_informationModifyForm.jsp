@@ -10,7 +10,7 @@
 <style type="text/css">
     .info-modify {
         width: 700px;
-        /*margin-top: 50px;*/
+        margin-top: 50px;
 
     }
 
@@ -64,26 +64,18 @@
         <ul>
             <li class="info-modify-form-items">
                 <p>이름</p>
-                <input type="text" class="user-input">
+                <input type="text" class="user-input" id="input_realname">
             </li>
             <li class="info-modify-form-items">
                 <p>닉네임</p>
-                <input type="text" class="user-input">
+                <input type="text" class="user-input"id="input_nickname">
                 <button type="button" class="btn-modify">중복체크</button>
             </li>
             <li class="info-modify-form-items">
-                <p>이메일</p>
-                <input type="text" class="user-input">
-            </li>
-            <li class="info-modify-form-items">
                 <p>휴대전화</p>
-                <input type="text" class="user-input" value="1999.10.1" readonly>
-
+                <input type="text" class="user-input" value="01022223333"/>
+<%--                <input type="text" class="user-input" value="1999.10.1" readonly>--%>
                 <button type="button" class="btn-modify" id="">변경</button>
-            </li>
-            <li class="info-modify-form-items">
-                <p>생년월일</p>
-                <input type="text" class="user-input" value="1999.10.1" readonly>
             </li>
             <li class="info-modify-form-items" >
                 <p>주소</p>

@@ -609,33 +609,34 @@
                 removeDiv.remove()
             })
 
-            const payList = new Array()
-
             $(".studyroom-reserv-done>button").click(function (){
 
-                for(let i = 0; i < $(".studyroom-reserv-result>div").length; i++){
-                    payList.push($(".studyroom-reserv-result>div").eq(i).children("div").eq(1).html()+" | "+$(".studyroom-reserv-result>div").eq(i).children("div").eq(2).html())
+                $(".studyroom-reserv-paylist").html("")
+
+                let totalWon = 0;
+
+                for(let i = 0; i < $(".studyroom-reserv-form>div").length; i++){
+
+                    $(".studyroom-reserv-paylist").append("<div>")
+                    $(".studyroom-reserv-paylist>div").eq(i).append("<p><b>"+
+                        $(".studyroom-reserv-form>div").eq(i).children("input[name=\"city\"]").val()+" | "+
+                        $(".studyroom-reserv-form>div").eq(i).children("input[name=\"branch\"]").val()+ "</b></p>")
+                    $(".studyroom-reserv-paylist>div").eq(i).append("<div>")
+                    $(".studyroom-reserv-paylist>div").eq(i).children("div").append("<div>"+$(".studyroom-reserv-form>div").eq(i).children("input[name=\"resDay\"]").val()+"</div>")
+                    $(".studyroom-reserv-paylist>div").eq(i).children("div").append("<ul><li>" +
+                        ""+$(".studyroom-reserv-form>div").eq(i).children("input[name=\"room\"]").val()+"</li>" +
+                        "<li>예약시간) "+$(".studyroom-reserv-form>div").eq(i).children("input[name=\"time\"]").val()+"</li></ul>")
+                    $(".studyroom-reserv-paylist>div").eq(i).children("div").append("<div>총 "+
+                        $(".studyroom-reserv-form>div").eq(i).children("input[name=\"time\"]").val().split(",").length+"시간 / "+
+                        $(".studyroom-reserv-form>div").eq(i).children("input[name=\"headcount\"]").val()+"인 / "+
+                    $(".studyroom-reserv-form>div").eq(i).children("input[name=\"pay\"]").val()+"원</div>")
+
+                    totalWon += parseInt($(".studyroom-reserv-form>div").eq(i).children("input[name=\"pay\"]").val())
                 }
 
-                $.ajax({
-                    url: '<c:url value="/nonView/SetPayList"/>',
-                    type: "GET",
-                    contentType: 'application/json; charset=utf-8',
-                    async: false,
-                    traditional: true,
-                    data: {"paylist": payList},
-                    dataType: 'json',
-                    success: function(data){
-                        $(".studyroom-reserv-paylist").html(decodeURIComponent(data.res))
-                        $(".studyroom-reserv-paylist+div>div:last-of-type").html($(".studyroom-reserv-paylist>div").length+"건")
-                        $(".studyroom-reserv-paylist+div+div>div:last-of-type").html(data.total+"원")
-                        $("#studyroom-reserv-receipt .modal-body > button:nth-of-type(1)").html("총 "+$(".studyroom-reserv-paylist>div").length+"건 | <b>"+data.total+"</b>원 결제하기")
-                    },
-                    error: function (e){
-                        console.log(e.responseText)
-                    }
-                })
-
+                $(".studyroom-reserv-paylist+div>div:last-of-type").html($(".studyroom-reserv-paylist>div").length+"건")
+                $(".studyroom-reserv-paylist+div+div>div:last-of-type").html(totalWon+"원")
+                $("#studyroom-reserv-receipt .modal-body > button:nth-of-type(1)").html("총 "+$(".studyroom-reserv-paylist>div").length+"건 | <b>"+totalWon+"</b>원 결제하기")
 
             })
 
@@ -761,7 +762,9 @@
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <div class="studyroom-reserv-paylist"></div>
+                <div class="studyroom-reserv-paylist">
+
+                </div>
 
                 <div>
                     <div>총 예약 건수</div>

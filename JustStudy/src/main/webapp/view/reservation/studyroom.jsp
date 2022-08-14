@@ -579,6 +579,14 @@
                     "</div>" +
                     "<button><i class=\"fa-regular fa-x fa-2x\"></i></button>" +
                     "<div>"+$(".studyroom-reserv-totalprice").html()+"원"+"</div></div>")
+
+                let realTotalWon = 0;
+
+                for(let i = 0; i < $(".studyroom-reserv-result>div").length; i++){
+                    realTotalWon += parseInt($(".studyroom-reserv-result>div").eq(i).children("div").eq(2).html().split("원")[0])
+                }
+
+                $(".studyroom-reserv-done>button").html("총 "+$(".studyroom-reserv-result>div").length+"건 | "+realTotalWon+"원 결제하기")
             })
 
             $(document).on("click", ".fa-x", function (){
@@ -586,6 +594,8 @@
                 removeDiv.html("")
                 removeDiv.remove()
             })
+
+
         }
     </script>
 </head>
@@ -672,7 +682,7 @@
     </div>
 
     <div class="studyroom-reserv-done">
-        <button data-bs-toggle="modal" data-bs-target="#studyroom-reserv-receipt">총 2건 | 9000원 결제하기</button>
+        <button data-bs-toggle="modal" data-bs-target="#studyroom-reserv-receipt">총 0건 | 0원 결제하기</button>
     </div>
 
 </div>

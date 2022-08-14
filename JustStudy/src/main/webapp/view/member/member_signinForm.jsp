@@ -30,7 +30,7 @@
   function goSignin() {
 
     let form_data = {
-      input_email:$('#input-email').val(),
+      input_userid:$('#input-userid').val(),
       input_password:$('#input-password').val()
     }
 

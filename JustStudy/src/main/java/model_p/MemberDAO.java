@@ -62,10 +62,10 @@ public class MemberDAO {
         return memberDTO;
     }
 
-    public int idDoubleCheck(String input_id) {
-
-
-    }
+//    public int idDoubleCheck(String input_id) {
+//
+//
+//    }
 
 
 

@@ -62,13 +62,13 @@ public class MemberDAO {
         return memberDTO;
     }
 
-    public boolean idDoubleCheck(String input_id) {
+    public boolean idDoubleCheck(String input_userid) {
         boolean res = false;
 
         sql = "select * from member where mem_userid = ?";
         try {
             ptmt = con.prepareStatement(sql);
-            ptmt.setString(1, input_id);
+            ptmt.setString(1, input_userid);
             rs = ptmt.executeQuery();
 
             res = rs.next();

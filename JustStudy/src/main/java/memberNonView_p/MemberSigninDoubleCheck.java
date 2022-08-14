@@ -9,10 +9,13 @@ import java.io.IOException;
 public class MemberSigninDoubleCheck implements MemberNonViewService {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
-        String input_id = request.getParameter("input_id");
-        System.out.println(input_id);
 
-        Boolean go = new MemberDAO().idDoubleCheck(input_id);
+        String input_userid = request.getParameter("input_userid");
+        String input_nickname = request.getParameter("input_id");
+
+        System.out.println(input_userid);
+
+        Boolean go = new MemberDAO().idDoubleCheck(input_userid);
 
         String check_result = "fail";
         if(go) {

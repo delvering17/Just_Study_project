@@ -11,12 +11,12 @@
 <script type="text/javascript">
 
   function goIDdoubleCheck() {
-    let input_id = $('#input-id').val()
+    let input_userid = $('#input-userid').val()
 
     $.ajax({
       url:'<c:url value="/memberNonView/MemberSigninDoubleCheck"/>',
       type: 'GET',
-      data: 'input_id='+input_id,
+      data: 'input_userid='+input_userid,
       async: false,
       success:function (response){
         alert(response)
@@ -120,7 +120,7 @@
   <p id="signin-logo">회원가입</p>
   <div class="wrapper-signin">
     <p>아이디</p>
-    <input type="text" class="input-signin" id="input-id" placeholder="ex) juststudy"/>
+    <input type="text" class="input-signin" id="input-userid" placeholder="ex) juststudy"/>
     <button type="button" class="btn-signin" onclick="goIDdoubleCheck()">중복체크</button>
   </div>
   <div class="wrapper-signin" id="wrapper-password">

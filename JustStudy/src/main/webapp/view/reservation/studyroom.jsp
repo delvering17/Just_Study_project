@@ -453,6 +453,7 @@
 
     </style>
 
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     <script type="text/javascript">
         window.onload = function () {
 
@@ -616,6 +617,7 @@
                         $(".studyroom-reserv-paylist").html(decodeURIComponent(data.res))
                         $(".studyroom-reserv-paylist+div>div:last-of-type").html($(".studyroom-reserv-paylist>div").length+"건")
                         $(".studyroom-reserv-paylist+div+div>div:last-of-type").html(data.total+"원")
+                        $("#studyroom-reserv-receipt .modal-body > button:nth-of-type(1)").html("총 "+$(".studyroom-reserv-paylist>div").length+"건 | <b>"+data.total+"</b>원 결제하기")
                     },
                     error: function (e){
                         console.log(e.responseText)
@@ -623,6 +625,34 @@
                 })
 
 
+            })
+
+            $("#studyroom-reserv-receipt .modal-body > button:nth-of-type(1)").click(function (){
+
+                if($(".personalInfo").is(':checked')){
+                    IMP.init('imp02841035');
+                    IMP.request_pay({
+                        pg : document.querySelector('input[type=radio][name=paymentMethod]:checked').getAttribute("value"),
+                        pay_method : 'card',
+                        merchant_uid : 'merchant_' + new Date().getTime(),
+                        name : 'JustStudy',
+                        amount : $("#studyroom-reserv-receipt .modal-body > button:nth-of-type(1)>b").html(),
+                        buyer_name : '송지은',
+                        buyer_tel : '010-0000-0000'
+                    }, function(rsp) {
+                        if ( rsp.success ) {
+                            var msg = '결제가 완료되었습니다.';
+                            
+                            location.href = '<c:url value="/nonView/PaySuccess"/>'
+                        } else {
+                            var msg = '결제에 실패하였습니다.';
+                            msg += '에러내용 : ' + rsp.error_msg;
+                        }
+                        alert(msg);
+                    });
+                } else{
+                    alert("이용규칙, 취소 및 환불규칙, 개인정보 수집 및 이용, 개인정보 제3자 제공에 동의해주세요.")
+                }
             })
         }
     </script>
@@ -734,16 +764,16 @@
                 <input type="text" value="송지은"/>
                 <input type="text" value="01027628090"/>
                 <div><font size="5px"><b>결제 수단 선택</b></font></div>
-                <label><input type="radio" name="paymentMethod">신용카드</label>
-                <label><input type="radio" name="paymentMethod">카카오페이</label>
+                <label><input type="radio" name="paymentMethod" value="kcp" checked>신용카드</label>
+                <label><input type="radio" name="paymentMethod" value="kakaopay">카카오페이</label>
 
                 <div><font size="2px" color="darkred"><b>*예약 복수 선택 시 환불 기간이 지나면 취소가 어려우니 유의바랍니다.</b></font></div>
                 <div><font size="2px" color="darkred"><b>(환불기간: 예약 시작시간 48시간 이전부터 취소/환불 불가)</b></font></div>
 
-                <label><input type="checkbox"><font size="2px">이용규칙, 취소 및 환불규칙, 개인정보 수집 및 이용, 개인정보 제3자 제공에 동의하실 경우
+                <label><input type="checkbox" class="personalInfo"><font size="2px">이용규칙, 취소 및 환불규칙, 개인정보 수집 및 이용, 개인정보 제3자 제공에 동의하실 경우
                     클릭해주세요.</font></label>
 
-                <button>총 2건 | 10,000원 결제하기</button>
+                <button></button>
                 <button data-bs-dismiss="modal">다시 선택하기</button>
             </div>
         </div>

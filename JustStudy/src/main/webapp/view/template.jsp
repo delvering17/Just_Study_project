@@ -24,6 +24,10 @@
     <script type="text/javascript" src="../jquery/jquery-3.6.0.js"></script>
     <script type="text/javascript" src="../jquery/jquery-ui.min.js"></script>
     <script src="https://unpkg.com/scrollreveal"></script>
+    <script
+            type="text/javascript"
+            src="../bootstrap/js/bootstrap.bundle.min.js"
+    ></script>
 </head>
 <body>
 <div>

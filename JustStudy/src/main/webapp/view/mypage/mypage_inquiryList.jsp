@@ -8,8 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<script type="text/javascript">
-</script>
+
 
 <style>
 
@@ -99,20 +98,29 @@
 
 </style>
 <div class="mypage-inquiry">
-    <div class="inquiry-top">
-        <p>문의일자 조회</p>
-        <div class="top-dateselect-wrapper">
-            <button class="btn-inquiry">오늘</button>
-            <button class="btn-inquiry">7일</button>
-            <button class="btn-inquiry">1개월</button>
-            <button class="btn-inquiry">3개월</button>
+    <form action="?" method="get" >
+        <div class="inquiry-top">
+            <p>문의일자 조회</p>
+            <div class="top-dateselect-wrapper">
+                <input type="radio" class="input-radio" name="date-period" id="find-today" value="today" />
+                <input type="radio" class="input-radio" name="date-period" id="find-day7" value="day7" checked/>
+                <input type="radio" class="input-radio" name="date-period" id="find-month" value="month" />
+                <input type="radio" class="input-radio" name="date-period" id="find-month3" value="month3" />
+<%--                <input type="radio" class="input-radio" name="find_group" id="find-today" value="today" hidden/>--%>
+<%--                <input type="radio" class="input-radio" name="find_group" id="find-day7" value="day7" hidden/>--%>
+<%--                <input type="radio" class="input-radio" name="find_group" id="find-month" value="month" hidden/>--%>
+<%--                <input type="radio" class="input-radio" name="find_group" id="find-month3" value="month3" hidden/>--%>
+                <label for="find-today"><div class="find-button">오늘</div></label>
+                <label for="find-day7"><div class="find-button">7일</div></label>
+                <label for="find-month"><div class="find-button">1개월</div></label>
+                <label for="find-month3"><div class="find-button">3개월</div></label>
+            </div>
+            <input class="top-datepicker" id="datepicker-before" name="date-before" max="" type="date">
+            <p id="inquiry-date-wave">&#126;</p>
+            <input class="top-datepicker" id="datepicker-after" name="date-after" type="date">
+                <button type="submit" class="btn-inquiry" id="submit-find">조회</button>
         </div>
-        <input class="top-datepicker" type="date">
-        <p id="inquiry-date-wave">&#126;</p>
-        <input class="top-datepicker" type="date">
-        <button type="submit" class="btn-inquiry" id="submit-find">조회</button>
-    </div>
-
+    </form>
     <hr/>
     <div class="inquiry-main">
         <c:forEach items="${arr_inquiryDTO}" var="inquiryDTO">
@@ -156,7 +164,7 @@
                 </c:choose>
             </c:forEach>
             <c:if test="${endPage < totalPage}">
-                <a class="inquiry-bottom-button" href="?nowPage=${endPage + 1}" >다음</a>
+                <a type="submit" class="inquiry-bottom-button" href="?nowPage=${endPage + 1}" >다음</a>
             </c:if>
     </div>
 
@@ -164,3 +172,57 @@
 
 
 </div>
+
+<script type="text/javascript">
+
+    // datepicker 오늘 날짜 제한
+    let now_utc = Date.now()
+    let timeOff = new Date().getTimezoneOffset()*60000;
+    let today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+    let inputarr = document.querySelectorAll('.top-datepicker')
+    inputarr.forEach(function (item) {
+        item.setAttribute("max", today);
+    } )
+
+    $('.top-datepicker').change(function () {
+
+        const inputRadio = document.querySelectorAll('.input-radio');
+        inputRadio.forEach(function (item) {
+            item.checked = false;
+        } )
+    });
+
+    $('.input-radio').change(function () {
+        const topDatePicker = document.querySelectorAll('.top-datepicker');
+        topDatePicker.forEach(function (item) {
+            item.value = '';
+        } )
+    });
+
+    $('#datepicker-before').change(function () {
+        const datepickerBefore = document.querySelector('#datepicker-before');
+        const datepickerAfter = document.querySelector('#datepicker-after');
+        datepickerAfter.setAttribute("min", datepickerBefore.value);
+        datepickerAfter.setAttribute("value", datepickerBefore.value);
+
+    });
+
+    $('#datepicker-after').change(function () {
+        const datepickerBefore = document.querySelector('#datepicker-before');
+        const datepickerAfter = document.querySelector('#datepicker-after');
+        datepickerBefore.setAttribute("max", datepickerAfter.value);
+        datepickerBefore.setAttribute("value", datepickerAfter.value);
+
+    });
+
+
+    // 활용해서 a의 nowPage 자체를 넘기기
+    // function fileDelete(){
+    //     if(confirm("파일을 삭제하시겠습니까? \n삭제한 파일은 복원할수 없습니다.")){
+    //         var frm = document.frm
+    //         frm.action="FileDelete"
+    //         frm.submit()
+    //     }
+    // }
+
+</script>

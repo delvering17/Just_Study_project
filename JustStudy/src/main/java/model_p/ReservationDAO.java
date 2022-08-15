@@ -88,7 +88,7 @@ public class ReservationDAO {
 
         ArrayList<ReservationDTO> res = new ArrayList<ReservationDTO>();
 
-        sql = "select * from reservation where userId = ?";
+        sql = "select * from reservation where userId = ? order by resDate desc";
         try {
             ptmt = con.prepareStatement(sql);
             ptmt.setString(1, userId);
@@ -101,8 +101,9 @@ public class ReservationDAO {
                 dto.setResDate(rs.getDate("resDate"));
                 dto.setUserId(rs.getString("userId"));
                 dto.setCity(rs.getString("city"));
-                dto.setBranch(rs.getString("barnch"));
+                dto.setBranch(rs.getString("branch"));
                 dto.setRoom(rs.getString("room"));
+                dto.setUseDate(rs.getString("useDate"));
                 dto.setTime(rs.getString("time"));
                 dto.setHeadcount(rs.getInt("headcount"));
                 dto.setPay(rs.getInt("pay"));
@@ -113,6 +114,8 @@ public class ReservationDAO {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            close();
         }
 
         return res;

@@ -22,11 +22,6 @@ public class MypageInquiryList implements MypageService{
 
 
 
-
-
-
-
-
         request.setAttribute("mainUrl","mypage/mypageTemplete.jsp");
         request.setAttribute("subUrl","mypage_inquiryList.jsp");
     }

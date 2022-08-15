@@ -9,7 +9,7 @@
 <%-- 갈아 엎기--%>
 <style>
     .mypage-menu-bg {
-        width: 500px;
+        width: 100%;
         background: #F5F5F5;
         display: flex;
         flex-direction: row;
@@ -67,11 +67,11 @@
     }
 
     .mypage-main {
-        width: 1200px;
+        width: 1000px;
 
         background: #F5F5F5;
         /*margin-top: 100px;*/
-        margin-left: 40px;
+        margin-left: 200px;
 
         /*position: relative;*/
 
@@ -151,4 +151,4 @@
         <jsp:include page="${subUrl}"/>
 
     </div>
-<%--</div>--%>
+</div>

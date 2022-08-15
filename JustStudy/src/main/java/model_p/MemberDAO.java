@@ -17,8 +17,6 @@ public class MemberDAO {
 
     public MemberDAO() {
 
-
-
         try {
             Context init = new InitialContext();
             DataSource ds = (DataSource) init.lookup("java:comp/env/qwer");
@@ -57,6 +55,8 @@ public class MemberDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            close();
         }
 
         return memberDTO;
@@ -75,6 +75,8 @@ public class MemberDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            close();
         }
 
         return  res;
@@ -93,11 +95,13 @@ public class MemberDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            close();
         }
 
-        return  res;
-    }
 
+        return res;
+    }
     public void signIn(MemberDTO memberDTO) {
         sql = " insert into member (mem_social , mem_userid , mem_password , mem_nickname , mem_realname , mem_phone, mem_address1, mem_address2,  mem_level, mem_socialid) values " +
                 "(?,?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -119,6 +123,8 @@ public class MemberDAO {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            close();
         }
 
     }
@@ -150,6 +156,8 @@ public class MemberDAO {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            close();
         }
 
         return memberDTO;
@@ -170,9 +178,34 @@ public class MemberDAO {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+    }
+
+    public void changePassword(MemberDTO memberDTO) {
+        sql = "update member set mem_password = ? where mem_id= ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, memberDTO.getMem_password());
+            ptmt.setInt(2, memberDTO.getMem_id());
+
+            ptmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
         }
 
 
+    }
+
+    public void close() {
+        if(rs!=null) try { rs.close(); } catch (SQLException e) {}
+        if(ptmt!=null) try { ptmt.close(); } catch (SQLException e) {}
+        if(con!=null) try { con.close(); } catch (SQLException e) {}
     }
 
 }

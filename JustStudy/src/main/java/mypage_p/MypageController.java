@@ -1,6 +1,8 @@
 package mypage_p;
 
 
+import model_p.MemberDAO;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +37,9 @@ public class MypageController extends HttpServlet {
         try {
 
             if(nonService.containsKey(service)) {
-//                request.setAttribute("mainUrl",nonService.get(service));
+                request.setAttribute("mainUrl", "mypage/mypageTemplete.jsp");
+                request.setAttribute("subUrl", nonService.get(service));
+                request.setAttribute("memberDTO",new MemberDAO().detail((Integer) (request.getSession()).getAttribute("login")));
             } else {
                 MypageService bs = (MypageService) Class.forName("mypage_p."+service).newInstance();
                 bs.execute(request, response);

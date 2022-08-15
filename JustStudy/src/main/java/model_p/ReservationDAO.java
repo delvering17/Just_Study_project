@@ -75,6 +75,8 @@ public class ReservationDAO {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            close();
         }
 
     }

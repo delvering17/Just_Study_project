@@ -57,7 +57,6 @@
 </style>
 <div class="mypage-inquiry">
     <div class="inquiry-top">
-        <%--        <p>예약일자 조회</p>--%>
         <div class="top-dateselect-wrapper">
             <button class="btn-inquiry">오늘</button>
             <button class="btn-inquiry">7일</button>

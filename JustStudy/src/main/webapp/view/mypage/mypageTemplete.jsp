@@ -119,9 +119,9 @@
         <div class="menu-profile-wrapper">
             <i class="fa-solid fa-circle-user fa-5x" style="color:gray"></i>
             <div class="mypage-menu-user-info">
-                <font size="6rem"><b>송지은</b></font>
+                <font size="6rem"><b>${memberDTO.mem_realname}</b></font>
                 <font size="4.5rem"><b>님</b></font><br/>
-                <font size="4.5rem" color="gray"><b>dieunn@naver.com</b></font>
+                <font size="4.5rem" color="gray"><b>${memberDTO.mem_userid}</b></font>
             </div>
         </div>
         <div class="menu-list-wrapper">

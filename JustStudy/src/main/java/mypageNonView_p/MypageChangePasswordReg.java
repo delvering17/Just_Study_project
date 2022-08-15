@@ -27,16 +27,16 @@ public class MypageChangePasswordReg implements MypageNonViewService{
 
 
         // 결과
+        MemberDTO memberDTO = new MemberDTO();
+        memberDTO.setMem_id(mem_id);
+        memberDTO.setMem_password(input_new_password);
 
-
-
-//        new MemberDAO().modifyInformation(memberDTO);
+        new MemberDAO().changePassword(memberDTO);
 
         JSONObject jj = new JSONObject();
         try {
 
-
-            jj.put("modifyResult","success");
+            jj.put("changeResult","success");
             response.getWriter().append(jj.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();

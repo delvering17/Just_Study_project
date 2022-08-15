@@ -171,6 +171,21 @@ public class MemberDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void changePassword(MemberDTO memberDTO) {
+        sql = "update member set mem_password = ? where mem_id= ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, memberDTO.getMem_password());
+            ptmt.setInt(2, memberDTO.getMem_id());
+
+            ptmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
 
     }

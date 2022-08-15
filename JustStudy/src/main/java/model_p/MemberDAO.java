@@ -121,7 +121,38 @@ public class MemberDAO {
             throw new RuntimeException(e);
         }
 
+    }
 
+    public MemberDTO detail(int mem_id) {
+        MemberDTO memberDTO = new MemberDTO();
+
+        sql = "select * from member where mem_id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, mem_id);
+            rs = ptmt.executeQuery();
+            if(rs.next()) {
+
+                memberDTO.setMem_id(rs.getInt("mem_id"));
+                memberDTO.setMem_social(rs.getInt("mem_social"));
+                memberDTO.setMem_userid(rs.getString("mem_userid"));
+                memberDTO.setMem_password(rs.getString("mem_password"));
+                memberDTO.setMem_nickname(rs.getString("mem_nickname"));
+                memberDTO.setMem_realname(rs.getString("mem_realname"));
+                memberDTO.setMem_phone(rs.getString("mem_phone"));
+                memberDTO.setMem_address1(rs.getString("mem_address1"));
+                memberDTO.setMem_address2(rs.getString("mem_address2"));
+                memberDTO.setMem_level(rs.getInt("mem_level"));
+                memberDTO.setMem_socialid(rs.getString("mem_socialid"));
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return memberDTO;
     }
 
 

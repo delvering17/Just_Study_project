@@ -14,6 +14,10 @@
         padding: 0;
         box-sizing: border-box;
     }
+    main {
+        width: 100%;
+        background: #F5F5F5;
+    }
 </style>
 <head>
     <title>template</title>

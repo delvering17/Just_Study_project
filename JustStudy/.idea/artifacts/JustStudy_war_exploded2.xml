@@ -6,6 +6,13 @@
         <element id="directory" name="classes">
           <element id="module-output" name="JustStudy" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="cos" />
+          <element id="library" level="project" name="json-simple-1.1.1" />
+          <element id="library" level="project" name="jstl" />
+          <element id="library" level="project" name="mariadb-java-client-2.7.3" />
+          <element id="library" level="project" name="standard" />
+        </element>
       </element>
       <element id="javaee-facet-resources" facet="JustStudy/web/Web" />
     </root>

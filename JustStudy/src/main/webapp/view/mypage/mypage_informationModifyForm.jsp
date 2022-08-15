@@ -64,27 +64,27 @@
         <ul>
             <li class="info-modify-form-items">
                 <p>이름</p>
-                <input type="text" class="user-input" id="input_realname">
+                <input type="text" class="user-input" id="input_realname" value="${memberDTO.mem_realname}">
             </li>
             <li class="info-modify-form-items">
                 <p>닉네임</p>
-                <input type="text" class="user-input"id="input_nickname">
+                <input type="text" class="user-input"id="input_nickname" value="${memberDTO.mem_realname}">
                 <button type="button" class="btn-modify">중복체크</button>
             </li>
             <li class="info-modify-form-items">
                 <p>휴대전화</p>
-                <input type="text" class="user-input" value="01022223333"/>
+                <input type="text" class="user-input" value="${memberDTO.mem_phone}"/>
 <%--                <input type="text" class="user-input" value="1999.10.1" readonly>--%>
                 <button type="button" class="btn-modify" id="">변경</button>
             </li>
             <li class="info-modify-form-items" >
                 <p>주소</p>
-                <input type="text" class="user-input" value="경기 화성시 봉담" readonly>
+                <input type="text" class="user-input" value="${memberDTO.mem_address1}" readonly>
                 <button type="button" class="btn-modify" id="btn-findaddress">검색</button>
             </li>
             <li class="info-modify-form-items">
                 <p></p>
-                <input type="text" class="user-input" value="저 언덕너머 위 101호" readonly>
+                <input type="text" class="user-input" value="${memberDTO.mem_address2}" readonly>
             </li>
             <li class="info-modify-form-items">
                 <p></p>

@@ -11,7 +11,7 @@ public class MemberLogout implements MemberService{
 
 
         HttpSession session = request.getSession();
-        session.removeAttribute("memberDTO");
+        session.removeAttribute("login");
 
         request.setAttribute("member_msg", "로그아웃 되었습니다.");
         request.setAttribute("mainUrl", "member/member_alert.jsp");

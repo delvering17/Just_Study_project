@@ -14,6 +14,7 @@ public class InquiryDTO {
     String inquiry_branch;
     Date inquiry_date;
     int inquiry_level;
+    int inquiry_state;
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 
@@ -93,6 +94,13 @@ public class InquiryDTO {
         this.inquiry_level = inquiry_level;
     }
 
+    public int getInquiry_state() {
+        return inquiry_state;
+    }
+
+    public void setInquiry_state(int inquiry_state) {
+        this.inquiry_state = inquiry_state;
+    }
 
     @Override
     public String toString() {
@@ -106,6 +114,7 @@ public class InquiryDTO {
                 ", inquiry_branch='" + inquiry_branch + '\'' +
                 ", inquiry_date=" + inquiry_date +
                 ", inquiry_level=" + inquiry_level +
+                ", inquiry_state=" + inquiry_state +
                 '}';
     }
 }

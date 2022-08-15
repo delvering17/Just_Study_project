@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: song-chanwook
@@ -16,7 +17,7 @@
     <hr>
     <div>
         <h3>질문</h3>
-        안녕하세요 저는 나문의 제목입니다.
+        <p>제목</p>${inquiryDTO.inquiry_title}
     </div>
     <div>
         <p>카테고리</p>${inquiryDTO.inquiry_category}
@@ -38,10 +39,22 @@
 
     <hr>
 
-    <h3>답변</h3>
+    <c:if test="${answerDTO != null}">
+        <div>
+            <h3>답변</h3>
+            <p>제목</p>${answerDTO.inquiry_title}
+        </div>
+        <div>
+            <p>문의 일자</p>${answerDTO.inquiry_date_String}
+        </div>
+        <div>
+                ${answerDTO.inquiry_content}
+        </div>
+    </c:if>
 
+    <a href="MypageInquiryList?nowPage=${nowPage}">목록으로</a>
 
-
+</div>
 
 
 </div>

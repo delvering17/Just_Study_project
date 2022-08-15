@@ -26,10 +26,16 @@ public class MypageInquiryDetail implements MypageService{
         int inquiry_id = Integer.parseInt(request.getParameter("inquiry_id"));
 
         InquiryDTO inquiryDTO = new InquiryDAO().inquiryDetail(inquiry_id);
-
-
-
         request.setAttribute("inquiryDTO", inquiryDTO);
+
+
+        if(inquiryDTO.getInquiry_state() == 2) {
+            InquiryDTO answerDTO = new InquiryDAO().answerDetail(inquiry_id);
+            request.setAttribute("answerDTO", answerDTO);
+        }
+
+
+        request.setAttribute("nowPage",request.getParameter("nowPage"));
 
         request.setAttribute("mainUrl","mypage/mypageTemplete.jsp");
         request.setAttribute("subUrl","mypage_inquiryDetail.jsp");

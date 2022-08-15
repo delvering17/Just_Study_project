@@ -23,6 +23,7 @@ public class MypageController extends HttpServlet {
         super();
         nonService.put("asdf", "mypage/mypageTemplete.jsp");
         nonService.put("MypageChangePasswordForm", "mypage_changePasswordForm.jsp");
+        nonService.put("MypageSignoutForm", "mypage_signoutForm.jsp");
     }
 
     @Override

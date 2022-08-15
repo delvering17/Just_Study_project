@@ -71,7 +71,7 @@
 
         background: #F5F5F5;
         /*margin-top: 100px;*/
-        margin-left: 200px;
+        margin-left: 100px;
 
         /*position: relative;*/
 

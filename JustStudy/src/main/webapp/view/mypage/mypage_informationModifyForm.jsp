@@ -34,6 +34,10 @@
             }
         })
     }
+
+    function gogo() {
+        location.href = "../mypage/MypageSignoutForm"
+    }
 </script>
 
 
@@ -121,7 +125,7 @@
             <li class="info-modify-form-items">
                 <p></p>
                 <div id="info-modify-confirm-wrapper">
-                    <button type="button" class="btn-modify" id="btn-memberclose">회원 탈퇴</button>
+                    <button type="button" class="btn-modify" id="btn-memberclose" onclick="gogo()">회원 탈퇴</button>
                     <button class="btn-modify" id="btn-confirm-modify" onclick="goInformationModify()">수정하기</button>
                 </div>
             </li>

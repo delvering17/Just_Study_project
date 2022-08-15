@@ -119,7 +119,7 @@
         <c:forEach items="${arr_inquiryDTO}" var="inquiryDTO">
             <div class="inquiry-items">
                 <div class="inquiry-items-title">
-                    <a href="">${inquiryDTO.inquiry_title}</a>
+                    <a href="MypageInquiryDetail?inquiry_id=${inquiryDTO.inquiry_id}&nowPage=${nowPage}">${inquiryDTO.inquiry_title}</a>
                 </div>
                 <div class="inquiry-items-category">
                         ${inquiryDTO.inquiry_category}

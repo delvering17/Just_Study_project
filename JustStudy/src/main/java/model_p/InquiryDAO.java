@@ -89,6 +89,40 @@ public class InquiryDAO {
         return 0;
     }
 
+    public InquiryDTO inquiryDetail(int inquiry_id) {
+        InquiryDTO inquiryDTO = new InquiryDTO();
+        sql = "select * from inquiry where inquiry_id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1,inquiry_id);
+
+            rs = ptmt.executeQuery();
+            if(rs.next()) {
+                inquiryDTO = new InquiryDTO();
+
+                inquiryDTO.setInquiry_id(rs.getInt("inquiry_id"));
+                inquiryDTO.setInquiry_title(rs.getString("inquiry_title"));
+                inquiryDTO.setInquiry_content(rs.getString("inquiry_content"));
+                inquiryDTO.setInquiry_writer(rs.getInt("inquiry_writer"));
+                inquiryDTO.setInquiry_category(rs.getString("inquiry_category"));
+                inquiryDTO.setInquiry_type(rs.getString("inquiry_type"));
+                inquiryDTO.setInquiry_branch(rs.getString("inquiry_branch"));
+                inquiryDTO.setInquiry_date(rs.getDate("inquiry_date"));
+                inquiryDTO.setInquiry_level(rs.getInt("inquiry_level"));
+                inquiryDTO.setInquiry_state(rs.getInt("inquiry_state"));
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+
+        return inquiryDTO;
+    }
+
 
     public void close() {
         if(rs!=null) try { rs.close(); } catch (SQLException e) {}

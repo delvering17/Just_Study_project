@@ -204,6 +204,22 @@ public class MemberDAO {
 
     }
 
+    public void signOut(int mem_id) {
+        sql = "delete from member where mem_id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, mem_id);
+            ptmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+
+    }
+
     public void close() {
         if(rs!=null) try { rs.close(); } catch (SQLException e) {}
         if(ptmt!=null) try { ptmt.close(); } catch (SQLException e) {}

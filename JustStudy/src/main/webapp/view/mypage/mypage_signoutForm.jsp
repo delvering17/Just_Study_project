@@ -3,26 +3,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <script type="text/javascript">
-    function goChangePassword() {
+    function goSignout() {
         let form_data = {
             input_password:$('#input-password').val()
         }
 
         $.ajax({
-            url:'<c:url value="/mypageNonView/MypageChangePasswordReg"/>',
+            url:'<c:url value="/mypageNonView/MypageSignoutReg"/>',
             type:'GET',
             data: form_data,
-            async:false,
+            async:true,
             dataType:'JSON',
             success:function(response){
-                alert(response.changeResult)
-                location.href = "/mypage/MypageChangePasswordForm"
-                <%--if(response.modifyResult === 'success') {--%>
-                <%--    alert(msg)--%>
-                <%--    location.href = '<c:url value="/board/MainPage"/>'--%>
-                <%--} else {--%>
-                <%--    alert(response.modifyResult)--%>
-                <%--}--%>
+                alert(response.signoutResult)
+                
+                location.href = '../board/MainPage'
+
             },
             error:function(e){
                 console.log(e.responseText)

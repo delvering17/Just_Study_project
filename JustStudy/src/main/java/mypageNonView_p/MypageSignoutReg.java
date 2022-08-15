@@ -23,6 +23,8 @@ public class MypageSignoutReg implements MypageNonViewService{
 
 
         // 결과
+        session.removeAttribute("login");
+
         new MemberDAO().signOut(mem_id);
 
         JSONObject jj = new JSONObject();

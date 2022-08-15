@@ -1,6 +1,8 @@
 package mypage_p;
 
 
+import model_p.MemberDAO;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,6 +22,7 @@ public class MypageController extends HttpServlet {
     public MypageController() {
         super();
         nonService.put("asdf", "mypage/mypageTemplete.jsp");
+        nonService.put("MypageChangePasswordForm", "mypage_changePasswordForm.jsp");
     }
 
     @Override
@@ -32,10 +35,14 @@ public class MypageController extends HttpServlet {
         }
 
         String service = request.getRequestURI().substring((request.getContextPath()+"/mypage/").length());
+        System.out.println(request.getRequestURI());
+        System.out.println(service);
         try {
 
             if(nonService.containsKey(service)) {
-//                request.setAttribute("mainUrl",nonService.get(service));
+                request.setAttribute("mainUrl","mypage/mypageTemplete.jsp");
+                request.setAttribute("subUrl",nonService.get(service));
+                request.setAttribute("memberDTO",new MemberDAO().detail((Integer) (request.getSession()).getAttribute("login")));
             } else {
                 MypageService bs = (MypageService) Class.forName("mypage_p."+service).newInstance();
                 bs.execute(request, response);

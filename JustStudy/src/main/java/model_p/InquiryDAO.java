@@ -67,6 +67,29 @@ public class InquiryDAO {
         return res;
     }
 
+    public int inquiryTotal (int mem_id) {
+
+        sql = "select count(*) from inquiry where inquiry_writer = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, mem_id);
+
+            rs = ptmt.executeQuery();
+
+            rs.next();
+            return rs.getInt(1);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            close();
+        }
+
+        return 0;
+    }
+
+
     public void close() {
         if(rs!=null) try { rs.close(); } catch (SQLException e) {}
         if(ptmt!=null) try { ptmt.close(); } catch (SQLException e) {}

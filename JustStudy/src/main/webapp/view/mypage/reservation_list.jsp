@@ -122,6 +122,50 @@
 
 </style>
 
+<script type="text/javascript">
+    window.onload = function (){
+        $("input[name=period]").change(function (){
+
+            $(".mypage-reservlist-table>tbody>tr").show()
+
+            let start = new Date();
+
+            switch ($("input[name=period]:checked").attr("id")){
+                case "all":
+                    start = null;
+                    break;
+                case "today":
+                    start = new Date();
+                    break;
+                case "sevenDays":
+                    start.setDate(new Date().getDate() - 6)
+                    break;
+                case "oneMonth":
+                    start.setMonth(new Date().getMonth() - 1)
+                    start.setDate(new Date().getDate() + 1)
+                    break;
+                case "threeMonths":
+                    start.setMonth(new Date().getMonth() - 3)
+                    start.setDate(new Date().getDate() + 1)
+                    break;
+            }
+
+            if(start != null) {
+                const startDate = new Date(start.getFullYear(), start.getMonth(), start.getDate())
+
+                for (let i = 1; i < $(".mypage-reservlist-table>tbody>tr").length; i++) {
+                    const useDate = $(".mypage-reservlist-table>tbody>tr").eq(i).children("td").eq(3)
+                    const useDate2 = new Date(useDate.html().split("-")[0], parseInt(useDate.html().split("-")[1]) - 1, parseInt(useDate.html().split("-")[2]))
+
+                    if (!(useDate2 >= startDate && useDate2 <= new Date())) {
+                        useDate.parent("tr").hide()
+                    }
+                }
+            }
+        })
+    }
+</script>
+
 <div class="mypage-reservlist">
     <div class="mypage-reservlist-top">
         <div class="top-dateselect-wrapper">

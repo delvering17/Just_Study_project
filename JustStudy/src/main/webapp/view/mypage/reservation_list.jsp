@@ -49,7 +49,7 @@
         background: lightgray;
     }
 
-    .mypage-reservlist > .mypage-reservlist-top > .mypage-reservlist-top-datepicker {
+    .mypage-reservlist-top-datepicker {
         width: 150px;
         height: 40px;
     }
@@ -124,11 +124,12 @@
 
 <script type="text/javascript">
     window.onload = function (){
-        $("input[name=period]").change(function (){
+        $("#submit-find").click(function (){
 
             $(".mypage-reservlist-table>tbody>tr").show()
 
             let start = new Date();
+            let endDate = new Date();
 
             switch ($("input[name=period]:checked").attr("id")){
                 case "all":
@@ -148,6 +149,14 @@
                     start.setMonth(new Date().getMonth() - 3)
                     start.setDate(new Date().getDate() + 1)
                     break;
+                case "mypick":
+                    const startPick = $(".mypage-reservlist-top-datepicker:first-of-type").val()
+                    start = new Date(startPick.split("-")[0], parseInt(startPick.split("-")[1]) - 1, parseInt(startPick.split("-")[2]))
+
+                    const endPick = $(".mypage-reservlist-top-datepicker:last-of-type").val()
+                    endDate = new Date(endPick.split("-")[0], parseInt(endPick.split("-")[1]) - 1, parseInt(endPick.split("-")[2]))
+                    
+                    break;
             }
 
             if(start != null) {
@@ -157,11 +166,15 @@
                     const useDate = $(".mypage-reservlist-table>tbody>tr").eq(i).children("td").eq(3)
                     const useDate2 = new Date(useDate.html().split("-")[0], parseInt(useDate.html().split("-")[1]) - 1, parseInt(useDate.html().split("-")[2]))
 
-                    if (!(useDate2 >= startDate && useDate2 <= new Date())) {
+                    if (!(useDate2 >= startDate && useDate2 <= endDate)) {
                         useDate.parent("tr").hide()
                     }
                 }
             }
+        })
+
+        $(".mypage-reservlist-top-datepicker").change(function (){
+            $("input[id=mypick]").attr('checked', true);
         })
     }
 </script>
@@ -190,7 +203,9 @@
         <p>&#126;</p>
         <input class="mypage-reservlist-top-datepicker" type="date">
         <button type="submit" class="mypage-reservlist-period" id="submit-find">조회</button>
+
     </div>
+    <label for="threeMonths"><input type="radio" name="period" id="mypick" hidden>
 
     <div class="mypage-reservlist-main">
         <table class="mypage-reservlist-table">

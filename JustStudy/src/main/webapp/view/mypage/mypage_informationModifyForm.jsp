@@ -1,34 +1,32 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: song-chanwook
-  Date: 2022/08/14
-  Time: 6:23 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <script type="text/javascript">
 
     function goInformationModify() {
         let form_data = {
-            // input_userid:$('#input-userid').val(),
-            // input_password:$('#input-password').val()
+            input_realname:$('#input-realname').val(),
+            input_nickname:$('#input-nickname').val(),
+            input_phone:$('#input-phone').val(),
+            input_address1:$('#input-address1').val(),
+            input_address2:$('#input-address2').val()
         }
 
         $.ajax({
-            url:'<c:url value="/memberNonView/MemberLoginReg"/>',
+            url:'<c:url value="/mypageNonView/MypageInformationModifyReg"/>',
             type:'GET',
             data: form_data,
             async:false,
             dataType:'JSON',
             success:function(response){
-                // alert(response.member_nickname)
-                if(response.loginResult === 'success') {
-                    alert('로그인에 성공했습니다.')
-                    location.href = '<c:url value="/board/MainPage"/>'
-                } else {
-                    alert(response.loginResult)
-                }
+                alert('야호 수정수정')
+                <%--if(response.modifyResult === 'success') {--%>
+                <%--    alert(msg)--%>
+                <%--    location.href = '<c:url value="/board/MainPage"/>'--%>
+                <%--} else {--%>
+                <%--    alert(response.modifyResult)--%>
+                <%--}--%>
             },
             error:function(e){
                 console.log(e.responseText)
@@ -97,33 +95,33 @@
         <ul>
             <li class="info-modify-form-items">
                 <p>이름</p>
-                <input type="text" class="user-input" id="input_realname" value="${memberDTO.mem_realname}">
+                <input type="text" class="user-input" id="input-realname" value="${memberDTO.mem_realname}">
             </li>
             <li class="info-modify-form-items">
                 <p>닉네임</p>
-                <input type="text" class="user-input"id="input_nickname" value="${memberDTO.mem_realname}">
+                <input type="text" class="user-input"id="input-nickname" value="${memberDTO.mem_realname}">
                 <button type="button" class="btn-modify">중복체크</button>
             </li>
             <li class="info-modify-form-items">
                 <p>휴대전화</p>
-                <input type="text" class="user-input" value="${memberDTO.mem_phone}"/>
+                <input type="text" class="user-input" id="input-phone" value="${memberDTO.mem_phone}"/>
 <%--                <input type="text" class="user-input" value="1999.10.1" readonly>--%>
                 <button type="button" class="btn-modify" id="">변경</button>
             </li>
             <li class="info-modify-form-items" >
                 <p>주소</p>
-                <input type="text" class="user-input" value="${memberDTO.mem_address1}" readonly>
+                <input type="text" class="user-input" id="input-address1" value="${memberDTO.mem_address1}" readonly>
                 <button type="button" class="btn-modify" id="btn-findaddress">검색</button>
             </li>
             <li class="info-modify-form-items">
                 <p></p>
-                <input type="text" class="user-input" value="${memberDTO.mem_address2}" readonly>
+                <input type="text" class="user-input" id="input-address2" value="${memberDTO.mem_address2}" readonly>
             </li>
             <li class="info-modify-form-items">
                 <p></p>
                 <div id="info-modify-confirm-wrapper">
                     <button type="button" class="btn-modify" id="btn-memberclose">회원 탈퇴</button>
-                    <button type="submit" class="btn-modify" id="btn-confirm-modify" onclick="goInformationModify()">수정하기</button>
+                    <button class="btn-modify" id="btn-confirm-modify" onclick="goInformationModify()">수정하기</button>
                 </div>
             </li>
         </ul>

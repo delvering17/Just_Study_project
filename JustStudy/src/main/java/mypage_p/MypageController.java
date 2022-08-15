@@ -32,7 +32,6 @@ public class MypageController extends HttpServlet {
         }
 
         String service = request.getRequestURI().substring((request.getContextPath()+"/mypage/").length());
-
         try {
 
             if(nonService.containsKey(service)) {

@@ -14,10 +14,7 @@ public class MypageInfomationModifyForm implements MypageService{
 
         HttpSession session = request.getSession();
 
-//        MemberDTO memberDTO = new MemberDAO().detail((Integer) session.getAttribute("login"));
-        MemberDTO memberDTO = new MemberDAO().detail(1);
-
-
+        MemberDTO memberDTO = new MemberDAO().detail((Integer) session.getAttribute("login"));
 
         request.setAttribute("memberDTO", memberDTO);
 

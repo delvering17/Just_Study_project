@@ -20,7 +20,8 @@
             async:false,
             dataType:'JSON',
             success:function(response){
-                alert('야호 수정수정')
+                alert(response.modifyResult)
+                location.href = "/mypage/MypageInformationModifyForm"
                 <%--if(response.modifyResult === 'success') {--%>
                 <%--    alert(msg)--%>
                 <%--    location.href = '<c:url value="/board/MainPage"/>'--%>
@@ -99,7 +100,7 @@
             </li>
             <li class="info-modify-form-items">
                 <p>닉네임</p>
-                <input type="text" class="user-input"id="input-nickname" value="${memberDTO.mem_realname}">
+                <input type="text" class="user-input"id="input-nickname" value="${memberDTO.mem_nickname}">
                 <button type="button" class="btn-modify">중복체크</button>
             </li>
             <li class="info-modify-form-items">

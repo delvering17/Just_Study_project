@@ -246,7 +246,7 @@
                         </ul>
                         <ul class="gnb-sub-list">
                                 <li><a href="../member/MemberLoginForm" >로그인</a></li>
-                            <c:if test="${sessionScope.memberDTO != null}">
+                            <c:if test="${sessionScope.login != null}">
                                 <li><a href="../member/MemberLogout" >로그아웃</a></li>
                             </c:if>
                             <li><a href="#" >관리자로그인</a></li>

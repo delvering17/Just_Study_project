@@ -71,7 +71,7 @@
 
         background: #F5F5F5;
         /*margin-top: 100px;*/
-        margin-left: 200px;
+        margin-left: 100px;
 
         /*position: relative;*/
 
@@ -127,11 +127,11 @@
         <div class="menu-list-wrapper">
             <div>
                 <i class="fa-solid fa-pen-to-square"></i>
-                <a href="">회원 정보 수정</a>
+                <a href="../mypage/MypageInfomationModifyForm">회원 정보 수정</a>
             </div>
             <div>
                 <i class="fa-solid fa-key"></i>
-                <a href="">비밀번호 변경</a>
+                <a href="../mypage/MypageChangePasswordForm">비밀번호 변경</a>
             </div>
             <div>
                 <i class="fa-solid fa-comment"></i>

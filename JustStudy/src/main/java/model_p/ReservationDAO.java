@@ -9,14 +9,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class DAO {
+public class ReservationDAO {
 
     Connection con;
     PreparedStatement ptmt;
     ResultSet rs;
     String sql;
 
-    public DAO() {
+    public ReservationDAO() {
 
         Context init;
 
@@ -55,6 +55,28 @@ public class DAO {
             close();
         }
         return res;
+    }
+
+    public void addReservation(ReservationDTO dto){
+        sql = "insert into reservation(city, branch, room, resDate, time, headcount, pay) values" +
+                "(?, ?, ?, ?, ?, ?, ?)";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, dto.getCity());
+            ptmt.setString(2, dto.getBranch());
+            ptmt.setString(3, dto.getRoom());
+            ptmt.setString(4, dto.getResDate());
+            ptmt.setString(5, dto.getTime());
+            ptmt.setInt(6, dto.getHeadcount());
+            ptmt.setInt(7, dto.getPay());
+
+            ptmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public void close() {

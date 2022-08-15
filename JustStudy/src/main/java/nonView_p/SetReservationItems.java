@@ -1,13 +1,12 @@
 package nonView_p;
 
 import model_p.BranchDTO;
-import model_p.DAO;
+import model_p.ReservationDAO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
@@ -15,7 +14,7 @@ public class SetReservationItems implements NonViewService {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-        ArrayList<BranchDTO> branchList = new DAO().branchList();
+        ArrayList<BranchDTO> branchList = new ReservationDAO().branchList();
         String res = "";
 
         for (BranchDTO dto : branchList) {
@@ -42,8 +41,8 @@ public class SetReservationItems implements NonViewService {
                 if(((String) request.getParameter("branchName")).equals(dto.getName())){
                     for(int i = dto.getOpen(); i < dto.getClose(); i++){
                         try {
-                            res += "<input type=\"checkbox\" name=\"time\" id=\"" + i + "\" hidden/>";
-                            res += "<label for=\"" + i + "\"><div><div class=\"studyroom-reserv-possible\">"+URLEncoder.encode("예약가능", "UTF-8")+"</div><div>"+(i < 10 ? "0" : "")+i+":00 ~ "+(i < 9 ? "0" : "")+(i+1)+":00</div></div></label>";
+                            res += "<input type=\"checkbox\" name=\"time\" id=\""+ (i > 9 ? "" : "0") + i + ":00" +"\" hidden/>";
+                            res += "<label for=\""+ (i > 9 ? "" : "0") + i + ":00" +"\"><div><div class=\"studyroom-reserv-possible\">"+URLEncoder.encode("예약가능", "UTF-8")+"</div><div>"+(i < 10 ? "0" : "")+i+":00 ~ "+(i < 9 ? "0" : "")+(i+1)+":00</div></div></label>";
                         } catch (UnsupportedEncodingException e) {
                             throw new RuntimeException(e);
                         }

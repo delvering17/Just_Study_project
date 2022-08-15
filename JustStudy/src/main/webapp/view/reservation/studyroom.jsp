@@ -1,6 +1,6 @@
 <%@ page import="model_p.BranchDTO" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="model_p.DAO" %>
+<%@ page import="model_p.ReservationDAO" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="reservation_p.Studyroom" %>
 <%@ page import="java.util.Calendar" %>
@@ -14,9 +14,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<html>
-
-<head>
     <style>
         .studyroom-reserv-bg {
             width: 100%;
@@ -334,45 +331,51 @@
         }
 
         #studyroom-reserv-receipt > div > div {
-            background: #F5F5F5;
-            padding: 20px 20px 20px 20px;
+             background: #F5F5F5;
+             padding: 20px 20px 20px 20px;
+         }
+
+         #studyroom-reserv-receipt .modal-header {
+             height: 100px;
+             border: none;
+         }
+
+        .studyroom-reserv-paylist > div > p{
+            font-size: 20px;
         }
 
-        #studyroom-reserv-receipt > div > div > div:first-of-type {
-            height: 100px;
-            border: none;
-        }
+        .studyroom-reserv-paylist > div > div{
+             margin-top: 10px;
+             margin-bottom: 30px;
+             border-top: 1px solid lightgray;
+             border-bottom: 1px solid lightgray;
+             background: white;
+             padding: 20px;
+         }
 
-        #studyroom-reserv-receipt .modal-body > div:nth-of-type(1) {
-            margin-top: 10px;
-            margin-bottom: 30px;
-            border-top: 1px solid lightgray;
-            border-bottom: 1px solid lightgray;
-            background: white;
-            padding: 20px;
-        }
 
-        #studyroom-reserv-receipt .modal-body > div:nth-of-type(1) > div:first-of-type {
-            font-size: 1.3rem;
+        .studyroom-reserv-paylist > div > div > div:first-of-type {
+            font-size: 1.2rem;
             font-weight: bold;
             margin-bottom: 10px;
         }
 
-        #studyroom-reserv-receipt .modal-body > div:nth-of-type(1) > ul > li {
+
+        .studyroom-reserv-paylist > div > div> ul > li {
             font-size: 1rem;
             font-weight: bold;
             height: 30px;
         }
 
-        #studyroom-reserv-receipt .modal-body > div:nth-of-type(1) > div:last-of-type {
+
+        .studyroom-reserv-paylist > div > div > div:last-of-type {
             text-align: right;
             font-size: 1.3rem;
             font-weight: bold;
         }
 
         #studyroom-reserv-receipt .modal-body > div:nth-of-type(2),
-        #studyroom-reserv-receipt .modal-body > div:nth-of-type(3),
-        #studyroom-reserv-receipt .modal-body > div:nth-of-type(4) {
+        #studyroom-reserv-receipt .modal-body > div:nth-of-type(3){
             width: 100%;
             display: flex;
             flex-direction: row;
@@ -381,18 +384,12 @@
             margin-bottom: 10px;
         }
 
-        #studyroom-reserv-receipt .modal-body > div:nth-of-type(4) {
+        #studyroom-reserv-receipt .modal-body > div:nth-of-type(3) {
             margin-bottom: 40px;
         }
 
-        #studyroom-reserv-receipt .modal-body > div:nth-of-type(2) > div {
-            width: fit-content;
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
-
-        #studyroom-reserv-receipt .modal-body > div:nth-of-type(3) > div,
-        #studyroom-reserv-receipt .modal-body > div:nth-of-type(4) > div {
+        #studyroom-reserv-receipt .modal-body > div:nth-of-type(2) > div,
+        #studyroom-reserv-receipt .modal-body > div:nth-of-type(3) > div {
             width: fit-content;
             font-size: 1.3rem;
             font-weight: bold;
@@ -456,6 +453,7 @@
 
     </style>
 
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     <script type="text/javascript">
         window.onload = function () {
 
@@ -481,8 +479,6 @@
             })
 
             $(document).on("change", "input[name=\"branchName\"]", function(){
-
-                console.log($(".studyroom-reserv-headcount:first-of-type+b").html())
 
                 $.ajax({
                     url: '<c:url value="/nonView/SetReservationItems"/>',
@@ -522,7 +518,6 @@
 
             $(document).on("change", "input[name=\"roomName\"]", function(){
 
-                console.log(document.querySelector('input[type=radio][name=roomName]:checked').getAttribute("id"))
                 $.ajax({
                     url: '<c:url value="/nonView/SetReservationItems"/>',
                     type: "GET",
@@ -540,7 +535,6 @@
             });
 
             $(document).on("change", "input[name=\"time\"]", function (){
-                console.log(document.querySelectorAll('input[type=checkbox][name=time]:checked').length)
 
                 let str = document.querySelector('input[type=checkbox][name=time]:checked+label>div>div:last-of-type').innerHTML
                     + ((document.querySelectorAll('input[type=checkbox][name=time]:checked').length - 1) > 0 ? " 외 "+(document.querySelectorAll('input[type=checkbox][name=time]:checked').length - 1)+"건" : "")
@@ -567,6 +561,14 @@
             })
 
             $(".studyroom-reserv-selected > button").click(function(){
+
+                const selectedTime = document.querySelectorAll('input[type=checkbox][name=time]:checked')
+                let selectedTimeList = new Array()
+
+                for(let i = 0; i < selectedTime.length; i++){
+                    selectedTimeList.push(selectedTime.item(i).id)
+                }
+
                 $(".studyroom-reserv-result").append("<div>" +
                     "<div>"+($(".studyroom-reserv-result>div").length+1)+"</div>" +
                     "<div>" +
@@ -574,7 +576,7 @@
                         $(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(2)>b").html() + " | "+
                         $(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(3)>b").html() + " | "+
                         $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(1)>b").html() + " | "+
-                        $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(2)>b").html() + " | "+
+                        selectedTimeList.join (", ")+ " | "+
                         $(".studyroom-reserv-headcount:first-of-type+b").html()+"인"+
                     "</div>" +
                     "<button><i class=\"fa-regular fa-x fa-2x\"></i></button>" +
@@ -587,20 +589,85 @@
                 }
 
                 $(".studyroom-reserv-done>button").html("총 "+$(".studyroom-reserv-result>div").length+"건 | "+realTotalWon+"원 결제하기")
+
+                const reserveNum = $(".studyroom-reserv-form>div").length
+                $(".studyroom-reserv-form").append("<div></div>")
+                $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='city' value='"+$(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(1)>b").html()+"'></input>")
+                $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='branch' value='"+$(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(2)>b").html()+"'></input>")
+                $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='room' value='"+$(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(3)>b").html()+"'></input>")
+                $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='resDate' value='"+$(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(1)>b").html()+"'></input>")
+                $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='time' value='"+selectedTimeList.join (", ")+"'></input>")
+                $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='headcount' value='"+$(".studyroom-reserv-headcount:first-of-type+b").html()+"'></input>")
+                $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='pay' value='"+$(".studyroom-reserv-totalprice").html()+"'></input>")
+
             })
 
             $(document).on("click", ".fa-x", function (){
                 const removeDiv = $(this).parent().parent()
+                $(".studyroom-reserv-form").children("div").eq($(this).index(".fa-x")).remove()
                 removeDiv.html("")
                 removeDiv.remove()
             })
 
+            $(".studyroom-reserv-done>button").click(function (){
 
+                $(".studyroom-reserv-paylist").html("")
+
+                let totalWon = 0;
+
+                for(let i = 0; i < $(".studyroom-reserv-form>div").length; i++){
+
+                    $(".studyroom-reserv-paylist").append("<div>")
+                    $(".studyroom-reserv-paylist>div").eq(i).append("<p><b>"+
+                        $(".studyroom-reserv-form>div").eq(i).children("input[name=\"city\"]").val()+" | "+
+                        $(".studyroom-reserv-form>div").eq(i).children("input[name=\"branch\"]").val()+ "</b></p>")
+                    $(".studyroom-reserv-paylist>div").eq(i).append("<div>")
+                    $(".studyroom-reserv-paylist>div").eq(i).children("div").append("<div>"+$(".studyroom-reserv-form>div").eq(i).children("input[name=\"resDate\"]").val()+"</div>")
+                    $(".studyroom-reserv-paylist>div").eq(i).children("div").append("<ul><li>" +
+                        ""+$(".studyroom-reserv-form>div").eq(i).children("input[name=\"room\"]").val()+"</li>" +
+                        "<li>예약시간) "+$(".studyroom-reserv-form>div").eq(i).children("input[name=\"time\"]").val()+"</li></ul>")
+                    $(".studyroom-reserv-paylist>div").eq(i).children("div").append("<div>총 "+
+                        $(".studyroom-reserv-form>div").eq(i).children("input[name=\"time\"]").val().split(",").length+"시간 / "+
+                        $(".studyroom-reserv-form>div").eq(i).children("input[name=\"headcount\"]").val()+"인 / "+
+                    $(".studyroom-reserv-form>div").eq(i).children("input[name=\"pay\"]").val()+"원</div>")
+
+                    totalWon += parseInt($(".studyroom-reserv-form>div").eq(i).children("input[name=\"pay\"]").val())
+                }
+
+                $(".studyroom-reserv-paylist+div>div:last-of-type").html($(".studyroom-reserv-paylist>div").length+"건")
+                $(".studyroom-reserv-paylist+div+div>div:last-of-type").html(totalWon+"원")
+                $("#studyroom-reserv-receipt .modal-body > button:nth-of-type(1)").html("총 "+$(".studyroom-reserv-paylist>div").length+"건 | <b>"+totalWon+"</b>원 결제하기")
+
+            })
+
+            $("#studyroom-reserv-receipt .modal-body > button:nth-of-type(1)").click(function (){
+
+                if($(".personalInfo").is(':checked')){
+                    IMP.init('imp02841035');
+                    IMP.request_pay({
+                        pg : document.querySelector('input[type=radio][name=paymentMethod]:checked').getAttribute("value"),
+                        pay_method : 'card',
+                        merchant_uid : 'merchant_' + new Date().getTime(),
+                        name : 'JustStudy',
+                        amount : $("#studyroom-reserv-receipt .modal-body > button:nth-of-type(1)>b").html(),
+                        buyer_name : '송지은',
+                        buyer_tel : '010-0000-0000'
+                    }, function(rsp) {
+                        if ( rsp.success ) {
+                            var msg = '결제가 완료되었습니다.';
+                            $(".studyroom-reserv-form").submit()
+                        } else {
+                            var msg = '결제에 실패하였습니다.';
+                            msg += '에러내용 : ' + rsp.error_msg;
+                        }
+                        alert(msg);
+                    });
+                } else{
+                    alert("이용규칙, 취소 및 환불규칙, 개인정보 수집 및 이용, 개인정보 제3자 제공에 동의해주세요.")
+                }
+            })
         }
     </script>
-</head>
-
-<body>
 
 <div class="studyroom-reserv-bg">
 
@@ -695,19 +762,10 @@
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <font size="5px"><b>서울 | 천호점</b></font>
-                <div>
-                    <div>2022.08.11(목)</div>
-                    <ul>
-                        <li>룸2(4인실)</li>
-                        <li>예약시간 | 22:00, 23:00</li>
-                    </ul>
-                    <div>총 2시간 | 10,000원</div>
+                <div class="studyroom-reserv-paylist">
+
                 </div>
-                <div>
-                    <div>총 예약 금액</div>
-                    <div>10,000원</div>
-                </div>
+
                 <div>
                     <div>총 예약 건수</div>
                     <div>2건</div>
@@ -720,22 +778,22 @@
                 <input type="text" value="송지은"/>
                 <input type="text" value="01027628090"/>
                 <div><font size="5px"><b>결제 수단 선택</b></font></div>
-                <label><input type="radio" name="paymentMethod">신용카드</label>
-                <label><input type="radio" name="paymentMethod">카카오페이</label>
+                <label><input type="radio" name="paymentMethod" value="kcp" checked>신용카드</label>
+                <label><input type="radio" name="paymentMethod" value="kakaopay">카카오페이</label>
 
                 <div><font size="2px" color="darkred"><b>*예약 복수 선택 시 환불 기간이 지나면 취소가 어려우니 유의바랍니다.</b></font></div>
                 <div><font size="2px" color="darkred"><b>(환불기간: 예약 시작시간 48시간 이전부터 취소/환불 불가)</b></font></div>
 
-                <label><input type="checkbox"><font size="2px">이용규칙, 취소 및 환불규칙, 개인정보 수집 및 이용, 개인정보 제3자 제공에 동의하실 경우
+                <label><input type="checkbox" class="personalInfo"><font size="2px">이용규칙, 취소 및 환불규칙, 개인정보 수집 및 이용, 개인정보 제3자 제공에 동의하실 경우
                     클릭해주세요.</font></label>
 
-                <button>총 2건 | 10,000원 결제하기</button>
+                <button></button>
                 <button data-bs-dismiss="modal">다시 선택하기</button>
             </div>
         </div>
     </div>
 </div>
+<form class="studyroom-reserv-form" method="post" action="PaySuccess">
+    <button type="submit"></button>
+</form>
 
-</body>
-
-</html>

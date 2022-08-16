@@ -97,10 +97,15 @@
         tr:first-of-type > th:nth-of-type(3),
         tr:first-of-type > th:nth-of-type(4),
         tr:first-of-type > th:nth-of-type(5),
-        tr:first-of-type > th:nth-of-type(6),
         tr:first-of-type > th:nth-of-type(7),
         tr:first-of-type > th:nth-of-type(8){
             width: 140px;
+            background: rgba(83, 104, 167, 0.856);
+            color: #fff;
+        }
+
+        tr:first-of-type > th:nth-of-type(6){
+            width: 250px;
             background: rgba(83, 104, 167, 0.856);
             color: #fff;
         }
@@ -164,9 +169,9 @@
                         </td>
                         <td><%=branchDTO.getPrice()%></td>
                         <td><%=(branchDTO.getRooms() != null ? branchDTO.getRooms().replaceAll(",", "<br/>") : "")%></td>
-                        <td><%=branchDTO.getAddress()%></td>
-                        <td><%=branchDTO.getPhone()%></td>
-                        <td><%=branchDTO.getFacilities()%></td>
+                        <td><%=(branchDTO.getAddress() != null ? branchDTO.getAddress() : "")%></td>
+                        <td><%=(branchDTO.getPhone() != null ? branchDTO.getPhone() : "")%></td>
+                        <td><%=(branchDTO.getFacilities() != null ? branchDTO.getFacilities().replaceAll(",", "<br/>") : "")%></td>
                         <th><input type="checkbox" name="user"></th>
                     </tr>
                     <%}

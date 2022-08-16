@@ -1,3 +1,7 @@
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="model_p.BranchDTO" %>
+<%@ page import="java.util.LinkedHashMap" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -59,10 +63,6 @@
             border-radius: 4px;
         }
 
-        #main > div:nth-of-type(2) > input[type=text]{
-            height: 22px;
-        }
-
         #main > div:nth-of-type(2) > button{
             width: 25px;
             height: 25px;
@@ -71,13 +71,6 @@
         table{
             border: 1px solid rgb(122, 115, 115);
             margin-top: 10px;
-        }
-
-        tr:nth-of-type(3),
-        tr:nth-of-type(5),
-        tr:nth-of-type(7),
-        tr:nth-of-type(9){
-            /*background: rgba(227, 233, 240, 0.726);*/
         }
 
         th{
@@ -91,13 +84,8 @@
             font-size: 13px;
         }
 
-        tr > td > div > input[type=radio]{
-            margin-left: 20px;
-            width: 10px;
-        }
-
         tr:first-of-type > th:first-of-type,
-        tr:first-of-type > th:nth-of-type(2){
+        tr:first-of-type > th:last-of-type{
             width: 50px;
             height: 50px;
             padding: 10px;
@@ -105,27 +93,26 @@
             background: rgba(83, 104, 167, 0.856);
         }
 
-        tr:nth-of-type(n+1) > th{
-
-        }
-
+        tr:first-of-type > th:nth-of-type(2),
         tr:first-of-type > th:nth-of-type(3),
         tr:first-of-type > th:nth-of-type(4),
         tr:first-of-type > th:nth-of-type(5),
         tr:first-of-type > th:nth-of-type(6),
         tr:first-of-type > th:nth-of-type(7),
-        tr:first-of-type > th:nth-of-type(8),
-        tr:first-of-type > th:nth-of-type(9),
-        tr:first-of-type > th:last-child{
+        tr:first-of-type > th:nth-of-type(8){
             width: 140px;
             background: rgba(83, 104, 167, 0.856);
             color: #fff;
         }
 
+        td{
+            height: 30px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
 
-
-        tr:nth-of-type(2) > td{
-            height: 200px;
+        .branch:nth-of-type(2n){
+            background: rgba(227, 233, 240, 0.726)
         }
 
     </style>
@@ -137,14 +124,14 @@
 
     <div id="headline">
         <b>지점관리</b>
-        <input type="button" value="선택수정">
         <input type="button" value="선택삭제">
+        <input type="button" value="선택수정">
+        <input type="button" value="지점추가">
     </div>
 
     <div id="main">
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
             <tr>
-                <th><input type="checkbox" name="user" onclick="selectAll(this)"></th>
                 <th>지역</th>
                 <th>지점명</th>
                 <th>운영 시간</th>
@@ -153,49 +140,39 @@
                 <th>매장 주소</th>
                 <th>전화번호</th>
                 <th>편의 시설</th>
+                <th><input type="checkbox" name="user" onclick="selectAll(this)"></th>
             </tr>
-            <tr>
-                <th rowspan="5"><input type="checkbox" name="user"></th>
-                <td rowspan="5">
-                    서울
-                </td>
-            </tr>
-            <tr>
-                <td>강남점</td>
-                <td>08:00 ~ 23:00</td>
-                <td>2500원</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>사당점</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>신촌점</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>교대점</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+
+            <%
+                LinkedHashMap<String, Integer> branchMap = (LinkedHashMap<String, Integer>) request.getAttribute("branchMap");
+                ArrayList<BranchDTO> branchList = (ArrayList<BranchDTO>) request.getAttribute("branchList");
+                for(String city : branchMap.keySet()){
+                    if(branchMap.get(city)!=0){%>
+                <tr>
+                    <td rowspan="<%=branchMap.get(city) +1%>"><%=city%></td>
+                </tr>
+                <%for(BranchDTO branchDTO : branchList) {
+                    if(city.equals(branchDTO.getCity())){%>
+                    <tr class="branch">
+                        <td><%=branchDTO.getName()%></td>
+                        <td>
+                            <%
+                                String openTime = (branchDTO.getOpen() > 9 ? "" : "0") + branchDTO.getOpen()+":00";
+                                String closeTime = (branchDTO.getClose() > 9 ? "" : "0") + branchDTO.getClose()+":00";
+                            %>
+                            <%=openTime%> ~ <%=closeTime%>
+                        </td>
+                        <td><%=branchDTO.getPrice()%></td>
+                        <td><%=(branchDTO.getRooms() != null ? branchDTO.getRooms().replaceAll(",", "<br/>") : "")%></td>
+                        <td><%=branchDTO.getAddress()%></td>
+                        <td><%=branchDTO.getPhone()%></td>
+                        <td><%=branchDTO.getFacilities()%></td>
+                        <th><input type="checkbox" name="user"></th>
+                    </tr>
+                    <%}
+                    }
+                }%>
+            <%}%>
 
         </table>
     </div>

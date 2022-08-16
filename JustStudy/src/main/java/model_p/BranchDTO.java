@@ -86,4 +86,28 @@ public class BranchDTO {
     public void setPrice(int price) {
         this.price = price;
     }
+
+    public String getFacilities() {
+        return facilities;
+    }
+
+    public void setFacilities(String facilities) {
+        this.facilities = facilities;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 }

@@ -47,7 +47,9 @@ public class ReservationDAO {
                 dto.setPrice(rs.getInt("price"));
                 dto.setOpen(rs.getInt("open"));
                 dto.setClose(rs.getInt("close"));
-
+                dto.setFacilities(rs.getString("facilities"));
+                dto.setAddress(rs.getString("address"));
+                dto.setPhone(rs.getString("phone"));
                 res.add(dto);
             }
         } catch (SQLException e) {

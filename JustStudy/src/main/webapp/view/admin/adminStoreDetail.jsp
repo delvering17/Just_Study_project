@@ -79,6 +79,10 @@
   }
 </style>
 
+<%
+  BranchDTO branchDTO = (BranchDTO) request.getAttribute("branchDTO");
+%>
+
 <script type="text/javascript">
   window.onload = function (){
     $(".admin-store-list").click(function (){
@@ -88,19 +92,21 @@
     $(".admin-store-modify").click(function (){
       location.href = "AdminStoreModify?branchName=<%=request.getParameter("branchName")%>"
     })
+
+    $(".admin-store-delete").click(function (){
+      if(confirm("<%=branchDTO.getName()%>: 정말 삭제하시겠습니까?")){
+        location.href="AdminStoreDelete?branchName=<%=branchDTO.getName()%>"
+      }
+    })
   }
 </script>
 
 <div id="headline">
   <b>지점관리 > 지점 상세보기</b>
   <input type="button" class="admin-store-list" value="목록으로">
-  <input type="button" class="admin-store-modify" value="삭제">
+  <input type="button" class="admin-store-delete" value="삭제">
   <input type="button" class="admin-store-modify" value="수정">
 </div>
-
-<%
-  BranchDTO branchDTO = (BranchDTO) request.getAttribute("branchDTO");
-%>
 
 <div id="main">
   <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-store-detail-table">

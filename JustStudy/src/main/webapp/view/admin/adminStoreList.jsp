@@ -84,23 +84,13 @@
 </style>
 
 <script type="text/javascript">
-    window.onload = function (){
-        $(".admin-store-delete").click(function (){
-            if(confirm($("input[name=branch]:checked").attr("id")+": 정말 삭제하시겠습니까?")){
-                location.href="AdminStoreDelete?branchName="+$("input[name=branch]:checked").attr("id")
-            }
-        })
 
-
-    }
 
 </script>
 <div class="admin-store-list-bg">
 
     <div id="headline">
         <b>지점관리</b>
-        <input type="button" class="admin-store-delete" value="선택삭제">
-        <input type="button" class="admin-store-modify" value="선택수정">
         <input type="button" class="admin-store-insert" value="지점추가">
     </div>
 

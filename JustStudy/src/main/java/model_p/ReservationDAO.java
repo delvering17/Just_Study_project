@@ -122,6 +122,31 @@ public class ReservationDAO {
         return res;
     }
 
+    public String soldOutList(String city, String branch, String room, String useDate){
+
+        ArrayList<String> arr = new ArrayList<>();
+
+        sql = "select time from reservation where city = ? and branch = ? and room = ? and useDate = ?";
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, city);
+            ptmt.setString(2, branch);
+            ptmt.setString(3, room);
+            ptmt.setString(4, useDate);
+
+            rs = ptmt.executeQuery();
+            while (rs.next()){
+                arr.add(rs.getString("time"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+
+        return String.join(", ", arr);
+    }
+
     public void close() {
         if(rs!=null) try { rs.close(); } catch (SQLException e) {}
         if(ptmt!=null) try { ptmt.close(); } catch (SQLException e) {}

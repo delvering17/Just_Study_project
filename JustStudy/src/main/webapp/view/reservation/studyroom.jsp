@@ -161,6 +161,17 @@
             color: white;
         }
 
+        .studyroom-reserv-impossible {
+            width: 70px;
+            height: 30px;
+            margin-right: 20px;
+            border-radius: 30px;
+            background: darkred;
+            line-height: 30px;
+            text-align: center;
+            color: white;
+        }
+
         .studyroom-reserv-selected {
             width: 1164px;
             height: 120px;
@@ -506,8 +517,25 @@
                     $(".studyroom-reserv-time > div > .fa-angle-left + div").html(nowDate.getFullYear()+"-"+(nowDate.getMonth() > 8 ? "" : "0")+(nowDate.getMonth()+1)+"-"+(nowDate.getDate() > 9 ? "" : "0")+nowDate.getDate()+" ("+"일월화수목금토".split("")[nowDate.getDay()]+")")
                     $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(1)>b").html($(".studyroom-reserv-time > div > .fa-angle-left + div").html())
                 } else{
-
+                    alert("이전 일자는 예약할 수 없습니다.")
                 }
+
+                $.ajax({
+                    url: '<c:url value="/nonView/SetReservationItems"/>',
+                    type: "GET",
+                    async: false,
+                    data: "type=setTime&roomName="+document.querySelector('input[type=radio][name=roomName]:checked').getAttribute("id")
+                        +"&branchName="+document.querySelector('input[type=radio][name=branchName]:checked').getAttribute("id")
+                        +"&cityName="+document.querySelector('input[type=radio][name=cityName]:checked').getAttribute("id")
+                        +"&selectedDay="+$(".fa-angle-left+div").html().split(" ")[0],
+                    success: function(data){
+                        $(".studyroom-reserv-time>.studyroom-reserv-innerlist-time").html(decodeURIComponent(data))
+                        $(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(3)>b").html(document.querySelector('input[type=radio][name=roomName]:checked').getAttribute("id"))
+                    },
+                    error: function (e){
+                        console.log(e.responseText)
+                    }
+                })
             })
 
             $(".studyroom-reserv-time > div > .fa-angle-right").click(function (){
@@ -515,6 +543,23 @@
                 nowDate.setDate(nowDate.getDate() + 1);
                 $(".studyroom-reserv-time > div > .fa-angle-left + div").html(nowDate.getFullYear()+"-"+(nowDate.getMonth() > 8 ? "" : "0")+(nowDate.getMonth()+1)+"-"+(nowDate.getDate() > 9 ? "" : "0")+nowDate.getDate()+" ("+"일월화수목금토".split("")[nowDate.getDay()]+")")
                 $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(1)>b").html($(".studyroom-reserv-time > div > .fa-angle-left + div").html())
+
+                $.ajax({
+                    url: '<c:url value="/nonView/SetReservationItems"/>',
+                    type: "GET",
+                    async: false,
+                    data: "type=setTime&roomName="+document.querySelector('input[type=radio][name=roomName]:checked').getAttribute("id")
+                        +"&branchName="+document.querySelector('input[type=radio][name=branchName]:checked').getAttribute("id")
+                        +"&cityName="+document.querySelector('input[type=radio][name=cityName]:checked').getAttribute("id")
+                        +"&selectedDay="+$(".fa-angle-left+div").html().split(" ")[0],
+                    success: function(data){
+                        $(".studyroom-reserv-time>.studyroom-reserv-innerlist-time").html(decodeURIComponent(data))
+                        $(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(3)>b").html(document.querySelector('input[type=radio][name=roomName]:checked').getAttribute("id"))
+                    },
+                    error: function (e){
+                        console.log(e.responseText)
+                    }
+                })
             })
 
             $(document).on("change", "input[name=\"roomName\"]", function(){
@@ -524,7 +569,9 @@
                     type: "GET",
                     async: false,
                     data: "type=setTime&roomName="+document.querySelector('input[type=radio][name=roomName]:checked').getAttribute("id")
-                        +"&branchName="+document.querySelector('input[type=radio][name=branchName]:checked').getAttribute("id"),
+                        +"&branchName="+document.querySelector('input[type=radio][name=branchName]:checked').getAttribute("id")
+                        +"&cityName="+document.querySelector('input[type=radio][name=cityName]:checked').getAttribute("id")
+                        +"&selectedDay="+$(".fa-angle-left+div").html().split(" ")[0],
                     success: function(data){
                         $(".studyroom-reserv-time>.studyroom-reserv-innerlist-time").html(decodeURIComponent(data))
                         $(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(3)>b").html(document.querySelector('input[type=radio][name=roomName]:checked').getAttribute("id"))
@@ -596,7 +643,7 @@
                 $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='city' value='"+$(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(1)>b").html()+"'></input>")
                 $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='branch' value='"+$(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(2)>b").html()+"'></input>")
                 $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='room' value='"+$(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(3)>b").html()+"'></input>")
-                $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='useDate' value='"+$(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(1)>b").html()+"'></input>")
+                $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='useDate' value='"+$(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(1)>b").html().split(" ")[0]+"'></input>")
                 $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='time' value='"+selectedTimeList.join (", ")+"'></input>")
                 $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='headcount' value='"+$(".studyroom-reserv-headcount:first-of-type+b").html()+"'></input>")
                 $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='pay' value='"+$(".studyroom-reserv-totalprice").html()+"'></input>")

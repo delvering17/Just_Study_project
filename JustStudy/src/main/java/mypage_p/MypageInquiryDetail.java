@@ -34,8 +34,22 @@ public class MypageInquiryDetail implements MypageService{
             request.setAttribute("answerDTO", answerDTO);
         }
 
+        String date_period = request.getParameter("date_period");
+        String date_before = request.getParameter("date_before");
+        String date_after = request.getParameter("date_after");
+
+        if(date_period != null) {
+            request.setAttribute("date_period", date_period);
+
+        } else {
+            request.setAttribute("date_before",date_before);
+            request.setAttribute("date_after",date_after);
+        }
 
         request.setAttribute("nowPage",request.getParameter("nowPage"));
+
+
+
 
         request.setAttribute("mainUrl","mypage/mypageTemplete.jsp");
         request.setAttribute("subUrl","mypage_inquiryDetail.jsp");

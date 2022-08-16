@@ -126,7 +126,7 @@
         <c:forEach items="${arr_inquiryDTO}" var="inquiryDTO">
             <div class="inquiry-items">
                 <div class="inquiry-items-title">
-                    <a href="MypageInquiryDetail?inquiry_id=${inquiryDTO.inquiry_id}&nowPage=${nowPage}">${inquiryDTO.inquiry_title}</a>
+                    <a id="btn-Detail" onclick="goDetail(${inquiryDTO.inquiry_id})">${inquiryDTO.inquiry_title}</a>
                 </div>
                 <div class="inquiry-items-category">
                         ${inquiryDTO.inquiry_category}
@@ -193,6 +193,7 @@
         inputRadio.forEach(function (item) {
             item.checked = false;
         } )
+
     });
 
     $('.input-radio').change(function () {
@@ -258,6 +259,27 @@
         }
 
         location.href = find_url + "&nowPage=" + i;
+    }
+
+    function goDetail(i) {
+
+        let detail_url ="MypageInquiryDetail?inquiry_id="+ i+"&nowPage=${nowPage}"
+
+        if($("input[name=date-period]:checked").attr('value') != null) {
+
+            detail_url += "&date_period=" +  $("input[name=date-period]:checked").attr('value')
+
+        } else {
+            let datepickerBefore = document.querySelector('#datepicker-before');
+            let datepickerAfter = document.querySelector('#datepicker-after');
+
+            detail_url += "&date_before=" + datepickerBefore.value+"&";
+            detail_url += "date_after=" + datepickerAfter.value;
+
+        }
+
+        location.href = detail_url
+
     }
 
     window.onload = function () {

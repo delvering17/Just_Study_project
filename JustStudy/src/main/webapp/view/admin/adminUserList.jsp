@@ -6,49 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-        }
-
-        .wrapper{
-            width: 100%;
-            height: 100%;
-        }
-
-
-        #hamburger, #admin, #r1, #r2, #r3, #r4, #r5, #r6{
-            display: none;
-        }
-
-
-        header{
-            height: 50px;
-            display: flex;
-            position: fixed;
-
-        }
-
-        header > label:nth-of-type(1){
-            width: 50px;
-            background: rgba(2, 2, 114, 0.884);
-            color: #fff;
-            text-align: center;
-            padding-top: 13px;
-
-        }
-
-        header > label:nth-of-type(2){
-            width: 189px;
-            height: 37px;
-            background: rgba(16, 16, 170, 0.918);
-            text-align: center;
-            padding-top: 13px;
-        }
+    <style type="text/css">
 
         #headline{
             width: 1330px;
@@ -192,9 +150,6 @@
         }
 
     </style>
-    <meta charset="UTF-8">
-    <title>usermanagement</title>
-</head>
 
 <div class="wrapper">
 
@@ -418,7 +373,7 @@
         </table>
     </div>
 </div>
-<script>
+<script type="text/javascript">
     function selectAll(selectAll)  {
         const checkboxes = document.querySelectorAll('input[name="user"]');
 
@@ -427,5 +382,4 @@
         })
     }
 </script>
-</html>
 

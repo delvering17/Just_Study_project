@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: userk
@@ -6,10 +7,16 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
+
 <head>
+    <meta charset="UTF-8">
+    <title>main</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
+    <script type="text/javascript" src="<c:url value="/jquery/"/>jquery-3.6.0.js"></script>
+    <script type="text/javascript" src="<c:url value="/jquery/"/>jquery-ui.min.js"></script>
+    <style type="text/css">
         *{
             margin: 0;
             padding: 0;
@@ -158,9 +165,9 @@
         }
 
     </style>
-    <meta charset="UTF-8">
-    <title>main</title>
+
 </head>
+
 <body>
 <div class="wrapper">
 

@@ -805,7 +805,7 @@
         </div>
     </div>
 </div>
-<form class="studyroom-reserv-form" method="post" action="PaySuccess">
+<form class="studyroom-reserv-form" method="post" action="PaySuccess" hidden>
     <button type="submit"></button>
     <%
         if(request.getAttribute("memberDTO")!=null){

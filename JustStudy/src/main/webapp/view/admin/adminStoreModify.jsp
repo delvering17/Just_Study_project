@@ -85,13 +85,13 @@
     }
 
     .admin-store-modify-table tr:nth-of-type(3) input[type=text],
-    .admin-store-modify-table tr:nth-of-type(8) input[type=text]{
-      width: 70px;
-      height: 25px;
+    .admin-store-modify-table tr:nth-of-type(8) input[type=text] {
+        width: 90px;
+        height: 25px;
     }
 
     .admin-store-modify-table tr:nth-of-type(5) input[type=text] {
-      width: 30px;
+        width: 30px;
     }
 
     .admin-store-modify-table tr:nth-of-type(6) input[type=text] {
@@ -111,21 +111,25 @@
         display: inline-block;
     }
 
-    .admin-store-modify-table select {
-        width: 100px;
+    select[name=roomType] {
+        width: 80px;
         height: 25px;
-      margin-left: 10px;
-      margin-bottom: 5px;
+        margin: 0px 10px 5px 10px;
     }
 
-    .admin-store-modify-table button {
+    select[name=facilities] {
+        width: 60px;
+        height: 25px;
+        margin: 0px 10px 5px 10px;
+    }
+
+    .admin-store-modify-table input[type=button] {
         width: 25px;
         height: 25px;
         clear: right;
     }
 
-    .admin-store-modify-room-plus,
-    .admin-store-modify-facilities-plus {
+    .admin-store-modify-room-plus {
         display: block;
     }
 
@@ -143,8 +147,32 @@
     }
 </script>
 
+
+<%
+    BranchDTO branchDTO = (BranchDTO) request.getAttribute("branchDTO");
+%>
+
 <script>
-  
+    window.onload = function () {
+
+        const initRoomType = "<%=branchDTO.getRooms()%>"
+
+        $("select[name=roomType]").change(function () {
+            if ($(this).val() == "변경안함") {
+                $("input[name=roomType]").eq($(this).index("select[name=roomType]")).val(initRoomType.split(",")[$(this).index("select[name=roomType]")].split(" ")[1])
+            } else {
+                $("input[name=roomType]").eq($(this).index("select[name=roomType]")).val($(this).val())
+            }
+        })
+
+        $("select[name=facilities]").change(function () {
+            if ($(this).val() == "X") {
+                $("input[class=facilities]").eq($(this).index("select[name=facilities]")).attr("name", "facilitiesX")
+            } else {
+                $("input[class=facilities]").eq($(this).index("select[name=facilities]")).attr("name", "facilities")
+            }
+        })
+    }
 
 </script>
 
@@ -154,9 +182,6 @@
     <input type="button" class="admin-store-save" value="저장">
 </div>
 
-<%
-    BranchDTO branchDTO = (BranchDTO) request.getAttribute("branchDTO");
-%>
 
 <div id="main">
     <form action="AdminStoreModifyReg">
@@ -174,7 +199,9 @@
                 <td>
                     <%for (int i = 0; i < branchDTO.getRooms().split(",").length; i++) {%>
                     <div>
-                        <p>룸<%=i + 1%>) <input type="text" name="roomType" value="<%=branchDTO.getRooms().split(",")[i].split(" ")[1]%>" disabled></p>
+                        <p>룸<%=i + 1%>) <input type="text" name="roomType"
+                                               value="<%=branchDTO.getRooms().split(",")[i].split(" ")[1]%>" disabled>
+                        </p>
                         <select name="roomType">
                             <option name="변경안함">변경안함</option>
                             <option name="4인실">4인실</option>
@@ -182,10 +209,10 @@
                             <option name="8인실">8인실</option>
                             <option name="대회의실">대회의실</option>
                         </select>
-                        <button class="admin-store-modify-room-minus">-</button>
+                        <input type="button" class="admin-store-modify-room-minus" value="-"/>
                     </div>
                     <%}%>
-                    <button class="admin-store-modify-room-plus">+</button>
+                    <input type="button" class="admin-store-modify-room-plus" value="+"/>
                 </td>
             </tr>
             <tr>
@@ -203,33 +230,32 @@
             </tr>
             <tr>
                 <th>매장 주소</th>
-                <td><input type="text" name="address" value="<%=branchDTO.getAddress() != null ? branchDTO.getAddress() : ""%>"/></td>
+                <td><input type="text" name="address"
+                           value="<%=branchDTO.getAddress() != null ? branchDTO.getAddress() : ""%>"/></td>
             </tr>
             <tr>
                 <th>전화번호</th>
-                <td><input type="text" name="phone" value="<%=branchDTO.getPhone() != null ? branchDTO.getPhone() : ""%>"/></td>
+                <td><input type="text" name="phone"
+                           value="<%=branchDTO.getPhone() != null ? branchDTO.getPhone() : ""%>"/></td>
             </tr>
             <tr>
                 <th>편의 시설</th>
                 <td>
-                    <%for (int i = 0; i < branchDTO.getFacilities().split(",").length; i++) {%>
-                    <div>
-                        <input type="text" name="facilities" value="<%=branchDTO.getFacilities().split(",")[i]%>" disabled>
-                        <select name="facilities">
-                            <option name="변경안함">변경안함</option>
-                            <option name="정수기">정수기</option>
-                            <option name="휴게실">휴게실</option>
-                            <option name="흡연실">흡연실</option>
-                            <option name="프린터">프린터</option>
-                            <option name="빔프로젝터">빔프로젝터</option>
-                            <option name="컴퓨터">컴퓨터</option>
-                            <option name="주차">주차</option>
-                            <option name="와이파이">와이파이</option>
-                        </select>
-                        <button class="admin-store-modify-facilities-minus">-</button>
-                    </div>
+                    <%for (String facility : "정수기,휴게실,흡연실,프린터,빔프로젝터,컴퓨터,주차,와이파이".split(",")) {%>
+                    <%if (branchDTO.getFacilities().contains(facility)) {%>
+                    <input type="text" name="facilities" class="facilities" value="<%=facility%>" disabled>
+                    <select name="facilities">
+                        <option name="O" selected>O</option>
+                        <option name="X">X</option>
+                    </select>
+                    <%} else {%>
+                    <input type="text" name="facilitiesX" class="facilities" value="<%=facility%>" disabled>
+                    <select name="facilities">
+                        <option name="O">O</option>
+                        <option name="X" selected>X</option>
+                    </select>
                     <%}%>
-                    <button class="admin-store-modify-facilities-plus">+</button>
+                    <%}%>
                 </td>
             </tr>
         </table>

@@ -4,7 +4,8 @@
 <%@ page import="java.util.HashMap" %>
 <%@ page import="reservation_p.Studyroom" %>
 <%@ page import="java.util.Calendar" %>
-<%@ page import="java.util.Date" %><%--
+<%@ page import="java.util.Date" %>
+<%@ page import="model_p.MemberDTO" %><%--
   Created by IntelliJ IDEA.
   User: dieun
   Date: 2022-08-11
@@ -70,6 +71,7 @@
         }
 
         .studyroom-reserv-innerlist > label > div,
+        .studyroom-reserv-innerlist-time > div,
         .studyroom-reserv-innerlist-time > label > div {
             border-bottom: 1px solid lightgray;
             height: 60px;
@@ -78,6 +80,10 @@
             justify-content: space-between;
             align-items: center;
             font-weight: bold;
+        }
+
+        .studyroom-reserv-innerlist > label > div,
+        .studyroom-reserv-innerlist-time > label > div{
             cursor: pointer;
         }
 
@@ -85,11 +91,13 @@
             background: lightgray;
         }
 
+        .studyroom-reserv-innerlist-time > div,
         .studyroom-reserv-innerlist-time > label > div {
             justify-content: left;
         }
 
-        .studyroom-reserv-innerlist-time > label > div >div:last-of-type {
+        .studyroom-reserv-innerlist-time > label > div >div:last-of-type,
+        .studyroom-reserv-innerlist-time > div > div:last-of-type{
             width: fit-content;
         }
 
@@ -158,6 +166,21 @@
             line-height: 30px;
             text-align: center;
             color: white;
+        }
+
+        .studyroom-reserv-impossible {
+            width: 70px;
+            height: 30px;
+            margin-right: 20px;
+            border-radius: 30px;
+            background: darkred;
+            line-height: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .studyroom-reserv-impossible + div{
+            color: gray;
         }
 
         .studyroom-reserv-selected {
@@ -505,8 +528,25 @@
                     $(".studyroom-reserv-time > div > .fa-angle-left + div").html(nowDate.getFullYear()+"-"+(nowDate.getMonth() > 8 ? "" : "0")+(nowDate.getMonth()+1)+"-"+(nowDate.getDate() > 9 ? "" : "0")+nowDate.getDate()+" ("+"일월화수목금토".split("")[nowDate.getDay()]+")")
                     $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(1)>b").html($(".studyroom-reserv-time > div > .fa-angle-left + div").html())
                 } else{
-
+                    alert("이전 일자는 예약할 수 없습니다.")
                 }
+
+                $.ajax({
+                    url: '<c:url value="/nonView/SetReservationItems"/>',
+                    type: "GET",
+                    async: false,
+                    data: "type=setTime&roomName="+document.querySelector('input[type=radio][name=roomName]:checked').getAttribute("id")
+                        +"&branchName="+document.querySelector('input[type=radio][name=branchName]:checked').getAttribute("id")
+                        +"&cityName="+document.querySelector('input[type=radio][name=cityName]:checked').getAttribute("id")
+                        +"&selectedDay="+$(".fa-angle-left+div").html().split(" ")[0],
+                    success: function(data){
+                        $(".studyroom-reserv-time>.studyroom-reserv-innerlist-time").html(decodeURIComponent(data))
+                        $(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(3)>b").html(document.querySelector('input[type=radio][name=roomName]:checked').getAttribute("id"))
+                    },
+                    error: function (e){
+                        console.log(e.responseText)
+                    }
+                })
             })
 
             $(".studyroom-reserv-time > div > .fa-angle-right").click(function (){
@@ -514,6 +554,23 @@
                 nowDate.setDate(nowDate.getDate() + 1);
                 $(".studyroom-reserv-time > div > .fa-angle-left + div").html(nowDate.getFullYear()+"-"+(nowDate.getMonth() > 8 ? "" : "0")+(nowDate.getMonth()+1)+"-"+(nowDate.getDate() > 9 ? "" : "0")+nowDate.getDate()+" ("+"일월화수목금토".split("")[nowDate.getDay()]+")")
                 $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(1)>b").html($(".studyroom-reserv-time > div > .fa-angle-left + div").html())
+
+                $.ajax({
+                    url: '<c:url value="/nonView/SetReservationItems"/>',
+                    type: "GET",
+                    async: false,
+                    data: "type=setTime&roomName="+document.querySelector('input[type=radio][name=roomName]:checked').getAttribute("id")
+                        +"&branchName="+document.querySelector('input[type=radio][name=branchName]:checked').getAttribute("id")
+                        +"&cityName="+document.querySelector('input[type=radio][name=cityName]:checked').getAttribute("id")
+                        +"&selectedDay="+$(".fa-angle-left+div").html().split(" ")[0],
+                    success: function(data){
+                        $(".studyroom-reserv-time>.studyroom-reserv-innerlist-time").html(decodeURIComponent(data))
+                        $(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(3)>b").html(document.querySelector('input[type=radio][name=roomName]:checked').getAttribute("id"))
+                    },
+                    error: function (e){
+                        console.log(e.responseText)
+                    }
+                })
             })
 
             $(document).on("change", "input[name=\"roomName\"]", function(){
@@ -523,7 +580,9 @@
                     type: "GET",
                     async: false,
                     data: "type=setTime&roomName="+document.querySelector('input[type=radio][name=roomName]:checked').getAttribute("id")
-                        +"&branchName="+document.querySelector('input[type=radio][name=branchName]:checked').getAttribute("id"),
+                        +"&branchName="+document.querySelector('input[type=radio][name=branchName]:checked').getAttribute("id")
+                        +"&cityName="+document.querySelector('input[type=radio][name=cityName]:checked').getAttribute("id")
+                        +"&selectedDay="+$(".fa-angle-left+div").html().split(" ")[0],
                     success: function(data){
                         $(".studyroom-reserv-time>.studyroom-reserv-innerlist-time").html(decodeURIComponent(data))
                         $(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(3)>b").html(document.querySelector('input[type=radio][name=roomName]:checked').getAttribute("id"))
@@ -595,7 +654,7 @@
                 $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='city' value='"+$(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(1)>b").html()+"'></input>")
                 $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='branch' value='"+$(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(2)>b").html()+"'></input>")
                 $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='room' value='"+$(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(3)>b").html()+"'></input>")
-                $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='resDate' value='"+$(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(1)>b").html()+"'></input>")
+                $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='useDate' value='"+$(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(1)>b").html().split(" ")[0]+"'></input>")
                 $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='time' value='"+selectedTimeList.join (", ")+"'></input>")
                 $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='headcount' value='"+$(".studyroom-reserv-headcount:first-of-type+b").html()+"'></input>")
                 $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='pay' value='"+$(".studyroom-reserv-totalprice").html()+"'></input>")
@@ -611,32 +670,39 @@
 
             $(".studyroom-reserv-done>button").click(function (){
 
-                $(".studyroom-reserv-paylist").html("")
+                if($("input[name=userId]").length != 0){
 
-                let totalWon = 0;
+                    $(".studyroom-reserv-paylist").html("")
 
-                for(let i = 0; i < $(".studyroom-reserv-form>div").length; i++){
+                    let totalWon = 0;
 
-                    $(".studyroom-reserv-paylist").append("<div>")
-                    $(".studyroom-reserv-paylist>div").eq(i).append("<p><b>"+
-                        $(".studyroom-reserv-form>div").eq(i).children("input[name=\"city\"]").val()+" | "+
-                        $(".studyroom-reserv-form>div").eq(i).children("input[name=\"branch\"]").val()+ "</b></p>")
-                    $(".studyroom-reserv-paylist>div").eq(i).append("<div>")
-                    $(".studyroom-reserv-paylist>div").eq(i).children("div").append("<div>"+$(".studyroom-reserv-form>div").eq(i).children("input[name=\"resDate\"]").val()+"</div>")
-                    $(".studyroom-reserv-paylist>div").eq(i).children("div").append("<ul><li>" +
-                        ""+$(".studyroom-reserv-form>div").eq(i).children("input[name=\"room\"]").val()+"</li>" +
-                        "<li>예약시간) "+$(".studyroom-reserv-form>div").eq(i).children("input[name=\"time\"]").val()+"</li></ul>")
-                    $(".studyroom-reserv-paylist>div").eq(i).children("div").append("<div>총 "+
-                        $(".studyroom-reserv-form>div").eq(i).children("input[name=\"time\"]").val().split(",").length+"시간 / "+
-                        $(".studyroom-reserv-form>div").eq(i).children("input[name=\"headcount\"]").val()+"인 / "+
-                    $(".studyroom-reserv-form>div").eq(i).children("input[name=\"pay\"]").val()+"원</div>")
+                    for(let i = 0; i < $(".studyroom-reserv-form>div").length; i++){
 
-                    totalWon += parseInt($(".studyroom-reserv-form>div").eq(i).children("input[name=\"pay\"]").val())
+                        $(".studyroom-reserv-paylist").append("<div>")
+                        $(".studyroom-reserv-paylist>div").eq(i).append("<p><b>"+
+                            $(".studyroom-reserv-form>div").eq(i).children("input[name=\"city\"]").val()+" | "+
+                            $(".studyroom-reserv-form>div").eq(i).children("input[name=\"branch\"]").val()+ "</b></p>")
+                        $(".studyroom-reserv-paylist>div").eq(i).append("<div>")
+                        $(".studyroom-reserv-paylist>div").eq(i).children("div").append("<div>"+$(".studyroom-reserv-form>div").eq(i).children("input[name=\"useDate\"]").val()+"</div>")
+                        $(".studyroom-reserv-paylist>div").eq(i).children("div").append("<ul><li>" +
+                            ""+$(".studyroom-reserv-form>div").eq(i).children("input[name=\"room\"]").val()+"</li>" +
+                            "<li>예약시간) "+$(".studyroom-reserv-form>div").eq(i).children("input[name=\"time\"]").val()+"</li></ul>")
+                        $(".studyroom-reserv-paylist>div").eq(i).children("div").append("<div>총 "+
+                            $(".studyroom-reserv-form>div").eq(i).children("input[name=\"time\"]").val().split(",").length+"시간 / "+
+                            $(".studyroom-reserv-form>div").eq(i).children("input[name=\"headcount\"]").val()+"인 / "+
+                        $(".studyroom-reserv-form>div").eq(i).children("input[name=\"pay\"]").val()+"원</div>")
+
+                        totalWon += parseInt($(".studyroom-reserv-form>div").eq(i).children("input[name=\"pay\"]").val())
+                    }
+
+                    $(".studyroom-reserv-paylist+div>div:last-of-type").html($(".studyroom-reserv-paylist>div").length+"건")
+                    $(".studyroom-reserv-paylist+div+div>div:last-of-type").html(totalWon+"원")
+                    $(".studyroom-reserv-paylist-username").val($("input[name='userName']").val())
+                    $(".studyroom-reserv-paylist-userphone").val($("input[name='userPhone']").val())
+                    $("#studyroom-reserv-receipt .modal-body > button:nth-of-type(1)").html("총 "+$(".studyroom-reserv-paylist>div").length+"건 | <b>"+totalWon+"</b>원 결제하기")
+                } else{
+                    alert("로그인 후 이용 가능합니다.")
                 }
-
-                $(".studyroom-reserv-paylist+div>div:last-of-type").html($(".studyroom-reserv-paylist>div").length+"건")
-                $(".studyroom-reserv-paylist+div+div>div:last-of-type").html(totalWon+"원")
-                $("#studyroom-reserv-receipt .modal-body > button:nth-of-type(1)").html("총 "+$(".studyroom-reserv-paylist>div").length+"건 | <b>"+totalWon+"</b>원 결제하기")
 
             })
 
@@ -650,11 +716,15 @@
                         merchant_uid : 'merchant_' + new Date().getTime(),
                         name : 'JustStudy',
                         amount : $("#studyroom-reserv-receipt .modal-body > button:nth-of-type(1)>b").html(),
-                        buyer_name : '송지은',
-                        buyer_tel : '010-0000-0000'
+                        buyer_name : $("input[name=userName]").val(),
+                        buyer_tel : $("input[name=userPhone]").val()
                     }, function(rsp) {
                         if ( rsp.success ) {
                             var msg = '결제가 완료되었습니다.';
+                            msg += rsp.imp_uid
+                            msg += document.querySelector('input[type=radio][name=paymentMethod]:checked').getAttribute("value")
+                            $(".studyroom-reserv-form>input[name=orderId]").attr("value", rsp.imp_uid)
+                            $(".studyroom-reserv-form>input[name=paymentMethod]").attr("value", document.querySelector('input[type=radio][name=paymentMethod]:checked').getAttribute("value"))
                             $(".studyroom-reserv-form").submit()
                         } else {
                             var msg = '결제에 실패하였습니다.';
@@ -775,8 +845,8 @@
                     <div>10,000원</div>
                 </div>
                 <font size="5px"><b>이용자 정보</b></font>
-                <input type="text" value="송지은"/>
-                <input type="text" value="01027628090"/>
+                <input type="text" class="studyroom-reserv-paylist-username"/>
+                <input type="text"  class="studyroom-reserv-paylist-userphone"/>
                 <div><font size="5px"><b>결제 수단 선택</b></font></div>
                 <label><input type="radio" name="paymentMethod" value="kcp" checked>신용카드</label>
                 <label><input type="radio" name="paymentMethod" value="kakaopay">카카오페이</label>
@@ -793,7 +863,17 @@
         </div>
     </div>
 </div>
-<form class="studyroom-reserv-form" method="post" action="PaySuccess">
+<form class="studyroom-reserv-form" method="post" action="PaySuccess" hidden>
     <button type="submit"></button>
+    <%
+        if(request.getAttribute("memberDTO")!=null){
+            MemberDTO memberDTO = (MemberDTO) request.getAttribute("memberDTO");
+    %>
+        <input name="userId" value="<%=memberDTO.getMem_userid()%>">
+        <input name="userName" value="<%=memberDTO.getMem_realname()%>">
+        <input name="userPhone" value="<%=memberDTO.getMem_phone()%>">
+    <%}%>
+    <input name="orderId">
+    <input name="paymentMethod">
 </form>
 

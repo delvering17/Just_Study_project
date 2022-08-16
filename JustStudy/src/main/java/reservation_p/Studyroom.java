@@ -1,10 +1,13 @@
 package reservation_p;
 
 import model_p.BranchDTO;
+import model_p.MemberDAO;
+import model_p.MemberDTO;
 import model_p.ReservationDAO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -23,6 +26,13 @@ public class Studyroom implements ReservationService{
                 branchMap.put(dto.getCity(), branchMap.get(dto.getCity()) + 1);
             }
         }
+
+        HttpSession session = request.getSession();
+        if(session.getAttribute("login") != null) {
+            MemberDTO memberDTO = new MemberDAO().detail((Integer) session.getAttribute("login"));
+            request.setAttribute("memberDTO", memberDTO);
+        }
+
         request.setAttribute("branchList", branch);
         request.setAttribute("branchMap", branchMap);
         request.setAttribute("mainUrl", "reservation/studyroom.jsp");

@@ -38,11 +38,27 @@ public class SetReservationItems implements NonViewService {
                     res += ","+dto.getPrice();
                 }
             } else if((request.getParameter("type")+"").equals("setTime")){
-                if(((String) request.getParameter("branchName")).equals(dto.getName())){
+
+                String city = request.getParameter("cityName");
+                String branch = request.getParameter("branchName");
+                String room = request.getParameter("roomName");
+                String selectedDay = request.getParameter("selectedDay");
+
+                if(branch.equals(dto.getName())){
+                    String soldOutList = new ReservationDAO().soldOutList(city, branch, room, selectedDay);
                     for(int i = dto.getOpen(); i < dto.getClose(); i++){
                         try {
-                            res += "<input type=\"checkbox\" name=\"time\" id=\""+ (i > 9 ? "" : "0") + i + ":00" +"\" hidden/>";
-                            res += "<label for=\""+ (i > 9 ? "" : "0") + i + ":00" +"\"><div><div class=\"studyroom-reserv-possible\">"+URLEncoder.encode("예약가능", "UTF-8")+"</div><div>"+(i < 10 ? "0" : "")+i+":00 ~ "+(i < 9 ? "0" : "")+(i+1)+":00</div></div></label>";
+                            String time1 = (i > 9 ? "" : "0") + i + ":00";
+                            String time2 = (i + 1 > 9 ? "" : "0") + (i + 1) + ":00";
+
+                            if(soldOutList.contains(time1)){
+                                res += "<div><div class=\"studyroom-reserv-impossible\">"+URLEncoder.encode("예약완료", "UTF-8")+"</div><div>"+ time1 +" ~ "+ time2
+                                        +"</div></div>";
+                            } else {
+                                res += "<input type=\"checkbox\" name=\"time\" id=\""+ time1 +"\" hidden/>";
+                                res += "<label for=\"" + time1 + "\"><div><div class=\"studyroom-reserv-possible\">" + URLEncoder.encode("예약가능", "UTF-8") + "</div><div>" + time1 + " ~ " + time2
+                                        + "</div></div></label>";
+                            }
                         } catch (UnsupportedEncodingException e) {
                             throw new RuntimeException(e);
                         }

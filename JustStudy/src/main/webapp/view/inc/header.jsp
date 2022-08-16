@@ -249,7 +249,7 @@
                             <c:if test="${sessionScope.login != null}">
                                 <li><a href="../member/MemberLogout" >로그아웃</a></li>
                             </c:if>
-                            <li><a href="#" >관리자로그인</a></li>
+                            <li><a href="../admin/AdminPage" >관리자로그인</a></li>
                         </ul>
                         <ul class="gnb-sub-list">
                             <li><a href="../mypage/MypageInfomationModifyForm" >마이페이지</a></li>

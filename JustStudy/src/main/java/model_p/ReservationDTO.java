@@ -3,9 +3,17 @@ package model_p;
 import java.util.Date;
 
 public class ReservationDTO {
-    String userId, city, branch, room, time, paymentMethod, status, useDate;
+    String orderId, userId, city, branch, room, time, paymentMethod, status, useDate;
     int id, headcount, pay;
     Date resDate;
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
 
     public String getUserId() {
         return userId;

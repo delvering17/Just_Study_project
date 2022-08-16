@@ -47,6 +47,7 @@ public class ReservationDAO {
                 dto.setPrice(rs.getInt("price"));
                 dto.setOpen(rs.getInt("open"));
                 dto.setClose(rs.getInt("close"));
+
                 res.add(dto);
             }
         } catch (SQLException e) {
@@ -58,8 +59,8 @@ public class ReservationDAO {
     }
 
     public void addReservation(ReservationDTO dto){
-        sql = "insert into reservation(resDate, userId, city, branch, room, useDate, time, headcount, pay, paymentMethod, status) values" +
-                "(sysdate(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        sql = "insert into reservation(resDate, userId, city, branch, room, useDate, time, headcount, pay, paymentMethod, status, orderId) values" +
+                "(sysdate(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             ptmt = con.prepareStatement(sql);
@@ -73,6 +74,7 @@ public class ReservationDAO {
             ptmt.setInt(8, dto.getPay());
             ptmt.setString(9, dto.getPaymentMethod());
             ptmt.setString(10, dto.getStatus());
+            ptmt.setString(11, dto.getOrderId());
 
             ptmt.executeUpdate();
 
@@ -119,6 +121,31 @@ public class ReservationDAO {
         }
 
         return res;
+    }
+
+    public String soldOutList(String city, String branch, String room, String useDate){
+
+        ArrayList<String> arr = new ArrayList<>();
+
+        sql = "select time from reservation where city = ? and branch = ? and room = ? and useDate = ?";
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, city);
+            ptmt.setString(2, branch);
+            ptmt.setString(3, room);
+            ptmt.setString(4, useDate);
+
+            rs = ptmt.executeQuery();
+            while (rs.next()){
+                arr.add(rs.getString("time"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+
+        return String.join(", ", arr);
     }
 
     public void close() {

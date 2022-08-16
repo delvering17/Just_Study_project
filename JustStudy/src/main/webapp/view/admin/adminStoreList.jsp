@@ -124,8 +124,9 @@
 <script type="text/javascript">
     window.onload = function (){
         $(".admin-store-delete").click(function (){
-            alert($("input[name=branch]:checked").attr("id"))
-
+            if(confirm($("input[name=branch]:checked").attr("id")+": 정말 삭제하시겠습니까?")){
+                location.href="AdminStoreDelete?branchName="+$("input[name=branch]:checked").attr("id")
+            }
         })
     }
 

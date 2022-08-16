@@ -64,6 +64,27 @@ public class BranchDAO {
         return res;
     }
 
+    public int delete(String branchName){
+
+        sql = "delete from branch where name = ?";
+
+        int res;
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, branchName);
+
+            res = ptmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+
+        return res;
+    }
+
 
 
     public void close() {

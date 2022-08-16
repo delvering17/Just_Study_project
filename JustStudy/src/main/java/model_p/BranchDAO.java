@@ -29,7 +29,7 @@ public class BranchDAO {
     }
 
     public ArrayList<BranchDTO> branchList() {
-        ArrayList<BranchDTO> res ;
+        ArrayList<BranchDTO> res;
 
         sql = "select * from branch ";
 
@@ -39,7 +39,7 @@ public class BranchDAO {
 
             res = new ArrayList<>();
 
-            while(rs.next()) {
+            while (rs.next()) {
                 BranchDTO branchDTO = new BranchDTO();
                 branchDTO.setCity(rs.getString("city"));
                 branchDTO.setName(rs.getString("name"));
@@ -64,6 +64,39 @@ public class BranchDAO {
         return res;
     }
 
+    public BranchDTO branchDetail(String name) {
+        BranchDTO branchDTO = new BranchDTO();
+
+        sql = "select * from branch where name = ? ";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, name);
+            rs = ptmt.executeQuery();
+
+            if(rs.next()) {
+                branchDTO.setCity(rs.getString("city"));
+                branchDTO.setName(rs.getString("name"));
+                branchDTO.setRooms(rs.getString("rooms"));
+                branchDTO.setPrice(rs.getInt("price"));
+                branchDTO.setOpen(rs.getInt("open"));
+                branchDTO.setClose(rs.getInt("close"));
+                branchDTO.setFacilities(rs.getString("facilities"));
+                branchDTO.setAddress(rs.getString("address"));
+                branchDTO.setPhone(rs.getString("phone"));
+                branchDTO.setImg(rs.getString("img"));
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+
+        return  branchDTO;
+    }
 
 
     public void close() {

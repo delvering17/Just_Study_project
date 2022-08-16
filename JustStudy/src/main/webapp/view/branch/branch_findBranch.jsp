@@ -91,7 +91,7 @@
         <div class="find-branch-bottom-left list-group">
             <ul>
                 <c:forEach items="${arr_BranchDTO}" var="branchDTO">
-                    <li class="list-branch list-group-item list-group-item-action" href="">
+                    <li class="list-branch list-group-item list-group-item-action" onclick="goBranchInfo('${branchDTO.name}')">
                         <img src="<c:url value="/img/branch/"/>${branchDTO.img}" alt="" />
                         <div class="list-branch-description">
                             <h1>${branchDTO.city}</h1>
@@ -100,7 +100,6 @@
                         </div>
                     </li>
                 </c:forEach>
-
             </ul>
         </div>
         <div class="find-branch-bottom-right">
@@ -108,3 +107,11 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+
+    function goBranchInfo(i) {
+        location.href = "BranchInfo?name=" + i;
+    }
+
+
+</script>

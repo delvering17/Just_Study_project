@@ -102,8 +102,8 @@
         <div class="inquiry-top">
             <p>문의일자 조회</p>
             <div class="top-dateselect-wrapper">
-                <input type="radio" class="input-radio" name="date-period" id="find-today" value="today" />
-                <input type="radio" class="input-radio" name="date-period" id="find-day7" value="day7" checked/>
+                <input type="radio" class="input-radio" name="date-period" id="find-today" value="today"/>
+                <input type="radio" class="input-radio" name="date-period" id="find-day7" value="day7"/>
                 <input type="radio" class="input-radio" name="date-period" id="find-month" value="month" />
                 <input type="radio" class="input-radio" name="date-period" id="find-month3" value="month3" />
 <%--                <input type="radio" class="input-radio" name="find_group" id="find-today" value="today" hidden/>--%>

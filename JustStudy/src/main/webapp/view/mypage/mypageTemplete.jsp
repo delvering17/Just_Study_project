@@ -135,7 +135,7 @@
             </div>
             <div>
                 <i class="fa-solid fa-comment"></i>
-                <a href="../mypage/MypageInquiryList">1:1 문의 내역</a>
+                <a href="../mypage/MypageInquiryList?date_period=day7&nowPage=1">1:1 문의 내역</a>
             </div>
             <div>
                 <i class="fa-solid fa-list"></i>

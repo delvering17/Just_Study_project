@@ -49,16 +49,25 @@ public class MypageInquiryList implements MypageService{
             endPage = totalPage;
         }
 
-        System.out.println(nowPage + "," + first + "," + total + "," + totalPage);
+//        System.out.println(nowPage + "," + first + "," + total + "," + totalPage);
 
         ArrayList<InquiryDTO> arr_inquiryDTO = new InquiryDAO().inquiryList(memberDTO.getMem_id(), first, limit);
 
-        System.out.println(arr_inquiryDTO.get(0).getInquiry_id());
-        System.out.println(arr_inquiryDTO.get(1).getInquiry_id());
-        System.out.println(arr_inquiryDTO.get(2).getInquiry_id());
-        System.out.println(arr_inquiryDTO.get(3).getInquiry_id());
+        // 기간 검색 페이지 검색
+        String date_period = request.getParameter("date_period");
+        String date_before = request.getParameter("date_before");
+        String date_after = request.getParameter("date_after");
 
+        if(date_period != null) {
+            request.setAttribute("date_period", date_period);
+        } else {
+            request.setAttribute("date_before",date_before);
+            request.setAttribute("date_after",date_after);
+        }
 
+        System.out.println(date_period);
+        System.out.println(date_before);
+        System.out.println(date_after);
 
 
         request.setAttribute("first", first);

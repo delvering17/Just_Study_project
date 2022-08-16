@@ -90,13 +90,17 @@
     <div class="find-branch-bottom">
         <div class="find-branch-bottom-left list-group">
             <ul>
-                <li class="list-branch list-group-item list-group-item-action" href="">
-                    <img src="<c:url value="/img/branch/sample1.jpeg"/>" alt="" />
-                    <div class="list-branch-description">
-                        <h3>강남역</h3>
-                        <h5>최고 좋은 강남역 스터디룸 !</h5>
-                    </div>
-                </li>
+                <c:forEach items="${arr_BranchDTO}" var="branchDTO">
+                    <li class="list-branch list-group-item list-group-item-action" href="">
+                        <img src="<c:url value="/img/branch/"/>${branchDTO.img}" alt="" />
+                        <div class="list-branch-description">
+                            <h1>${branchDTO.city}</h1>
+                            <h3>${branchDTO.name}</h3>
+                            <h5>최고 좋은 ${branchDTO.name} 스터디룸 !</h5>
+                        </div>
+                    </li>
+                </c:forEach>
+
             </ul>
         </div>
         <div class="find-branch-bottom-right">

@@ -37,6 +37,6 @@ public class AdminStoreModifyReg implements AdminService{
 
         request.setAttribute("msg", msg);
         request.setAttribute("adminUrl", "alert.jsp");
-        request.setAttribute("goUrl", "AdminStoreList");
+        request.setAttribute("goUrl", "AdminStoreDetail?branchName="+request.getParameter("branchName"));
     }
 }

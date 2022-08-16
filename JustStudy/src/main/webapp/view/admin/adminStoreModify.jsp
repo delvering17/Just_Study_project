@@ -199,10 +199,10 @@
                     <%for (int i = 0; i < branchDTO.getRooms().split(",").length; i++) {%>
                     <div>
                         <p>룸<%=i + 1%>) <input type="text" name="roomType"
-                                               value="<%=branchDTO.getRooms().split(",")[i].split(" ")[1]%>" readonly>
+                                               value="<%=!branchDTO.getRooms().equals("") ? branchDTO.getRooms().split(",")[i].split(" ")[1] : ""%>" readonly>
                         </p>
                         <select name="roomTypeSelect">
-                            <option name="<%=branchDTO.getRooms().split(",")[i].split(" ")[1]%>">변경안함</option>
+                            <option name="<%=!branchDTO.getRooms().equals("") ? branchDTO.getRooms().split(",")[i].split(" ")[1] : ""%>">변경안함</option>
                             <option name="4인실">4인실</option>
                             <option name="6인실">6인실</option>
                             <option name="8인실">8인실</option>

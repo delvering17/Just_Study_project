@@ -670,7 +670,7 @@
 
             $(".studyroom-reserv-done>button").click(function (){
 
-                if($("input[name=userId]").lengh != 0){
+                if($("input[name=userId]").length != 0){
 
                     $(".studyroom-reserv-paylist").html("")
 

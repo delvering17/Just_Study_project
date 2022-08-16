@@ -9,8 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<html>
-<head>
+
     <script src="<c:url value="/jquery/"/>jquery-3.6.0.js"></script>
     <script src="<c:url value="/jquery/"/>jquery-ui.min.js"></script>
     <script>
@@ -216,7 +215,7 @@
     </style>
     <meta charset="UTF-8">
     <title>usermanagement</title>
-</head>
+
 
 <div class="wrapper">
 
@@ -276,8 +275,10 @@
                     <td rowspan="2">${i.mem_phone}</td>
                     <td rowspan="2">${i.mem_level}</td>
                     <td rowspan="2">
-                        <input type="submit" value="수정">
-                        <input type="submit" value="삭제">
+                        <form action="AdminUserDelete" method="post" enctype="multipart/form-data">
+                            <input type="submit" value="수정">
+                            <input type="submit" value="삭제">
+                        </form>
                     </td>
                 </tr>
                 <tr>
@@ -290,6 +291,4 @@
     </div>
 </div>
 
-
-</html>
 

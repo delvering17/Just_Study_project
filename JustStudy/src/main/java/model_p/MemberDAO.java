@@ -199,10 +199,10 @@ public class MemberDAO {
         return memberDTO;
     }
 
-    public int delete() {
+    public int delete(int mem_id) {
 
         try {
-            sql = "delete from member";
+            sql = "delete from member where mem_id = ?";
 
             ptmt =con.prepareStatement(sql);
             return ptmt.executeUpdate();

@@ -15,5 +15,7 @@ public class AdminUserList implements AdminService{
         request.setAttribute("adminData", adminData);
         request.setAttribute("adminUrl","adminUserList.jsp");
 
+
+
     }
 }

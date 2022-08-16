@@ -166,7 +166,7 @@
 
     <header>
         <label for="hamburger"><i class="fa-solid fa-align-justify"></i></label>
-        <label for="admin"><a href="">ADMINISTRATOR</a></label>
+        <label for="admin"><a href="AdminPage">ADMINISTRATOR</a></label>
         <div>
             <div>
                 <input type="button" value="매장"/>

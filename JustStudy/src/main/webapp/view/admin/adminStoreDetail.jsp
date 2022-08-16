@@ -40,15 +40,29 @@
   }
 
   .admin-store-detail-table {
+    height: 700px;
     border: 1px solid rgb(97, 88, 88);
     margin-top: 10px;
   }
 
   .admin-store-detail-table > tbody > tr > th{
     width: 80px;
-    height: 50px;
     border: 1px solid rgb(97, 88, 88);
     font-size: 13px;
+  }
+
+  .admin-store-detail-table tr:nth-of-type(1),
+  .admin-store-detail-table tr:nth-of-type(2),
+  .admin-store-detail-table tr:nth-of-type(4),
+  .admin-store-detail-table tr:nth-of-type(5),
+  .admin-store-detail-table tr:nth-of-type(6),
+  .admin-store-detail-table tr:nth-of-type(7){
+    height: 7%;
+  }
+
+  .admin-store-detail-table tr:nth-of-type(3),
+  .admin-store-detail-table tr:nth-of-type(8){
+    height: 29%;
   }
 
   .admin-store-detail-table th{
@@ -59,7 +73,7 @@
 
   .admin-store-detail-table td{
     width: 400px;
-    padding: 10px;
+    padding: 5px 0px 5px 10px;
     font-size: 13px;
     border: 1px solid rgb(97, 88, 88);
   }
@@ -69,6 +83,10 @@
   window.onload = function (){
     $(".admin-store-list").click(function (){
       location.href = "AdminStoreList"
+    })
+
+    $(".admin-store-modify").click(function (){
+      location.href = "AdminStoreModify?branchName=<%=request.getParameter("branchName")%>"
     })
   }
 </script>
@@ -96,10 +114,10 @@
     </tr>
     <tr>
       <th>룸타입</th>
-      <td><%=branchDTO.getRooms() != null ? branchDTO.getRooms().replaceAll(",", "</br>") : ""%></td>
+      <td><%=branchDTO.getRooms() != null ? branchDTO.getRooms().replaceAll(",", "</br></br>") : ""%></td>
     </tr>
     <tr>
-      <th>1시간 당<br/>가격</th>
+      <th>가격(1시간)</th>
       <td><%=branchDTO.getPrice()%>원</td>
     </tr>
     <tr>
@@ -122,7 +140,7 @@
     </tr>
     <tr>
       <th>편의 시설</th>
-      <td><%=branchDTO.getFacilities() != null ? branchDTO.getFacilities().replaceAll(",", "</br>") : ""%></td>
+      <td><%=branchDTO.getFacilities() != null ? branchDTO.getFacilities().replaceAll(",", "</br></br>") : ""%></td>
     </tr>
   </table>
 </div>

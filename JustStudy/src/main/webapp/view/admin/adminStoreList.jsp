@@ -12,6 +12,11 @@
         padding: 0;
     }
 
+    .admin-store-list-bg{
+        width: 100%;
+        height: fit-content;
+    }
+
     #headline {
         width: 1330px;
         height: 40px;
@@ -38,12 +43,13 @@
 
     #main {
         width: 2000px;
-        height: 2000px;
+        height: fit-content;
         margin: 0px 0px 0px 220px;
         padding: 120px 20px 20px 40px;
     }
 
     table {
+        width: 60%;
         border: 1px solid rgb(122, 115, 115);
         margin-top: 10px;
     }
@@ -59,37 +65,11 @@
         font-size: 13px;
     }
 
-    tr:first-of-type > th:first-of-type {
-        width: 80px;
+    tr:first-of-type{
         height: 50px;
         padding: 10px;
         color: #fff;
         background: rgba(83, 104, 167, 0.856);
-    }
-
-    tr:first-of-type > th:last-of-type{
-        width: 70px;
-        height: 50px;
-        padding: 10px;
-        color: #fff;
-        background: rgba(83, 104, 167, 0.856);
-    }
-
-    tr:first-of-type > th:nth-of-type(2),
-    tr:first-of-type > th:nth-of-type(3),
-    tr:first-of-type > th:nth-of-type(4),
-    tr:first-of-type > th:nth-of-type(5),
-    tr:first-of-type > th:nth-of-type(7),
-    tr:first-of-type > th:nth-of-type(8) {
-        width: 140px;
-        background: rgba(83, 104, 167, 0.856);
-        color: #fff;
-    }
-
-    tr:first-of-type > th:nth-of-type(6) {
-        width: 250px;
-        background: rgba(83, 104, 167, 0.856);
-        color: #fff;
     }
 
     td {
@@ -115,7 +95,7 @@
     }
 
 </script>
-<div class="wrapper">
+<div class="admin-store-list-bg">
 
     <div id="headline">
         <b>지점관리</b>
@@ -135,7 +115,6 @@
                 <th>매장 주소</th>
                 <th>전화번호</th>
                 <th>편의 시설</th>
-                <th></th>
             </tr>
 
             <%
@@ -165,7 +144,6 @@
                 <td><%=(branchDTO.getAddress() != null ? branchDTO.getAddress() : "")%></td>
                 <td><%=(branchDTO.getPhone() != null ? branchDTO.getPhone() : "")%></td>
                 <td><%=(branchDTO.getFacilities() != null ? branchDTO.getFacilities().replaceAll(",", "<br/>") : "")%></td>
-                <th><input type="radio" name="branch" id="<%=branchDTO.getName()%>"></th>
             </tr>
             <%
                         }

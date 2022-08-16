@@ -71,6 +71,7 @@
         }
 
         .studyroom-reserv-innerlist > label > div,
+        .studyroom-reserv-innerlist-time > div,
         .studyroom-reserv-innerlist-time > label > div {
             border-bottom: 1px solid lightgray;
             height: 60px;
@@ -79,6 +80,10 @@
             justify-content: space-between;
             align-items: center;
             font-weight: bold;
+        }
+
+        .studyroom-reserv-innerlist > label > div,
+        .studyroom-reserv-innerlist-time > label > div{
             cursor: pointer;
         }
 
@@ -86,11 +91,13 @@
             background: lightgray;
         }
 
+        .studyroom-reserv-innerlist-time > div,
         .studyroom-reserv-innerlist-time > label > div {
             justify-content: left;
         }
 
-        .studyroom-reserv-innerlist-time > label > div >div:last-of-type {
+        .studyroom-reserv-innerlist-time > label > div >div:last-of-type,
+        .studyroom-reserv-innerlist-time > div > div:last-of-type{
             width: fit-content;
         }
 
@@ -170,6 +177,10 @@
             line-height: 30px;
             text-align: center;
             color: white;
+        }
+
+        .studyroom-reserv-impossible + div{
+            color: gray;
         }
 
         .studyroom-reserv-selected {

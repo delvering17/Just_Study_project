@@ -51,11 +51,11 @@ public class SetReservationItems implements NonViewService {
                             String time1 = (i > 9 ? "" : "0") + i + ":00";
                             String time2 = (i + 1 > 9 ? "" : "0") + (i + 1) + ":00";
 
-                            res += "<input type=\"checkbox\" name=\"time\" id=\""+ time1 +"\" hidden/>";
                             if(soldOutList.contains(time1)){
-                                res += "<label for=\""+ time1 +"\"><div><div class=\"studyroom-reserv-impossible\">"+URLEncoder.encode("예약완료", "UTF-8")+"</div><div>"+ time1 +" ~ "+ time2
-                                        +"</div></div></label>";
+                                res += "<div><div class=\"studyroom-reserv-impossible\">"+URLEncoder.encode("예약완료", "UTF-8")+"</div><div>"+ time1 +" ~ "+ time2
+                                        +"</div></div>";
                             } else {
+                                res += "<input type=\"checkbox\" name=\"time\" id=\""+ time1 +"\" hidden/>";
                                 res += "<label for=\"" + time1 + "\"><div><div class=\"studyroom-reserv-possible\">" + URLEncoder.encode("예약가능", "UTF-8") + "</div><div>" + time1 + " ~ " + time2
                                         + "</div></div></label>";
                             }

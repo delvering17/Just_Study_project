@@ -43,31 +43,6 @@
         padding: 120px 20px 20px 40px;
     }
 
-    #main > div:first-of-type > input[type=button] {
-        padding: 5px 3px 5px 3px;
-        border-radius: 5px;
-        border: 0;
-        background: rgb(138, 169, 238);
-        color: #fff;
-        cursor: pointer;
-        margin-top: 10px;
-    }
-
-    #main > div:nth-of-type(2) {
-        margin: 10px 0px 0px 0px;
-
-    }
-
-    #main > div:nth-of-type(2) > select {
-        height: 25px;
-        border-radius: 4px;
-    }
-
-    #main > div:nth-of-type(2) > button {
-        width: 25px;
-        height: 25px;
-    }
-
     table {
         border: 1px solid rgb(122, 115, 115);
         margin-top: 10px;
@@ -84,9 +59,16 @@
         font-size: 13px;
     }
 
-    tr:first-of-type > th:first-of-type,
-    tr:first-of-type > th:last-of-type {
-        width: 50px;
+    tr:first-of-type > th:first-of-type {
+        width: 80px;
+        height: 50px;
+        padding: 10px;
+        color: #fff;
+        background: rgba(83, 104, 167, 0.856);
+    }
+
+    tr:first-of-type > th:last-of-type{
+        width: 70px;
         height: 50px;
         padding: 10px;
         color: #fff;
@@ -128,6 +110,8 @@
                 location.href="AdminStoreDelete?branchName="+$("input[name=branch]:checked").attr("id")
             }
         })
+
+
     }
 
 </script>
@@ -145,7 +129,7 @@
             <tr>
                 <th>지역</th>
                 <th>지점명</th>
-                <th>룸 타입</th>
+                <th>룸타입</th>
                 <th>1시간 당 가격</th>
                 <th>운영 시간</th>
                 <th>매장 주소</th>
@@ -168,7 +152,7 @@
                     if (city.equals(branchDTO.getCity())) {
             %>
             <tr class="branch">
-                <td><%=branchDTO.getName()%></td>
+                <td><a href="AdminStoreDetail?branchName=<%=branchDTO.getName()%>"><%=branchDTO.getName()%></a></td>
                 <td><%=(branchDTO.getRooms() != null ? branchDTO.getRooms().replaceAll(",", "<br/>") : "")%></td>
                 <td><%=branchDTO.getPrice()%></td>
                 <td>

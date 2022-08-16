@@ -64,6 +64,38 @@ public class BranchDAO {
         return res;
     }
 
+    public BranchDTO detail(String branchName){
+
+        BranchDTO branchDTO = new BranchDTO();
+
+        sql = "select * from branch where name = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, branchName);
+
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                branchDTO.setCity(rs.getString("city"));
+                branchDTO.setName(rs.getString("name"));
+                branchDTO.setRooms(rs.getString("rooms"));
+                branchDTO.setPrice(rs.getInt("price"));
+                branchDTO.setOpen(rs.getInt("open"));
+                branchDTO.setClose(rs.getInt("close"));
+                branchDTO.setFacilities(rs.getString("facilities"));
+                branchDTO.setAddress(rs.getString("address"));
+                branchDTO.setPhone(rs.getString("phone"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+
+        return branchDTO;
+    }
+
     public int delete(String branchName){
 
         sql = "delete from branch where name = ?";

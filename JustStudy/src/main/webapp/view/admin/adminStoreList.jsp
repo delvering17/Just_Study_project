@@ -125,7 +125,7 @@
     window.onload = function (){
         $(".admin-store-delete").click(function (){
             alert($("input[name=branch]:checked").attr("id"))
-            
+
         })
     }
 

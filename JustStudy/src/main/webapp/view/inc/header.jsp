@@ -226,7 +226,7 @@
                     <div class="gnb-list-wrapper">
                         <ul class="gnb-sub-list">
                             <li><a href="?">기업소개</a></li>
-                            <li><a href="?">기업찾기</a></li>
+                            <li><a href="../branch/BranchFind">지점찾기</a></li>
                         </ul>
                         <ul class="gnb-sub-list">
                             <li><a href="?">이용안내</a></li>

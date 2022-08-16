@@ -5,7 +5,7 @@ import java.net.URLEncoder;
 
 public class BranchDTO {
 
-    String city, name, rooms, facilities, address, phone;
+    String city, name, rooms, facilities, address, phone, img;
     int price, open, close;
 
     public String getCity() {
@@ -109,5 +109,29 @@ public class BranchDTO {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    @Override
+    public String toString() {
+        return "BranchDTO{" +
+                "city='" + city + '\'' +
+                ", name='" + name + '\'' +
+                ", rooms='" + rooms + '\'' +
+                ", facilities='" + facilities + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", img='" + img + '\'' +
+                ", price=" + price +
+                ", open=" + open +
+                ", close=" + close +
+                '}';
     }
 }

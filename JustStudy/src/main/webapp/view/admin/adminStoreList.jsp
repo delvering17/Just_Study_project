@@ -84,8 +84,11 @@
 </style>
 
 <script type="text/javascript">
-
-
+    window.onload = function (){
+        $(".admin-store-insert").click(function (){
+            location.href = "AdminStoreInsert"
+        })
+    }
 </script>
 <div class="admin-store-list-bg">
 

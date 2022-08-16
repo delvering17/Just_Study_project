@@ -1,8 +1,10 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 
 <style type="text/css">
     * {
+        width: 100%;
         box-sizing: border-box;
         margin: 0;
         padding: 0;
@@ -25,14 +27,14 @@
 
 
     .header-logo {
-        /*width: 150px;*/
-        /*height: 150px;*/
+        width: 150px;
+        height: 150px;
         /*margin-right: 30px;*/
         /*display: flex;*/
         /*align-items: center;*/
         /*background-color: #fff;*/
-        /*margin-top: -25px;*/
-        /*z-index: 3;*/
+        margin-top: -25px;
+        z-index: 3;
     }
 
     #logo {
@@ -46,9 +48,8 @@
         height: 130px;
         background: white;
         /*border: solid 1px #ff00ff;*/
-
         position: fixed;
-        animation: down 0.5s ease;
+        /*animation: down 0.5s ease;*/
         z-index: 2;
     }
 
@@ -67,7 +68,6 @@
         position: relative;
         width: 100%;
         height: 0px;
-        background: red;
         margin-top: -25px;
         background: transparent;
         /*overflow: hidden;*/
@@ -179,6 +179,8 @@
     }
 
 
+
+
 </style>
 
 
@@ -187,13 +189,15 @@
     <div class="header-wrapper">
 
         <div class="header-logo">
-            <a href="header.jsp">
-                <%--<img id="logo" src="<%=request.getContextPath()%>/img/logo3.jpg">--%>
+            <a href="<c:url value="/board/MainPage"/>">
+                <img id="logo" src="<c:url value="/img/inc/logo.png"/>" style="width: 150px; height: 150px">
             </a>
         </div>
 
         <div class="nav-wrapper">
+
             <nav>
+
                 <div class="gnb">
                     <ul>
                         <li>
@@ -211,9 +215,10 @@
                         <li>
                             <a>HELP</a>
                         </li>
-                        <li><a href="?" style="">회원가입</a></li>
-                        <li><a id="login" href="?"><i class="fa-solid fa-user"></i></a></li>
+                        <li><a href="../member/MemberLoginForm" ><i class="fa-solid fa-user"></i></a></li>
 
+
+                        <li><a href="?" style="">회원가입</a></li>
                     </ul>
                 </div>
 
@@ -225,7 +230,7 @@
                         </ul>
                         <ul class="gnb-sub-list">
                             <li><a href="?">이용안내</a></li>
-                            <li><a href="?">스터디룸예약</a></li>
+                            <li><a href="../reservation/Studyroom">스터디룸예약</a></li>
                         </ul>
                         <ul class="gnb-sub-list">
                             <li><a href="?">스터디모집</a></li>
@@ -240,8 +245,16 @@
                             <li><a href="?">성FAQ</a></li>
                         </ul>
                         <ul class="gnb-sub-list">
+                                <li><a href="../member/MemberLoginForm" >로그인</a></li>
+                            <c:if test="${sessionScope.login != null}">
+                                <li><a href="../member/MemberLogout" >로그아웃</a></li>
+                            </c:if>
+                            <li><a href="#" >관리자로그인</a></li>
                         </ul>
                         <ul class="gnb-sub-list">
+                            <li><a href="../mypage/MypageInfomationModifyForm" >마이페이지</a></li>
+                            <li><a href="../member/MemberSigninForm" >회원가입</a></li>
+                            <li><a href="../member/MemberSigninForm" >회원가입</a></li>
                         </ul>
                     </div>
                 </div>
@@ -254,6 +267,11 @@
             </div>--%>
     </div>
 </div>
+
+
+
+</body>
+</html>
 
 <script type="text/javascript">
 
@@ -288,4 +306,24 @@
             }
         }
     }
+
+    function goLogin() {
+        $.ajax({
+            url:'<c:url value="/memberNonView/MemberLoginReg"/>',
+            type:'GET',
+            // data:{pname:$("#pname").val()},
+            async:false,
+            // dataType:'json',  //지정하지 않으면 문자열로 처리
+            success:function(dd){
+                // var ttt = decodeURIComponent(dd.name)
+                alert("성공");
+            },
+            error:function(e){
+                console.log(e.responseText)
+            }
+        })
+    }
+
+
+
 </script>

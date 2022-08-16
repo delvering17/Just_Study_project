@@ -8,6 +8,9 @@ target/
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/
+.idea/dataSources.xml
+.idea/webContexts.xml
+
 *.iws
 *.iml
 *.ipr
@@ -36,3 +39,5 @@ build/
 
 ### Mac OS ###
 .DS_Store
+/.idea/artifacts/JustStudy_war_exploded2.xml
+/out/

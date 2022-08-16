@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
+
     <style type="text/css">
         .footer-bg{
             width: 100%;
@@ -41,8 +38,7 @@
             height: 500px;
         }
     </style>
-</head>
-<body>
+
 <div class="footer-bg">
     <div>
         <button class="footer-link" data-bs-toggle="modal" data-bs-target="#personal-info">개인정보처리방침</button>
@@ -82,6 +78,3 @@
         </div>
     </div>
 </div>
-
-</body>
-</html>

@@ -58,8 +58,8 @@ public class ReservationDAO {
     }
 
     public void addReservation(ReservationDTO dto){
-        sql = "insert into reservation(resDate, userId, city, branch, room, useDate, time, headcount, pay, paymentMethod, status) values" +
-                "(sysdate(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        sql = "insert into reservation(resDate, userId, city, branch, room, useDate, time, headcount, pay, paymentMethod, status, orderId) values" +
+                "(sysdate(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             ptmt = con.prepareStatement(sql);
@@ -73,6 +73,7 @@ public class ReservationDAO {
             ptmt.setInt(8, dto.getPay());
             ptmt.setString(9, dto.getPaymentMethod());
             ptmt.setString(10, dto.getStatus());
+            ptmt.setString(11, dto.getOrderId());
 
             ptmt.executeUpdate();
 

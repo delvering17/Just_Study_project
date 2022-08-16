@@ -139,7 +139,7 @@
             </div>
             <div>
                 <i class="fa-solid fa-list"></i>
-                <a href="">이용 내역</a>
+                <a href="MyReservationList">이용 내역</a>
             </div>
             <div>
                 <i class="fa-solid fa-people-group"></i>

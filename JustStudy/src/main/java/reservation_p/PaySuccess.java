@@ -28,7 +28,6 @@ public class PaySuccess implements ReservationService {
             dto.setCity(city[i]);
             dto.setBranch(branch[i]);
             dto.setRoom(room[i]);
-            dto.setResDate(resDate[i]);
             dto.setTime(time[i]);
             dto.setHeadcount(Integer.parseInt(headcount[i]));
             dto.setPay(Integer.parseInt(pay[i]));

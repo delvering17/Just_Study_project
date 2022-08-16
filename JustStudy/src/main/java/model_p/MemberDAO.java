@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class MemberDAO {
 
@@ -16,8 +17,6 @@ public class MemberDAO {
     String sql;
 
     public MemberDAO() {
-
-
 
         try {
             Context init = new InitialContext();
@@ -128,10 +127,45 @@ public class MemberDAO {
         } finally {
             close();
         }
-
     }
 
-    public MemberDTO detail(int mem_id) {
+    public ArrayList<MemberDTO> list() {
+        ArrayList<MemberDTO> res = new ArrayList<>();
+
+        sql = "select * from member";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            rs = ptmt.executeQuery();
+
+            while (rs.next()) {
+                MemberDTO memberDTO = new MemberDTO();
+                memberDTO.setMem_id(rs.getInt("mem_id"));
+                memberDTO.setMem_social(rs.getInt("mem_social"));
+                memberDTO.setMem_userid(rs.getString("mem_userid"));
+                memberDTO.setMem_password(rs.getString("mem_password"));
+                memberDTO.setMem_nickname(rs.getString("mem_nickname"));
+                memberDTO.setMem_realname(rs.getString("mem_realname"));
+                memberDTO.setMem_phone(rs.getString("mem_phone"));
+                memberDTO.setMem_address1(rs.getString("mem_address1"));
+                memberDTO.setMem_address2(rs.getString("mem_address2"));
+                memberDTO.setMem_level(rs.getInt("mem_level"));
+                memberDTO.setMem_socialid(rs.getString("mem_socialid"));
+
+
+                res.add(memberDTO);
+            }
+
+        } catch (SQLException e) {
+
+        } finally {
+            close();
+        }
+
+        return res;
+    }
+
+        public MemberDTO detail(int mem_id) {
         MemberDTO memberDTO = new MemberDTO();
 
         sql = "select * from member where mem_id = ?";
@@ -163,6 +197,23 @@ public class MemberDAO {
         }
 
         return memberDTO;
+    }
+
+    public int delete() {
+
+        try {
+            sql = "delete from member";
+
+            ptmt =con.prepareStatement(sql);
+            return ptmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            close();
+        }
+
+        return 0;
     }
 
     public void modifyInformation(MemberDTO memberDTO) {

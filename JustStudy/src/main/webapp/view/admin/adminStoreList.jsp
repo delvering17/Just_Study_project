@@ -80,11 +80,11 @@
             margin-top: 10px;
         }
 
+        tr:nth-of-type(3),
         tr:nth-of-type(5),
-        tr:nth-of-type(6),
-        tr:nth-of-type(9),
-        tr:nth-of-type(10){
-            background: rgba(227, 233, 240, 0.726);
+        tr:nth-of-type(7),
+        tr:nth-of-type(9){
+            /*background: rgba(227, 233, 240, 0.726);*/
         }
 
         th{
@@ -103,59 +103,41 @@
             width: 10px;
         }
 
-        tr:first-of-type > th:first-child{
+        tr:first-of-type > th:first-of-type,
+        tr:first-of-type > th:nth-of-type(2){
+            width: 50px;
             height: 50px;
             padding: 10px;
-            background: rgba(83, 104, 167, 0.856);
-        }
-
-        tr:first-of-type > th:nth-of-type(2),
-        tr:first-of-type > th:nth-of-type(3){
-            width:180px;
-            background: rgba(83, 104, 167, 0.856);
             color: #fff;
+            background: rgba(83, 104, 167, 0.856);
         }
 
+        tr:nth-of-type(n+1) > th{
+
+        }
+
+        tr:first-of-type > th:nth-of-type(3),
         tr:first-of-type > th:nth-of-type(4),
         tr:first-of-type > th:nth-of-type(5),
         tr:first-of-type > th:nth-of-type(6),
         tr:first-of-type > th:nth-of-type(7),
         tr:first-of-type > th:nth-of-type(8),
-        tr:first-of-type > th:nth-of-type(9){
+        tr:first-of-type > th:nth-of-type(9),
+        tr:first-of-type > th:last-child{
             width: 140px;
             background: rgba(83, 104, 167, 0.856);
             color: #fff;
         }
 
-        tr:first-of-type > th:last-child{
-            width: 50px;
-            background: rgba(83, 104, 167, 0.856);
-            color: #fff;
-        }
 
-        tr:nth-of-type(2) > th{
-            background: rgba(83, 104, 167, 0.856);
-            color: #fff;
-        }
 
-        tr:nth-of-type(3) > th:first-child,
-        tr:nth-of-type(5) > th:first-child,
-        tr:nth-of-type(7) > th:first-child,
-        tr:nth-of-type(9) > th:first-child{
-            height: 50px;
-            padding: 10px;
-        }
-
-        tr:nth-of-type(2) > th:first-of-type,
-        tr:nth-of-type(4) > th:first-of-type,
-        tr:nth-of-type(6) > th:first-of-type,
-        tr:nth-of-type(8) > th:first-of-type{
-            width: 70px;
+        tr:nth-of-type(2) > td{
+            height: 200px;
         }
 
     </style>
     <meta charset="UTF-8">
-    <title>usermanagement</title>
+    <title>storemanagement</title>
 </head>
 <body>
 <div class="wrapper">
@@ -169,70 +151,59 @@
     <div id="main">
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
             <tr>
-                <th rowspan="2"><input type="checkbox" name="user" onclick="selectAll(this)"></th>
+                <th><input type="checkbox" name="user" onclick="selectAll(this)"></th>
                 <th>지역</th>
                 <th>지점명</th>
-                <th>운영시간</th>
+                <th>운영 시간</th>
                 <th>1시간 당 가격</th>
-                <th>편의시설</th>
                 <th>룸 타입</th>
-                <th></th>
-                <th></th>
-                <th></th>
-
-            </tr>
-            <tr>
-                <th>이름</th>
-                <th>닉네임</th>
-                <th>SMS수신</th>
-                <th>본인인증</th>
-                <th>접근차단</th>
-                <th>권한</th>
+                <th>매장 주소</th>
                 <th>전화번호</th>
-                <th>가입일</th>
+                <th>편의 시설</th>
             </tr>
             <tr>
-                <th rowspan="2"><input type="checkbox" name="user"></th>
-                <td colspan="2">*******</td>
-                <td rowspan="2">
-                    <input type="radio" name="certification">간편인증<br/>
-                    <input type="radio" name="certification">휴대폰<br/>
-                    <input type="radio" name="certification">아이핀<br/>
-                </td>
-                <td style="color: red">Yes</td>
-                <td><input type="checkbox"></td>
-                <td><input type="checkbox"></td>
-                <td>정상</td>
-                <td></td>
-                <td></td>
-                <td rowspan="2">
-                    <input type="button" value="수정">
-                    <input type="button" value="그룹">
+                <th rowspan="5"><input type="checkbox" name="user"></th>
+                <td rowspan="5">
+                    서울
                 </td>
             </tr>
             <tr>
-                <td>********</td>
-                <td>********</td>
-                <td><input type="checkbox"></td>
-                <td><input type="checkbox"></td>
-                <td><input type="checkbox"></td>
-                <td>
-                    <select name="powerlevel">
-                        <option>1</option>
-                        <option selected>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10</option>
-                    </select>
-                </td>
-                <td></td>
-                <td></td>
+               <td>강남점</td>
+               <td>08:00 ~ 23:00</td>
+               <td>2500원</td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
             </tr>
+            <tr>
+               <td>사당점</td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+            </tr>
+            <tr>
+               <td>신촌점</td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+            </tr>
+            <tr>
+               <td>교대점</td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+            </tr>
+
         </table>
     </div>
 </div>

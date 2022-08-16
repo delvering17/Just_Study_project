@@ -21,7 +21,7 @@
         }
 
 
-        #hamburger, #admin, #r1, #r2, #r3, #r4, #r5, #r6{
+        #hamburger, #admin, #r1, #r2, #r3, #r4, #r5{
             display: none;
         }
 
@@ -200,9 +200,7 @@
             <ul>
                 <li>회원관리</li>
                 <li><a href="AdminUserList">회원관리</a></li>
-                <li><a href="">회원메일발송</a></li>
-                <li><a href="">접속자집계</a></li>
-                <li><a href="">접속자검색</a></li>
+
             </ul>
             <ul>
                 <li>지점관리</li>
@@ -212,8 +210,8 @@
             </ul>
             <ul>
                 <li>매출관리</li>
-                <li><a href="">지점매출</a></li>
                 <li><a href="">회원매출</a></li>
+                <li><a href="">지점매출</a></li>
                 <li><a href=""></a></li>
             </ul>
             <ul>

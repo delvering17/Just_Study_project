@@ -78,13 +78,13 @@ public class BranchDAO {
             while(rs.next()){
                 branchDTO.setCity(rs.getString("city"));
                 branchDTO.setName(rs.getString("name"));
-                branchDTO.setRooms(rs.getString("rooms"));
+                branchDTO.setRooms(rs.getString("rooms") != null ? rs.getString("rooms") : "");
                 branchDTO.setPrice(rs.getInt("price"));
                 branchDTO.setOpen(rs.getInt("open"));
                 branchDTO.setClose(rs.getInt("close"));
-                branchDTO.setFacilities(rs.getString("facilities"));
-                branchDTO.setAddress(rs.getString("address"));
-                branchDTO.setPhone(rs.getString("phone"));
+                branchDTO.setFacilities(rs.getString("facilities") != null ? rs.getString("facilities") : "");
+                branchDTO.setAddress(rs.getString("address") != null ? rs.getString("address") : "");
+                branchDTO.setPhone(rs.getString("phone") != null ? rs.getString("phone") : "");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -94,6 +94,32 @@ public class BranchDAO {
 
 
         return branchDTO;
+    }
+
+    public int modify(String cityName, String branchName, BranchDTO dto){
+        sql = "update branch set rooms = ?, price = ?, open = ?, close = ?, facilities = ?, address = ?, phone = ? " +
+                "where city = ? and name = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, dto.getRooms());
+            ptmt.setInt(2, dto.getPrice());
+            ptmt.setInt(3, dto.getOpen());
+            ptmt.setInt(4, dto.getClose());
+            ptmt.setString(5, dto.getFacilities());
+            ptmt.setString(6, dto.getAddress());
+            ptmt.setString(7, dto.getPhone());
+            ptmt.setString(8, cityName);
+            ptmt.setString(9, branchName);
+
+            return ptmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+          close();
+        }
+
+        return 0;
     }
 
     public int delete(String branchName){

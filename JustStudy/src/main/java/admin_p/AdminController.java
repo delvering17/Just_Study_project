@@ -9,6 +9,9 @@ import java.io.IOException;
 public class AdminController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        request.setCharacterEncoding("UTF-8");
+
         String service = request.getRequestURI().substring((request.getContextPath()+"/admin/").length());
 
         try {
@@ -23,6 +26,6 @@ public class AdminController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request, response);
     }
 }

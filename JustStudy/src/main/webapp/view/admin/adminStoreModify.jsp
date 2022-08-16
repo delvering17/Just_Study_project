@@ -111,13 +111,13 @@
         display: inline-block;
     }
 
-    select[name=roomType] {
+    select[name=roomTypeSelect] {
         width: 80px;
         height: 25px;
         margin: 0px 10px 5px 10px;
     }
 
-    select[name=facilities] {
+    select[name=facilitiesSelect] {
         width: 60px;
         height: 25px;
         margin: 0px 10px 5px 10px;
@@ -155,22 +155,21 @@
 <script>
     window.onload = function () {
 
-        const initRoomType = "<%=branchDTO.getRooms()%>"
+        $("select[name=roomTypeSelect]").change(function () {
 
-        $("select[name=roomType]").change(function () {
-            if ($(this).val() == "변경안함") {
-                $("input[name=roomType]").eq($(this).index("select[name=roomType]")).val(initRoomType.split(",")[$(this).index("select[name=roomType]")].split(" ")[1])
+            $("input[name=roomType]").eq($(this).index("select[name=roomTypeSelect]")).val($(this).children("option:selected").attr("name"))
+        })
+
+        $("select[name=facilitiesSelect]").change(function () {
+            if ($(this).val() == "X") {
+                $("input[class=facilities]").eq($(this).index("select[name=facilitiesSelect]")).attr("name", "facilitiesX")
             } else {
-                $("input[name=roomType]").eq($(this).index("select[name=roomType]")).val($(this).val())
+                $("input[class=facilities]").eq($(this).index("select[name=facilitiesSelect]")).attr("name", "facilitiesO")
             }
         })
 
-        $("select[name=facilities]").change(function () {
-            if ($(this).val() == "X") {
-                $("input[class=facilities]").eq($(this).index("select[name=facilities]")).attr("name", "facilitiesX")
-            } else {
-                $("input[class=facilities]").eq($(this).index("select[name=facilities]")).attr("name", "facilities")
-            }
+        $(".admin-store-save").click(function (){
+            $("form").submit()
         })
     }
 
@@ -184,15 +183,15 @@
 
 
 <div id="main">
-    <form action="AdminStoreModifyReg">
+    <form action="AdminStoreModifyReg" method="post">
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-store-modify-table">
             <tr>
                 <th>지역</th>
-                <td><input type="text" name="cityName" value="<%=branchDTO.getCity()%>"/></td>
+                <td><input type="text" name="cityName" value="<%=branchDTO.getCity()%>" readonly/></td>
             </tr>
             <tr>
                 <th>지점명</th>
-                <td><input type="text" name="branchName" value="<%=branchDTO.getName()%>"/></td>
+                <td><input type="text" name="branchName" value="<%=branchDTO.getName()%>" readonly/></td>
             </tr>
             <tr>
                 <th>룸타입</th>
@@ -200,10 +199,10 @@
                     <%for (int i = 0; i < branchDTO.getRooms().split(",").length; i++) {%>
                     <div>
                         <p>룸<%=i + 1%>) <input type="text" name="roomType"
-                                               value="<%=branchDTO.getRooms().split(",")[i].split(" ")[1]%>" disabled>
+                                               value="<%=branchDTO.getRooms().split(",")[i].split(" ")[1]%>" readonly>
                         </p>
-                        <select name="roomType">
-                            <option name="변경안함">변경안함</option>
+                        <select name="roomTypeSelect">
+                            <option name="<%=branchDTO.getRooms().split(",")[i].split(" ")[1]%>">변경안함</option>
                             <option name="4인실">4인실</option>
                             <option name="6인실">6인실</option>
                             <option name="8인실">8인실</option>
@@ -243,14 +242,14 @@
                 <td>
                     <%for (String facility : "정수기,휴게실,흡연실,프린터,빔프로젝터,컴퓨터,주차,와이파이".split(",")) {%>
                     <%if (branchDTO.getFacilities().contains(facility)) {%>
-                    <input type="text" name="facilities" class="facilities" value="<%=facility%>" disabled>
-                    <select name="facilities">
+                    <input type="text" name="facilitiesO" class="facilities" value="<%=facility%>" readonly>
+                    <select name="facilitiesSelect">
                         <option name="O" selected>O</option>
                         <option name="X">X</option>
                     </select>
                     <%} else {%>
-                    <input type="text" name="facilitiesX" class="facilities" value="<%=facility%>" disabled>
-                    <select name="facilities">
+                    <input type="text" name="facilitiesX" class="facilities" value="<%=facility%>" readonly>
+                    <select name="facilitiesSelect">
                         <option name="O">O</option>
                         <option name="X" selected>X</option>
                     </select>

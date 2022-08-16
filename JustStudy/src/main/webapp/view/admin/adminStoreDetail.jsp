@@ -114,7 +114,7 @@
     </tr>
     <tr>
       <th>룸타입</th>
-      <td><%=branchDTO.getRooms() != null ? branchDTO.getRooms().replaceAll(",", "</br></br>") : ""%></td>
+      <td><%=branchDTO.getRooms().replaceAll(",", "</br></br>")%></td>
     </tr>
     <tr>
       <th>가격(1시간)</th>
@@ -132,15 +132,15 @@
     </tr>
     <tr>
       <th>매장 주소</th>
-      <td><%=branchDTO.getAddress() != null ? branchDTO.getAddress() : ""%></td>
+      <td><%=branchDTO.getAddress()%></td>
     </tr>
     <tr>
       <th>전화번호</th>
-      <td><%=branchDTO.getPhone() != null ? branchDTO.getPhone() : ""%></td>
+      <td><%=branchDTO.getPhone()%></td>
     </tr>
     <tr>
       <th>편의 시설</th>
-      <td><%=branchDTO.getFacilities() != null ? branchDTO.getFacilities().replaceAll(",", "</br></br>") : ""%></td>
+      <td><%=branchDTO.getFacilities().replaceAll(",", "</br></br>")%></td>
     </tr>
   </table>
 </div>

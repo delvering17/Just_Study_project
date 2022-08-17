@@ -12,6 +12,11 @@
         padding: 0;
     }
 
+    .admin-store-list-bg{
+        width: 100%;
+        height: fit-content;
+    }
+
     #headline {
         width: 1330px;
         height: 40px;
@@ -38,37 +43,13 @@
 
     #main {
         width: 2000px;
-        height: 2000px;
+        height: fit-content;
         margin: 0px 0px 0px 220px;
         padding: 120px 20px 20px 40px;
     }
 
-    #main > div:first-of-type > input[type=button] {
-        padding: 5px 3px 5px 3px;
-        border-radius: 5px;
-        border: 0;
-        background: rgb(138, 169, 238);
-        color: #fff;
-        cursor: pointer;
-        margin-top: 10px;
-    }
-
-    #main > div:nth-of-type(2) {
-        margin: 10px 0px 0px 0px;
-
-    }
-
-    #main > div:nth-of-type(2) > select {
-        height: 25px;
-        border-radius: 4px;
-    }
-
-    #main > div:nth-of-type(2) > button {
-        width: 25px;
-        height: 25px;
-    }
-
     table {
+        width: 60%;
         border: 1px solid rgb(122, 115, 115);
         margin-top: 10px;
     }
@@ -85,14 +66,13 @@
         font-size: 13px;
     }
 
-    tr:first-of-type > th:first-of-type,
-    tr:first-of-type > th:last-of-type {
-        width: 50px;
+    tr:first-of-type{
         height: 50px;
         padding: 10px;
         color: #fff;
         background: rgba(83, 104, 167, 0.856);
     }
+
 
     tr:first-of-type > th:nth-of-type(2),
     tr:first-of-type > th:nth-of-type(3),
@@ -120,9 +100,11 @@
             background: rgba(83, 104, 167, 0.856);
         }
 
-        tr:nth-of-type(n+1) > th{
-
-        }
+    td {
+        height: 30px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
 
         tr:first-of-type > th:nth-of-type(3),
         tr:first-of-type > th:nth-of-type(4),
@@ -149,28 +131,31 @@
 </head>
 <body>
 
-<div class="wrapper">
+<div class="admin-store-list-bg">
 
     <div id="headline">
         <b>지점관리</b>
-        <input type="button" class="admin-store-delete" value="선택삭제">
-        <input type="button" class="admin-store-modify" value="선택수정">
         <input type="button" class="admin-store-insert" value="지점추가">
     </div>
 
     <div id="main">
+
+        <div>
+            <input type="text">
+            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
             <tr>
 
                 <th>지역</th>
                 <th>지점명</th>
-                <th>룸 타입</th>
+                <th>룸타입</th>
                 <th>1시간 당 가격</th>
                 <th>운영 시간</th>
                 <th>매장 주소</th>
                 <th>전화번호</th>
                 <th>편의 시설</th>
-                <th></th>
             </tr>
 
             <%
@@ -188,7 +173,7 @@
                     if (city.equals(branchDTO.getCity())) {
             %>
             <tr class="branch">
-                <td><%=branchDTO.getName()%></td>
+                <td><a href="AdminStoreDetail?branchName=<%=branchDTO.getName()%>"><%=branchDTO.getName()%></a></td>
                 <td><%=(branchDTO.getRooms() != null ? branchDTO.getRooms().replaceAll(",", "<br/>") : "")%></td>
                 <td><%=branchDTO.getPrice()%></td>
                 <td>
@@ -201,7 +186,6 @@
                 <td><%=(branchDTO.getAddress() != null ? branchDTO.getAddress() : "")%></td>
                 <td><%=(branchDTO.getPhone() != null ? branchDTO.getPhone() : "")%></td>
                 <td><%=(branchDTO.getFacilities() != null ? branchDTO.getFacilities().replaceAll(",", "<br/>") : "")%></td>
-                <th><input type="radio" name="branch" id="<%=branchDTO.getName()%>"></th>
             </tr>
             <%
                         }

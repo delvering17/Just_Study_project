@@ -40,6 +40,7 @@
     }
 
     .admin-reserv-list-table {
+        width: 67%;
         border: 1px solid rgb(122, 115, 115);
         margin-top: 10px;
         table-layout: fixed;
@@ -51,12 +52,38 @@
         font-size: 13px;
     }
 
+    .admin-reserv-list-table th:nth-of-type(1) {
+        width: 3%
+    }
+
+    .admin-reserv-list-table th:nth-of-type(5),
+    .admin-reserv-list-table th:nth-of-type(6),
+    .admin-reserv-list-table th:nth-of-type(11),
+    .admin-reserv-list-table th:nth-of-type(12),
+    .admin-reserv-list-table th:nth-of-type(13),
+    .admin-reserv-list-table th:nth-of-type(14){
+        width: 6%;
+    }
+
+    .admin-reserv-list-table th:nth-of-type(2),
+    .admin-reserv-list-table th:nth-of-type(3),
+    .admin-reserv-list-table th:nth-of-type(10){
+        width: 12%;
+    }
+
+    .admin-reserv-list-table th:nth-of-type(4),
+    .admin-reserv-list-table th:nth-of-type(7),
+    .admin-reserv-list-table th:nth-of-type(8),
+    .admin-reserv-list-table th:nth-of-type(9){
+        width: 9%;
+    }
+
     .admin-reserv-list-table td {
         border: 1px solid rgb(97, 88, 88);
         text-align: center;
         font-size: 13px;
         height: 30px;
-        padding: 5px 20px 5px 20px;
+        padding: 5px 5px 5px 5px;
     }
 
     .admin-reserv-list-table tr:first-of-type{
@@ -81,8 +108,8 @@
     <div class="admin-reserv-list-main">
 
         <div>
-            <form action="AdminReserv">
-                <select name="admin-reserv-list-search">
+            <form action="AdminReservListSearch">
+                <select name="filter">
                     <option>주문번호</option>
                     <option>주문일자</option>
                     <option>사용자ID</option>
@@ -94,7 +121,7 @@
                     <option>시간</option>
                     <option>상태</option>
                 </select>
-                <input type="text">
+                <input type="text" name="word">
                 <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
         </div>
@@ -105,7 +132,7 @@
                 <th>주문번호</th>
                 <th>주문일자</th>
                 <th>사용자ID</th>
-                <th>사용자이름</th>
+                <th>사용자<br/>이름</th>
                 <th>지역</th>
                 <th>지점</th>
                 <th>룸타입</th>
@@ -114,6 +141,7 @@
                 <th>인원수</th>
                 <th>결제금액</th>
                 <th>상태</th>
+                <th></th>
             </tr>
 
             <%
@@ -134,6 +162,11 @@
                         <td><%=adminReservDTO.getHeadcount()%></td>
                         <td><%=adminReservDTO.getPay()%></td>
                         <td><%=adminReservDTO.getStatus()%></td>
+                        <td>
+                            <%if(adminReservDTO.getStatus().equals("이용전")){%>
+                                <input type="button" value="취소"/>
+                            <%}%>
+                        </td>
                     </tr>
               <%}%>
         </table>

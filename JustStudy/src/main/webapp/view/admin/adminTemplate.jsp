@@ -233,7 +233,7 @@
                 <li>게시판관리</li>
                 <li><a href="">게시판관리</a></li>
                 <li><a href="">게시판그룹관리</a></li>
-                <li><a href="">1:1문의</a></li>
+                <li><a href="AdminInquiryList">1:1문의</a></li>
             </ul>
         </div>
     </div>

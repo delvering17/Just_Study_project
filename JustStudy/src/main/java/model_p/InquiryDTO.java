@@ -40,6 +40,10 @@ public class InquiryDTO {
         return inquiry_content;
     }
 
+    public String getInquiry_content_String() {
+        return inquiry_content.replaceAll("\n","<br/>");
+    }
+
     public void setInquiry_content(String inquiry_content) {
         this.inquiry_content = inquiry_content;
     }

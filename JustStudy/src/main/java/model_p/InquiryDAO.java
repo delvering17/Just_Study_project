@@ -30,6 +30,42 @@ public class InquiryDAO {
         }
     }
 
+    public ArrayList<InquiryDTO> inquiryList() {
+        ArrayList<InquiryDTO> res = new ArrayList<>();
+
+        sql = "select * from inquiry where inquiry_level = 1";
+        try {
+            ptmt = con.prepareStatement(sql);
+
+            rs = ptmt.executeQuery();
+
+            while(rs.next()) {
+                InquiryDTO inquiryDTO = new InquiryDTO();
+
+                inquiryDTO.setInquiry_id(rs.getInt("inquiry_id"));
+                inquiryDTO.setInquiry_title(rs.getString("inquiry_title"));
+                inquiryDTO.setInquiry_content(rs.getString("inquiry_content"));
+                inquiryDTO.setInquiry_writer(rs.getInt("inquiry_writer"));
+                inquiryDTO.setInquiry_category(rs.getString("inquiry_category"));
+                inquiryDTO.setInquiry_type(rs.getString("inquiry_type"));
+                inquiryDTO.setInquiry_branch(rs.getString("inquiry_branch"));
+                inquiryDTO.setInquiry_date(rs.getDate("inquiry_date"));
+                inquiryDTO.setInquiry_level(rs.getInt("inquiry_level"));
+                inquiryDTO.setInquiry_state(rs.getInt("inquiry_state"));
+
+                res.add(inquiryDTO);
+            }
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }finally {
+            close();
+        }
+
+        return res;
+    }
+
+
     public ArrayList<InquiryDTO> inquiryPeriodList(int mem_id, int first, int limit, String date_before, String date_after) {
         ArrayList<InquiryDTO> res = new ArrayList<>();
 

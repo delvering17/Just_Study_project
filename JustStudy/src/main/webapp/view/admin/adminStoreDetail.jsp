@@ -147,7 +147,7 @@
     </tr>
     <tr>
       <th>매장 사진</th>
-      <td></td>
+      <td><%=branchDTO.getImg()%></td>
     </tr>
     <tr>
       <th>편의 시설</th>

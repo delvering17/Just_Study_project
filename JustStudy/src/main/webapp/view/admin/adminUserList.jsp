@@ -56,6 +56,7 @@
             padding-top: 13px;
         }
 
+
         #headline{
             width: 1330px;
             height: 40px;
@@ -213,9 +214,12 @@
         }
 
     </style>
+<<<<<<< HEAD
     <meta charset="UTF-8">
     <title>usermanagement</title>
 
+=======
+>>>>>>> origin/test
 
 <div class="wrapper">
 
@@ -290,5 +294,17 @@
         </table>
     </div>
 </div>
+<<<<<<< HEAD
 
+=======
+<script type="text/javascript">
+    function selectAll(selectAll)  {
+        const checkboxes = document.querySelectorAll('input[name="user"]');
+
+        checkboxes.forEach((checkbox) => {
+            checkbox.checked = selectAll.checked
+        })
+    }
+</script>
+>>>>>>> origin/test
 

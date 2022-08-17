@@ -10,13 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class Studyroom implements ReservationService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
         ArrayList<BranchDTO> branch = new ReservationDAO().branchList();
 
-        HashMap<String, Integer> branchMap = new HashMap<String, Integer>();
+        LinkedHashMap<String, Integer> branchMap = new LinkedHashMap<String, Integer>();
         for (String city : "서울,경기,부산,대구,인천,광주,대전,울산,세종,강원,충북,충남,전북,전남,경북,경남,제주".split(",")) {
             branchMap.put(city, 0);
         }

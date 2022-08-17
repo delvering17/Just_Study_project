@@ -95,21 +95,80 @@ public class BranchDAO {
         return  branchDTO;
     }
 
-    public ArrayList<String> branchNameList() {
-        ArrayList<String> res = new ArrayList<>();
+    public BranchDTO detail(String branchName){
 
-        sql = "select name from branch";
+        BranchDTO branchDTO = new BranchDTO();
+
+        sql = "select * from branch where name = ?";
 
         try {
             ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, branchName);
+
             rs = ptmt.executeQuery();
-
-            while(rs.next()) {
-                res.add(rs.getString("name"));
+            while(rs.next()){
+                branchDTO.setCity(rs.getString("city"));
+                branchDTO.setName(rs.getString("name"));
+                branchDTO.setRooms(rs.getString("rooms") != null ? rs.getString("rooms") : "");
+                branchDTO.setPrice(rs.getInt("price"));
+                branchDTO.setOpen(rs.getInt("open"));
+                branchDTO.setClose(rs.getInt("close"));
+                branchDTO.setFacilities(rs.getString("facilities") != null ? rs.getString("facilities") : "");
+                branchDTO.setAddress(rs.getString("address") != null ? rs.getString("address") : "");
+                branchDTO.setPhone(rs.getString("phone") != null ? rs.getString("phone") : "");
+                branchDTO.setImg(rs.getString("img") != null ? rs.getString("img") : "");
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            close();
+        }
+
+
+        return branchDTO;
+    }
+
+    public int modify(String cityName, String branchName, BranchDTO dto){
+        sql = "update branch set rooms = ?, price = ?, open = ?, close = ?, facilities = ?, address = ?, phone = ?, img = ?" +
+                " where city = ? and name = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, dto.getRooms());
+            ptmt.setInt(2, dto.getPrice());
+            ptmt.setInt(3, dto.getOpen());
+            ptmt.setInt(4, dto.getClose());
+            ptmt.setString(5, dto.getFacilities());
+            ptmt.setString(6, dto.getAddress());
+            ptmt.setString(7, dto.getPhone());
+            ptmt.setString(8, dto.getImg());
+            ptmt.setString(9, cityName);
+            ptmt.setString(10, branchName);
+
+            return ptmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+          close();
+        }
+
+        return 0;
+    }
+
+    public int delete(String branchName){
+
+        sql = "delete from branch where name = ?";
+
+        int res;
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, branchName);
+
+            res = ptmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         } finally {
             close();
         }
@@ -117,6 +176,50 @@ public class BranchDAO {
         return res;
     }
 
+    public int insert(BranchDTO branchDTO){
+
+        sql = "insert into branch (city, name, rooms, price, open, close, facilities, address, phone, img) values " +
+                "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, branchDTO.getCity());
+            ptmt.setString(2, branchDTO.getName());
+            ptmt.setString(3, branchDTO.getRooms());
+            ptmt.setInt(4, branchDTO.getPrice());
+            ptmt.setInt(5, branchDTO.getOpen());
+            ptmt.setInt(6, branchDTO.getClose());
+            ptmt.setString(7, branchDTO.getFacilities());
+            ptmt.setString(8, branchDTO.getAddress());
+            ptmt.setString(9, branchDTO.getPhone());
+            ptmt.setString(10, branchDTO.getImg());
+
+            return ptmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+        return 0;
+    }
+
+    public int imgDelete(BranchDTO branchDTO){
+
+        sql = "update branch set img = ? where name = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, "");
+            ptmt.setString(2, branchDTO.getName());
+
+            return ptmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
 
     public void close() {
         if(rs!=null) try { rs.close(); } catch (SQLException e) {}

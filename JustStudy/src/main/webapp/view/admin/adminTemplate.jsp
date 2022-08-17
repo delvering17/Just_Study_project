@@ -28,7 +28,7 @@
         }
 
 
-        #hamburger, #admin, #r1, #r2, #r3, #r4, #r5, #r6{
+        #hamburger, #admin, #r1, #r2, #r3, #r4, #r5{
             display: none;
         }
 
@@ -173,7 +173,7 @@
 
     <header>
         <label for="hamburger"><i class="fa-solid fa-align-justify"></i></label>
-        <label for="admin"><a href="">ADMINISTRATOR</a></label>
+        <label for="admin"><a href="AdminPage">ADMINISTRATOR</a></label>
         <div>
             <div>
                 <input type="button" value="매장"/>
@@ -207,20 +207,18 @@
             <ul>
                 <li>회원관리</li>
                 <li><a href="AdminUserList">회원관리</a></li>
-                <li><a href="">회원메일발송</a></li>
-                <li><a href="">접속자집계</a></li>
-                <li><a href="">접속자검색</a></li>
+
             </ul>
             <ul>
                 <li>지점관리</li>
-                <li><a href="AdminStoreList">지점목록</a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
+                <li><a href="AdminStoreList">지점 목록</a></li>
+                <li><a href="">휴일 관리</a></li>
+                <li><a href="">이용 후기</a></li>
             </ul>
             <ul>
                 <li>매출관리</li>
-                <li><a href="">지점매출</a></li>
                 <li><a href="">회원매출</a></li>
+                <li><a href="">지점매출</a></li>
                 <li><a href=""></a></li>
             </ul>
             <ul>

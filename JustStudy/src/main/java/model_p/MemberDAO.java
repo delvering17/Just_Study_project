@@ -205,6 +205,7 @@ public class MemberDAO {
             sql = "delete from member where mem_id = ?";
 
             ptmt =con.prepareStatement(sql);
+            ptmt.setInt(1, mem_id);
             return ptmt.executeUpdate();
 
         } catch (Exception e) {

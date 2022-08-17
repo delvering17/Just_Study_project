@@ -263,23 +263,23 @@
 
             <c:forEach items="${adminData}" var="i">
                 <tr>
-                    <th rowspan="2"><input type="checkbox" name="user">${i.mem_id}
-                    </th>
-                    <td>${i.mem_userid}</td>
+                    <form action="AdminUserDelete" method="get">
+                        <th rowspan="2"><input type="checkbox" name="user" value="${i.mem_id}">${i.mem_id}
+                        </th>
+                        <td>${i.mem_userid}</td>
 
-                    <td>${i.mem_realname}</td>
-                    <td rowspan="2">${i.mem_social}</td>
+                        <td>${i.mem_realname}</td>
+                        <td rowspan="2">${i.mem_social}</td>
 
-                    <td rowspan="2">${i.mem_address1}</td>
-                    <td rowspan="2">${i.mem_address2}</td>
-                    <td rowspan="2">${i.mem_phone}</td>
-                    <td rowspan="2">${i.mem_level}</td>
-                    <td rowspan="2">
-                        <form action="AdminUserDelete" method="post" enctype="multipart/form-data">
-                            <input type="submit" value="수정">
-                            <input type="submit" value="삭제">
-                        </form>
-                    </td>
+                        <td rowspan="2">${i.mem_address1}</td>
+                        <td rowspan="2">${i.mem_address2}</td>
+                        <td rowspan="2">${i.mem_phone}</td>
+                        <td rowspan="2">${i.mem_level}</td>
+                        <td rowspan="2">
+                                <input type="submit" value="수정">
+                                <input type="submit" value="삭제">
+                        </td>
+                    </form>
                 </tr>
                 <tr>
                     <td>${i.mem_password}</td>

@@ -205,32 +205,33 @@
         </div>
         <div class="categoryitem">
             <ul>
-                <li>회원관리</li>
-                <li><a href="AdminUserList">회원관리</a></li>
+                <li>회원 관리</li>
+                <li><a href="AdminUserList">회원 관리</a></li>
+                <li><a href="AdminBlackList">블랙리스트 관리</a></li>
 
             </ul>
             <ul>
-                <li>지점관리</li>
+                <li>지점 관리</li>
                 <li><a href="AdminStoreList">지점 목록</a></li>
                 <li><a href="">휴일 관리</a></li>
                 <li><a href="">이용 후기</a></li>
             </ul>
             <ul>
-                <li>매출관리</li>
-                <li><a href="">회원매출</a></li>
-                <li><a href="">지점매출</a></li>
+                <li>매출 관리</li>
+                <li><a href="">회원 매출</a></li>
+                <li><a href="">지점 매출</a></li>
+
+            </ul>
+            <ul>
+                <li>예약 관리</li>
+                <li><a href="">예약 관리</a></li>
+                <li><a href=""></a></li>
                 <li><a href=""></a></li>
             </ul>
             <ul>
-                <li>예약관리</li>
-                <li><a href="">예약관리</a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-            </ul>
-            <ul>
-                <li>게시판관리</li>
-                <li><a href="">게시판관리</a></li>
-                <li><a href="">게시판그룹관리</a></li>
+                <li>게시판 관리</li>
+                <li><a href="">게시판 관리</a></li>
+                <li><a href="">게시판 그룹 관리</a></li>
                 <li><a href="AdminInquiryList">1:1문의</a></li>
             </ul>
         </div>

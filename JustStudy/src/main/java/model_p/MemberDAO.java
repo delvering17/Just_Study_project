@@ -151,7 +151,8 @@ public class MemberDAO {
                 memberDTO.setMem_address2(rs.getString("mem_address2"));
                 memberDTO.setMem_level(rs.getInt("mem_level"));
                 memberDTO.setMem_socialid(rs.getString("mem_socialid"));
-
+                ArrayList<MemberDTO> qwe = new ArrayList<>();
+                System.out.println(qwe.size());
 
                 res.add(memberDTO);
             }

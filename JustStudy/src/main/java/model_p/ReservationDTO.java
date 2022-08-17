@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class ReservationDTO {
     String orderId, city, branch, room, time, paymentMethod, status, useDate;
-    int id, headcount, pay, userId;
+    int id, headcount, pay, userId, review;
     Date resDate;
 
     public String getOrderId() {
@@ -109,5 +109,13 @@ public class ReservationDTO {
 
     public void setUseDate(String useDate) {
         this.useDate = useDate;
+    }
+
+    public int getReview() {
+        return review;
+    }
+
+    public void setReview(int review) {
+        this.review = review;
     }
 }

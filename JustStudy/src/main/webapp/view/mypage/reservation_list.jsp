@@ -112,6 +112,14 @@
         color: white;
     }
 
+    .mypage-reservlist-review-done{
+        height: 30px;
+        border-radius: 10px;
+        border: none;
+        background: gray;
+        color: white;
+    }
+
     .mypage-reservlist-cancle{
         height: 30px;
         border-radius: 10px;
@@ -176,6 +184,10 @@
         $(".mypage-reservlist-top-datepicker").change(function (){
             $("input[id=mypick]").attr('checked', true);
         })
+
+        $(".mypage-reservlist-review").click(function (){
+            location.href= "MypageReview"
+        })
     }
 </script>
 
@@ -222,25 +234,32 @@
                 </tr>
                 <%
                     ArrayList<ReservationDTO> myReservation = (ArrayList<ReservationDTO>) request.getAttribute("myReservation");
-                    for (ReservationDTO dto : myReservation) {
+                    for (ReservationDTO reservationDTO : myReservation) {
                 %>
-                <tr>
-                    <td><%=dto.getResDate()%></td>
-                    <td><%=dto.getBranch()%></td>
-                    <td><%=dto.getRoom()%></td>
-                    <td><%=dto.getUseDate()%></td>
-                    <td><%=dto.getTime().replaceAll(",", "</br>")%></td>
-                    <td><%=dto.getHeadcount()%></td>
-                    <td><%=dto.getPay()%></td>
-                    <td><%=dto.getStatus()%></td>
-                    <td>
-                        <%if(dto.getStatus().equals("이용완료")){%>
-                        <button class="mypage-reservlist-review">후기 작성</button>
-                        <%} else if(dto.getStatus().equals("이용전")){%>
-                        <button class="mypage-reservlist-cancle">예약 취소</button>
-                        <%}%>
-                    </td>
-                </tr>
+                <form action="MypageReview">
+                    <tr>
+                        <input type="hidden" name="reservId" value="<%=reservationDTO.getId()%>"/>
+                        <td><%=reservationDTO.getResDate()%></td>
+                        <td><%=reservationDTO.getBranch()%></td>
+                        <td><%=reservationDTO.getRoom()%></td>
+                        <td><%=reservationDTO.getUseDate()%></td>
+                        <td><%=reservationDTO.getTime().replaceAll(",", "</br>")%></td>
+                        <td><%=reservationDTO.getHeadcount()%></td>
+                        <td><%=reservationDTO.getPay()%></td>
+                        <td><%=reservationDTO.getStatus()%></td>
+                        <td>
+                            <%if(reservationDTO.getStatus().equals("이용완료")){
+                                if(reservationDTO.getReview() == 0){%>
+                                    <button type=submit class="mypage-reservlist-review">후기 작성</button>
+                              <%}else if(reservationDTO.getReview() == 1){%>
+                                    <button class="mypage-reservlist-review-done" disabled>후기 완료</button>
+                              <%}
+                            } else if(reservationDTO.getStatus().equals("이용전")){%>
+                            <button class="mypage-reservlist-cancle">예약 취소</button>
+                            <%}%>
+                        </td>
+                    </tr>
+                </form>
                 <%}%>
             </table>
         </div>

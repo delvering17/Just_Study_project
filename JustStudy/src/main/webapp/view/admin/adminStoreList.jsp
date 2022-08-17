@@ -17,7 +17,7 @@
         height: fit-content;
     }
 
-    #headline {
+    .admin-store-list-headline {
         width: 1330px;
         height: 40px;
         background: #fff;
@@ -30,18 +30,18 @@
         flex-direction: row;
     }
 
-    #headline > b {
+    .admin-store-list-headline > b {
         width: 100px;
         font-size: 20px;
     }
 
-    #headline > input {
+    .admin-store-list-headline > input {
         float: right;
         margin: 0px 10px 50px 0px;
 
     }
 
-    #main {
+    .admin-store-list-main {
         width: 2000px;
         height: fit-content;
         margin: 0px 0px 0px 220px;
@@ -108,12 +108,12 @@
 </script>
 <div class="admin-store-list-bg">
 
-    <div id="headline">
+    <div class="admin-store-list-headline">
         <b>지점관리</b>
         <input type="button" class="admin-store-insert" value="지점추가">
     </div>
 
-    <div id="main">
+    <div class="admin-store-list-main">
 
         <div>
             <input type="text">

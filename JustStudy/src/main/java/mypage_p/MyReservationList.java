@@ -18,7 +18,7 @@ public class MyReservationList implements MypageService{
         HttpSession session = request.getSession();
         MemberDTO memberDTO = new MemberDAO().detail((Integer) session.getAttribute("login"));
 
-        ArrayList<ReservationDTO> myReservation = new ReservationDAO().myReservationList(memberDTO.getMem_userid());
+        ArrayList<ReservationDTO> myReservation = new ReservationDAO().myReservationList(memberDTO.getMem_id());
 
         request.setAttribute("myReservation", myReservation);
         request.setAttribute("memberDTO", memberDTO);

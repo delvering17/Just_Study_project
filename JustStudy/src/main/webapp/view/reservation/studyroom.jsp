@@ -869,7 +869,7 @@
         if(request.getAttribute("memberDTO")!=null){
             MemberDTO memberDTO = (MemberDTO) request.getAttribute("memberDTO");
     %>
-        <input name="userId" value="<%=memberDTO.getMem_userid()%>">
+        <input name="userId" value="<%=memberDTO.getMem_id()%>">
         <input name="userName" value="<%=memberDTO.getMem_realname()%>">
         <input name="userPhone" value="<%=memberDTO.getMem_phone()%>">
     <%}%>

@@ -185,8 +185,9 @@
         <h2>답변</h2>
         <c:choose>
             <c:when test="${inquiryDTO.inquiry_state == 2}">
-                <form action="aaaa" method="get">
+                <form action="" method="get">
                     <input type="hidden" name="input_purpose" value="${inquiryDTO.inquiry_id}"/>
+                    <input type="hidden" name="input_id" value="${answerDTO.inquiry_id}"/>
                     <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
                         <tr>
                             <th>답변 일자</th>
@@ -206,7 +207,8 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <button type="submit">수정</button><button type="submit" formaction="" formmethod="get">삭제</button>
+                                <button type="submit" formaction="AdminInquiryModify" formmethod="get">수정</button>
+                                <button type="submit" formaction="" formmethod="get">삭제</button>
                             </td>
                         </tr>
                         <tr></tr>

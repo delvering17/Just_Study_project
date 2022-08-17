@@ -41,7 +41,7 @@ public class AdminInquiryInsert implements AdminService{
 
         request.setAttribute("adminUrl","adminInquiryDetailAlert.jsp");
 
-        request.setAttribute("goUrl","AdminInquiryList?inquiry_id"+input_purpose);
+        request.setAttribute("goUrl","AdminInquiryDetail?inquiry_id="+input_purpose);
 
     }
 }

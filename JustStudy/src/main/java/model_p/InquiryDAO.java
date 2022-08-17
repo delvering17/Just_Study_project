@@ -271,6 +271,26 @@ public class InquiryDAO {
         }
     }
 
+    public void answerModify(InquiryDTO inquiryDTO) {
+        sql = "update inquiry set inquiry_title = ?,inquiry_content = ?,inquiry_writer = ?,inquiry_date = sysdate() where inquiry_id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, inquiryDTO.getInquiry_title());
+            ptmt.setString(2, inquiryDTO.getInquiry_content());
+            ptmt.setInt(3, inquiryDTO.getInquiry_writer());
+            ptmt.setInt(4,inquiryDTO.getInquiry_id());
+
+            ptmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+
+
+    }
 
     public void close() {
         if(rs!=null) try { rs.close(); } catch (SQLException e) {}

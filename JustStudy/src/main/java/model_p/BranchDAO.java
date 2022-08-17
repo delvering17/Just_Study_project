@@ -61,6 +61,28 @@ public class BranchDAO {
         return res;
     }
 
+    public ArrayList<String> branchNameList() {
+        ArrayList<String> res = new ArrayList<>();
+
+        sql = "select name from branch";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            rs = ptmt.executeQuery();
+
+            while(rs.next()) {
+                res.add(rs.getString("name"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return res;
+    }
+
     public BranchDTO branchDetail(String name) {
         BranchDTO branchDTO = new BranchDTO();
 

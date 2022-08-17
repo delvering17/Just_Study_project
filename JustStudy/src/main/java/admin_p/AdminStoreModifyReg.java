@@ -15,9 +15,10 @@ public class AdminStoreModifyReg implements AdminService{
 
         ArrayList<String> roomType = new ArrayList<String>();
 
-        for(int i = 0; i < request.getParameterValues("roomType").length; i++){
-            if(request.getParameterValues("roomType")[i]!="") {
-                roomType.add("룸" + (i + 1) + ") " + request.getParameterValues("roomType")[i]);
+        int roomCnt = 0;
+        for(String roomNum : request.getParameterValues("roomNum")){
+            for(int i = 0; i < Integer.parseInt(roomNum); i ++){
+
             }
         }
 

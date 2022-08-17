@@ -168,22 +168,26 @@
 <script>
   window.onload = function () {
 
-    $("select[name=roomTypeSelect]").change(function () {
-
-      $("input[name=roomType]").eq($(this).index("select[name=roomTypeSelect]")).val($(this).children("option:selected").attr("name"))
+    $("input[name=roomType]").change(function () {
+      $(this).parent().children("input[name=roomNum]").attr("disabled", !$(this).parent().children("input[name=roomNum]").attr("disabled"))
+      $(this).parent().children("input[type=button]").attr("disabled", !$(this).parent().children("input[type=button]").attr("disabled"))
     })
 
-    $("select[name=facilitiesSelect]").change(function () {
-      if ($(this).val() == "X") {
-        $("input[class=facilities]").eq($(this).index("select[name=facilitiesSelect]")).attr("name", "facilitiesX")
-      } else {
-        $("input[class=facilities]").eq($(this).index("select[name=facilitiesSelect]")).attr("name", "facilitiesO")
+    $("input[name=roomMinus]").click(function () {
+      if($(this).parent().children("input[name=roomNum]").val() > 0){
+        $(this).parent().children("input[name=roomNum]").val($(this).parent().children("input[name=roomNum]").val()-1)
       }
     })
 
-    $(".admin-store-save").click(function (){
+    $("input[name=roomPlus]").click(function () {
+      $(this).parent().children("input[name=roomNum]").val(parseInt($(this).parent().children("input[name=roomNum]").val())+1)
+    })
+
+    $(".admin-store-save").click(function () {
       $("form").submit()
     })
+
+
   }
 
 </script>
@@ -234,9 +238,9 @@
           <div>
             <input type="checkbox" name="roomType" value="<%=room%>>"/>
             <div><%=room%></div>
-            <input type="button" name="roomMinus" value="-"/>
-            <input type="text" name="roomNum" value="0" readonly>
-            <input type="button" name="roomPlus" value="+"/>
+            <input type="button" name="roomMinus" value="-" disabled/>
+            <input type="text" name="roomNum" value="0" disabled readonly>
+            <input type="button" name="roomPlus" value="+" disabled/>
           </div>
 
           <%}%>

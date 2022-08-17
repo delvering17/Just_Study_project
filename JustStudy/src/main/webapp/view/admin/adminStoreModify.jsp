@@ -141,29 +141,34 @@
 
 </style>
 
-<script type="text/javascript">
-    window.onload = function () {
-        $(".admin-store-list").click(function () {
-            location.href = "AdminStoreList"
-        })
-
-        $(".admin-store-modify").click(function () {
-            location.href = "AdminStoreModify?branchName=<%=request.getParameter("branchName")%>"
-        })
-    }
-</script>
-
-
 <%
     BranchDTO branchDTO = (BranchDTO) request.getAttribute("branchDTO");
 %>
 
 <script>
     window.onload = function () {
+        $("input[name=roomType]").change(function (){
+            $(this).parent().children("input[name=roomNum]").attr("disabled", !$(this).parent().children("input[name=roomNum]").attr("disabled"));
+            $(this).parent().children("input[type=button]").attr("disabled", !$(this).parent().children("input[type=button]").attr("disabled"))
 
-        $("select[name=roomTypeSelect]").change(function () {
+        })
 
-            $("input[name=roomType]").eq($(this).index("select[name=roomTypeSelect]")).val($(this).children("option:selected").attr("name"))
+        $("input[name=roomMinus]").click(function () {
+            if($(this).parent().children("input[name=roomNum]").val() > 0){
+                $(this).parent().children("input[name=roomNum]").val($(this).parent().children("input[name=roomNum]").val()-1)
+            }
+        })
+
+        $("input[name=roomPlus]").click(function () {
+            $(this).parent().children("input[name=roomNum]").val(parseInt($(this).parent().children("input[name=roomNum]").val())+1)
+        })
+
+        $(".admin-store-list").click(function () {
+            location.href = "AdminStoreList"
+        })
+
+        $(".admin-store-modify").click(function () {
+            location.href = "AdminStoreModify?branchName=<%=request.getParameter("branchName")%>"
         })
     }
 
@@ -199,7 +204,7 @@
                             <input type="checkbox" name="roomType" value="<%=room%>>"/>
                         <%}%>
                         <div><%=room%></div>
-                        <input type="button" name="roomMinus" value="-"/>
+                        <input type="button" name="roomMinus" value="-" disabled/>
                         <%
                             int cnt = 0;
                             if(!branchDTO.getRooms().equals("")) {
@@ -210,8 +215,8 @@
                                 }
                             }
                         %>
-                        <input type="text" name="roomNum" value="<%=cnt%>" readonly>
-                        <input type="button" name="roomPlus" value="+"/>
+                        <input type="text" name="roomNum" value="<%=cnt%>" disabled readonly>
+                        <input type="button" name="roomPlus" value="+" disabled/>
                     </div>
 
                     <%}%>

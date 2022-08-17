@@ -119,7 +119,7 @@
             <input class="top-datepicker" id="datepicker-before" max="" type="date">
             <p id="inquiry-date-wave">&#126;</p>
             <input class="top-datepicker" id="datepicker-after" type="date">
-                <button class="btn-inquiry" id="submit-find" onclick="goFind()">조회</button>
+                <button class="btn-inquiry" onclick="goFind()">조회</button>
         </div>
     <hr/>
     <div class="inquiry-main">
@@ -166,6 +166,8 @@
         <c:if test="${endPage < totalPage}">
             <a type="submit" class="inquiry-bottom-button" onclick="goPageFind(${endPage + 1})" >다음</a>
         </c:if>
+        <button class="btn-inquiry" id="submit-find" onclick="goInquiryInsert()">문의하기</button>
+
     </div>
 
     <hr/>
@@ -317,6 +319,10 @@
             let datepicker_after = document.querySelector('#datepicker-after');
             datepicker_after.value = '${date_after}';
         </c:if>
+    }
+
+    function goInquiryInsert() {
+        location.href = "MypageInquiryInsertForm";
     }
 
 

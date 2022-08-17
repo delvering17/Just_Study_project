@@ -241,8 +241,8 @@
                             <li><a href="notice_News.jsp">뉴스</a></li>
                         </ul>
                         <ul class="gnb-sub-list">
-                            <li><a href="?">1:1상담</a></li>
-                            <li><a href="?">성FAQ</a></li>
+                            <li><a href="../mypage/MypageInquiryInsertForm">1:1 문의</a></li>
+                            <li><a href="?">FAQ</a></li>
                         </ul>
                         <ul class="gnb-sub-list">
                                 <li><a href="../member/MemberLoginForm" >로그인</a></li>

@@ -3,10 +3,7 @@ package model_p;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class BranchDAO {
@@ -96,6 +93,28 @@ public class BranchDAO {
 
 
         return  branchDTO;
+    }
+
+    public ArrayList<String> branchNameList() {
+        ArrayList<String> res = new ArrayList<>();
+
+        sql = "select name from branch";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            rs = ptmt.executeQuery();
+
+            while(rs.next()) {
+                res.add(rs.getString("name"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return res;
     }
 
 

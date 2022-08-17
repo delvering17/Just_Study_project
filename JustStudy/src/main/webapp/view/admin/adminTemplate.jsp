@@ -211,9 +211,9 @@
             </ul>
             <ul>
                 <li>지점관리</li>
-                <li><a href="AdminStoreList">지점목록</a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
+                <li><a href="AdminStoreList">지점 목록</a></li>
+                <li><a href="">휴일 관리</a></li>
+                <li><a href="">이용 후기</a></li>
             </ul>
             <ul>
                 <li>매출관리</li>

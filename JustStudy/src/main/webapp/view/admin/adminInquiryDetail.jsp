@@ -208,7 +208,7 @@
                         <tr>
                             <td colspan="2">
                                 <button type="submit" formaction="AdminInquiryModify" formmethod="get">수정</button>
-                                <button type="submit" formaction="" formmethod="get">삭제</button>
+                                <button type="submit" formaction="AdminInquiryDelete" formmethod="get">삭제</button>
                             </td>
                         </tr>
                         <tr></tr>
@@ -242,7 +242,7 @@
             </c:otherwise>
 
         </c:choose>
-
+                    <a href="AdminInquiryList">목록으로</a>
     </div>
 </div>
 

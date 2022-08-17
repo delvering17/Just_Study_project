@@ -289,6 +289,36 @@ public class InquiryDAO {
             close();
         }
 
+    }
+
+    public void answerDelete(int answer_id, int inquiry_purpose) {
+        sql = "delete from inquiry where inquiry_id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, answer_id);
+            ptmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        sql = "update inquiry set inquiry_state = 1 where inquiry_id = ?";
+
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, inquiry_purpose);
+            ptmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+
 
     }
 

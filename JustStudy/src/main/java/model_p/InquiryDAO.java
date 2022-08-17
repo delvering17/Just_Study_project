@@ -322,6 +322,42 @@ public class InquiryDAO {
 
     }
 
+    public int userInsert(InquiryDTO inquiryDTO) {
+        int res = 0;
+        sql = "select max(inquiry_id) from inquiry";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            rs = ptmt.executeQuery();
+            if(rs.next()) {
+                res = rs.getInt(1)+1;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        sql = "insert into inquiry (inquiry_title,inquiry_content,inquiry_writer,inquiry_category,inquiry_type,inquiry_branch, inquiry_date,inquiry_state, inquiry_level) " +
+                "values (?,?,?,?,?,?,sysdate(),1, 1)";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, inquiryDTO.inquiry_title);
+            ptmt.setString(2, inquiryDTO.inquiry_content);
+            ptmt.setInt(3, inquiryDTO.inquiry_writer);
+            ptmt.setString(4, inquiryDTO.inquiry_category);
+            ptmt.setString(5, inquiryDTO.inquiry_type);
+            ptmt.setString(6, inquiryDTO.inquiry_branch);
+
+            ptmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+        return res;
+    }
+
     public void close() {
         if(rs!=null) try { rs.close(); } catch (SQLException e) {}
         if(ptmt!=null) try { ptmt.close(); } catch (SQLException e) {}

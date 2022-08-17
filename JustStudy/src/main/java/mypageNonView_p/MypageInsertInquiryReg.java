@@ -1,5 +1,7 @@
 package mypageNonView_p;
 
+import model_p.InquiryDAO;
+import model_p.InquiryDTO;
 import model_p.MemberDAO;
 import model_p.MemberDTO;
 import org.json.simple.JSONObject;
@@ -16,7 +18,8 @@ public class MypageInsertInquiryReg implements MypageNonViewService{
 
         HttpSession session = request.getSession();
         int mem_id = (int) session.getAttribute("login");
-        String input_writer = request.getParameter("input_writer");
+
+        int input_writer = Integer.parseInt(request.getParameter("input_writer"));
         String input_title = request.getParameter("input_title");
         String input_content = request.getParameter("input_content");
         String input_category = request.getParameter("input_category");
@@ -30,9 +33,15 @@ public class MypageInsertInquiryReg implements MypageNonViewService{
 
 
         // 결과
+        InquiryDTO inquiryDTO = new InquiryDTO();
+        inquiryDTO.setInquiry_title(input_title);
+        inquiryDTO.setInquiry_content(input_content);
+        inquiryDTO.setInquiry_writer(input_writer);
+        inquiryDTO.setInquiry_category(input_category);
+        inquiryDTO.setInquiry_type(input_type);
+        inquiryDTO.setInquiry_branch(input_branch);
 
-
-
+        int inquiry_id = new InquiryDAO().userInsert(inquiryDTO);
 
         JSONObject jj = new JSONObject();
 
@@ -40,6 +49,7 @@ public class MypageInsertInquiryReg implements MypageNonViewService{
 
 
             jj.put("insertResult","success");
+            jj.put("inquiry_id",inquiry_id);
             response.getWriter().append(jj.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();

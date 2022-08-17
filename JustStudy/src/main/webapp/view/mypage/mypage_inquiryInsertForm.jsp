@@ -132,7 +132,7 @@
             </li>
             <li class="inquiry-insert-form-items">
                 <p>문의 내용</p>
-                <textarea name="input_content" id="" cols="30" rows="10"></textarea>
+                <textarea id="input-content" name="input_content" id="" cols="30" rows="10"></textarea>
             </li>
             <li class="inquiry-insert-form-items">
                 <p></p>
@@ -163,7 +163,7 @@
             dataType:'JSON',
             success:function(response){
                 alert(response.insertResult)
-                <%--location.href = "/mypage/MypageInformationModifyForm"--%>
+                location.href = "MypageInquiryDetail?inquiry_id=" + response.inquiry_id + "&nowPage=1&date_period=today" ;
                 <%--if(response.insertResult === 'success') {--%>
                 <%--    alert(msg)--%>
                 <%--    location.href = '<c:url value="/board/MainPage"/>'--%>

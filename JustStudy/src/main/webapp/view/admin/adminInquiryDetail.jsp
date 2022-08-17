@@ -185,56 +185,64 @@
         <h2>답변</h2>
         <c:choose>
             <c:when test="${inquiryDTO.inquiry_state == 2}">
-                <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
-                    <tr>
-                        <th>답변 일자</th>
-                        <td><input type="text" name="input_date" value="${answerDTO.inquiry_date}"></td>
-                    </tr>
-                    <tr>
-                        <th>제목</th>
-                        <td><input type="text" name="input_title" value="${answerDTO.inquiry_title}"></td>
-                    </tr>
-                    <tr>
-                        <th>담당자</th>
-                        <td><input type="text" name="input_writer" value="${answerDTO.inquiry_writer}"></td>
-                    </tr>
-                    <tr>
-                        <th>답변 내용</th>
-                        <td><textarea name="input_content" cols="30" rows="10">${answerDTO.inquiry_content_String}</textarea></td>
-                    </tr>
-                </table>
+                <form action="aaaa" method="get">
+                    <input type="hidden" name="input_purpose" value="${inquiryDTO.inquiry_id}"/>
+                    <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+                        <tr>
+                            <th>답변 일자</th>
+                            <td><input type="text" name="input_date" id="input-date" value="${answerDTO.inquiry_date}"></td>
+                        </tr>
+                        <tr>
+                            <th>제목</th>
+                            <td><input type="text" name="input_title" id="input-title" value="${answerDTO.inquiry_title}"></td>
+                        </tr>
+                        <tr>
+                            <th>담당자</th>
+                            <td><input type="text" name="input_writer" id="input-writer" value="${answerDTO.inquiry_writer}"></td>
+                        </tr>
+                        <tr>
+                            <th>답변 내용</th>
+                            <td><textarea name="input_content" id="input-content" cols="30" rows="10">${answerDTO.inquiry_content}</textarea></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <button type="submit">수정</button><button type="submit" formaction="" formmethod="get">삭제</button>
+                            </td>
+                        </tr>
+                        <tr></tr>
+
+                    </table>
+
             </c:when>
             <c:otherwise>
-                <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
-                    <tr>
-                        <th>답변 일자</th>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <th>제목</th>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <th>담당자</th>
-                        <td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <th>답변 내용</th>
-                        <td><textarea name="input_content" cols="30" rows="10"></textarea></td>
-                    </tr>
-                </table>
+                <form action="AdminInquiryInsert" method="get">
+                    <input type="hidden" name="input_purpose" value="${inquiryDTO.inquiry_id}"/>
+                    <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+                        <tr>
+                            <th>제목</th>
+                            <td><input name="input_title"  type="text" ></td>
+                        </tr>
+                        <tr>
+                            <th>담당자</th>
+                            <td><input name="input_writer"  type="text"></td>
+                        </tr>
+                        <tr>
+                            <th>답변 내용</th>
+                            <td><textarea name="input_content" cols="30" rows="10"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                            <button type="submit">답변</button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
             </c:otherwise>
 
         </c:choose>
-        <c:choose>
-            <c:when test="${inquiryDTO.inquiry_state == 2}">
-                <button >수정</button>
-            </c:when>
-            <c:otherwise>
-                <button >답변</button>
-            </c:otherwise>
-        </c:choose>
-        <button>삭제</button>
 
     </div>
 </div>
+
+<script type="text/javascript">
+</script>

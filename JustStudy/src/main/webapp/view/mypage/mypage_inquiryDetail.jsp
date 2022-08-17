@@ -56,7 +56,7 @@
     <c:if test="${date_period != null}">
         <a href="MypageInquiryList?nowPage=${nowPage}&date_period=${date_period}">목록으로</a>
     </c:if>
-    <c:if test="${date_before != null}">
+    <c:if test="${date_before != null}">32
         <a href="MypageInquiryList?nowPage=${nowPage}&date_before=${date_before}&date_after=${date_after}">목록으로</a>
     </c:if>
 </div>

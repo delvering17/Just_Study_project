@@ -240,6 +240,37 @@ public class InquiryDAO {
         return inquiryDTO;
     }
 
+    public void answerInsert(InquiryDTO inquiryDTO) {
+        sql = "insert into inquiry (inquiry_title,inquiry_content,inquiry_writer,inquiry_date,inquiry_level, inquiry_purpose) " +
+                "values (?,?,?,sysdate(),2,?)";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, inquiryDTO.inquiry_title);
+            ptmt.setString(2, inquiryDTO.inquiry_content);
+            ptmt.setInt(3, inquiryDTO.inquiry_writer);
+            ptmt.setInt(4, inquiryDTO.inquiry_purpose);
+            ptmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        sql = "update inquiry set inquiry_state = 2 where inquiry_id = ?";
+
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, inquiryDTO.inquiry_purpose);
+            ptmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+    }
+
 
     public void close() {
         if(rs!=null) try { rs.close(); } catch (SQLException e) {}

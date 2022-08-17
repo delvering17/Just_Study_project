@@ -34,7 +34,7 @@
     <hr>
 
     <div>
-        ${inquiryDTO.inquiry_content}
+        ${inquiryDTO.inquiry_content_String}
     </div>
 
     <hr>
@@ -48,7 +48,7 @@
             <p>문의 일자</p>${answerDTO.inquiry_date_String}
         </div>
         <div>
-                ${answerDTO.inquiry_content}
+                ${answerDTO.inquiry_content_String}
         </div>
     </c:if>
 

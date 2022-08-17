@@ -181,48 +181,60 @@
                 <td>${inquiryDTO.inquiry_content_String}</td>
             </tr>
         </table>
-        <h2>답변</h2>
-        <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
-            <tr>
-                <th>문의 일자</th>
-                <td>${inquiryDTO.inquiry_date}</td>
-            </tr>
-            <tr>
-                <th>제목</th>
-                <td>${inquiryDTO.inquiry_title}</td>
-            </tr>
-            <tr>
-                <th>작성자</th>
-                <td>${inquiryDTO.inquiry_writer}</td>
-            </tr>
-            <tr>
-                <th>카테고리</th>
-                <td>${inquiryDTO.inquiry_category}</td>
-            </tr>
-            <tr>
-                <th>종류</th>
-                <td>${inquiryDTO.inquiry_type}</td>
-            </tr>
-            <tr>
-                <th>지점</th>
-                <td>${inquiryDTO.inquiry_branch}</td>
 
-            </tr>
-            <tr>
-                <th>답변 상태</th>
-                <c:choose>
-                    <c:when test="${inquiryDTO.inquiry_state == 1}">
-                        <td>미답변</td>
-                    </c:when>
-                    <c:otherwise>
-                        <td>답변</td>
-                    </c:otherwise>
-                </c:choose>
-            </tr>
-            <tr>
-                <th>답변 내용</th>
-                <td>${inquiryDTO.inquiry_content_String}</td>
-            </tr>
-        </table>
+        <h2>답변</h2>
+        <c:choose>
+            <c:when test="${inquiryDTO.inquiry_state == 2}">
+                <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+                    <tr>
+                        <th>답변 일자</th>
+                        <td><input type="text" name="input_date" value="${answerDTO.inquiry_date}"></td>
+                    </tr>
+                    <tr>
+                        <th>제목</th>
+                        <td><input type="text" name="input_title" value="${answerDTO.inquiry_title}"></td>
+                    </tr>
+                    <tr>
+                        <th>담당자</th>
+                        <td><input type="text" name="input_writer" value="${answerDTO.inquiry_writer}"></td>
+                    </tr>
+                    <tr>
+                        <th>답변 내용</th>
+                        <td><textarea name="input_content" cols="30" rows="10">${answerDTO.inquiry_content_String}</textarea></td>
+                    </tr>
+                </table>
+            </c:when>
+            <c:otherwise>
+                <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+                    <tr>
+                        <th>답변 일자</th>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <th>제목</th>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <th>담당자</th>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <th>답변 내용</th>
+                        <td><textarea name="input_content" cols="30" rows="10"></textarea></td>
+                    </tr>
+                </table>
+            </c:otherwise>
+
+        </c:choose>
+        <c:choose>
+            <c:when test="${inquiryDTO.inquiry_state == 2}">
+                <button >수정</button>
+            </c:when>
+            <c:otherwise>
+                <button >답변</button>
+            </c:otherwise>
+        </c:choose>
+        <button>삭제</button>
+
     </div>
 </div>

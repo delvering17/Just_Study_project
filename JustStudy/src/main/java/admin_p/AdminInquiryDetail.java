@@ -15,6 +15,15 @@ public class AdminInquiryDetail implements AdminService{
 
         InquiryDTO inquiryDTO = new InquiryDAO().inquiryDetail(inquiry_id);
 
+        if(inquiryDTO.getInquiry_state() == 2) {
+            InquiryDTO answerDTO = new InquiryDAO().answerDetail(inquiry_id);
+            request.setAttribute("answerDTO", answerDTO);
+        }
+
+
+
+
+
         request.setAttribute("inquiryDTO", inquiryDTO);
 
         request.setAttribute("adminUrl","adminInquiryDetail.jsp");

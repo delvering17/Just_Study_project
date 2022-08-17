@@ -6,6 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script>
+<%
+    if(request.getAttribute("msg") != null){%>
+        alert("<%=request.getAttribute("msg")%>")
+  <%}%>
+</script>
 
 <style type="text/css">
     #headline {
@@ -133,7 +139,7 @@
         display: inline-block;
     }
 
-    .admin-store-modify-table input[type=button] {
+    .admin-store-modify-table tr:nth-of-type(3) input[type=button] {
         width: 25px;
         height: 25px;
         clear: right;
@@ -172,6 +178,13 @@
             console.log("dsfad")
             $("form").submit()
         })
+
+        $(".imgDelete").click(function (){
+            if(confirm("정말 삭제하시겠습니까?")){
+                $(".admin-store-modify-form").attr("action", "AdminStoreImgDelete")
+                $(".admin-store-modify-form").submit()
+            }
+        })
     }
 
 </script>
@@ -184,7 +197,7 @@
 
 
 <div id="main">
-    <form action="AdminStoreModifyReg" method="post">
+    <form action="AdminStoreModifyReg" method="post" enctype="multipart/form-data" class="admin-store-modify-form">
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-store-modify-table">
             <tr>
                 <th>지역</th>
@@ -257,7 +270,16 @@
             </tr>
             <tr>
                 <th>매장 사진</th>
-                <td><input type="file" name="img"></td>
+                <%if (!branchDTO.getImg().equals("")) {%>
+                        <td>
+                            <%=branchDTO.getImg()%>
+                            <input type="button" value="파일 삭제" class="imgDelete"/>
+                            <ipnut type="hidden" name="img" value="<%=branchDTO.getImg()%>"/>
+                        </td>
+                <%} else{%>
+                    <td><input type="file" name="img"></td>
+                 <%}%>
+
             </tr>
             <tr>
                 <th>편의 시설</th>

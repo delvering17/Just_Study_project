@@ -14,8 +14,10 @@ public class AdminStoreInsertReg implements AdminService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-        String path = "C:\\Users\\dieun\\jieun\\coding\\GItHub\\Just_Study_project\\JustStudy\\src\\main\\webapp\\img\\branch";
-        //TODO 배포할땐 path 바꿔줘야한다
+        String path = request.getRealPath("/img/branch");
+        path = "C:\\Users\\dieun\\jieun\\coding\\GItHub\\Just_Study_project\\JustStudy\\src\\main\\webapp" +
+                "\\img\\branch";
+        //todo : 배포할땐 뒤에꺼 주석처리
 
         int size = 1024 * 1024 * 10;
 

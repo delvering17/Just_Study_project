@@ -133,7 +133,7 @@ public class BranchDAO {
 
     public int modify(String cityName, String branchName, BranchDTO dto){
         sql = "update branch set rooms = ?, price = ?, open = ?, close = ?, facilities = ?, address = ?, phone = ?, img = ?" +
-                "where city = ? and name = ?";
+                " where city = ? and name = ?";
 
         try {
             ptmt = con.prepareStatement(sql);
@@ -203,6 +203,24 @@ public class BranchDAO {
         } finally {
             close();
         }
+        return 0;
+    }
+
+    public int imgDelete(BranchDTO branchDTO){
+
+        sql = "update branch set img = ? where name = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, "");
+            ptmt.setString(2, branchDTO.getName());
+
+            return ptmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return 0;
     }
 

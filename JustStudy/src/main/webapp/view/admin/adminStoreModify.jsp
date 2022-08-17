@@ -56,13 +56,14 @@
     .admin-store-modify-table tr:nth-of-type(4),
     .admin-store-modify-table tr:nth-of-type(5),
     .admin-store-modify-table tr:nth-of-type(6),
-    .admin-store-modify-table tr:nth-of-type(7) {
-        height: 7%;
+    .admin-store-modify-table tr:nth-of-type(7),
+    .admin-store-modify-table tr:nth-of-type(8) {
+        height: 8%;
     }
 
     .admin-store-modify-table tr:nth-of-type(3),
-    .admin-store-modify-table tr:nth-of-type(8) {
-        height: 29%;
+    .admin-store-modify-table tr:nth-of-type(9) {
+        height: 22%;
     }
 
     .admin-store-modify-table th {
@@ -105,32 +106,37 @@
         float: left;
     }
 
-    .admin-store-modify-table div {
-        width: fit-content;
-        height: fit-content;
+    .admin-store-modify-table tr:nth-of-type(3) > td > div {
+        height: 25px;
+        line-height: 25px;
+        margin-bottom: 10px;
+    }
+
+    .admin-store-modify-table tr:nth-of-type(3) > td > div > div {
+        width: 100px;
+        height: 25px;
+        line-height: 25px;
         display: inline-block;
     }
 
-    select[name=roomTypeSelect] {
-        width: 80px;
+    .admin-store-modify-table tr:nth-of-type(3) > td > div > input[type=text] {
+        width: 20px;
         height: 25px;
-        margin: 0px 10px 5px 10px;
+        line-height: 25px;
+        display: inline-block;
     }
 
-    select[name=facilitiesSelect] {
-        width: 60px;
+    .admin-store-modify-table tr:last-of-type div {
+        width: 100px;
         height: 25px;
-        margin: 0px 10px 5px 10px;
+        line-height: 25px;
+        display: inline-block;
     }
 
     .admin-store-modify-table input[type=button] {
         width: 25px;
         height: 25px;
         clear: right;
-    }
-
-    .admin-store-modify-room-plus {
-        display: block;
     }
 
 </style>
@@ -159,18 +165,6 @@
 
             $("input[name=roomType]").eq($(this).index("select[name=roomTypeSelect]")).val($(this).children("option:selected").attr("name"))
         })
-
-        $("select[name=facilitiesSelect]").change(function () {
-            if ($(this).val() == "X") {
-                $("input[class=facilities]").eq($(this).index("select[name=facilitiesSelect]")).attr("name", "facilitiesX")
-            } else {
-                $("input[class=facilities]").eq($(this).index("select[name=facilitiesSelect]")).attr("name", "facilitiesO")
-            }
-        })
-
-        $(".admin-store-save").click(function (){
-            $("form").submit()
-        })
     }
 
 </script>
@@ -196,22 +190,32 @@
             <tr>
                 <th>룸타입</th>
                 <td>
-                    <%for (int i = 0; i < branchDTO.getRooms().split(",").length; i++) {%>
+                    <%
+                        for (String room : "4인실,6인실,8인실,대회의실".split(",")) { %>
                     <div>
-                        <p>룸<%=i + 1%>) <input type="text" name="roomType"
-                                               value="<%=!branchDTO.getRooms().equals("") ? branchDTO.getRooms().split(",")[i].split(" ")[1] : ""%>" readonly>
-                        </p>
-                        <select name="roomTypeSelect">
-                            <option name="<%=!branchDTO.getRooms().equals("") ? branchDTO.getRooms().split(",")[i].split(" ")[1] : ""%>">변경안함</option>
-                            <option name="4인실">4인실</option>
-                            <option name="6인실">6인실</option>
-                            <option name="8인실">8인실</option>
-                            <option name="대회의실">대회의실</option>
-                        </select>
-                        <input type="button" class="admin-store-modify-room-minus" value="-"/>
+                        <%if(branchDTO.getRooms().contains(room)){%>
+                            <input type="checkbox" name="roomType" value="<%=room%>>" checked/>
+                    <%} else{%>
+                            <input type="checkbox" name="roomType" value="<%=room%>>"/>
+                        <%}%>
+                        <div><%=room%></div>
+                        <input type="button" name="roomMinus" value="-"/>
+                        <%
+                            int cnt = 0;
+                            if(!branchDTO.getRooms().equals("")) {
+                                for (String dtoRoom : branchDTO.getRooms().split(",")) {
+                                    if (room.equals(dtoRoom.split(" ")[1])) {
+                                        cnt++;
+                                    }
+                                }
+                            }
+                        %>
+                        <input type="text" name="roomNum" value="<%=cnt%>" readonly>
+                        <input type="button" name="roomPlus" value="+"/>
                     </div>
+
                     <%}%>
-                    <input type="button" class="admin-store-modify-room-plus" value="+"/>
+
                 </td>
             </tr>
             <tr>
@@ -238,21 +242,17 @@
                            value="<%=branchDTO.getPhone() != null ? branchDTO.getPhone() : ""%>"/></td>
             </tr>
             <tr>
+                <th>매장 사진</th>
+                <td><input type="file" name="img"></td>
+            </tr>
+            <tr>
                 <th>편의 시설</th>
                 <td>
                     <%for (String facility : "정수기,휴게실,흡연실,프린터,빔프로젝터,컴퓨터,주차,와이파이".split(",")) {%>
                     <%if (branchDTO.getFacilities().contains(facility)) {%>
-                    <input type="text" name="facilitiesO" class="facilities" value="<%=facility%>" readonly>
-                    <select name="facilitiesSelect">
-                        <option name="O" selected>O</option>
-                        <option name="X">X</option>
-                    </select>
+                        <div><input type="checkbox" name="facilities" value="<%=facility%>" checked><%=facility%></div>
                     <%} else {%>
-                    <input type="text" name="facilitiesX" class="facilities" value="<%=facility%>" readonly>
-                    <select name="facilitiesSelect">
-                        <option name="O">O</option>
-                        <option name="X" selected>X</option>
-                    </select>
+                        <div><input type="checkbox" name="facilities" value="<%=facility%>"><%=facility%></div>
                     <%}%>
                     <%}%>
                 </td>

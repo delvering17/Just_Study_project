@@ -56,13 +56,14 @@
   .admin-store-insert-table tr:nth-of-type(4),
   .admin-store-insert-table tr:nth-of-type(5),
   .admin-store-insert-table tr:nth-of-type(6),
-  .admin-store-insert-table tr:nth-of-type(7) {
-    height: 7%;
+  .admin-store-insert-table tr:nth-of-type(7),
+  .admin-store-insert-table tr:nth-of-type(8) {
+    height: 8%;
   }
 
   .admin-store-insert-table tr:nth-of-type(3),
-  .admin-store-insert-table tr:nth-of-type(8) {
-    height: 29%;
+  .admin-store-insert-table tr:nth-of-type(9) {
+    height: 22%;
   }
 
   .admin-store-insert-table th {
@@ -116,16 +117,24 @@
     height: 25px;
   }
 
-  select[name=roomTypeSelect] {
-    width: 80px;
+  .admin-store-insert-table tr:nth-of-type(3) > td > div {
     height: 25px;
-    margin: 0px 10px 5px 10px;
+    line-height: 25px;
+    margin-bottom: 10px;
   }
 
-  select[name=facilitiesSelect] {
-    width: 60px;
+  .admin-store-insert-table tr:nth-of-type(3) > td > div > div {
+    width: 100px;
     height: 25px;
-    margin: 0px 10px 5px 10px;
+    line-height: 25px;
+    display: inline-block;
+  }
+
+  .admin-store-insert-table tr:nth-of-type(3) > td > div > input[type=text] {
+    width: 20px;
+    height: 25px;
+    line-height: 25px;
+    display: inline-block;
   }
 
   .admin-store-insert-table input[type=button] {
@@ -134,8 +143,11 @@
     clear: right;
   }
 
-  .admin-store-insert-room-plus {
-    display: block;
+  .admin-store-insert-table tr:last-of-type div {
+    width: 100px;
+    height: 25px;
+    line-height: 25px;
+    display: inline-block;
   }
 
 </style>
@@ -217,20 +229,18 @@
       <tr>
         <th>룸타입</th>
         <td>
-          <%for (int i = 0; i < 3; i++) {%>
+          <%
+            for (String room : "4인실,6인실,8인실,대회의실".split(",")) { %>
           <div>
-            <p>룸<%=i + 1%>) <input type="text" name="roomType" value="4인실" readonly>
-            </p>
-            <select name="roomTypeSelect">
-              <option name="4인실">4인실</option>
-              <option name="6인실">6인실</option>
-              <option name="8인실">8인실</option>
-              <option name="대회의실">대회의실</option>
-            </select>
-            <input type="button" class="admin-store-insert-room-minus" value="-"/>
+            <input type="checkbox" name="roomType" value="<%=room%>>"/>
+            <div><%=room%></div>
+            <input type="button" name="roomMinus" value="-"/>
+            <input type="text" name="roomNum" value="0" readonly>
+            <input type="button" name="roomPlus" value="+"/>
           </div>
+
           <%}%>
-          <input type="button" class="admin-store-insert-room-plus" value="+"/>
+
         </td>
       </tr>
       <tr>
@@ -255,14 +265,14 @@
         <td><input type="text" name="phone"/></td>
       </tr>
       <tr>
+        <th>매장 사진</th>
+        <td><input type="file" name="img"></td>
+      </tr>
+      <tr>
         <th>편의 시설</th>
         <td>
           <%for (String facility : "정수기,휴게실,흡연실,프린터,빔프로젝터,컴퓨터,주차,와이파이".split(",")) {%>
-          <input type="text" name="facilitiesO" class="facilities" value="<%=facility%>" readonly>
-          <select name="facilitiesSelect">
-            <option name="O" selected>O</option>
-            <option name="X">X</option>
-          </select>
+          <div><input type="checkbox" name="facilities" value="<%=facility%>"><%=facility%></div>
           <%}%>
         </td>
       </tr>

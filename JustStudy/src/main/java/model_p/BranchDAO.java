@@ -119,6 +119,7 @@ public class BranchDAO {
                 branchDTO.setFacilities(rs.getString("facilities") != null ? rs.getString("facilities") : "");
                 branchDTO.setAddress(rs.getString("address") != null ? rs.getString("address") : "");
                 branchDTO.setPhone(rs.getString("phone") != null ? rs.getString("phone") : "");
+                branchDTO.setImg(rs.getString("img") != null ? rs.getString("img") : "");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -131,7 +132,7 @@ public class BranchDAO {
     }
 
     public int modify(String cityName, String branchName, BranchDTO dto){
-        sql = "update branch set rooms = ?, price = ?, open = ?, close = ?, facilities = ?, address = ?, phone = ? " +
+        sql = "update branch set rooms = ?, price = ?, open = ?, close = ?, facilities = ?, address = ?, phone = ?, img = ?" +
                 "where city = ? and name = ?";
 
         try {
@@ -143,8 +144,9 @@ public class BranchDAO {
             ptmt.setString(5, dto.getFacilities());
             ptmt.setString(6, dto.getAddress());
             ptmt.setString(7, dto.getPhone());
-            ptmt.setString(8, cityName);
-            ptmt.setString(9, branchName);
+            ptmt.setString(8, dto.getImg());
+            ptmt.setString(9, cityName);
+            ptmt.setString(10, branchName);
 
             return ptmt.executeUpdate();
         } catch (SQLException e) {
@@ -179,8 +181,8 @@ public class BranchDAO {
 
     public int insert(BranchDTO branchDTO){
 
-        sql = "insert into branch (city, name, rooms, price, open, close, facilities, address, phone) values " +
-                "(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        sql = "insert into branch (city, name, rooms, price, open, close, facilities, address, phone, img) values " +
+                "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             ptmt = con.prepareStatement(sql);
@@ -193,6 +195,7 @@ public class BranchDAO {
             ptmt.setString(7, branchDTO.getFacilities());
             ptmt.setString(8, branchDTO.getAddress());
             ptmt.setString(9, branchDTO.getPhone());
+            ptmt.setString(10, branchDTO.getImg());
 
             return ptmt.executeUpdate();
         } catch (SQLException e) {

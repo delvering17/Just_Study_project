@@ -233,7 +233,7 @@
                 </td>
             </tr>
             <tr>
-                <th>가격(1시간)</th>
+                <th>이용요금<br/>(1시간)</th>
                 <td><input type="text" name="price" value="<%=branchDTO.getPrice()%>"/>원</td>
             </tr>
             <tr>

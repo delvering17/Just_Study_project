@@ -187,7 +187,9 @@
       $("form").submit()
     })
 
-
+    $(".admin-store-list").click(function (){
+      location.href = "AdminStoreList"
+    })
   }
 
 </script>
@@ -200,7 +202,7 @@
 
 
 <div id="main">
-  <form action="AdminStoreInsertReg" method="post">
+  <form action="AdminStoreInsertReg" method="post" enctype="multipart/form-data">
     <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-store-insert-table">
       <tr>
         <th>지역</th>
@@ -248,7 +250,7 @@
         </td>
       </tr>
       <tr>
-        <th>가격(1시간)</th>
+        <th>이용요금<br/>(1시간)</th>
         <td><input type="text" name="price"/>원</td>
       </tr>
       <tr>

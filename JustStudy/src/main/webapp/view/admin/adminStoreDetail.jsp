@@ -124,7 +124,7 @@
       <td><%=branchDTO.getRooms().replaceAll(",", "</br>")%></td>
     </tr>
     <tr>
-      <th>가격(1시간)</th>
+      <th>이용요금<br/>(1시간)</th>
       <td><%=branchDTO.getPrice()%>원</td>
     </tr>
     <tr>

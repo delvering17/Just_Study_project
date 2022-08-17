@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<script>
-	alert("<%=request.getAttribute("msg")%>");
-	location.href="<%=request.getAttribute("goUrl")%>"
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<script type="text/javascript">
+    alert("${msg}")
+    location.href="${goUrl}"
 </script>

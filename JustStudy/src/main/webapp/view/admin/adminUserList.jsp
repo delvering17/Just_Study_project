@@ -12,50 +12,12 @@
 
     <script src="<c:url value="/jquery/"/>jquery-3.6.0.js"></script>
     <script src="<c:url value="/jquery/"/>jquery-ui.min.js"></script>
-    <script>
-        function selectAll(selectAll)  {
-            const checkboxes = document.querySelectorAll('input[name="user"]');
-
-            checkboxes.forEach((checkbox) => {
-                checkbox.checked = selectAll.checked
-            })
-        }
-    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         *{
             margin: 0;
             padding: 0;
         }
-
-        .wrapper{
-            width: 100%;
-            height: 100%;
-        }
-        header{
-            height: 50px;
-            display: flex;
-            position: fixed;
-
-        }
-
-        header > label:nth-of-type(1){
-            width: 50px;
-            background: rgba(2, 2, 114, 0.884);
-            color: #fff;
-            text-align: center;
-            padding-top: 13px;
-
-        }
-
-        header > label:nth-of-type(2){
-            width: 189px;
-            height: 37px;
-            background: rgba(16, 16, 170, 0.918);
-            text-align: center;
-            padding-top: 13px;
-        }
-
 
         #headline{
             width: 1330px;
@@ -212,14 +174,11 @@
         tr:nth-of-type(8) > th:first-of-type{
             width: 70px;
         }
-
     </style>
-<<<<<<< HEAD
+
     <meta charset="UTF-8">
     <title>usermanagement</title>
 
-=======
->>>>>>> origin/test
 
 <div class="wrapper">
 
@@ -250,7 +209,7 @@
 
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
             <tr>
-                <th rowspan="2"><input type="checkbox" name="user" onclick="selectAll(this)">회원번호</th>
+                <th rowspan="2">회원번호</th>
                 <th>아이디</th>
                 <th>이름</th>
                 <th rowspan="2">SMS로그인</th>
@@ -267,8 +226,8 @@
 
             <c:forEach items="${adminData}" var="i">
                 <tr>
-                    <form action="AdminUserDelete" method="get">
-                        <th rowspan="2"><input type="checkbox" name="user" value="${i.mem_id}">${i.mem_id}
+                    <form action="" method="">
+                        <th rowspan="2"><input type="hidden" name="user" value="${i.mem_id}">${i.mem_id}
                         </th>
                         <td>${i.mem_userid}</td>
 
@@ -280,8 +239,13 @@
                         <td rowspan="2">${i.mem_phone}</td>
                         <td rowspan="2">${i.mem_level}</td>
                         <td rowspan="2">
-                                <input type="submit" value="수정">
-                                <input type="submit" value="삭제">
+                            <button formaction="AdminUserModify" formmethod="get">수정
+
+                            </button>
+                            <button formaction="AdminUserDelete" formmethod="get">삭제
+
+                            </button>
+
                         </td>
                     </form>
                 </tr>
@@ -294,9 +258,7 @@
         </table>
     </div>
 </div>
-<<<<<<< HEAD
 
-=======
 <script type="text/javascript">
     function selectAll(selectAll)  {
         const checkboxes = document.querySelectorAll('input[name="user"]');
@@ -305,6 +267,7 @@
             checkbox.checked = selectAll.checked
         })
     }
+
 </script>
->>>>>>> origin/test
+
 

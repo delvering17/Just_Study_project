@@ -147,6 +147,7 @@
 
 <script>
     window.onload = function () {
+
         $("input[name=roomType]").change(function (){
             $(this).parent().children("input[name=roomNum]").attr("disabled", !$(this).parent().children("input[name=roomNum]").attr("disabled"));
             $(this).parent().children("input[type=button]").attr("disabled", !$(this).parent().children("input[type=button]").attr("disabled"))
@@ -167,8 +168,9 @@
             location.href = "AdminStoreList"
         })
 
-        $(".admin-store-modify").click(function () {
-            location.href = "AdminStoreModify?branchName=<%=request.getParameter("branchName")%>"
+        $(".admin-store-save").click(function () {
+            console.log("dsfad")
+            $("form").submit()
         })
     }
 
@@ -199,12 +201,10 @@
                         for (String room : "4인실,6인실,8인실,대회의실".split(",")) { %>
                     <div>
                         <%if(branchDTO.getRooms().contains(room)){%>
-                            <input type="checkbox" name="roomType" value="<%=room%>>" checked/>
+                            <input type="checkbox" name="roomType" value="<%=room%>" checked/>
                     <%} else{%>
-                            <input type="checkbox" name="roomType" value="<%=room%>>"/>
+                            <input type="checkbox" name="roomType" value="<%=room%>"/>
                         <%}%>
-                        <div><%=room%></div>
-                        <input type="button" name="roomMinus" value="-" disabled/>
                         <%
                             int cnt = 0;
                             if(!branchDTO.getRooms().equals("")) {
@@ -215,8 +215,17 @@
                                 }
                             }
                         %>
-                        <input type="text" name="roomNum" value="<%=cnt%>" disabled readonly>
-                        <input type="button" name="roomPlus" value="+" disabled/>
+                        <div><%=room%></div>
+                        <%if (branchDTO.getRooms().contains(room)) {%>
+                            <input type="button" name="roomMinus" value="-"/>
+                            <input type="text" name="roomNum" value="<%=cnt%>" readonly>
+                            <input type="button" name="roomPlus" value="+"/>
+                        <%} else {%>
+                            <input type="button" name="roomMinus" value="-" disabled/>
+                            <input type="text" name="roomNum" value="<%=cnt%>" disabled readonly>
+                            <input type="button" name="roomPlus" value="+" disabled/>
+                        <%}%>
+
                     </div>
 
                     <%}%>

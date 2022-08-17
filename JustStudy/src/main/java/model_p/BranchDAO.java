@@ -143,7 +143,31 @@ public class BranchDAO {
         return res;
     }
 
+    public int insert(BranchDTO branchDTO){
 
+        sql = "insert into branch (city, name, rooms, price, open, close, facilities, address, phone) values " +
+                "(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, branchDTO.getCity());
+            ptmt.setString(2, branchDTO.getName());
+            ptmt.setString(3, branchDTO.getRooms());
+            ptmt.setInt(4, branchDTO.getPrice());
+            ptmt.setInt(5, branchDTO.getOpen());
+            ptmt.setInt(6, branchDTO.getClose());
+            ptmt.setString(7, branchDTO.getFacilities());
+            ptmt.setString(8, branchDTO.getAddress());
+            ptmt.setString(9, branchDTO.getPhone());
+
+            return ptmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+        return 0;
+    }
 
     public void close() {
         if(rs!=null) try { rs.close(); } catch (SQLException e) {}

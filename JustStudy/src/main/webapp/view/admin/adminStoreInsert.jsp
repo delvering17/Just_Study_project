@@ -236,7 +236,7 @@
           <%
             for (String room : "4인실,6인실,8인실,대회의실".split(",")) { %>
           <div>
-            <input type="checkbox" name="roomType" value="<%=room%>>"/>
+            <input type="checkbox" name="roomType" value="<%=room%>"/>
             <div><%=room%></div>
             <input type="button" name="roomMinus" value="-" disabled/>
             <input type="text" name="roomNum" value="0" disabled readonly>

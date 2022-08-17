@@ -13,24 +13,29 @@ public class AdminStoreModifyReg implements AdminService{
 
         BranchDTO branchDTO = new BranchDTO();
 
-        ArrayList<String> roomType = new ArrayList<String>();
-
-        int roomCnt = 0;
-        for(String roomNum : request.getParameterValues("roomNum")){
-            for(int i = 0; i < Integer.parseInt(roomNum); i ++){
-
+        if(request.getParameterValues("roomType").length > 0){
+            ArrayList<String> roomType = new ArrayList<String>();
+            int roomCnt = 1;
+            for(int i = 0; i < request.getParameterValues("roomType").length; i++){
+                for(int k = 0; k < Integer.parseInt(request.getParameterValues("roomNum")[i]); k++){
+                    roomType.add("룸"+roomCnt+") "+request.getParameterValues("roomType")[i]);
+                    roomCnt++;
+                }
             }
+            branchDTO.setRooms(String.join(",", roomType));
+        }else{
+            branchDTO.setRooms("");
         }
 
-        branchDTO.setRooms(String.join(",", roomType));
+        System.out.println(branchDTO.toString());
+
         branchDTO.setPrice(Integer.parseInt(request.getParameter("price")));
         branchDTO.setOpen(Integer.parseInt(request.getParameter("open")));
         branchDTO.setClose(Integer.parseInt(request.getParameter("close")));
         branchDTO.setAddress(request.getParameter("address"));
         branchDTO.setPhone(request.getParameter("phone"));
-        branchDTO.setFacilities((request.getParameterValues("facilitiesO") != null ? String.join(",", request.getParameterValues("facilitiesO")) : null));
+        branchDTO.setFacilities((request.getParameterValues("facilities") != null ? String.join(",", request.getParameterValues("facilities")) : null));
 
-        System.out.println(branchDTO.toString());
 
         String msg = "수정 실패";
 

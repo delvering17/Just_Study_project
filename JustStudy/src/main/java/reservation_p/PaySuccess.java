@@ -27,7 +27,7 @@ public class PaySuccess implements ReservationService {
         for(int i = 0; i < city.length; i ++){
             ReservationDTO dto = new ReservationDTO();
             dto.setOrderId(request.getParameter("orderId"));
-            dto.setUserId(request.getParameter("userId"));
+            dto.setUserId(Integer.parseInt(request.getParameter("userId")));
             dto.setCity(city[i]);
             dto.setBranch(branch[i]);
             dto.setRoom(room[i]);
@@ -39,7 +39,8 @@ public class PaySuccess implements ReservationService {
             dto.setPay(Integer.parseInt(pay[i]));
 
             System.out.println(dto.toString());
-            new ReservationDAO().addReservation(dto);
+            int a = new ReservationDAO().addReservation(dto);
+            System.out.println(a);
         }
 
         request.setAttribute("mainUrl", "main/main.jsp");

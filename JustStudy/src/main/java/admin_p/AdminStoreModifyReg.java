@@ -16,7 +16,9 @@ public class AdminStoreModifyReg implements AdminService{
         ArrayList<String> roomType = new ArrayList<String>();
 
         for(int i = 0; i < request.getParameterValues("roomType").length; i++){
-            roomType.add("룸"+(i+1)+") "+request.getParameterValues("roomType")[i]);
+            if(request.getParameterValues("roomType")[i]!="") {
+                roomType.add("룸" + (i + 1) + ") " + request.getParameterValues("roomType")[i]);
+            }
         }
 
         branchDTO.setRooms(String.join(",", roomType));

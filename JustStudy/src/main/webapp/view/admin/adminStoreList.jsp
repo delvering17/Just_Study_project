@@ -98,6 +98,12 @@
     </div>
 
     <div id="main">
+
+        <div>
+            <input type="text">
+            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
             <tr>
                 <th>지역</th>

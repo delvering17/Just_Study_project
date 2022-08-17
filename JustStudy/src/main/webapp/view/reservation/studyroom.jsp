@@ -529,6 +529,7 @@
                     $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(1)>b").html($(".studyroom-reserv-time > div > .fa-angle-left + div").html())
                 } else{
                     alert("이전 일자는 예약할 수 없습니다.")
+
                 }
 
                 $.ajax({
@@ -671,6 +672,9 @@
             $(".studyroom-reserv-done>button").click(function (){
 
                 if($("input[name=userId]").length != 0){
+
+                    let btn = document.querySelector("#studyroom-reserv-done-btn");
+                    btn.setAttribute("data-bs-target", "#studyroom-reserv-receipt")
 
                     $(".studyroom-reserv-paylist").html("")
 
@@ -819,7 +823,7 @@
     </div>
 
     <div class="studyroom-reserv-done">
-        <button data-bs-toggle="modal" data-bs-target="#studyroom-reserv-receipt">총 0건 | 0원 결제하기</button>
+        <button id="studyroom-reserv-done-btn" data-bs-toggle="modal">총 0건 | 0원 결제하기</button>
     </div>
 
 </div>

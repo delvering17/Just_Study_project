@@ -48,89 +48,64 @@
         padding: 120px 20px 20px 40px;
     }
 
-    table {
+    .admin-store-list-table {
         width: 60%;
         border: 1px solid rgb(122, 115, 115);
         margin-top: 10px;
     }
 
-    th {
+    .admin-store-list-table th {
         border: 1px solid rgb(97, 88, 88);
         font-size: 13px;
     }
 
-
-    td {
+    .admin-store-list-table td {
         border: 1px solid rgb(97, 88, 88);
         text-align: center;
         font-size: 13px;
     }
 
-    tr:first-of-type{
+    .admin-store-list-table tr:first-of-type{
         height: 50px;
         padding: 10px;
         color: #fff;
         background: rgba(83, 104, 167, 0.856);
     }
 
-
-    tr:first-of-type > th:nth-of-type(2),
-    tr:first-of-type > th:nth-of-type(3),
-    tr:first-of-type > th:nth-of-type(4),
-    tr:first-of-type > th:nth-of-type(5),
-    tr:first-of-type > th:nth-of-type(7),
-    tr:first-of-type > th:nth-of-type(8) {
-        width: 140px;
-        background: rgba(83, 104, 167, 0.856);
-        color: #fff;
-    }
-
-    tr:first-of-type > th:nth-of-type(6) {
-        width: 250px;
-        background: rgba(83, 104, 167, 0.856);
-        color: #fff;
-    }
-
-        tr:first-of-type > th:first-of-type,
-        tr:first-of-type > th:nth-of-type(2){
-            width: 50px;
-            height: 50px;
-            padding: 10px;
-            color: #fff;
-            background: rgba(83, 104, 167, 0.856);
-        }
-
-    td {
+    .admin-store-list-table td {
         height: 30px;
         padding-top: 5px;
         padding-bottom: 5px;
     }
 
-        tr:first-of-type > th:nth-of-type(3),
-        tr:first-of-type > th:nth-of-type(4),
-        tr:first-of-type > th:nth-of-type(5),
-        tr:first-of-type > th:nth-of-type(6),
-        tr:first-of-type > th:nth-of-type(7),
-        tr:first-of-type > th:nth-of-type(8),
-        tr:first-of-type > th:nth-of-type(9),
-        tr:first-of-type > th:last-child{
-            width: 140px;
-            background: rgba(83, 104, 167, 0.856);
-            color: #fff;
-        }
+    .admin-store-list-table th:nth-of-type(1),
+    .admin-store-list-table th:nth-of-type(2),
+    .admin-store-list-table th:nth-of-type(3),
+    .admin-store-list-table th:nth-of-type(4),
+    .admin-store-list-table th:nth-of-type(5),
+    .admin-store-list-table th:nth-of-type(7),
+    .admin-store-list-table th:nth-of-type(8) {
+        width: 10%;
+    }
+
+    .admin-store-list-table th:nth-of-type(6) {
+        width: 30%;
+    }
 
 
 
-        tr:nth-of-type(2) > td{
-            height: 200px;
-        }
+    .branch:nth-of-type(2n) {
+        background: rgba(227, 233, 240, 0.726)
+    }
+</style>
 
-    </style>
-    <meta charset="UTF-8">
-    <title>storemanagement</title>
-</head>
-<body>
-
+<script type="text/javascript">
+    window.onload = function (){
+        $(".admin-store-insert").click(function (){
+            location.href = "AdminStoreInsert"
+        })
+    }
+</script>
 <div class="admin-store-list-bg">
 
     <div id="headline">
@@ -145,9 +120,8 @@
             <button><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
 
-        <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+        <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-store-list-table">
             <tr>
-
                 <th>지역</th>
                 <th>지점명</th>
                 <th>룸타입</th>
@@ -164,7 +138,6 @@
                 for (String city : branchMap.keySet()) {
                     if (branchMap.get(city) != 0) {%>
             <tr>
-
                 <td rowspan="<%=branchMap.get(city) +1%>"><%=city%>
                 </td>
             </tr>

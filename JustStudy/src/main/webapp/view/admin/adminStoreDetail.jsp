@@ -56,13 +56,14 @@
   .admin-store-detail-table tr:nth-of-type(4),
   .admin-store-detail-table tr:nth-of-type(5),
   .admin-store-detail-table tr:nth-of-type(6),
-  .admin-store-detail-table tr:nth-of-type(7){
-    height: 7%;
+  .admin-store-detail-table tr:nth-of-type(7),
+  .admin-store-detail-table tr:nth-of-type(8) {
+    height: 8%;
   }
 
   .admin-store-detail-table tr:nth-of-type(3),
-  .admin-store-detail-table tr:nth-of-type(8){
-    height: 29%;
+  .admin-store-detail-table tr:nth-of-type(9) {
+    height: 22%;
   }
 
   .admin-store-detail-table th{
@@ -120,7 +121,7 @@
     </tr>
     <tr>
       <th>룸타입</th>
-      <td><%=branchDTO.getRooms().replaceAll(",", "</br></br>")%></td>
+      <td><%=branchDTO.getRooms().replaceAll(",", "</br>")%></td>
     </tr>
     <tr>
       <th>가격(1시간)</th>
@@ -145,8 +146,12 @@
       <td><%=branchDTO.getPhone()%></td>
     </tr>
     <tr>
+      <th>매장 사진</th>
+      <td></td>
+    </tr>
+    <tr>
       <th>편의 시설</th>
-      <td><%=branchDTO.getFacilities().replaceAll(",", "</br></br>")%></td>
+      <td><%=branchDTO.getFacilities().replaceAll(",", "</br>")%></td>
     </tr>
   </table>
 </div>

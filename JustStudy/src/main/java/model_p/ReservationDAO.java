@@ -114,6 +114,7 @@ public class ReservationDAO {
                 dto.setPay(rs.getInt("pay"));
                 dto.setPaymentMethod(rs.getString("paymentMethod"));
                 dto.setStatus(rs.getString("status"));
+                dto.setReview(rs.getInt("review"));
 
                 res.add(dto);
             }

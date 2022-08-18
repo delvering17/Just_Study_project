@@ -212,7 +212,7 @@
             <ul>
                 <li>지점관리</li>
                 <li><a href="AdminStoreList">지점목록</a></li>
-                <li><a href="">이용후기</a></li>
+                <li><a href="AdminStoreReview">이용후기</a></li>
                 <li><a href=""></a></li>
             </ul>
             <ul>

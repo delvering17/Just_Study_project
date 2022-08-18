@@ -161,6 +161,7 @@
         #r3:checked~ .category > .categoryicon > div:nth-of-type(3),
         #r4:checked~ .category > .categoryicon > div:nth-of-type(4),
         #r5:checked~ .category > .categoryicon > div:nth-of-type(5){
+
             background: #fff;
         }
 

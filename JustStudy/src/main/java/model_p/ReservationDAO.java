@@ -152,6 +152,36 @@ public class ReservationDAO {
         return String.join(", ", arr);
     }
 
+    public ArrayList<ReservationDTO> storeSalesList() {
+        ArrayList<ReservationDTO> res = new ArrayList<>();
+
+        sql = "select * from reservation";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            rs = ptmt.executeQuery();
+
+            while (rs.next()) {
+                ReservationDTO reservationDTO = new ReservationDTO();
+                reservationDTO.setCity(rs.getString("city"));
+                reservationDTO.setBranch(rs.getString("branch"));
+                reservationDTO.setUseDate(rs.getString("useDate"));
+                reservationDTO.setPay(rs.getInt("pay"));
+
+                res.add(reservationDTO);
+            }
+
+        } catch (SQLException e) {
+
+        } finally {
+            close();
+        }
+
+        return res;
+    }
+
+
+
     public void close() {
         if(rs!=null) try { rs.close(); } catch (SQLException e) {}
         if(ptmt!=null) try { ptmt.close(); } catch (SQLException e) {}

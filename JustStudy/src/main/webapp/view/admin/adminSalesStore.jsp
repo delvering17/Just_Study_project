@@ -34,7 +34,7 @@
   }
 
   .admin-sales-store-main{
-    width: 2000px;
+    width: 1700px;
     height: fit-content;
     margin: 0px 0px 0px 220px;
     padding: 120px 20px 20px 40px;
@@ -92,8 +92,6 @@
           }
       <%}%>
     })
-
-
   }
 </script>
 
@@ -138,22 +136,29 @@
         <button type="submit" class="admin-sales-store-search"><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
     </div>
+      <div>총 매출:${total}</div>
 
     <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-sales-store-table">
       <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-
+        <th>지역</th>
+        <th>지점명</th>
+        <th>영업일</th>
+        <th>매출</th>
       </tr>
+      <form action="">
+        <c:forEach items="${salesList}" var="salesList">
+
+          <tr>
+            <td>${salesList.city}</td>
+            <td>${salesList.branch}</td>
+            <td>${salesList.useDate}</td>
+            <td>${salesList.pay}</td>
+          </tr>
+
+        </c:forEach>
+      </form>
+
+
 
     </table>
   </div>

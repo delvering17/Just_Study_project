@@ -54,7 +54,7 @@
       <tr>
         <td>
           <a href="MyReservationList">목록으로</a>
-          <a href="">삭제</a>
+          <a href="MypageReviewDelete?reservId=<%=reviewDTO.getReservId()%>">삭제</a>
         </td>
       </tr>
     </table>

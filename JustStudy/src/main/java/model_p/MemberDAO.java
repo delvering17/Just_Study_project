@@ -206,6 +206,7 @@ public class MemberDAO {
 
             ptmt =con.prepareStatement(sql);
             ptmt.setInt(1, mem_id);
+
             return ptmt.executeUpdate();
 
         } catch (Exception e) {

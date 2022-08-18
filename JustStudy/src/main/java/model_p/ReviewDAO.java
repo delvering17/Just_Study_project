@@ -175,6 +175,41 @@ public class ReviewDAO {
         return res;
     }
 
+    public int delete(int reservId){
+
+        try {
+            sql = "delete from review where reservId = ?";
+
+            ptmt =con.prepareStatement(sql);
+            ptmt.setInt(1, reservId);
+            return ptmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            close();
+        }
+
+        return 0;
+    }
+    public int changeReviewStatus(int reservId){
+
+        try {
+            sql = "update reservation set review = 0 where id = ?";
+
+            ptmt =con.prepareStatement(sql);
+            ptmt.setInt(1, reservId);
+
+            return ptmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            close();
+        }
+
+        return 0;
+    }
+
     public void close() {
         if(rs!=null) try { rs.close(); } catch (SQLException e) {}
         if(ptmt!=null) try { ptmt.close(); } catch (SQLException e) {}

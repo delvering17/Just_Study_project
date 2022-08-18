@@ -125,7 +125,6 @@
         line-height: 50px;
         border-radius: 10px;
         cursor: pointer;
-
     }
 
     .community-modify-btn{
@@ -138,6 +137,7 @@
         border-radius: 10px;
         cursor: pointer;
     }
+
 
     .community-delete-btn{
         width: 100px;

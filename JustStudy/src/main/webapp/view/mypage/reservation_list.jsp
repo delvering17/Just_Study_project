@@ -252,7 +252,7 @@
                                 if(reservationDTO.getReview() == 0){%>
                                     <button type=submit class="mypage-reservlist-review">후기 작성</button>
                               <%}else if(reservationDTO.getReview() == 1){%>
-                                    <button class="mypage-reservlist-review-done" disabled>후기 완료</button>
+                                    <button class="mypage-reservlist-review-done">후기 조회</button>
                               <%}
                             } else if(reservationDTO.getStatus().equals("이용전")){%>
                             <button class="mypage-reservlist-cancle">예약 취소</button>

@@ -31,9 +31,16 @@ public class ReviewDAO {
 
     public int insert(ReviewDTO reviewDTO){
 
-        sql = "insert into review (id, reservId, memId, content) values (?, ?, ?, ?)";
-
         try {
+            sql = "select max(id)+1 from review";
+
+            ptmt = con.prepareStatement(sql);
+            rs = ptmt.executeQuery();
+            rs.next();
+            reviewDTO.id = rs.getInt(1);
+
+            sql = "insert into review (id, reservId, memId, content) values (?, ?, ?, ?)";
+
             ptmt = con.prepareStatement(sql);
             ptmt.setInt(1, reviewDTO.getId());
             ptmt.setDouble(2, reviewDTO.getReservId());
@@ -48,6 +55,31 @@ public class ReviewDAO {
         }
 
         return 0;
+    }
+
+    public ReviewDTO detail(int id){
+
+        ReviewDTO reviewDTO = new ReviewDTO();
+
+        sql = "select * from review where id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, id);
+
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                reviewDTO.setId(rs.getInt("id"));
+                reviewDTO.setReservId(rs.getInt("reservId"));
+                reviewDTO.setMemId(rs.getInt("memId"));
+                reviewDTO.setContent(rs.getString("content"));
+
+                return reviewDTO;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public int reviewDone(ReviewDTO reviewDTO){

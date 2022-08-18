@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="model_p.CommunityDTO" %><%--
   Created by IntelliJ IDEA.
   User: whgml
@@ -115,18 +116,46 @@
         width: fit-content;
     }
 
-    .community-detail-btns div{
+    .community-apply-btn{
         width: 200px;
         height: 50px;
         background: #001f4a;
         color: white;
         text-align: center;
         line-height: 50px;
+        border-radius: 10px;
+        cursor: pointer;
+
     }
+
+    .community-modify-btn{
+        width: 100px;
+        height: 50px;
+        background: darkolivegreen;
+        color: white;
+        text-align: center;
+        line-height: 50px;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    .community-delete-btn{
+        width: 100px;
+        height: 50px;
+        background: darkred;
+        color: white;
+        text-align: center;
+        line-height: 50px;
+        border-radius: 10px;
+        cursor: pointer;
+
+    }
+
 </style>
 
 <script type="text/javascript">
     $(".community-apply-btn").click(function (){
+        alert("sdaf")
         location.href="CommunityApplyInsertForm"
     })
 </script>
@@ -171,8 +200,16 @@
 
         <div class="community-detail-btns">
             <a href="CommunityPage"><i class="fa-regular fa-circle-left"></i>목록</a>
-            <div class="community-apply-btn">신청하기</div>
+            <c:choose>
+                <c:when test="${login == null}"></c:when>
+                <c:when test="${login == communityDTO.memId}">
+                    <div class="community-apply-btn">신청하기</div>
+                </c:when>
+                <c:otherwise>
+                    <div class="community-modify-btn">수정</div>
+                    <div class="community-delete-btn">삭제</div>
+                </c:otherwise>
+            </c:choose>
         </div>
-
     </div>
 </div>

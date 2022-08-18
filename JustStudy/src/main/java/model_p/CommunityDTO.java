@@ -1,7 +1,5 @@
 package model_p;
 
-import java.util.Date;
-
 public class CommunityDTO {
     int id, people;
     String location,startdate,enddate,title,pname,studykind,content;

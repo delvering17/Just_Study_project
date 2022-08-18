@@ -217,8 +217,8 @@
             </ul>
             <ul>
                 <li>매출관리</li>
-                <li><a href="">회원매출</a></li>
-                <li><a href="">지점매출</a></li>
+                <li><a href="AdminSalesStore">지점별 매출</a></li>
+                <li><a href="">회원별 매출</a></li>
                 <li><a href=""></a></li>
             </ul>
             <ul>

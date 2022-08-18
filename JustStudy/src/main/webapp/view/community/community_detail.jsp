@@ -154,10 +154,20 @@
 </style>
 
 <script type="text/javascript">
-    $(".community-apply-btn").click(function (){
-        alert("sdaf")
-        location.href="CommunityApplyInsertForm"
-    })
+    window.onload = function (){
+        $(".community-apply-btn").click(function (){
+            location.href="CommunityApplyInsertForm"
+        })
+
+        $(".community-modify-btn").click(function (){
+            location.href="CommunityModifyForm?id=${communityDTO.id}"
+        })
+
+        $(".community-delete-btn").click(function (){
+
+        })
+    }
+
 </script>
 
 <div class="community-detail-bg">

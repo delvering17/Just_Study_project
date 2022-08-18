@@ -21,6 +21,8 @@ public class CommunityModifyForm implements CommunityService{
         HttpSession session = request.getSession();
         MemberDTO memberDTO = new MemberDAO().detail((Integer) session.getAttribute("login"));
 
+        communityDTO.setNickname(memberDTO.getMem_nickname());
+
         request.setAttribute("branchList", branchList);
         request.setAttribute("memberDTO", memberDTO);
         request.setAttribute("mainUrl", "community/community_modifyForm.jsp");

@@ -9,6 +9,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<script>
+    <c:if test="${msg!=null }">
+    alert("${msg}")
+    </c:if>
+</script>
+
 <style>
     .txt-wrapper p {
         font-weight: bold;
@@ -73,8 +79,8 @@
             </tr>
             <tr>
                 <td>작성자</td>
-                <input type="hidden" name="memId" value="${memberDTO.mem_id}">
-                <td colspan="3"><input type="text" name="nickname" value="${memberDTO.mem_nickname}" readonly></td>
+                <input type="hidden" name="memId" value="${communityDTO.memId}">
+                <td colspan="3"><input type="text" name="nickname" value="${communityDTO.nickname}" readonly></td>
             </tr>
             <tr>
                 <td>모집인원</td>

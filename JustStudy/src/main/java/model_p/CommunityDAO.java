@@ -135,6 +135,27 @@ public class CommunityDAO {
         return res;
     }
 
+    public int modify(CommunityDTO communityDTO){
+
+        sql = "update studygroup set location = ?, startdate = ?, enddate = ?, title = ?, people = ?, studykind = ?, content = ? where id = ?";
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, communityDTO.getLocation());
+            ptmt.setDate(2, new java.sql.Date(communityDTO.getStartdate().getTime()));
+            ptmt.setDate(3, new java.sql.Date(communityDTO.getEnddate().getTime()));
+            ptmt.setString(4, communityDTO.getTitle());
+            ptmt.setInt(5,communityDTO.getPeople());
+            ptmt.setString(6, communityDTO.getStudykind());
+            ptmt.setString(7, communityDTO.getContent());
+            ptmt.setInt(8, communityDTO.id);
+
+            return ptmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+    }
 
 
     public void close() {

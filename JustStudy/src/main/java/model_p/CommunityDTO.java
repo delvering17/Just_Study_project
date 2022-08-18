@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class CommunityDTO {
     int id, memId, people;
-    String location, title, studykind, content;
+    String location, title, studykind, content, nickname;
     Date startdate, enddate;
 
 
@@ -84,6 +84,14 @@ public class CommunityDTO {
         this.content = content;
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
     @Override
     public String toString() {
         return "CommunityDTO{" +
@@ -94,6 +102,7 @@ public class CommunityDTO {
                 ", title='" + title + '\'' +
                 ", studykind='" + studykind + '\'' +
                 ", content='" + content + '\'' +
+                ", nickname='" + nickname + '\'' +
                 ", startdate=" + startdate +
                 ", enddate=" + enddate +
                 '}';

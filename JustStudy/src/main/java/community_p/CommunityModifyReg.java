@@ -1,6 +1,8 @@
 package community_p;
 
+import model_p.CommunityDAO;
 import model_p.CommunityDTO;
+import model_p.MemberDAO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,8 +32,22 @@ public class CommunityModifyReg implements CommunityService{
         communityDTO.setPeople(Integer.parseInt(request.getParameter("people")));
         communityDTO.setStudykind(String.join(",", request.getParameterValues("studykind")));
         communityDTO.setContent(request.getParameter("content"));
+        communityDTO.setNickname(new MemberDAO().detail(communityDTO.getMemId()).getMem_nickname());
 
         System.out.println(communityDTO.toString());
+
+        String msg = "수정 실패";
+        String mainUrl = "community/community_modifyForm.jsp";
+
+        if(new CommunityDAO().modify(communityDTO) > 0){
+            msg = "수정되었습니다.";
+            mainUrl = "community/alert.jsp";
+            request.setAttribute("goUrl", "CommunityDetail?id="+communityDTO.getId());
+        }
+
+        request.setAttribute("msg", msg);
+        request.setAttribute("mainUrl", mainUrl);
+        request.setAttribute("communityDTO", communityDTO);
 
     }
 }

@@ -187,7 +187,7 @@
         <i class="fa-solid fa-circle-user"></i>
         <p>${communityDTO.location}</p>
         <h2>${communityDTO.title}</h2>
-        <p>개설자: ${communityLeader}</p>
+        <p>개설자: ${communityDTO.nickname}</p>
 
         <table class="community-detail-table">
             <tr>
@@ -212,7 +212,7 @@
             <a href="CommunityPage"><i class="fa-regular fa-circle-left"></i>목록</a>
             <c:choose>
                 <c:when test="${login == null}"></c:when>
-                <c:when test="${login == communityDTO.memId}">
+                <c:when test="${login != communityDTO.memId}">
                     <div class="community-apply-btn">신청하기</div>
                 </c:when>
                 <c:otherwise>

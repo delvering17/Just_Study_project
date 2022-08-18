@@ -70,9 +70,16 @@
             letter-spacing: -2px;
         }
 
+        .studyroom-reserv-innerlist > label,
+        .studyroom-reserv-innerlist-time > label
+        {
+            width: 100%;
+        }
+
         .studyroom-reserv-innerlist > label > div,
         .studyroom-reserv-innerlist-time > div,
         .studyroom-reserv-innerlist-time > label > div {
+            width: 100%;
             border-bottom: 1px solid lightgray;
             height: 60px;
             padding-left: 20px;
@@ -138,6 +145,7 @@
 
         .studyroom-reserv-innerlist {
             overflow: auto;
+            width: 100%;
             height: 429px;
         }
 
@@ -420,6 +428,7 @@
         }
 
         #studyroom-reserv-receipt input[type=text] {
+            width: 100%;
             height: 40px;
             margin-top: 10px;
             padding-left: 20px;
@@ -466,11 +475,13 @@
         }
 
         #studyroom-reserv-receipt .modal-body > button:nth-of-type(1) {
+            width: 100%;
             margin-top: 70px;
             background: darkred;
         }
 
         #studyroom-reserv-receipt .modal-body > button:nth-of-type(2) {
+            width: 100%;
             background: #B1997A;
         }
 
@@ -850,7 +861,7 @@
                 </div>
                 <font size="5px"><b>이용자 정보</b></font>
                 <input type="text" class="studyroom-reserv-paylist-username"/>
-                <input type="text"  class="studyroom-reserv-paylist-userphone"/>
+                <input type="text" class="studyroom-reserv-paylist-userphone"/>
                 <div><font size="5px"><b>결제 수단 선택</b></font></div>
                 <label><input type="radio" name="paymentMethod" value="kcp" checked>신용카드</label>
                 <label><input type="radio" name="paymentMethod" value="kakaopay">카카오페이</label>

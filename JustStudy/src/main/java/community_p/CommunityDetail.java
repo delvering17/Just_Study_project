@@ -15,13 +15,17 @@ public class CommunityDetail implements CommunityService{
         System.out.println(id);
 
         CommunityDAO communityDAO = new CommunityDAO();
-
         CommunityDTO communityDTO = communityDAO.detail(id);
 
+        System.out.println(communityDTO);
         MemberDTO memberDTO = new MemberDAO().detail(communityDTO.getMemId());
+        System.out.println(memberDTO);
+
+        communityDTO.setNickname(memberDTO.getMem_nickname());
+
+        System.out.println(communityDTO);
 
         request.setAttribute("mainUrl","community/community_detail.jsp");
         request.setAttribute("communityDTO", communityDTO);
-        request.setAttribute("communityLeader", memberDTO.getMem_nickname());
     }
 }

@@ -109,6 +109,38 @@
         justify-content: space-around;
     }
 
+    .main-study-list-wrapper {
+        list-style: none;
+
+        margin-top: 30px;
+
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 2rem;
+        place-items: center;
+
+
+    }
+
+    .study-list-item {
+
+        width: 200px;
+        border: 1px solid #aaa;
+        background: #fff;
+    }
+
+    .list-item-sub-text {
+
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+
+    }
+
+    .btn-apply {
+        text-align: center;
+    }
+
 
 </style>
 
@@ -171,46 +203,33 @@
                 </div>
                 <a href="">새 글쓰기</a>
             </form>
-            <ul>
+            <ul class="main-study-list-wrapper">
                 <jsp:useBean id="now" class="java.util.Date" />
                 <fmt:formatDate var = "today" value="${now}" pattern="yyyy-MM-dd"/>
 
                 <c:forEach items="${mainData}" var="dto" varStatus="no">
-                    <c:choose>
-                    <c:when test="${today < dto.enddate}">
-                        <li>
-                        <div >
-                            <p>${dto.location}</p>
-                            <div></div>
-                            <p>${dto.title}</p>
-                            <div>
-                                <p>${dto.studykind}</p>
-                                <p>모집인원&nbsp; &colon; &nbsp;</p>
-                                <p>${dto.people}명</p>
-                            </div>
-                            <a href="CommunityDetail?id=${dto.id}">신청하기</a>
-                        </div>
-                    </li>
-                    </c:when>
-                    <c:otherwise>
-                        <li>
+                        <li class="study-list-item">
                             <div>
                                 <p>${dto.location}</p>
-                                <div></div>
                                 <p>${dto.title}</p>
-                                <div>
+                                <div class="list-item-sub-text">
                                     <p>${dto.studykind}</p>
-                                    <p>모집인원&nbsp; &colon; &nbsp;</p>
-                                    <p>${dto.people}명</p>
+                                    <p>모집인원&nbsp;&colon; ${dto.people}명</p>
                                 </div>
-                                <a>신청마감</a>
+                                <c:choose>
+                                    <c:when test="${today < dto.enddate}">
+                                        <a class="btn-apply" href="CommunityDetail?id=${dto.id}">신청하기</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a>신청마감</a>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                         </li>
-                    </c:otherwise>
-                    </c:choose>
                 </c:forEach>
             </ul>
         </div>
+    </div>
 </div>
 <a href="#none" class="top_btn"></a>
 <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
@@ -221,7 +240,6 @@
             itemSelector: '.commu_list',
         });
 
-// filter items on button click
         $('.tabmenu').on( 'click', 'li', function() {
             var filterValue = $(this).children().attr('data-filter');
             $('.commu_list_area').isotope({ filter: filterValue });

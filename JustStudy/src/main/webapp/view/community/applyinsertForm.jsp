@@ -73,23 +73,25 @@
             <col width="*"/>
         </colgroup>
         <tr>
-            <th><label>닉네임</label></th>
-            <td width="500px">아무개</td> <!-- db "pname"  -->
-        </tr>
-        <tr>
-            <th><label>참여동기</label></th>
-            <td>
-                <textarea></textarea> <!-- db 추가해야할듯 -->
+            <th><p>닉네임</p></th>
+            <td width="500px">
+                ${memberDTO.mem_nickname}
             </td>
         </tr>
         <tr>
-            <th><label>참여목표</label></th>
+            <th><p>내용</p></th>
             <td>
-                <textarea></textarea> <!-- db 추가해야할듯 -->
+                <textarea name="input_content" cols="30" rows="10"></textarea> <!-- db 추가해야할듯 -->
             </td>
         </tr>
     </table>
 
-    <button type="submit">등록</button>
+    <button onclick="goApplyInsert()">등록</button>
 </form>
+<script type="text/javascript">
+    function goApplyInsert() {
+        
+    }
+    
+</script>
 

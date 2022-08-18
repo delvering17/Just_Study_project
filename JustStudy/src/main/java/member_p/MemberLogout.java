@@ -11,6 +11,7 @@ public class MemberLogout implements MemberService{
 
 
         HttpSession session = request.getSession();
+        int mem_id = (int) session.getAttribute("login");
         session.removeAttribute("login");
 
         request.setAttribute("member_msg", "로그아웃 되었습니다.");

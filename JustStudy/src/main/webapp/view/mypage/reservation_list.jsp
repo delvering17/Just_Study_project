@@ -257,7 +257,7 @@
                                     <input type="button" class="mypage-reservlist-review-done" value="후기 조회"></input>
                               <%}
                             } else if(reservationDTO.getStatus().equals("이용전")){%>
-                            <button class="mypage-reservlist-cancle">예약 취소</button>
+                            <input type="button" class="mypage-reservlist-cancle" value="예약 취소"></input>
                             <%}%>
                         </td>
                     </tr>

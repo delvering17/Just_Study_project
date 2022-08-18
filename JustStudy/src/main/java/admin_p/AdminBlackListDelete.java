@@ -1,5 +1,6 @@
 package admin_p;
 
+import model_p.BlackDAO;
 import model_p.MemberDAO;
 import model_p.MemberDTO;
 
@@ -10,11 +11,13 @@ public class AdminBlackListDelete implements AdminService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-        int modifyId = Integer.parseInt(request.getParameter("user"));
+        int blackDeleteId = Integer.parseInt(request.getParameter("user"));
+        String msg = "삭제 완료";
 
-        MemberDTO blackListDelete = new MemberDAO().detail(modifyId);
+        new BlackDAO().delete(blackDeleteId);
 
-        request.setAttribute("blackListDelete", blackListDelete);
-        request.setAttribute("adminUrl", "adminBlackListModify.jsp");
+        request.setAttribute("adminUrl", "alert.jsp");
+        request.setAttribute("msg", msg);
+        request.setAttribute("goUrl","AdminBlackList");
     }
 }

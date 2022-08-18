@@ -49,28 +49,24 @@
 </style>
 
   <div id="headline">
-    <b>블랙리스트 정보 수정</b>
+    <b>블랙리스트 추가</b>
   </div>
 
   <div id="main">
 
-    <form action="AdminBlackListModifyReg" method="get">
-            <input type="hidden" name="id" value="${adminModifyDTO.mem_id}"/>
+    <form action="AdminBlackListAddReg" method="get">
+
             <table border="" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
               <tr>
-                <td>아이디</td>
-                <td><input type="text" name="userid" value="${adminModifyDTO.mem_userid}"/></td>
+                <td>회원번호</td>
+                <td><input type="text" name="black_id" value="${blackListAddId}" readonly/></td>
               </tr>
               <tr>
-                <td>이름</td>
-                <td><input type="text" name="realname" value="${adminModifyDTO.mem_realname}"/></td>
+                <td>사유</td>
+                <td><input type="text" name="black_reason" value=""/></td>
               </tr>
               <tr>
-                <td>닉네임</td>
-                <td><input type="text" name="nickname" value="${adminModifyDTO.mem_nickname}"/></td>
-              </tr>
-              <tr>
-                <td colspan="2"><input type="submit" value="수정"/></td>
+                <td colspan="2"><input type="submit" value="추가"/></td>
               </tr>
 
       </table>

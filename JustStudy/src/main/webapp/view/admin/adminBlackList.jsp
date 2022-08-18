@@ -51,25 +51,22 @@
   <b>블랙리스트 관리</b>
 </div>
   <div id="main">
-    <button formaction="AdminBlackListAddDelete" formmethod="get">추가</button>
-
-    <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+    <table border="" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
       <tr>
-        <th rowspan="2">회원번호</th>
-        <th>아이디</th>
-        <th>이름</th>
-        <th>닉네임</th>
+        <th>회원번호</th>
+        <th>이메일</th>
+        <th>사유</th>
+        <th>관리</th>
       </tr>
 
-      <c:forEach items="${adminData}" var="i">
+      <c:forEach items="${blackData}" var="i">
         <tr>
           <form action="" method="">
-            <th rowspan="2"><input type="hidden" name="user" value="${i.mem_id}">${i.mem_id}</th>
-            <td>${i.mem_userid}</td>
-            <td>${i.mem_realname}</td>
-            <td>${i.mem_nickname}</td>
-            <td rowspan="2">
-              <button formaction="AdminBlackListAddDelete" formmethod="get">삭제</button>
+            <th><input type="hidden" name="user" value="${i.black_id}">${i.black_id}</th>
+            <td></td>
+            <td>${i.black_reason}</td>
+            <td>
+              <button formaction="AdminBlackListDelete" formmethod="get">삭제</button>
             </td>
           </form>
         </tr>

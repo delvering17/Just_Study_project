@@ -1,7 +1,8 @@
 package admin_p;
 
-import model_p.MemberDAO;
-import model_p.MemberDTO;
+import model_p.BlackDAO;
+import model_p.BlackDTO;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,11 +11,9 @@ public class AdminBlackListAdd implements AdminService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-        int modifyId = Integer.parseInt(request.getParameter("user"));
+        int blackListAddId = Integer.parseInt(request.getParameter("user"));
 
-        MemberDTO blackListAdd = new MemberDAO().detail(modifyId);
-
-        request.setAttribute("blackListAdd", blackListAdd);
-        request.setAttribute("adminUrl", "adminBlackListModify.jsp");
+        request.setAttribute("blackListAddId",blackListAddId);
+        request.setAttribute("adminUrl", "adminBlackListAdd.jsp");
     }
 }

@@ -166,6 +166,8 @@ public class MemberDAO {
         return res;
     }
 
+
+
         public MemberDTO detail(int mem_id) {
         MemberDTO memberDTO = new MemberDTO();
 

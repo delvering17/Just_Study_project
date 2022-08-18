@@ -1,8 +1,11 @@
 package model_p;
 
+import java.util.Date;
+
 public class CommunityDTO {
-    int id, people;
-    String location,startdate,enddate,title,pname,studykind,content;
+    int id, memId, people;
+    String location, title, studykind, content;
+    Date startdate, enddate;
 
 
     public int getId() {
@@ -11,6 +14,14 @@ public class CommunityDTO {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getMemId() {
+        return memId;
+    }
+
+    public void setMemId(int memId) {
+        this.memId = memId;
     }
 
     public int getPeople() {
@@ -29,19 +40,19 @@ public class CommunityDTO {
         this.location = location;
     }
 
-    public String getStartdate() {
+    public Date getStartdate() {
         return startdate;
     }
 
-    public void setStartdate(String startdate) {
+    public void setStartdate(Date startdate) {
         this.startdate = startdate;
     }
 
-    public String getEnddate() {
+    public Date getEnddate() {
         return enddate;
     }
 
-    public void setEnddate(String enddate) {
+    public void setEnddate(Date enddate) {
         this.enddate = enddate;
     }
 
@@ -51,14 +62,6 @@ public class CommunityDTO {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getPname() {
-        return pname;
-    }
-
-    public void setPname(String pname) {
-        this.pname = pname;
     }
 
     public String getStudykind() {
@@ -81,19 +84,18 @@ public class CommunityDTO {
         this.content = content;
     }
 
-
     @Override
     public String toString() {
         return "CommunityDTO{" +
                 "id=" + id +
+                ", memId=" + memId +
                 ", people=" + people +
                 ", location='" + location + '\'' +
-                ", startdate='" + startdate + '\'' +
-                ", enddate='" + enddate + '\'' +
                 ", title='" + title + '\'' +
-                ", pname='" + pname + '\'' +
                 ", studykind='" + studykind + '\'' +
                 ", content='" + content + '\'' +
+                ", startdate=" + startdate +
+                ", enddate=" + enddate +
                 '}';
     }
 }

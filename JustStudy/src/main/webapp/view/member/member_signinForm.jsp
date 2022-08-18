@@ -8,89 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<script type="text/javascript">
 
-  function goIDdoubleCheck() {
-    let input_userid = $('#input-userid').val()
-
-    $.ajax({
-      url:'<c:url value="/memberNonView/MemberSigninDoubleCheck"/>',
-      type: 'GET',
-      data: 'input_userid='+input_userid,
-      async: false,
-      success:function (response){
-        if(response === 'success') {
-          alert('사용가능한 아이디 입니다')
-        } else {
-          alert('중복된 아이디 입니다.')
-        }
-
-
-      },
-      error:function(e){
-        console.log(e.responseText)
-      }
-    });
-  }
-
-  function goNicknamedoubleCheck() {
-    let input_nickname = $('#input-nickname').val()
-
-    $.ajax({
-      url:'<c:url value="/memberNonView/MemberSigninDoubleCheck"/>',
-      type: 'GET',
-      data: 'input_nickname='+input_nickname,
-      async: false,
-      success:function (response){
-        if(response === 'success') {
-          alert('사용가능한 닉네임 입니다')
-        } else {
-          alert('중복된 닉네임 입니다.')
-        }
-
-      },
-      error:function(e){
-        console.log(e.responseText)
-      }
-    });
-  }
-
-
-  function goSignin() {
-
-    let form_data = {
-      input_userid:$('#input-userid').val(),
-      input_password1:$('#input-password1').val(),
-      input_password2:$('#input-password2').val(),
-      input_nickname:$('#input-nickname').val(),
-      input_phone:$('#input-phone').val(),
-      input_realname:$('#input-realname').val(),
-      input_address1:$('#input-address1').val(),
-      input_address2:$('#input-address2').val()
-    }
-
-    $.ajax({
-      url:'<c:url value="/memberNonView/MemberSigninReg"/>',
-      type:'GET',
-      data: form_data,
-      async:false,
-      dataType:'JSON',
-      success:function(response){
-        alert(response.msg)
-        <%--if(response.loginResult === 'success') {--%>
-        <%--  alert('로그인에 성공했습니다.')--%>
-        <%--  location.href = '<c:url value="/board/MainPage"/>'--%>
-        <%--} else {--%>
-        <%--  alert(response.loginResult)--%>
-        <%--}--%>
-      },
-      error:function(e){
-        console.log(e.responseText)
-      }
-    })
-
-  }
-</script>
 <style type="text/css">
 
   #form-signin {
@@ -154,9 +72,13 @@
 <div id="form-signin">
   <p id="signin-logo">회원가입</p>
   <div class="wrapper-signin">
-    <p>아이디</p>
+    <p>이메일</p>
     <input type="text" class="input-signin" id="input-userid" placeholder="ex) juststudy"/>
     <button type="button" class="btn-signin" onclick="goIDdoubleCheck()">중복체크</button>
+    <input type="text" class="input-signin" id="input-certificate-num" placeholder="인증번호 입력"/>
+    <button type="button" class="btn-signin" onclick="goCertificationNum()">인증확인</button>
+    <p id="timer">인증시간 : </p>
+
   </div>
   <div class="wrapper-signin" id="wrapper-password">
     <p>비밀번호</p>
@@ -194,3 +116,133 @@
     <button class="btn-signin" onclick="goSignin()" id="submit-signin">회원 가입</button>
   </div>
 </div>
+<script type="text/javascript">
+
+  function goIDdoubleCheck() {
+    let input_userid = $('#input-userid').val()
+
+    $.ajax({
+      url:'<c:url value="/memberNonView/MemberSigninDoubleCheck"/>',
+      type: 'GET',
+      data: 'input_userid='+input_userid,
+      async: false,
+      success:function (response){
+        let msg = decodeURIComponent(response).replaceAll("+"," ");
+        alert(msg)
+
+        $('#timer').html('<p>'+ msg + '</p>');
+      },
+      error:function(e){
+        console.log(e.responseText)
+      }
+    });
+  }
+
+  function goCertificationNum() {
+    let input_certificate_num = $('#input-certificate-num').val()
+
+    $.ajax({
+      url:'<c:url value="/memberNonView/MemberCertificationNum"/>',
+      type: 'GET',
+      data: 'input_certificate_num='+input_certificate_num,
+      async: false,
+      success:function (response){
+        alert(decodeURIComponent(response).replaceAll("+"," "))
+
+      },
+      error:function(e){
+        console.log(e.responseText)
+      }
+    });
+  }
+
+  function goCertificationNum() {
+    let form_data = {
+      input_certificate_num: $('#input-certificate-num').val(),
+      input_userid: $('#input-userid').val()
+    }
+
+    $.ajax({
+      url: '<c:url value="/memberNonView/MemberCertificationNum"/>',
+      type: 'GET',
+      data: form_data,
+      async: false,
+      dataType: 'JSON',
+      success: function (response) {
+        // alert(response.member_nickname)
+        if (response.certificateResult === 'success') {
+          alert('인증이 완료 되었습니다!');
+        } else {
+          alert('인증에 실패했습니다.');
+        }
+      }
+      ,
+      error: function (e) {
+        console.log(e.responseText)
+      }
+
+    });
+  }
+  function goNicknamedoubleCheck() {
+    let input_nickname = $('#input-nickname').val()
+
+    $.ajax({
+      url:'<c:url value="/memberNonView/MemberSigninDoubleCheck"/>',
+      type: 'GET',
+      data: 'input_nickname='+input_nickname,
+      async: false,
+      success:function (response){
+        if(response === 'success') {
+          alert('사용가능한 닉네임 입니다')
+        } else {
+          alert('중복된 닉네임 입니다.')
+        }
+
+      },
+      error:function(e){
+        console.log(e.responseText)
+      }
+    });
+  }
+
+
+  function goSignin() {
+
+    let form_data = {
+      input_userid:$('#input-userid').val(),
+      input_password1:$('#input-password1').val(),
+      input_password2:$('#input-password2').val(),
+      input_nickname:$('#input-nickname').val(),
+      input_phone:$('#input-phone').val(),
+      input_realname:$('#input-realname').val(),
+      input_address1:$('#input-address1').val(),
+      input_address2:$('#input-address2').val()
+    }
+
+    $.ajax({
+      url:'<c:url value="/memberNonView/MemberSigninReg"/>',
+      type:'GET',
+      data: form_data,
+      async:false,
+      dataType:'JSON',
+      success:function(response){
+        alert(response.msg)
+        <%--if(response.loginResult === 'success') {--%>
+        <%--  alert('로그인에 성공했습니다.')--%>
+        <%--  location.href = '<c:url value="/board/MainPage"/>'--%>
+        <%--} else {--%>
+        <%--  alert(response.loginResult)--%>
+        <%--}--%>
+      },
+      error:function(e){
+        console.log(e.responseText)
+      }
+    })
+
+  }
+
+
+
+
+
+</script>

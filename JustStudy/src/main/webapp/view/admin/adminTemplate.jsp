@@ -205,8 +205,9 @@
         </div>
         <div class="categoryitem">
             <ul>
-                <li>회원관리</li>
-                <li><a href="AdminUserList">회원관리</a></li>
+                <li>회원 관리</li>
+                <li><a href="AdminUserList">회원 관리</a></li>
+                <li><a href="AdminBlackList">블랙리스트 관리</a></li>
 
             </ul>
             <ul>
@@ -217,8 +218,8 @@
             </ul>
             <ul>
                 <li>매출관리</li>
-                <li><a href="">회원매출</a></li>
-                <li><a href="">지점매출</a></li>
+                <li><a href="AdminSalesStore">지점별 매출</a></li>
+                <li><a href="">회원별 매출</a></li>
                 <li><a href=""></a></li>
             </ul>
             <ul>
@@ -228,9 +229,9 @@
                 <li><a href=""></a></li>
             </ul>
             <ul>
-                <li>게시판관리</li>
-                <li><a href="">게시판관리</a></li>
-                <li><a href="">게시판그룹관리</a></li>
+                <li>게시판 관리</li>
+                <li><a href="">게시판 관리</a></li>
+                <li><a href="">게시판 그룹 관리</a></li>
                 <li><a href="AdminInquiryList">1:1문의</a></li>
             </ul>
         </div>

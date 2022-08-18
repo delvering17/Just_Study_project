@@ -10,7 +10,6 @@ public class AdminUserModifyReg implements AdminService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-
         MemberDTO userUpdate = new MemberDTO();
 
         userUpdate.setMem_id(Integer.parseInt(request.getParameter("id")));

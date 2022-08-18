@@ -16,7 +16,7 @@ public class MypageReviewDetail implements MypageService{
         HttpSession session = request.getSession();
         MemberDTO memberDTO = new MemberDAO().detail((Integer) session.getAttribute("login"));
 
-        ReviewDTO reviewDTO = new ReviewDAO().detail(Integer.parseInt(request.getParameter("id")));
+        ReviewDTO reviewDTO = new ReviewDAO().detail(Integer.parseInt(request.getParameter("reservId")));
 
         request.setAttribute("memberDTO", memberDTO);
         request.setAttribute("reviewDTO", reviewDTO);

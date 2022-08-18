@@ -185,8 +185,10 @@
             $("input[id=mypick]").attr('checked', true);
         })
 
-        $(".mypage-reservlist-review").click(function (){
-            location.href= "MypageReview"
+
+        $(".mypage-reservlist-review-done").click(function (){
+
+            location.href = "MypageReviewDetail?reservId="+$(this).parent().parent().children("input[name=reservId]").val()
         })
     }
 </script>
@@ -236,7 +238,7 @@
                     ArrayList<ReservationDTO> myReservation = (ArrayList<ReservationDTO>) request.getAttribute("myReservation");
                     for (ReservationDTO reservationDTO : myReservation) {
                 %>
-                <form action="MypageReview">
+                <form action="MypageReview" class="mypage-reservlist-review-form">
                     <tr>
                         <input type="hidden" name="reservId" value="<%=reservationDTO.getId()%>"/>
                         <td><%=reservationDTO.getResDate()%></td>
@@ -252,7 +254,7 @@
                                 if(reservationDTO.getReview() == 0){%>
                                     <button type=submit class="mypage-reservlist-review">후기 작성</button>
                               <%}else if(reservationDTO.getReview() == 1){%>
-                                    <button class="mypage-reservlist-review-done">후기 조회</button>
+                                    <input type="button" class="mypage-reservlist-review-done" value="후기 조회"></input>
                               <%}
                             } else if(reservationDTO.getStatus().equals("이용전")){%>
                             <button class="mypage-reservlist-cancle">예약 취소</button>

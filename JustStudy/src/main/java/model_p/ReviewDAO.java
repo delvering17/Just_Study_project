@@ -57,15 +57,15 @@ public class ReviewDAO {
         return 0;
     }
 
-    public ReviewDTO detail(int id){
+    public ReviewDTO detail(int reservId){
 
         ReviewDTO reviewDTO = new ReviewDTO();
 
-        sql = "select * from review where id = ?";
+        sql = "select * from review where reservId = ?";
 
         try {
             ptmt = con.prepareStatement(sql);
-            ptmt.setInt(1, id);
+            ptmt.setInt(1, reservId);
 
             rs = ptmt.executeQuery();
             while(rs.next()){
@@ -78,6 +78,8 @@ public class ReviewDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            close();
         }
         return null;
     }

@@ -31,6 +31,6 @@ public class MypageReviewInsert implements MypageService{
         request.setAttribute("msg", msg);
         request.setAttribute("memberDTO", memberDTO);
         request.setAttribute("mainUrl","mypage/mypage_alert.jsp");
-        request.setAttribute("goUrl","MypageReviewDetail?id="+ reviewDTO.getId());
+        request.setAttribute("goUrl","MypageReviewDetail?reservId="+ reviewDTO.getReservId());
     }
 }

@@ -3,10 +3,7 @@ package model_p;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class CommunityDAO {
@@ -42,11 +39,11 @@ public class CommunityDAO {
                 CommunityDTO dto = new CommunityDTO();
 
                 dto.setId(rs.getInt("id"));
+                dto.setMemId(rs.getInt("memId"));
                 dto.setLocation(rs.getString("location"));
-                dto.setStartdate(rs.getString("startdate"));
-                dto.setEnddate(rs.getString("enddate"));
+                dto.setStartdate(rs.getDate("startdate"));
+                dto.setEnddate(rs.getDate("enddate"));
                 dto.setTitle(rs.getString("title"));
-                dto.setPname(rs.getString("pname"));
                 dto.setPeople(rs.getInt("people"));
                 dto.setStudykind(rs.getString("studykind"));
                 dto.setContent(rs.getString("content"));
@@ -77,19 +74,19 @@ public class CommunityDAO {
             //System.out.println(dto);
 
 
-            sql = "insert into studygroup (id,location,startdate,enddate,title, pname,people,studykind,content) "
+            sql = "insert into studygroup (id,memId,location,startdate,enddate,title,people,studykind,content) "
                     + "values (?,?,?,?,?,?,?,?,?)";
 
             ptmt =con.prepareStatement(sql);
-            ptmt.setInt(1, dto.id);
-            ptmt.setString(2, dto.location);
-            ptmt.setString(3, dto.startdate);
-            ptmt.setString(4, dto.enddate);
-            ptmt.setString(5, dto.title);
-            ptmt.setString(6, dto.pname);
-            ptmt.setInt(7,dto.people);
-            ptmt.setString(8, dto.studykind);
-            ptmt.setString(9, dto.content);
+            ptmt.setInt(1, dto.getId());
+            ptmt.setInt(2, dto.getMemId());
+            ptmt.setString(3, dto.getLocation());
+            ptmt.setDate(4, (Date) dto.getStartdate());
+            ptmt.setDate(5, (Date) dto.getEnddate());
+            ptmt.setString(6, dto.getTitle());
+            ptmt.setInt(7,dto.getPeople());
+            ptmt.setString(8, dto.getStudykind());
+            ptmt.setString(9, dto.getContent());
 
             ptmt.executeUpdate();
 
@@ -116,11 +113,11 @@ public class CommunityDAO {
             if(rs.next()) { // rs가 존재한다면~ 가지고 나가거라~(pw를 제외하고 다 가져옴)
                 res = new CommunityDTO();
                 res.setId(rs.getInt("id"));
-                res.setTitle(rs.getString("location"));
-                res.setStartdate(rs.getString("startdate"));
-                res.setEnddate(rs.getString("enddate"));
+                res.setMemId(rs.getInt("memId"));
+                res.setLocation(rs.getString("location"));
+                res.setStartdate(rs.getDate("startdate"));
+                res.setEnddate(rs.getDate("enddate"));
                 res.setTitle(rs.getString("title"));
-                res.setPname(rs.getString("pname"));
                 res.setPeople(rs.getInt("people"));
                 res.setStudykind(rs.getString("studykind"));
                 res.setContent(rs.getString("content"));

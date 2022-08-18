@@ -2,6 +2,8 @@ package community_p;
 
 import model_p.CommunityDAO;
 import model_p.CommunityDTO;
+import model_p.MemberDAO;
+import model_p.MemberDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,11 +14,14 @@ public class CommunityDetail implements CommunityService{
         int id = Integer.parseInt(request.getParameter("id"));
         System.out.println(id);
 
-        CommunityDAO dao = new CommunityDAO();
+        CommunityDAO communityDAO = new CommunityDAO();
 
-        CommunityDTO dto = dao.detail(id);
+        CommunityDTO communityDTO = communityDAO.detail(id);
 
-        request.setAttribute("mainUrl","community/detail.jsp");
-        request.setAttribute("dto", dto);
+        MemberDTO memberDTO = new MemberDAO().detail(communityDTO.getMemId());
+
+        request.setAttribute("mainUrl","community/community_detail.jsp");
+        request.setAttribute("communityDTO", communityDTO);
+        request.setAttribute("communityLeader", memberDTO.getMem_nickname());
     }
 }

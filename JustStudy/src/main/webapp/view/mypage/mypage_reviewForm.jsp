@@ -34,6 +34,12 @@
                 </td>
             </tr>
             <tr>
+                <td>별점</td>
+                <td>
+                    <input type="text" name="reviewStar"/>
+                </td>
+            </tr>
+            <tr>
                 <td>내용</td>
                 <td>
                     <textarea name="reviewContent" cols="20" rows="5"></textarea>

@@ -83,13 +83,14 @@ public class ReviewDAO {
             rs.next();
             reviewDTO.id = rs.getInt(1);
 
-            sql = "insert into review (id, reservId, memId, content) values (?, ?, ?, ?)";
+            sql = "insert into review (id, reservId, memId, reviewDate, star, content) values (?, ?, ?, sysdate(), ?, ?)";
 
             ptmt = con.prepareStatement(sql);
             ptmt.setInt(1, reviewDTO.getId());
             ptmt.setInt(2, reviewDTO.getReservId());
             ptmt.setInt(3, reviewDTO.getMemId());
-            ptmt.setString(4, reviewDTO.getContent());
+            ptmt.setDouble(4, reviewDTO.getStar());
+            ptmt.setString(5, reviewDTO.getContent());
 
             return ptmt.executeUpdate();
         } catch (SQLException e) {
@@ -116,6 +117,8 @@ public class ReviewDAO {
                 reviewDTO.setId(rs.getInt("id"));
                 reviewDTO.setReservId(rs.getInt("reservId"));
                 reviewDTO.setMemId(rs.getInt("memId"));
+                reviewDTO.setReviewDate(rs.getDate("reviewDate"));
+                reviewDTO.setStar(rs.getDouble("star"));
                 reviewDTO.setContent(rs.getString("content"));
 
                 return reviewDTO;

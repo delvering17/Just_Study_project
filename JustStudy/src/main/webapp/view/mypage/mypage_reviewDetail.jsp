@@ -34,6 +34,18 @@
         </td>
       </tr>
       <tr>
+      <tr>
+        <td>작성일자</td>
+        <td><%=reviewDTO.getReviewDate()%>
+        </td>
+      </tr>
+      <tr>
+        <td>별점</td>
+        <td>
+          <%=reviewDTO.getStar()%>
+        </td>
+      </tr>
+      <tr>
         <td>내용</td>
         <td>
           <%=reviewDTO.getContent()%>

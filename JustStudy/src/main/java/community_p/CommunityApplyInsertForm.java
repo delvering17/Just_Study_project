@@ -17,15 +17,11 @@ public class CommunityApplyInsertForm implements CommunityService{
         int mem_id = (int) session.getAttribute("login");
         MemberDTO memberDTO = new MemberDAO().detail(mem_id);
 
-
-
         try {
 
-
+            request.setAttribute("mem_id", mem_id);
             request.setAttribute("memberDTO",memberDTO);
             request.setAttribute("mainUrl", "community/applyinsertForm.jsp");
-
-
 
         } catch (Exception e) {
             // TODO Auto-generated catch block

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: whgml
@@ -66,8 +67,9 @@
     <p>간단한 신청자 정보를 입력해 주세요.</p>
 </div>
 
-<form action="CommunityApplyInsertReg"> <%-- 지정해줘야함 --%>
+<form >
     <table border="">
+        <input type="hidden" name="mem_id" id="mem-id" value="${mem_id}">
         <colgroup>
             <col width="200px"/>
             <col width="*"/>
@@ -81,7 +83,7 @@
         <tr>
             <th><p>내용</p></th>
             <td>
-                <textarea name="input_content" cols="30" rows="10"></textarea> <!-- db 추가해야할듯 -->
+                <textarea id="input-content" name="input_content" cols="30" rows="10"></textarea>
             </td>
         </tr>
     </table>
@@ -89,9 +91,32 @@
     <button onclick="goApplyInsert()">등록</button>
 </form>
 <script type="text/javascript">
+
     function goApplyInsert() {
-        
+        let form_data = {
+            input_id:$('#mem-id').val(),
+            input_content:$('#input_content').val()
+        }
+
+        $.ajax({
+            url:'<c:url value="/community/CommunityApplyInsertReg"/>',
+            type:'GET',
+            data: form_data,
+            async:false,
+            dataType:'JSON',
+            success:function(response){
+                // alert(response.member_nickname)
+                if(response.applyResult === 'success') {
+                    alert('신청되었습니다')
+                    location.href = '<c:url value="/board/MainPage"/>'
+                } else {
+                    alert(response.applyResult)
+                }
+            },
+            error:function(e){
+                console.log(e.responseText)
+            }
+        })
     }
-    
 </script>
 

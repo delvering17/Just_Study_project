@@ -1,5 +1,6 @@
 package community_p;
 
+import model_p.ApplyStudyDAO;
 import model_p.CommunityDAO;
 import model_p.CommunityDTO;
 
@@ -10,33 +11,20 @@ public class CommunityApplyInsertReg implements CommunityService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-                System.out.println("ApplyinsertReg 들어왔냐?");
 
-             /*   try {
-                    CommunityDTO dto = new CommunityDTO();
-                    dto.setLocation(request.getParameter("location"));
-                    dto.setStartdate(request.getParameter("startdate"));
-                    dto.setEnddate(request.getParameter("enddate"));
-                    dto.setTitle(request.getParameter("title"));
-                    dto.setPname(request.getParameter("pname"));
-                    dto.setPeople(Integer.parseInt(request.getParameter("people")));
-                    dto.setStudykind(request.getParameter("studykind"));
-                    dto.setContent(request.getParameter("content"));
+//        int input_purpose = Integer.parseInt(request.getParameter("input_purpose"));
+        int input_purpose = input_purpose = 1; // 나중에 제대로 디테일에서 넘겨 받고 지워줘라 찬욱아
+
+        int input_id = Integer.parseInt(request.getParameter("input_id"));
+        String input_content = request.getParameter("input_content");
+
+        // db
+        new ApplyStudyDAO().insertApply(input_purpose,input_id,input_content);
 
 
-                    new CommunityDAO().insert(dto);
+        request.setAttribute("mainUrl", "community/alert.jsp");
+        request.setAttribute("msg", "입력되었습니다.");
+        request.setAttribute("goUrl", "studygroup.jsp");
 
-
-                    System.out.println(dto);*/
-
-                    request.setAttribute("mainUrl", "community/alert.jsp");
-                    request.setAttribute("msg", "입력되었습니다.");
-                    request.setAttribute("goUrl", "studygroup.jsp");
-           /*     } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }*/
-
-
-            }
-        }
+    }
+}

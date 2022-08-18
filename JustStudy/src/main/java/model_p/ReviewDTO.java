@@ -1,9 +1,13 @@
 package model_p;
 
+import java.util.Date;
+
 public class ReviewDTO {
 
     int id, reservId, memId;
-    String content;
+    String content, branch, userId;
+    double star;
+    Date reviewDate;
 
     public int getId() {
         return id;
@@ -35,6 +39,38 @@ public class ReviewDTO {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public double getStar() {
+        return star;
+    }
+
+    public void setStar(double star) {
+        this.star = star;
+    }
+
+    public Date getReviewDate() {
+        return reviewDate;
+    }
+
+    public void setReviewDate(Date reviewDate) {
+        this.reviewDate = reviewDate;
     }
 
     @Override

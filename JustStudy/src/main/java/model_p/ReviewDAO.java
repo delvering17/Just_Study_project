@@ -3,10 +3,7 @@ package model_p;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -143,6 +140,36 @@ public class ReviewDAO {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    public ArrayList<ReviewDTO> branchReview(String branchName){
+        ArrayList<ReviewDTO> res = new ArrayList<ReviewDTO>();
+
+        sql = "SELECT branch, mem_userid, reviewDate, star, content FROM review JOIN reservation ON reservId = reservation.id" +
+                " JOIN member ON reservation.userId = member.mem_id WHERE branch = ? limit 5";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, branchName);
+            rs = ptmt.executeQuery();
+
+            while(rs.next()){
+                ReviewDTO reviewDTO = new ReviewDTO();
+                reviewDTO.setBranch(rs.getString("branch"));
+                reviewDTO.setUserId(rs.getString("mem_userid"));
+                reviewDTO.setReviewDate(rs.getTimestamp("reviewDate"));
+                reviewDTO.setStar(rs.getDouble("star"));
+                reviewDTO.setContent(rs.getString("content"));
+
+                res.add(reviewDTO);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return res;
     }
 
     public void close() {

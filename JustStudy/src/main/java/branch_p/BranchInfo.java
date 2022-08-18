@@ -2,6 +2,8 @@ package branch_p;
 
 import model_p.BranchDAO;
 import model_p.BranchDTO;
+import model_p.ReviewDAO;
+import model_p.ReviewDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +23,10 @@ public class BranchInfo implements BranchService{
         BranchDTO branchDTO = new BranchDAO().branchDetail(name);
 
         String [] facilities = branchDTO.getFacilities().split(",");
+
+        ArrayList<ReviewDTO> reviewList = new ReviewDAO().branchReview(request.getParameter("name"));
+
+        request.setAttribute("reviewList", reviewList);
 
         request.setAttribute("facilities", facilities);
 

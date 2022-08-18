@@ -175,9 +175,6 @@
         margin-top: 5px;
     }
 </style>
-
-
-
 <div class="wrapper-branch-info">
     <div class="branch-info">
         <div class="branch-info-top">
@@ -228,12 +225,14 @@
             <div class="branch-info-bottom-items" id="bottom-review">
                 <p class="items-header">후기</p>
                 <hr />
-                <div class="review-item">
-                    <p class="review-id">국문학과가 가고싶었던 선장</p>
-                    <p class="review-date">2022-11-10</p>
-                    <div class="review-star">별</div>
-                    <div class="review-content">adsfd</div>
-                </div>
+                <c:forEach items="${reviewList}" var="review" varStatus="no">
+                    <div class="review-item">
+                        <p class="review-id">${review.userId}</p>
+                        <p class="review-date">${review.reviewDate}</p>
+                        <div class="review-star">${review.star}</div>
+                        <div class="review-content">${review.content}</div>
+                    </div>
+                </c:forEach>
             </div>
         </div>
     </div>

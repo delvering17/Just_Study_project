@@ -47,6 +47,7 @@
 
     <form action="CommunityModifyReg">
         <table>
+            <input type="hidden" name="id" value="${communityDTO.id}"/>
             <tr>
                 <td>지역</td>
                 <td colspan="3">

@@ -63,7 +63,7 @@
         <tr>
           <form action="" method="">
             <th><input type="hidden" name="user" value="${i.black_id}">${i.black_id}</th>
-            <td></td>
+            <td>${i.mem_userid}</td>
             <td>${i.black_reason}</td>
             <td>
               <button formaction="AdminBlackListDelete" formmethod="get">삭제</button>

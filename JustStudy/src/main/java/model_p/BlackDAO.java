@@ -30,7 +30,7 @@ public class BlackDAO {
     public ArrayList<BlackDTO> blackList(){
 
         ArrayList<BlackDTO> res = new ArrayList<>();
-        sql = "select * from blacklist";
+        sql = "SELECT black_id, mem_userid, black_reason FROM blacklist JOIN member ON black_id = mem_id";
 
         try {
             ptmt = con.prepareStatement(sql);
@@ -39,6 +39,7 @@ public class BlackDAO {
             while (rs.next()) {
                 BlackDTO blackDTO = new BlackDTO();
                 blackDTO.setBlack_id(rs.getInt("black_id"));
+                blackDTO.setMem_userid(rs.getString("mem_userid"));
                 blackDTO.setBlack_reason(rs.getString("black_reason"));
                 res.add(blackDTO);
             }

@@ -4,6 +4,7 @@ public class BlackDTO {
 
     int black_id;
     String black_reason;
+    String mem_userid;
 
     public BlackDTO() {
 
@@ -25,11 +26,20 @@ public class BlackDTO {
         this.black_reason = black_reason;
     }
 
+    public String getMem_userid() {
+        return mem_userid;
+    }
+
+    public void setMem_userid(String mem_userid) {
+        this.mem_userid = mem_userid;
+    }
+
     @Override
     public String toString() {
         return "BlackDTO{" +
                 "black_id=" + black_id +
                 ", black_reason='" + black_reason + '\'' +
+                ", mem_userid='" + mem_userid + '\'' +
                 '}';
     }
 }

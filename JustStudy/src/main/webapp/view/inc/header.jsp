@@ -3,11 +3,11 @@
          pageEncoding="UTF-8" %>
 
 <style type="text/css">
-    * {
-        width: 100%;
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
+    .wrapper * {
+         width: 100%;
+         box-sizing: border-box;
+         margin: 0;
+         padding: 0;
     }
 
     .header-wrapper {
@@ -17,8 +17,9 @@
 
     }
 
+
     .wrapper {
-        width: 100%;
+        /*width: 100%;*/
         height: fit-content;
         /*background-image: url("
 <%--    <%=request.getContextPath()%> --%>

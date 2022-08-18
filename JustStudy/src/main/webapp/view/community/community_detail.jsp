@@ -164,7 +164,7 @@
         })
 
         $(".community-delete-btn").click(function (){
-
+            location.href="CommunityDeleteForm?id=${communityDTO.id}"
         })
     }
 

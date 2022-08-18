@@ -19,7 +19,7 @@ public class CommunityController extends HttpServlet {
     public CommunityController(){
         super();
         nonService.put("CommunityInsertForm", "community/insertForm.jsp");
-        nonService.put("CommunityDeleteForm", "community/deleteForm.jsp");
+        nonService.put("CommunityDeleteForm", "community/community_deleteForm.jsp");
 }
 
     @Override

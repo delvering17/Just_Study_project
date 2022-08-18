@@ -3,8 +3,8 @@ package model_p;
 import java.util.Date;
 
 public class ReservationDTO {
-    String orderId, userId, city, branch, room, time, paymentMethod, status, useDate;
-    int id, headcount, pay;
+    String orderId, city, branch, room, time, paymentMethod, status, useDate;
+    int id, headcount, pay, userId, review;
     Date resDate;
 
     public String getOrderId() {
@@ -15,11 +15,11 @@ public class ReservationDTO {
         this.orderId = orderId;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -109,5 +109,13 @@ public class ReservationDTO {
 
     public void setUseDate(String useDate) {
         this.useDate = useDate;
+    }
+
+    public int getReview() {
+        return review;
+    }
+
+    public void setReview(int review) {
+        this.review = review;
     }
 }

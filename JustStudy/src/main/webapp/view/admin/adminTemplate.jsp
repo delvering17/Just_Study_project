@@ -211,20 +211,20 @@
 
             </ul>
             <ul>
-                <li>지점 관리</li>
-                <li><a href="AdminStoreList">지점 목록</a></li>
-                <li><a href="">휴일 관리</a></li>
-                <li><a href="">이용 후기</a></li>
+                <li>지점관리</li>
+                <li><a href="AdminStoreList">지점목록</a></li>
+                <li><a href="AdminStoreReview">이용후기</a></li>
+                <li><a href=""></a></li>
             </ul>
             <ul>
-                <li>매출 관리</li>
-                <li><a href="">회원 매출</a></li>
-                <li><a href="">지점 매출</a></li>
-
+                <li>매출관리</li>
+                <li><a href="AdminSalesStore">지점별 매출</a></li>
+                <li><a href="">회원별 매출</a></li>
+                <li><a href=""></a></li>
             </ul>
             <ul>
-                <li>예약 관리</li>
-                <li><a href="">예약 관리</a></li>
+                <li>예약관리</li>
+                <li><a href="AdminReservList">예약목록</a></li>
                 <li><a href=""></a></li>
                 <li><a href=""></a></li>
             </ul>

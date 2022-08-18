@@ -60,13 +60,13 @@ public class ReservationDAO {
         return res;
     }
 
-    public void addReservation(ReservationDTO dto){
+    public int addReservation(ReservationDTO dto) {
         sql = "insert into reservation(resDate, userId, city, branch, room, useDate, time, headcount, pay, paymentMethod, status, orderId) values" +
                 "(sysdate(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             ptmt = con.prepareStatement(sql);
-            ptmt.setString(1, dto.getUserId());
+            ptmt.setInt(1, dto.getUserId());
             ptmt.setString(2, dto.getCity());
             ptmt.setString(3, dto.getBranch());
             ptmt.setString(4, dto.getRoom());
@@ -78,24 +78,25 @@ public class ReservationDAO {
             ptmt.setString(10, dto.getStatus());
             ptmt.setString(11, dto.getOrderId());
 
-            ptmt.executeUpdate();
+            return ptmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         } finally {
             close();
         }
 
+        return 0;
     }
 
-    public ArrayList<ReservationDTO> myReservationList(String userId){
+    public ArrayList<ReservationDTO> myReservationList(int userId){
 
         ArrayList<ReservationDTO> res = new ArrayList<ReservationDTO>();
 
         sql = "select * from reservation where userId = ? order by resDate desc";
         try {
             ptmt = con.prepareStatement(sql);
-            ptmt.setString(1, userId);
+            ptmt.setInt(1, userId);
 
             rs = ptmt.executeQuery();
             while(rs.next()){
@@ -103,7 +104,7 @@ public class ReservationDAO {
 
                 dto.setId(rs.getInt("id"));
                 dto.setResDate(rs.getDate("resDate"));
-                dto.setUserId(rs.getString("userId"));
+                dto.setUserId(rs.getInt("userId"));
                 dto.setCity(rs.getString("city"));
                 dto.setBranch(rs.getString("branch"));
                 dto.setRoom(rs.getString("room"));
@@ -113,6 +114,7 @@ public class ReservationDAO {
                 dto.setPay(rs.getInt("pay"));
                 dto.setPaymentMethod(rs.getString("paymentMethod"));
                 dto.setStatus(rs.getString("status"));
+                dto.setReview(rs.getInt("review"));
 
                 res.add(dto);
             }

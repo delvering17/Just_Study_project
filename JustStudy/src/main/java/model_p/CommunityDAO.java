@@ -157,6 +157,23 @@ public class CommunityDAO {
         }
     }
 
+    public int delete(int id) {
+        sql = "delete from studygroup where id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, id);
+
+            return ptmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return 0;
+    }
+
 
     public void close() {
         if(rs!=null) try {rs.close();} catch (SQLException e) {}

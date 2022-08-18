@@ -51,7 +51,7 @@
 
 <div class="community-modify-bg">
 
-    <form action="CommunityModifyReg">
+    <form action="CommunityModifyReg" method="post">
         <table>
             <input type="hidden" name="id" value="${communityDTO.id}"/>
             <tr>

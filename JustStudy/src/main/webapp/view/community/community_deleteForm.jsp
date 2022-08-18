@@ -6,7 +6,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<form action="CommunityDeleteReg">
+<script>
+  <c:if test="${msg!=null }">
+  alert("${msg}")
+  </c:if>
+</script>
+<form action="CommunityDeleteReg" method="post">
   <table border="" width="100%">
     <input type="hidden" name="id" value="${param.id }"/>
     <tr>

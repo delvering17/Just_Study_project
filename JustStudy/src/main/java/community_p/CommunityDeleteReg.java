@@ -10,7 +10,8 @@ public class CommunityDeleteReg implements CommunityService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-        String password = new MemberDAO().detail(Integer.parseInt(request.getParameter("id"))).getMem_password();
+
+        String password = new MemberDAO().detail(new CommunityDAO().detail(Integer.parseInt(request.getParameter("id"))).getMemId()).getMem_password();
 
         String msg = "삭제 실패";
         String goUrl = "CommunityDetail?id="+request.getParameter("id");

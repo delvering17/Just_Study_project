@@ -47,6 +47,7 @@ public class CommunityDAO {
                 dto.setPeople(rs.getInt("people"));
                 dto.setStudykind(rs.getString("studykind"));
                 dto.setContent(rs.getString("content"));
+                dto.setRegDate(rs.getDate("regDate"));
 
                 res.add(dto);
             }
@@ -171,6 +172,42 @@ public class CommunityDAO {
         }
 
         return 0;
+    }
+
+    public ArrayList<CommunityDTO> makedList(int id){
+
+        ArrayList<CommunityDTO> res = new ArrayList<CommunityDTO>();
+
+        sql = "select * from studygroup where memId = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, id);
+            rs = ptmt.executeQuery();
+
+            while(rs.next()){
+                CommunityDTO communityDTO = new CommunityDTO();
+
+                communityDTO.setId(rs.getInt("id"));
+                communityDTO.setMemId(rs.getInt("memId"));
+                communityDTO.setLocation(rs.getString("location"));
+                communityDTO.setStartdate(rs.getDate("startdate"));
+                communityDTO.setEnddate(rs.getDate("enddate"));
+                communityDTO.setTitle(rs.getString("title"));
+                communityDTO.setPeople(rs.getInt("people"));
+                communityDTO.setStudykind(rs.getString("studykind"));
+                communityDTO.setContent(rs.getString("content"));
+                communityDTO.setRegDate(rs.getDate("regDate"));
+
+                res.add(communityDTO);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return res;
     }
 
 

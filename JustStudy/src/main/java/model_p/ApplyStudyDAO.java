@@ -4,6 +4,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class ApplyStudyDAO {
@@ -38,7 +39,7 @@ public class ApplyStudyDAO {
                 res = new ApplyStudyDTO();
                 res.setAs_id(rs.getInt("as_id"));
                 res.setAs_purpose(rs.getInt("as_purpose"));
-                res.setAs_mem_id(rs.getInt("mem_id"));
+                res.setAs_mem_id(rs.getInt("as_mem_id"));
                 res.setAs_content(rs.getString("as_content"));
                 res.setAs_state(rs.getInt("as_state"));
 
@@ -70,10 +71,37 @@ public class ApplyStudyDAO {
         } finally {
             close();
         }
-
-
     }
 
+    public ArrayList<ApplyStudyDTO> myApplyList(int id){
+
+        ArrayList<ApplyStudyDTO> res = new ArrayList<ApplyStudyDTO>();
+
+        sql = "select * from applystudy where as_mem_id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, id);
+
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                ApplyStudyDTO applyStudyDTO = new ApplyStudyDTO();
+                applyStudyDTO.setAs_id(rs.getInt("as_id"));
+                applyStudyDTO.setAs_purpose(rs.getInt("as_purpose"));
+                applyStudyDTO.setAs_mem_id(rs.getInt("as_mem_id"));
+                applyStudyDTO.setAs_content(rs.getString("as_content"));
+                applyStudyDTO.setAs_state(rs.getInt("as_state"));
+
+                res.add(applyStudyDTO);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return res;
+    }
 
     public void close() {
         if(rs!=null) try { rs.close(); } catch (SQLException e) {}

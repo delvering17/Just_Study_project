@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: dieun
@@ -110,6 +111,27 @@
     border-bottom: 1px solid lightgray;
   }
 
+  .mypage-studygroup-table td:nth-of-type(1){
+    width: 3%;
+  }
+
+  .mypage-studygroup-table td:nth-of-type(2){
+    width: 19%;
+  }
+
+  .mypage-studygroup-table td:nth-of-type(3),
+  .mypage-studygroup-table td:nth-of-type(4),
+  .mypage-studygroup-table td:nth-of-type(5),
+  .mypage-studygroup-table td:nth-of-type(6),
+  .mypage-studygroup-table td:nth-of-type(7) {
+    width: 12%;
+  }
+
+  .mypage-studygroup-table td:nth-of-type(8),
+  .mypage-studygroup-table td:nth-of-type(9){
+    width: 9%;
+  }
+
 </style>
 
 <script type="text/javascript">
@@ -153,6 +175,16 @@
       $("input[id=mypick]").attr('checked', true);
     })
 
+    $("input[name=mypage-studygroup-type]").each(function (key, value){
+      if(value.getAttribute("id") == "${param.type}"){
+        value.setAttribute("checked", true);
+      }
+    })
+
+    $("input[name=mypage-studygroup-type]").change(function (){
+      location.href = "MypageStudygroup?type="+$("input[name=mypage-studygroup-type]:checked").attr("id")
+    })
+
 
   }
 </script>
@@ -188,7 +220,7 @@
   <div class="mypage-studygroup-main">
 
     <div class="mypage-studygroup-menu">
-      <input type="radio" name="mypage-studygroup-type" id="maked" checked hidden><label for="maked"><p>커뮤니티 개설내역</p></label>
+      <input type="radio" name="mypage-studygroup-type" id="maked" hidden><label for="maked"><p>커뮤니티 개설내역</p></label>
       <input type="radio" name="mypage-studygroup-type" id="apply" hidden><label for="apply"><p>커뮤니티 신청내역</p></label>
     </div>
 
@@ -196,7 +228,7 @@
       <tr>
         <td>ID</td>
         <td>제목</td>
-        <td>개설일자</td>
+        <td>등록일자</td>
         <td>지점</td>
         <td>시작일</td>
         <td>종료일</td>
@@ -205,11 +237,21 @@
         <td>상태</td>
       </tr>
 
-      <form action="MypageReview" class="mypage-studygroup-review-form">
-        <tr>
-
-        </tr>
-      </form>
+      <c:forEach items="${studygroupList}" var="studygroup" varStatus="no">
+        <form action="MypageReview" class="mypage-studygroup-review-form">
+          <tr>
+            <td>${studygroup.id}</td>
+            <td>${studygroup.title}</td>
+            <td>${studygroup.regDate}</td>
+            <td>${studygroup.location}</td>
+            <td>${studygroup.startdate}</td>
+            <td>${studygroup.enddate}</td>
+            <td>${studygroup.people}</td>
+            <td>${studygroup.studykind}</td>
+            <td></td>
+          </tr>
+        </form>
+      </c:forEach>
     </table>
   </div>
 

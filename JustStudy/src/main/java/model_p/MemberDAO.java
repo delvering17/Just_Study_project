@@ -273,8 +273,33 @@ public class MemberDAO {
         } finally {
             close();
         }
-
     }
+
+    public int isSocialId(String social_id) {
+        int res = 0;
+        sql = "select mem_id from member where mem_social = 2 and mem_socialid = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1,social_id);
+            rs = ptmt.executeQuery();
+
+            if(rs.next()) {
+                res = rs.getInt("mem_id");
+            }
+
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+
+        return res;
+    }
+
+
 
     public void close() {
         if(rs!=null) try { rs.close(); } catch (SQLException e) {}

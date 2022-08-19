@@ -40,10 +40,14 @@ public class ApplyStudyDTO {
         return as_content;
     }
 
+    public String getAs_content_String() {
+
+        return as_content.replaceAll("\n","<br/>");
+    }
+
     public void setAs_content(String as_content) {
         this.as_content = as_content;
     }
-
     public int getAs_state() {
         return as_state;
     }

@@ -1,5 +1,6 @@
-package community_p;
+package nonView_p;
 
+import community_p.CommunityService;
 import model_p.ApplyStudyDAO;
 import model_p.CommunityDAO;
 import model_p.CommunityDTO;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class CommunityApplyInsertReg implements CommunityService{
+public class CommunityApplyInsertReg implements NonViewService {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
@@ -37,9 +38,5 @@ public class CommunityApplyInsertReg implements CommunityService{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
-
     }
 }

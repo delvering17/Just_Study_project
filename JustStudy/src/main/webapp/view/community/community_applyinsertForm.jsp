@@ -67,30 +67,29 @@
     <p>간단한 신청자 정보를 입력해 주세요.</p>
 </div>
 
-<form >
-    <table border="">
-        <input type="hidden" name="mem_id" id="mem-id" value="${mem_id}">
-        <input type="hidden" name="input_purpose" id="input-purpose" value="${input_purpose}">
-        <colgroup>
-            <col width="200px"/>
-            <col width="*"/>
-        </colgroup>
-        <tr>
-            <th><p>닉네임</p></th>
-            <td width="500px">
-                ${memberDTO.mem_nickname}
-            </td>
-        </tr>
-        <tr>
-            <th><p>내용</p></th>
-            <td>
-                <textarea id="input-content" name="input_content" cols="30" rows="10"></textarea>
-            </td>
-        </tr>
-    </table>
+<table border="">
+    <input type="hidden" name="mem_id" id="mem-id" value="${mem_id}">
+    <input type="hidden" name="input_purpose" id="input-purpose" value="${input_purpose}">
+    <colgroup>
+        <col width="200px"/>
+        <col width="*"/>
+    </colgroup>
+    <tr>
+        <th><p>닉네임</p></th>
+        <td width="500px">
+            ${memberDTO.mem_nickname}
+        </td>
+    </tr>
+    <tr>
+        <th><p>내용</p></th>
+        <td>
+            <textarea id="input-content" name="input_content" cols="30" rows="10"></textarea>
+        </td>
+    </tr>
+</table>
+<a onclick="goApplyInsert()">등록</a>
 
-    <button onclick="goApplyInsert()">등록</button>
-</form>
+
 <script type="text/javascript">
 
     function goApplyInsert() {
@@ -101,16 +100,15 @@
         }
 
         $.ajax({
-            url:'<c:url value="/community/CommunityApplyInsertReg"/>',
+            url:'<c:url value="/nonView/CommunityApplyInsertReg"/>',
             type:'GET',
             data: form_data,
             async:false,
             dataType:'JSON',
             success:function(response){
-                // alert(response.member_nickname)
                 if(response.applyResult === 'success') {
                     alert('신청되었습니다.')
-                    location.href = '<c:url value="/board/MainPage"/>'
+                    location.href = 'CommunityApplyDetail?as_id=' + response.as_id
                 } else {
                     alert(response.applyResult)
                 }
@@ -120,5 +118,6 @@
             }
         })
     }
+
 </script>
 

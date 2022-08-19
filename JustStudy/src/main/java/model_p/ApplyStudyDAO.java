@@ -25,7 +25,7 @@ public class ApplyStudyDAO {
         }
     }
 
-    public ApplyStudyDTO detail() {
+    public ApplyStudyDTO list() {
         ApplyStudyDTO res = null;
 
         sql = "select * from applystudy";
@@ -89,7 +89,36 @@ public class ApplyStudyDAO {
         } finally {
             close();
         }
-        return res + 1;
+        return res;
+    }
+
+    public ApplyStudyDTO detail(int as_id) {
+        ApplyStudyDTO res = null;
+        sql = "select * from applystudy where as_id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, as_id);
+            rs = ptmt.executeQuery();
+
+            if(rs.next()) {
+                res = new ApplyStudyDTO();
+
+                res.setAs_id(rs.getInt("as_id"));
+                res.setAs_purpose(rs.getInt("as_purpose"));
+                res.setAs_mem_id(rs.getInt("as_mem_id"));
+                res.setAs_content(rs.getString("as_content"));
+                res.setAs_state(rs.getInt("as_state"));
+                res.setReg_date(rs.getTimestamp("reg_date"));
+
+            }
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return res;
     }
 
 

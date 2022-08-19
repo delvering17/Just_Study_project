@@ -25,8 +25,8 @@
         </tr>
         <tr>
             <td>이벤트 기간</td>
-            <td><input type="date" name="startdate"></td>
-            <td> ~ <input type="date" name="enddate"></td>
+            <td><input type="date" name="event_startdate"></td>
+            <td> ~ <input type="date" name="event_enddate"></td>
             <td></td>
         </tr>
         <tr>
@@ -39,8 +39,3 @@
     </table>
 
 </form>
-<script>
-    const lc = document.getElementById("location_01");
-   /* alert('선택된 옵션 value 값=' + lc.options[lc.selectedIndex].value);*/
-
-</script>

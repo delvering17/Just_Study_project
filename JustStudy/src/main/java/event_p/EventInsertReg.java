@@ -16,8 +16,8 @@ public class EventInsertReg implements EventService {
         try {
             EventDTO dto = new EventDTO();
             dto.setTitle(request.getParameter("title"));
-            dto.setStartdate(request.getParameter("startdate"));
-            dto.setEnddate(request.getParameter("enddate"));
+            dto.setEvent_startdate(request.getParameter("event_startdate"));
+            dto.setEvent_enddate(request.getParameter("event_enddate"));
             dto.setContent(request.getParameter("content"));
 
 

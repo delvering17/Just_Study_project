@@ -137,7 +137,7 @@
 
 <div class="event-status">
     <h2> ${dto.title} </h2>
-   <p class="date" style="margin-top: 30px"> ${dto.startdate}~${dto.enddate}</p>
+   <p class="date" style="margin-top: 30px"> ${dto.event_startdate}~${dto.event_enddate}</p>
 
 </div>
 <hr style="width: 80%; height: 1px; margin-left: 10%; background: lightgray">

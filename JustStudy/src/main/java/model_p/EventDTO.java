@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class EventDTO {
     int id;
-    String title,startdate,enddate,content;
+    String title,event_startdate,event_enddate,content;
     Date reg_date;
 
     public int getId() {
@@ -23,20 +23,20 @@ public class EventDTO {
         this.title = title;
     }
 
-    public String getStartdate() {
-        return startdate;
+    public String getEvent_startdate() {
+        return event_startdate;
     }
 
-    public void setStartdate(String startdate) {
-        this.startdate = startdate;
+    public void setEvent_startdate(String event_startdate) {
+        this.event_startdate = event_startdate;
     }
 
-    public String getEnddate() {
-        return enddate;
+    public String getEvent_enddate() {
+        return event_enddate;
     }
 
-    public void setEnddate(String enddate) {
-        this.enddate = enddate;
+    public void setEvent_enddate(String event_enddate) {
+        this.event_enddate = event_enddate;
     }
 
     public String getContent() {
@@ -64,8 +64,8 @@ public class EventDTO {
         return "EventDTO{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", startdate='" + startdate + '\'' +
-                ", enddate='" + enddate + '\'' +
+                ", startdate='" + event_startdate + '\'' +
+                ", enddate='" + event_enddate + '\'' +
                 ", content='" + content + '\'' +
                 ", reg_date=" + reg_date +
                 '}';

@@ -116,6 +116,12 @@
         height: 50px;
         border: 1px solid #000;
     }
+    .tabmenu li.on a{
+        background:#001f2e;
+        font-family:'NotoSansKR-Bold';
+        color:#fff;
+        border-color:#001f2e
+    } /*메뉴 버튼 3개 클릭 시 변경*/
 </style>
 
 <div class="main">
@@ -126,9 +132,11 @@
 
     <div class="event-status">
         <ul class="tabmenu">
-            <li class="on"><a href="#none" data-filter=".filter-active" data-sca="" />전체</li>
-            <li class=""><a href="#none" data-filter=".filter-ing" data-sca="ing" />진행중</li>
-            <li class=""><a href="#none" data-filter=".filter-close" data-sca="close" />마감</li>
+            <li class="on"><a href="#none" data-filter=".filter-active" data-sca="" >전체</a></li>
+            <li class=""><a href="#none" data-filter=".filter-ing" data-sca="ing" >진행중</a></li><%--진행중--%>
+            <li class=""><a href="#none" data-filter=".filter-close" data-sca="close" >마감</a></li><%--마감--%>
+
+
         </ul>
         <%--<div>전체</div>
         <div>진행중</div>
@@ -138,13 +146,15 @@
 
     <div class="event-list-area">
 
+
         <ul class="event-ul">
             <jsp:useBean id="now" class="java.util.Date" />
             <fmt:formatDate var="today" value="${now}" pattern="yyyy-MM-dd"/>
 
             <c:forEach items="${mainData}" var="dto" varStatus="no">
                 <c:choose>
-                    <c:when test="${today < dto.enddate}">
+                    <c:when test="${today < dto.event_enddate}">
+
                 <li class="event-li filter-active filter-ing">${dto.id}
                     <div class="event-img">
                         이벤트 이미지
@@ -157,7 +167,7 @@
                         </div>
                         <hr>
                         <div class="event-date">
-                            <p>${dto.startdate} ~ ${dto.enddate}</p>
+                            <p>${dto.event_startdate} ~ ${dto.event_enddate}</p>
                             <div class="ing">
                                 <p>상시 <a href="EventDetail?id=${dto.id}" /></p>
                             </div>
@@ -178,7 +188,7 @@
                                 </div>
                                 <hr>
                                 <div class="event-date">
-                                    <p>${dto.startdate} ~ ${dto.enddate}</p>
+                                    <p>${dto.event_startdate} ~ ${dto.event_enddate}</p>
                                     <div class="ing">
                                         <p>이벤트마감</p>
                                     </div>
@@ -196,6 +206,7 @@
     </div>
 
 </div>
+
 <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
 <script>
     $(document).ready( function() {
@@ -208,7 +219,7 @@
         $('.tabmenu').on( 'click', 'li', function() {
             var filterValue = $(this).children().attr('data-filter');
             $('.event-ul').isotope({ filter: filterValue });
-            $('.tabmenu li').removeClass('on');
+            $('.tabmenu > li').removeClass('on');
             $(this).addClass('on');
         });
     })

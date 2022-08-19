@@ -45,8 +45,8 @@ public class EventDAO {
                 dto.setId(rs.getInt("id"));
                 dto.setTitle(rs.getString("title"));
                 dto.setReg_date(rs.getTimestamp("reg_date"));
-                dto.setStartdate(rs.getString("startdate"));
-                dto.setEnddate(rs.getString("enddate"));
+                dto.setEvent_startdate(rs.getString("event_startdate"));
+                dto.setEvent_enddate(rs.getString("event_enddate"));
                 dto.setContent(rs.getString("content"));
 
                 res.add(dto);
@@ -76,15 +76,15 @@ public class EventDAO {
             //System.out.println(dto);
 
 
-            sql = "insert into eventpp (id,title,startdate,enddate,content) "
+            sql = "insert into eventpp (id,title,event_startdate,event_enddate,content) "
                     + "values (?,?,?,?,?)";
 
             ptmt =con.prepareStatement(sql);
 
             ptmt.setInt(1, dto.id);
             ptmt.setString(2,dto.title);
-            ptmt.setString(3,dto.startdate);
-            ptmt.setString(4,dto.enddate);
+            ptmt.setString(3,dto.event_startdate);
+            ptmt.setString(4,dto.event_enddate);
             ptmt.setString(5,dto.content);
 
             ptmt.executeUpdate();
@@ -112,8 +112,8 @@ public class EventDAO {
                 res = new EventDTO();
                 res.setId(rs.getInt("id"));
                 res.setTitle(rs.getString("title"));
-                res.setStartdate(rs.getString("startdate"));
-                res.setEnddate(rs.getString("enddate"));
+                res.setEvent_startdate(rs.getString("event_startdate"));
+                res.setEvent_enddate(rs.getString("event_enddate"));
                 res.setContent(rs.getString("content"));
 
 

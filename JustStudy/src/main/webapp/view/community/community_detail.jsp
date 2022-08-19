@@ -188,6 +188,7 @@
         <p>${communityDTO.location}</p>
         <h2>${communityDTO.title}</h2>
         <p>개설자: ${communityDTO.nickname}</p>
+        <p>등록일: ${communityDTO.regDate}</p>
 
         <table class="community-detail-table">
             <tr>

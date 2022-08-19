@@ -62,7 +62,6 @@
                         <c:forEach items="${branchList}" var="branch" varStatus="no">
                             <option value="${branch.name}">${branch.name}</option>
                         </c:forEach>
-
                     </select></td>
             </tr>
             <tr>

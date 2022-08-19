@@ -18,7 +18,6 @@ public class CommunityController extends HttpServlet {
 
     public CommunityController(){
         super();
-        nonService.put("CommunityInsertForm", "community/insertForm.jsp");
         nonService.put("CommunityDeleteForm", "community/community_deleteForm.jsp");
         nonService.put("CommunityApplyDeleteForm", "community/community_applyDeleteForm.jsp");
 }
@@ -32,8 +31,6 @@ public class CommunityController extends HttpServlet {
         }catch (UnsupportedEncodingException e){
             e.printStackTrace();
         }
-
-
 
         String service = request.getRequestURI().substring((request.getContextPath()+"/community/").length());
         System.out.println(service);

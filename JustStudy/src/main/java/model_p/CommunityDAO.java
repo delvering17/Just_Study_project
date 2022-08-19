@@ -62,7 +62,7 @@ public class CommunityDAO {
         return res;
     }
 
-    public void insert(CommunityDTO dto) {
+    public void insert(CommunityDTO communityDTO) {
 
         try {
             sql = "select max(id)+1 from studygroup";
@@ -70,7 +70,7 @@ public class CommunityDAO {
             ptmt = con.prepareStatement(sql);
             rs = ptmt.executeQuery();
             rs.next();
-            dto.id = rs.getInt(1);
+            communityDTO.id = rs.getInt(1);
 
             //System.out.println(dto);
 
@@ -79,15 +79,15 @@ public class CommunityDAO {
                     + "values (?,?,?,?,?,?,?,?,?,sysdate())";
 
             ptmt =con.prepareStatement(sql);
-            ptmt.setInt(1, dto.getId());
-            ptmt.setInt(2, dto.getMemId());
-            ptmt.setString(3, dto.getLocation());
-            ptmt.setDate(4, (Date) dto.getStartdate());
-            ptmt.setDate(5, (Date) dto.getEnddate());
-            ptmt.setString(6, dto.getTitle());
-            ptmt.setInt(7,dto.getPeople());
-            ptmt.setString(8, dto.getStudykind());
-            ptmt.setString(9, dto.getContent());
+            ptmt.setInt(1, communityDTO.getId());
+            ptmt.setInt(2, communityDTO.getMemId());
+            ptmt.setString(3, communityDTO.getLocation());
+            ptmt.setDate(4, new java.sql.Date(communityDTO.getStartdate().getTime()));
+            ptmt.setDate(5, new java.sql.Date(communityDTO.getEnddate().getTime()));
+            ptmt.setString(6, communityDTO.getTitle());
+            ptmt.setInt(7,communityDTO.getPeople());
+            ptmt.setString(8, communityDTO.getStudykind());
+            ptmt.setString(9, communityDTO.getContent());
 
             ptmt.executeUpdate();
 

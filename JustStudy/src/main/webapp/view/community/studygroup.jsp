@@ -201,7 +201,7 @@
                 <input class="input-main-form" type="checkbox" name="devision02" id="cate_3" data-cate="기타" checked>
                 <label class="label-main-form" for="cate_3">기타</label>
                 </div>
-                <a href="">새 글쓰기</a>
+                <a href="CommunityInsertForm">새 글쓰기</a>
             </form>
             <ul class="main-study-list-wrapper">
                 <jsp:useBean id="now" class="java.util.Date" />

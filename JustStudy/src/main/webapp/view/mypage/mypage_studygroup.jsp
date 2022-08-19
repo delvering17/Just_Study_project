@@ -252,8 +252,18 @@
             <td>${studygroup.enddate}</td>
             <td>${studygroup.people}</td>
             <td>${studygroup.studykind}</td>
+            <jsp:useBean id="now" class="java.util.Date" />
+            <fmt:formatDate var = "today" value="${now}" pattern="yyyy-MM-dd"/>
             <c:choose>
-              <c:when test="${param.type == 'type'}">
+              <c:when test="${param.type == 'maked'}">
+                <c:choose>
+                  <c:when test="${today < communityDTO.enddate}">
+                    <td>모집중</td>
+                  </c:when>
+                  <c:otherwise>
+                    <td>모집완료</td>
+                  </c:otherwise>
+                </c:choose>
               </c:when>
               <c:when test="${param.type == 'apply'}">
                 <c:choose>

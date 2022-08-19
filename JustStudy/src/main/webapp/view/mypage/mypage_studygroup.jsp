@@ -1,3 +1,6 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="model_p.ApplyStudyDTO" %>
+<%@ page import="java.util.Date" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -238,17 +241,40 @@
       </tr>
 
       <c:forEach items="${studygroupList}" var="studygroup" varStatus="no">
-        <form action="MypageReview" class="mypage-studygroup-review-form">
+        <form action="<c:url value="/community/CommunityApplyDetail"/>" class="mypage-studygroup-review-form">
+          <input type="hidden" name="as_id" value="${myApplyList[no.index].as_id}">
           <tr>
             <td>${studygroup.id}</td>
-            <td>${studygroup.title}</td>
+            <td><a href="<c:url value="/community/CommunityDetail?id=${studygroup.id}"/>">${studygroup.title}</a></td>
             <td>${studygroup.regDate}</td>
             <td>${studygroup.location}</td>
             <td>${studygroup.startdate}</td>
             <td>${studygroup.enddate}</td>
             <td>${studygroup.people}</td>
             <td>${studygroup.studykind}</td>
-            <td></td>
+            <c:choose>
+              <c:when test="${param.type == 'type'}">
+              </c:when>
+              <c:when test="${param.type == 'apply'}">
+                <c:choose>
+                  <c:when test="${myApplyList[no.index].as_state == 1}">
+                    <td>
+                      <input type="submit" value="대기중"/>
+                    </td>
+                  </c:when>
+                  <c:when test="${myApplyList[no.index].as_state == 2}">
+                    <td>
+                      <input type="submit" value="승인"/>
+                    </td>
+                  </c:when>
+                  <c:when test="${myApplyList[no.index].as_state == 3}">
+                    <td>
+                      <input type="submit" value="반려"/>
+                    </td>
+                  </c:when>
+                </c:choose>
+              </c:when>
+            </c:choose>
           </tr>
         </form>
       </c:forEach>

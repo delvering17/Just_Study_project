@@ -5,6 +5,7 @@ import model_p.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -23,9 +24,13 @@ public class MypageStudygroup implements MypageService{
 
         } else if(request.getParameter("type").equals("apply")){
 
-            for(ApplyStudyDTO applyStudyDTO : new ApplyStudyDAO().myApplyList(memberDTO.getMem_id())){
+            ArrayList<ApplyStudyDTO> myApplyList = new ApplyStudyDAO().myApplyList(memberDTO.getMem_id());
+
+            for(ApplyStudyDTO applyStudyDTO : myApplyList){
                 studygroupList.add(new CommunityDAO().detail(applyStudyDTO.getAs_purpose()));
             }
+
+            request.setAttribute("myApplyList", myApplyList);
         }
 
         request.setAttribute("memberDTO", memberDTO);

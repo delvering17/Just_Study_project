@@ -41,6 +41,7 @@ public class ApplyStudyDAO {
                 res.setAs_mem_id(rs.getInt("mem_id"));
                 res.setAs_content(rs.getString("as_content"));
                 res.setAs_state(rs.getInt("as_state"));
+                res.setReg_date(rs.getTimestamp("reg_date"));
 
             }
 
@@ -55,7 +56,7 @@ public class ApplyStudyDAO {
 
     public void insertApply(int input_purpose,int input_id, String input_content) {
 
-        sql = "insert into applystudy (as_purpose, as_mem_id, as_content, as_state) values (?, ?, ?, 1);";
+        sql = "insert into applystudy (as_purpose, as_mem_id, as_content, as_state, reg_date) values (?, ?, ?, 1, sysdate());";
 
         try {
             ptmt = con.prepareStatement(sql);
@@ -70,8 +71,25 @@ public class ApplyStudyDAO {
         } finally {
             close();
         }
+    }
 
+    public int selectAs_id() {
+        int res = 0;
+        sql = "select max(as_id) from applystudy";
 
+        try {
+            ptmt = con.prepareStatement(sql);
+            rs = ptmt.executeQuery();
+            if(rs.next()) {
+                res = rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+        return res + 1;
     }
 
 

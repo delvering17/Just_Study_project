@@ -1,5 +1,7 @@
 package model_p;
 
+import java.util.Date;
+
 public class ApplyStudyDTO {
 
     int as_id;
@@ -7,6 +9,8 @@ public class ApplyStudyDTO {
     int as_mem_id;
     String as_content;
     int as_state;
+
+    Date reg_date;
 
     public int getAs_id() {
         return as_id;
@@ -48,6 +52,14 @@ public class ApplyStudyDTO {
         this.as_state = as_state;
     }
 
+    public Date getReg_date() {
+        return reg_date;
+    }
+
+    public void setReg_date(Date reg_date) {
+        this.reg_date = reg_date;
+    }
+
     @Override
     public String toString() {
         return "ApplyStudyDTO{" +
@@ -56,6 +68,8 @@ public class ApplyStudyDTO {
                 ", as_mem_id=" + as_mem_id +
                 ", as_content='" + as_content + '\'' +
                 ", as_state=" + as_state +
+                ", reg_date=" + reg_date +
                 '}';
     }
+
 }

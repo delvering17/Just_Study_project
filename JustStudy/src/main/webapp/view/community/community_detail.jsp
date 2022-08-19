@@ -156,7 +156,7 @@
 <script type="text/javascript">
     window.onload = function (){
         $(".community-apply-btn").click(function (){
-            location.href="CommunityApplyInsertForm"
+            location.href="CommunityApplyInsertForm?input_purpose=${communityDTO.id}"
         })
 
         $(".community-modify-btn").click(function (){

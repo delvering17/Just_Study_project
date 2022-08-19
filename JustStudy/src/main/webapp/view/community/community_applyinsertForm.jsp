@@ -70,6 +70,7 @@
 <form >
     <table border="">
         <input type="hidden" name="mem_id" id="mem-id" value="${mem_id}">
+        <input type="hidden" name="input_purpose" id="input-purpose" value="${input_purpose}">
         <colgroup>
             <col width="200px"/>
             <col width="*"/>
@@ -95,7 +96,8 @@
     function goApplyInsert() {
         let form_data = {
             input_id:$('#mem-id').val(),
-            input_content:$('#input_content').val()
+            input_content:$('#input-content').val(),
+            input_purpose:$('#input-purpose').val()
         }
 
         $.ajax({
@@ -107,7 +109,7 @@
             success:function(response){
                 // alert(response.member_nickname)
                 if(response.applyResult === 'success') {
-                    alert('신청되었습니다')
+                    alert('신청되었습니다.')
                     location.href = '<c:url value="/board/MainPage"/>'
                 } else {
                     alert(response.applyResult)

@@ -180,8 +180,6 @@ public class ReservationDAO {
         return res;
     }
 
-
-
     public void close() {
         if(rs!=null) try { rs.close(); } catch (SQLException e) {}
         if(ptmt!=null) try { ptmt.close(); } catch (SQLException e) {}

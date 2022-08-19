@@ -136,7 +136,7 @@
         <button type="submit" class="admin-sales-store-search"><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
     </div>
-      <div>총 매출:${total}</div>
+      <div>총 매출:${storeTotalPay}</div>
 
     <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-sales-store-table">
       <tr>
@@ -146,20 +146,17 @@
         <th>매출</th>
       </tr>
       <form action="">
-        <c:forEach items="${salesList}" var="salesList">
+        <c:forEach items="${salesStoreList}" var="salesStoreList">
 
           <tr>
-            <td>${salesList.city}</td>
-            <td>${salesList.branch}</td>
-            <td>${salesList.useDate}</td>
-            <td>${salesList.pay}</td>
+            <td>${salesStoreList.city}</td>
+            <td>${salesStoreList.branch}</td>
+            <td>${salesStoreList.useDate}</td>
+            <td>${salesStoreList.pay}</td>
           </tr>
 
         </c:forEach>
       </form>
-
-
-
     </table>
   </div>
 </div>

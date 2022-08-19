@@ -110,6 +110,87 @@ public class AdminReservDAO {
 
     }
 
+    public ArrayList<AdminReservDTO> userSalesList(){
+
+        ArrayList<AdminReservDTO> res = new ArrayList<AdminReservDTO>();
+
+        sql="select mem_userid, mem_nickname, useDate, pay from reservation join member on reservation.userId = member.mem_id";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                AdminReservDTO adminReservDTO = new AdminReservDTO();
+                adminReservDTO.setMem_userid(rs.getString("mem_userid"));
+                adminReservDTO.setMem_nickname(rs.getString("mem_nickname"));
+                adminReservDTO.setUseDate(rs.getString("useDate"));
+                adminReservDTO.setPay(rs.getInt("pay"));
+
+                res.add(adminReservDTO);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            close();
+        }
+
+        return res;
+    }
+
+    public ArrayList<AdminReservDTO> userSalesIdSearch(String id){
+
+        ArrayList<AdminReservDTO> res = new ArrayList<AdminReservDTO>();
+
+        sql="select mem_userid, mem_nickname, useDate, pay from reservation join member on reservation.userId = member.mem_id where mem_userid like ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, "%"+id+"%");
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                AdminReservDTO adminReservDTO = new AdminReservDTO();
+                adminReservDTO.setMem_userid(rs.getString("mem_userid"));
+                adminReservDTO.setMem_nickname(rs.getString("mem_nickname"));
+                adminReservDTO.setUseDate(rs.getString("useDate"));
+                adminReservDTO.setPay(rs.getInt("pay"));
+
+                res.add(adminReservDTO);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            close();
+        }
+        return res;
+    }
+
+    public ArrayList<AdminReservDTO> userSalesNicknameSearch(String nickname){
+
+        ArrayList<AdminReservDTO> res = new ArrayList<AdminReservDTO>();
+
+        sql="select mem_userid, mem_nickname, useDate, pay from reservation join member on reservation.userId = member.mem_id where mem_nickname like ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, "%"+nickname+"%");
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                AdminReservDTO adminReservDTO = new AdminReservDTO();
+                adminReservDTO.setMem_userid(rs.getString("mem_userid"));
+                adminReservDTO.setMem_nickname(rs.getString("mem_nickname"));
+                adminReservDTO.setUseDate(rs.getString("useDate"));
+                adminReservDTO.setPay(rs.getInt("pay"));
+
+                res.add(adminReservDTO);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            close();
+        }
+
+        return res;
+    }
 
         public void close() {
         if (rs != null) try {

@@ -74,8 +74,8 @@ public class CommunityDAO {
             //System.out.println(dto);
 
 
-            sql = "insert into studygroup (id,memId,location,startdate,enddate,title,people,studykind,content) "
-                    + "values (?,?,?,?,?,?,?,?,?)";
+            sql = "insert into studygroup (id,memId,location,startdate,enddate,title,people,studykind,content,regDate) "
+                    + "values (?,?,?,?,?,?,?,?,?,sysdate())";
 
             ptmt =con.prepareStatement(sql);
             ptmt.setInt(1, dto.getId());
@@ -121,10 +121,9 @@ public class CommunityDAO {
                 res.setPeople(rs.getInt("people"));
                 res.setStudykind(rs.getString("studykind"));
                 res.setContent(rs.getString("content"));
+                res.setRegDate(rs.getDate("regDate"));
 
             }
-
-
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

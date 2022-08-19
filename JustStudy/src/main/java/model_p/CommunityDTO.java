@@ -5,7 +5,7 @@ import java.util.Date;
 public class CommunityDTO {
     int id, memId, people;
     String location, title, studykind, content, nickname;
-    Date startdate, enddate;
+    Date startdate, enddate, regDate;
 
 
     public int getId() {
@@ -82,6 +82,14 @@ public class CommunityDTO {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Date getRegDate() {
+        return regDate;
+    }
+
+    public void setRegDate(Date regDate) {
+        this.regDate = regDate;
     }
 
     public String getNickname() {

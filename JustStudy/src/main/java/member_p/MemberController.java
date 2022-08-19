@@ -21,6 +21,7 @@ public class MemberController extends HttpServlet {
 
         nonService.put("MemberLoginForm","member/member_loginForm.jsp");
         nonService.put("MemberSigninForm","member/member_signinForm.jsp");
+        nonService.put("MemberSocialSigninForm","member/member_signinForm_kakao.jsp");
     }
 
     @Override

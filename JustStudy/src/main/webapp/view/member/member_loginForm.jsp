@@ -36,14 +36,19 @@
     console.log(Kakao.isInitialized()); // sdk초기화여부판단
     //카카오로그인1
     function kakaoLogin() {
+
         Kakao.Auth.login({
             success: function (response) {
                 Kakao.API.request({
                     url: '/v2/user/me',
                     success: function (response) {
                         console.log(response)
-                        isSocialSignIn(response)
+                        if(response.loginResult === 'success') {
+                            location.href = response.goUrl
+                        } else {
+                            isSocialSignIn(response)
 
+                        }
 
                     },
                     fail: function (error) {
@@ -69,15 +74,17 @@
                 },
             })
             Kakao.Auth.setAccessToken(undefined)
+
+
         }
     }
 
-    if (!Kakao.Auth.getAccessToken()) {
-        console.log('Not logged in.');
-    }
-    Kakao.Auth.logout(function() {
-        console.log(Kakao.Auth.getAccessToken());
-    });
+    // if (!Kakao.Auth.getAccessToken()) {
+    //     console.log('Not logged in.');
+    // }
+    // Kakao.Auth.logout(function() {
+    //     console.log(Kakao.Auth.getAccessToken());
+    // });
 
     function getUserInformation() {
         Kakao.API.request({
@@ -117,7 +124,8 @@
     function isSocialSignIn(response) {
         let form_data = {
             social_id:response.id,
-            social_email:response.kakao_account['email']
+            social_email:response.kakao_account['email'],
+            realname:response.kakao_account['profile'].nickname
         }
 
         $.ajax({
@@ -127,7 +135,10 @@
             async:false,
             dataType:'JSON',
             success:function(response){
-                alert(response.loginResult)
+
+                let msg = decodeURIComponent(response.loginResult).replaceAll("+"," ")
+                alert(msg)
+                location.href = response.goUrl
                 <%--if(response.loginResult === 'success') {--%>
                 <%--  alert('로그인에 성공했습니다.')--%>
                 <%--  location.href = '<c:url value="/board/MainPage"/>'--%>
@@ -177,6 +188,7 @@
         <div class="wrapper-login">
             <div class="btn-login">
                 <button onclick="goLogin()" class="btn btn-dark">로그인</button>
+                <button onclick="kakaoLogout()" class="btn btn-dark">로그인</button>
             </div>
             <div class="btn-login">
                 <button onclick="kakaoLogin()" class="btn" style="padding: 0px">

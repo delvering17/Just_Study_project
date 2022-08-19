@@ -116,9 +116,45 @@ public class ApplyStudyDAO {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            close();
         }
 
         return res;
+    }
+
+    public void applyModify(int as_id, String as_content) {
+        sql = "update applystudy set as_content = ?, reg_date = sysdate() where as_id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, as_content);
+            ptmt.setInt(2, as_id);
+
+            ptmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+
+    }
+
+    public void applyDelete(int as_id) {
+        sql = "delete from applystudy where as_id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, as_id);
+            ptmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+
     }
 
 

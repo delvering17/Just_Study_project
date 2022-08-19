@@ -173,12 +173,14 @@
 
     <div class="community-detail-main">
         <i class="fa-solid fa-circle-user"></i>
-        <p>신청자:</p>
+        <p>신청자:${nickname}</p>
 
         <table class="community-detail-table">
             <tr>
                 <td>내용</td>
-                <td>${applyStudyDTO.as_content_String}</td>
+                <td>
+                    ${applyStudyDTO.as_content_String}
+                </td>
             </tr>
         </table>
 
@@ -186,14 +188,26 @@
             <a href="CommunityPage"><i class="fa-regular fa-circle-left"></i>목록</a>
             <c:choose>
                 <c:when test="${login == null}"></c:when>
-                <c:when test="${login != applyStudyDTO.as_mem_id}">
-                    <div class="community-apply-btn">신청하기</div>
-                </c:when>
-                <c:otherwise>
+                <c:when test="${login == applyStudyDTO.as_mem_id}">
                     <div class="community-modify-btn">수정</div>
                     <div class="community-delete-btn">삭제</div>
-                </c:otherwise>
+                </c:when>
             </c:choose>
         </div>
     </div>
 </div>
+
+
+<script type="text/javascript">
+    window.onload = function (){
+
+        $(".community-modify-btn").click(function (){
+            location.href="CommunityApplyModifyForm?as_id=${applyStudyDTO.as_id}"
+        })
+
+        $(".community-delete-btn").click(function (){
+            location.href="CommunityApplyDeleteForm?as_id=${applyStudyDTO.as_id}&as_mem_id=${applyStudyDTO.as_mem_id}"
+        })
+    }
+
+</script>

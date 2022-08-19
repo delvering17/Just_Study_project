@@ -216,7 +216,7 @@
                     <div class="community-apply-btn">신청하기</div>
                 </c:when>
                 <c:otherwise>
-                    <div class="community-modify-btn">수정</div>
+                    <div class="community-modify-btn" onclick="">수정</div>
                     <div class="community-delete-btn">삭제</div>
                 </c:otherwise>
             </c:choose>

@@ -148,9 +148,49 @@
         line-height: 50px;
         border-radius: 10px;
         cursor: pointer;
-
     }
 
+    .community-detail-apply-list{
+        width: 60%;
+        height: fit-content;
+        margin: 70px 0px;
+        border-top: 1px black solid ;
+    }
+
+    .community-detail-apply-list .fa-circle-user{
+        width: fit-content;
+        margin-right: 20px;
+        color: gray;
+        font-size: 5rem;
+        float: left;
+    }
+
+    .community-detail-apply-list > form > div{
+        width: 100%;
+        height: fit-content;
+        border-bottom: 1px lightgray solid;
+        padding: 20px 50px;
+        display: flex;
+        align-items: center;
+    }
+
+    .community-detail-apply-list > form > div > div:first-of-type{
+        width: fit-content;
+        float: left;
+    }
+
+    .community-detail-apply-list > form > div > div:last-of-type{
+        width: fit-content;
+        float: right;
+    }
+
+    .community-detail-apply-list p{
+        width: fit-content;
+    }
+
+    .community-detail-apply-list input[type=submit]{
+        display: block;
+    }
 </style>
 
 <script type="text/javascript">
@@ -213,14 +253,33 @@
             <a href="CommunityPage"><i class="fa-regular fa-circle-left"></i>목록</a>
             <c:choose>
                 <c:when test="${login == null}"></c:when>
-                <c:when test="${login != communityDTO.memId}">
-                    <div class="community-apply-btn">신청하기</div>
-                </c:when>
-                <c:otherwise>
+                <c:when test="${login == communityDTO.memId}">
                     <div class="community-modify-btn" onclick="">수정</div>
                     <div class="community-delete-btn">삭제</div>
+                </c:when>
+                <c:otherwise>
+                    <div class="community-apply-btn">신청하기</div>
                 </c:otherwise>
             </c:choose>
+        </div>
+
+        <div class="community-detail-apply-list">
+            <c:forEach items="${applyList}" var="apply" varStatus="no">
+                <form action="">
+                    <input type="hidden" name="as_id" value="${apply.as_id}"/>
+                    <div>
+                        <i class="fa-solid fa-circle-user"></i>
+                        <div>
+                            <p>${applyMemList[no.index].mem_nickname}</p>
+                            <p>${apply.as_content}</p>
+                        </div>
+                        <div>
+                            <input type="submit" name="type" value="승인"/>
+                            <input type="submit" name="type" value="반려"/>
+                        </div>
+                    </div>
+                </form>
+            </c:forEach>
         </div>
     </div>
 </div>

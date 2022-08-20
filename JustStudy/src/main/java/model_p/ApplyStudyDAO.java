@@ -185,6 +185,36 @@ public class ApplyStudyDAO {
         return res;
     }
 
+    public ArrayList<ApplyStudyDTO> applyListPurpose(int purpose){
+        ArrayList<ApplyStudyDTO> res = new ArrayList<ApplyStudyDTO>();
+
+        sql = "select * from applystudy where as_purpose = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, purpose);
+
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                ApplyStudyDTO applyStudyDTO = new ApplyStudyDTO();
+                applyStudyDTO.setAs_id(rs.getInt("as_id"));
+                applyStudyDTO.setAs_purpose(rs.getInt("as_purpose"));
+                applyStudyDTO.setAs_mem_id(rs.getInt("as_mem_id"));
+                applyStudyDTO.setAs_content(rs.getString("as_content"));
+                applyStudyDTO.setAs_state(rs.getInt("as_state"));
+
+                res.add(applyStudyDTO);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return res;
+    }
+
+
     public void close() {
         if(rs!=null) try { rs.close(); } catch (SQLException e) {}
         if(ptmt!=null) try { ptmt.close(); } catch (SQLException e) {}

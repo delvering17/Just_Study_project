@@ -272,5 +272,11 @@
                 $(".mypage-reservlist-top-datepicker").val("")
             }
         })
+
+        $(".mypage-reservlist-top-datepicker").eq(1).change(function (){
+            if($(".mypage-reservlist-top-datepicker").eq(0).val() > $(".mypage-reservlist-top-datepicker").eq(1).val()){
+                $(".mypage-reservlist-top-datepicker").eq(0).val($(".mypage-reservlist-top-datepicker").eq(1).val())
+            }
+        })
     }
 </script>

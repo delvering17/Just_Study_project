@@ -29,7 +29,7 @@ public class ApplyStudyDAO {
     public ApplyStudyDTO list() {
         ApplyStudyDTO res = null;
 
-        sql = "select * from applystudy";
+        sql = "select * from applystudy order by reg_date desc ";
 
         try {
             ptmt = con.prepareStatement(sql);
@@ -159,7 +159,7 @@ public class ApplyStudyDAO {
     public ArrayList<ApplyStudyDTO> myApplyList(int id){
         ArrayList<ApplyStudyDTO> res = new ArrayList<ApplyStudyDTO>();
 
-        sql = "select * from applystudy where as_mem_id = ?";
+        sql = "select * from applystudy where as_mem_id = ? order by reg_date desc ";
 
         try {
             ptmt = con.prepareStatement(sql);
@@ -173,7 +173,7 @@ public class ApplyStudyDAO {
                 applyStudyDTO.setAs_mem_id(rs.getInt("as_mem_id"));
                 applyStudyDTO.setAs_content(rs.getString("as_content"));
                 applyStudyDTO.setAs_state(rs.getInt("as_state"));
-
+                applyStudyDTO.setReg_date(rs.getDate("reg_date"));
                 res.add(applyStudyDTO);
             }
         } catch (SQLException e) {
@@ -188,7 +188,7 @@ public class ApplyStudyDAO {
     public ArrayList<ApplyStudyDTO> myApplyPeriodList(int id, String date_before, String date_after){
         ArrayList<ApplyStudyDTO> res = new ArrayList<ApplyStudyDTO>();
 
-        sql = "select * from applystudy where as_mem_id = ? and reg_date >= ? and reg_date <= ?";
+        sql = "select * from applystudy where as_mem_id = ? and reg_date >= ? and reg_date <= ? order by reg_date desc ";
 
         try {
             ptmt = con.prepareStatement(sql);
@@ -206,6 +206,7 @@ public class ApplyStudyDAO {
                 applyStudyDTO.setAs_mem_id(rs.getInt("as_mem_id"));
                 applyStudyDTO.setAs_content(rs.getString("as_content"));
                 applyStudyDTO.setAs_state(rs.getInt("as_state"));
+                applyStudyDTO.setReg_date(rs.getDate("reg_date"));
                 res.add(applyStudyDTO);
             }
         } catch (SQLException e) {
@@ -234,7 +235,7 @@ public class ApplyStudyDAO {
                 applyStudyDTO.setAs_mem_id(rs.getInt("as_mem_id"));
                 applyStudyDTO.setAs_content(rs.getString("as_content"));
                 applyStudyDTO.setAs_state(rs.getInt("as_state"));
-
+                applyStudyDTO.setReg_date(rs.getDate("reg_date"));
                 res.add(applyStudyDTO);
             }
         } catch (SQLException e) {

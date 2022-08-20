@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
-
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript">
 
     function goLogin() {
@@ -31,6 +31,130 @@
             }
         })
     }
+
+    Kakao.init('ff02c77cc518953296a556a4691cd2f8'); //발급받은 키 중 javascript키를 사용해준다.
+    console.log(Kakao.isInitialized()); // sdk초기화여부판단
+    //카카오로그인1
+    function kakaoLogin() {
+
+        Kakao.Auth.login({
+            success: function (response) {
+                Kakao.API.request({
+                    url: '/v2/user/me',
+                    success: function (response) {
+                        console.log(response)
+                        if(response.loginResult === 'success') {
+                            location.href = response.goUrl
+                        } else {
+                            isSocialSignIn(response)
+
+                        }
+
+                    },
+                    fail: function (error) {
+                        console.log(error)
+                    },
+                })
+            },
+            fail: function (error) {
+                console.log(error)
+            },
+        })
+    }
+    //카카오로그아웃
+    function kakaoLogout() {
+        if (Kakao.Auth.getAccessToken()) {
+            Kakao.API.request({
+                url: '/v1/user/unlink',
+                success: function (response) {
+                    console.log(response)
+                },
+                fail: function (error) {
+                    console.log(error)
+                },
+            })
+            Kakao.Auth.setAccessToken(undefined)
+
+
+        }
+    }
+
+    // if (!Kakao.Auth.getAccessToken()) {
+    //     console.log('Not logged in.');
+    // }
+    // Kakao.Auth.logout(function() {
+    //     console.log(Kakao.Auth.getAccessToken());
+    // });
+
+    function getUserInformation() {
+        Kakao.API.request({
+            url: '/v2/user/me',
+            success: function(res) {
+                // alert(JSON.stringify(res))
+                console.log(JSON.stringify(res));
+                alert(res.properties["nickname"]);
+            },
+            fail: function(error) {
+                alert(
+                    'login success, but failed to request user information: ' +
+                    JSON.stringify(error)
+                )
+            },
+        })
+    }
+
+
+    function setUserInformation() {
+        Kakao.API.request({
+            url: '/v1/user/update_profile',
+            data: {
+                properties: {
+                    '${name}': '${"야호"}'
+                },
+            },
+            success: function(response) {
+                console.log(response);
+            },
+            fail: function(error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function isSocialSignIn(response) {
+        let form_data = {
+            social_id:response.id,
+            social_email:response.kakao_account['email'],
+            realname:response.kakao_account['profile'].nickname
+        }
+
+        $.ajax({
+            url:'<c:url value="/memberNonView/MemberSocialLoginReg"/>',
+            type:'GET',
+            data: form_data,
+            async:false,
+            dataType:'JSON',
+            success:function(response){
+
+                let msg = decodeURIComponent(response.loginResult).replaceAll("+"," ")
+                alert(msg)
+                location.href = response.goUrl
+                <%--if(response.loginResult === 'success') {--%>
+                <%--  alert('로그인에 성공했습니다.')--%>
+                <%--  location.href = '<c:url value="/board/MainPage"/>'--%>
+                <%--} else {--%>
+                <%--  alert(response.loginResult)--%>
+                <%--}--%>
+            },
+            error:function(e){
+                console.log(e.responseText)
+            }
+        })
+
+
+
+    }
+
 </script>
 <style type="text/css">
     .btn-login {
@@ -64,9 +188,10 @@
         <div class="wrapper-login">
             <div class="btn-login">
                 <button onclick="goLogin()" class="btn btn-dark">로그인</button>
+                <button onclick="kakaoLogout()" class="btn btn-dark">로그인</button>
             </div>
             <div class="btn-login">
-                <button onclick="goLogin()" class="btn" style="padding: 0px">
+                <button onclick="kakaoLogin()" class="btn" style="padding: 0px">
                     <img src="<c:url value="/img/member/kakao_login.png"/>" alt=""/>
                 </button>
             </div>

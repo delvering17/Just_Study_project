@@ -18,11 +18,11 @@ public class MemberNonViewController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//        try {
-//            request.setCharacterEncoding("UTF-8");
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            request.setCharacterEncoding("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
         String service = request.getRequestURI().substring((request.getContextPath()+"/memberNonView/").length());
         try {

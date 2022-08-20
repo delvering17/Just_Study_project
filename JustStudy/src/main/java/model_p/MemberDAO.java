@@ -129,6 +129,32 @@ public class MemberDAO {
         }
     }
 
+    public void signInSocial(MemberDTO memberDTO) {
+        sql = " insert into member (mem_social , mem_userid , mem_password , mem_nickname , mem_realname , mem_phone, mem_address1, mem_address2,  mem_level, mem_socialid) values " +
+                "(?,?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            ptmt = con.prepareStatement(sql);
+
+            ptmt.setInt(1,memberDTO.getMem_social());
+            ptmt.setString(2, memberDTO.getMem_userid());
+            ptmt.setString(3, null);
+            ptmt.setString(4, memberDTO.getMem_nickname());
+            ptmt.setString(5, memberDTO.getMem_realname());
+            ptmt.setString(6, null);
+            ptmt.setString(7, memberDTO.getMem_address1());
+            ptmt.setString(8, memberDTO.getMem_address2());
+            ptmt.setInt(9, memberDTO.getMem_level());
+            ptmt.setString(10, memberDTO.getMem_socialid());
+
+            ptmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+    }
+
     public ArrayList<MemberDTO> list() {
         ArrayList<MemberDTO> res = new ArrayList<>();
 
@@ -273,8 +299,33 @@ public class MemberDAO {
         } finally {
             close();
         }
-
     }
+
+    public int isSocialId(String social_id) {
+        int res = 0;
+        sql = "select mem_id from member where mem_social = 2 and mem_socialid = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1,social_id);
+            rs = ptmt.executeQuery();
+
+            if(rs.next()) {
+                res = rs.getInt("mem_id");
+            }
+
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+
+        return res;
+    }
+
+
 
     public void close() {
         if(rs!=null) try { rs.close(); } catch (SQLException e) {}

@@ -47,13 +47,15 @@ public class MypageInquiryList implements MypageService{
 
 //        System.out.println(nowPage + "," + first + "," + total + "," + totalPage);
 
-        ArrayList<InquiryDTO> arr_inquiryDTO = null;
 
 
         // 기간 검색 페이지 검색
         String date_period = request.getParameter("date_period");
         String date_before = request.getParameter("date_before");
         String date_after = request.getParameter("date_after");
+
+        ArrayList<InquiryDTO> arr_inquiryDTO = null;
+
 
         if(date_period != null) {
 

@@ -1,9 +1,6 @@
 package admin_p;
 
-import model_p.BranchDAO;
-import model_p.BranchDTO;
-import model_p.ReservationDAO;
-import model_p.ReservationDTO;
+import model_p.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,10 +15,9 @@ public class AdminSalesStore implements AdminService {
         ArrayList<BranchDTO> branchList = new BranchDAO().branchList();
 
         int storeTotalPay = 0;
-        for (int i = 0; i < salesStoreList.size(); i++) {
-            storeTotalPay += salesStoreList.get(i).getPay();
+        for (ReservationDTO dto : salesStoreList) {
+            storeTotalPay += dto.getPay();
         }
-        System.out.println(storeTotalPay);
 
         request.setAttribute("branchList", branchList);
         request.setAttribute("salesStoreList", salesStoreList);

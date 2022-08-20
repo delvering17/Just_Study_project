@@ -2,6 +2,7 @@ package admin_p;
 
 import model_p.AdminReservDAO;
 import model_p.AdminReservDTO;
+import model_p.ReservationDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,20 +12,16 @@ public class AdminSalesUserSearch implements AdminService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-        ArrayList<AdminReservDTO> salesUserList = new ArrayList<>();
+        ArrayList<AdminReservDTO> salesUserList;
 
-        String userType = request.getParameter("user-search");
-        String userValue = request.getParameter("search-input");
+        String userType = request.getParameter("salesUser-search");
+        String userValue = request.getParameter("searchSalesUser-input");
 
-        if (userType.equals("id")){
-            salesUserList = new AdminReservDAO().userSalesIdSearch(userValue);
-        }else if(userType.equals("nickname")){
-            salesUserList = new AdminReservDAO().userSalesNicknameSearch(userValue);
-        }
+        salesUserList = new AdminReservDAO().salesUserSearch(userType, userValue);
 
         int userTotalPay = 0;
-        for (int i = 0; i < salesUserList.size(); i++) {
-            userTotalPay += salesUserList.get(i).getPay();
+        for (AdminReservDTO dto : salesUserList) {
+            userTotalPay += dto.getPay();
         }
 
         request.setAttribute("salesUserList", salesUserList);

@@ -85,13 +85,13 @@
 
     <div class="admin-sales-user-main">
         <div>
-
             <form action="AdminSalesUserSearch">
-                <select name="user-search">
-                    <option value="id">아이디</option>
-                    <option value="nickname">닉네임</option>
+                <select name="salesUser-search">
+                    <option value="mem_userid">아이디</option>
+                    <option value="mem_nickname">닉네임</option>
                 </select>
-                <input type="text" name="search-input"/>
+                <input type="text" name="searchSalesUser-input"/>
+
                 <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
         </div>

@@ -14,8 +14,9 @@ public class AdminSalesUser implements AdminService{
         ArrayList<AdminReservDTO> salesUserList = new AdminReservDAO().userSalesList();
 
         int userTotalPay = 0;
-        for (int i = 0; i < salesUserList.size(); i++) {
-            userTotalPay += salesUserList.get(i).getPay();
+
+        for (AdminReservDTO dto : salesUserList) {
+            userTotalPay += dto.getPay();
         }
 
         request.setAttribute("salesUserList", salesUserList);

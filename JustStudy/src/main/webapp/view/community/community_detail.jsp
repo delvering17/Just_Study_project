@@ -284,10 +284,17 @@
                             <p>${applyMemList[no.index].mem_nickname}</p>
                             <p>${apply.as_content}</p>
                         </div>
-                        <div>
-                            <input type="submit" name="answer" value="승인"/>
-                            <input type="submit" name="answer" value="반려"/>
-                        </div>
+                        <c:choose>
+                            <c:when test="${apply.as_state == 1}">
+                                <div>
+                                    <input type="submit" name="answer" value="승인"/>
+                                    <input type="submit" name="answer" value="반려"/>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div>처리 완료</div>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </form>
             </c:forEach>

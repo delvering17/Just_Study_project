@@ -1,15 +1,14 @@
-<%@ page import="model_p.EventDTO" %><%--
+<%@ page import="model_p.NoticeDTO" %><%--
   Created by IntelliJ IDEA.
   User: whgml
-  Date: 2022-08-14
-  Time: 오후 6:38
+  Date: 2022-08-20
+  Time: 오후 8:48
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-   EventDTO dto = new EventDTO();
+    NoticeDTO dto = new NoticeDTO();
 %>
-
 <style>
 
     .event-title-area{
@@ -120,72 +119,28 @@
 
 
 </style>
-
-
-<%--<div class="header"></div>--%>
-
-
-<%--<div style="text-align: center">
-    <a style="background: #ffa" href="CommunityModifyForm?id=${dto.id }">수정</a>
-    <a style="background: #ffa" href="CommunityDeleteForm?id=${dto.id }">삭제</a>
-</div>--%>
-
 <div class="event-title-area">
-    <p id="event-title">이벤트</p>
+    <p id="event-title">공지사항</p>
     <hr class="title-line">
 </div>
 
 <div class="event-status">
     <h2> ${dto.title} </h2>
-   <p class="date" style="margin-top: 30px"> ${dto.event_startdate}~${dto.event_enddate}</p>
+    <%--<p class="date" style="margin-top: 30px"> ${dto.reg_date}</p>--%>
 
 </div>
 <hr style="width: 80%; height: 1px; margin-left: 10%; background: lightgray">
 
 
 <div class="event-list-area">
-<%--    <div class="event-upload-img">  TODO 이미지 파일 업로드 되는 위치
-        <img style="width: 100%" src="<%=request.getContextPath()%>/img/background.jpeg">
-    </div>--%>
+    <%--    <div class="event-upload-img">  TODO 이미지 파일 업로드 되는 위치
+            <img style="width: 100%" src="<%=request.getContextPath()%>/img/background.jpeg">
+        </div>--%>
     ${dto.content}
 </div>
 
 
 <div class="listlink">
-    <a href="EventPage">목록으로</a>
-    <a href="EventModifyForm?id=${dto.id }">수정</a>
-    <a href="EventDeleteForm?id=${dto.id }">삭제</a>
-</div>
-
-
-<%--<div class="event-head">
+    <a href="NoticePage">목록으로</a>
 
 </div>
-
-<table class="showtable" border="">
-    <colgroup>
-        <col width="280px" />
-        <col width="1220px" />
-    </colgroup>
-    <tr>
-        <th height="65px"><label>타이틀</label></th>
-        <td height="65px">${dto.title}</td>
-    </tr>
-
-    <tr>
-        <th height="65px"><label>이벤트 기간</label></th>
-        <td height="65px">${dto.startdate} ~ ${dto.enddate}</td>
-    </tr>
-
-    <tr>
-        <th height="65px"><label>내용</label></th>
-        <td height="65px">${dto.content}</td>
-    </tr>
-</table>
-
-<div class="listlink">
-    <a href="EventPage">목록으로</a>
-</div>--%>
-
-
-

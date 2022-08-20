@@ -1,4 +1,4 @@
-<%@ page import="model_p.EventDTO" %><%--
+
   Created by IntelliJ IDEA.
   User: whgml
   Date: 2022-08-14
@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-   EventDTO dto = new EventDTO();
+   NewsDTO dto = new NewsDTO();
 %>
 
 <style>
@@ -152,9 +152,9 @@
 
 
 <div class="listlink">
-    <a href="EventPage">목록으로</a>
-    <a href="EventModifyForm?id=${dto.id }">수정</a>
-    <a href="EventDeleteForm?id=${dto.id }">삭제</a>
+    <a href="NewsPage">목록으로</a>
+    <a href="NewsModifyForm?id=${dto.id }">수정</a>
+    <a href="NewsDeleteForm?id=${dto.id }">삭제</a>
 </div>
 
 

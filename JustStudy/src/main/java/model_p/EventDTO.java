@@ -4,8 +4,9 @@ import java.util.Date;
 
 public class EventDTO {
     int id;
-    String title,event_startdate,event_enddate,content;
-    Date reg_date;
+    String title,content,img;
+    Date reg_date,event_startdate,event_enddate;
+
 
     public int getId() {
         return id;
@@ -23,32 +24,20 @@ public class EventDTO {
         this.title = title;
     }
 
-    public String getEvent_startdate() {
-        return event_startdate;
-    }
-
-    public void setEvent_startdate(String event_startdate) {
-        this.event_startdate = event_startdate;
-    }
-
-    public String getEvent_enddate() {
-        return event_enddate;
-    }
-
-    public void setEvent_enddate(String event_enddate) {
-        this.event_enddate = event_enddate;
-    }
-
     public String getContent() {
         return content;
     }
 
-    public String getContentBr() {
-        return content.replaceAll("\n", "<br>");
-    }
-
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public Date getReg_date() {
@@ -59,15 +48,19 @@ public class EventDTO {
         this.reg_date = reg_date;
     }
 
-    @Override
-    public String toString() {
-        return "EventDTO{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", startdate='" + event_startdate + '\'' +
-                ", enddate='" + event_enddate + '\'' +
-                ", content='" + content + '\'' +
-                ", reg_date=" + reg_date +
-                '}';
+    public Date getEvent_startdate() {
+        return event_startdate;
+    }
+
+    public void setEvent_startdate(Date event_startdate) {
+        this.event_startdate = event_startdate;
+    }
+
+    public Date getEvent_enddate() {
+        return event_enddate;
+    }
+
+    public void setEvent_enddate(Date event_enddate) {
+        this.event_enddate = event_enddate;
     }
 }

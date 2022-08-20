@@ -1,15 +1,13 @@
-package event_p;
+package news_p;
 
-import model_p.CommunityDAO;
-import model_p.CommunityDTO;
+import event_p.EventService;
 import model_p.EventDAO;
 import model_p.EventDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
 
-public class EventInsertReg implements EventService {
+public class NewsInsertReg implements NewsService {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("insertReg 들어왔냐?");
@@ -17,10 +15,9 @@ public class EventInsertReg implements EventService {
         try {
             EventDTO dto = new EventDTO();
             dto.setTitle(request.getParameter("title"));
-            dto.setEvent_startdate(new Date(request.getParameter("event_startdate")));
-            dto.setEvent_enddate(new Date(request.getParameter("event_enddate")));
+            dto.setEvent_startdate(request.getParameter("event_startdate"));
+            dto.setEvent_enddate(request.getParameter("event_enddate"));
             dto.setContent(request.getParameter("content"));
-            dto.setImg(request.getParameter("img"));
 
 
             new EventDAO().insert(dto);
@@ -28,9 +25,9 @@ public class EventInsertReg implements EventService {
 
             System.out.println(dto);
 
-            request.setAttribute("mainUrl", "event/alert.jsp");
+            request.setAttribute("mainUrl", "news/alert.jsp");
             request.setAttribute("msg", "입력되었습니다.");
-            request.setAttribute("goUrl", "EventDetail?id=" + dto.getId());
+            request.setAttribute("goUrl", "NewsDetail?id=" + dto.getId());
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

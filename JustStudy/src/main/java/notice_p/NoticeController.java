@@ -1,4 +1,4 @@
-package event_p;
+package notice_p;
 
 
 
@@ -12,18 +12,18 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
-@WebServlet("/event/*")
-public class EventController extends HttpServlet {
+@WebServlet("/notice/*")
+public class NoticeController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     HashMap<String,String> nonService = new HashMap<>();
 
 
-    public EventController(){
+    public NoticeController(){
         super();
-        nonService.put("EventInsertForm", "event/insertForm.jsp");
-        nonService.put("EventDeleteForm", "event/deleteForm.jsp");
-}
+        nonService.put("NoticeInsertForm", "notice/insertForm.jsp");
+        /*nonService.put("NoticeDeleteForm", "notice/deleteForm.jsp");*/
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
@@ -37,7 +37,7 @@ public class EventController extends HttpServlet {
 
 
 
-        String service = request.getRequestURI().substring((request.getContextPath()+"/event/").length());
+        String service = request.getRequestURI().substring((request.getContextPath()+"/notice/").length());
         System.out.println(service);
 
         try {
@@ -45,8 +45,8 @@ public class EventController extends HttpServlet {
                 request.setAttribute("mainUrl",nonService.get(service));
 
             }else {
-                EventService es = (EventService) Class.forName("event_p." + service).newInstance();
-                es.execute(request, response);
+                NoticeService ns = (NoticeService) Class.forName("notice_p." + service).newInstance();
+                ns.execute(request, response);
             }
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("/view/template.jsp");
@@ -58,7 +58,7 @@ public class EventController extends HttpServlet {
 
 
 
-        }
+    }
 
 
 

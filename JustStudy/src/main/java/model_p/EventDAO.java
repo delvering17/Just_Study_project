@@ -4,10 +4,7 @@ package model_p;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class EventDAO {
@@ -45,8 +42,9 @@ public class EventDAO {
                 dto.setId(rs.getInt("id"));
                 dto.setTitle(rs.getString("title"));
                 dto.setReg_date(rs.getTimestamp("reg_date"));
-                dto.setEvent_startdate(rs.getString("event_startdate"));
-                dto.setEvent_enddate(rs.getString("event_enddate"));
+                dto.setEvent_startdate(rs.getTimestamp("event_startdate"));
+                dto.setEvent_enddate(rs.getTimestamp("event_enddate"));
+                dto.setImg(rs.getString("img"));
                 dto.setContent(rs.getString("content"));
 
                 res.add(dto);
@@ -66,26 +64,19 @@ public class EventDAO {
     public void insert(EventDTO dto) {
 
         try {
-            sql = "select max(id)+1 from eventpp";
-
-            ptmt = con.prepareStatement(sql);
-            rs = ptmt.executeQuery();
-            rs.next();
-            dto.id = rs.getInt(1);
-
-            //System.out.println(dto);
 
 
-            sql = "insert into eventpp (id,title,event_startdate,event_enddate,content) "
-                    + "values (?,?,?,?,?)";
+            sql = "insert into eventpp (title,reg_date,event_startdate,event_enddate,content,img) "
+                    + "values (?,sysdate(),?,?,?,?)";
 
             ptmt =con.prepareStatement(sql);
 
-            ptmt.setInt(1, dto.id);
-            ptmt.setString(2,dto.title);
-            ptmt.setString(3,dto.event_startdate);
-            ptmt.setString(4,dto.event_enddate);
-            ptmt.setString(5,dto.content);
+
+            ptmt.setString(1,dto.title);
+            ptmt.setDate(2, (Date) dto.event_startdate);
+            ptmt.setDate(3, (Date) dto.event_enddate);
+            ptmt.setString(4,dto.content);
+            ptmt.setString(5,dto.img);
 
             ptmt.executeUpdate();
 
@@ -112,10 +103,10 @@ public class EventDAO {
                 res = new EventDTO();
                 res.setId(rs.getInt("id"));
                 res.setTitle(rs.getString("title"));
-                res.setEvent_startdate(rs.getString("event_startdate"));
-                res.setEvent_enddate(rs.getString("event_enddate"));
+                res.setEvent_startdate(rs.getDate("event_startdate"));
+                res.setEvent_enddate(rs.getDate("event_enddate"));
                 res.setContent(rs.getString("content"));
-
+                res.setImg(rs.getString("img"));
 
             }
 
@@ -128,6 +119,46 @@ public class EventDAO {
         }
 
         return res;
+    }
+
+
+    public int modify(EventDTO dto){
+
+        sql = "update eventpp set title = ?, event_startdate = ?, event_enddate = ?, content = ?, img = ? where id = ?";
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, dto.getTitle());
+            ptmt.setDate(2, (Date) dto.getEvent_startdate());
+            ptmt.setDate(3, (Date) dto.getEvent_enddate());
+            ptmt.setString(4, dto.getContent());
+            ptmt.setString(5, dto.getImg());
+            ptmt.setInt(6, dto.id);
+
+
+            return ptmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+    }
+
+    public int delete(EventDTO dto) {
+
+        try {
+            sql = "delete from eventpp where id = ?";
+
+            ptmt =con.prepareStatement(sql);
+            ptmt.setInt(1, dto.id);
+            return ptmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            close();
+        }
+
+        return 0;
     }
 
 

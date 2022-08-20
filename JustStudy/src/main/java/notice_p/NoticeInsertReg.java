@@ -1,36 +1,33 @@
-package event_p;
+package notice_p;
 
-import model_p.CommunityDAO;
-import model_p.CommunityDTO;
 import model_p.EventDAO;
 import model_p.EventDTO;
+import model_p.NoticeDAO;
+import model_p.NoticeDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
 
-public class EventInsertReg implements EventService {
+public class NoticeInsertReg implements NoticeService {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("insertReg 들어왔냐?");
 
         try {
-            EventDTO dto = new EventDTO();
+            NoticeDTO dto = new NoticeDTO();
             dto.setTitle(request.getParameter("title"));
-            dto.setEvent_startdate(new Date(request.getParameter("event_startdate")));
-            dto.setEvent_enddate(new Date(request.getParameter("event_enddate")));
+            /*dto.setReg_date(request.getParameter("reg_date"));*/
             dto.setContent(request.getParameter("content"));
-            dto.setImg(request.getParameter("img"));
 
 
-            new EventDAO().insert(dto);
+            new NoticeDAO().insert(dto);
 
 
             System.out.println(dto);
 
-            request.setAttribute("mainUrl", "event/alert.jsp");
+            request.setAttribute("mainUrl", "notice/alert.jsp");
             request.setAttribute("msg", "입력되었습니다.");
-            request.setAttribute("goUrl", "EventDetail?id=" + dto.getId());
+            request.setAttribute("goUrl", "NoticeDetail?id=" + dto.getId());
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

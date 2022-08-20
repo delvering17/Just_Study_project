@@ -24,7 +24,6 @@ public class MypageStudygroup implements MypageService{
 
         // 기간 검색 페이지 검색
 
-
         String date_period = request.getParameter("date_period");
         String date_before = request.getParameter("date_before");
         String date_after = request.getParameter("date_after");
@@ -48,6 +47,20 @@ public class MypageStudygroup implements MypageService{
 
                         studygroupList = new CommunityDAO().makedList(memberDTO.getMem_id());
 
+                        for(CommunityDTO communityDTO : studygroupList){
+                            int cnt = 0;
+                            for (ApplyStudyDTO applyStudyDTO : new ApplyStudyDAO().applyListPurpose(communityDTO.getId())){
+                                if(applyStudyDTO.getAs_state() == 2){
+                                    cnt ++;
+                                }
+                            }
+                            if(cnt == communityDTO.getPeople() || communityDTO.getEnddate().before(new Date())){
+                                communityDTO.setStatus("모집마감");
+                            } else{
+                                communityDTO.setStatus("모집중");
+                            }
+                        }
+
                     } else if(request.getParameter("type").equals("apply")){
 
                         ArrayList<ApplyStudyDTO> myApplyList = new ApplyStudyDAO().myApplyList(memberDTO.getMem_id());
@@ -63,6 +76,20 @@ public class MypageStudygroup implements MypageService{
                 case "today":
                     if(request.getParameter("type").equals("maked")){
                         studygroupList = new CommunityDAO().communityPeriodList(memberDTO.getMem_id(), date_today   , date_today);
+
+                        for(CommunityDTO communityDTO : studygroupList){
+                            int cnt = 0;
+                            for (ApplyStudyDTO applyStudyDTO : new ApplyStudyDAO().applyListPurpose(communityDTO.getId())){
+                                if(applyStudyDTO.getAs_state() == 2){
+                                    cnt ++;
+                                }
+                            }
+                            if(cnt == communityDTO.getPeople() || communityDTO.getEnddate().before(new Date())){
+                                communityDTO.setStatus("모집마감");
+                            } else{
+                                communityDTO.setStatus("모집중");
+                            }
+                        }
 
                     } else if(request.getParameter("type").equals("apply")){
                         ArrayList<ApplyStudyDTO> myApplyList = new ApplyStudyDAO().myApplyPeriodList(memberDTO.getMem_id(),date_today, date_today );
@@ -84,6 +111,20 @@ public class MypageStudygroup implements MypageService{
                     if(request.getParameter("type").equals("maked")){
                         studygroupList = new CommunityDAO().communityPeriodList(memberDTO.getMem_id(), date_bb, date_today);
 
+                        for(CommunityDTO communityDTO : studygroupList){
+                            int cnt = 0;
+                            for (ApplyStudyDTO applyStudyDTO : new ApplyStudyDAO().applyListPurpose(communityDTO.getId())){
+                                if(applyStudyDTO.getAs_state() == 2){
+                                    cnt ++;
+                                }
+                            }
+                            if(cnt == communityDTO.getPeople() || communityDTO.getEnddate().before(new Date())){
+                                communityDTO.setStatus("모집마감");
+                            } else{
+                                communityDTO.setStatus("모집중");
+                            }
+                        }
+
                     } else if(request.getParameter("type").equals("apply")){
                         ArrayList<ApplyStudyDTO> myApplyList = new ApplyStudyDAO().myApplyPeriodList(memberDTO.getMem_id(),date_bb, date_today );
 
@@ -104,6 +145,20 @@ public class MypageStudygroup implements MypageService{
                     if(request.getParameter("type").equals("maked")){
                         studygroupList = new CommunityDAO().communityPeriodList(memberDTO.getMem_id(), date_bb, date_today);
 
+                        for(CommunityDTO communityDTO : studygroupList){
+                            int cnt = 0;
+                            for (ApplyStudyDTO applyStudyDTO : new ApplyStudyDAO().applyListPurpose(communityDTO.getId())){
+                                if(applyStudyDTO.getAs_state() == 2){
+                                    cnt ++;
+                                }
+                            }
+                            if(cnt == communityDTO.getPeople() || communityDTO.getEnddate().before(new Date())){
+                                communityDTO.setStatus("모집마감");
+                            } else{
+                                communityDTO.setStatus("모집중");
+                            }
+                        }
+
                     } else if(request.getParameter("type").equals("apply")){
                         ArrayList<ApplyStudyDTO> myApplyList = new ApplyStudyDAO().myApplyPeriodList(memberDTO.getMem_id(),date_bb, date_today );
 
@@ -121,6 +176,20 @@ public class MypageStudygroup implements MypageService{
                     date_bb = sdf.format(tt);
                     if(request.getParameter("type").equals("maked")){
                         studygroupList = new CommunityDAO().communityPeriodList(memberDTO.getMem_id(), date_bb, date_today);
+
+                        for(CommunityDTO communityDTO : studygroupList){
+                            int cnt = 0;
+                            for (ApplyStudyDTO applyStudyDTO : new ApplyStudyDAO().applyListPurpose(communityDTO.getId())){
+                                if(applyStudyDTO.getAs_state() == 2){
+                                    cnt ++;
+                                }
+                            }
+                            if(cnt == communityDTO.getPeople() || communityDTO.getEnddate().before(new Date())){
+                                communityDTO.setStatus("모집마감");
+                            } else{
+                                communityDTO.setStatus("모집중");
+                            }
+                        }
                     } else if(request.getParameter("type").equals("apply")){
                         ArrayList<ApplyStudyDTO> myApplyList = new ApplyStudyDAO().myApplyPeriodList(memberDTO.getMem_id(),date_bb, date_today );
 
@@ -140,6 +209,20 @@ public class MypageStudygroup implements MypageService{
 
             if(request.getParameter("type").equals("maked")){
                 studygroupList = new CommunityDAO().communityPeriodList(memberDTO.getMem_id(), date_before, date_after);
+
+                for(CommunityDTO communityDTO : studygroupList){
+                    int cnt = 0;
+                    for (ApplyStudyDTO applyStudyDTO : new ApplyStudyDAO().applyListPurpose(communityDTO.getId())){
+                        if(applyStudyDTO.getAs_state() == 2){
+                            cnt ++;
+                        }
+                    }
+                    if(cnt == communityDTO.getPeople() || communityDTO.getEnddate().before(new Date())){
+                        communityDTO.setStatus("모집마감");
+                    } else{
+                        communityDTO.setStatus("모집중");
+                    }
+                }
 
             } else if(request.getParameter("type").equals("apply")){
                 ArrayList<ApplyStudyDTO> myApplyList = new ApplyStudyDAO().myApplyPeriodList(memberDTO.getMem_id(),date_before, date_after );

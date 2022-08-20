@@ -1,5 +1,7 @@
 package community_p;
 
+import model_p.ApplyStudyDAO;
+import model_p.ApplyStudyDTO;
 import model_p.CommunityDAO;
 import model_p.CommunityDTO;
 
@@ -14,6 +16,18 @@ public class CommunityPage implements CommunityService {
         ArrayList<CommunityDTO> mainData = new CommunityDAO().list();
         System.out.println("Communitypage 들어왔따 : "+mainData);
 
+        for(CommunityDTO communityDTO : mainData){
+            int cnt = 0;
+            for (ApplyStudyDTO applyStudyDTO : new ApplyStudyDAO().applyListPurpose(communityDTO.getId())){
+                if(applyStudyDTO.getAs_state() == 2){
+                    cnt ++;
+                }
+            }
+
+            if(cnt == communityDTO.getPeople()){
+                communityDTO.setStatus("마감");
+            }
+        }
 
         request.setAttribute("mainData",mainData);
         request.setAttribute("mainUrl", "community/studygroup.jsp");

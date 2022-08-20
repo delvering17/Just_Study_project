@@ -62,6 +62,10 @@
             <td colspan="3"><textarea name="content" cols="50" rows="10"></textarea></td>
         </tr>
         <tr>
+            <td>오픈채팅 URL</td>
+            <td colspan="3"><input type="text" name="openChatting"/></td>
+        </tr>
+        <tr>
             <td colspan="4"><input type="checkbox"  id="agree">
                 <label for="agree">개인정보취급방침을 읽었으며 이에 동의합니다.</label></td>
         </tr>

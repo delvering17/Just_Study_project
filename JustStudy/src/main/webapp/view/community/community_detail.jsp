@@ -7,6 +7,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script>
+    <c:if test="${msg!=null }">
+    alert("${msg}")
+    </c:if>
+</script>
+
 <style>
 
     .community-detail-bg{
@@ -247,6 +253,20 @@
                 <td>내용</td>
                 <td>${communityDTO.contentBr}</td>
             </tr>
+            <c:forEach items="${applyList}" var="apply" varStatus="no">
+                <c:if test="${apply.as_mem_id == login && apply.as_state == 2}">
+                    <tr>
+                        <td>오픈채팅 URL</td>
+                        <td>${communityDTO.openChatting}</td>
+                    </tr>
+                </c:if>
+            </c:forEach>
+            <c:if test="${login == communityDTO.memId}">
+            <tr>
+                <td>오픈채팅 URL</td>
+                <td>${communityDTO.openChatting}</td>
+            </tr>
+            </c:if>
         </table>
 
         <div class="community-detail-btns">
@@ -263,9 +283,11 @@
             </c:choose>
         </div>
 
+        <c:if test="${communityDTO.memId == login}">
         <div class="community-detail-apply-list">
             <c:forEach items="${applyList}" var="apply" varStatus="no">
-                <form action="">
+                <form action="CommunityApplyAnswer">
+                    <input type="hidden" name="studyId" value="${communityDTO.id}"/>
                     <input type="hidden" name="as_id" value="${apply.as_id}"/>
                     <div>
                         <i class="fa-solid fa-circle-user"></i>
@@ -273,13 +295,21 @@
                             <p>${applyMemList[no.index].mem_nickname}</p>
                             <p>${apply.as_content}</p>
                         </div>
-                        <div>
-                            <input type="submit" name="type" value="승인"/>
-                            <input type="submit" name="type" value="반려"/>
-                        </div>
+                        <c:choose>
+                            <c:when test="${apply.as_state == 1}">
+                                <div>
+                                    <input type="submit" name="answer" value="승인"/>
+                                    <input type="submit" name="answer" value="반려"/>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div>처리 완료</div>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </form>
             </c:forEach>
         </div>
+        </c:if>
     </div>
 </div>

@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class CommunityDTO {
     int id, memId, people;
-    String location, title, studykind, content, nickname;
+    String location, title, studykind, content, nickname, openChatting, status;
     Date startdate, enddate, regDate;
 
 
@@ -98,6 +98,22 @@ public class CommunityDTO {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public String getOpenChatting() {
+        return openChatting;
+    }
+
+    public void setOpenChatting(String openChatting) {
+        this.openChatting = openChatting;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override

@@ -32,6 +32,7 @@ public class CommunityInsertReg implements CommunityService{
         communityDTO.setPeople(Integer.parseInt(request.getParameter("people")));
         communityDTO.setStudykind(String.join(", ", request.getParameterValues("studykind")));
         communityDTO.setContent(request.getParameter("content"));
+        communityDTO.setOpenChatting(request.getParameter("openChatting"));
 
         new CommunityDAO().insert(communityDTO);
 

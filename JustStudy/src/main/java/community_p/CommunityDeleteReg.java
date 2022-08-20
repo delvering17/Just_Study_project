@@ -19,7 +19,7 @@ public class CommunityDeleteReg implements CommunityService{
         if(password.equals(request.getParameter("pw"))){
             if(new CommunityDAO().delete(Integer.parseInt(request.getParameter("id"))) > 0){
                 msg = "삭제되었습니다.";
-                goUrl = "CommunityPage";
+                goUrl = "CommunityPage?category=all";
             }
         }
 

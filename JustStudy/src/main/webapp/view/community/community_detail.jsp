@@ -247,6 +247,10 @@
                 <td>내용</td>
                 <td>${communityDTO.contentBr}</td>
             </tr>
+            <tr>
+                <td>오픈채팅 URL</td>
+                <td>${communityDTO.openChatting}</td>
+            </tr>
         </table>
 
         <div class="community-detail-btns">

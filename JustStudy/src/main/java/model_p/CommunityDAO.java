@@ -48,6 +48,7 @@ public class CommunityDAO {
                 dto.setStudykind(rs.getString("studykind"));
                 dto.setContent(rs.getString("content"));
                 dto.setRegDate(rs.getDate("regDate"));
+                dto.setOpenChatting(rs.getString("openChatting"));
 
                 res.add(dto);
             }
@@ -75,8 +76,8 @@ public class CommunityDAO {
             //System.out.println(dto);
 
 
-            sql = "insert into studygroup (id,memId,location,startdate,enddate,title,people,studykind,content,regDate) "
-                    + "values (?,?,?,?,?,?,?,?,?,sysdate())";
+            sql = "insert into studygroup (id,memId,location,startdate,enddate,title,people,studykind,content,regDate,openChatting) "
+                    + "values (?,?,?,?,?,?,?,?,?,sysdate(),?)";
 
             ptmt =con.prepareStatement(sql);
             ptmt.setInt(1, communityDTO.getId());
@@ -88,6 +89,7 @@ public class CommunityDAO {
             ptmt.setInt(7,communityDTO.getPeople());
             ptmt.setString(8, communityDTO.getStudykind());
             ptmt.setString(9, communityDTO.getContent());
+            ptmt.setString(10, communityDTO.getOpenChatting());
 
             ptmt.executeUpdate();
 
@@ -123,6 +125,7 @@ public class CommunityDAO {
                 res.setStudykind(rs.getString("studykind"));
                 res.setContent(rs.getString("content"));
                 res.setRegDate(rs.getDate("regDate"));
+                res.setOpenChatting(rs.getString("openChatting"));
 
             }
         } catch (SQLException e) {
@@ -137,7 +140,7 @@ public class CommunityDAO {
 
     public int modify(CommunityDTO communityDTO){
 
-        sql = "update studygroup set location = ?, startdate = ?, enddate = ?, title = ?, people = ?, studykind = ?, content = ? where id = ?";
+        sql = "update studygroup set location = ?, startdate = ?, enddate = ?, title = ?, people = ?, studykind = ?, content = ?, openChatting = ? where id = ?";
         try {
             ptmt = con.prepareStatement(sql);
             ptmt.setString(1, communityDTO.getLocation());
@@ -147,7 +150,8 @@ public class CommunityDAO {
             ptmt.setInt(5,communityDTO.getPeople());
             ptmt.setString(6, communityDTO.getStudykind());
             ptmt.setString(7, communityDTO.getContent());
-            ptmt.setInt(8, communityDTO.id);
+            ptmt.setInt(8, communityDTO.getId());
+            ptmt.setString(9, communityDTO.getOpenChatting());
 
             return ptmt.executeUpdate();
         } catch (SQLException e) {
@@ -198,6 +202,7 @@ public class CommunityDAO {
                 communityDTO.setStudykind(rs.getString("studykind"));
                 communityDTO.setContent(rs.getString("content"));
                 communityDTO.setRegDate(rs.getDate("regDate"));
+                communityDTO.setOpenChatting(rs.getString("openChatting"));
 
                 res.add(communityDTO);
             }
@@ -216,6 +221,4 @@ public class CommunityDAO {
         if(ptmt!=null) try { ptmt.close();} catch (SQLException e) {}
         if(con!=null) try { con.close();} catch (SQLException e) {}
     }
-
-
 }

@@ -943,7 +943,7 @@
         </div>
     </div>
 </div>
-<form class="studyroom-reserv-form" method="post" action="PaySuccess">
+<form class="studyroom-reserv-form" method="post" action="PaySuccess" hidden>
         <%
             if(request.getAttribute("memberDTO")!=null){
                 MemberDTO memberDTO = (MemberDTO) request.getAttribute("memberDTO");

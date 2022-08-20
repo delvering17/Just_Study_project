@@ -253,10 +253,20 @@
                 <td>내용</td>
                 <td>${communityDTO.contentBr}</td>
             </tr>
+            <c:forEach items="${applyList}" var="apply" varStatus="no">
+                <c:if test="${apply.as_mem_id == login && apply.as_state == 2}">
+                    <tr>
+                        <td>오픈채팅 URL</td>
+                        <td>${communityDTO.openChatting}</td>
+                    </tr>
+                </c:if>
+            </c:forEach>
+            <c:if test="${login == communityDTO.memId}">
             <tr>
                 <td>오픈채팅 URL</td>
                 <td>${communityDTO.openChatting}</td>
             </tr>
+            </c:if>
         </table>
 
         <div class="community-detail-btns">
@@ -273,6 +283,7 @@
             </c:choose>
         </div>
 
+        <c:if test="${communityDTO.memId == login}">
         <div class="community-detail-apply-list">
             <c:forEach items="${applyList}" var="apply" varStatus="no">
                 <form action="CommunityApplyAnswer">
@@ -299,5 +310,6 @@
                 </form>
             </c:forEach>
         </div>
+        </c:if>
     </div>
 </div>

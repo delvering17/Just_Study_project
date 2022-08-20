@@ -639,79 +639,80 @@
 
             $(".studyroom-reserv-selected > button").click(function(){
 
-                const selectedTime = document.querySelectorAll('input[type=checkbox][name=time]:checked')
-                let selectedTimeList = new Array()
+                console.log($("input[name=city]:checked").length)
+                console.log($("input[name=branchName]:checked").length)
+                console.log($("input[name=roomName]:checked").length)
+                console.log($("input[name=time]:checked").length)
 
-                for(let i = 0; i < selectedTime.length; i++){
-                    selectedTimeList.push(selectedTime.item(i).id)
-                }
+                if($("input[name=cityName]:checked").length != 0 && $("input[name=branchName]:checked").length != 0 && $("input[name=roomName]:checked").length != 0 && $("input[name=time]:checked").length != 0){
+                    const selectedTime = document.querySelectorAll('input[type=checkbox][name=time]:checked')
+                    let selectedTimeList = new Array()
 
-                const selected = new Array();
-                selected.push($(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(1)>b").html())
-                selected.push($(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(2)>b").html())
-                selected.push($(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(3)>b").html().replaceAll("&nbsp;", " "))
-                selected.push($(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(1)>b").html())
-
-                let totalCheck = true;
-                big:for(let i = 0 ; i < $(".studyroom-reserv-form>div").length; i++){
-                    let check = true;
-                    for(let k = 0 ; k < selected.length; k ++){
-/*                        console.log(selected[k])
-                        console.log($(".studyroom-reserv-form>div").eq(i).children("input").eq(k).val())*/
-                        if(!selected[k].includes($(".studyroom-reserv-form>div").eq(i).children("input").eq(k).val())){
-                            check = false;
-                        }
+                    for(let i = 0; i < selectedTime.length; i++){
+                        selectedTimeList.push(selectedTime.item(i).id)
                     }
-/*                    console.log(check)*/
-                    if(check){
-                        for(let l = 0 ; l < selectedTimeList.length; l++){
-/*                            console.log($(".studyroom-reserv-form>div").eq(i).children("input").eq(4).val())
-                            console.log(selectedTimeList[l])*/
-                            if($(".studyroom-reserv-form>div").eq(i).children("input").eq(4).val().includes(selectedTimeList[l])){
-                                totalCheck = false;
-                                break big;
+
+                    const selected = new Array();
+                    selected.push($(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(1)>b").html())
+                    selected.push($(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(2)>b").html())
+                    selected.push($(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(3)>b").html().replaceAll("&nbsp;", " "))
+                    selected.push($(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(1)>b").html())
+
+                    let totalCheck = true;
+                    big:for(let i = 0 ; i < $(".studyroom-reserv-form>div").length; i++){
+                        let check = true;
+                        for(let k = 0 ; k < selected.length; k ++){
+                            if(!selected[k].includes($(".studyroom-reserv-form>div").eq(i).children("input").eq(k).val())){
+                                check = false;
+                            }
+                        }
+                        if(check){
+                            for(let l = 0 ; l < selectedTimeList.length; l++){
+                                if($(".studyroom-reserv-form>div").eq(i).children("input").eq(4).val().includes(selectedTimeList[l])){
+                                    totalCheck = false;
+                                    break big;
+                                }
                             }
                         }
                     }
-/*                    console.log(check)*/
-                }
 
-                if(totalCheck){
-                    $(".studyroom-reserv-result").append("<div>" +
-                        "<div>"+($(".studyroom-reserv-result>div").length+1)+"</div>" +
-                        "<div>" +
-                        selected[0] + " | "+
-                        selected[1] + " | "+
-                        selected[2] + " | "+
-                        selected[3] + " | "+
-                        selectedTimeList.join (", ")+ " | "+
-                        $(".studyroom-reserv-headcount:first-of-type+b").html()+"인"+
-                        "</div>" +
-                        "<button><i class=\"fa-regular fa-x fa-2x\"></i></button>" +
-                        "<div>"+$(".studyroom-reserv-totalprice").html()+"원"+"</div></div>")
+                    if(totalCheck){
+                        $(".studyroom-reserv-result").append("<div>" +
+                            "<div>"+($(".studyroom-reserv-result>div").length+1)+"</div>" +
+                            "<div>" +
+                            selected[0] + " | "+
+                            selected[1] + " | "+
+                            selected[2] + " | "+
+                            selected[3] + " | "+
+                            selectedTimeList.join (", ")+ " | "+
+                            $(".studyroom-reserv-headcount:first-of-type+b").html()+"인"+
+                            "</div>" +
+                            "<button><i class=\"fa-regular fa-x fa-2x\"></i></button>" +
+                            "<div>"+$(".studyroom-reserv-totalprice").html()+"원"+"</div></div>")
 
-                    let realTotalWon = 0;
+                        let realTotalWon = 0;
 
-                    for(let i = 0; i < $(".studyroom-reserv-result>div").length; i++){
-                        realTotalWon += parseInt($(".studyroom-reserv-result>div").eq(i).children("div").eq(2).html().split("원")[0])
+                        for(let i = 0; i < $(".studyroom-reserv-result>div").length; i++){
+                            realTotalWon += parseInt($(".studyroom-reserv-result>div").eq(i).children("div").eq(2).html().split("원")[0])
+                        }
+
+                        $(".studyroom-reserv-done>button").html("총 "+$(".studyroom-reserv-result>div").length+"건 | "+realTotalWon+"원 결제하기")
+
+                        const reserveNum = $(".studyroom-reserv-form>div").length
+                        $(".studyroom-reserv-form").append("<div></div>")
+                        $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='city' value='"+selected[0]+"'></input>")
+                        $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='branch' value='"+selected[1]+"'></input>")
+                        $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='room' value='"+selected[2]+"'></input>")
+                        $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='useDate' value='"+selected[3].split(" ")[0]+"'></input>")
+                        $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='time' value='"+selectedTimeList.join (", ")+"'></input>")
+                        $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='headcount' value='"+$(".studyroom-reserv-headcount:first-of-type+b").html()+"'></input>")
+                        $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='pay' value='"+$(".studyroom-reserv-totalprice").html()+"'></input>")
+                    } else{
+                        alert("중복된 예약은 추가할 수 없습니다.")
                     }
-
-                    $(".studyroom-reserv-done>button").html("총 "+$(".studyroom-reserv-result>div").length+"건 | "+realTotalWon+"원 결제하기")
-
-                    const reserveNum = $(".studyroom-reserv-form>div").length
-                    $(".studyroom-reserv-form").append("<div></div>")
-                    $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='city' value='"+selected[0]+"'></input>")
-                    $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='branch' value='"+selected[1]+"'></input>")
-                    $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='room' value='"+selected[2]+"'></input>")
-                    $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='useDate' value='"+selected[3].split(" ")[0]+"'></input>")
-                    $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='time' value='"+selectedTimeList.join (", ")+"'></input>")
-                    $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='headcount' value='"+$(".studyroom-reserv-headcount:first-of-type+b").html()+"'></input>")
-                    $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='pay' value='"+$(".studyroom-reserv-totalprice").html()+"'></input>")
-                } else{
-                    alert("중복된 예약은 추가할 수 없습니다.")
+                }else{
+                    alert("지역, 지점명, 룸타입, 시간을 모두 선택해주세요.")
                 }
-
-
             })
 
             $(document).on("click", ".fa-x", function (){

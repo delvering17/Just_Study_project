@@ -207,11 +207,6 @@
 
 </div>
 <script type="text/javascript">
-
-
-
-
-
     window.onload = function (){
         $("#submit-find").click(function (){
 
@@ -263,7 +258,7 @@
         })
 
         $(".mypage-reservlist-top-datepicker").change(function (){
-            $("input[id=mypick]").attr('checked', true);
+            $("input[id=mypick]").prop('checked', true);
         })
 
 

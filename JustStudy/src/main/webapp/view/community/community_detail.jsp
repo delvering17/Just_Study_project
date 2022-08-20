@@ -7,6 +7,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script>
+    <c:if test="${msg!=null }">
+    alert("${msg}")
+    </c:if>
+</script>
+
 <style>
 
     .community-detail-bg{
@@ -269,7 +275,8 @@
 
         <div class="community-detail-apply-list">
             <c:forEach items="${applyList}" var="apply" varStatus="no">
-                <form action="">
+                <form action="CommunityApplyAnswer">
+                    <input type="hidden" name="studyId" value="${communityDTO.id}"/>
                     <input type="hidden" name="as_id" value="${apply.as_id}"/>
                     <div>
                         <i class="fa-solid fa-circle-user"></i>
@@ -278,8 +285,8 @@
                             <p>${apply.as_content}</p>
                         </div>
                         <div>
-                            <input type="submit" name="type" value="승인"/>
-                            <input type="submit" name="type" value="반려"/>
+                            <input type="submit" name="answer" value="승인"/>
+                            <input type="submit" name="answer" value="반려"/>
                         </div>
                     </div>
                 </form>

@@ -215,6 +215,25 @@ public class CommunityDAO {
         return res;
     }
 
+    public int applyAnswer(int as_id, int answer){
+
+        sql = "update applystudy set as_state = ? where as_id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, answer);
+            ptmt.setInt(2, as_id);
+
+            return ptmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return 0;
+    }
+
 
     public void close() {
         if(rs!=null) try {rs.close();} catch (SQLException e) {}

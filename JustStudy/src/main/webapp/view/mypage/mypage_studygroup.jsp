@@ -141,19 +141,19 @@
   <div class="mypage-studygroup-top">
     <div class="top-dateselect-wrapper">
 
-      <label for="all"><input type="radio" class="input-radio" name="period" id="all" checked hidden>
+      <label for="all"><input type="radio" class="input-radio" name="period" id="all" hidden>
         <div class="mypage-studygroup-period">전체</div>
       </label>
-      <label for="today"><input type="radio" class="input-radio" name="period" id="today" hidden>
+      <label for="today"><input type="radio" class="input-radio" name="period" id="today" hidden >
         <div class="mypage-studygroup-period">오늘</div>
       </label>
-      <label for="sevenDays"><input type="radio" class="input-radio" name="period" id="sevenDays" hidden>
+      <label for="day7"><input type="radio" class="input-radio" name="period" id="day7" hidden>
         <div class="mypage-studygroup-period">7일</div>
       </label>
-      <label for="oneMonth"><input type="radio" class="input-radio" name="period" id="oneMonth" hidden>
+      <label for="month"><input type="radio" class="input-radio" name="period" id="month" hidden>
         <div class="mypage-studygroup-period">1개월</div>
       </label>
-      <label for="threeMonths"><input type="radio" class="input-radio" name="period" id="threeMonths" hidden>
+      <label for="month3"><input type="radio" class="input-radio" name="period" id="month3" hidden>
         <div class="mypage-studygroup-period">3개월</div>
       </label>
     </div>
@@ -161,11 +161,9 @@
     <input class="mypage-studygroup-top-datepicker" id="datepicker-before" max="" type="date">
     <p>&#126;</p>
     <input class="mypage-studygroup-top-datepicker" id="datepicker-after" type="date">
-    <button type="submit" class="mypage-studygroup-period" id="submit-find" onclick="goFind()">조회</button>
+    <button class="mypage-studygroup-period" id="submit-find" onclick="goFind()">조회</button>
 
   </div>
-  <label for="threeMonths"><input type="radio" name="period" id="mypick" hidden></label>
-
   <div class="mypage-studygroup-main">
 
     <div class="mypage-studygroup-menu">
@@ -177,12 +175,14 @@
       <tr>
         <td>ID</td>
         <td>제목</td>
-        <td>신청일자</td>
+
         <td>지점</td>
         <td>시작일</td>
         <td>종료일</td>
         <td>모집인원</td>
         <td>구분</td>
+
+        <td id="td-regDate">신청일자</td>
         <td>상태</td>
       </tr>
 
@@ -192,12 +192,13 @@
           <tr>
             <td>${studygroup.id}</td>
             <td><a href="<c:url value="/community/CommunityDetail?id=${studygroup.id}"/>">${studygroup.title}</a></td>
-            <td>${studygroup.regDate}</td>
+
             <td>${studygroup.location}</td>
             <td>${studygroup.startdate}</td>
             <td>${studygroup.enddate}</td>
             <td>${studygroup.people}</td>
             <td>${studygroup.studykind}</td>
+            <td>${studygroup.regDate}</td>
             <jsp:useBean id="now" class="java.util.Date" />
             <fmt:formatDate var = "today" value="${now}" pattern="yyyy-MM-dd"/>
             <c:choose>
@@ -291,16 +292,17 @@
 
   // 활용해서 a의 nowPage 자체를 넘기기
 
-  function goFind(i){
+  function goFind(){
 
-    let find_url = "?type=" + "${param.type}" ;
+    let find_url = "?type=${param.type}" ;
 
-    let input_radio = $("input[name=period]:checked").attr('value');
+    let input_radio = $("input[name=period]:checked").attr("id");
     let datepickerBefore = document.querySelector('#datepicker-before');
     let datepickerAfter = document.querySelector('#datepicker-after');
 
     if(input_radio != null){
       find_url += "&date_period=" + input_radio;
+
     }
 
     if(datepickerBefore.value !== ''){
@@ -360,31 +362,31 @@
 
 
 
-    <%--    <c:if test="${date_period != null}" >--%>
+        <c:if test="${date_period != null}" >
 
-<%--    switch ('${date_period}') {--%>
-<%--      case "today":--%>
+    switch ('${date_period}') {
+      case "today":
 
-<%--        let find_today = document.querySelector('#find-today');--%>
-<%--        find_today.checked = true;--%>
-<%--        break;--%>
+        let find_today = document.querySelector('#today');
+        find_today.checked = true;
+        break;
 
-<%--      case "day7":--%>
-<%--        let find_day7 = document.querySelector('#find-day7');--%>
-<%--        find_day7.checked = true;--%>
-<%--        break;--%>
+      case "day7":
+        let find_day7 = document.querySelector('#day7');
+        find_day7.checked = true;
+        break;
 
-<%--      case "month":--%>
-<%--        let find_month = document.querySelector('#find-month');--%>
-<%--        find_month.checked = true;--%>
-<%--        break;--%>
+      case "month":
+        let find_month = document.querySelector('#month');
+        find_month.checked = true;
+        break;
 
-<%--      case "month3":--%>
-<%--        let find_month3 = document.querySelector('#find-month3');--%>
-<%--        find_month3.checked = true;--%>
-<%--        break;--%>
-<%--    }--%>
-<%--    </c:if>--%>
+      case "month3":
+        let find_month3 = document.querySelector('#month3');
+        find_month3.checked = true;
+        break;
+    }
+    </c:if>
 
     <c:if test="${date_before != null}" >
     let datepicker_before = document.querySelector('#datepicker-before');
@@ -392,6 +394,12 @@
     let datepicker_after = document.querySelector('#datepicker-after');
     datepicker_after.value = '${date_after}';
     </c:if>
+
+
+    <%--if('${param.type}' == ) {--%>
+    <%--  ${}--%>
+    <%--}--%>
+
   }
 
   $("input[name=mypage-studygroup-type]").each(function (key, value){
@@ -401,7 +409,25 @@
   })
 
   $("input[name=mypage-studygroup-type]").change(function (){
-    location.href = "MypageStudygroup?type="+$("input[name=mypage-studygroup-type]:checked").attr("id")
+
+    let find_url = "?type=" + $("input[name=mypage-studygroup-type]:checked").attr("id") ;
+
+    let input_radio = $("input[name=period]:checked").attr("id");
+    let datepickerBefore = document.querySelector('#datepicker-before');
+    let datepickerAfter = document.querySelector('#datepicker-after');
+
+    if(input_radio != null){
+      find_url += "&date_period=" + input_radio;
+
+    }
+
+    if(datepickerBefore.value !== ''){
+      find_url += "&date_before=" + datepickerBefore.value+"&";
+      find_url += "date_after=" + datepickerAfter.value;
+    }
+
+    location.href = find_url
+
   })
 
 

@@ -62,7 +62,7 @@ public class MypageStudygroup implements MypageService{
                     break;
                 case "today":
                     if(request.getParameter("type").equals("maked")){
-                        studygroupList = new CommunityDAO().makedList(memberDTO.getMem_id());
+                        studygroupList = new CommunityDAO().communityPeriodList(memberDTO.getMem_id(), date_today   , date_today);
 
                     } else if(request.getParameter("type").equals("apply")){
                         ArrayList<ApplyStudyDTO> myApplyList = new ApplyStudyDAO().myApplyPeriodList(memberDTO.getMem_id(),date_today, date_today );
@@ -82,7 +82,7 @@ public class MypageStudygroup implements MypageService{
                     tt = new Date(date_year,date_month,date_day);
                     date_bb = sdf.format(tt);
                     if(request.getParameter("type").equals("maked")){
-                        studygroupList = new CommunityDAO().makedList(memberDTO.getMem_id());
+                        studygroupList = new CommunityDAO().communityPeriodList(memberDTO.getMem_id(), date_bb, date_today);
 
                     } else if(request.getParameter("type").equals("apply")){
                         ArrayList<ApplyStudyDTO> myApplyList = new ApplyStudyDAO().myApplyPeriodList(memberDTO.getMem_id(),date_bb, date_today );
@@ -102,7 +102,7 @@ public class MypageStudygroup implements MypageService{
                     tt = new Date(date_year,date_month,date_day);
                     date_bb = sdf.format(tt);
                     if(request.getParameter("type").equals("maked")){
-                        studygroupList = new CommunityDAO().makedList(memberDTO.getMem_id());
+                        studygroupList = new CommunityDAO().communityPeriodList(memberDTO.getMem_id(), date_bb, date_today);
 
                     } else if(request.getParameter("type").equals("apply")){
                         ArrayList<ApplyStudyDTO> myApplyList = new ApplyStudyDAO().myApplyPeriodList(memberDTO.getMem_id(),date_bb, date_today );
@@ -120,8 +120,7 @@ public class MypageStudygroup implements MypageService{
                     tt = new Date(date_year,date_month,date_day);
                     date_bb = sdf.format(tt);
                     if(request.getParameter("type").equals("maked")){
-                        studygroupList = new CommunityDAO().makedList(memberDTO.getMem_id());
-
+                        studygroupList = new CommunityDAO().communityPeriodList(memberDTO.getMem_id(), date_bb, date_today);
                     } else if(request.getParameter("type").equals("apply")){
                         ArrayList<ApplyStudyDTO> myApplyList = new ApplyStudyDAO().myApplyPeriodList(memberDTO.getMem_id(),date_bb, date_today );
 
@@ -140,7 +139,7 @@ public class MypageStudygroup implements MypageService{
         } else {
 
             if(request.getParameter("type").equals("maked")){
-                studygroupList = new CommunityDAO().makedList(memberDTO.getMem_id());
+                studygroupList = new CommunityDAO().communityPeriodList(memberDTO.getMem_id(), date_before, date_after);
 
             } else if(request.getParameter("type").equals("apply")){
                 ArrayList<ApplyStudyDTO> myApplyList = new ApplyStudyDAO().myApplyPeriodList(memberDTO.getMem_id(),date_before, date_after );
@@ -157,7 +156,9 @@ public class MypageStudygroup implements MypageService{
             request.setAttribute("date_before",date_before);
             request.setAttribute("date_after",date_after);
         }
-        System.out.println();
+
+
+
 
         request.setAttribute("memberDTO", memberDTO);
         request.setAttribute("mainUrl","mypage/mypageTemplete.jsp");

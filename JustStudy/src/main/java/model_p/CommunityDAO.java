@@ -269,11 +269,44 @@ public class CommunityDAO {
     }
 
 
-//    public ArrayList<CommunityDTO> communityPeriodList(int mem_id, int first, int limit, String date_before, String date_after) {
-//
-//    }
+    public ArrayList<CommunityDTO> communityPeriodList(int id, String date_before, String date_after){
+        ArrayList<CommunityDTO> res = new ArrayList<>();
+
+        sql = "select * from studygroup where memId = ? and regDate >= ? and regDate <= ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, id);
+            ptmt.setString(2, date_before );
+            ptmt.setString(3, date_after);
 
 
+
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                CommunityDTO communityDTO = new CommunityDTO();
+
+                communityDTO.setId(rs.getInt("id"));
+                communityDTO.setMemId(rs.getInt("memId"));
+                communityDTO.setLocation(rs.getString("location"));
+                communityDTO.setStartdate(rs.getDate("startdate"));
+                communityDTO.setEnddate(rs.getDate("enddate"));
+                communityDTO.setTitle(rs.getString("title"));
+                communityDTO.setPeople(rs.getInt("people"));
+                communityDTO.setStudykind(rs.getString("studykind"));
+                communityDTO.setContent(rs.getString("content"));
+                communityDTO.setRegDate(rs.getDate("regDate"));
+                communityDTO.setOpenChatting(rs.getString("openChatting"));
+                res.add(communityDTO);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return res;
+    }
 
     public void close() {
         if(rs!=null) try {rs.close();} catch (SQLException e) {}

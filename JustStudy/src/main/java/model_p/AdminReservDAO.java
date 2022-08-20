@@ -114,7 +114,7 @@ public class AdminReservDAO {
 
         ArrayList<AdminReservDTO> res = new ArrayList<AdminReservDTO>();
 
-        sql="select mem_userid, mem_nickname, useDate, pay from reservation join member on reservation.userId = member.mem_id";
+        sql="select mem_userid, mem_nickname, city, branch, time, room, useDate, pay from reservation join member on reservation.userId = member.mem_id";
 
         try {
             ptmt = con.prepareStatement(sql);
@@ -123,6 +123,10 @@ public class AdminReservDAO {
                 AdminReservDTO adminReservDTO = new AdminReservDTO();
                 adminReservDTO.setMem_userid(rs.getString("mem_userid"));
                 adminReservDTO.setMem_nickname(rs.getString("mem_nickname"));
+                adminReservDTO.setCity(rs.getString("city"));
+                adminReservDTO.setBranch(rs.getString("branch"));
+                adminReservDTO.setTime(rs.getString("time"));
+                adminReservDTO.setRoom(rs.getString("room"));
                 adminReservDTO.setUseDate(rs.getString("useDate"));
                 adminReservDTO.setPay(rs.getInt("pay"));
 

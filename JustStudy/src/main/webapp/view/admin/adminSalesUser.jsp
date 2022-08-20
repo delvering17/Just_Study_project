@@ -102,8 +102,12 @@
             <tr>
                 <th>아이디</th>
                 <th>닉네임</th>
-                <th>이용일</th>
-                <th>지출</th>
+                <th>지역</th>
+                <th>이용지점</th>
+                <th>이용일자</th>
+                <th>이용시간</th>
+                <th>룸 타임</th>
+                <th>결제금액</th>
             </tr>
             <form action="">
                 <c:forEach items="${salesUserList}" var="salesUserList">
@@ -111,7 +115,11 @@
                     <tr>
                         <td>${salesUserList.mem_userid}</td>
                         <td>${salesUserList.mem_nickname}</td>
+                        <td>${salesUserList.city}</td>
+                        <td>${salesUserList.branch}</td>
                         <td>${salesUserList.useDate}</td>
+                        <td>${salesUserList.time}</td>
+                        <td>${salesUserList.room}</td>
                         <td>${salesUserList.pay}</td>
                     </tr>
 

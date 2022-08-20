@@ -206,20 +206,25 @@
     });
 
     $('#datepicker-before').change(function () {
-        const datepickerBefore = document.querySelector('#datepicker-before');
-        const datepickerAfter = document.querySelector('#datepicker-after');
-        datepickerAfter.setAttribute("min", datepickerBefore.value);
+        let datepickerBefore = document.querySelector('#datepicker-before');
+        let datepickerAfter = document.querySelector('#datepicker-after');
+        if(datepickerBefore.value > datepickerAfter.value) {
+            datepickerAfter.value = datepickerBefore.value
+        }
+        // datepickerAfter.setAttribute("min", datepickerBefore.value);
         datepickerAfter.setAttribute("value", datepickerBefore.value);
-
     });
 
     $('#datepicker-after').change(function () {
-        const datepickerBefore = document.querySelector('#datepicker-before');
-        const datepickerAfter = document.querySelector('#datepicker-after');
-        datepickerBefore.setAttribute("max", datepickerAfter.value);
+        let datepickerBefore = document.querySelector('#datepicker-before');
+        let datepickerAfter = document.querySelector('#datepicker-after');
+        if(datepickerAfter.value < datepickerBefore.value) {
+            datepickerBefore.value = datepickerAfter.value
+        }
+        // datepickerBefore.setAttribute("max", datepickerAfter.value);
         datepickerBefore.setAttribute("value", datepickerAfter.value);
-
     });
+
 
 
     // 활용해서 a의 nowPage 자체를 넘기기
@@ -286,6 +291,10 @@
 
     window.onload = function () {
 
+        const datepickerBefore = document.querySelector('#datepicker-before');
+        datepickerBefore.setAttribute("max", today);
+        let datepickerAfter = document.querySelector('#datepicker-after');
+        datepickerAfter.setAttribute("max", today);
 
         <c:if test="${date_period != null}" >
 

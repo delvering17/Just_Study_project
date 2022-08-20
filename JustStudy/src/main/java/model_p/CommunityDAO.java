@@ -29,7 +29,7 @@ public class CommunityDAO {
     public ArrayList<CommunityDTO> list(){
         ArrayList<CommunityDTO> res = new ArrayList<CommunityDTO>();
 
-        sql = "select * from studygroup";
+        sql = "select * from studygroup order by regDate desc ";
 
         try {
             ptmt = con.prepareStatement(sql);
@@ -48,6 +48,7 @@ public class CommunityDAO {
                 dto.setStudykind(rs.getString("studykind"));
                 dto.setContent(rs.getString("content"));
                 dto.setRegDate(rs.getDate("regDate"));
+                dto.setOpenChatting(rs.getString("openChatting"));
 
                 res.add(dto);
             }
@@ -62,7 +63,7 @@ public class CommunityDAO {
         return res;
     }
 
-    public void insert(CommunityDTO dto) {
+    public void insert(CommunityDTO communityDTO) {
 
         try {
             sql = "select max(id)+1 from studygroup";
@@ -70,24 +71,25 @@ public class CommunityDAO {
             ptmt = con.prepareStatement(sql);
             rs = ptmt.executeQuery();
             rs.next();
-            dto.id = rs.getInt(1);
+            communityDTO.id = rs.getInt(1);
 
             //System.out.println(dto);
 
 
-            sql = "insert into studygroup (id,memId,location,startdate,enddate,title,people,studykind,content,regDate) "
-                    + "values (?,?,?,?,?,?,?,?,?,sysdate())";
+            sql = "insert into studygroup (id,memId,location,startdate,enddate,title,people,studykind,content,regDate,openChatting) "
+                    + "values (?,?,?,?,?,?,?,?,?,sysdate(),?)";
 
             ptmt =con.prepareStatement(sql);
-            ptmt.setInt(1, dto.getId());
-            ptmt.setInt(2, dto.getMemId());
-            ptmt.setString(3, dto.getLocation());
-            ptmt.setDate(4, (Date) dto.getStartdate());
-            ptmt.setDate(5, (Date) dto.getEnddate());
-            ptmt.setString(6, dto.getTitle());
-            ptmt.setInt(7,dto.getPeople());
-            ptmt.setString(8, dto.getStudykind());
-            ptmt.setString(9, dto.getContent());
+            ptmt.setInt(1, communityDTO.getId());
+            ptmt.setInt(2, communityDTO.getMemId());
+            ptmt.setString(3, communityDTO.getLocation());
+            ptmt.setDate(4, new java.sql.Date(communityDTO.getStartdate().getTime()));
+            ptmt.setDate(5, new java.sql.Date(communityDTO.getEnddate().getTime()));
+            ptmt.setString(6, communityDTO.getTitle());
+            ptmt.setInt(7,communityDTO.getPeople());
+            ptmt.setString(8, communityDTO.getStudykind());
+            ptmt.setString(9, communityDTO.getContent());
+            ptmt.setString(10, communityDTO.getOpenChatting());
 
             ptmt.executeUpdate();
 
@@ -123,6 +125,41 @@ public class CommunityDAO {
                 res.setStudykind(rs.getString("studykind"));
                 res.setContent(rs.getString("content"));
                 res.setRegDate(rs.getDate("regDate"));
+                res.setOpenChatting(rs.getString("openChatting"));
+
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally {
+            close();
+        }
+
+        return res;
+    }
+
+    public CommunityDTO communityApplyDetail(int id,  java.util.Date apply_date) {
+        CommunityDTO res = null;
+
+        sql = "select * from studygroup where id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, id);
+            rs = ptmt.executeQuery(); //실행~
+
+            if(rs.next()) { // rs가 존재한다면~ 가지고 나가거라~(pw를 제외하고 다 가져옴)
+                res = new CommunityDTO();
+                res.setId(rs.getInt("id"));
+                res.setMemId(rs.getInt("memId"));
+                res.setLocation(rs.getString("location"));
+                res.setStartdate(rs.getDate("startdate"));
+                res.setEnddate(rs.getDate("enddate"));
+                res.setTitle(rs.getString("title"));
+                res.setPeople(rs.getInt("people"));
+                res.setStudykind(rs.getString("studykind"));
+                res.setContent(rs.getString("content"));
+                res.setRegDate(apply_date);
 
             }
         } catch (SQLException e) {
@@ -137,7 +174,7 @@ public class CommunityDAO {
 
     public int modify(CommunityDTO communityDTO){
 
-        sql = "update studygroup set location = ?, startdate = ?, enddate = ?, title = ?, people = ?, studykind = ?, content = ? where id = ?";
+        sql = "update studygroup set location = ?, startdate = ?, enddate = ?, title = ?, people = ?, studykind = ?, content = ?, openChatting = ? where id = ?";
         try {
             ptmt = con.prepareStatement(sql);
             ptmt.setString(1, communityDTO.getLocation());
@@ -147,7 +184,8 @@ public class CommunityDAO {
             ptmt.setInt(5,communityDTO.getPeople());
             ptmt.setString(6, communityDTO.getStudykind());
             ptmt.setString(7, communityDTO.getContent());
-            ptmt.setInt(8, communityDTO.id);
+            ptmt.setInt(8, communityDTO.getId());
+            ptmt.setString(9, communityDTO.getOpenChatting());
 
             return ptmt.executeUpdate();
         } catch (SQLException e) {
@@ -178,7 +216,7 @@ public class CommunityDAO {
 
         ArrayList<CommunityDTO> res = new ArrayList<CommunityDTO>();
 
-        sql = "select * from studygroup where memId = ?";
+        sql = "select * from studygroup where memId = ? order by regDate desc ";
 
         try {
             ptmt = con.prepareStatement(sql);
@@ -198,6 +236,7 @@ public class CommunityDAO {
                 communityDTO.setStudykind(rs.getString("studykind"));
                 communityDTO.setContent(rs.getString("content"));
                 communityDTO.setRegDate(rs.getDate("regDate"));
+                communityDTO.setOpenChatting(rs.getString("openChatting"));
 
                 res.add(communityDTO);
             }
@@ -210,12 +249,68 @@ public class CommunityDAO {
         return res;
     }
 
+    public int applyAnswer(int as_id, int answer){
+
+        sql = "update applystudy set as_state = ? where as_id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, answer);
+            ptmt.setInt(2, as_id);
+
+            return ptmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return 0;
+    }
+
+
+    public ArrayList<CommunityDTO> communityPeriodList(int id, String date_before, String date_after){
+        ArrayList<CommunityDTO> res = new ArrayList<>();
+
+        sql = "select * from studygroup where memId = ? and regDate >= ? and regDate <= ? order by regDate desc ";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, id);
+            ptmt.setString(2, date_before );
+            ptmt.setString(3, date_after);
+
+
+
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                CommunityDTO communityDTO = new CommunityDTO();
+
+                communityDTO.setId(rs.getInt("id"));
+                communityDTO.setMemId(rs.getInt("memId"));
+                communityDTO.setLocation(rs.getString("location"));
+                communityDTO.setStartdate(rs.getDate("startdate"));
+                communityDTO.setEnddate(rs.getDate("enddate"));
+                communityDTO.setTitle(rs.getString("title"));
+                communityDTO.setPeople(rs.getInt("people"));
+                communityDTO.setStudykind(rs.getString("studykind"));
+                communityDTO.setContent(rs.getString("content"));
+                communityDTO.setRegDate(rs.getDate("regDate"));
+                communityDTO.setOpenChatting(rs.getString("openChatting"));
+                res.add(communityDTO);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return res;
+    }
 
     public void close() {
         if(rs!=null) try {rs.close();} catch (SQLException e) {}
         if(ptmt!=null) try { ptmt.close();} catch (SQLException e) {}
         if(con!=null) try { con.close();} catch (SQLException e) {}
     }
-
-
 }

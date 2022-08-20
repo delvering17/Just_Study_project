@@ -1,3 +1,6 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="model_p.ApplyStudyDTO" %>
+<%@ page import="java.util.Date" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -134,89 +137,33 @@
 
 </style>
 
-<script type="text/javascript">
-  window.onload = function (){
-    $("#submit-find").click(function (){
-
-      let start = new Date();
-      let endDate = new Date();
-
-      switch ($("input[name=period]:checked").attr("id")){
-        case "all":
-          start = null;
-          break;
-        case "today":
-          start = new Date();
-          break;
-        case "sevenDays":
-          start.setDate(new Date().getDate() - 6)
-          break;
-        case "oneMonth":
-          start.setMonth(new Date().getMonth() - 1)
-          start.setDate(new Date().getDate() + 1)
-          break;
-        case "threeMonths":
-          start.setMonth(new Date().getMonth() - 3)
-          start.setDate(new Date().getDate() + 1)
-          break;
-        case "mypick":
-          const startPick = $(".mypage-studygroup-top-datepicker:first-of-type").val()
-          start = new Date(startPick.split("-")[0], parseInt(startPick.split("-")[1]) - 1, parseInt(startPick.split("-")[2]))
-
-          const endPick = $(".mypage-studygroup-top-datepicker:last-of-type").val()
-          endDate = new Date(endPick.split("-")[0], parseInt(endPick.split("-")[1]) - 1, parseInt(endPick.split("-")[2]))
-
-          break;
-      }
-
-    })
-
-    $(".mypage-studygroup-top-datepicker").change(function (){
-      $("input[id=mypick]").attr('checked', true);
-    })
-
-    $("input[name=mypage-studygroup-type]").each(function (key, value){
-      if(value.getAttribute("id") == "${param.type}"){
-        value.setAttribute("checked", true);
-      }
-    })
-
-    $("input[name=mypage-studygroup-type]").change(function (){
-      location.href = "MypageStudygroup?type="+$("input[name=mypage-studygroup-type]:checked").attr("id")
-    })
-
-
-  }
-</script>
-
 <div class="mypage-studygroup-bg">
   <div class="mypage-studygroup-top">
     <div class="top-dateselect-wrapper">
-      <label for="all"><input type="radio" name="period" id="all" checked hidden>
+
+      <label for="all"><input type="radio" class="input-radio" name="period" id="all" hidden>
         <div class="mypage-studygroup-period">전체</div>
       </label>
-      <label for="today"><input type="radio" name="period" id="today" hidden>
+      <label for="today"><input type="radio" class="input-radio" name="period" id="today" hidden >
         <div class="mypage-studygroup-period">오늘</div>
       </label>
-      <label for="sevenDays"><input type="radio" name="period" id="sevenDays" hidden>
+      <label for="day7"><input type="radio" class="input-radio" name="period" id="day7" hidden>
         <div class="mypage-studygroup-period">7일</div>
       </label>
-      <label for="oneMonth"><input type="radio" name="period" id="oneMonth" hidden>
+      <label for="month"><input type="radio" class="input-radio" name="period" id="month" hidden>
         <div class="mypage-studygroup-period">1개월</div>
       </label>
-      <label for="threeMonths"><input type="radio" name="period" id="threeMonths" hidden>
+      <label for="month3"><input type="radio" class="input-radio" name="period" id="month3" hidden>
         <div class="mypage-studygroup-period">3개월</div>
       </label>
     </div>
 
-    <input class="mypage-studygroup-top-datepicker" type="date">
+    <input class="mypage-studygroup-top-datepicker" id="datepicker-before" max="" type="date">
     <p>&#126;</p>
-    <input class="mypage-studygroup-top-datepicker" type="date">
-    <button type="submit" class="mypage-studygroup-period" id="submit-find">조회</button>
+    <input class="mypage-studygroup-top-datepicker" id="datepicker-after" type="date">
+    <button class="mypage-studygroup-period" id="submit-find" onclick="goFind()">조회</button>
 
   </div>
-  <label for="threeMonths"><input type="radio" name="period" id="mypick" hidden></label>
-
   <div class="mypage-studygroup-main">
 
     <div class="mypage-studygroup-menu">
@@ -228,27 +175,63 @@
       <tr>
         <td>ID</td>
         <td>제목</td>
-        <td>등록일자</td>
+
         <td>지점</td>
         <td>시작일</td>
         <td>종료일</td>
         <td>모집인원</td>
         <td>구분</td>
+
+        <td id="td_regDate">신청일자</td>
         <td>상태</td>
       </tr>
 
       <c:forEach items="${studygroupList}" var="studygroup" varStatus="no">
-        <form action="MypageReview" class="mypage-studygroup-review-form">
+        <form action="<c:url value="/community/CommunityApplyDetail"/>" class="mypage-studygroup-review-form">
+          <input type="hidden" name="as_id" value="${myApplyList[no.index].as_id}">
           <tr>
             <td>${studygroup.id}</td>
-            <td>${studygroup.title}</td>
-            <td>${studygroup.regDate}</td>
+            <td><a href="<c:url value="/community/CommunityDetail?id=${studygroup.id}"/>">${studygroup.title}</a></td>
+
             <td>${studygroup.location}</td>
             <td>${studygroup.startdate}</td>
             <td>${studygroup.enddate}</td>
             <td>${studygroup.people}</td>
             <td>${studygroup.studykind}</td>
-            <td></td>
+            <td>${studygroup.regDate}</td>
+            <jsp:useBean id="now" class="java.util.Date" />
+            <fmt:formatDate var = "today" value="${now}" pattern="yyyy-MM-dd"/>
+            <c:choose>
+              <c:when test="${param.type == 'maked'}">
+                <c:choose>
+                  <c:when test="${today < communityDTO.enddate}">
+                    <td>모집중</td>
+                  </c:when>
+                  <c:otherwise>
+                    <td>모집완료</td>
+                  </c:otherwise>
+                </c:choose>
+              </c:when>
+              <c:when test="${param.type == 'apply'}">
+                <c:choose>
+                  <c:when test="${myApplyList[no.index].as_state == 1}">
+                    <td>
+                      <input type="submit" value="대기중"/>
+                    </td>
+                  </c:when>
+                  <c:when test="${myApplyList[no.index].as_state == 2}">
+                    <td>
+                      <input type="submit" value="승인"/>
+                    </td>
+                  </c:when>
+                  <c:when test="${myApplyList[no.index].as_state == 3}">
+                    <td>
+                      <input type="submit" value="반려"/>
+                    </td>
+                  </c:when>
+                </c:choose>
+              </c:when>
+            </c:choose>
           </tr>
         </form>
       </c:forEach>
@@ -256,3 +239,207 @@
   </div>
 
 </div>
+
+<script type="text/javascript">
+
+
+
+
+  // datepicker 오늘 날짜 제한
+  let now_utc = Date.now()
+  let timeOff = new Date().getTimezoneOffset()*60000;
+  let today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+
+  let inputarr = document.querySelectorAll('.input-radio')
+  inputarr.forEach(function (item) {
+    item.setAttribute("max", today);
+  } )
+
+  $('.mypage-studygroup-top-datepicker').change(function () {
+    const inputRadio = document.querySelectorAll('.input-radio');
+    inputRadio.forEach(function (item) {
+      item.checked = false;
+    } )
+  });
+
+  $('.input-radio').change(function () {
+    const topDatePicker = document.querySelectorAll('.mypage-studygroup-top-datepicker');
+    topDatePicker.forEach(function (item) {
+      item.value = '';
+    } )
+  });
+
+  $('#datepicker-before').change(function () {
+    let datepickerBefore = document.querySelector('#datepicker-before');
+    let datepickerAfter = document.querySelector('#datepicker-after');
+    if(datepickerBefore.value > datepickerAfter.value) {
+      datepickerAfter.value = datepickerBefore.value
+    }
+    // datepickerAfter.setAttribute("min", datepickerBefore.value);
+    datepickerAfter.setAttribute("value", datepickerBefore.value);
+  });
+
+  $('#datepicker-after').change(function () {
+    let datepickerBefore = document.querySelector('#datepicker-before');
+    let datepickerAfter = document.querySelector('#datepicker-after');
+    if(datepickerAfter.value < datepickerBefore.value) {
+      datepickerBefore.value = datepickerAfter.value
+    }
+    // datepickerBefore.setAttribute("max", datepickerAfter.value);
+    datepickerBefore.setAttribute("value", datepickerAfter.value);
+  });
+
+
+  // 활용해서 a의 nowPage 자체를 넘기기
+
+  function goFind(){
+
+    let find_url = "?type=${param.type}" ;
+
+    let input_radio = $("input[name=period]:checked").attr("id");
+    let datepickerBefore = document.querySelector('#datepicker-before');
+    let datepickerAfter = document.querySelector('#datepicker-after');
+
+    if(input_radio != null){
+      find_url += "&date_period=" + input_radio;
+
+    }
+
+    if(datepickerBefore.value !== ''){
+      find_url += "&date_before=" + datepickerBefore.value+"&";
+      find_url += "date_after=" + datepickerAfter.value;
+    }
+
+    location.href = find_url
+
+  }
+
+<%--  function goPageFind(i){--%>
+
+<%--    let find_url = "?";--%>
+
+<%--    let input_radio = $("input[name=date-period]:checked").attr('value');--%>
+<%--    let datepickerBefore = document.querySelector('#datepicker-before');--%>
+<%--    let datepickerAfter = document.querySelector('#datepicker-after');--%>
+
+<%--    if(input_radio != null){--%>
+<%--      find_url += "date_period=" + input_radio;--%>
+<%--    }--%>
+<%--    if(datepickerBefore.value !== ''){--%>
+<%--      find_url += "date_before=" + datepickerBefore.value+"&";--%>
+<%--      find_url += "date_after=" + datepickerAfter.value;--%>
+<%--    }--%>
+
+<%--    location.href = find_url + "&nowPage=" + i;--%>
+<%--  }--%>
+
+<%--  function goDetail(i) {--%>
+
+<%--    let detail_url ="MypageInquiryDetail?inquiry_id="+ i+"&nowPage=${nowPage}"--%>
+
+<%--    if($("input[name=date-period]:checked").attr('value') != null) {--%>
+
+<%--      detail_url += "&date_period=" +  $("input[name=date-period]:checked").attr('value')--%>
+
+<%--    } else {--%>
+<%--      let datepickerBefore = document.querySelector('#datepicker-before');--%>
+<%--      let datepickerAfter = document.querySelector('#datepicker-after');--%>
+
+<%--      detail_url += "&date_before=" + datepickerBefore.value+"&";--%>
+<%--      detail_url += "date_after=" + datepickerAfter.value;--%>
+
+<%--    }--%>
+
+<%--    location.href = detail_url--%>
+<%--  }--%>
+
+  window.onload = function () {
+
+    const datepickerBefore = document.querySelector('#datepicker-before');
+    datepickerBefore.setAttribute("max", today);
+    let datepickerAfter = document.querySelector('#datepicker-after');
+    datepickerAfter.setAttribute("max", today);
+
+
+
+        <c:if test="${date_period != null}" >
+
+    switch ('${date_period}') {
+      case "all":
+
+        let find_all = document.querySelector('#all');
+        find_all.checked = true;
+        break;
+      case "today":
+
+        let find_today = document.querySelector('#today');
+        find_today.checked = true;
+        break;
+
+      case "day7":
+        let find_day7 = document.querySelector('#day7');
+        find_day7.checked = true;
+        break;
+
+      case "month":
+        let find_month = document.querySelector('#month');
+        find_month.checked = true;
+        break;
+
+      case "month3":
+        let find_month3 = document.querySelector('#month3');
+        find_month3.checked = true;
+        break;
+    }
+    </c:if>
+
+    <c:if test="${date_before != null}" >
+    let datepicker_before = document.querySelector('#datepicker-before');
+    datepicker_before.value = '${date_before}';
+    let datepicker_after = document.querySelector('#datepicker-after');
+    datepicker_after.value = '${date_after}';
+    </c:if>
+
+
+    if('${param.type}' === 'maked' ) {
+      $('#td_regDate').empty()
+      $('#td_regDate').html('개설 일자')
+
+    } else {
+      $('#td_regDate').empty()
+      $('#td_regDate').html('신청 일자')
+
+    }
+
+  }
+
+  $("input[name=mypage-studygroup-type]").each(function (key, value){
+    if(value.getAttribute("id") == "${param.type}"){
+      value.setAttribute("checked", true);
+    }
+  })
+
+  $("input[name=mypage-studygroup-type]").change(function (){
+
+    let find_url = "?type=" + $("input[name=mypage-studygroup-type]:checked").attr("id") ;
+
+    let input_radio = $("input[name=period]:checked").attr("id");
+    let datepickerBefore = document.querySelector('#datepicker-before');
+    let datepickerAfter = document.querySelector('#datepicker-after');
+
+    if(input_radio != null){
+      find_url += "&date_period=" + input_radio;
+
+    }
+
+    if(datepickerBefore.value !== ''){
+      find_url += "&date_before=" + datepickerBefore.value+"&";
+      find_url += "date_after=" + datepickerAfter.value;
+    }
+
+    location.href = find_url
+
+  })
+
+
+</script>

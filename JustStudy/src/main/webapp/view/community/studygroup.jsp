@@ -182,9 +182,9 @@
         </div>
         <div class="commuity-main">
             <ul class="main-list-selector">
-                <li><a href="" >전체</a></li>
-                <li><a href="" >모집중</a></li>
-                <li><a href="" >모집완료</a></li>
+                <li><a href="CommunityPage?category=all" >전체</a></li>
+                <li><a href="CommunityPage?category=open" >모집중</a></li>
+                <li><a href="CommunityPage?category=close" >모집완료</a></li>
             </ul>
 
             <form class="main-form">
@@ -201,12 +201,9 @@
                 <input class="input-main-form" type="checkbox" name="devision02" id="cate_3" data-cate="기타" checked>
                 <label class="label-main-form" for="cate_3">기타</label>
                 </div>
-                <a href="">새 글쓰기</a>
+                <a href="CommunityInsertForm">새 글쓰기</a>
             </form>
             <ul class="main-study-list-wrapper">
-                <jsp:useBean id="now" class="java.util.Date" />
-                <fmt:formatDate var = "today" value="${now}" pattern="yyyy-MM-dd"/>
-
                 <c:forEach items="${mainData}" var="dto" varStatus="no">
                         <li class="study-list-item">
                             <div>
@@ -217,7 +214,7 @@
                                     <p>모집인원&nbsp;&colon; ${dto.people}명</p>
                                 </div>
                                 <c:choose>
-                                    <c:when test="${today < dto.enddate}">
+                                    <c:when test="${dto.status == '모집중'}">
                                         <a class="btn-apply" href="CommunityDetail?id=${dto.id}">신청하기</a>
                                     </c:when>
                                     <c:otherwise>

@@ -143,7 +143,7 @@
             </div>
             <div>
                 <i class="fa-solid fa-people-group"></i>
-                <a href="MypageStudygroup?type=maked">내 스터디</a>
+                <a href="MypageStudygroup?type=maked&date_period=day7">내 스터디</a>
             </div>
         </div>
     </div>

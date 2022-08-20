@@ -7,6 +7,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script>
+    <c:if test="${msg!=null }">
+    alert("${msg}")
+    </c:if>
+</script>
+
 <style>
 
     .community-detail-bg{
@@ -148,9 +154,49 @@
         line-height: 50px;
         border-radius: 10px;
         cursor: pointer;
-
     }
 
+    .community-detail-apply-list{
+        width: 60%;
+        height: fit-content;
+        margin: 70px 0px;
+        border-top: 1px black solid ;
+    }
+
+    .community-detail-apply-list .fa-circle-user{
+        width: fit-content;
+        margin-right: 20px;
+        color: gray;
+        font-size: 5rem;
+        float: left;
+    }
+
+    .community-detail-apply-list > form > div{
+        width: 100%;
+        height: fit-content;
+        border-bottom: 1px lightgray solid;
+        padding: 20px 50px;
+        display: flex;
+        align-items: center;
+    }
+
+    .community-detail-apply-list > form > div > div:first-of-type{
+        width: fit-content;
+        float: left;
+    }
+
+    .community-detail-apply-list > form > div > div:last-of-type{
+        width: fit-content;
+        float: right;
+    }
+
+    .community-detail-apply-list p{
+        width: fit-content;
+    }
+
+    .community-detail-apply-list input[type=submit]{
+        display: block;
+    }
 </style>
 
 <script type="text/javascript">
@@ -207,20 +253,63 @@
                 <td>내용</td>
                 <td>${communityDTO.contentBr}</td>
             </tr>
+            <c:forEach items="${applyList}" var="apply" varStatus="no">
+                <c:if test="${apply.as_mem_id == login && apply.as_state == 2}">
+                    <tr>
+                        <td>오픈채팅 URL</td>
+                        <td>${communityDTO.openChatting}</td>
+                    </tr>
+                </c:if>
+            </c:forEach>
+            <c:if test="${login == communityDTO.memId}">
+            <tr>
+                <td>오픈채팅 URL</td>
+                <td>${communityDTO.openChatting}</td>
+            </tr>
+            </c:if>
         </table>
 
         <div class="community-detail-btns">
-            <a href="CommunityPage"><i class="fa-regular fa-circle-left"></i>목록</a>
+            <a href="CommunityPage?category=all"><i class="fa-regular fa-circle-left"></i>목록</a>
             <c:choose>
                 <c:when test="${login == null}"></c:when>
-                <c:when test="${login != communityDTO.memId}">
-                    <div class="community-apply-btn">신청하기</div>
-                </c:when>
-                <c:otherwise>
+                <c:when test="${login == communityDTO.memId}">
                     <div class="community-modify-btn" onclick="">수정</div>
                     <div class="community-delete-btn">삭제</div>
+                </c:when>
+                <c:otherwise>
+                    <div class="community-apply-btn">신청하기</div>
                 </c:otherwise>
             </c:choose>
         </div>
+
+        <c:if test="${communityDTO.memId == login}">
+        <div class="community-detail-apply-list">
+            <c:forEach items="${applyList}" var="apply" varStatus="no">
+                <form action="CommunityApplyAnswer">
+                    <input type="hidden" name="studyId" value="${communityDTO.id}"/>
+                    <input type="hidden" name="as_id" value="${apply.as_id}"/>
+                    <div>
+                        <i class="fa-solid fa-circle-user"></i>
+                        <div>
+                            <p>${applyMemList[no.index].mem_nickname}</p>
+                            <p>${apply.as_content}</p>
+                        </div>
+                        <c:choose>
+                            <c:when test="${apply.as_state == 1}">
+                                <div>
+                                    <input type="submit" name="answer" value="승인"/>
+                                    <input type="submit" name="answer" value="반려"/>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div>처리 완료</div>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                </form>
+            </c:forEach>
+        </div>
+        </c:if>
     </div>
 </div>

@@ -10,7 +10,7 @@ public class MemberLoginForm implements MemberService{
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
 
-//        request.setAttribute("mainUrl", "member/member_loginForm.jsp");
+        request.setAttribute("mainUrl", "member/member_loginForm.jsp");
 //        System.out.println("잘오니");
 
 

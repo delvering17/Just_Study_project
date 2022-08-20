@@ -62,7 +62,6 @@
                         <c:forEach items="${branchList}" var="branch" varStatus="no">
                             <option value="${branch.name}">${branch.name}</option>
                         </c:forEach>
-
                     </select></td>
             </tr>
             <tr>
@@ -105,6 +104,10 @@
             <tr>
                 <td>내용</td>
                 <td colspan="3"><textarea name="content" cols="50" rows="10">${communityDTO.content}</textarea></td>
+            </tr>
+            <tr>
+                <td>오픈채팅 URL</td>
+                <td colspan="3"><input type="text" name="openChatting" value="${communityDTO.openChatting}"/></td>
             </tr>
             <tr>
                 <td>

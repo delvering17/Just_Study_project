@@ -234,7 +234,7 @@
                             <li><a href="../reservation/Studyroom">스터디룸예약</a></li>
                         </ul>
                         <ul class="gnb-sub-list">
-                            <li><a href="../community/CommunityPage">스터디모집</a></li>
+                            <li><a href="../community/CommunityPage?category=all">스터디모집</a></li>
                         </ul>
                         <ul class="gnb-sub-list">
                             <li><a href="notice_Notice.jsp">공지사항</a></li>

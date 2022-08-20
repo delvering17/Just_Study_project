@@ -182,7 +182,7 @@
         <td>모집인원</td>
         <td>구분</td>
 
-        <td id="td-regDate">신청일자</td>
+        <td id="td_regDate">신청일자</td>
         <td>상태</td>
       </tr>
 
@@ -365,6 +365,11 @@
         <c:if test="${date_period != null}" >
 
     switch ('${date_period}') {
+      case "all":
+
+        let find_all = document.querySelector('#all');
+        find_all.checked = true;
+        break;
       case "today":
 
         let find_today = document.querySelector('#today');
@@ -396,9 +401,15 @@
     </c:if>
 
 
-    <%--if('${param.type}' == ) {--%>
-    <%--  ${}--%>
-    <%--}--%>
+    if('${param.type}' === 'maked' ) {
+      $('#td_regDate').empty()
+      $('#td_regDate').html('개설 일자')
+
+    } else {
+      $('#td_regDate').empty()
+      $('#td_regDate').html('신청 일자')
+
+    }
 
   }
 

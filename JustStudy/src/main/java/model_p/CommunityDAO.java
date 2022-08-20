@@ -29,7 +29,7 @@ public class CommunityDAO {
     public ArrayList<CommunityDTO> list(){
         ArrayList<CommunityDTO> res = new ArrayList<CommunityDTO>();
 
-        sql = "select * from studygroup";
+        sql = "select * from studygroup order by regDate desc ";
 
         try {
             ptmt = con.prepareStatement(sql);
@@ -216,7 +216,7 @@ public class CommunityDAO {
 
         ArrayList<CommunityDTO> res = new ArrayList<CommunityDTO>();
 
-        sql = "select * from studygroup where memId = ?";
+        sql = "select * from studygroup where memId = ? order by regDate desc ";
 
         try {
             ptmt = con.prepareStatement(sql);
@@ -272,7 +272,7 @@ public class CommunityDAO {
     public ArrayList<CommunityDTO> communityPeriodList(int id, String date_before, String date_after){
         ArrayList<CommunityDTO> res = new ArrayList<>();
 
-        sql = "select * from studygroup where memId = ? and regDate >= ? and regDate <= ?";
+        sql = "select * from studygroup where memId = ? and regDate >= ? and regDate <= ? order by regDate desc ";
 
         try {
             ptmt = con.prepareStatement(sql);

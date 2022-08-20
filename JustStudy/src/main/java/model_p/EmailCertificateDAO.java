@@ -67,6 +67,8 @@ public class EmailCertificateDAO {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            close();
         }
 
         return new EmailCertificateDAO().selectCertificate_date(email);
@@ -85,6 +87,8 @@ public class EmailCertificateDAO {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            close();
         }
 
         return new EmailCertificateDAO().selectCertificate_date(email);

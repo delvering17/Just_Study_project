@@ -16,8 +16,11 @@ public class MemberCertificationNum implements MemberNonViewService{
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
         String input_userid = request.getParameter("input_userid");
-        int input_certificate_num = Integer.parseInt(request.getParameter("input_certificate_num"));
+        String input_certificate = request.getParameter("input_certificate_num");
 
+        
+
+        int input_certificate_num = Integer.parseInt(input_certificate);
 
         Date now = new Date();
 

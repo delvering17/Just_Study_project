@@ -28,6 +28,9 @@ public class MemberSigninReg implements MemberNonViewService{
 
         // 여기 유효성 검사 다 해줘야함 찬욱아 까먹지마라
 
+
+
+
         MemberDTO memberDTO = new MemberDTO();
 
 
@@ -44,10 +47,11 @@ public class MemberSigninReg implements MemberNonViewService{
         //  TODO - 유효성 검사 필요
 
 
-        new MemberDAO().signIn(memberDTO);
+//        new MemberDAO().signIn(memberDTO);
 
         JSONObject jj = new JSONObject();
         try {
+                jj.put("signinResult", "success");
                 jj.put("msg", "success");
             response.getWriter().append(jj.toJSONString());
         } catch (IOException e) {

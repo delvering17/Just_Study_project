@@ -1,5 +1,6 @@
 package model_p;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ApplyStudyDTO {
@@ -11,6 +12,8 @@ public class ApplyStudyDTO {
     int as_state;
 
     Date reg_date;
+
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public int getAs_id() {
         return as_id;
@@ -60,9 +63,16 @@ public class ApplyStudyDTO {
         return reg_date;
     }
 
+    public String getReg_date_String() {
+        return sdf.format(reg_date);
+    }
+
     public void setReg_date(Date reg_date) {
         this.reg_date = reg_date;
     }
+
+
+
 
     @Override
     public String toString() {

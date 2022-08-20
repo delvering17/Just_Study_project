@@ -177,7 +177,7 @@
       <tr>
         <td>ID</td>
         <td>제목</td>
-        <td>등록일자</td>
+        <td>신청일자</td>
         <td>지점</td>
         <td>시작일</td>
         <td>종료일</td>
@@ -293,18 +293,18 @@
 
   function goFind(i){
 
-    let find_url = "?";
+    let find_url = "?type=" + "${param.type}" ;
 
     let input_radio = $("input[name=period]:checked").attr('value');
     let datepickerBefore = document.querySelector('#datepicker-before');
     let datepickerAfter = document.querySelector('#datepicker-after');
 
     if(input_radio != null){
-      find_url += "date_period=" + input_radio;
+      find_url += "&date_period=" + input_radio;
     }
 
     if(datepickerBefore.value !== ''){
-      find_url += "date_before=" + datepickerBefore.value+"&";
+      find_url += "&date_before=" + datepickerBefore.value+"&";
       find_url += "date_after=" + datepickerAfter.value;
     }
 

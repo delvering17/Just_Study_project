@@ -135,6 +135,40 @@ public class CommunityDAO {
         return res;
     }
 
+    public CommunityDTO communityApplyDetail(int id,  java.util.Date apply_date) {
+        CommunityDTO res = null;
+
+        sql = "select * from studygroup where id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, id);
+            rs = ptmt.executeQuery(); //실행~
+
+            if(rs.next()) { // rs가 존재한다면~ 가지고 나가거라~(pw를 제외하고 다 가져옴)
+                res = new CommunityDTO();
+                res.setId(rs.getInt("id"));
+                res.setMemId(rs.getInt("memId"));
+                res.setLocation(rs.getString("location"));
+                res.setStartdate(rs.getDate("startdate"));
+                res.setEnddate(rs.getDate("enddate"));
+                res.setTitle(rs.getString("title"));
+                res.setPeople(rs.getInt("people"));
+                res.setStudykind(rs.getString("studykind"));
+                res.setContent(rs.getString("content"));
+                res.setRegDate(apply_date);
+
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally {
+            close();
+        }
+
+        return res;
+    }
+
     public int modify(CommunityDTO communityDTO){
 
         sql = "update studygroup set location = ?, startdate = ?, enddate = ?, title = ?, people = ?, studykind = ?, content = ? where id = ?";
@@ -209,6 +243,12 @@ public class CommunityDAO {
 
         return res;
     }
+
+
+//    public ArrayList<CommunityDTO> communityPeriodList(int mem_id, int first, int limit, String date_before, String date_after) {
+//
+//    }
+
 
 
     public void close() {

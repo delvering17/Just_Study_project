@@ -185,6 +185,38 @@ public class ApplyStudyDAO {
         return res;
     }
 
+    public ArrayList<ApplyStudyDTO> myApplyPeriodList(int id, String date_before, String date_after){
+        ArrayList<ApplyStudyDTO> res = new ArrayList<ApplyStudyDTO>();
+
+        sql = "select * from applystudy where as_mem_id = ? and reg_date >= ? and reg_date <= ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, id);
+            ptmt.setString(2, date_before );
+            ptmt.setString(3, date_after);
+
+
+
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                ApplyStudyDTO applyStudyDTO = new ApplyStudyDTO();
+                applyStudyDTO.setAs_id(rs.getInt("as_id"));
+                applyStudyDTO.setAs_purpose(rs.getInt("as_purpose"));
+                applyStudyDTO.setAs_mem_id(rs.getInt("as_mem_id"));
+                applyStudyDTO.setAs_content(rs.getString("as_content"));
+                applyStudyDTO.setAs_state(rs.getInt("as_state"));
+                res.add(applyStudyDTO);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return res;
+    }
+
     public ArrayList<ApplyStudyDTO> applyListPurpose(int purpose){
         ArrayList<ApplyStudyDTO> res = new ArrayList<ApplyStudyDTO>();
 

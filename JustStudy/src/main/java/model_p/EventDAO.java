@@ -128,8 +128,8 @@ public class EventDAO {
         try {
             ptmt = con.prepareStatement(sql);
             ptmt.setString(1, dto.getTitle());
-            ptmt.setDate(2, (Date) dto.getEvent_startdate());
-            ptmt.setDate(3, (Date) dto.getEvent_enddate());
+            ptmt.setDate(2,new java.sql.Date(dto.getEvent_startdate().getTime()));
+            ptmt.setDate(3, new java.sql.Date(dto.getEvent_enddate().getTime()));
             ptmt.setString(4, dto.getContent());
             ptmt.setString(5, dto.getImg());
             ptmt.setInt(6, dto.id);
@@ -143,13 +143,13 @@ public class EventDAO {
         }
     }
 
-    public int delete(EventDTO dto) {
+    public int delete(int id) {
 
         try {
             sql = "delete from eventpp where id = ?";
 
             ptmt =con.prepareStatement(sql);
-            ptmt.setInt(1, dto.id);
+            ptmt.setInt(1, id);
             return ptmt.executeUpdate();
 
         } catch (Exception e) {

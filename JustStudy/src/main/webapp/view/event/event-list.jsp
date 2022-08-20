@@ -60,7 +60,7 @@
         width: 300px;
         height: 300px;
         border: solid 1px #000;
-        background-image: url("<%=request.getContextPath()%>/img/event/event_poster.png");
+
 
     }
 
@@ -157,7 +157,7 @@
 
                 <li class="event-li filter-active filter-ing">${dto.id}
                     <div class="event-img">
-                        이벤트 이미지
+                        <img src="<c:url value="/img/event/${dto.img}"/>" alt="">
                     </div>
                     <div class="event-info">
                         <div class="event-text">
@@ -167,7 +167,7 @@
                         </div>
                         <hr>
                         <div class="event-date">
-                            <p>${dto.event_startdate} ~ ${dto.event_enddate}</p>
+                            <p>${dto.event_startdate_sdf} ~ ${dto.event_enddate_sdf}</p>
                             <div class="ing">
                                 <p>상시 <a href="EventDetail?id=${dto.id}" /></p>
                             </div>
@@ -178,7 +178,8 @@
                     <c:otherwise>
                         <li class="event-li filter-active filter-close">${dto.id}
                             <div class="event-img">
-                                이벤트 이미지
+                                <img src="<c:url value="/img/event/${dto.img}"/>" alt="">
+
                             </div>
                             <div class="event-info">
                                 <div class="event-text">
@@ -188,7 +189,7 @@
                                 </div>
                                 <hr>
                                 <div class="event-date">
-                                    <p>${dto.event_startdate} ~ ${dto.event_enddate}</p>
+                                    <p>${dto.event_startdate_sdf} ~ ${dto.event_enddate_sdf}</p>
                                     <div class="ing">
                                         <p>이벤트마감</p>
                                     </div>

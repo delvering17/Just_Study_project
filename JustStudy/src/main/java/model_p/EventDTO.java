@@ -1,5 +1,6 @@
 package model_p;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class EventDTO {
@@ -7,6 +8,7 @@ public class EventDTO {
     String title,content,img;
     Date reg_date,event_startdate,event_enddate;
 
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public int getId() {
         return id;
@@ -52,12 +54,20 @@ public class EventDTO {
         return event_startdate;
     }
 
+    public String getEvent_startdate_sdf(){
+        return sdf.format(event_startdate);
+    }
+
     public void setEvent_startdate(Date event_startdate) {
         this.event_startdate = event_startdate;
     }
 
     public Date getEvent_enddate() {
         return event_enddate;
+    }
+
+    public String getEvent_enddate_sdf(){
+        return sdf.format(event_enddate);
     }
 
     public void setEvent_enddate(Date event_enddate) {

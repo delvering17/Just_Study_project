@@ -6,6 +6,7 @@ import model_p.EventDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 
 public class NewsInsertReg implements NewsService {
     @Override
@@ -15,8 +16,8 @@ public class NewsInsertReg implements NewsService {
         try {
             EventDTO dto = new EventDTO();
             dto.setTitle(request.getParameter("title"));
-            dto.setEvent_startdate(request.getParameter("event_startdate"));
-            dto.setEvent_enddate(request.getParameter("event_enddate"));
+            dto.setEvent_startdate(new Date(request.getParameter("event_startdate")));
+            dto.setEvent_enddate(new Date(request.getParameter("event_enddate")));
             dto.setContent(request.getParameter("content"));
 
 

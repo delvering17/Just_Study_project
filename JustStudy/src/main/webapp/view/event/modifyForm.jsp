@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <form action="EventModifyReg" method="post">
+    <input type="hidden" name="id" value="${dto.id}">
 
     <table>
         <tr>
@@ -19,8 +20,12 @@
               <td> ~ <input type="date" name="event_enddate" value="${dto.event_enddate}"></td>
         </tr>
         <tr>
+            <td>이미지 첨부</td>
+            <td colspan="3"><input type="text" name="img" value="sample1.jpeg"></td>
+        </tr>
+        <tr>
             <td>내용</td>
-            <td colspan="3"><textarea name="content" cols="50" rows="10">${dto.conetnt}</textarea></td>
+            <td colspan="3"><textarea name="content" cols="50" rows="10">${dto.content}</textarea></td>
         </tr>
         <tr>
             <td colspan="4" align="center">

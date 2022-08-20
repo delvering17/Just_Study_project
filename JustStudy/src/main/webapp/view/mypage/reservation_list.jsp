@@ -266,5 +266,11 @@
 
             location.href = "MypageReviewDetail?reservId="+$(this).parent().parent().children("input[name=reservId]").val()
         })
+
+        $("input[name=period]").change(function (){
+            if($("input[name=period]:checked").attr("id") != "mypick"){
+                $(".mypage-reservlist-top-datepicker").val("")
+            }
+        })
     }
 </script>

@@ -643,6 +643,25 @@
                         .html(e.date.getFullYear()+"-"+
                             (e.date.getMonth() > 8 ? "" : "0")
                             +(parseInt(e.date.getMonth())+1)+"-"+e.date.getDate()+" ("+"일월화수목금토".split("")[e.date.getDay()]+")")
+
+                    $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(1)>b").html($(".studyroom-reserv-time > div > .fa-angle-left + div").html())
+
+                    $.ajax({
+                        url: '<c:url value="/nonView/SetReservationItems"/>',
+                        type: "GET",
+                        async: false,
+                        data: "type=setTime&roomName="+document.querySelector('input[type=radio][name=roomName]:checked').getAttribute("id")
+                            +"&branchName="+document.querySelector('input[type=radio][name=branchName]:checked').getAttribute("id")
+                            +"&cityName="+document.querySelector('input[type=radio][name=cityName]:checked').getAttribute("id")
+                            +"&selectedDay="+$(".fa-angle-left+div").html().split(" ")[0],
+                        success: function(data){
+                            $(".studyroom-reserv-time>.studyroom-reserv-innerlist-time").html(decodeURIComponent(data))
+                            $(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(3)>b").html(document.querySelector('input[type=radio][name=roomName]:checked').getAttribute("id"))
+                        },
+                        error: function (e){
+                            console.log(e.responseText)
+                        }
+                    })
                 });
 
             $(".studyroom-reserv-headcount:first-of-type").click(function (){

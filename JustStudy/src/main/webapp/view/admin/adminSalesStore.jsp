@@ -108,12 +108,12 @@
         <select name="city">
           <option>전체</option>
           <c:forTokens items="서울,경기,부산,대구,인천,광주,대전,울산,세종,강원,충북,충남,전북,전남,경북,경남,제주" var="city" delims=",">
-            <option value="city">${city}</option>
+            <option>${city}</option>
           </c:forTokens>
         </select>
 
         <select name="branch">
-          <option value="branch">전체</option>
+          <option>전체</option>
         </select>
 
         <input type="radio" name="admin-sales-store-period"/>일일

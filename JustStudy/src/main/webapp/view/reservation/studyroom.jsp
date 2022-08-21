@@ -683,10 +683,12 @@
                 });
 
             $(".studyroom-reserv-headcount:first-of-type").click(function (){
-                $(".studyroom-reserv-headcount:first-of-type+b").html($(".studyroom-reserv-headcount:first-of-type+b").html() - 1)
-                $(".studyroom-reserv-totalprice").html($(".studyroom-reserv-headcount:last-of-type+font>b").html()
-                    * document.querySelectorAll('input[type=checkbox][name=time]:checked').length
-                    * $(".studyroom-reserv-headcount:first-of-type+b").html())
+                if($(".studyroom-reserv-headcount:first-of-type+b").html() > 1){
+                    $(".studyroom-reserv-headcount:first-of-type+b").html($(".studyroom-reserv-headcount:first-of-type+b").html() - 1)
+                    $(".studyroom-reserv-totalprice").html($(".studyroom-reserv-headcount:last-of-type+font>b").html()
+                        * document.querySelectorAll('input[type=checkbox][name=time]:checked').length
+                        * $(".studyroom-reserv-headcount:first-of-type+b").html())
+                }
             })
 
             $(".studyroom-reserv-headcount:last-of-type").click(function (){

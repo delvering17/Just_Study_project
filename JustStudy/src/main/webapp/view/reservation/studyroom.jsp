@@ -516,6 +516,10 @@
                         console.log(e.responseText)
                     }
                 })
+                $(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(2)>b").html("")
+                $(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(3)>b").html("")
+                $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(2)>b").html("")
+
             })
 
             $(document).on("change", "input[name=\"branchName\"]", function(){
@@ -536,6 +540,9 @@
                         console.log(e.responseText)
                     }
                 })
+
+                $(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(3)>b").html("")
+                $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(2)>b").html("")
             });
 
             $(".studyroom-reserv-time > div > .fa-angle-left").click(function (){
@@ -565,6 +572,8 @@
                         console.log(e.responseText)
                     }
                 })
+
+                $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(2)>b").html("")
             })
 
             $(".studyroom-reserv-time > div > .fa-angle-right").click(function (){
@@ -589,6 +598,9 @@
                         console.log(e.responseText)
                     }
                 })
+
+                $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(2)>b").html("")
+
             })
 
             $(document).on("change", "input[name=\"roomName\"]", function(){
@@ -609,6 +621,9 @@
                         console.log(e.responseText)
                     }
                 })
+
+                $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(2)>b").html("")
+
             });
 
             $(document).on("change", "input[name=\"time\"]", function (){
@@ -662,6 +677,9 @@
                             console.log(e.responseText)
                         }
                     })
+
+                    $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(2)>b").html("")
+
                 });
 
             $(".studyroom-reserv-headcount:first-of-type").click(function (){

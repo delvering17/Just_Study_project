@@ -102,11 +102,7 @@
       $("select[name=branch]").html("<option>전체</option>")
       <%for(BranchDTO branchDTO : branchList){%>
           if($("select[name=city]").val() == "<%=branchDTO.getCity()%>"){
-            if("<%=branchDTO.getName()%>" == "${param.branch}"){
-              $("select[name=branch]").append("<option selected><%=branchDTO.getName()%></option>")
-            } else{
               $("select[name=branch]").append("<option><%=branchDTO.getName()%></option>")
-            }
           }
       <%}%>
     })

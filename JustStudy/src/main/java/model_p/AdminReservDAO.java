@@ -5,6 +5,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class AdminReservDAO {
 
@@ -248,22 +249,27 @@ public class AdminReservDAO {
 
     }
 
-    public ArrayList<AdminReservDTO> salesStoreList(String city, String branch){
+    public ArrayList<AdminReservDTO> salesStoreList(String city, String branch, String period, java.util.Date startDate, Date endDate){
 
         ArrayList<AdminReservDTO> res = new ArrayList<AdminReservDTO>();
 
         sql = "select member.mem_userid, member.mem_realname, reservation.city, reservation.branch, reservation.room, reservation.useDate, " +
                 "reservation.time, reservation.pay from reservation join member on " +
-                "reservation.userId = member.mem_id"+(city.equals("전체") ? "" : " where city = ?")+(branch.equals("전체") ? "" : " and branch = ?");
+                "reservation.userId = member.mem_id where city = ? and branch = ?";
+
+        if(period!=null) {
+            sql += " and useDate >= ? and useDate < ?";
+        }
 
         try {
             ptmt = con.prepareStatement(sql);
-            if(!city.equals("전체")) {
                 ptmt.setString(1, city);
-            }
-            if(!branch.equals("전체")){
                 ptmt.setString(2, branch);
-            }
+
+                if(period!=null){
+                    ptmt.setDate(3, new java.sql.Date(startDate.getTime()));
+                    ptmt.setDate(4, new java.sql.Date(endDate.getTime()));
+                }
 
             System.out.println(ptmt);
             rs = ptmt.executeQuery();

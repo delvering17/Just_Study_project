@@ -3,6 +3,8 @@ package news_p;
 import event_p.EventService;
 import model_p.EventDAO;
 import model_p.EventDTO;
+import model_p.NewsDAO;
+import model_p.NewsDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,9 +16,9 @@ public class NewsDetail implements NewsService {
         int id = Integer.parseInt(request.getParameter("id"));
         System.out.println(id);
 
-        EventDAO dao = new EventDAO();
+        NewsDAO dao = new NewsDAO();
 
-        EventDTO dto = dao.detail(id);
+        NewsDTO dto = dao.detail(id);
 
         request.setAttribute("mainUrl","news/detail.jsp");
         request.setAttribute("dto", dto);

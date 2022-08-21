@@ -1,10 +1,7 @@
 package news_p;
 
-
-
-import event_p.EventService;
-import model_p.EventDAO;
-import model_p.EventDTO;
+import model_p.NewsDAO;
+import model_p.NewsDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,8 +11,8 @@ public class NewsPage implements NewsService {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-        ArrayList<EventDTO> mainData = new EventDAO().list();
-        System.out.println("Eventpage 들어왔따 : "+mainData);
+        ArrayList<NewsDTO> mainData = new NewsDAO().list();
+        System.out.println("Newspage 들어왔따 : "+mainData);
 
 
         request.setAttribute("mainData",mainData);

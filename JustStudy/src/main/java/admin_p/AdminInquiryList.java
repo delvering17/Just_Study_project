@@ -17,10 +17,6 @@ public class AdminInquiryList implements AdminService{
 
         ArrayList<InquiryDTO> arr_inquiryDTO = new InquiryDAO().inquiryList();
 
-
-
-
-
         request.setAttribute("arr_inquiryDTO", arr_inquiryDTO);
 
         request.setAttribute("adminUrl","adminInquiryList.jsp");

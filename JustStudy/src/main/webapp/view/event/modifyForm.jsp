@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: whgml
@@ -22,8 +23,14 @@
         </tr>
         <tr>
             <td>이미지 첨부</td>
-
-            <td colspan="3"><input type="file" name="img" value="${dto.img}"></td>
+            <c:choose>
+                <c:when test="${dto.img != null}">
+                    <td colspan="3"><input type="file" name="img" value="${dto.img}"></td>
+                </c:when>
+                <c:otherwise>
+                    <td colspan="3"><input type="file" name="img" value=""></td>
+                </c:otherwise>
+            </c:choose>
         </tr>
         <tr>
             <td>내용</td>

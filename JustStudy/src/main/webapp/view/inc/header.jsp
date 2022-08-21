@@ -238,7 +238,7 @@
                         </ul>
                         <ul class="gnb-sub-list">
                             <li><a href="notice_Notice.jsp">공지사항</a></li>
-                            <li><a href="notice_Event.jsp">이벤트</a></li>
+                            <li><a href="../event/EventPage">이벤트</a></li>
                             <li><a href="notice_News.jsp">뉴스</a></li>
                         </ul>
                         <ul class="gnb-sub-list">

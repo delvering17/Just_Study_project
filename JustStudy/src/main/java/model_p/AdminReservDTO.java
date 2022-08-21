@@ -5,8 +5,8 @@ import java.util.Date;
 public class AdminReservDTO {
 
     int id, headcount, pay;
-    String orderId, mem_userid, mem_realname, city, branch, room, useDate, time, status;
-    Date resDate;
+    String orderId, mem_userid, mem_realname, city, branch, room, time, status;
+    Date resDate, useDate;
 
     public int getId() {
         return id;
@@ -88,11 +88,11 @@ public class AdminReservDTO {
         this.room = room;
     }
 
-    public String getUseDate() {
+    public Date getUseDate() {
         return useDate;
     }
 
-    public void setUseDate(String useDate) {
+    public void setUseDate(Date useDate) {
         this.useDate = useDate;
     }
 

@@ -50,7 +50,7 @@ public class AdminReservDAO {
                 adminReservDTO.setCity(rs.getString("city"));
                 adminReservDTO.setBranch(rs.getString("branch"));
                 adminReservDTO.setRoom(rs.getString("room"));
-                adminReservDTO.setUseDate(rs.getString("useDate"));
+                adminReservDTO.setUseDate(rs.getDate("useDate"));
                 adminReservDTO.setTime(rs.getString("time"));
                 adminReservDTO.setHeadcount(rs.getInt("headcount"));
                 adminReservDTO.setPay(rs.getInt("pay"));
@@ -92,7 +92,7 @@ public class AdminReservDAO {
                 adminReservDTO.setCity(rs.getString("city"));
                 adminReservDTO.setBranch(rs.getString("branch"));
                 adminReservDTO.setRoom(rs.getString("room"));
-                adminReservDTO.setUseDate(rs.getString("useDate"));
+                adminReservDTO.setUseDate(rs.getDate("useDate"));
                 adminReservDTO.setTime(rs.getString("time"));
                 adminReservDTO.setHeadcount(rs.getInt("headcount"));
                 adminReservDTO.setPay(rs.getInt("pay"));

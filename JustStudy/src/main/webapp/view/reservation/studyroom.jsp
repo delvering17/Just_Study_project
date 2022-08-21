@@ -605,6 +605,7 @@
 
             $(document).on("change", "input[name=\"roomName\"]", function(){
 
+                console.log("sdfas")
                 $.ajax({
                     url: '<c:url value="/nonView/SetReservationItems"/>',
                     type: "GET",
@@ -763,7 +764,7 @@
                         $(".studyroom-reserv-form").append("<div></div>")
                         $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='city' value='"+selected[0]+"'></input>")
                         $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='branch' value='"+selected[1]+"'></input>")
-                        $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='room' value='"+selected[2]+"'></input>")
+                        $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='room' value='"+selected[2].replaceAll(" ", "&nbsp;")+"'></input>")
                         $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='useDate' value='"+selected[3].split(" ")[0]+"'></input>")
                         $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='time' value='"+selectedTimeList.join (", ")+"'></input>")
                         $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='headcount' value='"+$(".studyroom-reserv-headcount:first-of-type+b").html()+"'></input>")

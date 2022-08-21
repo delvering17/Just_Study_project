@@ -157,7 +157,7 @@
                     <td><a href="AdminEventDetail?id=${eventDTO.id}">${eventDTO.title}</a></td>
                     <td>${eventDTO.event_startdate_sdf}</td>
                     <td>${eventDTO.event_enddate_sdf}</td>
-                    <td>${eventDTO.event_reg_date_sdf}</td>
+                    <td>${eventDTO.reg_date_sdf}</td>
                 </tr>
             </c:forEach>
         </table>

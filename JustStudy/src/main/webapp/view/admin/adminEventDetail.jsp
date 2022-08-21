@@ -9,6 +9,12 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<script>
+    <%
+        if(request.getAttribute("msg") != null){%>
+    alert("<%=request.getAttribute("msg")%>")
+    <%}%>
+</script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
       integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
       crossorigin="anonymous" referrerpolicy="no-referrer"/>
@@ -128,23 +134,16 @@
     }
 </style>
 
-<script type="text/javascript">
-    window.onload = function (){
-        $(".admin-store-delete").click(function (){
-            alert($("input[name=branch]:checked").attr("id"))
 
-        })
-    }
-
-</script>
 <div class="wrapper">
 
     <div id="headline">
         <b>이벤트 상세보기</b>
     </div>
     <div id="main">
-        <form>
+        <form id="event-detail-form" method="post" enctype="multipart/form-data">
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+            <input type="hidden" name="id" value="${eventDTO.id}">
             <tr>
                 <th>제목</th>
                 <td>
@@ -166,14 +165,25 @@
             <tr>
                 <th>게시일</th>
                 <td>
-                    ${eventDTO.event_reg_date_sdf}
+                    <input type="hidden" name="reg_date" value="${eventDTO.reg_date_sdf}">
+                    ${eventDTO.reg_date_sdf}
                 </td>
             </tr>
             <tr>
                 <th>이미지</th>
                 <td>
-                    <input type="file" name="img" value="${eventDTO.img}">
-                    <img src="<c:url value="/img/event/" />${eventDTO.img}" alt="">
+
+                    <c:choose>
+                        <c:when test="${eventDTO.img == ''}">
+                            <input type="file" name="img">
+                        </c:when>
+                        <c:otherwise>
+                            <input type="button" value="파일 삭제" id="imgDelete" onclick="deleteFile()"/>
+                            <ipnut type="hidden" name="img" value="${eventDTO.img}"/>
+                        </c:otherwise>
+                    </c:choose>
+
+
                 </td>
             </tr>
             <tr>
@@ -184,13 +194,19 @@
                 </td>
             </tr>
         </table>
-            <button type="submit" formaction="AdminEventModifyReg?id=${eventDTO.id}" formmethod="post" formenctype="multipart/form-data">수정</button>
-            <button type="submit" href="AdminInquiryList" formmethod="get">삭제</button>
+        <button type="submit" formaction="AdminEventModifyReg?id=${eventDTO.id}" formmethod="post" formenctype="multipart/form-data">수정</button>
+        <button type="submit" href="AdminInquiryList" formmethod="get">삭제</button>
         </form>
         <a href="AdminEventList">목록으로</a>
     </div>
 </div>
 
 <script type="text/javascript">
-</script>
+    function deleteFile() {
+        if(confirm("이미지 파일을 삭제하시겠습니까?")){
+            $("#event-detail-form").attr("action", "AdminEventImgDelete")
 
+            $("#event-detail-form").submit()
+        }
+    }
+</script>

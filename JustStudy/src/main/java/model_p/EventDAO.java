@@ -163,6 +163,26 @@ public class EventDAO {
         return 0;
     }
 
+    public int imgDelete(EventDTO eventDTO){
+
+        sql = "update eventpp set img = ? where id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, "");
+            ptmt.setInt(2, eventDTO.getId());
+
+            return ptmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return 0;
+    }
+
 
     public void close() {
         if(rs!=null) try {rs.close();} catch (SQLException e) {}

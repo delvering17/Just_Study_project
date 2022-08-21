@@ -54,7 +54,7 @@ public class EventDTO {
         this.reg_date = reg_date;
     }
 
-    public String getEvent_reg_date_sdf() {
+    public String getReg_date_sdf() {
         return sdf.format(reg_date);
     }
 

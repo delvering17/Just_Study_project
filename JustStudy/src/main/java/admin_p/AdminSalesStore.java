@@ -19,6 +19,8 @@ public class AdminSalesStore implements AdminService {
         ArrayList<BranchDTO> branchList = new BranchDAO().branchList();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date startDate;
+        Date endDate;
 
         if(request.getParameter("admin-sales-store-period") == null){
             salesStoreList = totalList;
@@ -33,8 +35,8 @@ public class AdminSalesStore implements AdminService {
                         }
                         break;
                     case "dayBetweenDay":
-                        Date startDate = sdf.parse(request.getParameter("admin-sales-store-start"));
-                        Date endDate = sdf.parse(request.getParameter("admin-sales-store-end"));
+                        startDate = sdf.parse(request.getParameter("admin-sales-store-start"));
+                        endDate = sdf.parse(request.getParameter("admin-sales-store-end"));
 
                         for (AdminReservDTO adminReservDTO : totalList) {
                             if((adminReservDTO.getUseDate().after(startDate) || adminReservDTO.getUseDate().equals(startDate))
@@ -44,12 +46,29 @@ public class AdminSalesStore implements AdminService {
                         }
                         break;
                     case "month":
+
+                        startDate = sdf.parse(request.getParameter("admin-sales-store-year")+"-"+
+                                request.getParameter("admin-sales-store-month")+"-"+1);
+
+                        endDate = sdf.parse(request.getParameter("admin-sales-store-year")+"-"+
+                                (Integer.parseInt(request.getParameter("admin-sales-store-month"))+1)+"-"+1);
+
+
+                        System.out.println(startDate);
+                        System.out.println(endDate);
+
+                        for(AdminReservDTO adminReservDTO : totalList){
+                            if((adminReservDTO.getUseDate().equals(startDate) || adminReservDTO.getUseDate().after(startDate))
+                            && adminReservDTO.getUseDate().before(endDate)){
+                                salesStoreList.add(adminReservDTO);
+                            }
+                        }
                         break;
                     case "year":
                         break;
                 }
             } catch (ParseException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
 
         }

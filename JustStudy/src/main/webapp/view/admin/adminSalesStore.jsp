@@ -42,7 +42,8 @@
   input[type=radio][value=dayBetweenDay]:checked+input+input+input[name=admin-sales-store-start],
   input[type=radio][value=dayBetweenDay]:checked+input+input+input+input[name=admin-sales-store-end],
   input[type=radio][value=month]:checked+input+input+input+select,
-  input[type=radio][value=year]:checked+input+input+select+select{
+  input[type=radio][value=month]:checked+input+input+input+select+select,
+  input[type=radio][value=year]:checked+input+input+select{
     display: inline-block;
   }
 
@@ -129,8 +130,6 @@
           <option>전체</option>
         </select>
 
-
-
         <input type="radio" name="admin-sales-store-period" value="day"/>일일
         <input type="radio" name="admin-sales-store-period" value="dayBetweenDay"/>일간
         <input type="radio" name="admin-sales-store-period" value="month"/>월간
@@ -139,15 +138,16 @@
         <input type="date" name="admin-sales-store-start"/>
         <input type="date" name="admin-sales-store-end"/>
 
+        <select name="admin-sales-store-year">
+          <option>2021</option>
+          <option>2022</option>
+        </select>
         <select name="admin-sales-store-month">
           <c:forEach var="month" begin="1" end="12" step="1">
-            <option value="month">${month}</option>
+            <option>${month}</option>
           </c:forEach>
         </select>
-        <select name="admin-sales-store-year">
-          <option value="year">2021</option>
-          <option value="year">2022</option>
-        </select>
+
         <button type="submit" class="admin-sales-store-search"><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
     </div>

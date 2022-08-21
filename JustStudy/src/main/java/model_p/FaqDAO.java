@@ -58,6 +58,34 @@ public class FaqDAO {
         return res;
     }
 
+    public ArrayList<FaqDTO> totalList(){
+
+        ArrayList<FaqDTO> res = new ArrayList<FaqDTO>();
+
+        sql = "select * from faq";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            rs = ptmt.executeQuery();
+
+            while(rs.next()){
+                FaqDTO faqDTO = new FaqDTO();
+                faqDTO.setId(rs.getInt("id"));
+                faqDTO.setQuestion(rs.getString("question"));
+                faqDTO.setAnswer(rs.getString("answer"));
+                faqDTO.setCategory(rs.getString("category"));
+
+                res.add(faqDTO);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return res;
+    }
+
     public void close() {
         if(rs!=null) try {rs.close();} catch (SQLException e) {}
         if(ptmt!=null) try { ptmt.close();} catch (SQLException e) {}

@@ -5,6 +5,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class AdminReservDAO {
 
@@ -139,7 +140,9 @@ public class AdminReservDAO {
         }
 
         return res;
-    }public ArrayList<AdminReservDTO> salesUserSearch(String filter, String id){
+    }
+
+    public ArrayList<AdminReservDTO> salesUserSearch(String filter, String id){
 
         ArrayList<AdminReservDTO> res = new ArrayList<AdminReservDTO>();
 
@@ -246,18 +249,72 @@ public class AdminReservDAO {
 
     }
 
+    public ArrayList<AdminReservDTO> salesStoreList(String city, String branch, String period, java.util.Date startDate, Date endDate, String filter, String word){
+
+        ArrayList<AdminReservDTO> res = new ArrayList<AdminReservDTO>();
+
+        sql = "select ifnull(member.mem_userid, '회원정보없음') AS mem_userid, IFNULL(member.mem_nickname, '회원정보없음') " +
+                "AS mem_nickname, ifnull(member.mem_realname, '회원정보없음') AS mem_realname, reservation.city, " +
+                "reservation.branch, reservation.room, reservation.useDate, " +
+                "reservation.time, reservation.pay from reservation left outer join member on " +
+                "reservation.userId = member.mem_id where city = ? and branch = ? and reservation.status = '이용완료'";
+
+        if(period!=null) {
+            sql += " and useDate >= ? and useDate < ?";
+        }
+
+        if(filter!=null){
+            sql += " and "+filter+" like ?";
+        }
+
+        try {
+            ptmt = con.prepareStatement(sql);
+                ptmt.setString(1, city);
+                ptmt.setString(2, branch);
+
+                if(period!=null){
+                    ptmt.setDate(3, new java.sql.Date(startDate.getTime()));
+                    ptmt.setDate(4, new java.sql.Date(endDate.getTime()));
+                }
+
+                if(period == null & filter!=null){
+                    ptmt.setString(3,"%"+word+"%");
+                } else if(period != null & filter!=null){
+                    ptmt.setString(5,"%"+word+"%");
+                }
+
+            System.out.println(ptmt);
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                AdminReservDTO adminReservDTO = new AdminReservDTO();
+                adminReservDTO.setMem_userid(rs.getString("mem_userid"));
+                adminReservDTO.setMem_realname(rs.getString("mem_realname"));
+                adminReservDTO.setMem_nickname(rs.getString("mem_nickname"));
+                adminReservDTO.setCity(rs.getString("city"));
+                adminReservDTO.setBranch(rs.getString("branch"));
+                adminReservDTO.setRoom(rs.getString("room"));
+                adminReservDTO.setUseDate(rs.getDate("useDate"));
+                adminReservDTO.setUseDate(rs.getDate("useDate"));
+                adminReservDTO.setTime(rs.getString("time"));
+                adminReservDTO.setPay(rs.getInt("pay"));
+
+                res.add(adminReservDTO);
+            }
+
+            return res;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return null;
+    }
+
+
         public void close() {
-        if (rs != null) try {
-            rs.close();
-        } catch (SQLException e) {
-        }
-        if (ptmt != null) try {
-            ptmt.close();
-        } catch (SQLException e) {
-        }
-        if (con != null) try {
-            con.close();
-        } catch (SQLException e) {
-        }
+        if (rs != null) try {rs.close();} catch (SQLException e) {}
+        if (ptmt != null) try {ptmt.close();} catch (SQLException e) {}
+        if (con != null) try {con.close();} catch (SQLException e) {}
     }
 }

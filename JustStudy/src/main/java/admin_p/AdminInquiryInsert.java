@@ -5,7 +5,6 @@ import model_p.InquiryDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AdminInquiryInsert implements AdminService{

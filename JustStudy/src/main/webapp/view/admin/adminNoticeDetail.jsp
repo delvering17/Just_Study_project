@@ -1,14 +1,11 @@
-<%@ page import="model_p.NoticeDTO" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: whgml
-  Date: 2022-08-20
-  Time: 오후 8:48
+  Date: 2022-08-21
+  Time: 오후 5:15
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-    NoticeDTO dto = new NoticeDTO();
-%>
 <style>
 
     .event-title-area{
@@ -133,13 +130,16 @@
 
 
 <div class="event-list-area">
+    <%--    <div class="event-upload-img">  TODO 이미지 파일 업로드 되는 위치
+            <img style="width: 100%" src="<%=request.getContextPath()%>/img/background.jpeg">
+        </div>--%>
     ${dto.content}
 </div>
 
 
 <div class="listlink">
-    <a href="NoticePage">목록으로</a>
-<%--    <a href="NoticeModifyForm?id=${dto.id}">수정</a>
-    <a href="NoticeDeleteForm?id=${dto.id}">삭제</a>--%>
+    <a href="AdminNoticeList">목록으로</a>
+    <a href="AdminNoticeModifyForm?id=${dto.id}">수정</a>
+    <a href="AdminNoticeDeleteReg?id=${dto.id}">삭제</a>
 
 </div>

@@ -66,7 +66,7 @@
 
     <div class="notice-title-area">
         <p id="notice-title">공지사항</p>
-        <a href="NoticeInsertForm" style="align-items: center">글쓰기</a>
+
     </div>
 
     <div class="notice-area">
@@ -74,15 +74,15 @@
         <div class="notice-subject" style="width: 80%; margin: 0 auto; background: #ffa"></div>
         <ul class="notice-ul">
             <c:forEach items="${mainData}" var="dto" varStatus="no">
-                <li class="notice-li">${dto.id}
+                <li class="notice-li"><a href="NoticeDetail?id=${dto.id}" />
                     <div class="notice-num">
                         <p>${dto.id}</p>
                     </div>
                     <div class="notice-title">
-                        <p>${dto.title}<a href="NoticeDetail?id=${dto.id}" /></p>
+                        <p>${dto.title}</p>
                     </div>
                     <div class="notice-date">
-                        <p>${dto.reg_date}</p>
+                        ${dto.reg_date_sdf}
                     </div>
                 </li>
             </c:forEach>

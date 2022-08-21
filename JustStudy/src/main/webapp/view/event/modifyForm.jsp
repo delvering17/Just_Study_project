@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <form action="EventModifyReg" method="post" enctype="multipart/form-data">
     <input type="hidden" name="id" value="${dto.id}">
 
@@ -21,6 +22,7 @@
         </tr>
         <tr>
             <td>이미지 첨부</td>
+
             <td colspan="3"><input type="file" name="img" value="${dto.img}"></td>
         </tr>
         <tr>

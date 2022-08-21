@@ -16,7 +16,7 @@ import java.util.Date;
 public class EventModifyReg implements EventService {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("EventModifyFomr 입장~");
+        System.out.println("EventModifyForm 입장~");
 
         String path = request.getRealPath("/img/event");
         path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\" +
@@ -34,16 +34,16 @@ public class EventModifyReg implements EventService {
 
             dto.setTitle(mr.getParameter("title"));
             dto.setContent(mr.getParameter("content"));
-            dto.setImg(mr.getParameter("img"));
+            dto.setImg(mr.getFilesystemName("img"));
             dto.setEvent_startdate(sdf.parse(mr.getParameter("event_startdate")));
             dto.setEvent_enddate(sdf.parse(mr.getParameter("event_enddate")));
-
+            dto.setId(Integer.parseInt(mr.getParameter("id")));
 
 
             String msg = "수정 실패";
             String mainUrl = "event/event_modifyForm.jsp";
 
-            if(new EventDAO().modify(dto, mr.getParameter("img") ) > 0){
+            if(new EventDAO().modify(dto, mr.getFilesystemName("img") ) > 0){
                 msg = "수정되었습니다.";
                 mainUrl = "event/alert.jsp";
 

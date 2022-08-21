@@ -2,4 +2,5 @@
 <script>
     /*location.href="board/MainPage"*/
     location.href="event/EventPage"
+    /*location.href="notice/NoticePage"*/
 </script>

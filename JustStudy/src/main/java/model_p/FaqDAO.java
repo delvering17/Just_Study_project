@@ -86,6 +86,31 @@ public class FaqDAO {
         return res;
     }
 
+    public void insert(FaqDTO faqDTO){
+        try {
+            sql = "select max(id)+1 from faq";
+
+            ptmt = con.prepareStatement(sql);
+            rs = ptmt.executeQuery();
+            rs.next();
+            faqDTO.id = rs.getInt(1);
+
+            sql = "insert into faq (id, question, answer, category) values (?, ?, ?, ?)";
+
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, faqDTO.getId());
+            ptmt.setString(2, faqDTO.getQuestion());
+            ptmt.setString(3, faqDTO.getAnswer());
+            ptmt.setString(4, faqDTO.getCategory());
+
+            ptmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+    }
+
     public void close() {
         if(rs!=null) try {rs.close();} catch (SQLException e) {}
         if(ptmt!=null) try { ptmt.close();} catch (SQLException e) {}

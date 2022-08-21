@@ -65,18 +65,27 @@
         background: rgba(83, 104, 167, 0.856);
     }
 
-    .admin-faq-list-table th:nth-of-type(1){
-        width: 5%;
+    .admin-faq-list-table th:nth-of-type(1),
+    .admin-faq-list-table th:nth-of-type(5){
+        width: 7%;
     }
     .admin-faq-list-table th:nth-of-type(2){
-        width: 15%;
+        width: 16%;
     }
     .admin-faq-list-table th:nth-of-type(3),
     .admin-faq-list-table th:nth-of-type(4){
-        width: 40%;
+        width: 35%;
     }
 
 </style>
+
+<script type="text/javascript">
+    window.onload = function (){
+        $(".admin-faq-insert").click(function (){
+            location.href="AdminFAQInsert";
+        })
+    }
+</script>
 
 <div class="admin-faq-list-bg">
 
@@ -88,6 +97,7 @@
         <div>
             <input type="text">
             <button><i class="fa-solid fa-magnifying-glass"></i></button>
+            <button class="admin-faq-insert">추가</button>
         </div>
 
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-faq-list-table">
@@ -96,6 +106,7 @@
                 <th>분류</th>
                 <th>질문</th>
                 <th>답변</th>
+                <th></th>
             </tr>
 
             <c:forEach items="${faqList}" varStatus="no" var="faq">
@@ -104,6 +115,10 @@
                     <td>${faq.categoryKor}</td>
                     <td>${faq.question}</td>
                     <td>${faq.answer}</td>
+                    <td>
+                        <input type="submit" name="modify" value="수정">
+                        <input type="submit" name="delete" value="삭제">
+                    </td>
                 </tr>
             </c:forEach>
         </table>

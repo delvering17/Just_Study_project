@@ -33,6 +33,19 @@
     font-size: 20px;
   }
 
+  input[name=admin-sales-store-start], input[name=admin-sales-store-end],
+  select[name=admin-sales-store-month], select[name=admin-sales-store-year]{
+    display: none;
+  }
+
+  input[type=radio][value=day]:checked+input+input+input+input[name=admin-sales-store-start],
+  input[type=radio][value=dayBetweenDay]:checked+input+input+input[name=admin-sales-store-start],
+  input[type=radio][value=dayBetweenDay]:checked+input+input+input+input[name=admin-sales-store-end],
+  input[type=radio][value=month]:checked+input+input+input+select,
+  input[type=radio][value=year]:checked+input+input+select+select{
+    display: inline-block;
+  }
+
   .admin-sales-store-main{
     width: 1700px;
     height: fit-content;
@@ -116,10 +129,12 @@
           <option value="branch">전체</option>
         </select>
 
-        <input type="radio" name="admin-sales-store-period"/>일일
-        <input type="radio" name="admin-sales-store-period"/>일간
-        <input type="radio" name="admin-sales-store-period"/>월간
-        <input type="radio" name="admin-sales-store-period"/>연간
+
+
+        <input type="radio" name="admin-sales-store-period" value="day"/>일일
+        <input type="radio" name="admin-sales-store-period" value="dayBetweenDay"/>일간
+        <input type="radio" name="admin-sales-store-period" value="month"/>월간
+        <input type="radio" name="admin-sales-store-period" value="year"/>연간
 
         <input type="date" name="admin-sales-store-start"/>
         <input type="date" name="admin-sales-store-end"/>

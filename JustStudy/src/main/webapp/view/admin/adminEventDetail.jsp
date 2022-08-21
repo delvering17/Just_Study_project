@@ -143,37 +143,51 @@
         <b>이벤트 상세보기</b>
     </div>
     <div id="main">
+        <form>
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
             <tr>
                 <th>제목</th>
-                <td>${eventDTO.title}</td>
+                <td>
+                    <input type="text" value="${eventDTO.title}">
+                </td>
             </tr>
             <tr>
                 <th>이벤트 시작일</th>
-                <td>${eventDTO.event_startdate_sdf}</td>
+                <td>
+                    <input type="date" value="${eventDTO.event_startdate_sdf}">
+                </td>
             </tr>
             <tr>
                 <th>이벤트 종료일</th>
-                <td>${eventDTO.event_enddate_sdf}</td>
+                <td>
+                    <input type="date" value="${eventDTO.event_enddate_sdf}">
+                </td>
             </tr>
             <tr>
                 <th>게시일</th>
-                <td>${eventDTO.event_reg_date_sdf}</td>
+                <td>
+                    <input type="date" value="${eventDTO.event_reg_date_sdf}">
+                </td>
             </tr>
             <tr>
                 <th>이미지</th>
                 <td>
+                    <input type="file" value="${eventDTO.event_reg_date_sdf}">
                     <img src="<c:url value="/img/event/" />${eventDTO.img}" alt="">
                 </td>
             </tr>
             <tr>
                 <th>내용</th>
-                <td>${eventDTO.content_String}</td>
+                <td>
+                    <textarea name="input_content" cols="30" rows="10">${eventDTO.content}</textarea>
+
+                </td>
             </tr>
         </table>
-            <a href="AdminInquiryList">수정</a>
-            <a href="AdminInquiryList">삭제</a>
-            <a href="AdminEventList">목록으로</a>
+            <button type="submit" formaction="AdminEventModifyReg?id=${eventDTO.id}" formmethod="get">수정</button>
+            <button type="submit" href="AdminInquiryList" formmethod="get">삭제</button>
+        </form>
+        <a href="AdminEventList">목록으로</a>
     </div>
 </div>
 

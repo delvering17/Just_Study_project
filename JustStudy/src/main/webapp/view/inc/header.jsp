@@ -243,7 +243,7 @@
                         </ul>
                         <ul class="gnb-sub-list">
                             <li><a href="../mypage/MypageInquiryInsertForm">1:1 문의</a></li>
-                            <li><a href="../customer/Faq">FAQ</a></li>
+                            <li><a href="../customer/Faq?category=usage">FAQ</a></li>
                         </ul>
                         <ul class="gnb-sub-list">
                                 <li><a href="../member/MemberLoginForm" >로그인</a></li>

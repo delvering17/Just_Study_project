@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: dieun
@@ -49,16 +50,36 @@
         width: 70%;
         height: fit-content;
         border-top: 1px solid lightgray;
+        padding: 20px 0px;
     }
 
     .customer-faq-question{
         width: 100%;
         height: 70px;
+        padding: 0px 100px;
+        line-height: 70px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .fa-circle-question{
+        height: 100%;
+        font-size: 3rem;
+        margin-right: 20px;
+    }
+
+    .customer-faq-question p{
+        width: fit-content;
+        font-size: 1.5rem;
+        font-weight: bold;
+        display: inline-block;
     }
 
     .customer-faq-answer{
         width: 100%;
         height: fit-content;
+        padding: 20px 100px;
     }
 
 </style>
@@ -87,8 +108,11 @@
         <label><input type="radio" name="faq-category" id="etc" hidden><div>기타</div></label>
     </div>
 
-    <div class="customer-faq-list">
-        <div class="customer-faq-question"></div>
-        <div class="customer-faq-answer"></div>
-    </div>
+    <c:forEach items="${faqList}" var="faq" varStatus="no">
+        <div class="customer-faq-list">
+            <div class="customer-faq-question"><i class="fa-solid fa-circle-question"></i><p>${faq.question}</p></div>
+            <div class="customer-faq-answer">${faq.answerBr}</div>
+        </div>
+    </c:forEach>
+
 </div>

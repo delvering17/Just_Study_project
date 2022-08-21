@@ -155,10 +155,14 @@
 
     <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-sales-store-table">
       <tr>
+        <th>사용자ID</th>
+        <th>사용자이름</th>
         <th>지역</th>
         <th>지점명</th>
-        <th>영업일</th>
-        <th>매출</th>
+        <th>이용일자</th>
+        <th>룸타입</th>
+        <th>시간</th>
+        <th>결제금액</th>
       </tr>
       <form action="">
         <c:forEach items="${salesStoreList}" var="salesStoreList">

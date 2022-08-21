@@ -177,21 +177,58 @@ public class MemberDAO {
                 memberDTO.setMem_address2(rs.getString("mem_address2"));
                 memberDTO.setMem_level(rs.getInt("mem_level"));
                 memberDTO.setMem_socialid(rs.getString("mem_socialid"));
+<<<<<<< HEAD
                 ArrayList<MemberDTO> qwe = new ArrayList<>();
                 System.out.println(qwe.size());
+=======
+>>>>>>> origin/Admin_매출관리
 
                 res.add(memberDTO);
             }
-
         } catch (SQLException e) {
 
         } finally {
             close();
         }
-
         return res;
     }
 
+<<<<<<< HEAD
+=======
+    public ArrayList<MemberDTO> userListFilter(String filter, String value) {
+        ArrayList<MemberDTO> res = new ArrayList<>();
+
+        sql = "select * from member where "+filter+" like ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, "%"+value+"%");
+            rs = ptmt.executeQuery();
+
+            while (rs.next()) {
+                MemberDTO memberDTO = new MemberDTO();
+                memberDTO.setMem_id(rs.getInt("mem_id"));
+                memberDTO.setMem_social(rs.getInt("mem_social"));
+                memberDTO.setMem_userid(rs.getString("mem_userid"));
+                memberDTO.setMem_password(rs.getString("mem_password"));
+                memberDTO.setMem_nickname(rs.getString("mem_nickname"));
+                memberDTO.setMem_realname(rs.getString("mem_realname"));
+                memberDTO.setMem_phone(rs.getString("mem_phone"));
+                memberDTO.setMem_address1(rs.getString("mem_address1"));
+                memberDTO.setMem_address2(rs.getString("mem_address2"));
+                memberDTO.setMem_level(rs.getInt("mem_level"));
+                memberDTO.setMem_socialid(rs.getString("mem_socialid"));
+
+                res.add(memberDTO);
+            }
+        } catch (SQLException e) {
+
+        } finally {
+            close();
+        }
+        return res;
+    }
+>>>>>>> origin/Admin_매출관리
 
 
         public MemberDTO detail(int mem_id) {

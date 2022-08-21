@@ -34,7 +34,7 @@
   }
 
   .admin-sales-store-main{
-    width: 2000px;
+    width: 1700px;
     height: fit-content;
     margin: 0px 0px 0px 220px;
     padding: 120px 20px 20px 40px;
@@ -92,8 +92,6 @@
           }
       <%}%>
     })
-
-
   }
 </script>
 
@@ -106,16 +104,16 @@
   <div class="admin-sales-store-main">
 
     <div>
-      <form action="">
+      <form action="AdminSalesStoreSearch">
         <select name="city">
           <option>전체</option>
           <c:forTokens items="서울,경기,부산,대구,인천,광주,대전,울산,세종,강원,충북,충남,전북,전남,경북,경남,제주" var="city" delims=",">
-            <option>${city}</option>
+            <option value="city">${city}</option>
           </c:forTokens>
         </select>
 
         <select name="branch">
-          <option>전체</option>
+          <option value="branch">전체</option>
         </select>
 
         <input type="radio" name="admin-sales-store-period"/>일일
@@ -128,33 +126,37 @@
 
         <select name="admin-sales-store-month">
           <c:forEach var="month" begin="1" end="12" step="1">
-            <option>${month}</option>
+            <option value="month">${month}</option>
           </c:forEach>
         </select>
         <select name="admin-sales-store-year">
-          <option>2021</option>
-          <option>2022</option>
+          <option value="year">2021</option>
+          <option value="year">2022</option>
         </select>
         <button type="submit" class="admin-sales-store-search"><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
     </div>
+      <div>총 매출:${storeTotalPay}</div>
 
     <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-sales-store-table">
       <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-
+        <th>지역</th>
+        <th>지점명</th>
+        <th>영업일</th>
+        <th>매출</th>
       </tr>
+      <form action="">
+        <c:forEach items="${salesStoreList}" var="salesStoreList">
 
+          <tr>
+            <td>${salesStoreList.city}</td>
+            <td>${salesStoreList.branch}</td>
+            <td>${salesStoreList.useDate}</td>
+            <td>${salesStoreList.pay}</td>
+          </tr>
+
+        </c:forEach>
+      </form>
     </table>
   </div>
 </div>

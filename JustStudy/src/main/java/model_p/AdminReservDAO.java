@@ -103,13 +103,113 @@ public class AdminReservDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            close();
+                close();
         }
 
         return res;
 
     }
 
+    public ArrayList<AdminReservDTO> userSalesList(){
+
+        ArrayList<AdminReservDTO> res = new ArrayList<AdminReservDTO>();
+
+        sql="select mem_userid, mem_nickname, city, branch, time, room, useDate, pay from reservation join member on reservation.userId = member.mem_id";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                AdminReservDTO adminReservDTO = new AdminReservDTO();
+                adminReservDTO.setMem_userid(rs.getString("mem_userid"));
+                adminReservDTO.setMem_nickname(rs.getString("mem_nickname"));
+                adminReservDTO.setCity(rs.getString("city"));
+                adminReservDTO.setBranch(rs.getString("branch"));
+                adminReservDTO.setTime(rs.getString("time"));
+                adminReservDTO.setRoom(rs.getString("room"));
+                adminReservDTO.setUseDate(rs.getDate("useDate"));
+                adminReservDTO.setPay(rs.getInt("pay"));
+
+                res.add(adminReservDTO);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            close();
+        }
+
+        return res;
+    }
+
+    public ArrayList<AdminReservDTO> salesUserSearch(String filter, String id){
+
+        ArrayList<AdminReservDTO> res = new ArrayList<AdminReservDTO>();
+
+        sql="select mem_userid, mem_nickname, city, branch, time, room, useDate, pay from reservation join member on reservation.userId = member.mem_id where "+filter+" like ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, "%"+id+"%");
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                AdminReservDTO adminReservDTO = new AdminReservDTO();
+                adminReservDTO.setMem_userid(rs.getString("mem_userid"));
+                adminReservDTO.setMem_nickname(rs.getString("mem_nickname"));
+                adminReservDTO.setCity(rs.getString("city"));
+                adminReservDTO.setBranch(rs.getString("branch"));
+                adminReservDTO.setTime(rs.getString("time"));
+                adminReservDTO.setRoom(rs.getString("room"));
+                adminReservDTO.setUseDate(rs.getDate("useDate"));
+                adminReservDTO.setPay(rs.getInt("pay"));
+
+                res.add(adminReservDTO);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            close();
+        }
+        return res;
+    }
+
+    public ArrayList<AdminReservDTO> salesStorefilter(String city, String branch, String startDate, String endDate, String month, String year) {
+
+        ArrayList<AdminReservDTO> res = new ArrayList<AdminReservDTO>();
+
+        sql = "select city, branch, useDate, pay where "+city+", "+branch+","+startDate+","+endDate+" like ?";
+
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                AdminReservDTO adminReservDTO = new AdminReservDTO();
+
+                adminReservDTO.setId(rs.getInt("id"));
+                adminReservDTO.setOrderId(rs.getString("orderId"));
+                adminReservDTO.setResDate(rs.getTimestamp("resDate"));
+                adminReservDTO.setMem_userid(rs.getString("mem_userid"));
+                adminReservDTO.setMem_realname(rs.getString("mem_realname"));
+                adminReservDTO.setCity(rs.getString("city"));
+                adminReservDTO.setBranch(rs.getString("branch"));
+                adminReservDTO.setRoom(rs.getString("room"));
+                adminReservDTO.setUseDate(rs.getDate("useDate"));
+                adminReservDTO.setTime(rs.getString("time"));
+                adminReservDTO.setHeadcount(rs.getInt("headcount"));
+                adminReservDTO.setPay(rs.getInt("pay"));
+                adminReservDTO.setStatus(rs.getString("status"));
+
+                res.add(adminReservDTO);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return res;
+
+    }
 
         public void close() {
         if (rs != null) try {

@@ -152,6 +152,34 @@ public class ReservationDAO {
         return String.join(", ", arr);
     }
 
+    public ArrayList<ReservationDTO> salesStorefilter(String city, String branch, String useDate){
+
+        ArrayList<ReservationDTO> res = new ArrayList<ReservationDTO>();
+
+        sql = "select city, branch, useDate, pay from reservation where city = ? and branch = ? and useDate = ? ";
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, city);
+            ptmt.setString(2, branch);
+            ptmt.setString(3, useDate);
+
+            rs = ptmt.executeQuery();
+            while (rs.next()){
+                ReservationDTO reservationDTO = new ReservationDTO();
+                reservationDTO.setCity(rs.getString("city"));
+                reservationDTO.setBranch(rs.getString("branch"));
+                reservationDTO.setUseDate(rs.getString("useDate"));
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+
+        return res;
+    }
+
     public ArrayList<ReservationDTO> storeSalesList() {
         ArrayList<ReservationDTO> res = new ArrayList<>();
 

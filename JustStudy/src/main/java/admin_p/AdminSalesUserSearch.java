@@ -12,12 +12,10 @@ public class AdminSalesUserSearch implements AdminService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-        ArrayList<AdminReservDTO> salesUserList;
-
         String userType = request.getParameter("salesUser-search");
         String userValue = request.getParameter("searchSalesUser-input");
 
-        salesUserList = new AdminReservDAO().salesUserSearch(userType, userValue);
+        ArrayList<AdminReservDTO> salesUserList = new AdminReservDAO().salesUserSearch(userType, userValue);
 
         int userTotalPay = 0;
         for (AdminReservDTO dto : salesUserList) {

@@ -104,16 +104,16 @@
   <div class="admin-sales-store-main">
 
     <div>
-      <form action="">
+      <form action="AdminSalesStoreSearch">
         <select name="city">
           <option>전체</option>
           <c:forTokens items="서울,경기,부산,대구,인천,광주,대전,울산,세종,강원,충북,충남,전북,전남,경북,경남,제주" var="city" delims=",">
-            <option>${city}</option>
+            <option value="city">${city}</option>
           </c:forTokens>
         </select>
 
         <select name="branch">
-          <option>전체</option>
+          <option value="branch">전체</option>
         </select>
 
         <input type="radio" name="admin-sales-store-period"/>일일
@@ -126,12 +126,12 @@
 
         <select name="admin-sales-store-month">
           <c:forEach var="month" begin="1" end="12" step="1">
-            <option>${month}</option>
+            <option value="month">${month}</option>
           </c:forEach>
         </select>
         <select name="admin-sales-store-year">
-          <option>2021</option>
-          <option>2022</option>
+          <option value="year">2021</option>
+          <option value="year">2022</option>
         </select>
         <button type="submit" class="admin-sales-store-search"><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>

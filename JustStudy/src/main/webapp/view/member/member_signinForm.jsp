@@ -69,7 +69,7 @@
   }
 
   .hide {
-    visibility: hidden;
+    display: none;
   }
 
   .show {
@@ -91,9 +91,9 @@
   </div>
   <div class="wrapper-signin" id="wrapper-password">
     <p>비밀번호</p>
-    <input type="text" class="input-signin" id="input-password1" placeholder="비밀번호를 입력하세요."/>
+    <input type="password" class="input-signin" id="input-password1" placeholder="비밀번호를 입력하세요."/>
     <p class="signin-notice hide" id="notice-password1">영문,숫자, 특수문자를 혼합하여 공백없이 8자리 ~ 20자리 이내로 입력해주세요. </p>
-    <input type="text" class="input-signin" id="input-password2" placeholder="비밀번호를 다시 한 번 입력해 주세요."/>
+    <input type="password" class="input-signin" id="input-password2" placeholder="비밀번호를 다시 한 번 입력해 주세요."/>
     <p class="signin-notice hide" id="notice-password2">비밀번호가 일치하지 않습니다.</p>
   </div>
   <div class="wrapper-signin">
@@ -117,7 +117,7 @@
     <div>
 <%--      <input type="text" class="input-signin" id="input-address1" />--%>
       <input type="text" class="input-signin" id="input-address1" readonly/>
-      <button type="button" class="btn-signin" id="btn-findaddress">검색</button>
+      <button type="button" class="btn-signin" id="btn-findaddress" onclick="gofindAddress()">검색</button>
     </div>
     <input type="text" class="input-signin" id="input-address2" placeholder="상세 주소를 입력해주세요."/>
   </div>
@@ -125,6 +125,8 @@
     <button class="btn-signin" onclick="goSignin()" id="submit-signin">회원 가입</button>
   </div>
 </div>
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 
   function goIDdoubleCheck() {
@@ -310,6 +312,16 @@
 
   }
 
+
+  function gofindAddress() {
+
+      new daum.Postcode({
+        oncomplete: function(data) {
+          document.getElementById("input-address1").value = data.address;
+          document.getElementById("input-address2").focus();
+        }
+      }).open();
+  }
 
 
 

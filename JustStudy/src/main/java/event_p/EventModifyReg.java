@@ -1,11 +1,14 @@
 package event_p;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import model_p.CommunityDAO;
 import model_p.EventDAO;
 import model_p.EventDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,33 +18,51 @@ public class EventModifyReg implements EventService {
     public void execute(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("EventModifyFomr 입장~");
 
-        EventDTO dto = new EventDTO();
-        dto.setId(Integer.parseInt(request.getParameter("id")));
-        dto.setTitle(request.getParameter("title"));
+        String path = request.getRealPath("/img/event");
+        path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\" +
+                "\\img\\event";
+
+        int size = 1024 * 1024 * 10;
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        EventDTO dto = new EventDTO();
+
+
         try {
-            dto.setEvent_startdate(sdf.parse(request.getParameter("event_startdate")));
-            dto.setEvent_enddate(sdf.parse(request.getParameter("event_enddate")));
+            MultipartRequest mr = new MultipartRequest(request, path, size, "UTF-8", new DefaultFileRenamePolicy());
+
+            dto.setTitle(mr.getParameter("title"));
+            dto.setContent(mr.getParameter("content"));
+            dto.setImg(mr.getParameter("img"));
+            dto.setEvent_startdate(sdf.parse(mr.getParameter("event_startdate")));
+            dto.setEvent_enddate(sdf.parse(mr.getParameter("event_enddate")));
+
+
+
+            String msg = "수정 실패";
+            String mainUrl = "event/event_modifyForm.jsp";
+
+            if(new EventDAO().modify(dto, mr.getParameter("img") ) > 0){
+                msg = "수정되었습니다.";
+                mainUrl = "event/alert.jsp";
+
+            }
+
+            request.setAttribute("msg", msg);
+            request.setAttribute("mainUrl", mainUrl);
+            request.setAttribute("goUrl", "EventDetail?id="+dto.getId());
+            request.setAttribute("EventDTO", dto);
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
 
-        dto.setContent(request.getParameter("content"));
-        dto.setImg(request.getParameter("img"));
 
 
-        String msg = "수정 실패";
-        String mainUrl = "event/event_modifyForm.jsp";
-
-        if(new EventDAO().modify(dto) > 0){
-            msg = "수정되었습니다.";
-            mainUrl = "event/alert.jsp";
-            request.setAttribute("goUrl", "EventDetail?id="+dto.getId());
-        }
-
-        request.setAttribute("msg", msg);
-        request.setAttribute("mainUrl", mainUrl);
-        request.setAttribute("EventDTO", dto);
 
     }
 }

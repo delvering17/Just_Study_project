@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
    EventDTO dto = new EventDTO();
 %>
@@ -117,6 +119,16 @@
         outline: none;
         /*vertical-align: middle;*/
     }
+    #event-img{
+        width: 300px;
+        height: 300px;
+        border: 1px solid #000;
+    }
+    #event-content{
+        width: 70%;
+        height: 90%;
+        border: 1px solid #000;
+    }
 
 
 </style>
@@ -144,10 +156,13 @@
 
 
 <div class="event-list-area">
-<%--    <div class="event-upload-img">  TODO 이미지 파일 업로드 되는 위치
-        <img style="width: 100%" src="<%=request.getContextPath()%>/img/background.jpeg">
-    </div>--%>
-    ${dto.content}
+    <div id="event-img">
+        <img id="event-fileup-img" src="<c:url value="/img/event/" />${dto.img}" alt="">
+    </div>
+    <div id="event-content">
+        ${dto.content}
+    </div>
+
 </div>
 
 
@@ -156,36 +171,9 @@
     <a href="EventModifyForm?id=${dto.id }">수정</a>
     <a href="EventDeleteForm?id=${dto.id }">삭제</a>
 </div>
-
-
-<%--<div class="event-head">
-
-</div>
-
-<table class="showtable" border="">
-    <colgroup>
-        <col width="280px" />
-        <col width="1220px" />
-    </colgroup>
-    <tr>
-        <th height="65px"><label>타이틀</label></th>
-        <td height="65px">${dto.title}</td>
-    </tr>
-
-    <tr>
-        <th height="65px"><label>이벤트 기간</label></th>
-        <td height="65px">${dto.startdate} ~ ${dto.enddate}</td>
-    </tr>
-
-    <tr>
-        <th height="65px"><label>내용</label></th>
-        <td height="65px">${dto.content}</td>
     </tr>
 </table>
 
-<div class="listlink">
-    <a href="EventPage">목록으로</a>
-</div>--%>
 
 
 

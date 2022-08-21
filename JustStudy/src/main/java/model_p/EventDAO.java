@@ -14,6 +14,8 @@ public class EventDAO {
     ResultSet rs;
     String sql;
 
+
+
     public EventDAO(){
         Context init;
 
@@ -73,14 +75,14 @@ public class EventDAO {
 
 
             ptmt.setString(1,dto.title);
-            ptmt.setDate(2, (Date) dto.event_startdate);
-            ptmt.setDate(3, (Date) dto.event_enddate);
+            ptmt.setDate(2, new java.sql.Date(dto.getEvent_startdate().getTime()));
+            ptmt.setDate(3, new java.sql.Date(dto.getEvent_enddate().getTime()));
             ptmt.setString(4,dto.content);
             ptmt.setString(5,dto.img);
 
             ptmt.executeUpdate();
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }finally {
             close();
@@ -122,7 +124,7 @@ public class EventDAO {
     }
 
 
-    public int modify(EventDTO dto){
+    public int modify(EventDTO dto, String img){
 
         sql = "update eventpp set title = ?, event_startdate = ?, event_enddate = ?, content = ?, img = ? where id = ?";
         try {

@@ -16,12 +16,16 @@
 
 </style>
 
-<form action="EventInsertReg" method="post">
+<form action="EventInsertReg" method="post" enctype="multipart/form-data">
 
     <table>
         <tr>
             <td>타이틀</td>
             <td colspan="3"><input type="text" name="title"></td>
+        </tr>
+        <tr>
+            <td>이미지 첨부</td>
+            <td><input type="file" name="img" /></td>
         </tr>
         <tr>
             <td>이벤트 기간</td>

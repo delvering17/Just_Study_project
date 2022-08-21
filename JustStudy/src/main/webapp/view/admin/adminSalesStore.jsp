@@ -102,7 +102,11 @@
       $("select[name=branch]").html("<option>전체</option>")
       <%for(BranchDTO branchDTO : branchList){%>
           if($("select[name=city]").val() == "<%=branchDTO.getCity()%>"){
-            $("select[name=branch]").append("<option><%=branchDTO.getName()%></option>")
+            if("<%=branchDTO.getName()%>" == "${param.branch}"){
+              $("select[name=branch]").append("<option selected><%=branchDTO.getName()%></option>")
+            } else{
+              $("select[name=branch]").append("<option><%=branchDTO.getName()%></option>")
+            }
           }
       <%}%>
     })
@@ -118,7 +122,7 @@
   <div class="admin-sales-store-main">
 
     <div>
-      <form action="AdminSalesStore">
+      <form action="AdminSalesStore" method="post">
         <select name="city">
           <option>전체</option>
           <c:forTokens items="서울,경기,부산,대구,인천,광주,대전,울산,세종,강원,충북,충남,전북,전남,경북,경남,제주" var="city" delims=",">
@@ -149,9 +153,15 @@
         </select>
 
         <button type="submit" class="admin-sales-store-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+
+        <div>
+          <input type="text" name="word"/>
+          <button type="submit" class="admin-sales-store-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
       </form>
     </div>
-      <div>총 매출:${storeTotalPay}</div>
+
+    <div>총 매출:${storeTotalPay}</div>
 
     <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-sales-store-table">
       <tr>

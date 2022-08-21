@@ -253,9 +253,11 @@ public class AdminReservDAO {
 
         ArrayList<AdminReservDTO> res = new ArrayList<AdminReservDTO>();
 
-        sql = "select member.mem_userid, member.mem_realname, reservation.city, reservation.branch, reservation.room, reservation.useDate, " +
-                "reservation.time, reservation.pay from reservation join member on " +
-                "reservation.userId = member.mem_id where city = ? and branch = ?";
+        sql = "select ifnull(member.mem_userid, '회원정보없음') AS mem_userid, IFNULL(member.mem_nickname, '회원정보없음') " +
+                "AS mem_nickname, ifnull(member.mem_realname, '회원정보없음') AS mem_realname, reservation.city, " +
+                "reservation.branch, reservation.room, reservation.useDate, " +
+                "reservation.time, reservation.pay from reservation left outer join member on " +
+                "reservation.userId = member.mem_id where city = ? and branch = ? and reservation.status = '이용완료'";
 
         if(period!=null) {
             sql += " and useDate >= ? and useDate < ?";
@@ -287,6 +289,7 @@ public class AdminReservDAO {
                 AdminReservDTO adminReservDTO = new AdminReservDTO();
                 adminReservDTO.setMem_userid(rs.getString("mem_userid"));
                 adminReservDTO.setMem_realname(rs.getString("mem_realname"));
+                adminReservDTO.setMem_nickname(rs.getString("mem_nickname"));
                 adminReservDTO.setCity(rs.getString("city"));
                 adminReservDTO.setBranch(rs.getString("branch"));
                 adminReservDTO.setRoom(rs.getString("room"));

@@ -290,26 +290,44 @@
       input_address2:$('#input-address2').val()
     }
 
-    $.ajax({
-      url:'<c:url value="/memberNonView/MemberSigninReg"/>',
-      type:'GET',
-      data: form_data,
-      async:false,
-      dataType:'JSON',
-      success:function(response){
-        alert(response.signinResult)
-        <%--if(response.loginResult === 'success') {--%>
-        <%--  alert('로그인에 성공했습니다.')--%>
-        <%--  location.href = '<c:url value="/board/MainPage"/>'--%>
-        <%--} else {--%>
-        <%--  alert(response.loginResult)--%>
-        <%--}--%>
-      },
-      error:function(e){
-        console.log(e.responseText)
-      }
-    })
+    if(form_data.input_userid === '') {
+      alert('빈 칸을 입력해주세요')
+      $('#input-userid').focus()
 
+    } else if(!/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/.test(form_data.input_userid)) {
+      alert('이메일 형식에 맞게 입력해주세요.')
+      $('#input-userid').focus()
+    } else if(form_data.input_password1 === '') {
+      alert('빈 칸을 입력해주세요')
+      $('#input-password1').focus()
+    } else if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/.test(form_data.input_password1)) {
+      alert('영문,숫자, 특수문자를 혼합하여 공백없이 8자리 ~ 20자리 이내로 입력해주세요.')
+      $('#input-password1').focus()
+    } else if(form_data.input_password2 === '') {
+      alert('빈 칸을 입력해주세요')
+      $('#input-password2').focus()
+    }
+
+
+    <%--$.ajax({--%>
+    <%--  url:'<c:url value="/memberNonView/MemberSigninReg"/>',--%>
+    <%--  type:'GET',--%>
+    <%--  data: form_data,--%>
+    <%--  async:false,--%>
+    <%--  dataType:'JSON',--%>
+    <%--  success:function(response){--%>
+    <%--    alert(response.signinResult)--%>
+    <%--    &lt;%&ndash;if(response.loginResult === 'success') {&ndash;%&gt;--%>
+    <%--    &lt;%&ndash;  alert('로그인에 성공했습니다.')&ndash;%&gt;--%>
+    <%--    &lt;%&ndash;  location.href = '<c:url value="/board/MainPage"/>'&ndash;%&gt;--%>
+    <%--    &lt;%&ndash;} else {&ndash;%&gt;--%>
+    <%--    &lt;%&ndash;  alert(response.loginResult)&ndash;%&gt;--%>
+    <%--    &lt;%&ndash;}&ndash;%&gt;--%>
+    <%--  },--%>
+    <%--  error:function(e){--%>
+    <%--    console.log(e.responseText)--%>
+    <%--  }--%>
+    <%--})--%>
   }
 
 

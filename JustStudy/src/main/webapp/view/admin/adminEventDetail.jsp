@@ -148,43 +148,43 @@
             <tr>
                 <th>제목</th>
                 <td>
-                    <input type="text" value="${eventDTO.title}">
+                    <input type="text" name="title" value="${eventDTO.title}">
                 </td>
             </tr>
             <tr>
                 <th>이벤트 시작일</th>
                 <td>
-                    <input type="date" value="${eventDTO.event_startdate_sdf}">
+                    <input type="date" name="event_startdate" value="${eventDTO.event_startdate_sdf}">
                 </td>
             </tr>
             <tr>
                 <th>이벤트 종료일</th>
                 <td>
-                    <input type="date" value="${eventDTO.event_enddate_sdf}">
+                    <input type="date" name="event_enddate" value="${eventDTO.event_enddate_sdf}">
                 </td>
             </tr>
             <tr>
                 <th>게시일</th>
                 <td>
-                    <input type="date" value="${eventDTO.event_reg_date_sdf}">
+                    ${eventDTO.event_reg_date_sdf}
                 </td>
             </tr>
             <tr>
                 <th>이미지</th>
                 <td>
-                    <input type="file" value="${eventDTO.event_reg_date_sdf}">
+                    <input type="file" name="img" value="${eventDTO.img}">
                     <img src="<c:url value="/img/event/" />${eventDTO.img}" alt="">
                 </td>
             </tr>
             <tr>
                 <th>내용</th>
                 <td>
-                    <textarea name="input_content" cols="30" rows="10">${eventDTO.content}</textarea>
+                    <textarea name="content" cols="30" rows="10">${eventDTO.content}</textarea>
 
                 </td>
             </tr>
         </table>
-            <button type="submit" formaction="AdminEventModifyReg?id=${eventDTO.id}" formmethod="get">수정</button>
+            <button type="submit" formaction="AdminEventModifyReg?id=${eventDTO.id}" formmethod="post" formenctype="multipart/form-data">수정</button>
             <button type="submit" href="AdminInquiryList" formmethod="get">삭제</button>
         </form>
         <a href="AdminEventList">목록으로</a>

@@ -130,9 +130,8 @@
 
 <script type="text/javascript">
     window.onload = function (){
-        $(".admin-store-delete").click(function (){
-            alert($("input[name=branch]:checked").attr("id"))
-
+        $(".admin-event-insert").click(function (){
+            location.href = "AdminEventInsertForm"
         })
     }
 
@@ -141,6 +140,7 @@
 
     <div id="headline">
         <b>이벤트 관리</b>
+        <input type="button" class="admin-event-insert" value="이벤트 추가">
     </div>
 
     <div id="main">

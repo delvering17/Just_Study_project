@@ -16,7 +16,6 @@ import java.util.Date;
 public class EventModifyReg implements EventService {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("EventModifyForm 입장~");
 
         String path = request.getRealPath("/img/event");
         path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\" +

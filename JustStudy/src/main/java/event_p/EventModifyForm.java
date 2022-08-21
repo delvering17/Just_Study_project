@@ -10,7 +10,7 @@ public class EventModifyForm implements EventService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
-        System.out.println(id);
+
 
         EventDAO dao = new EventDAO();
         EventDTO dto = dao.detail(id);

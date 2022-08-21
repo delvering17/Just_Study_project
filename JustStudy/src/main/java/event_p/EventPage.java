@@ -14,7 +14,7 @@ public class EventPage implements EventService {
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
         ArrayList<EventDTO> mainData = new EventDAO().list();
-        System.out.println("Eventpage 들어왔따 : "+mainData);
+
 
 
         request.setAttribute("mainData",mainData);

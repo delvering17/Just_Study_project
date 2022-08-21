@@ -65,9 +65,22 @@ public class EventDAO {
 
     public void insert(EventDTO dto) {
 
+        sql = "select max(id) from eventpp";
+
         try {
+            ptmt = con.prepareStatement(sql);
+            rs = ptmt.executeQuery();
+            if(rs.next()) {
+                dto.setId(rs.getInt(1)+1);
+            }
 
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        try {
             sql = "insert into eventpp (title,reg_date,event_startdate,event_enddate,content,img) "
                     + "values (?,sysdate(),?,?,?,?)";
 

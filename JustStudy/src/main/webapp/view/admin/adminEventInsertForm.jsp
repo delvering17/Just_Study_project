@@ -138,76 +138,51 @@
 <div class="wrapper">
 
     <div id="headline">
-        <b>이벤트 상세보기</b>
+        <b>이벤트 추가</b>
     </div>
     <div id="main">
-        <form id="event-detail-form" method="post" enctype="multipart/form-data">
-        <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
-            <input type="hidden" name="id" value="${eventDTO.id}">
-            <tr>
-                <th>제목</th>
-                <td>
-                    <input type="text" name="title" value="${eventDTO.title}">
-                </td>
-            </tr>
-            <tr>
-                <th>이벤트 시작일</th>
-                <td>
-                    <input type="date" name="event_startdate" value="${eventDTO.event_startdate_sdf}">
-                </td>
-            </tr>
-            <tr>
-                <th>이벤트 종료일</th>
-                <td>
-                    <input type="date" name="event_enddate" value="${eventDTO.event_enddate_sdf}">
-                </td>
-            </tr>
-            <tr>
-                <th>게시일</th>
-                <td>
-                    <input type="hidden" name="reg_date" value="${eventDTO.reg_date_sdf}">
-                    ${eventDTO.reg_date_sdf}
-                </td>
-            </tr>
-            <tr>
-                <th>이미지</th>
-                <td>
-
-                    <c:choose>
-                        <c:when test="${eventDTO.img == ''}">
-                            <input type="file" name="img">
-                        </c:when>
-                        <c:otherwise>
-                            <input type="button" value="파일 삭제" id="imgDelete" onclick="deleteFile()"/>
-                            <ipnut type="hidden" name="img" value="${eventDTO.img}"></ipnut>
-                            <img src="<c:url value="/img/event/${eventDTO.img}"/> ">
-                        </c:otherwise>
-                    </c:choose>
-
-
-                </td>
-            </tr>
-            <tr>
-                <th>내용</th>
-                <td>
-                    <textarea name="content" cols="30" rows="10">${eventDTO.content}</textarea>
-
-                </td>
-            </tr>
-        </table>
-        <button type="submit" formaction="AdminEventModifyReg?id=${eventDTO.id}" formmethod="post" formenctype="multipart/form-data">수정</button>
-        <button type="submit" href="AdminInquiryList" formmethod="get">삭제</button>
+        <form action="AdminEventInsertReg" id="event-detail-form" method="post" enctype="multipart/form-data">
+            <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+                <tr>
+                    <th>제목</th>
+                    <td>
+                        <input type="text" name="title" >
+                    </td>
+                </tr>
+                <tr>
+                    <th>이벤트 시작일</th>
+                    <td>
+                        <input type="date" name="event_startdate">
+                    </td>
+                </tr>
+                <tr>
+                    <th>이벤트 종료일</th>
+                    <td>
+                        <input type="date" name="event_enddate">
+                    </td>
+                </tr>
+                <tr>
+                    <th>게시일</th>
+                    <td>
+                        <input type="hidden" name="reg_date" >
+                        ${eventDTO.reg_date_sdf}
+                    </td>
+                </tr>
+                <tr>
+                    <th>이미지</th>
+                    <td>
+                        <input type="file" name="img">
+                    </td>
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td>
+                        <textarea name="content" cols="30" rows="10"></textarea>
+                    </td>
+                </tr>
+            </table>
+             <button type="submit" >추가</button>
         </form>
         <a href="AdminEventList">목록으로</a>
     </div>
 </div>
-
-<script type="text/javascript">
-    function deleteFile() {
-        if(confirm("이미지 파일을 삭제하시겠습니까?")){
-            $("#event-detail-form").attr("action", "AdminEventImgDelete")
-
-            $("#event-detail-form").submit()
-        }
-    }
-</script>

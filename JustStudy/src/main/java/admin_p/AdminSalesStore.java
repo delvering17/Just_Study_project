@@ -46,13 +46,11 @@ public class AdminSalesStore implements AdminService {
                         }
                         break;
                     case "month":
-
                         startDate = sdf.parse(request.getParameter("admin-sales-store-year")+"-"+
                                 request.getParameter("admin-sales-store-month")+"-"+1);
 
                         endDate = sdf.parse(request.getParameter("admin-sales-store-year")+"-"+
                                 (Integer.parseInt(request.getParameter("admin-sales-store-month"))+1)+"-"+1);
-
 
                         System.out.println(startDate);
                         System.out.println(endDate);
@@ -65,6 +63,22 @@ public class AdminSalesStore implements AdminService {
                         }
                         break;
                     case "year":
+                        startDate = sdf.parse(request.getParameter("admin-sales-store-year")+"-"+
+                                1+"-"+1);
+
+                        endDate = sdf.parse((Integer.parseInt(request.getParameter("admin-sales-store-year"))+1)
+                                +"-"+1+"-"+1);
+
+                        System.out.println(startDate);
+                        System.out.println(endDate);
+
+                        for(AdminReservDTO adminReservDTO : totalList){
+                            if((adminReservDTO.getUseDate().equals(startDate) || adminReservDTO.getUseDate().after(startDate))
+                                    && adminReservDTO.getUseDate().before(endDate)){
+                                salesStoreList.add(adminReservDTO);
+                            }
+                        }
+
                         break;
                 }
             } catch (ParseException e) {

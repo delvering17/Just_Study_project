@@ -34,6 +34,10 @@ public class EventDTO {
         this.content = content;
     }
 
+    public String getContent_String() {
+        return content.replaceAll("\n","<br/>");
+    }
+
     public String getImg() {
         return img;
     }
@@ -48,6 +52,10 @@ public class EventDTO {
 
     public void setReg_date(Date reg_date) {
         this.reg_date = reg_date;
+    }
+
+    public String getEvent_reg_date_sdf() {
+        return sdf.format(reg_date);
     }
 
     public Date getEvent_startdate() {

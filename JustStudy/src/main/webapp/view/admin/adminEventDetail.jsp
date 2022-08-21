@@ -1,14 +1,13 @@
-<%--
+<%@ page import="model_p.EventDTO" %><%--
   Created by IntelliJ IDEA.
   User: whgml
-  Date: 2022-08-19
-  Time: 오후 12:59
+  Date: 2022-08-14
+  Time: 오후 6:38
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
       integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
@@ -76,6 +75,7 @@
     }
 
     table {
+        width: 400px;
         border: 1px solid rgb(122, 115, 115);
         margin-top: 10px;
     }
@@ -93,7 +93,7 @@
 
     tr:first-of-type > th:first-of-type,
     tr:first-of-type > th:last-of-type {
-        width: 140px;
+        width: 50px;
         height: 50px;
         padding: 10px;
         color: #fff;
@@ -140,26 +140,43 @@
 <div class="wrapper">
 
     <div id="headline">
-        <b>이벤트 관리</b>
+        <b>이벤트 상세보기</b>
     </div>
-
     <div id="main">
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
-
             <tr>
                 <th>제목</th>
-                <th>이벤트 시작일</th>
-                <th>이벤트 종료일</th>
-                <th>게시 일자</th>
+                <td>${eventDTO.title}</td>
             </tr>
-            <c:forEach items="${arr_eventDTO}" var="eventDTO">
-                <tr>
-                    <td><a href="AdminEventDetail?id=${eventDTO.id}">${eventDTO.title}</a></td>
-                    <td>${eventDTO.event_startdate_sdf}</td>
-                    <td>${eventDTO.event_enddate_sdf}</td>
-                    <td>${eventDTO.event_reg_date_sdf}</td>
-                </tr>
-            </c:forEach>
+            <tr>
+                <th>이벤트 시작일</th>
+                <td>${eventDTO.event_startdate_sdf}</td>
+            </tr>
+            <tr>
+                <th>이벤트 종료일</th>
+                <td>${eventDTO.event_enddate_sdf}</td>
+            </tr>
+            <tr>
+                <th>게시일</th>
+                <td>${eventDTO.event_reg_date_sdf}</td>
+            </tr>
+            <tr>
+                <th>이미지</th>
+                <td>
+                    <img src="<c:url value="/img/event/" />${eventDTO.img}" alt="">
+                </td>
+            </tr>
+            <tr>
+                <th>내용</th>
+                <td>${eventDTO.content_String}</td>
+            </tr>
         </table>
+            <a href="AdminInquiryList">수정</a>
+            <a href="AdminInquiryList">삭제</a>
+            <a href="AdminEventList">목록으로</a>
     </div>
 </div>
+
+<script type="text/javascript">
+</script>
+

@@ -13,9 +13,9 @@ public class AdminEventList implements AdminService {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-        ArrayList<EventDTO> mainData = new EventDAO().list();
+        ArrayList<EventDTO> arr_eventDTO = new EventDAO().list();
 
-        request.setAttribute("mainData",mainData);
+        request.setAttribute("arr_eventDTO",arr_eventDTO);
         request.setAttribute("adminUrl","adminEventList.jsp");
     }
 }

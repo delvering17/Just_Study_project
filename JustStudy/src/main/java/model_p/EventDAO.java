@@ -107,9 +107,9 @@ public class EventDAO {
                 res.setTitle(rs.getString("title"));
                 res.setEvent_startdate(rs.getDate("event_startdate"));
                 res.setEvent_enddate(rs.getDate("event_enddate"));
+                res.setReg_date(rs.getDate("reg_date"));
                 res.setContent(rs.getString("content"));
                 res.setImg(rs.getString("img"));
-                System.out.println(res.getImg());
             }
 
 

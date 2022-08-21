@@ -84,6 +84,12 @@
         $(".admin-faq-insert").click(function (){
             location.href="AdminFAQInsert";
         })
+
+        $("input[value=삭제]").click(function (){
+            if(confirm("정말 삭제하시겠습니까?")){
+                $(".admin-faq-list-form").submit()
+            }
+        })
     }
 </script>
 
@@ -110,16 +116,19 @@
             </tr>
 
             <c:forEach items="${faqList}" varStatus="no" var="faq">
-                <tr>
-                    <td>${faq.id}</td>
-                    <td>${faq.categoryKor}</td>
-                    <td>${faq.question}</td>
-                    <td>${faq.answer}</td>
-                    <td>
-                        <input type="submit" name="modify" value="수정">
-                        <input type="submit" name="delete" value="삭제">
-                    </td>
-                </tr>
+                <form action="adminFAQModifyDelete" class="admin-faq-list-form">
+                    <input type="hidden" name="faqId" value="${faq.id}"/>
+                    <tr>
+                        <td>${faq.id}</td>
+                        <td>${faq.categoryKor}</td>
+                        <td>${faq.question}</td>
+                        <td>${faq.answer}</td>
+                        <td>
+                            <input type="submit" name="type" value="수정">
+                            <input type="button" value="삭제">
+                        </td>
+                    </tr>
+                </form>
             </c:forEach>
         </table>
     </div>

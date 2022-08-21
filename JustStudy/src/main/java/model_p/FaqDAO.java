@@ -111,6 +111,24 @@ public class FaqDAO {
         }
     }
 
+    public int delete(int faqId){
+
+        try {
+            sql = "delete from faq where id = ?";
+
+            ptmt =con.prepareStatement(sql);
+            ptmt.setInt(1, faqId);
+            return ptmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            close();
+        }
+
+        return 0;
+    }
+
     public void close() {
         if(rs!=null) try {rs.close();} catch (SQLException e) {}
         if(ptmt!=null) try { ptmt.close();} catch (SQLException e) {}

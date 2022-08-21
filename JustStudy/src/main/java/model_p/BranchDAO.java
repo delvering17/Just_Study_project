@@ -238,6 +238,8 @@ public class BranchDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            close();
         }
 
         return 0;

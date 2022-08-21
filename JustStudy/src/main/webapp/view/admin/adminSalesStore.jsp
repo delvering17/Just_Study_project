@@ -117,7 +117,7 @@
   <div class="admin-sales-store-main">
 
     <div>
-      <form action="AdminSalesStoreSearch">
+      <form action="AdminSalesStore">
         <select name="city">
           <option>전체</option>
           <c:forTokens items="서울,경기,부산,대구,인천,광주,대전,울산,세종,강원,충북,충남,전북,전남,경북,경남,제주" var="city" delims=",">
@@ -159,8 +159,8 @@
         <th>사용자이름</th>
         <th>지역</th>
         <th>지점명</th>
-        <th>이용일자</th>
         <th>룸타입</th>
+        <th>이용일자</th>
         <th>시간</th>
         <th>결제금액</th>
       </tr>
@@ -168,9 +168,13 @@
         <c:forEach items="${salesStoreList}" var="salesStoreList">
 
           <tr>
+            <td>${salesStoreList.mem_userid}</td>
+            <td>${salesStoreList.mem_realname}</td>
             <td>${salesStoreList.city}</td>
             <td>${salesStoreList.branch}</td>
+            <td>${salesStoreList.room}</td>
             <td>${salesStoreList.useDate}</td>
+            <td>${salesStoreList.time}</td>
             <td>${salesStoreList.pay}</td>
           </tr>
 

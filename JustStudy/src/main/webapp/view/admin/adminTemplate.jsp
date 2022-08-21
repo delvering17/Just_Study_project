@@ -220,7 +220,7 @@
             </ul>
             <ul>
                 <li>매출관리</li>
-                <li><a href="AdminSalesStore">지점별 매출</a></li>
+                <li><a href="AdminSalesStore?city=전체&branch=전체">지점별 매출</a></li>
                 <li><a href="AdminSalesUser">회원별 매출</a></li>
                 <li><a href=""></a></li>
             </ul>

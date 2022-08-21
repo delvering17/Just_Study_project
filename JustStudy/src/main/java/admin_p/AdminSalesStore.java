@@ -11,11 +11,11 @@ public class AdminSalesStore implements AdminService {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-        ArrayList<ReservationDTO> salesStoreList = new ReservationDAO().storeSalesList();
+        ArrayList<AdminReservDTO> salesStoreList = new AdminReservDAO().salesStoreList(request.getParameter("city"), request.getParameter("branch"));
         ArrayList<BranchDTO> branchList = new BranchDAO().branchList();
 
         int storeTotalPay = 0;
-        for (ReservationDTO dto : salesStoreList) {
+        for (AdminReservDTO dto : salesStoreList) {
             storeTotalPay += dto.getPay();
         }
 

@@ -139,7 +139,9 @@ public class AdminReservDAO {
         }
 
         return res;
-    }public ArrayList<AdminReservDTO> salesUserSearch(String filter, String id){
+    }
+
+    public ArrayList<AdminReservDTO> salesUserSearch(String filter, String id){
 
         ArrayList<AdminReservDTO> res = new ArrayList<AdminReservDTO>();
 
@@ -246,18 +248,53 @@ public class AdminReservDAO {
 
     }
 
+    public ArrayList<AdminReservDTO> salesStoreList(String city, String branch){
+
+        ArrayList<AdminReservDTO> res = new ArrayList<AdminReservDTO>();
+
+        sql = "select member.mem_userid, member.mem_realname, reservation.city, reservation.branch, reservation.room, reservation.useDate, " +
+                "reservation.time, reservation.pay from reservation join member on " +
+                "reservation.userId = member.mem_id"+(city.equals("전체") ? "" : " where city = ?")+(branch.equals("전체") ? "" : " and branch = ?");
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            if(!city.equals("전체")) {
+                ptmt.setString(1, city);
+            }
+            if(!branch.equals("전체")){
+                ptmt.setString(2, branch);
+            }
+
+            System.out.println(ptmt);
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                AdminReservDTO adminReservDTO = new AdminReservDTO();
+                adminReservDTO.setMem_userid(rs.getString("mem_userid"));
+                adminReservDTO.setMem_realname(rs.getString("mem_realname"));
+                adminReservDTO.setCity(rs.getString("city"));
+                adminReservDTO.setBranch(rs.getString("branch"));
+                adminReservDTO.setRoom(rs.getString("room"));
+                adminReservDTO.setUseDate(rs.getDate("useDate"));
+                adminReservDTO.setUseDate(rs.getDate("useDate"));
+                adminReservDTO.setTime(rs.getString("time"));
+                adminReservDTO.setPay(rs.getInt("pay"));
+
+                res.add(adminReservDTO);
+            }
+
+            return res;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return null;
+    }
+
         public void close() {
-        if (rs != null) try {
-            rs.close();
-        } catch (SQLException e) {
-        }
-        if (ptmt != null) try {
-            ptmt.close();
-        } catch (SQLException e) {
-        }
-        if (con != null) try {
-            con.close();
-        } catch (SQLException e) {
-        }
+        if (rs != null) try {rs.close();} catch (SQLException e) {}
+        if (ptmt != null) try {ptmt.close();} catch (SQLException e) {}
+        if (con != null) try {con.close();} catch (SQLException e) {}
     }
 }

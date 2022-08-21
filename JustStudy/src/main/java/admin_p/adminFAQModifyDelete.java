@@ -1,9 +1,11 @@
 package admin_p;
 
 import model_p.FaqDAO;
+import model_p.FaqDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
 public class adminFAQModifyDelete implements AdminService{
     @Override
@@ -23,6 +25,10 @@ public class adminFAQModifyDelete implements AdminService{
 
         } else if(request.getParameter("type").equals("수정")){
 
+            FaqDTO faqDTO = new FaqDAO().detail(Integer.parseInt(request.getParameter("faqId")));
+
+            request.setAttribute("faqDTO", faqDTO);
+            request.setAttribute("adminUrl", "adminFAQModifyForm.jsp");
         }
     }
 }

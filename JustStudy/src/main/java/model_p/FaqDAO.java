@@ -86,6 +86,34 @@ public class FaqDAO {
         return res;
     }
 
+    public FaqDTO detail(int id){
+
+        FaqDTO faqDTO = new FaqDTO();
+
+        sql = "select * from faq where id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, id);
+            rs = ptmt.executeQuery();
+
+            while(rs.next()){
+                faqDTO.setId(rs.getInt("id"));
+                faqDTO.setQuestion(rs.getString("question"));
+                faqDTO.setAnswer(rs.getString("answer"));
+                faqDTO.setCategory(rs.getString("category"));
+            }
+
+            return faqDTO;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return null;
+    }
+
     public void insert(FaqDTO faqDTO){
         try {
             sql = "select max(id)+1 from faq";
@@ -123,6 +151,26 @@ public class FaqDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
+            close();
+        }
+
+        return 0;
+    }
+
+    public int modify(FaqDTO faqDTO){
+        sql = "update faq set category = ?, question = ?, answer = ? where id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, faqDTO.getCategory());
+            ptmt.setString(2, faqDTO.getQuestion());
+            ptmt.setString(3, faqDTO.getAnswer());
+            ptmt.setInt(4, faqDTO.getId());
+
+            return ptmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
             close();
         }
 

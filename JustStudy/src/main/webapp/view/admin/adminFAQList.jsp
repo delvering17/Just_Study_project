@@ -122,7 +122,7 @@
                         <td>${faq.id}</td>
                         <td>${faq.categoryKor}</td>
                         <td>${faq.question}</td>
-                        <td>${faq.answer}</td>
+                        <td>${faq.answerBr}</td>
                         <td>
                             <input type="submit" name="type" value="수정">
                             <input type="button" value="삭제">

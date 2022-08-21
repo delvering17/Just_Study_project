@@ -37,12 +37,12 @@ public class NoticeDTO {
         this.content = content;
     }
 
-    public String getReg_dateStr() {
-        return sdf.format(reg_date);
-    }
-
     public Date getReg_date() {
         return reg_date;
+    }
+
+    public String getReg_date_sdf(){
+        return sdf.format(reg_date);
     }
 
     public void setReg_date(Date reg_date) {

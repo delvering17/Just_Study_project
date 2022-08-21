@@ -59,21 +59,15 @@ public class NoticeDAO {
     }
 
 
+
+
+
     public void insert(NoticeDTO dto) {
 
         try {
-            sql = "select max(id)+1 from notice";
 
-            ptmt = con.prepareStatement(sql);
-            rs = ptmt.executeQuery();
-            rs.next();
-            dto.id = rs.getInt(1);
-
-            //System.out.println(dto);
-
-
-            sql = "insert into notice (id,title,content) "
-                    + "values (?,?,?)";
+            sql = "insert into notice (id,title,content,reg_date) "
+                    + "values (?,?,?,sysdate())";
 
             ptmt =con.prepareStatement(sql);
 
@@ -120,6 +114,43 @@ public class NoticeDAO {
         }
 
         return res;
+    }
+
+
+    public int modify(NoticeDTO dto){
+
+        sql = "update notice set title = ?, content = ? where id = ?";
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, dto.getTitle());
+            ptmt.setString(2, dto.getContent());
+            ptmt.setInt(3, dto.id);
+
+
+            return ptmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+    }
+
+    public int delete(int id) {
+
+        try {
+            sql = "delete from notice where id = ?";
+
+            ptmt =con.prepareStatement(sql);
+            ptmt.setInt(1, id);
+            return ptmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            close();
+        }
+
+        return 0;
     }
 
 

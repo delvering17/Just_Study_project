@@ -195,16 +195,18 @@
             <input type="button" value="탈퇴 43명"/>
         </div>
         <div>
-            <select name="sortfillter">
-                <option selected>아이디</option>
-                <option>닉네임</option>
-                <option>이름</option>
-                <option>이메일</option>
-                <option>전화번호</option>
-                <option>가입일시</option>
-            </select>
-            <input type="text">
-            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+            <form action="AdminUserListSearch">
+                <select name="userList-search">
+                    <option value="mem_userid" selected>아이디</option>
+                    <option value="mem_nickname">닉네임</option>
+                    <option value="mem_realname">이름</option>
+                    <option value="mem_phone">전화번호</option>
+
+                </select>
+                <input type="text" name="searchUserList-input"/>
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+
         </div>
 
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 public class PaySuccess implements ReservationService {
@@ -24,6 +26,8 @@ public class PaySuccess implements ReservationService {
         String[] headcount = request.getParameterValues("headcount");
         String[] pay = request.getParameterValues("pay");
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
         for(int i = 0; i < city.length; i ++){
             ReservationDTO dto = new ReservationDTO();
             dto.setOrderId(request.getParameter("orderId"));
@@ -34,7 +38,11 @@ public class PaySuccess implements ReservationService {
             dto.setTime(time[i]);
             dto.setPaymentMethod(request.getParameter("paymentMethod"));
             dto.setStatus("이용전");
-            dto.setUseDate(useDate[i]);
+            try {
+                dto.setUseDate(sdf.parse(useDate[i]));
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
             dto.setHeadcount(Integer.parseInt(headcount[i]));
             dto.setPay(Integer.parseInt(pay[i]));
 

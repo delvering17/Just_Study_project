@@ -19,9 +19,7 @@ public class BranchDTO {
         }
         return null;
     }
-    public void setCity(String city) {
-        this.city = city;
-    }
+    public void setCity(String city) { this.city = city; }
     public String getName() {
         return name;
     }

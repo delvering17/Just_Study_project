@@ -54,7 +54,7 @@ public class ReviewDAO {
                 reservationDTO.setCity(rs.getString("city"));
                 reservationDTO.setBranch(rs.getString("branch"));
                 reservationDTO.setRoom(rs.getString("room"));
-                reservationDTO.setUseDate(rs.getString("useDate"));
+                reservationDTO.setUseDate(rs.getDate("useDate"));
                 reservationDTO.setTime(rs.getString("time"));
                 reviewDTO.setContent(rs.getString("content"));
 

@@ -207,11 +207,6 @@
 
 </div>
 <script type="text/javascript">
-
-
-
-
-
     window.onload = function (){
         $("#submit-find").click(function (){
 
@@ -263,13 +258,25 @@
         })
 
         $(".mypage-reservlist-top-datepicker").change(function (){
-            $("input[id=mypick]").attr('checked', true);
+            $("input[id=mypick]").prop('checked', true);
         })
 
 
         $(".mypage-reservlist-review-done").click(function (){
 
             location.href = "MypageReviewDetail?reservId="+$(this).parent().parent().children("input[name=reservId]").val()
+        })
+
+        $("input[name=period]").change(function (){
+            if($("input[name=period]:checked").attr("id") != "mypick"){
+                $(".mypage-reservlist-top-datepicker").val("")
+            }
+        })
+
+        $(".mypage-reservlist-top-datepicker").eq(1).change(function (){
+            if($(".mypage-reservlist-top-datepicker").eq(0).val() > $(".mypage-reservlist-top-datepicker").eq(1).val()){
+                $(".mypage-reservlist-top-datepicker").eq(0).val($(".mypage-reservlist-top-datepicker").eq(1).val())
+            }
         })
     }
 </script>

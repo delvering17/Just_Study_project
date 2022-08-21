@@ -162,6 +162,7 @@
         #r3:checked~ .category > .categoryicon > div:nth-of-type(3),
         #r4:checked~ .category > .categoryicon > div:nth-of-type(4),
         #r5:checked~ .category > .categoryicon > div:nth-of-type(5){
+
             background: #fff;
         }
 
@@ -220,7 +221,7 @@
             <ul>
                 <li>매출관리</li>
                 <li><a href="AdminSalesStore">지점별 매출</a></li>
-                <li><a href="">회원별 매출</a></li>
+                <li><a href="AdminSalesUser">회원별 매출</a></li>
                 <li><a href=""></a></li>
             </ul>
             <ul>

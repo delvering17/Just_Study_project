@@ -79,12 +79,15 @@
 </style>
 <div id="form-signin">
   <p id="signin-logo">회원가입</p>
+
   <div class="wrapper-signin">
     <p>이메일</p>
     <input type="text" class="input-signin" id="input-userid" placeholder="ex) juststudy@gmail.com"/>
+    <input type="checkbox" id="isIDdoubleCheck" hidden/>
     <button type="button" class="btn-signin" id="btn-certificate-num" onclick="goIDdoubleCheck()">중복체크</button>
     <p class="signin-notice hide" id="notice-email">이메일 형식에 맞게 입력해주세요. </p>
     <input type="text" class="input-signin certifiy-email hide" id="input-certificate-num" placeholder="인증번호 입력"/>
+    <input type="checkbox" id="isCertificationNum" hidden />
     <button type="button" class="btn-signin certifiy-email hide" onclick="goCertificationNum()">인증확인</button>
     <p class="certifiy-email hide" id="timer">인증시간 : </p>
 
@@ -99,6 +102,7 @@
   <div class="wrapper-signin">
     <p>닉네임</p>
     <input type="text" class="input-signin" id="input-nickname" placeholder="커뮤니티 활동에 사용할 닉네임을 입력해 주세요."/>
+    <input type="checkbox" id="isNicknamedoubleCheck" hidden/>
     <button type="button" onclick="goNicknamedoubleCheck()" class="btn-signin">중복체크</button>
     <p class="signin-notice hide" id="notice-nickname">한글 2~6자리를 입력해주세요 </p>
   </div>
@@ -148,6 +152,8 @@
           $('#notice-email').empty()
           $('#notice-email').html(msg)
         } else {
+          $('#isIDdoubleCheck').attr("checked", true);
+
           alert(msg)
           $('#notice-email').removeClass('show')
           $('#notice-email').addClass('hide')
@@ -179,6 +185,7 @@
     } else if (!/^[0-9].{1,12}$/.test($('#input-certificate-num').val())){
       alert('숫자만 입력해주세요')
     } else{
+
       let form_data = {
         input_certificate_num: $('#input-certificate-num').val(),
         input_userid: $('#input-userid').val()
@@ -194,6 +201,8 @@
           // alert(response.member_nickname)
           if (response.certificateResult === 'success') {
             alert('인증이 완료 되었습니다!');
+
+            $('#isCertificationNum').attr("checked",true);
 
             $("#input-userid").attr("readonly",true);
             let arr_certify = document.querySelectorAll('.certifiy-email')
@@ -251,8 +260,10 @@
       alert('한글 2~6자리를 입력해주세요')
       $('#notice-nickname').removeClass('hide')
       $('#notice-nickname').addClass('show')
+    } else if(/\s/g.test($('#input-nickname').val())) {
+      alert('공백을 제거해 주세요')
     } else {
-      $("#input-nickname").attr("readonly",true);
+
 
       let input_nickname = $('#input-nickname').val()
       $.ajax({
@@ -262,7 +273,12 @@
         async: false,
         success:function (response){
           if(response === 'success') {
+            $('#isNicknamedoubleCheck').attr("checked",true);
+            $("#input-nickname").attr("readonly",true);
             alert('사용가능한 닉네임 입니다')
+
+          } else if(response === 'regex'){
+            alert('한글은 2~6자리를 입력해주세요')
           } else {
             alert('중복된 닉네임 입니다.')
           }
@@ -291,43 +307,84 @@
     }
 
     if(form_data.input_userid === '') {
-      alert('빈 칸을 입력해주세요')
+      alert('빈 칸을 입력해주세요.')
       $('#input-userid').focus()
-
-    } else if(!/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/.test(form_data.input_userid)) {
+    } else if(!/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,5}$/.test(form_data.input_userid)) {
       alert('이메일 형식에 맞게 입력해주세요.')
       $('#input-userid').focus()
+    } else if(/\s/g.test($('#input-userid').val())) {
+      alert('이메일 공백을 제거해 주세요')
+      $('#input-userid').focus()
+    } else if($('#isIDdoubleCheck').is(":checked") === false) {
+      alert('이메일 중복 체크를 해주세요.')
+    } else if($('#isCertificationNum').is(":checked") === false) {
+      alert('이메일 인증을 해주세요.')
     } else if(form_data.input_password1 === '') {
-      alert('빈 칸을 입력해주세요')
+      alert('빈 칸을 입력해주세요.')
       $('#input-password1').focus()
     } else if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/.test(form_data.input_password1)) {
       alert('영문,숫자, 특수문자를 혼합하여 공백없이 8자리 ~ 20자리 이내로 입력해주세요.')
       $('#input-password1').focus()
+    } else if(/\s/g.test($('#input-password1').val())) {
+      alert('비밀번호 공백을 제거해 주세요')
+      $('#input-userid').focus()
     } else if(form_data.input_password2 === '') {
-      alert('빈 칸을 입력해주세요')
+      alert('빈 칸을 입력해주세요.')
       $('#input-password2').focus()
+    } else if(/\s/g.test($('#input-password2').val())) {
+      alert('비밀번호 확인 공백을 제거해 주세요')
+      $('#input-userid').focus()
+    } else if(form_data.input_password1 !== form_data.input_password2) {
+      alert('비밀번호가 일치하지 않습니다.')
+      $('#input-password2').focus()
+    } else if(form_data.input_nickname === '') {
+      alert('빈 칸을 입력해주세요.')
+      $('#input-nickname').focus()
+    } else if(!/^(?=[ㄱ-ㅎ|가-힣]).{2,8}$/.test($('#input-nickname').val())) {
+      alert('한글 2~6자리를 입력해주세요.')
+      $('#input-nickname').focus()
+    } else if(/\s/g.test($('#input-nickname').val())) {
+      alert('비밀번호 확인 공백을 제거해 주세요')
+      $('#input-userid').focus()
+    } else if($('#isNicknamedoubleCheck').is(":checked") === false) {
+      alert('닉네임 중복 확인을 해주세요.')
+    } else if(form_data.input_realname === '') {
+      alert('빈 칸을 입력해주세요.')
+      $('#input-realname').focus()
+    } else if(/\s/g.test($('#input-realname').val())) {
+      alert('이름 공백을 제거해 주세요')
+      $('#input-userid').focus()
+    } else if(form_data.input_address1 === '') {
+      alert('주소 검색을 이용해 주소를 입력해주세요.')
+      $('#input-address1').focus()
+    } else if(form_data.input_address2 === '') {
+      alert('빈 칸을 입력해주세요.')
+      $('#input-address2').focus()
+    } else {
+      alert('통과')
+      $.ajax({
+        url:'<c:url value="/memberNonView/MemberSigninReg"/>',
+        type:'GET',
+        data: form_data,
+        async:false,
+        dataType:'JSON',
+        success:function(response){
+          alert(response.signinResult)
+          if(response.signinResult === 'success') {
+            alert('로그인에 성공했습니다.')
+            location.href = '<c:url value="/board/MainPage"/>'
+          } else {
+            alert(response.signinResult)
+          }
+        },
+        error:function(e){
+          console.log(e.responseText)
+        }
+      })
     }
 
 
-    <%--$.ajax({--%>
-    <%--  url:'<c:url value="/memberNonView/MemberSigninReg"/>',--%>
-    <%--  type:'GET',--%>
-    <%--  data: form_data,--%>
-    <%--  async:false,--%>
-    <%--  dataType:'JSON',--%>
-    <%--  success:function(response){--%>
-    <%--    alert(response.signinResult)--%>
-    <%--    &lt;%&ndash;if(response.loginResult === 'success') {&ndash;%&gt;--%>
-    <%--    &lt;%&ndash;  alert('로그인에 성공했습니다.')&ndash;%&gt;--%>
-    <%--    &lt;%&ndash;  location.href = '<c:url value="/board/MainPage"/>'&ndash;%&gt;--%>
-    <%--    &lt;%&ndash;} else {&ndash;%&gt;--%>
-    <%--    &lt;%&ndash;  alert(response.loginResult)&ndash;%&gt;--%>
-    <%--    &lt;%&ndash;}&ndash;%&gt;--%>
-    <%--  },--%>
-    <%--  error:function(e){--%>
-    <%--    console.log(e.responseText)--%>
-    <%--  }--%>
-    <%--})--%>
+
   }
 
 

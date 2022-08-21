@@ -62,7 +62,7 @@ public class MemberSigninDoubleCheck implements MemberNonViewService {
 
                     // 이메일 전송
 //                    goEmail(input_userid, certificate_num);
-
+                    // TODO - 배포에 이메일 전송 풀기
                 } else {
                     check_result = "중복된 이메일 입니다.";
 
@@ -75,9 +75,16 @@ public class MemberSigninDoubleCheck implements MemberNonViewService {
         // 닉네임
         } else {
 
-            // 닉네임 중복검사
-            if(new MemberDAO().nicknameDoubleCheck(input_nickname)) {
-                check_result = "fail";
+            // 한글만 2~6자리 정규식 검사
+            String nickname_regex = "^[ㄱ-ㅎ|가-힣]{2,6}$";
+            if(Pattern.matches(nickname_regex, input_nickname)) {
+                // 닉네임 중복검사
+                if(new MemberDAO().nicknameDoubleCheck(input_nickname)) {
+                    check_result = "fail";
+                }
+
+            } else {
+                check_result = "regex";
             }
 
         }

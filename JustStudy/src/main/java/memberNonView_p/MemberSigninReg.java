@@ -26,7 +26,7 @@ public class MemberSigninReg implements MemberNonViewService{
         String input_address2 = request.getParameter("input_address2");
         String input_socialid = request.getParameter("input_socialid");
 
-        // 여기 유효성 검사 다 해줘야함 찬욱아 까먹지마라
+
 
 
 
@@ -44,10 +44,9 @@ public class MemberSigninReg implements MemberNonViewService{
         memberDTO.setMem_address2(input_address2);
         memberDTO.setMem_level(1);
 
-        //  TODO - 유효성 검사 필요
 
+        new MemberDAO().signIn(memberDTO);
 
-//        new MemberDAO().signIn(memberDTO);
 
         JSONObject jj = new JSONObject();
         try {

@@ -201,11 +201,6 @@
             </c:forEach>
         </ul>
     </div>
-
-    <div class="admin-write">
-        <a href="EventInsertForm" style=" background: #ffa; ">새 글쓰기</a>
-    </div>
-
 </div>
 
 <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>

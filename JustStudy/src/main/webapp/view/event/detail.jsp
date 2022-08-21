@@ -168,8 +168,6 @@
 
 <div class="listlink">
     <a href="EventPage">목록으로</a>
-    <a href="EventModifyForm?id=${dto.id }">수정</a>
-    <a href="EventDeleteForm?id=${dto.id }">삭제</a>
 </div>
     </tr>
 </table>

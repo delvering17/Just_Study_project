@@ -38,7 +38,6 @@ public class EventController extends HttpServlet {
 
 
         String service = request.getRequestURI().substring((request.getContextPath()+"/event/").length());
-        System.out.println(service);
 
         try {
             if(nonService.containsKey(service)){

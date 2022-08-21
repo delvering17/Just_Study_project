@@ -177,11 +177,6 @@ public class MemberDAO {
                 memberDTO.setMem_address2(rs.getString("mem_address2"));
                 memberDTO.setMem_level(rs.getInt("mem_level"));
                 memberDTO.setMem_socialid(rs.getString("mem_socialid"));
-<<<<<<< HEAD
-                ArrayList<MemberDTO> qwe = new ArrayList<>();
-                System.out.println(qwe.size());
-=======
->>>>>>> origin/Admin_매출관리
 
                 res.add(memberDTO);
             }
@@ -193,8 +188,6 @@ public class MemberDAO {
         return res;
     }
 
-<<<<<<< HEAD
-=======
     public ArrayList<MemberDTO> userListFilter(String filter, String value) {
         ArrayList<MemberDTO> res = new ArrayList<>();
 
@@ -228,7 +221,6 @@ public class MemberDAO {
         }
         return res;
     }
->>>>>>> origin/Admin_매출관리
 
 
         public MemberDTO detail(int mem_id) {

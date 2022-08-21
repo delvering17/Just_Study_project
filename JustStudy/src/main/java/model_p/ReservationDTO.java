@@ -3,9 +3,9 @@ package model_p;
 import java.util.Date;
 
 public class ReservationDTO {
-    String orderId, city, branch, room, time, paymentMethod, status, useDate;
+    String orderId, city, branch, room, time, paymentMethod, status;
     int id, headcount, pay, userId, review;
-    Date resDate;
+    Date resDate, useDate;
 
     public String getOrderId() {
         return orderId;
@@ -103,11 +103,11 @@ public class ReservationDTO {
         this.resDate = resDate;
     }
 
-    public String getUseDate() {
+    public Date getUseDate() {
         return useDate;
     }
 
-    public void setUseDate(String useDate) {
+    public void setUseDate(Date useDate) {
         this.useDate = useDate;
     }
 

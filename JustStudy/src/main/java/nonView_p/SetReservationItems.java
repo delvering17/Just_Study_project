@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class SetReservationItems implements NonViewService {
@@ -44,8 +46,16 @@ public class SetReservationItems implements NonViewService {
                 String room = request.getParameter("roomName");
                 String selectedDay = request.getParameter("selectedDay");
 
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
                 if(branch.equals(dto.getName())){
-                    String soldOutList = new ReservationDAO().soldOutList(city, branch, room, selectedDay);
+                    String soldOutList = null;
+                    try {
+                        soldOutList = new ReservationDAO().soldOutList(city, branch, room, sdf.parse(selectedDay));
+                        System.out.println(soldOutList);
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
                     for(int i = dto.getOpen(); i < dto.getClose(); i++){
                         try {
                             String time1 = (i > 9 ? "" : "0") + i + ":00";

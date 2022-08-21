@@ -3,10 +3,7 @@ package model_p;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class ReservationDAO {
@@ -70,7 +67,7 @@ public class ReservationDAO {
             ptmt.setString(2, dto.getCity());
             ptmt.setString(3, dto.getBranch());
             ptmt.setString(4, dto.getRoom());
-            ptmt.setString(5, dto.getUseDate());
+            ptmt.setDate(5, new java.sql.Date(dto.getUseDate().getTime()));
             ptmt.setString(6, dto.getTime());
             ptmt.setInt(7, dto.getHeadcount());
             ptmt.setInt(8, dto.getPay());
@@ -108,7 +105,7 @@ public class ReservationDAO {
                 dto.setCity(rs.getString("city"));
                 dto.setBranch(rs.getString("branch"));
                 dto.setRoom(rs.getString("room"));
-                dto.setUseDate(rs.getString("useDate"));
+                dto.setUseDate(rs.getDate("useDate"));
                 dto.setTime(rs.getString("time"));
                 dto.setHeadcount(rs.getInt("headcount"));
                 dto.setPay(rs.getInt("pay"));
@@ -127,7 +124,7 @@ public class ReservationDAO {
         return res;
     }
 
-    public String soldOutList(String city, String branch, String room, String useDate){
+    public String soldOutList(String city, String branch, String room, java.util.Date useDate){
 
         ArrayList<String> arr = new ArrayList<>();
 
@@ -137,14 +134,14 @@ public class ReservationDAO {
             ptmt.setString(1, city);
             ptmt.setString(2, branch);
             ptmt.setString(3, room);
-            ptmt.setString(4, useDate);
+            ptmt.setDate(4, new java.sql.Date(useDate.getTime()));
 
             rs = ptmt.executeQuery();
             while (rs.next()){
                 arr.add(rs.getString("time"));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         } finally {
             close();
         }
@@ -168,7 +165,7 @@ public class ReservationDAO {
                 ReservationDTO reservationDTO = new ReservationDTO();
                 reservationDTO.setCity(rs.getString("city"));
                 reservationDTO.setBranch(rs.getString("branch"));
-                reservationDTO.setUseDate(rs.getString("useDate"));
+                reservationDTO.setUseDate(rs.getDate("useDate"));
 
             }
         } catch (SQLException e) {
@@ -193,7 +190,7 @@ public class ReservationDAO {
                 ReservationDTO reservationDTO = new ReservationDTO();
                 reservationDTO.setCity(rs.getString("city"));
                 reservationDTO.setBranch(rs.getString("branch"));
-                reservationDTO.setUseDate(rs.getString("useDate"));
+                reservationDTO.setUseDate(rs.getDate("useDate"));
                 reservationDTO.setPay(rs.getInt("pay"));
 
                 res.add(reservationDTO);

@@ -33,6 +33,19 @@
     font-size: 20px;
   }
 
+  input[name=admin-sales-store-start], input[name=admin-sales-store-end],
+  select[name=admin-sales-store-month], select[name=admin-sales-store-year]{
+    display: none;
+  }
+
+  input[type=radio][value=day]:checked+input+input+input+input[name=admin-sales-store-start],
+  input[type=radio][value=dayBetweenDay]:checked+input+input+input[name=admin-sales-store-start],
+  input[type=radio][value=dayBetweenDay]:checked+input+input+input+input[name=admin-sales-store-end],
+  input[type=radio][value=month]:checked+input+input+input+select,
+  input[type=radio][value=year]:checked+input+input+select+select{
+    display: inline-block;
+  }
+
   .admin-sales-store-main{
     width: 1700px;
     height: fit-content;
@@ -116,10 +129,12 @@
           <option>전체</option>
         </select>
 
-        <input type="radio" name="admin-sales-store-period"/>일일
-        <input type="radio" name="admin-sales-store-period"/>일간
-        <input type="radio" name="admin-sales-store-period"/>월간
-        <input type="radio" name="admin-sales-store-period"/>연간
+
+
+        <input type="radio" name="admin-sales-store-period" value="day"/>일일
+        <input type="radio" name="admin-sales-store-period" value="dayBetweenDay"/>일간
+        <input type="radio" name="admin-sales-store-period" value="month"/>월간
+        <input type="radio" name="admin-sales-store-period" value="year"/>연간
 
         <input type="date" name="admin-sales-store-start"/>
         <input type="date" name="admin-sales-store-end"/>
@@ -140,10 +155,14 @@
 
     <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-sales-store-table">
       <tr>
+        <th>사용자ID</th>
+        <th>사용자이름</th>
         <th>지역</th>
         <th>지점명</th>
-        <th>영업일</th>
-        <th>매출</th>
+        <th>이용일자</th>
+        <th>룸타입</th>
+        <th>시간</th>
+        <th>결제금액</th>
       </tr>
       <form action="">
         <c:forEach items="${salesStoreList}" var="salesStoreList">

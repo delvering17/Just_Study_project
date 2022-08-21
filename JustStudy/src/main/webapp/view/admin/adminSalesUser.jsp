@@ -1,4 +1,5 @@
-<%--
+<%@ page import="model_p.BranchDTO" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: userk
   Date: 2022-08-19
@@ -72,10 +73,21 @@
 
 
 </style>
+<%
+    ArrayList<BranchDTO> branchList = (ArrayList<BranchDTO>) request.getAttribute("branchList");
+%>
 
 <script type="text/javascript">
     window.onload = function (){
 
+        $("select[name=city]").change(function (){
+            $("select[name=branch]").html("<option>전체</option>")
+            <%for(BranchDTO branchDTO : branchList){%>
+            if($("select[name=city]").val() == "<%=branchDTO.getCity()%>"){
+                $("select[name=branch]").append("<option><%=branchDTO.getName()%></option>")
+            }
+            <%}%>
+        })
     }
 </script>
 <div class="admin-sales-user-bg">
@@ -91,6 +103,17 @@
                     <option value="mem_nickname">닉네임</option>
                 </select>
                 <input type="text" name="searchSalesUser-input"/>
+
+                <select name="city">
+                    <option>전체</option>
+                    <c:forTokens items="서울,경기,부산,대구,인천,광주,대전,울산,세종,강원,충북,충남,전북,전남,경북,경남,제주" var="city" delims=",">
+                        <option>${city}</option>
+                    </c:forTokens>
+                </select>
+
+                <select name="branch">
+                    <option>전체</option>
+                </select>
 
                 <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>

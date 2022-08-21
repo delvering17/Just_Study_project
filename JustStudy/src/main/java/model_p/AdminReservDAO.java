@@ -249,7 +249,7 @@ public class AdminReservDAO {
 
     }
 
-    public ArrayList<AdminReservDTO> salesStoreList(String city, String branch, String period, java.util.Date startDate, Date endDate){
+    public ArrayList<AdminReservDTO> salesStoreList(String city, String branch, String period, java.util.Date startDate, Date endDate, String filter, String word){
 
         ArrayList<AdminReservDTO> res = new ArrayList<AdminReservDTO>();
 
@@ -261,6 +261,10 @@ public class AdminReservDAO {
             sql += " and useDate >= ? and useDate < ?";
         }
 
+        if(filter!=null){
+            sql += " and "+filter+" like ?";
+        }
+
         try {
             ptmt = con.prepareStatement(sql);
                 ptmt.setString(1, city);
@@ -269,6 +273,12 @@ public class AdminReservDAO {
                 if(period!=null){
                     ptmt.setDate(3, new java.sql.Date(startDate.getTime()));
                     ptmt.setDate(4, new java.sql.Date(endDate.getTime()));
+                }
+
+                if(period == null & filter!=null){
+                    ptmt.setString(3,"%"+word+"%");
+                } else if(period != null & filter!=null){
+                    ptmt.setString(5,"%"+word+"%");
                 }
 
             System.out.println(ptmt);

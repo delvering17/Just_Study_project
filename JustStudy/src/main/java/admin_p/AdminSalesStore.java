@@ -59,18 +59,21 @@ public class AdminSalesStore implements AdminService {
         if(request.getParameter("city").equals("전체")){
             for(BranchDTO branchDTO : branchList){
                 salesStoreList.addAll(new AdminReservDAO().salesStoreList(branchDTO.getCity(), branchDTO.getName(),
-                        request.getParameter("admin-sales-store-period"), startDate, endDate));
+                        request.getParameter("admin-sales-store-period"), startDate, endDate,
+                        request.getParameter("admin-sales-store-filter"), request.getParameter("admin-sales-store-word")));
             }
         } else if(request.getParameter("branch").equals("전체")){
             for (BranchDTO branchDTO : branchList){
                 if(branchDTO.getCity().equals(request.getParameter("city"))){
                     salesStoreList.addAll(new AdminReservDAO().salesStoreList(branchDTO.getCity(), branchDTO.getName(),
-                            request.getParameter("admin-sales-store-period"), startDate, endDate));
+                            request.getParameter("admin-sales-store-period"), startDate, endDate,
+                            request.getParameter("admin-sales-store-filter"), request.getParameter("admin-sales-store-word")));
                 }
             }
         } else{
             salesStoreList = new AdminReservDAO().salesStoreList(request.getParameter("city"), request.getParameter("branch"),
-                    request.getParameter("admin-sales-store-period"), startDate, endDate);
+                    request.getParameter("admin-sales-store-period"), startDate, endDate,
+                    request.getParameter("admin-sales-store-filter"), request.getParameter("admin-sales-store-word"));
         }
 
         int storeTotalPay = 0;

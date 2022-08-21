@@ -148,10 +148,12 @@
           </c:forEach>
         </select>
 
-        <button type="submit" class="admin-sales-store-search"><i class="fa-solid fa-magnifying-glass"></i></button>
-
         <div>
-          <input type="text" name="word"/>
+          <select name="admin-sales-store-filter">
+            <option value="mem_userid">사용자ID</option>
+            <option value="mem_realname">사용자이름</option>
+          </select>
+          <input type="text" name="admin-sales-store-word"/>
           <button type="submit" class="admin-sales-store-search"><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
       </form>

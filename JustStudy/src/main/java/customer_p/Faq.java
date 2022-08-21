@@ -7,6 +7,8 @@ public class Faq implements CustomerService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
+        
+
         request.setAttribute("mainUrl", "customer/faq.jsp");
     }
 }

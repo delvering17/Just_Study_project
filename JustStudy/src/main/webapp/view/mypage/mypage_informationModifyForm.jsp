@@ -8,7 +8,6 @@
         let form_data = {
             input_realname:$('#input-realname').val(),
             input_nickname:$('#input-nickname').val(),
-            input_phone:$('#input-phone').val(),
             input_address1:$('#input-address1').val(),
             input_address2:$('#input-address2').val()
         }
@@ -107,12 +106,12 @@
                 <input type="text" class="user-input"id="input-nickname" value="${memberDTO.mem_nickname}">
                 <button type="button" class="btn-modify">중복체크</button>
             </li>
-            <li class="info-modify-form-items">
-                <p>휴대전화</p>
-                <input type="text" class="user-input" id="input-phone" value="${memberDTO.mem_phone}"/>
+<%--            <li class="info-modify-form-items">--%>
+<%--                <p>휴대전화</p>--%>
+<%--                <input type="text" class="user-input" id="input-phone" value="${memberDTO.mem_phone}"/>--%>
 <%--                <input type="text" class="user-input" value="1999.10.1" readonly>--%>
-                <button type="button" class="btn-modify" id="">변경</button>
-            </li>
+<%--                <button type="button" class="btn-modify" id="">변경</button>--%>
+<%--            </li>--%>
             <li class="info-modify-form-items" >
                 <p>주소</p>
                 <input type="text" class="user-input" id="input-address1" value="${memberDTO.mem_address1}" readonly>

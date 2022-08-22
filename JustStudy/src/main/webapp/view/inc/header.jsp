@@ -215,8 +215,15 @@
                         </li>
                         <li><a href="../member/MemberLoginForm" ><i class="fa-solid fa-user"></i></a></li>
 
+                        <c:choose>
+                            <c:when test="${sessionScope.login == null}">
+                                <li><a href="../member/MemberSigninForm" >회원가입</a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li><a href="../mypage/MypageInfomationModifyForm" >마이페이지</a></li>
+                            </c:otherwise>
+                        </c:choose>
 
-                        <li><a href="?" style="">회원가입</a></li>
                     </ul>
                 </div>
 
@@ -251,15 +258,14 @@
                                     <li><a href="../member/MemberLogout" >로그아웃</a></li>
                                 </c:otherwise>
                             </c:choose>
-
-                            <c:if test="${mem_level == 2}">
+                            <c:if test="${sessionScope.mem_level == 2}">
                                 <li><a href="../admin/AdminPage" >관리자로그인</a></li>
                             </c:if>
                         </ul>
                         <ul class="gnb-sub-list">
-                            <li><a href="../mypage/MypageInfomationModifyForm" >마이페이지</a></li>
-                            <li><a href="../member/MemberSigninForm" >회원가입</a></li>
-                            <li><a href="../member/MemberSigninForm" >회원가입</a></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
                         </ul>
                     </div>
                 </div>

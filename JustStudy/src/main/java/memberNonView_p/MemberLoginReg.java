@@ -32,6 +32,7 @@ public class MemberLoginReg implements MemberNonViewService{
 
                 HttpSession session = request.getSession();
                 session.setAttribute("login", memberDTO.getMem_id());
+                session.setAttribute("mem_level", memberDTO.getMem_level());
 
                 jj.put("loginResult", "success");
 

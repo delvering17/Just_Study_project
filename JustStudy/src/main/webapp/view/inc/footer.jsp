@@ -39,11 +39,19 @@
         }
     </style>
 
+<script type="text/javascript">
+    window.onload = function (){
+        $(".customer-service").click(function (){
+            location.href = "../mypage/MypageInquiryInsertForm"
+        })
+    }
+</script>
+
 <div class="footer-bg">
     <div>
         <button class="footer-link" data-bs-toggle="modal" data-bs-target="#personal-info">개인정보처리방침</button>
         <button class="footer-link" data-bs-toggle="modal" data-bs-target="#email-ban">이메일무단수집거부</button>
-        <button class="footer-link" data-bs-toggle="modal" data-bs-target="#customer-service">고객센터</button>
+        <button class="footer-link customer-service" data-bs-toggle="modal" data-bs-target="#customer-service">고객센터</button>
     </div>
     <div class="footer-info">
         (주)JustStudy 송찬욱 사업자등록번호:000-11-22222 통신판매번호:2022-서울 강남-3333 서울 강남구 테헤란로5길 24, 4층 T.3481-1005 juststudy@juststudycafe.com<br/>

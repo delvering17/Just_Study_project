@@ -64,6 +64,19 @@ public class NoticeDAO {
 
     public void insert(NoticeDTO dto) {
 
+        sql = "select max(id) from notice";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            rs = ptmt.executeQuery();
+            if (rs.next()) {
+                dto.setId(rs.getInt(1)+1);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         try {
 
             sql = "insert into notice (id,title,content,reg_date) "

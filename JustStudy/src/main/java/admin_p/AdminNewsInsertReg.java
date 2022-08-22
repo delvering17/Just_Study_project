@@ -1,8 +1,7 @@
-package news_p;
+package admin_p;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-
 import model_p.NewsDAO;
 import model_p.NewsDTO;
 
@@ -12,46 +11,39 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-
-public class NewsInsertReg implements NewsService {
+public class AdminNewsInsertReg implements AdminService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("NewsinsertReg 들어왔냐?");
+        System.out.println("AdminInsertReg 들어왔다");
 
-        String path = request.getRealPath("/img/news");
+        String path = request.getRealPath("/img/event");
         path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\" +
                 "\\img\\news";
 
         int size = 1024 * 1024 * 10;
 
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         NewsDTO dto = new NewsDTO();
 
         try {
-            MultipartRequest mr = new MultipartRequest(request, path, size, "UTF-8", new DefaultFileRenamePolicy());
-
+            MultipartRequest mr= new MultipartRequest(request, path, size, "UTF-8", new DefaultFileRenamePolicy());
 
             dto.setNews_title(mr.getParameter("news_title"));
             dto.setNews_content(mr.getParameter("news_content"));
             dto.setNews_img(mr.getFilesystemName("news_img"));
-            dto.setNews_reg_date(sdf.parse(mr.getParameter("news_reg_date")));
-
 
 
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
             throw new RuntimeException(e);
         }
 
         new NewsDAO().insert(dto);
 
-
         System.out.println(dto);
 
-        request.setAttribute("mainUrl", "news/alert.jsp");
-        request.setAttribute("msg", "입력되었습니다.");
-        request.setAttribute("goUrl", "NewsDetail?id=" + dto.getNews_id());
+        request.setAttribute("adminUrl","alert.jsp");
+        request.setAttribute("msg","입력되었습니다.");
+        request.setAttribute("goUrl","AdminNewsDetail?id="+dto.getNews_id());
+
+
     }
 }

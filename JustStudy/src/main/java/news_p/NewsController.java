@@ -19,8 +19,7 @@ public class NewsController extends HttpServlet {
 
     public NewsController(){
         super();
-        nonService.put("NewsInsertForm", "news/insertForm.jsp");
-        nonService.put("NewsDeleteForm", "news/deleteForm.jsp");
+
 }
 
     @Override

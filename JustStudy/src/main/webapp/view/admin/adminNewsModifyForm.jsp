@@ -127,25 +127,61 @@
     }
 </style>
 
+<script>
+    window.onload = function(){
 
+    $(".imgDelete").click(function (){
+        if(confirm("정말 삭제하시겠습니까?")){
+            $(".admin-modify-form").attr("action", "AdminNewsImgDelete")
+            $(".admin-modify-form").submit()
+        }
+    })
+
+    }
+
+</script>
+<script>
+    <%
+        if(request.getAttribute("msg") != null){%>
+    alert("<%=request.getAttribute("msg")%>")
+    <%}%>
+</script>
 
 <div class="wrapper">
 
     <div id="headline">
-        <b>공지사항 수정</b>
+        <b>뉴스 수정</b>
     </div>
 
     <div id="main">
-        <form action="AdminNoticeModifyReg">
-            <input type="hidden" name="id" value="${dto.id}">
+        <form action="AdminNewsModifyReg" method="post" enctype="multipart/form-data" class="admin-modify-form">
+            <input type="hidden" name="news_id" value="${dto.news_id}">
             <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
                 <tr>
                     <td>타이틀</td>
-                    <td colspan="3"><input type="text" name="title" value="${dto.title}"></td>
+                    <td colspan="3"><input type="text" name="news_title" value="${dto.news_title}">
                 </tr>
                 <tr>
+                    <th>뉴스 사진</th>
+                    <c:choose>
+                        <c:when test="${dto.news_img != null}">
+                    <td colspan="3">
+                            <input type="button" value="파일 삭제" class="imgDelete"/>
+                            <input type="hidden" name="news_img" value="${dto.news_img}">
+                            <img src="<c:url value="/img/news/${dto.news_img}"/>"/>
+                    </td>
+                        </c:when>
+                        <c:otherwise>
+                            <td colspan="3">
+                                <input type="file" name="news_img" value="">
+                            </td>
+                        </c:otherwise>
+                    </c:choose>
+                </tr>
+
+                <tr>
                     <td>내용</td>
-                    <td colspan="3"><textarea name="content" cols="50" rows="10">${dto.content}</textarea></td>
+                    <td colspan="3"><textarea name="news_content" cols="50" rows="10">${dto.news_content}</textarea></td>
                 </tr>
                 <tr>
                     <td colspan="4"><input type="submit" value="등록"></td>
@@ -154,3 +190,4 @@
         </form>
     </div>
 </div>
+

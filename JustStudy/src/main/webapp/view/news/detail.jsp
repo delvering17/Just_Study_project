@@ -144,16 +144,11 @@
 </div>
 
 <div class="news-list-area">
-<%--    <div class="event-upload-img">  TODO 이미지 파일 업로드 되는 위치
-        <img style="width: 100%" src="<%=request.getContextPath()%>/img/background.jpeg">
-    </div>--%>
     ${dto.news_content}
 </div>
 
 
 <div class="listlink">
     <a href="NewsPage">목록으로</a>
-    <a href="NewsModifyForm?id=${dto.news_id }">수정</a>
-    <a href="NewsDeleteForm?id=${dto.news_id }">삭제</a>
 </div>
 

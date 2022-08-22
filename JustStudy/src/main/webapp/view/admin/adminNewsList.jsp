@@ -1,12 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
   User: whgml
-  Date: 2022-08-21
-  Time: 오후 5:50
+  Date: 2022-08-22
+  Time: 오전 9:49
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
@@ -127,30 +126,29 @@
     }
 </style>
 
-
-
 <div class="wrapper">
 
     <div id="headline">
-        <b>공지사항 수정</b>
+        <b>뉴스 관리</b>
+        <a href="AdminNewsInsertForm" style="align-items: center">글쓰기</a>
+
     </div>
 
     <div id="main">
-        <form action="AdminNoticeModifyReg">
-            <input type="hidden" name="id" value="${dto.id}">
-            <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+        <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+            <tr>
+                <th>제목</th>
+                <%--<th>공지사항 내용</th>--%>
+                <th>게시 일자</th>
+            </tr>
+            <c:forEach items="${mainData}" var="newsDTO">
                 <tr>
-                    <td>타이틀</td>
-                    <td colspan="3"><input type="text" name="title" value="${dto.title}"></td>
+                    <td><a href="AdminNewsDetail?id=${newsDTO.news_id}" />${newsDTO.news_title}</td>
+                    <%--<td><a href="AdminNewsDetail?id=${newsDTO.news_id}" />${newsDTO.news_content}</td>--%>
+                    <td>${newsDTO.news_reg_date_sdf }</td>
                 </tr>
-                <tr>
-                    <td>내용</td>
-                    <td colspan="3"><textarea name="content" cols="50" rows="10">${dto.content}</textarea></td>
-                </tr>
-                <tr>
-                    <td colspan="4"><input type="submit" value="등록"></td>
-                </tr>
-            </table>
-        </form>
+            </c:forEach>
+        </table>
     </div>
 </div>
+

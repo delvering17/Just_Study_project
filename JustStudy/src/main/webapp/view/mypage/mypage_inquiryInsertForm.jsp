@@ -4,40 +4,7 @@
 
 <script type="text/javascript">
 
-    <%--function goInformationModify() {--%>
-    <%--    let form_data = {--%>
-    <%--        input_realname:$('#input-realname').val(),--%>
-    <%--        input_nickname:$('#input-nickname').val(),--%>
-    <%--        input_phone:$('#input-phone').val(),--%>
-    <%--        input_address1:$('#input-address1').val(),--%>
-    <%--        input_address2:$('#input-address2').val()--%>
-    <%--    }--%>
-    
-    <%--    $.ajax({--%>
-    <%--        url:'<c:url value="/mypageNonView/MypageInformationModifyReg"/>',--%>
-    <%--        type:'GET',--%>
-    <%--        data: form_data,--%>
-    <%--        async:false,--%>
-    <%--        dataType:'JSON',--%>
-    <%--        success:function(response){--%>
-    <%--            alert(response.modifyResult)--%>
-    <%--            location.href = "/mypage/MypageInformationModifyForm"--%>
-    <%--            &lt;%&ndash;if(response.modifyResult === 'success') {&ndash;%&gt;--%>
-    <%--            &lt;%&ndash;    alert(msg)&ndash;%&gt;--%>
-    <%--            &lt;%&ndash;    location.href = '<c:url value="/board/MainPage"/>'&ndash;%&gt;--%>
-    <%--            &lt;%&ndash;} else {&ndash;%&gt;--%>
-    <%--            &lt;%&ndash;    alert(response.modifyResult)&ndash;%&gt;--%>
-    <%--            &lt;%&ndash;}&ndash;%&gt;--%>
-    <%--        },--%>
-    <%--        error:function(e){--%>
-    <%--            console.log(e.responseText)--%>
-    <%--        }--%>
-    <%--    })--%>
-    <%--}--%>
-    
-    <%--function gogo() {--%>
-    <%--    location.href = "../mypage/MypageSignoutForm"--%>
-    <%--}--%>
+
 </script>
 
 
@@ -126,7 +93,7 @@
                 <p>지점</p>
                 <select id="input_branch">
                     <c:forEach items="${arr_branchName}" var="branchName">
-                        <option value="${branchName}">${branchName}</option>
+                        <option id="${branchName}" value="${branchName}">${branchName}</option>
                     </c:forEach>
                 </select>
             </li>
@@ -145,6 +112,12 @@
     </form>
 </div>
 <script>
+
+    if(${param.inquiry_branch != null}) {
+        $('#input-reveravtion').attr("checked",true);
+        $('#${param.inquiry_branch}').attr("selected",true);
+    }
+
     function goInquiryInsert() {
         let form_data = {
             input_writer:$('#input-writer').val(),

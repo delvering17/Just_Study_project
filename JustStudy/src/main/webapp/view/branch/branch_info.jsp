@@ -181,7 +181,12 @@
         $("#btn-reservation").click(function (){
             location.href = "../reservation/Studyroom?city=${branchDTO.city}&branch=${branchDTO.name}"
         })
+
+        $("#btn-inquiry").click(function (){
+            location.href = "../mypage/MypageInquiryInsertForm?inquiry_category=예약&inquiry_branch=${branchDTO.name}"
+        })
     }
+
 </script>
 <div class="wrapper-branch-info">
     <div class="branch-info">

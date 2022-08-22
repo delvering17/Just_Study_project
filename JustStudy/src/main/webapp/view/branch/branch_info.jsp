@@ -175,6 +175,14 @@
         margin-top: 5px;
     }
 </style>
+
+<script type="text/javascript">
+    window.onload = function (){
+        $("#btn-reservation").click(function (){
+            location.href = "../reservation/Studyroom?city=${branchDTO.city}&branch=${branchDTO.name}"
+        })
+    }
+</script>
 <div class="wrapper-branch-info">
     <div class="branch-info">
         <div class="branch-info-top">

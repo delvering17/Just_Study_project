@@ -174,7 +174,7 @@
                 <td>
 
                     <c:choose>
-                        <c:when test="${eventDTO.img == ''}">
+                        <c:when test="${eventDTO.img == null}">
                             <input type="file" name="img">
                         </c:when>
                         <c:otherwise>

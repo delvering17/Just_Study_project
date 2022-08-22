@@ -95,19 +95,7 @@
   ArrayList<BranchDTO> branchList = (ArrayList<BranchDTO>) request.getAttribute("branchList");
 %>
 
-<script type="text/javascript">
-  window.onload = function (){
 
-    $("select[name=city]").change(function (){
-      $("select[name=branch]").html("<option>전체</option>")
-      <%for(BranchDTO branchDTO : branchList){%>
-          if($("select[name=city]").val() == "<%=branchDTO.getCity()%>"){
-              $("select[name=branch]").append("<option><%=branchDTO.getName()%></option>")
-          }
-      <%}%>
-    })
-  }
-</script>
 
 <div class="admin-sales-store-bg">
 
@@ -196,3 +184,15 @@
     </table>
   </div>
 </div>
+<script type="text/javascript">
+
+    $("select[name=city]").change(function (){
+      $("select[name=branch]").html("<option>전체</option>")
+      <%for(BranchDTO branchDTO : branchList){%>
+      if($("select[name=city]").val() == "<%=branchDTO.getCity()%>"){
+        $("select[name=branch]").append("<option><%=branchDTO.getName()%></option>")
+      }
+      <%}%>
+    })
+
+</script>

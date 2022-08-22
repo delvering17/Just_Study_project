@@ -79,19 +79,7 @@
 
 </style>
 
-<script type="text/javascript">
-    window.onload = function (){
-        $(".admin-faq-insert").click(function (){
-            location.href="AdminFAQInsert";
-        })
 
-        $("input[value=삭제]").click(function (){
-            if(confirm("정말 삭제하시겠습니까?")){
-                $(".admin-faq-list-form").submit()
-            }
-        })
-    }
-</script>
 
 <div class="admin-faq-list-bg">
 
@@ -134,3 +122,15 @@
     </div>
 
 </div>
+<script type="text/javascript">
+    $(".admin-faq-insert").click(function (){
+        location.href="AdminFAQInsert";
+    })
+
+    $("input[value=삭제]").click(function (){
+        if(confirm("정말 삭제하시겠습니까?")){
+            $(".admin-faq-list-form").submit()
+        }
+    })
+
+</script>

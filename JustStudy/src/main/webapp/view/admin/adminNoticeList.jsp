@@ -126,15 +126,7 @@
     }
 </style>
 
-<script type="text/javascript">
-    window.onload = function (){
-        $(".admin-store-delete").click(function (){
-            alert($("input[name=branch]:checked").attr("id"))
 
-        })
-    }
-
-</script>
 <div class="wrapper">
 
     <div id="headline">
@@ -160,3 +152,12 @@
         </table>
     </div>
 </div>
+
+<script type="text/javascript">
+        $(".admin-store-delete").click(function (){
+            alert($("input[name=branch]:checked").attr("id"))
+
+        })
+
+
+</script>

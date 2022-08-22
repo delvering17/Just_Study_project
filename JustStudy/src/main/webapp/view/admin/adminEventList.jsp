@@ -128,14 +128,7 @@
     }
 </style>
 
-<script type="text/javascript">
-    window.onload = function (){
-        $(".admin-event-insert").click(function (){
-            location.href = "AdminEventInsertForm"
-        })
-    }
 
-</script>
 <div class="wrapper">
 
     <div id="headline">
@@ -163,3 +156,10 @@
         </table>
     </div>
 </div>
+<script type="text/javascript">
+    $(".admin-event-insert").click(function (){
+        location.href = "AdminEventInsertForm"
+    })
+
+
+</script>

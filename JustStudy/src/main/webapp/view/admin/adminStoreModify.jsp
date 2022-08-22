@@ -153,42 +153,6 @@
     BranchDTO branchDTO = (BranchDTO) request.getAttribute("branchDTO");
 %>
 
-<script>
-    window.onload = function () {
-
-        $("input[name=roomType]").change(function (){
-            $(this).parent().children("input[name=roomNum]").attr("disabled", !$(this).parent().children("input[name=roomNum]").attr("disabled"));
-            $(this).parent().children("input[type=button]").attr("disabled", !$(this).parent().children("input[type=button]").attr("disabled"))
-
-        })
-
-        $("input[name=roomMinus]").click(function () {
-            if($(this).parent().children("input[name=roomNum]").val() > 0){
-                $(this).parent().children("input[name=roomNum]").val($(this).parent().children("input[name=roomNum]").val()-1)
-            }
-        })
-
-        $("input[name=roomPlus]").click(function () {
-            $(this).parent().children("input[name=roomNum]").val(parseInt($(this).parent().children("input[name=roomNum]").val())+1)
-        })
-
-        $(".admin-store-list").click(function () {
-            location.href = "AdminStoreList"
-        })
-
-        $(".admin-store-save").click(function () {
-            $("form").submit()
-        })
-
-        $(".imgDelete").click(function (){
-            if(confirm("정말 삭제하시겠습니까?")){
-                $(".admin-store-modify-form").attr("action", "AdminStoreImgDelete")
-                $(".admin-store-modify-form").submit()
-            }
-        })
-    }
-
-</script>
 
 <div id="headline">
     <b>지점관리 > 지점 수정</b>
@@ -303,3 +267,38 @@
         </table>
     </form>
 </div>
+
+<script>
+        $("input[name=roomType]").change(function (){
+            $(this).parent().children("input[name=roomNum]").attr("disabled", !$(this).parent().children("input[name=roomNum]").attr("disabled"));
+            $(this).parent().children("input[type=button]").attr("disabled", !$(this).parent().children("input[type=button]").attr("disabled"))
+
+        })
+
+        $("input[name=roomMinus]").click(function () {
+            if($(this).parent().children("input[name=roomNum]").val() > 0){
+                $(this).parent().children("input[name=roomNum]").val($(this).parent().children("input[name=roomNum]").val()-1)
+            }
+        })
+
+        $("input[name=roomPlus]").click(function () {
+            $(this).parent().children("input[name=roomNum]").val(parseInt($(this).parent().children("input[name=roomNum]").val())+1)
+        })
+
+        $(".admin-store-list").click(function () {
+            location.href = "AdminStoreList"
+        })
+
+        $(".admin-store-save").click(function () {
+            $("form").submit()
+        })
+
+        $(".imgDelete").click(function (){
+            if(confirm("정말 삭제하시겠습니까?")){
+                $(".admin-store-modify-form").attr("action", "AdminStoreImgDelete")
+                $(".admin-store-modify-form").submit()
+            }
+        })
+
+
+</script>

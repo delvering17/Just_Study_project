@@ -154,47 +154,9 @@
 
 </style>
 
-<script type="text/javascript">
-  window.onload = function () {
-    $(".admin-store-list").click(function () {
-      location.href = "AdminStoreList"
-    })
-
-    $(".admin-store-insert").click(function () {
-      location.href = "AdminStoreInsertReg?branchName=<%=request.getParameter("branchName")%>"
-    })
-  }
-</script>
 
 
-<script>
-  window.onload = function () {
 
-    $("input[name=roomType]").change(function () {
-      $(this).parent().children("input[name=roomNum]").attr("disabled", !$(this).parent().children("input[name=roomNum]").attr("disabled"))
-      $(this).parent().children("input[type=button]").attr("disabled", !$(this).parent().children("input[type=button]").attr("disabled"))
-    })
-
-    $("input[name=roomMinus]").click(function () {
-      if($(this).parent().children("input[name=roomNum]").val() > 0){
-        $(this).parent().children("input[name=roomNum]").val($(this).parent().children("input[name=roomNum]").val()-1)
-      }
-    })
-
-    $("input[name=roomPlus]").click(function () {
-      $(this).parent().children("input[name=roomNum]").val(parseInt($(this).parent().children("input[name=roomNum]").val())+1)
-    })
-
-    $(".admin-store-save").click(function () {
-      $("form").submit()
-    })
-
-    $(".admin-store-list").click(function (){
-      location.href = "AdminStoreList"
-    })
-  }
-
-</script>
 
 <div id="headline">
   <b>지점관리 > 지점 추가</b>
@@ -294,3 +256,35 @@
     </table>
   </form>
 </div>
+
+<script type="text/javascript">
+    $(".admin-store-list").click(function () {
+      location.href = "AdminStoreList"
+    })
+
+    $(".admin-store-insert").click(function () {
+      location.href = "AdminStoreInsertReg?branchName=<%=request.getParameter("branchName")%>"
+    })
+    $("input[name=roomType]").change(function () {
+      $(this).parent().children("input[name=roomNum]").attr("disabled", !$(this).parent().children("input[name=roomNum]").attr("disabled"))
+      $(this).parent().children("input[type=button]").attr("disabled", !$(this).parent().children("input[type=button]").attr("disabled"))
+    })
+
+    $("input[name=roomMinus]").click(function () {
+      if($(this).parent().children("input[name=roomNum]").val() > 0){
+        $(this).parent().children("input[name=roomNum]").val($(this).parent().children("input[name=roomNum]").val()-1)
+      }
+    })
+
+    $("input[name=roomPlus]").click(function () {
+      $(this).parent().children("input[name=roomNum]").val(parseInt($(this).parent().children("input[name=roomNum]").val())+1)
+    })
+
+    $(".admin-store-save").click(function () {
+      $("form").submit()
+    })
+
+    $(".admin-store-list").click(function (){
+      location.href = "AdminStoreList"
+    })
+</script>

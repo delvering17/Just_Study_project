@@ -1020,6 +1020,14 @@
             $(".studyroom-reserv-form").children("div").eq($(this).index(".fa-x")).remove()
             removeDiv.html("")
             removeDiv.remove()
+
+            let realTotalWon = 0;
+
+            for(let i = 0; i < $(".studyroom-reserv-result>div").length; i++){
+                realTotalWon += parseInt($(".studyroom-reserv-result>div").eq(i).children("div").eq(2).html().split("원")[0])
+            }
+
+            $(".studyroom-reserv-done>button").html("총 "+$(".studyroom-reserv-result>div").length+"건 | "+realTotalWon+"원 결제하기")
         })
 
         $(".studyroom-reserv-done>button").click(function (){

@@ -181,8 +181,8 @@ public class CommunityDAO {
             ptmt.setInt(5,communityDTO.getPeople());
             ptmt.setString(6, communityDTO.getStudykind());
             ptmt.setString(7, communityDTO.getContent());
-            ptmt.setInt(8, communityDTO.getId());
-            ptmt.setString(9, communityDTO.getOpenChatting());
+            ptmt.setString(8, communityDTO.getOpenChatting());
+            ptmt.setInt(9, communityDTO.getId());
 
             return ptmt.executeUpdate();
         } catch (SQLException e) {

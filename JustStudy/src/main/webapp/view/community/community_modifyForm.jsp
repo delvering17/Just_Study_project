@@ -55,7 +55,7 @@
         <table>
             <input type="hidden" name="id" value="${communityDTO.id}"/>
             <tr>
-                <td>지역</td>
+                <td>지점명</td>
                 <td colspan="3">
                     <select id="location_01" name="location" class="local-selector">
                         <option value="">지점 선택</option>

@@ -1,13 +1,12 @@
 package community_p;
 
-import model_p.CommunityDAO;
-import model_p.CommunityDTO;
-import model_p.MemberDAO;
+import model_p.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class CommunityModifyReg implements CommunityService{
@@ -35,6 +34,8 @@ public class CommunityModifyReg implements CommunityService{
         communityDTO.setNickname(new MemberDAO().detail(communityDTO.getMemId()).getMem_nickname());
         communityDTO.setOpenChatting(request.getParameter("openChatting"));
 
+        ArrayList<BranchDTO> branchList = new BranchDAO().branchList();
+
         String msg = "수정 실패";
         String mainUrl = "community/community_modifyForm.jsp";
 
@@ -44,6 +45,7 @@ public class CommunityModifyReg implements CommunityService{
             request.setAttribute("goUrl", "CommunityDetail?id="+communityDTO.getId());
         }
 
+        request.setAttribute("branchList", branchList);
         request.setAttribute("msg", msg);
         request.setAttribute("mainUrl", mainUrl);
         request.setAttribute("communityDTO", communityDTO);

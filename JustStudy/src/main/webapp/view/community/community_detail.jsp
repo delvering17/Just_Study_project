@@ -199,23 +199,6 @@
     }
 </style>
 
-<script type="text/javascript">
-    window.onload = function (){
-        $(".community-apply-btn").click(function (){
-            location.href="CommunityApplyInsertForm?input_purpose=${communityDTO.id}"
-        })
-
-        $(".community-modify-btn").click(function (){
-            location.href="CommunityModifyForm?id=${communityDTO.id}"
-        })
-
-        $(".community-delete-btn").click(function (){
-            location.href="CommunityDeleteForm?id=${communityDTO.id}"
-        })
-    }
-
-</script>
-
 <div class="community-detail-bg">
 
     <div class="community-title-area">
@@ -313,3 +296,17 @@
         </c:if>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(".community-apply-btn").click(function (){
+        location.href="CommunityApplyInsertForm?input_purpose=${communityDTO.id}"
+    })
+
+    $(".community-modify-btn").click(function (){
+        location.href="CommunityModifyForm?id=${communityDTO.id}"
+    })
+
+    $(".community-delete-btn").click(function (){
+        location.href="CommunityDeleteForm?id=${communityDTO.id}"
+    })
+</script>

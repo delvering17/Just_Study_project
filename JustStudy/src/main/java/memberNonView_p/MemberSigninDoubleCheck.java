@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
+import java.util.regex.Pattern;
 
 public class MemberSigninDoubleCheck implements MemberNonViewService {
     @Override
@@ -28,59 +29,65 @@ public class MemberSigninDoubleCheck implements MemberNonViewService {
         String check_result = "success";
         Boolean go = false;
 
+
         if(input_userid != null) {
-            go = new MemberDAO().idDoubleCheck(input_userid);
-            if(go) {
-                check_result = "중복된 닉네임 입니다";
-            } else {
-                int certificate_num = (int) (Math.random() * 100000);
 
-                String cc_date = "";
-                Date certificate_date ;
+            // 이메일 유효성
 
-                if(new EmailCertificateDAO().checkDoubleEmail(input_userid)) {
-                    certificate_date = new EmailCertificateDAO().insertDoubleEmail(input_userid,certificate_num);
+            String email_regex = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
 
+            // 이메일 regex
+            if(Pattern.matches(email_regex, input_userid)) {
+                // 이메일 중복 체크
+                if(!new MemberDAO().idDoubleCheck(input_userid)) {
 
+                    int certificate_num = (int) (Math.random() * 100000);
 
-                } else {
-                    certificate_date = new EmailCertificateDAO().insertCertificate_num(input_userid,certificate_num);
-                }
-                check_result = "입력한 메일 확인하시어 인증 번호를 입력해주세요";
+                    Date certificate_date ;
 
+                    // 이미 이메일 인증 번호 전송 검사
+                    if(new EmailCertificateDAO().checkDoubleEmail(input_userid)) {
+                        certificate_date = new EmailCertificateDAO().insertDoubleEmail(input_userid,certificate_num);
+                    } else {
+                        certificate_date = new EmailCertificateDAO().insertCertificate_num(input_userid,certificate_num);
+                    }
 
-                if(certificate_date != null) {
                     Calendar cal = Calendar.getInstance();
                     cal.setTime(certificate_date);
                     cal.add(Calendar.MINUTE, 3);
                     certificate_date = cal.getTime();
 
-
-                    System.out.println(certificate_date);
-
-
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분 ss초");
-                    cc_date = sdf.format(certificate_date);
+                    check_result = sdf.format(certificate_date) + "까지 인증해주세요.";
 
-                    check_result = cc_date + "까지 인증해주세요.";
+                    // 이메일 전송
+//                    goEmail(input_userid, certificate_num);
+                    // TODO - 배포에 이메일 전송 풀기
+                } else {
+                    check_result = "중복된 이메일 입니다.";
 
                 }
 
-                goEmail(input_userid, certificate_num);
+            } else {
+                check_result = "이메일 형식에 맞춰 입력해주세요.";
             }
 
+        // 닉네임
         } else {
 
-            go = new MemberDAO().nicknameDoubleCheck(input_nickname);
+            // 한글만 2~6자리 정규식 검사
+            String nickname_regex = "^[ㄱ-ㅎ|가-힣]{2,6}$";
+            if(Pattern.matches(nickname_regex, input_nickname)) {
+                // 닉네임 중복검사
+                if(new MemberDAO().nicknameDoubleCheck(input_nickname)) {
+                    check_result = "fail";
+                }
 
-            if(go) {
-                check_result = "fail";
+            } else {
+                check_result = "regex";
             }
+
         }
-
-        // email 인증번호 난수
-
-
 
 
         try {
@@ -88,10 +95,6 @@ public class MemberSigninDoubleCheck implements MemberNonViewService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
-
     }
 
     public void goEmail(String email, int certificate_num) {

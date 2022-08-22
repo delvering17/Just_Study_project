@@ -68,6 +68,7 @@ public class MemberDAO {
 
         sql = "select * from member where mem_userid = ?";
         try {
+
             ptmt = con.prepareStatement(sql);
             ptmt.setString(1, input_userid);
             rs = ptmt.executeQuery();

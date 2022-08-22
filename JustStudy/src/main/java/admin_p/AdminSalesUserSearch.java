@@ -21,9 +21,6 @@ public class AdminSalesUserSearch implements AdminService{
         String startDate = request.getParameter("useDate-start");
         String endDate = request.getParameter("useDate-and");
 
-        System.out.println("startDate:"+startDate);
-        System.out.println("endDate:"+endDate);
-
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date user_startDate = null;
         Date user_endDate = null;
@@ -54,10 +51,18 @@ public class AdminSalesUserSearch implements AdminService{
         for (AdminReservDTO dto : salesUserList) {
             userTotalPay += dto.getPay();
         }
+        if(userTotalPay==0){
+            String msg = "매출 정보가 없습니다";
+            request.setAttribute("adminUrl", "alert.jsp");
+            request.setAttribute("msg", msg);
+            request.setAttribute("goUrl","AdminSalesUser");
+        }else{
+            request.setAttribute("branchList", branchList);
+            request.setAttribute("salesUserList", salesUserList);
+            request.setAttribute("userTotalPay", userTotalPay);
+            request.setAttribute("adminUrl", "adminSalesUser.jsp");
+        }
 
-        request.setAttribute("branchList", branchList);
-        request.setAttribute("salesUserList", salesUserList);
-        request.setAttribute("userTotalPay", userTotalPay);
-        request.setAttribute("adminUrl", "adminSalesUser.jsp");
+
     }
 }

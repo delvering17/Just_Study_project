@@ -51,14 +51,40 @@
             padding: 120px 20px 20px 40px;
         }
 
-        #main > div:first-of-type > input[type=button]{
+        #main > div:first-of-type > form{
+            display: flex;
+            text-align: center;
+        }
+
+        #main > div:first-of-type > form > button{
             padding: 5px 3px 5px 3px;
             border-radius: 5px;
             border: 0;
             background: rgb(138, 169, 238);
             color: #fff;
             cursor: pointer;
-            margin-top: 10px;
+            font-size: 15px;
+            margin-right: 10px;
+        }
+
+        #main > div:first-of-type > form > div:nth-of-type(1){
+            width: 150px;
+            padding: 5px 3px 5px 3px;
+            border-radius: 5px;
+            border: 0;
+            background: rgb(138, 169, 238);
+            color: #fff;
+            margin-right: 10px;
+        }
+
+        #main > div:first-of-type > form > div:nth-of-type(2){
+            width: 80px;
+            padding: 5px 3px 5px 3px;
+            border-radius: 5px;
+            border: 0;
+            background: rgb(138, 169, 238);
+            color: #fff;
+            margin-right: 10px;
         }
 
         #main > div:nth-of-type(2){
@@ -189,10 +215,12 @@
 
     <div id="main">
         <div>
-            <input type="button" value="전체목록"/>
-            <input type="button" value="총 회원수 3,548명"/>
-            <input type="button" value="차단 0명"/>
-            <input type="button" value="탈퇴 43명"/>
+            <form action="AdminUserAllList">
+                <button type="submit" name="allUserList">전체 목록</button>
+
+                    <div>총 회원수 ${userStatus}명</div>
+                    <div>차단 ${blackStatus}명</div>
+            </form>
         </div>
         <div>
             <form action="AdminUserListSearch">

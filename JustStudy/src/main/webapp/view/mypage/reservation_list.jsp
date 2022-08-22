@@ -280,4 +280,10 @@
             $(".mypage-reservlist-top-datepicker").eq(0).val($(".mypage-reservlist-top-datepicker").eq(1).val())
         }
     })
+
+    $(".mypage-reservlist-top-datepicker").eq(0).change(function (){
+        if($(".mypage-reservlist-top-datepicker").eq(0).val() > $(".mypage-reservlist-top-datepicker").eq(1).val()){
+            $(".mypage-reservlist-top-datepicker").eq(1).val($(".mypage-reservlist-top-datepicker").eq(0).val())
+        }
+    })
 </script>

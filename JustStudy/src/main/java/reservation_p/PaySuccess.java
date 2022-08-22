@@ -58,8 +58,10 @@ public class PaySuccess implements ReservationService {
             reservArr[i] = dto;
         }
 
-        goSuccessEmail(request.getParameter("userEmail"), reservArr);
-        request.setAttribute("mainUrl", "main/main.jsp");
+        /*goSuccessEmail(request.getParameter("userEmail"), reservArr);*/
+        request.setAttribute("mainUrl", "reservation/alert.jsp");
+        request.setAttribute("msg", "예약이 완료되었습니다.");
+        request.setAttribute("goUrl", "../mypage/MyReservationList");
     }
 
     public void goSuccessEmail(String email, ReservationDTO ...reservArr) {

@@ -287,7 +287,7 @@ public class AdminReservDAO {
                 "AS mem_nickname, ifnull(member.mem_realname, '회원정보없음') AS mem_realname, reservation.city, " +
                 "reservation.branch, reservation.room, reservation.useDate, " +
                 "reservation.time, reservation.pay from reservation left outer join member on " +
-                "reservation.userId = member.mem_id where city = ? and branch = ? and reservation.status = '이용완료'";
+                "reservation.userId = member.mem_id where city = ? and branch = ? and reservation.status = '결제완료'";
 
         if(period!=null) {
             sql += " and useDate >= ? and useDate < ?";

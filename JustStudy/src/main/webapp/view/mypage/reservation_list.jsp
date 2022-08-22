@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model_p.ReservationDTO" %>
+<%@ page import="java.util.Date" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -189,15 +190,17 @@
                         <td><%=reservationDTO.getPay()%></td>
                         <td><%=reservationDTO.getStatus()%></td>
                         <td>
-                            <%if(reservationDTO.getStatus().equals("이용완료")){
-                                if(reservationDTO.getReview() == 0){%>
-                                    <button type=submit class="mypage-reservlist-review">후기 작성</button>
-                              <%}else if(reservationDTO.getReview() == 1){%>
-                                    <input type="button" class="mypage-reservlist-review-done" value="후기 조회"></input>
-                              <%}
-                            } else if(reservationDTO.getStatus().equals("이용전")){%>
-                            <input type="button" class="mypage-reservlist-cancle" value="예약 취소"></input>
-                            <%}%>
+                            <%
+                                if (reservationDTO.getStatus().equals("결제완료")) {
+                                    if (reservationDTO.getUseDate().before(new Date())) {
+                                        if (reservationDTO.getReview() == 0) {%>
+                            <button type=submit class="mypage-reservlist-review">후기 작성</button>
+                            <%} else if (reservationDTO.getReview() == 1) {%>
+                            <input type="button" class="mypage-reservlist-review-done" value="후기 조회"/>
+                            <%}
+                            }else{%>
+                            <input type="button" class="mypage-reservlist-cancle" value="예약 취소"/>
+                            <% }}%>
                         </td>
                     </tr>
                 </form>

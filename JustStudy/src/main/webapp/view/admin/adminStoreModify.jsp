@@ -270,7 +270,7 @@
             </tr>
             <tr>
                 <th>매장 사진</th>
-                <%if (!branchDTO.getImg().equals("")) {%>
+                <%if (!branchDTO.getImg().equals(null)) {%>
                         <td>
                             <%=branchDTO.getImg()%>
                             <input type="button" value="파일 삭제" class="imgDelete"/>

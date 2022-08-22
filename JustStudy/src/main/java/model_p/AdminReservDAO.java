@@ -115,7 +115,7 @@ public class AdminReservDAO {
 
         ArrayList<AdminReservDTO> res = new ArrayList<AdminReservDTO>();
 
-        sql="select mem_userid, mem_nickname, city, branch, time, room, useDate, pay from reservation join member on reservation.userId = member.mem_id";
+        sql="select mem_userid, mem_realname, mem_nickname, city, branch, time, room, useDate, pay from reservation join member on reservation.userId = member.mem_id";
 
         try {
             ptmt = con.prepareStatement(sql);
@@ -123,6 +123,7 @@ public class AdminReservDAO {
             while(rs.next()){
                 AdminReservDTO adminReservDTO = new AdminReservDTO();
                 adminReservDTO.setMem_userid(rs.getString("mem_userid"));
+                adminReservDTO.setMem_realname(rs.getString("mem_realname"));
                 adminReservDTO.setMem_nickname(rs.getString("mem_nickname"));
                 adminReservDTO.setCity(rs.getString("city"));
                 adminReservDTO.setBranch(rs.getString("branch"));
@@ -175,23 +176,52 @@ public class AdminReservDAO {
         return res;
     }
 
-    public ArrayList<AdminReservDTO> salesUserDetailSearch(String filter, String id, String city, String branch){
+    public ArrayList<AdminReservDTO> salesUserDetailSearch(String filter, String id, String city, String branch, Date sqlUseStartDate, Date sqlUseEndDate){
 
         ArrayList<AdminReservDTO> res = new ArrayList<AdminReservDTO>();
+        String cityFilter = "";
+        String branchFilter = "";
+        String useDateFilter = "";
 
-        sql="select mem_userid, mem_nickname, city, branch, time, room, useDate, pay from reservation " +
-                "join member on reservation.userId = member.mem_id where city = ? and branch = ? "+filter+" like ?";
+        if(!city.equals("전체")){
+            cityFilter = "and city = ?";
+        }
+
+        if(!branch.equals("전체")){
+            branchFilter = "and branch = ?";
+        }
+
+        if(sqlUseStartDate!=null && sqlUseEndDate!=null){
+            useDateFilter = "and useDate >= ? and useDate <= ?";
+        }
+
+        sql="select mem_userid, mem_realname, mem_nickname, city, branch, time, room, useDate, pay from reservation join member on " +
+                "reservation.userId = member.mem_id where "+filter+" like ?"+cityFilter+" "+branchFilter+" "+useDateFilter+" ";
 
         try {
             ptmt = con.prepareStatement(sql);
-            ptmt.setString(1, city);
-            ptmt.setString(2, branch);
-            ptmt.setString(3, "%"+id+"%");
+            ptmt.setString(1, "%"+id+"%");
+
+            if(!city.equals("전체")){
+                ptmt.setString(2, city);
+            }
+            if(!branch.equals("전체")){
+                ptmt.setString(3, branch);
+            }
+
+            if(city.equals("전체") && branch.equals("전체") && sqlUseStartDate!=null && sqlUseEndDate!=null){
+                ptmt.setDate(2, sqlUseStartDate);
+                ptmt.setDate(3, sqlUseEndDate);
+            }else if(!city.equals("전체") && !branch.equals("전체") && sqlUseStartDate!=null && sqlUseEndDate!=null){
+                ptmt.setDate(4, sqlUseStartDate);
+                ptmt.setDate(5, sqlUseEndDate);
+            }
 
             rs = ptmt.executeQuery();
             while(rs.next()){
                 AdminReservDTO adminReservDTO = new AdminReservDTO();
                 adminReservDTO.setMem_userid(rs.getString("mem_userid"));
+                adminReservDTO.setMem_realname(rs.getString("mem_realname"));
                 adminReservDTO.setMem_nickname(rs.getString("mem_nickname"));
                 adminReservDTO.setCity(rs.getString("city"));
                 adminReservDTO.setBranch(rs.getString("branch"));
@@ -214,7 +244,7 @@ public class AdminReservDAO {
 
         ArrayList<AdminReservDTO> res = new ArrayList<AdminReservDTO>();
 
-        sql = "select city, branch, useDate, pay where "+city+", "+branch+","+startDate+","+endDate+" like ?";
+        sql = "select city, branch, useDate, pay where "+city+" "+branch+" "+startDate+" "+endDate+" like ?";
 
 
         try {

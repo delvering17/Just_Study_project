@@ -15,7 +15,6 @@ public class AdminNoticeModifyForm implements AdminService {
         NoticeDAO dao = new NoticeDAO();
         NoticeDTO dto = dao.detail(id);
 
-
         request.setAttribute("adminUrl", "adminNoticeModifyForm.jsp");
         request.setAttribute("dto", dto);
     }

@@ -5,7 +5,7 @@ import java.net.URLEncoder;
 
 public class BranchDTO {
 
-    String city, name, rooms, facilities, address, phone, img;
+    String city, name, rooms, facilities, address, addressDetail, phone, img;
     int price, open, close;
 
     public String getCity() {
@@ -99,6 +99,14 @@ public class BranchDTO {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getAddressDetail() {
+        return addressDetail;
+    }
+
+    public void setAddressDetail(String addressDetail) {
+        this.addressDetail = addressDetail;
     }
 
     public String getPhone() {

@@ -40,7 +40,7 @@
   }
 
   .admin-store-insert-table {
-    height: 700px;
+    height: 730px;
     border: 1px solid rgb(97, 88, 88);
     margin-top: 10px;
   }
@@ -57,12 +57,13 @@
   .admin-store-insert-table tr:nth-of-type(5),
   .admin-store-insert-table tr:nth-of-type(6),
   .admin-store-insert-table tr:nth-of-type(7),
+  .admin-store-insert-table tr:nth-of-type(9),
   .admin-store-insert-table tr:nth-of-type(8) {
-    height: 8%;
+    height: 7%;
   }
 
   .admin-store-insert-table tr:nth-of-type(3),
-  .admin-store-insert-table tr:nth-of-type(9) {
+  .admin-store-insert-table tr:nth-of-type(10) {
     height: 22%;
   }
 
@@ -86,7 +87,7 @@
   }
 
   .admin-store-insert-table tr:nth-of-type(3) input[type=text],
-  .admin-store-insert-table tr:nth-of-type(8) input[type=text] {
+  .admin-store-insert-table tr:nth-of-type(9) input[type=text] {
     width: 90px;
     height: 25px;
   }
@@ -95,7 +96,8 @@
     width: 30px;
   }
 
-  .admin-store-insert-table tr:nth-of-type(6) input[type=text] {
+  .admin-store-insert-table tr:nth-of-type(6) input[type=text],
+  .admin-store-insert-table tr:nth-of-type(7) input[type=text] {
     width: 300px;
   }
 
@@ -120,7 +122,7 @@
   .admin-store-insert-table tr:nth-of-type(3) > td > div {
     height: 25px;
     line-height: 25px;
-    margin-bottom: 10px;
+    margin-bottom: 7px;
   }
 
   .admin-store-insert-table tr:nth-of-type(3) > td > div > div {
@@ -264,7 +266,14 @@
       </tr>
       <tr>
         <th>매장 주소</th>
-        <td><input type="text" name="address"/></td>
+        <td>
+          <input type="text" name="address"/>
+          <input type="button" name="address-search" value="검색"/>
+        </td>
+      </tr>
+      <tr>
+        <th>상세 주소</th>
+        <td><input type="text" name="addressDetail"/></td>
       </tr>
       <tr>
         <th>전화번호</th>

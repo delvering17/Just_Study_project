@@ -40,7 +40,7 @@
   }
 
   .admin-store-detail-table {
-    height: 700px;
+    height: 730px;
     margin-right: 50px;
     border: 1px solid rgb(97, 88, 88);
     margin-top: 10px;
@@ -68,12 +68,13 @@
   .admin-store-detail-table tr:nth-of-type(5),
   .admin-store-detail-table tr:nth-of-type(6),
   .admin-store-detail-table tr:nth-of-type(7),
+  .admin-store-detail-table tr:nth-of-type(9),
   .admin-store-detail-table tr:nth-of-type(8) {
-    height: 8%;
+    height: 7%;
   }
 
   .admin-store-detail-table tr:nth-of-type(3),
-  .admin-store-detail-table tr:nth-of-type(9) {
+  .admin-store-detail-table tr:nth-of-type(10) {
     height: 22%;
   }
 
@@ -154,6 +155,10 @@
     <tr>
       <th>매장 주소</th>
       <td><%=branchDTO.getAddress()%></td>
+    </tr>
+    <tr>
+      <th>상세 주소</th>
+      <td><%=branchDTO.getAddressDetail()%></td>
     </tr>
     <tr>
       <th>전화번호</th>

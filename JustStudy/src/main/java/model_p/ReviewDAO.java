@@ -76,7 +76,8 @@ public class ReviewDAO {
     public int insert(ReviewDTO reviewDTO){
 
         try {
-            sql = "select max(id)+1 from review";
+
+            sql = "SELECT AUTO_INCREMENT FROM information_schema.tables WHERE table_name = 'review' AND table_schema = DATABASE( )";
 
             ptmt = con.prepareStatement(sql);
             rs = ptmt.executeQuery();

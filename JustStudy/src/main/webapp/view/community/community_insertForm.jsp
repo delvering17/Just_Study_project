@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 </style>
-<form action="CommunityInsertReg" method="post">
+<form name="frmJoin" action=" CommunityInsertReg" method="post" onsubmit="return CheckForm(this)">
 
     <table>
         <tr>
@@ -24,8 +24,8 @@
         </tr>
         <tr>
             <td>스터디 기간</td>
-            <td><input type="date" name="startdate"></td>
-            <td> ~ <input type="date" name="enddate"></td>
+            <td><input type="date" id="Date-start" name="startdate"></td>
+            <td> ~ <input type="date" id="Date-end" name="enddate"></td>
             <td></td>
         </tr>
         <tr>
@@ -66,7 +66,7 @@
             <td colspan="3"><input type="text" name="openChatting"/></td>
         </tr>
         <tr>
-            <td colspan="4"><input type="checkbox"  id="agree">
+            <td colspan="4"><input type="checkbox" name="agree" id="agree" value="">
                 <label for="agree">개인정보취급방침을 읽었으며 이에 동의합니다.</label></td>
         </tr>
         <tr>
@@ -75,3 +75,22 @@
     </table>
 
 </form>
+
+<script>
+    var now_utc = Date.now()
+    var timeOff = new Date().getTimezoneOffset()*60000;
+    var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+    document.getElementById("Date-start").setAttribute("min", today);
+    document.getElementById("Date-end").setAttribute("min", today);
+
+    function CheckForm(Join){
+        var chk = document.frmJoin.agree.checked;
+        if(!chk){
+            alert("약관에 동의해주세요")
+            return false;
+        }
+
+
+    }
+
+</script>

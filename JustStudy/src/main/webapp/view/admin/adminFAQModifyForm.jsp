@@ -79,15 +79,6 @@
   }
 </style>
 
-<script type="text/javascript">
-  window.onload = function (){
-    $("input[name=faq-category]").each(function (key, value){
-      if(value.getAttribute("value") == "${faqDTO.category}"){
-        value.setAttribute("Checked", true)
-      }
-    })
-  }
-</script>
 
 <div class="admin-faq-modify-bg">
   <div class="admin-faq-modify-headline">
@@ -96,7 +87,7 @@
 
   <div class="admin-faq-modify-main">
 
-    <form action="AdminFAQmodifyReg" method="get">
+    <form action="AdminFAQModifyReg" method="get">
       <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-faq-modify-table">
         <input type="hidden" name="faq-id" value="${faqDTO.id}"/>
         <tr>
@@ -121,3 +112,12 @@
     </form>
   </div>
 </div>
+
+<script type="text/javascript">
+    $("input[name=faq-category]").each(function (key, value){
+      if(value.getAttribute("value") == "${faqDTO.category}"){
+        value.setAttribute("Checked", true)
+      }
+    });
+
+</script>

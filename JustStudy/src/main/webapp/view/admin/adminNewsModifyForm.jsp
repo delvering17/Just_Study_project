@@ -127,19 +127,7 @@
     }
 </style>
 
-<script>
-    window.onload = function(){
 
-    $(".imgDelete").click(function (){
-        if(confirm("정말 삭제하시겠습니까?")){
-            $(".admin-modify-form").attr("action", "AdminNewsImgDelete")
-            $(".admin-modify-form").submit()
-        }
-    })
-
-    }
-
-</script>
 <script>
     <%
         if(request.getAttribute("msg") != null){%>
@@ -191,3 +179,14 @@
     </div>
 </div>
 
+<script type="text/javascript">
+
+        $(".imgDelete").click(function (){
+            if(confirm("정말 삭제하시겠습니까?")){
+                $(".admin-modify-form").attr("action", "AdminNewsImgDelete")
+                $(".admin-modify-form").submit()
+            }
+        })
+
+
+</script>

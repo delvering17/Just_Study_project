@@ -324,13 +324,13 @@ public class InquiryDAO {
 
     public int userInsert(InquiryDTO inquiryDTO) {
         int res = 0;
-        sql = "select max(inquiry_id) from inquiry";
+        sql = "SELECT AUTO_INCREMENT FROM information_schema.tables WHERE table_name = 'inquiry' AND table_schema = DATABASE( )";
 
         try {
             ptmt = con.prepareStatement(sql);
             rs = ptmt.executeQuery();
             if(rs.next()) {
-                res = rs.getInt(1)+1;
+                res = rs.getInt(1);
             }
 
         } catch (SQLException e) {

@@ -34,7 +34,7 @@ public class AdminStoreInsertReg implements AdminService{
                 int roomCnt = 1;
                 for(int i = 0; i < mr.getParameterValues("roomType").length; i++){
                     for(int k = 0; k < Integer.parseInt(mr.getParameterValues("roomNum")[i]); k++){
-                        roomType.add("룸"+roomCnt+") "+mr.getParameterValues("roomType")[i]);
+                        roomType.add("룸"+roomCnt+")"+mr.getParameterValues("roomType")[i]);
                         roomCnt++;
                     }
                 }

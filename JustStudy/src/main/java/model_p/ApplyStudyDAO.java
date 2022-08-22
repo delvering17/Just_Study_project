@@ -76,7 +76,8 @@ public class ApplyStudyDAO {
 
     public int selectAs_id() {
         int res = 0;
-        sql = "select max(as_id) from applystudy";
+
+        sql = "SELECT AUTO_INCREMENT FROM information_schema.tables WHERE table_name = 'applystudy' AND table_schema = DATABASE( )";
 
         try {
             ptmt = con.prepareStatement(sql);

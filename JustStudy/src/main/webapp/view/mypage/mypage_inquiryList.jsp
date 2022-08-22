@@ -289,7 +289,7 @@
 
     }
 
-    window.onload = function () {
+
 
         const datepickerBefore = document.querySelector('#datepicker-before');
         datepickerBefore.setAttribute("max", today);
@@ -328,7 +328,7 @@
             let datepicker_after = document.querySelector('#datepicker-after');
             datepicker_after.value = '${date_after}';
         </c:if>
-    }
+
 
     function goInquiryInsert() {
         location.href = "MypageInquiryInsertForm";

@@ -9,7 +9,6 @@
             input_new_password:$('#input-new-password').val(),
             input_new_password_repeat:$('#input-new-password-repeat').val()
         }
-
         $.ajax({
             url:'<c:url value="/mypageNonView/MypageChangePasswordReg"/>',
             type:'GET',

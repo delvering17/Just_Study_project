@@ -3,7 +3,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <script type="text/javascript">
-
+    <c:if test="${msg != null}" >
+    alert('${msg}')
+    location.href = "../board/MainPage"
+    </c:if>
 
 </script>
 

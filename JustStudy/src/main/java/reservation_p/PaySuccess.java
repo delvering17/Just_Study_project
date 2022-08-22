@@ -63,6 +63,9 @@ public class PaySuccess implements ReservationService {
     }
 
     public void goSuccessEmail(String email, ReservationDTO ...reservArr) {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
@@ -87,7 +90,7 @@ public class PaySuccess implements ReservationService {
         for (ReservationDTO reservationDTO : reservArr){
             content += "지점: "+reservationDTO.getBranch()+"<br/>";
             content += "룸타입: "+reservationDTO.getRoom()+"<br/>";
-            content += "이용일: "+reservationDTO.getUseDate()+"<br/>";
+            content += "이용일: "+sdf.format(reservationDTO.getUseDate())+"<br/>";
             content += "이용시간: "+reservationDTO.getTime()+"<br/>";
             content += "인원: "+reservationDTO.getHeadcount()+"인<br/><br/>";
         }

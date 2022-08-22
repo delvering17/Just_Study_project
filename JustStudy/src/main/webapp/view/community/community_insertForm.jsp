@@ -24,8 +24,8 @@
         </tr>
         <tr>
             <td>스터디 기간</td>
-            <td><input type="date" name="startdate"></td>
-            <td> ~ <input type="date" name="enddate"></td>
+            <td><input type="date" id="Date-start" name="startdate"></td>
+            <td> ~ <input type="date" id="Date-end" name="enddate"></td>
             <td></td>
         </tr>
         <tr>
@@ -75,3 +75,12 @@
     </table>
 
 </form>
+
+<script>
+    var now_utc = Date.now()
+    var timeOff = new Date().getTimezoneOffset()*60000;
+    var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+    document.getElementById("Date-start").setAttribute("min", today);
+    document.getElementById("Date-end").setAttribute("min", today);
+
+</script>

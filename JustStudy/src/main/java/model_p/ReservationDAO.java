@@ -46,6 +46,7 @@ public class ReservationDAO {
                 dto.setClose(rs.getInt("close"));
                 dto.setFacilities(rs.getString("facilities"));
                 dto.setAddress(rs.getString("address"));
+                dto.setAddressDetail(rs.getString("addressDetail"));
                 dto.setPhone(rs.getString("phone"));
                 res.add(dto);
             }

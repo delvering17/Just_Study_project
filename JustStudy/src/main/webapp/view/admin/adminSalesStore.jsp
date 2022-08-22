@@ -129,8 +129,6 @@
           <option>전체</option>
         </select>
 
-
-
         <input type="radio" name="admin-sales-store-period" value="day"/>일일
         <input type="radio" name="admin-sales-store-period" value="dayBetweenDay"/>일간
         <input type="radio" name="admin-sales-store-period" value="month"/>월간

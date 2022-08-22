@@ -100,6 +100,7 @@
             <form action="AdminSalesUserSearch">
                 <select name="salesUser-search">
                     <option value="mem_userid">아이디</option>
+                    <option value="mem_realname">이름</option>
                     <option value="mem_nickname">닉네임</option>
                 </select>
                 <input type="text" name="searchSalesUser-input"/>
@@ -115,6 +116,9 @@
                     <option>전체</option>
                 </select>
 
+                <input type="date" name="useDate-start"/>
+                <input type="date" name="useDate-and"/>
+
                 <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
         </div>
@@ -124,6 +128,7 @@
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-sales-store-table">
             <tr>
                 <th>아이디</th>
+                <th>이름</th>
                 <th>닉네임</th>
                 <th>지역</th>
                 <th>이용지점</th>
@@ -137,6 +142,7 @@
 
                     <tr>
                         <td>${salesUserList.mem_userid}</td>
+                        <td>${salesUserList.mem_realname}</td>
                         <td>${salesUserList.mem_nickname}</td>
                         <td>${salesUserList.city}</td>
                         <td>${salesUserList.branch}</td>

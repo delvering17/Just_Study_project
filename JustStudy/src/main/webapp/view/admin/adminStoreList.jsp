@@ -77,21 +77,7 @@
         padding-top: 5px;
         padding-bottom: 5px;
     }
-
-    .admin-store-list-table th:nth-of-type(1),
-    .admin-store-list-table th:nth-of-type(2),
-    .admin-store-list-table th:nth-of-type(3),
-    .admin-store-list-table th:nth-of-type(4),
-    .admin-store-list-table th:nth-of-type(5),
-    .admin-store-list-table th:nth-of-type(7),
-    .admin-store-list-table th:nth-of-type(8) {
-        width: 10%;
-    }
-
-    .admin-store-list-table th:nth-of-type(6) {
-        width: 30%;
-    }
-
+    
     .branch:nth-of-type(2n) {
         background: rgba(227, 233, 240, 0.726)
     }
@@ -126,6 +112,7 @@
                 <th>이용요금(1시간)</th>
                 <th>운영 시간</th>
                 <th>매장 주소</th>
+                <th>상세 주소</th>
                 <th>전화번호</th>
                 <th>편의 시설</th>
             </tr>
@@ -155,6 +142,7 @@
                     <%=openTime%> ~ <%=closeTime%>
                 </td>
                 <td><%=(branchDTO.getAddress() != null ? branchDTO.getAddress() : "")%></td>
+                <td><%=(branchDTO.getAddressDetail() != null ? branchDTO.getAddressDetail() : "")%></td>
                 <td><%=(branchDTO.getPhone() != null ? branchDTO.getPhone() : "")%></td>
                 <td><%=(branchDTO.getFacilities() != null ? branchDTO.getFacilities().replaceAll(",", "<br/>") : "")%></td>
             </tr>

@@ -26,6 +26,13 @@ public class BranchInfo implements BranchService{
 
         ArrayList<ReviewDTO> reviewList = new ReviewDAO().branchReview(request.getParameter("name"));
 
+        float reviewAverage = new ReviewDAO().branchAverage(request.getParameter("name"));
+        System.out.println(reviewAverage);
+        System.out.println(reviewList.size());
+        request.setAttribute("reviewTotal", reviewList.size());
+
+        request.setAttribute("reviewAverage", reviewAverage);
+
         request.setAttribute("reviewList", reviewList);
 
         request.setAttribute("facilities", facilities);

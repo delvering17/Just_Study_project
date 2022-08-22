@@ -194,8 +194,8 @@
             <div class="top-left">
                 <h1>${branchDTO.name}</h1>
                 <div class="top-left-review">
-                    <p>4.3점</p>
-                    <a href="">13개 리뷰</a>
+                    <p>${reviewAverage}점</p>
+                    <a href="">${reviewTotal}개 리뷰</a>
                 </div>
             </div>
             <div class="top-right">

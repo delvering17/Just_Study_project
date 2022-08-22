@@ -145,6 +145,8 @@ public class ReviewDAO {
         return 0;
     }
 
+
+
     public ArrayList<ReviewDTO> branchReview(String branchName){
         ArrayList<ReviewDTO> res = new ArrayList<ReviewDTO>();
 
@@ -173,6 +175,48 @@ public class ReviewDAO {
         }
 
         return res;
+    }
+
+
+    public float branchAverage(String branchName){
+        ArrayList<ReviewDTO> arr_reviewDTO = new ArrayList<ReviewDTO>();
+        int total = 0;
+        float sum = 0;
+        float avg = 0;
+        sql = "SELECT branch, mem_nickname, reviewDate, star, content FROM review JOIN reservation ON reservId = reservation.id" +
+                " JOIN member ON reservation.userId = member.mem_id WHERE branch = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, branchName);
+            rs = ptmt.executeQuery();
+
+            while(rs.next()){
+                ReviewDTO reviewDTO = new ReviewDTO();
+                reviewDTO.setBranch(rs.getString("branch"));
+                reviewDTO.setUserNickname(rs.getString("mem_nickname"));
+                reviewDTO.setReviewDate(rs.getTimestamp("reviewDate"));
+                reviewDTO.setStar(rs.getDouble("star"));
+                reviewDTO.setContent(rs.getString("content"));
+
+                arr_reviewDTO.add(reviewDTO);
+
+                sum += rs.getDouble("star");
+
+            }
+
+            total = arr_reviewDTO.size();
+
+            avg  = sum / total;
+            avg = (float) (Math.round(avg * 10) / 10.0);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return avg;
     }
 
     public int delete(int reservId){

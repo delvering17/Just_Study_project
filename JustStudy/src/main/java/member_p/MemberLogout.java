@@ -9,7 +9,6 @@ public class MemberLogout implements MemberService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-
         HttpSession session = request.getSession();
         int mem_id = (int) session.getAttribute("login");
         session.removeAttribute("login");

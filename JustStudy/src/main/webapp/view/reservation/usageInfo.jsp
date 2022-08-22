@@ -132,17 +132,7 @@
     </style>
     <title>이용 안내</title>
 </head>
-<script>
-    window.onload=function (){
-        ScrollReveal().reveal('.usageinfo-scroll', {
-            interval:500,
-            duration:1000,
-            reset: true,
-            easing: 'ease-out',
-            distance: '50px'
-        });
-    }
-</script>
+
 <body>
 <div class="usageinfo-bg">
     <h1>이용 안내</h1>
@@ -195,3 +185,14 @@
 </div>
 </body>
 </html>
+<script type="text/javascript">
+
+        ScrollReveal().reveal('.usageinfo-scroll', {
+            interval:500,
+            duration:1000,
+            reset: true,
+            easing: 'ease-out',
+            distance: '50px'
+        });
+
+</script>

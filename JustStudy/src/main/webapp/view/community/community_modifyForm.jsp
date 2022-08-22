@@ -30,24 +30,7 @@
 
 </style>
 
-<script type="text/javascript">
-    window.onload = function (){
 
-        $("select[name=location]>option").each(function (key, value){
-            console.log("${communityDTO.location}")
-            console.log(value.getAttribute("value"))
-            if("${communityDTO.location}" == value.getAttribute("value")){
-                value.setAttribute("selected", true)
-            }
-        })
-
-        $("input[name=studykind]").each(function (key, value){
-            if("${communityDTO.studykind}".includes(value.getAttribute("value"))){
-                value.setAttribute("checked", true)
-            }
-        })
-    }
-</script>
 
 <div class="community-modify-bg">
 
@@ -118,4 +101,21 @@
 
     </form>
 </div>
+<script type="text/javascript">
+
+    $("select[name=location]>option").each(function (key, value){
+        console.log("${communityDTO.location}")
+        console.log(value.getAttribute("value"))
+        if("${communityDTO.location}" == value.getAttribute("value")){
+            value.setAttribute("selected", true)
+        }
+    })
+
+    $("input[name=studykind]").each(function (key, value){
+        if("${communityDTO.studykind}".includes(value.getAttribute("value"))){
+            value.setAttribute("checked", true)
+        }
+    })
+
+</script>
 

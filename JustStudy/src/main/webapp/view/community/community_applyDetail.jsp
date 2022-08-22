@@ -199,7 +199,6 @@
 
 
 <script type="text/javascript">
-    window.onload = function (){
 
         $(".community-modify-btn").click(function (){
             location.href="CommunityApplyModifyForm?as_id=${applyStudyDTO.as_id}"
@@ -208,6 +207,6 @@
         $(".community-delete-btn").click(function (){
             location.href="CommunityApplyDeleteForm?as_id=${applyStudyDTO.as_id}&as_mem_id=${applyStudyDTO.as_mem_id}"
         })
-    }
+
 
 </script>

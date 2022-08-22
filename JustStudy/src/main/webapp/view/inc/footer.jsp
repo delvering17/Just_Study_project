@@ -39,13 +39,7 @@
         }
     </style>
 
-<script type="text/javascript">
-    window.onload = function (){
-        $(".customer-service").click(function (){
-            location.href = "../mypage/MypageInquiryInsertForm"
-        })
-    }
-</script>
+
 
 <div class="footer-bg">
     <div>
@@ -86,3 +80,8 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+        $(".customer-service").click(function (){
+            location.href = "../mypage/MypageInquiryInsertForm"
+        })
+</script>

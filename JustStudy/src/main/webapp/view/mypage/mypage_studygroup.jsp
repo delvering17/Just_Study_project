@@ -345,7 +345,6 @@
 <%--    location.href = detail_url--%>
 <%--  }--%>
 
-  window.onload = function () {
 
     const datepickerBefore = document.querySelector('#datepicker-before');
     datepickerBefore.setAttribute("max", today);
@@ -403,7 +402,7 @@
 
     }
 
-  }
+
 
   $("input[name=mypage-studygroup-type]").each(function (key, value){
     if(value.getAttribute("id") == "${param.type}"){

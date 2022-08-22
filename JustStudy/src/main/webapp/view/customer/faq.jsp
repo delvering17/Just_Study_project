@@ -84,20 +84,7 @@
 
 </style>
 
-<script type="text/javascript">
-    window.onload = function (){
 
-        $("input[name=faq-category]").each(function (key, value){
-            if(value.getAttribute("id") == "${param.category}"){
-                value.setAttribute("checked", true)
-            }
-        })
-
-        $("input[name=faq-category]").change(function (){
-            location.href = "Faq?category="+$("input[name=faq-category]:checked").attr("id")
-        })
-    }
-</script>
 
 <div class="customer-faq-bg">
     <h1>자주 하는 질문</h1>
@@ -116,3 +103,17 @@
     </c:forEach>
 
 </div>
+
+<script type="text/javascript">
+
+        $("input[name=faq-category]").each(function (key, value){
+            if(value.getAttribute("id") == "${param.category}"){
+                value.setAttribute("checked", true)
+            }
+        })
+
+        $("input[name=faq-category]").change(function (){
+            location.href = "Faq?category="+$("input[name=faq-category]:checked").attr("id")
+        })
+
+</script>

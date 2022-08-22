@@ -19,7 +19,7 @@ public class MypageInformationModifyReg implements MypageNonViewService{
         int mem_id = (int) session.getAttribute("login");
         String input_realname = request.getParameter("input_realname");
         String input_nickname = request.getParameter("input_nickname");
-        String input_phone = request.getParameter("input_phone");
+//        String input_phone = request.getParameter("input_phone");
         String input_address1 = request.getParameter("input_address1");
         String input_address2 = request.getParameter("input_address2");
 
@@ -34,7 +34,7 @@ public class MypageInformationModifyReg implements MypageNonViewService{
         memberDTO.setMem_id(mem_id);
         memberDTO.setMem_realname(input_realname);
         memberDTO.setMem_nickname(input_nickname);
-        memberDTO.setMem_phone(input_phone);
+//        memberDTO.setMem_phone(input_phone);
         memberDTO.setMem_address1(input_address1);
         memberDTO.setMem_address2(input_address2);
 

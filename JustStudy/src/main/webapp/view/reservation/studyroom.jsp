@@ -684,19 +684,51 @@
                 });
 
             $(".studyroom-reserv-headcount:first-of-type").click(function (){
-                if($(".studyroom-reserv-headcount:first-of-type+b").html() > 1){
+
+                let minHeadcount;
+
+                if($("input[type=radio][name=roomName]:checked").attr("id").includes("4인실")){
+                    minHeadcount = 2;
+                } else if($("input[type=radio][name=roomName]:checked").attr("id").includes("6인실")){
+                    minHeadcount = 4;
+                } else if($("input[type=radio][name=roomName]:checked").attr("id").includes("8인실")){
+                    minHeadcount = 6;
+                } else if($("input[type=radio][name=roomName]:checked").attr("id").includes("대회의실")){
+                    minHeadcount = 10;
+                }
+
+                if($(".studyroom-reserv-headcount:first-of-type+b").html() > minHeadcount){
                     $(".studyroom-reserv-headcount:first-of-type+b").html($(".studyroom-reserv-headcount:first-of-type+b").html() - 1)
                     $(".studyroom-reserv-totalprice").html($(".studyroom-reserv-headcount:last-of-type+font>b").html()
                         * document.querySelectorAll('input[type=checkbox][name=time]:checked').length
                         * $(".studyroom-reserv-headcount:first-of-type+b").html())
+                } else{
+                    alert(minHeadcount+"인 이상 이용 가능합니다.")
                 }
             })
 
             $(".studyroom-reserv-headcount:last-of-type").click(function (){
-                $(".studyroom-reserv-headcount:first-of-type+b").html(parseInt($(".studyroom-reserv-headcount:first-of-type+b").html()) + 1)
-                $(".studyroom-reserv-totalprice").html($(".studyroom-reserv-headcount:last-of-type+font>b").html()
-                    * document.querySelectorAll('input[type=checkbox][name=time]:checked').length
-                    * $(".studyroom-reserv-headcount:first-of-type+b").html())
+
+                let maxHeadcount;
+                if($("input[type=radio][name=roomName]:checked").attr("id").includes("4인실")){
+                    maxHeadcount = 4;
+                } else if($("input[type=radio][name=roomName]:checked").attr("id").includes("6인실")){
+                    maxHeadcount = 6;
+                } else if($("input[type=radio][name=roomName]:checked").attr("id").includes("8인실")){
+                    maxHeadcount = 8;
+                } else if($("input[type=radio][name=roomName]:checked").attr("id").includes("대회의실")){
+                    maxHeadcount = 16;
+                }
+
+                if($(".studyroom-reserv-headcount:first-of-type+b").html() < maxHeadcount){
+                    $(".studyroom-reserv-headcount:first-of-type+b").html(parseInt($(".studyroom-reserv-headcount:first-of-type+b").html()) + 1)
+                    $(".studyroom-reserv-totalprice").html($(".studyroom-reserv-headcount:last-of-type+font>b").html()
+                        * document.querySelectorAll('input[type=checkbox][name=time]:checked').length
+                        * $(".studyroom-reserv-headcount:first-of-type+b").html())
+                } else{
+                    alert(maxHeadcount+"인 이하만 이용 가능합니다.")
+                }
+
             })
 
             $(".studyroom-reserv-selected > button").click(function(){

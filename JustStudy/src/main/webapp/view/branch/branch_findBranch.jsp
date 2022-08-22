@@ -22,7 +22,7 @@
     }
 
     .wrapper-find-branch {
-        width: 1000px;
+        width: 100px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -80,6 +80,11 @@
     .list-branch > .list-branch-description {
         margin-left: 20px;
     }
+
+    #branch-map {
+        width: 500px;
+        height: 750px;
+    }
 </style>
 
 <div class="wrapper-find-branch">
@@ -103,15 +108,24 @@
             </ul>
         </div>
         <div class="find-branch-bottom-right">
-            <div class="branch-map"></div>
+            <div id="map" style="width:500px;height:750px;"></div>
+
         </div>
     </div>
 </div>
-<script type="text/javascript">
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ff02c77cc518953296a556a4691cd2f8"></script>
+<script>
+    var container = document.getElementById('map');
+    var options = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667),
+        level: 3
+    };
 
+    var map = new kakao.maps.Map(container, options);
+</script>
+<script type="text/javascript">
     function goBranchInfo(i) {
         location.href = "BranchInfo?name=" + i;
     }
-
 
 </script>

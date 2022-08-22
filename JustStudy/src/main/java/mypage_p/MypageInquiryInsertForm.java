@@ -17,19 +17,21 @@ public class MypageInquiryInsertForm implements MypageService{
 
         HttpSession session = request.getSession();
 
-        MemberDTO memberDTO = new MemberDAO().detail((Integer) session.getAttribute("login"));
+        Integer mem_id = (Integer) session.getAttribute("login");
 
+        if(mem_id != null) {
+            MemberDTO memberDTO = new MemberDAO().detail(mem_id);
+            ArrayList<String> arr_branchName = new BranchDAO().branchNameList();
+            request.setAttribute("arr_branchName", arr_branchName);
+            request.setAttribute("memberDTO", memberDTO);
+            request.setAttribute("mainUrl","mypage/mypageTemplete.jsp");
+            request.setAttribute("subUrl","mypage_inquiryInsertForm.jsp");
+        } else {
+            request.setAttribute("msg","로그인을 먼저 해주세요.");
+            request.setAttribute("mainUrl","mypage/mypage_alert.jsp");
+            request.setAttribute("goUrl", "../member/MemberLoginForm");
 
-        ArrayList<String> arr_branchName = new BranchDAO().branchNameList();
-
-
-
-        request.setAttribute("arr_branchName", arr_branchName);
-
-        request.setAttribute("memberDTO", memberDTO);
-
-        request.setAttribute("mainUrl","mypage/mypageTemplete.jsp");
-        request.setAttribute("subUrl","mypage_inquiryInsertForm.jsp");
+        }
 
     }
 }

@@ -625,6 +625,19 @@
 
                 $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(2)>b").html("")
 
+                let minHeadcount;
+
+                if($("input[type=radio][name=roomName]:checked").attr("id").includes("4인실")){
+                    minHeadcount = 2;
+                } else if($("input[type=radio][name=roomName]:checked").attr("id").includes("6인실")){
+                    minHeadcount = 4;
+                } else if($("input[type=radio][name=roomName]:checked").attr("id").includes("8인실")){
+                    minHeadcount = 6;
+                } else if($("input[type=radio][name=roomName]:checked").attr("id").includes("대회의실")){
+                    minHeadcount = 10;
+                }
+
+                $(".studyroom-reserv-headcount:first-of-type+b").html(minHeadcount)
             });
 
             $(document).on("change", "input[name=\"time\"]", function (){

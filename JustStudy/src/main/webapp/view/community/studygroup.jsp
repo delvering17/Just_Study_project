@@ -176,7 +176,7 @@
                 </select>
             </div>
             <form>
-                <input type="text" placeholder="검색어를 입력하세요">
+                <input type="text" id="search" onkeyup="filter()" placeholder="제목을 입력하세요">
                 <button type="button">검색</button>
             </form>
         </div>
@@ -205,10 +205,11 @@
             </form>
             <ul class="main-study-list-wrapper">
                 <c:forEach items="${mainData}" var="dto" varStatus="no">
+                    <div class="listInner">
                         <li class="study-list-item">
                             <div>
-                                <p>${dto.location}</p>
-                                <p>${dto.title}</p>
+                                    <p>${dto.location}</p>
+                                    <span class="event-srch-title" style="display: inline">${dto.title}</span>
                                 <div class="list-item-sub-text">
                                     <p>${dto.studykind}</p>
                                     <p>모집인원&nbsp;&colon; ${dto.people}명</p>
@@ -223,6 +224,7 @@
                                 </c:choose>
                             </div>
                         </li>
+                    </div>
                 </c:forEach>
             </ul>
         </div>
@@ -244,5 +246,21 @@
             $(this).addClass('on');
         });
     })
+
+    function filter() {
+        let search = document.getElementById("search").value.toLowerCase();
+        let listInner = document.getElementsByClassName("listInner");
+
+        for (let i = 0; i < listInner.length; i++) {
+            ttsrch = listInner[i].getElementsByClassName("event-srch-title");
+
+            if (ttsrch[0].innerHTML.toLowerCase().indexOf(search) != -1
+            ) {
+                listInner[i].style.display = "inline"
+            } else {
+                listInner[i].style.display = "none"
+            }
+        }
+    }
 
 </script>

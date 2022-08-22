@@ -497,7 +497,7 @@
 <script type="text/javascript">
     window.onload = function () {
 
-        if("${param.city}" != null){
+        if(${param.city != null}){
             console.log("${param.city}")
             $("input[name=cityName]").each(function (key, value){
                 if(value.getAttribute("id") == "${param.city}"){
@@ -1096,6 +1096,7 @@
     <input name="userId" value="<%=memberDTO.getMem_id()%>">
     <input name="userName" value="<%=memberDTO.getMem_realname()%>">
     <input name="userPhone" value="<%=memberDTO.getMem_phone()%>">
+    <input name="userEmail" value="<%=memberDTO.getMem_userid()%>">
     <%}%>
     <input name="orderId">
     <input name="paymentMethod">

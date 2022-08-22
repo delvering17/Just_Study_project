@@ -30,6 +30,8 @@ public class PaySuccess implements ReservationService {
         String[] headcount = request.getParameterValues("headcount");
         String[] pay = request.getParameterValues("pay");
 
+        ReservationDTO[] reservArr = new ReservationDTO[city.length];
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         for(int i = 0; i < city.length; i ++){
@@ -53,12 +55,14 @@ public class PaySuccess implements ReservationService {
 
             int a = new ReservationDAO().addReservation(dto);
 
+            reservArr[i] = dto;
         }
 
+        goSuccessEmail(request.getParameter("userEmail"), reservArr);
         request.setAttribute("mainUrl", "main/main.jsp");
     }
 
-    public void goSuccessEmail(String email, ReservationDTO reservationDTO) {
+    public void goSuccessEmail(String email, ReservationDTO ...reservArr) {
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
@@ -75,8 +79,21 @@ public class PaySuccess implements ReservationService {
 
         String receiver = email; // 메일 받을 주소
         String title = "[Just Study] 예약이 완료되었습니다.";
-        String content = "<h2>Just Study</h2>";
-        content += "<h2>인증번호:</h2><h2 style='color:blue'>"+  +"</h2>";
+        String content = "<h2>Just Study</h2><br/>";
+        content += "안녕하세요, Just Study 입니다.<br/>";
+        content += "저희 스터디룸을 예약해주셔서 감사합니다.<br/><br/>";
+        content += "[예약내역]<br/>";
+
+        for (ReservationDTO reservationDTO : reservArr){
+            content += "지점: "+reservationDTO.getBranch()+"<br/>";
+            content += "룸타입: "+reservationDTO.getRoom()+"<br/>";
+            content += "이용일: "+reservationDTO.getUseDate()+"<br/>";
+            content += "이용시간: "+reservationDTO.getTime()+"<br/>";
+            content += "인원: "+reservationDTO.getHeadcount()+"인<br/><br/>";
+        }
+
+        content += "예약 시간 10분전 입실 가능합니다. 감사합니다^^<br/>";
+
         Message message = new MimeMessage(session);
         try {
             message.setFrom(new InternetAddress("juststudy0901@gmail.com", "관리자", "utf-8"));

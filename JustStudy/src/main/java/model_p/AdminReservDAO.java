@@ -176,7 +176,7 @@ public class AdminReservDAO {
         return res;
     }
 
-    public ArrayList<AdminReservDTO> salesUserDetailSearch(String filter, String id, String city, String branch, Date sqlUseStartDate, Date sqlUseEndDate){
+    public ArrayList<AdminReservDTO> salesUserDetailSearch(String filter, String id, String city, String branch, java.sql.Date sqlUseStartDate, java.sql.Date sqlUseEndDate){
 
         ArrayList<AdminReservDTO> res = new ArrayList<AdminReservDTO>();
         String cityFilter = "";

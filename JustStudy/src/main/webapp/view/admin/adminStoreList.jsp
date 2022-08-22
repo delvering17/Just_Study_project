@@ -92,8 +92,6 @@
         width: 30%;
     }
 
-
-
     .branch:nth-of-type(2n) {
         background: rgba(227, 233, 240, 0.726)
     }

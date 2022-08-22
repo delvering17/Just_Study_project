@@ -240,7 +240,7 @@
                 <hr />
                 <c:forEach items="${reviewList}" var="review" varStatus="no">
                     <div class="review-item">
-                        <p class="review-id">${review.userId}</p>
+                        <p class="review-id">${review.userNickname}</p>
                         <p class="review-date">${review.reviewDate}</p>
                         <div class="review-star">${review.star}</div>
                         <div class="review-content">${review.content}</div>

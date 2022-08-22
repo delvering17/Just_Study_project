@@ -148,7 +148,7 @@ public class ReviewDAO {
     public ArrayList<ReviewDTO> branchReview(String branchName){
         ArrayList<ReviewDTO> res = new ArrayList<ReviewDTO>();
 
-        sql = "SELECT branch, mem_userid, reviewDate, star, content FROM review JOIN reservation ON reservId = reservation.id" +
+        sql = "SELECT branch, mem_nickname, reviewDate, star, content FROM review JOIN reservation ON reservId = reservation.id" +
                 " JOIN member ON reservation.userId = member.mem_id WHERE branch = ? limit 5";
 
         try {
@@ -159,7 +159,7 @@ public class ReviewDAO {
             while(rs.next()){
                 ReviewDTO reviewDTO = new ReviewDTO();
                 reviewDTO.setBranch(rs.getString("branch"));
-                reviewDTO.setUserId(rs.getString("mem_userid"));
+                reviewDTO.setUserNickname(rs.getString("mem_nickname"));
                 reviewDTO.setReviewDate(rs.getTimestamp("reviewDate"));
                 reviewDTO.setStar(rs.getDouble("star"));
                 reviewDTO.setContent(rs.getString("content"));

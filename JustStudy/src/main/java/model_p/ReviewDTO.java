@@ -5,7 +5,7 @@ import java.util.Date;
 public class ReviewDTO {
 
     int id, reservId, memId;
-    String content, branch, userId;
+    String content, branch, userNickname;
     double star;
     Date reviewDate;
 
@@ -49,12 +49,12 @@ public class ReviewDTO {
         this.branch = branch;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUserNickname() {
+        return userNickname;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserNickname(String userNickname) {
+        this.userNickname = userNickname;
     }
 
     public double getStar() {

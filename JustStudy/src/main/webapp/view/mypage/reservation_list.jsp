@@ -210,76 +210,80 @@
 
 </div>
 <script type="text/javascript">
-    window.onload = function (){
-        $("#submit-find").click(function (){
+    $("#submit-find").click(function (){
 
-            $(".mypage-reservlist-table>tbody>tr").show()
+        $(".mypage-reservlist-table>tbody>tr").show()
 
-            let start = new Date();
-            let endDate = new Date();
+        let start = new Date();
+        let endDate = new Date();
 
-            switch ($("input[name=period]:checked").attr("id")){
-                case "all":
-                    start = null;
-                    break;
-                case "today":
-                    start = new Date();
-                    break;
-                case "sevenDays":
-                    start.setDate(new Date().getDate() - 6)
-                    break;
-                case "oneMonth":
-                    start.setMonth(new Date().getMonth() - 1)
-                    start.setDate(new Date().getDate() + 1)
-                    break;
-                case "threeMonths":
-                    start.setMonth(new Date().getMonth() - 3)
-                    start.setDate(new Date().getDate() + 1)
-                    break;
-                case "mypick":
-                    const startPick = $(".mypage-reservlist-top-datepicker:first-of-type").val()
-                    start = new Date(startPick.split("-")[0], parseInt(startPick.split("-")[1]) - 1, parseInt(startPick.split("-")[2]))
+        switch ($("input[name=period]:checked").attr("id")){
+            case "all":
+                start = null;
+                break;
+            case "today":
+                start = new Date();
+                break;
+            case "sevenDays":
+                start.setDate(new Date().getDate() - 6)
+                break;
+            case "oneMonth":
+                start.setMonth(new Date().getMonth() - 1)
+                start.setDate(new Date().getDate() + 1)
+                break;
+            case "threeMonths":
+                start.setMonth(new Date().getMonth() - 3)
+                start.setDate(new Date().getDate() + 1)
+                break;
+            case "mypick":
+                const startPick = $(".mypage-reservlist-top-datepicker:first-of-type").val()
+                start = new Date(startPick.split("-")[0], parseInt(startPick.split("-")[1]) - 1, parseInt(startPick.split("-")[2]))
 
-                    const endPick = $(".mypage-reservlist-top-datepicker:last-of-type").val()
-                    endDate = new Date(endPick.split("-")[0], parseInt(endPick.split("-")[1]) - 1, parseInt(endPick.split("-")[2]))
+                const endPick = $(".mypage-reservlist-top-datepicker:last-of-type").val()
+                endDate = new Date(endPick.split("-")[0], parseInt(endPick.split("-")[1]) - 1, parseInt(endPick.split("-")[2]))
 
-                    break;
-            }
+                break;
+        }
 
-            if(start != null) {
-                const startDate = new Date(start.getFullYear(), start.getMonth(), start.getDate())
+        if(start != null) {
+            const startDate = new Date(start.getFullYear(), start.getMonth(), start.getDate())
 
-                for (let i = 1; i < $(".mypage-reservlist-table>tbody>tr").length; i++) {
-                    const useDate = $(".mypage-reservlist-table>tbody>tr").eq(i).children("td").eq(3)
-                    const useDate2 = new Date(useDate.html().split("-")[0], parseInt(useDate.html().split("-")[1]) - 1, parseInt(useDate.html().split("-")[2]))
+            for (let i = 1; i < $(".mypage-reservlist-table>tbody>tr").length; i++) {
+                const useDate = $(".mypage-reservlist-table>tbody>tr").eq(i).children("td").eq(3)
+                const useDate2 = new Date(useDate.html().split("-")[0], parseInt(useDate.html().split("-")[1]) - 1, parseInt(useDate.html().split("-")[2]))
 
-                    if (!(useDate2 >= startDate && useDate2 <= endDate)) {
-                        useDate.parent("tr").hide()
-                    }
+                if (!(useDate2 >= startDate && useDate2 <= endDate)) {
+                    useDate.parent("tr").hide()
                 }
             }
-        })
+        }
+    })
 
-        $(".mypage-reservlist-top-datepicker").change(function (){
-            $("input[id=mypick]").prop('checked', true);
-        })
+    $(".mypage-reservlist-top-datepicker").change(function (){
+        $("input[id=mypick]").prop('checked', true);
+    })
 
 
-        $(".mypage-reservlist-review-done").click(function (){
+    $(".mypage-reservlist-review-done").click(function (){
 
-            location.href = "MypageReviewDetail?reservId="+$(this).parent().parent().children("input[name=reservId]").val()
-        })
+        location.href = "MypageReviewDetail?reservId="+$(this).parent().parent().children("input[name=reservId]").val()
+    })
 
-        $("input[name=period]").change(function (){
-            if($("input[name=period]:checked").attr("id") != "mypick"){
-                $(".mypage-reservlist-top-datepicker").val("")
-            }
-        })
+    $("input[name=period]").change(function (){
+        if($("input[name=period]:checked").attr("id") != "mypick"){
+            $(".mypage-reservlist-top-datepicker").val("")
+        }
+    })
 
-        $(".mypage-reservlist-top-datepicker").eq(1).change(function (){
-            if($(".mypage-reservlist-top-datepicker").eq(0).val() > $(".mypage-reservlist-top-datepicker").eq(1).val()){
-                $(".mypage-reservlist-top-datepicker").eq(0).val($(".mypage-reservlist-top-datepicker").eq(1).val())
-            }
-        })
-    }
+    $(".mypage-reservlist-top-datepicker").eq(1).change(function (){
+        if($(".mypage-reservlist-top-datepicker").eq(0).val() > $(".mypage-reservlist-top-datepicker").eq(1).val()){
+            $(".mypage-reservlist-top-datepicker").eq(0).val($(".mypage-reservlist-top-datepicker").eq(1).val())
+        }
+    })
+
+    $(".mypage-reservlist-top-datepicker").eq(0).change(function (){
+        if($(".mypage-reservlist-top-datepicker").eq(0).val() > $(".mypage-reservlist-top-datepicker").eq(1).val()){
+            $(".mypage-reservlist-top-datepicker").eq(1).val($(".mypage-reservlist-top-datepicker").eq(0).val())
+        }
+    })
 </script>

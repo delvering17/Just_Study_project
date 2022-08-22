@@ -361,7 +361,6 @@
       alert('빈 칸을 입력해주세요.')
       $('#input-address2').focus()
     } else {
-      alert('통과')
       $.ajax({
         url:'<c:url value="/memberNonView/MemberSigninReg"/>',
         type:'GET',
@@ -369,9 +368,8 @@
         async:false,
         dataType:'JSON',
         success:function(response){
-          alert(response.signinResult)
           if(response.signinResult === 'success') {
-            alert('로그인에 성공했습니다.')
+            alert('회원가입에 성공했습니다.')
             location.href = '<c:url value="/board/MainPage"/>'
           } else {
             alert(response.signinResult)

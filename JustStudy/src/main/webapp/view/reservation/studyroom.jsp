@@ -921,7 +921,7 @@
                     $(".studyroom-reserv-paylist+div>div:last-of-type").html($(".studyroom-reserv-paylist>div").length+"건")
                     $(".studyroom-reserv-paylist+div+div>div:last-of-type").html(totalWon+"원")
                     $(".studyroom-reserv-paylist-username").val($("input[name='userName']").val())
-                    $(".studyroom-reserv-paylist-userphone").val($("input[name='userPhone']").val())
+                    $(".studyroom-reserv-paylist-useremail").val($("input[name='userEmail']").val())
                     $("#studyroom-reserv-receipt .modal-body > button:nth-of-type(1)").html("총 "+$(".studyroom-reserv-paylist>div").length+"건 | <b>"+totalWon+"</b>원 결제하기")
 
                 } else{
@@ -1070,8 +1070,8 @@
                     <div>10,000원</div>
                 </div>
                 <font size="5px"><b>이용자 정보</b></font>
-                <input type="text" class="studyroom-reserv-paylist-username"/>
-                <input type="text" class="studyroom-reserv-paylist-userphone"/>
+                <input type="text" class="studyroom-reserv-paylist-username" readonly/>
+                <input type="text" class="studyroom-reserv-paylist-useremail" readonly/>
                 <div><font size="5px"><b>결제 수단 선택</b></font></div>
                 <label><input type="radio" name="paymentMethod" value="kcp" checked>신용카드</label>
                 <label><input type="radio" name="paymentMethod" value="kakaopay">카카오페이</label>
@@ -1088,14 +1088,13 @@
         </div>
     </div>
 </div>
-<form class="studyroom-reserv-form" method="post" action="PaySuccess" hidden>
+<form class="studyroom-reserv-form" method="post" action="PaySuccess">
     <%
         if(request.getAttribute("memberDTO")!=null){
             MemberDTO memberDTO = (MemberDTO) request.getAttribute("memberDTO");
     %>
     <input name="userId" value="<%=memberDTO.getMem_id()%>">
     <input name="userName" value="<%=memberDTO.getMem_realname()%>">
-    <input name="userPhone" value="<%=memberDTO.getMem_phone()%>">
     <input name="userEmail" value="<%=memberDTO.getMem_userid()%>">
     <%}%>
     <input name="orderId">

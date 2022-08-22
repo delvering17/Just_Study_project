@@ -96,7 +96,7 @@
 
   <div class="admin-faq-modify-main">
 
-    <form action="AdminFAQmodifyReg" method="get">
+    <form action="AdminFAQModifyReg" method="get">
       <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-faq-modify-table">
         <input type="hidden" name="faq-id" value="${faqDTO.id}"/>
         <tr>

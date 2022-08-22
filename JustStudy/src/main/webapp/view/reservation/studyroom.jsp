@@ -936,7 +936,7 @@
 
         $(".studyroom-reserv-selected > button").click(function(){
 
-            console.log($("input[name=city]:checked").length)
+            console.log($("input[name=cityName]:checked").length)
             console.log($("input[name=branchName]:checked").length)
             console.log($("input[name=roomName]:checked").length)
             console.log($("input[name=time]:checked").length)
@@ -952,16 +952,19 @@
                 const selected = new Array();
                 selected.push($(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(1)>b").html())
                 selected.push($(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(2)>b").html())
-                selected.push($(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(3)>b").html().replaceAll("&nbsp;", " "))
+                selected.push($(".studyroom-reserv-selected>div:nth-of-type(1)>div:nth-of-type(3)>b").html())
                 selected.push($(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(1)>b").html())
 
                 let totalCheck = true;
                 big:for(let i = 0 ; i < $(".studyroom-reserv-form>div").length; i++){
                     let check = true;
                     for(let k = 0 ; k < selected.length; k ++){
+                        console.log(selected[k])
+                        console.log($(".studyroom-reserv-form>div").eq(i).children("input").eq(k).val())
                         if(!selected[k].includes($(".studyroom-reserv-form>div").eq(i).children("input").eq(k).val())){
                             check = false;
                         }
+                        console.log(check)
                     }
                     if(check){
                         for(let l = 0 ; l < selectedTimeList.length; l++){
@@ -999,7 +1002,7 @@
                     $(".studyroom-reserv-form").append("<div></div>")
                     $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='city' value='"+selected[0]+"'></input>")
                     $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='branch' value='"+selected[1]+"'></input>")
-                    $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='room' value='"+selected[2].replaceAll(" ", "&nbsp;")+"'></input>")
+                    $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='room' value='"+selected[2]+"'></input>")
                     $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='useDate' value='"+selected[3].split(" ")[0]+"'></input>")
                     $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='time' value='"+selectedTimeList.join (", ")+"'></input>")
                     $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='headcount' value='"+$(".studyroom-reserv-headcount:first-of-type+b").html()+"'></input>")

@@ -6,7 +6,7 @@ import model_p.FaqDTO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class AdminFAQmodifyReg implements AdminService{
+public class AdminFAQModifyReg implements AdminService{
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {

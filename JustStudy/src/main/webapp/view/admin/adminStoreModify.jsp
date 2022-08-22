@@ -177,7 +177,6 @@
         })
 
         $(".admin-store-save").click(function () {
-            console.log("dsfad")
             $("form").submit()
         })
 
@@ -224,7 +223,7 @@
                             int cnt = 0;
                             if(!branchDTO.getRooms().equals("")) {
                                 for (String dtoRoom : branchDTO.getRooms().split(",")) {
-                                    if (room.equals(dtoRoom.split(" ")[1])) {
+                                    if (dtoRoom.contains(room)) {
                                         cnt++;
                                     }
                                 }

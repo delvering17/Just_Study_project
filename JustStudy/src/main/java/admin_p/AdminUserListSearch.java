@@ -14,10 +14,10 @@ public class AdminUserListSearch implements AdminService{
     public void execute(HttpServletRequest request, HttpServletResponse response){
 
         ArrayList<MemberDTO> adminData;
+        ArrayList<BlackDTO> adminBlackData = new BlackDAO().blackList();
 
         String userType = request.getParameter("userList-search");
         String userValue = request.getParameter("searchUserList-input");
-        System.out.println("userValue:"+userValue);
 
         adminData = new MemberDAO().userListFilter(userType, userValue);
 
@@ -33,13 +33,9 @@ public class AdminUserListSearch implements AdminService{
             request.setAttribute("goUrl","AdminUserList");
         }else {
             request.setAttribute("adminData", adminData);
+            request.setAttribute("userStatus", adminData.size());
+            request.setAttribute("blackStatus", adminBlackData.size());
             request.setAttribute("adminUrl","adminUserList.jsp");
         }
-
-
-
-
-
-
     }
 }

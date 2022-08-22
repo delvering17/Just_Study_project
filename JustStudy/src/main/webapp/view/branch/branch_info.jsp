@@ -176,18 +176,7 @@
     }
 </style>
 
-<script type="text/javascript">
-    window.onload = function (){
-        $("#btn-reservation").click(function (){
-            location.href = "../reservation/Studyroom?city=${branchDTO.city}&branch=${branchDTO.name}"
-        })
 
-        $("#btn-inquiry").click(function (){
-            location.href = "../mypage/MypageInquiryInsertForm?inquiry_category=예약&inquiry_branch=${branchDTO.name}"
-        })
-    }
-
-</script>
 <div class="wrapper-branch-info">
     <div class="branch-info">
         <div class="branch-info-top">
@@ -251,3 +240,14 @@
     </div>
 </div>
 </body>
+<script type="text/javascript">
+    $("#btn-reservation").click(function (){
+        location.href = "../reservation/Studyroom?city=${branchDTO.city}&branch=${branchDTO.name}"
+    })
+
+    $("#btn-inquiry").click(function (){
+        location.href = "../mypage/MypageInquiryInsertForm?inquiry_category=예약&inquiry_branch=${branchDTO.name}"
+    })
+
+
+</script>

@@ -33,7 +33,7 @@ public class CommunityController extends HttpServlet {
         }
 
         String service = request.getRequestURI().substring((request.getContextPath()+"/community/").length());
-        System.out.println(service);
+
 
         try {
             if(nonService.containsKey(service)){

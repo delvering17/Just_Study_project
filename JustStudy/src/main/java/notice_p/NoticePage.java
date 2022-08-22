@@ -12,7 +12,6 @@ public class NoticePage implements NoticeService {
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
         ArrayList<NoticeDTO> mainData = new NoticeDAO().list();
-        System.out.println("Noticepage 들어왔따 : "+mainData);
 
 
         request.setAttribute("mainData",mainData);

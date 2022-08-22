@@ -39,7 +39,6 @@ public class AdminStoreModifyReg implements AdminService{
                 branchDTO.setRooms("");
             }
 
-            System.out.println(branchDTO.toString());
 
             branchDTO.setPrice(Integer.parseInt(mr.getParameter("price")));
             branchDTO.setOpen(Integer.parseInt(mr.getParameter("open")));

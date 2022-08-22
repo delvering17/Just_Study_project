@@ -11,7 +11,7 @@ public class AdminNoticeDetail implements AdminService{
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
         int id = Integer.parseInt(request.getParameter("id"));
-        System.out.println(id);
+
 
         NoticeDAO dao = new NoticeDAO();
 

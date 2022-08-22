@@ -46,9 +46,9 @@ public class PaySuccess implements ReservationService {
             dto.setHeadcount(Integer.parseInt(headcount[i]));
             dto.setPay(Integer.parseInt(pay[i]));
 
-            System.out.println(dto.toString());
+
             int a = new ReservationDAO().addReservation(dto);
-            System.out.println(a);
+
         }
 
         request.setAttribute("mainUrl", "main/main.jsp");

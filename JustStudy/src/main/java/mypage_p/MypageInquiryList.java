@@ -45,10 +45,6 @@ public class MypageInquiryList implements MypageService{
         int total ;
 
 
-//        System.out.println(nowPage + "," + first + "," + total + "," + totalPage);
-
-
-
         // 기간 검색 페이지 검색
         String date_period = request.getParameter("date_period");
         String date_before = request.getParameter("date_before");
@@ -71,7 +67,7 @@ public class MypageInquiryList implements MypageService{
             int date_year = Integer.parseInt(date_today.split("-")[0])-1900;
             int date_month = Integer.parseInt(date_today.split("-")[1])-1;
             int date_day = Integer.parseInt(date_today.split("-")[2]);
-            System.out.println(date_today);
+
             Date tt;
             switch (date_period) {
                 case "today":
@@ -98,7 +94,6 @@ public class MypageInquiryList implements MypageService{
                     arr_inquiryDTO = new InquiryDAO().inquiryPeriodList(memberDTO.getMem_id(), first, limit, date_bb, date_today);
                     break;
             }
-            System.out.println(date_bb);
 
             total = new InquiryDAO().inquiryTotal(memberDTO.getMem_id(),date_bb, date_today);
 

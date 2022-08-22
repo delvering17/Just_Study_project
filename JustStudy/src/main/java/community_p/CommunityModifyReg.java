@@ -35,8 +35,6 @@ public class CommunityModifyReg implements CommunityService{
         communityDTO.setNickname(new MemberDAO().detail(communityDTO.getMemId()).getMem_nickname());
         communityDTO.setOpenChatting(request.getParameter("openChatting"));
 
-        System.out.println(communityDTO.toString());
-
         String msg = "수정 실패";
         String mainUrl = "community/community_modifyForm.jsp";
 

@@ -23,7 +23,7 @@ public class MemberSocialLoginReg implements MemberNonViewService{
         String social_email = request.getParameter("social_email");
         String social_id = request.getParameter("social_id");
         String realname = request.getParameter("realname");
-        System.out.println(realname);
+
         int mem_id = new MemberDAO().isSocialId(social_id);
 
         if(mem_id != 0) {

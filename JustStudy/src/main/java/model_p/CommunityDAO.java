@@ -73,9 +73,6 @@ public class CommunityDAO {
             rs.next();
             communityDTO.id = rs.getInt(1);
 
-            //System.out.println(dto);
-
-
             sql = "insert into studygroup (id,memId,location,startdate,enddate,title,people,studykind,content,regDate,openChatting) "
                     + "values (?,?,?,?,?,?,?,?,?,sysdate(),?)";
 

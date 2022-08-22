@@ -15,7 +15,7 @@ public class MainController extends HttpServlet {
             IOException {
 
         String service = request.getRequestURI().substring((request.getContextPath()+"/board/").length());
-        System.out.println(request.getRequestURI());
+
         try {
             MainService bs = (MainService) Class.forName("main_p."+service).newInstance();
             bs.execute(request, response);

@@ -43,7 +43,6 @@ public class BlackDAO {
                 blackDTO.setBlack_reason(rs.getString("black_reason"));
                 res.add(blackDTO);
             }
-                System.out.println(res.size());
 
         } catch (SQLException e) {
 

@@ -28,8 +28,7 @@ public class MemberCertificationNum implements MemberNonViewService{
         cal.setTime(now);
         cal.add(Calendar.MINUTE, -3);
         Date now_date_After3min = cal.getTime();
-        System.out.println(input_userid);
-        System.out.println(now);
+
 
         Boolean res = new EmailCertificateDAO().certificateNum(input_userid,input_certificate_num,now_date_After3min);
 

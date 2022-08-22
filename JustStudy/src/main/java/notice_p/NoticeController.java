@@ -38,7 +38,7 @@ public class NoticeController extends HttpServlet {
 
 
         String service = request.getRequestURI().substring((request.getContextPath()+"/notice/").length());
-        System.out.println(service);
+
 
         try {
             if(nonService.containsKey(service)){

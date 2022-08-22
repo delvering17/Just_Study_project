@@ -283,7 +283,6 @@ public class AdminReservDAO {
                     ptmt.setString(5,"%"+word+"%");
                 }
 
-            System.out.println(ptmt);
             rs = ptmt.executeQuery();
             while(rs.next()){
                 AdminReservDTO adminReservDTO = new AdminReservDTO();

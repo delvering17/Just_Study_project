@@ -26,10 +26,6 @@ public class CommunityApplyInsertReg implements NonViewService {
 
         int as_id = new ApplyStudyDAO().selectAs_id();
 
-//        request.setAttribute("mainUrl", "community/alert.jsp");
-//        request.setAttribute("goUrl", "studygroup.jsp");
-//        request.setAttribute("msg", "신청되었습니다.");
-
         JSONObject jj = new JSONObject();
         try {
             jj.put("applyResult", "success");

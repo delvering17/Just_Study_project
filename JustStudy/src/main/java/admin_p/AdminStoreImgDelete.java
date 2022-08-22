@@ -58,7 +58,6 @@ public class AdminStoreImgDelete implements AdminService{
             branchDTO.setImg(mr.getFilesystemName("img"));
             branchDTO.setFacilities((mr.getParameterValues("facilities") != null ? String.join(",", mr.getParameterValues("facilities")) : null));
 
-            System.out.println(branchDTO.toString());
 
             String msg = "이미지 삭제 실패";
             if(new BranchDAO().imgDelete(branchDTO) > 0){

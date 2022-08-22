@@ -15,7 +15,6 @@ import java.text.SimpleDateFormat;
 public class AdminEventModifyReg implements AdminService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("EventModifyForm 입장~");
 
         String path = request.getRealPath("/img/event");
         path = "/Users/song-chanwook/workplace/git_repo/ JustStudy/Just_Study_project/JustStudy/src/main/webapp/img/event";

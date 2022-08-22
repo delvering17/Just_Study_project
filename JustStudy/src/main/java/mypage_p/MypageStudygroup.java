@@ -39,7 +39,7 @@ public class MypageStudygroup implements MypageService{
             int date_year = Integer.parseInt(date_today.split("-")[0])-1900;
             int date_month = Integer.parseInt(date_today.split("-")[1])-1;
             int date_day = Integer.parseInt(date_today.split("-")[2]);
-            System.out.println(date_today);
+
             Date tt;
             switch (date_period) {
                 case "all":

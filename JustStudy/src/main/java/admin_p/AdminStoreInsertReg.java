@@ -51,7 +51,6 @@ public class AdminStoreInsertReg implements AdminService{
             branchDTO.setImg(mr.getFilesystemName("img"));
             branchDTO.setFacilities((mr.getParameterValues("facilities") != null ? String.join(",", mr.getParameterValues("facilities")) : null));
 
-            System.out.println(branchDTO.toString());
 
             String msg = "추가 실패";
 

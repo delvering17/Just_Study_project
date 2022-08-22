@@ -11,10 +11,10 @@ public class CommunityApplyDeleteReg implements CommunityService{
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
         String password = new MemberDAO().detail(Integer.parseInt(request.getParameter("as_mem_id"))).getMem_password();
-        System.out.println("pw1"+password);
+
         String msg = "삭제 실패";
         String goUrl = "CommunityApplyDetail?as_id="+request.getParameter("as_mem_id");
-        System.out.println("pw2"+request.getParameter("password"));
+
 
         if(password.equals(request.getParameter("password"))){
             if(new CommunityDAO().delete(Integer.parseInt(request.getParameter("as_mem_id"))) > 0){

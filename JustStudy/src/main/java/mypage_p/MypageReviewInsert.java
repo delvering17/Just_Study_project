@@ -27,7 +27,6 @@ public class MypageReviewInsert implements MypageService{
             msg = "후기 작성이 완료되었습니다.";
         }
 
-        System.out.println(reviewDTO.getId());
 
         request.setAttribute("msg", msg);
         request.setAttribute("memberDTO", memberDTO);

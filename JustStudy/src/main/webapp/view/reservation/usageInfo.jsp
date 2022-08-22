@@ -44,6 +44,7 @@
         .usageinfo-wrapper1 > div:nth-of-type(1),
         .usageinfo-wrapper1 > div:nth-of-type(2),
         .usageinfo-wrapper1 > div:nth-of-type(4){
+            width: 100%;
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -103,7 +104,6 @@
         }
 
         .usageinfo-wrapper1 > div:last-of-type{
-            margin-left: 100px;
             margin-top: 20px;
         }
 
@@ -167,11 +167,6 @@
             <div>실시간 예약신청</div>
             <div>결제</div>
             <div>스터디룸 이용</div>
-        </div>
-        <div>
-            <i class="fa-solid fa-check"></i><div>&nbsp;예약은 최소 2시간부터 가능하며, 1시간 단위로 이용 가능합니다.</div><br/>
-            <i class="fa-solid fa-check"></i><div>&nbsp;일부 매장은 최소 이용 인원이 있습니다.</div><br/>
-            <i class="fa-solid fa-check"></i><div>&nbsp;각 지점별 룸타입, 운영시간, 이용요금 관련 내용은 지점찾기에서 확인하실 수 있습니다.</div><br/>
         </div>
     </div>
     <div class="usageinfo-wrapper2 usageinfo-scroll">

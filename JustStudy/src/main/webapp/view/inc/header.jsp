@@ -179,9 +179,6 @@
         text-decoration: none;
     }
 
-
-
-
 </style>
 
 
@@ -230,7 +227,7 @@
                             <li><a href="../branch/BranchFind">지점찾기</a></li>
                         </ul>
                         <ul class="gnb-sub-list">
-                            <li><a href="?">이용안내</a></li>
+                            <li><a href="../reservation/UsageInfo">이용안내</a></li>
                             <li><a href="../reservation/Studyroom">스터디룸예약</a></li>
                         </ul>
                         <ul class="gnb-sub-list">

@@ -68,6 +68,8 @@ public class CommunityDAO {
         try {
             sql = "select max(id)+1 from studygroup";
 
+            sql = "SELECT AUTO_INCREMENT FROM information_schema.tables WHERE table_name = 'studygroup' AND table_schema = DATABASE( )";
+
             ptmt = con.prepareStatement(sql);
             rs = ptmt.executeQuery();
             rs.next();

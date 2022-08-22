@@ -43,7 +43,7 @@ public class PaySuccess implements ReservationService {
             dto.setRoom(room[i]);
             dto.setTime(time[i]);
             dto.setPaymentMethod(request.getParameter("paymentMethod"));
-            dto.setStatus("이용전");
+            dto.setStatus("결제완료");
             try {
                 dto.setUseDate(sdf.parse(useDate[i]));
             } catch (ParseException e) {

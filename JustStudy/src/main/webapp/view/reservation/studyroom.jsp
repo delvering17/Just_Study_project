@@ -493,10 +493,145 @@
 
 </style>
 
+
+<div class="studyroom-reserv-bg">
+
+    <h1>스터디룸예약</h1>
+
+    <div class="studyroom-reserv-select">
+        <div class="studyroom-reserv-wrapper studyroom-reserv-city">
+            <h4>지역</h4>
+            <div class="studyroom-reserv-innerlist">
+                <%for (String city : "서울,경기,부산,대구,인천,광주,대전,울산,세종,강원,충북,충남,전북,전남,경북,경남,제주".split(",")) {
+                    if(((HashMap<String, Integer>)request.getAttribute("branchMap")).get(city)!=0){%>
+                <input type="radio" name="cityName" id="<%=city%>" hidden/>
+                <label for="<%=city%>">
+                    <div>
+                        <%= city%>
+                        <div><%=((HashMap<String, Integer>)request.getAttribute("branchMap")).get(city)%></div>
+                    </div>
+                </label>
+                <%}%>
+                <%}%>
+
+            </div>
+        </div>
+        <div class="studyroom-reserv-wrapper studyroom-reserv-branch">
+            <h4>지점명</h4>
+            <div class="studyroom-reserv-innerlist">
+
+            </div>
+        </div>
+        <div class="studyroom-reserv-wrapper studyroom-reserv-room">
+            <h4>룸타입</h4>
+            <div class="studyroom-reserv-innerlist">
+
+            </div>
+        </div>
+        <div class="studyroom-reserv-wrapper studyroom-reserv-time">
+            <h4>
+                예약날짜 및 시간
+                <div>시간은 복수선택 가능합니다.</div>
+            </h4>
+            <div>
+                <i class="fa-solid fa-angle-left"></i>
+                <div><fmt:formatDate value="<%=new Date()%>" pattern="yyyy-MM-d (E)"/></div>
+                <i class="fa-solid fa-angle-right"></i>
+                <i class="fa-solid fa-calendar-days fa-2x form-control" id="datePicker"></i>
+            </div>
+            <div class="studyroom-reserv-innerlist-time">
+            </div>
+        </div>
+    </div>
+
+    <div class="studyroom-reserv-selected">
+        <div>
+            <div>지역명<b></b></div>
+            <div>지점명<b></b></div>
+            <div>룸타입<b></b></div>
+        </div>
+        <div>
+            <div>날짜<b><fmt:formatDate value="<%=new Date()%>" pattern="yyyy-MM-d (E)"/></b></div>
+            <div>시간<b></b></div>
+        </div>
+        <i class="fa-solid fa-chevron-right fa-2x"></i>
+        <div>
+            인원
+            <button class="studyroom-reserv-headcount">-</button>
+            <b>2</b><b>명</b>
+            <button class="studyroom-reserv-headcount">+</button>
+            <font size="2px" color="darkred">*인당 1시간 2000원</font>
+            <div>총
+                <div class="studyroom-reserv-totalprice">0</div>
+                원
+            </div>
+        </div>
+        <button><i class="fa-solid fa-cart-shopping"></i>예약추가</button>
+    </div>
+
+    <div class="studyroom-reserv-result">
+        <h5><b>예약 확인</b></h5>
+    </div>
+
+    <div class="studyroom-reserv-done">
+        <button id="studyroom-reserv-done-btn" data-bs-toggle="modal">총 0건 | 0원 결제하기</button>
+    </div>
+
+</div>
+
+<div id="studyroom-reserv-receipt" class="modal" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4><b>예약 내역</b></h4>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="studyroom-reserv-paylist">
+
+                </div>
+
+                <div>
+                    <div>총 예약 건수</div>
+                    <div>2건</div>
+                </div>
+                <div>
+                    <div>결제 금액</div>
+                    <div>10,000원</div>
+                </div>
+                <font size="5px"><b>이용자 정보</b></font>
+                <input type="text" class="studyroom-reserv-paylist-username" readonly/>
+                <input type="text" class="studyroom-reserv-paylist-useremail" readonly/>
+                <div><font size="5px"><b>결제 수단 선택</b></font></div>
+                <label><input type="radio" name="paymentMethod" value="kcp" checked>신용카드</label>
+                <label><input type="radio" name="paymentMethod" value="kakaopay">카카오페이</label>
+
+                <div><font size="2px" color="darkred"><b>*예약 복수 선택 시 환불 기간이 지나면 취소가 어려우니 유의바랍니다.</b></font></div>
+                <div><font size="2px" color="darkred"><b>(환불기간: 예약 시작시간 48시간 이전부터 취소/환불 불가)</b></font></div>
+
+                <label><input type="checkbox" class="personalInfo"><font size="2px">이용규칙, 취소 및 환불규칙, 개인정보 수집 및 이용, 개인정보 제3자 제공에 동의하실 경우
+                    클릭해주세요.</font></label>
+
+                <button></button>
+                <button data-bs-dismiss="modal">다시 선택하기</button>
+            </div>
+        </div>
+    </div>
+</div>
+<form class="studyroom-reserv-form" method="post" action="PaySuccess">
+    <%
+        if(request.getAttribute("memberDTO")!=null){
+            MemberDTO memberDTO = (MemberDTO) request.getAttribute("memberDTO");
+    %>
+    <input name="userId" value="<%=memberDTO.getMem_id()%>">
+    <input name="userName" value="<%=memberDTO.getMem_realname()%>">
+    <input name="userEmail" value="<%=memberDTO.getMem_userid()%>">
+    <%}%>
+    <input name="orderId">
+    <input name="paymentMethod">
+</form>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
-    window.onload = function () {
-
         if(${param.city != null}){
             console.log("${param.city}")
             $("input[name=cityName]").each(function (key, value){
@@ -553,8 +688,7 @@
             $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(2)>b").html("")
         }
 
-        $('input[name="cityName"]').change(function () {
-
+        $("input[name=cityName]").change(function () {
             $.ajax({
                 url: '<c:url value="/nonView/SetReservationItems"/>',
                 type: "GET",
@@ -961,142 +1095,4 @@
                 alert("이용규칙, 취소 및 환불규칙, 개인정보 수집 및 이용, 개인정보 제3자 제공에 동의해주세요.")
             }
         })
-    }
 </script>
-
-<div class="studyroom-reserv-bg">
-
-    <h1>스터디룸예약</h1>
-
-    <div class="studyroom-reserv-select">
-        <div class="studyroom-reserv-wrapper studyroom-reserv-city">
-            <h4>지역</h4>
-            <div class="studyroom-reserv-innerlist">
-                <%for (String city : "서울,경기,부산,대구,인천,광주,대전,울산,세종,강원,충북,충남,전북,전남,경북,경남,제주".split(",")) {
-                    if(((HashMap<String, Integer>)request.getAttribute("branchMap")).get(city)!=0){%>
-                <input type="radio" name="cityName" id="<%=city%>" hidden/>
-                <label for="<%=city%>">
-                    <div>
-                        <%= city%>
-                        <div><%=((HashMap<String, Integer>)request.getAttribute("branchMap")).get(city)%></div>
-                    </div>
-                </label>
-                <%}%>
-                <%}%>
-
-            </div>
-        </div>
-        <div class="studyroom-reserv-wrapper studyroom-reserv-branch">
-            <h4>지점명</h4>
-            <div class="studyroom-reserv-innerlist">
-
-            </div>
-        </div>
-        <div class="studyroom-reserv-wrapper studyroom-reserv-room">
-            <h4>룸타입</h4>
-            <div class="studyroom-reserv-innerlist">
-
-            </div>
-        </div>
-        <div class="studyroom-reserv-wrapper studyroom-reserv-time">
-            <h4>
-                예약날짜 및 시간
-                <div>시간은 복수선택 가능합니다.</div>
-            </h4>
-            <div>
-                <i class="fa-solid fa-angle-left"></i>
-                <div><fmt:formatDate value="<%=new Date()%>" pattern="yyyy-MM-d (E)"/></div>
-                <i class="fa-solid fa-angle-right"></i>
-                <i class="fa-solid fa-calendar-days fa-2x form-control" id="datePicker"></i>
-            </div>
-            <div class="studyroom-reserv-innerlist-time">
-            </div>
-        </div>
-    </div>
-
-    <div class="studyroom-reserv-selected">
-        <div>
-            <div>지역명<b></b></div>
-            <div>지점명<b></b></div>
-            <div>룸타입<b></b></div>
-        </div>
-        <div>
-            <div>날짜<b><fmt:formatDate value="<%=new Date()%>" pattern="yyyy-MM-d (E)"/></b></div>
-            <div>시간<b></b></div>
-        </div>
-        <i class="fa-solid fa-chevron-right fa-2x"></i>
-        <div>
-            인원
-            <button class="studyroom-reserv-headcount">-</button>
-            <b>2</b><b>명</b>
-            <button class="studyroom-reserv-headcount">+</button>
-            <font size="2px" color="darkred">*인당 1시간 2000원</font>
-            <div>총
-                <div class="studyroom-reserv-totalprice">0</div>
-                원
-            </div>
-        </div>
-        <button><i class="fa-solid fa-cart-shopping"></i>예약추가</button>
-    </div>
-
-    <div class="studyroom-reserv-result">
-        <h5><b>예약 확인</b></h5>
-    </div>
-
-    <div class="studyroom-reserv-done">
-        <button id="studyroom-reserv-done-btn" data-bs-toggle="modal">총 0건 | 0원 결제하기</button>
-    </div>
-
-</div>
-
-<div id="studyroom-reserv-receipt" class="modal" data-bs-backdrop="static">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4><b>예약 내역</b></h4>
-                <button class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <div class="studyroom-reserv-paylist">
-
-                </div>
-
-                <div>
-                    <div>총 예약 건수</div>
-                    <div>2건</div>
-                </div>
-                <div>
-                    <div>결제 금액</div>
-                    <div>10,000원</div>
-                </div>
-                <font size="5px"><b>이용자 정보</b></font>
-                <input type="text" class="studyroom-reserv-paylist-username" readonly/>
-                <input type="text" class="studyroom-reserv-paylist-useremail" readonly/>
-                <div><font size="5px"><b>결제 수단 선택</b></font></div>
-                <label><input type="radio" name="paymentMethod" value="kcp" checked>신용카드</label>
-                <label><input type="radio" name="paymentMethod" value="kakaopay">카카오페이</label>
-
-                <div><font size="2px" color="darkred"><b>*예약 복수 선택 시 환불 기간이 지나면 취소가 어려우니 유의바랍니다.</b></font></div>
-                <div><font size="2px" color="darkred"><b>(환불기간: 예약 시작시간 48시간 이전부터 취소/환불 불가)</b></font></div>
-
-                <label><input type="checkbox" class="personalInfo"><font size="2px">이용규칙, 취소 및 환불규칙, 개인정보 수집 및 이용, 개인정보 제3자 제공에 동의하실 경우
-                    클릭해주세요.</font></label>
-
-                <button></button>
-                <button data-bs-dismiss="modal">다시 선택하기</button>
-            </div>
-        </div>
-    </div>
-</div>
-<form class="studyroom-reserv-form" method="post" action="PaySuccess">
-    <%
-        if(request.getAttribute("memberDTO")!=null){
-            MemberDTO memberDTO = (MemberDTO) request.getAttribute("memberDTO");
-    %>
-    <input name="userId" value="<%=memberDTO.getMem_id()%>">
-    <input name="userName" value="<%=memberDTO.getMem_realname()%>">
-    <input name="userEmail" value="<%=memberDTO.getMem_userid()%>">
-    <%}%>
-    <input name="orderId">
-    <input name="paymentMethod">
-</form>

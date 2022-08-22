@@ -173,6 +173,7 @@
         <th>이용일자</th>
         <th>시간</th>
         <th>결제금액</th>
+        <th>상태</th>
       </tr>
       <form action="">
         <c:forEach items="${salesStoreList}" var="salesStoreList">
@@ -187,6 +188,7 @@
             <td>${salesStoreList.useDate}</td>
             <td>${salesStoreList.time}</td>
             <td>${salesStoreList.pay}</td>
+            <td>${salesStoreList.status}</td>
           </tr>
 
         </c:forEach>

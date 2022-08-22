@@ -1,9 +1,5 @@
 package news_p;
 
-
-
-import event_p.EventService;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,8 +19,7 @@ public class NewsController extends HttpServlet {
 
     public NewsController(){
         super();
-        nonService.put("NewsInsertForm", "news/insertForm.jsp");
-        nonService.put("NewsDeleteForm", "news/deleteForm.jsp");
+
 }
 
     @Override
@@ -47,7 +42,7 @@ public class NewsController extends HttpServlet {
                 request.setAttribute("mainUrl",nonService.get(service));
 
             }else {
-                EventService es = (EventService) Class.forName("news_p." + service).newInstance();
+                NewsService es = (NewsService) Class.forName("news_p." + service).newInstance();
                 es.execute(request, response);
             }
 

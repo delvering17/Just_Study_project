@@ -16,8 +16,10 @@ public class AdminController extends HttpServlet {
         nonService.put("AdminStoreInsert", "adminStoreInsert.jsp");
         nonService.put("AdminEventInsertForm", "adminEventInsertForm.jsp");
         nonService.put("AdminNoticeInsertForm", "adminNoticeInsertForm.jsp");
+        nonService.put("AdminNewsInsertForm", "adminNewsInsertForm.jsp");
         nonService.put("AdminNoticeDeleteForm","adminNoticeDeleteForm.jsp");
         nonService.put("AdminFAQInsert", "adminFAQInsert.jsp");
+        nonService.put("AdminNewsDeleteForm","adminNewsDeleteForm.jsp");
     }
 
     @Override

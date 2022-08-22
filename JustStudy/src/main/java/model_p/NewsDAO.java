@@ -9,13 +9,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class NoticeDAO {
+public class NewsDAO {
+
     Connection con;
     PreparedStatement ptmt;
     ResultSet rs;
     String sql;
 
-    public NoticeDAO(){
+    public NewsDAO(){
         Context init;
 
         try {
@@ -28,22 +29,23 @@ public class NoticeDAO {
         }
     }
 
-    public ArrayList<NoticeDTO> list(){
-        ArrayList<NoticeDTO> res = new ArrayList<NoticeDTO>();
+    public ArrayList<NewsDTO> list(){
+        ArrayList<NewsDTO> res = new ArrayList<NewsDTO>();
 
-        sql = "select * from notice";
+        sql = "select * from news";
 
         try {
             ptmt = con.prepareStatement(sql);
             rs = ptmt.executeQuery();
 
             while(rs.next()) {
-                NoticeDTO dto = new NoticeDTO();
+                NewsDTO dto = new NewsDTO();
 
-                dto.setId(rs.getInt("id"));
-                dto.setTitle(rs.getString("title"));
-                dto.setReg_date(rs.getTimestamp("reg_date"));
-                dto.setContent(rs.getString("content"));
+                dto.setNews_id(rs.getInt("news_id"));
+                dto.setNews_title(rs.getString("news_title"));
+                dto.setNews_reg_date(rs.getTimestamp("news_reg_date"));
+                dto.setNews_content(rs.getString("news_content"));
+                dto.setNews_img(rs.getString("news_img"));
 
                 res.add(dto);
             }
@@ -58,19 +60,15 @@ public class NoticeDAO {
         return res;
     }
 
+    public void insert(NewsDTO dto) {
 
-
-
-
-    public void insert(NoticeDTO dto) {
-
-        sql = "select max(id) from notice";
+        sql = "select max(news_id) from news";
 
         try {
             ptmt = con.prepareStatement(sql);
             rs = ptmt.executeQuery();
             if (rs.next()) {
-                dto.setId(rs.getInt(1)+1);
+                dto.setNews_id(rs.getInt(1)+1);
             }
 
         } catch (SQLException e) {
@@ -79,18 +77,21 @@ public class NoticeDAO {
 
         try {
 
-            sql = "insert into notice (id,title,content,reg_date) "
-                    + "values (?,?,?,sysdate())";
+
+            sql = "insert into news (news_id,news_title,news_content,news_img,news_reg_date) "
+                    + "values (?,?,?,?,sysdate())";
 
             ptmt =con.prepareStatement(sql);
 
-            ptmt.setInt(1, dto.id);
-            ptmt.setString(2,dto.title);
-            ptmt.setString(3,dto.content);
+            ptmt.setInt(1, dto.news_id);
+            ptmt.setString(2,dto.news_title);
+            ptmt.setString(3,dto.news_content);
+            ptmt.setString(4,dto.news_img);
+
 
             ptmt.executeUpdate();
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }finally {
             close();
@@ -99,10 +100,11 @@ public class NoticeDAO {
 
     }
 
-    public NoticeDTO detail(int id) {
-        NoticeDTO res = null;
 
-        sql = "select * from notice where id = ?";
+    public NewsDTO detail(int id) {
+        NewsDTO res = null;
+
+        sql = "select * from news where news_id = ?";
 
         try {
             ptmt = con.prepareStatement(sql);
@@ -110,11 +112,12 @@ public class NoticeDAO {
             rs = ptmt.executeQuery();
 
             if(rs.next()) {
-                res = new NoticeDTO();
-                res.setId(rs.getInt("id"));
-                res.setTitle(rs.getString("title"));
-                res.setReg_date(rs.getTimestamp("reg_date"));
-                res.setContent(rs.getString("content"));
+                res = new NewsDTO();
+                res.setNews_id(rs.getInt("news_id"));
+                res.setNews_title(rs.getString("news_title"));
+                res.setNews_content(rs.getString("news_content"));
+                res.setNews_img(rs.getString("news_img"));
+                res.setNews_reg_date(rs.getTimestamp("news_reg_date"));
 
             }
 
@@ -130,14 +133,15 @@ public class NoticeDAO {
     }
 
 
-    public int modify(NoticeDTO dto){
+    public int modify(NewsDTO dto, String img){
 
-        sql = "update notice set title = ?, content = ? where id = ?";
+        sql = "update news set news_title = ? ,news_content = ?, news_img = ? where news_id = ?";
         try {
             ptmt = con.prepareStatement(sql);
-            ptmt.setString(1, dto.getTitle());
-            ptmt.setString(2, dto.getContent());
-            ptmt.setInt(3, dto.id);
+            ptmt.setString(1, dto.getNews_title());
+            ptmt.setString(2, dto.getNews_content());
+            ptmt.setString(3, dto.getNews_img());
+            ptmt.setInt(4, dto.getNews_id());
 
 
             return ptmt.executeUpdate();
@@ -151,7 +155,7 @@ public class NoticeDAO {
     public int delete(int id) {
 
         try {
-            sql = "delete from notice where id = ?";
+            sql = "delete from news where news_id = ?";
 
             ptmt =con.prepareStatement(sql);
             ptmt.setInt(1, id);
@@ -161,6 +165,25 @@ public class NoticeDAO {
             e.printStackTrace();
         }finally {
             close();
+        }
+
+        return 0;
+    }
+
+
+    public int imgDelete(NewsDTO dto, int id){
+
+        sql = "update news set news_img = ? where news_id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, "");
+            ptmt.setInt(2, id);
+
+            return ptmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return 0;

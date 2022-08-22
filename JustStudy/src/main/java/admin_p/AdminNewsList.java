@@ -1,4 +1,4 @@
-package news_p;
+package admin_p;
 
 import model_p.NewsDAO;
 import model_p.NewsDTO;
@@ -7,15 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 
-public class NewsPage implements NewsService {
+public class AdminNewsList implements AdminService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
-
         ArrayList<NewsDTO> mainData = new NewsDAO().list();
-        System.out.println("Newspage 들어왔따 : "+mainData);
-
+        System.out.println("AdminNewsList 들어왔따 : "+mainData);
 
         request.setAttribute("mainData",mainData);
-        request.setAttribute("mainUrl", "news/news-list.jsp");
+        request.setAttribute("adminUrl", "adminNewsList.jsp");
     }
 }

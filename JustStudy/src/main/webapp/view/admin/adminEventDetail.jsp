@@ -179,12 +179,10 @@
                         </c:when>
                         <c:otherwise>
                             <input type="button" value="파일 삭제" id="imgDelete" onclick="deleteFile()"/>
-                            <ipnut type="hidden" name="img" value="${eventDTO.img}"></ipnut>
-                            <img src="<c:url value="/img/event/${eventDTO.img}"/> ">
+                            <input type="hidden" name="img" value="${eventDTO.img}"></input>
+                            <img src="<c:url value="/img/${eventDTO.img}"/> ">
                         </c:otherwise>
                     </c:choose>
-
-
                 </td>
             </tr>
             <tr>

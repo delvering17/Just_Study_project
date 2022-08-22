@@ -274,7 +274,7 @@
                         <td>
                             <%=branchDTO.getImg()%>
                             <input type="button" value="파일 삭제" class="imgDelete"/>
-                            <ipnut type="hidden" name="img" value="<%=branchDTO.getImg()%>"/>
+                            <input type="hidden" name="img" value="<%=branchDTO.getImg()%>"/>
                         </td>
                 <%} else{%>
                     <td><input type="file" name="img"></td>

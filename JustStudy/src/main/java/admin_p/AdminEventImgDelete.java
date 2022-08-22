@@ -20,6 +20,7 @@ public class AdminEventImgDelete implements AdminService{
 
         String path = request.getRealPath("/img/branch");
         path = "/Users/song-chanwook/workplace/git_repo/JustStudy/Just_Study_project/JustStudy/src/main/webapp/img/event";
+        path = "C:\\Users\\dieun\\jieun\\coding\\GItHub\\Just_Study_project\\JustStudy\\src\\main\\webapp\\img";
 
         //todo : 배포할땐 뒤에꺼 주석처리
 
@@ -42,14 +43,15 @@ public class AdminEventImgDelete implements AdminService{
             eventDTO.setEvent_startdate(sdf.parse(mr.getParameter("event_startdate")));
             eventDTO.setEvent_enddate(sdf.parse(mr.getParameter("event_enddate")));
             eventDTO.setContent(mr.getParameter("content"));
-            eventDTO.setImg(mr.getFilesystemName("img"));
+            eventDTO.setImg(mr.getParameter("img"));
 
             String msg = "이미지 삭제 실패";
 
             if(new EventDAO().imgDelete(eventDTO) > 0){
                 new File(path + "\\" + eventDTO.getImg()).delete();
+                System.out.println(eventDTO.getImg());
                 msg = "이미지를 삭제했습니다.";
-                eventDTO.setImg("");
+                eventDTO.setImg(null);
             }
 
             request.setAttribute("adminUrl", "adminEventDetail.jsp");

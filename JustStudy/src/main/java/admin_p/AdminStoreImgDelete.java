@@ -55,7 +55,7 @@ public class AdminStoreImgDelete implements AdminService{
             branchDTO.setClose(Integer.parseInt(mr.getParameter("close")));
             branchDTO.setAddress(mr.getParameter("address"));
             branchDTO.setPhone(mr.getParameter("phone"));
-            branchDTO.setImg(mr.getFilesystemName("img"));
+            branchDTO.setImg(mr.getParameter("img"));
             branchDTO.setFacilities((mr.getParameterValues("facilities") != null ? String.join(",", mr.getParameterValues("facilities")) : null));
 
 
@@ -63,7 +63,7 @@ public class AdminStoreImgDelete implements AdminService{
             if(new BranchDAO().imgDelete(branchDTO) > 0){
                 new File(path + "\\" + branchDTO.getImg()).delete();
                 msg = "이미지를 삭제했습니다.";
-                branchDTO.setImg("");
+                branchDTO.setImg(null);
             }
 
             request.setAttribute("adminUrl", "adminStoreModify.jsp");

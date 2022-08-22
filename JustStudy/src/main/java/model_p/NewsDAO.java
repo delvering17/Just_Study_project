@@ -62,7 +62,7 @@ public class NewsDAO {
 
     public void insert(NewsDTO dto) {
 
-        sql = "select max(news_id) from news";
+        sql = "SELECT AUTO_INCREMENT FROM information_schema.tables WHERE table_name = 'news' AND table_schema = DATABASE( )";
 
         try {
             ptmt = con.prepareStatement(sql);

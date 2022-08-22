@@ -116,7 +116,8 @@ public class FaqDAO {
 
     public void insert(FaqDTO faqDTO){
         try {
-            sql = "select max(id)+1 from faq";
+            sql = "SELECT AUTO_INCREMENT FROM information_schema.tables WHERE table_name = 'faq' AND table_schema = DATABASE( )";
+
 
             ptmt = con.prepareStatement(sql);
             rs = ptmt.executeQuery();

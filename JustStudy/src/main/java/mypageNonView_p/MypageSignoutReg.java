@@ -31,7 +31,7 @@ public class MypageSignoutReg implements MypageNonViewService{
         // 예약 중인 내역이 있는지 검사
 
         MemberDTO memberDTO = new MemberDAO().detail(mem_id);
-        ArrayList<ReservationDTO> myReservation = new ReservationDAO().myReservationListWill(memberDTO.getMem_id());
+        ArrayList<ReservationDTO> myReservation = new ReservationDAO().myReservationListWill(memberDTO.getMem_id(), null);
         ArrayList<ReservationDTO> myReservationToday = new ReservationDAO().myReservationListToday(memberDTO.getMem_id());
 
         for(ReservationDTO reservationDTO : myReservationToday){

@@ -156,32 +156,35 @@
 
 
 <div class="mypage-reservlist">
-    <div class="mypage-reservlist-top">
-        <div class="top-dateselect-wrapper">
-            <label for="all"><input type="radio" class="input-radio" name="period" id="all" checked hidden>
-                <div class="mypage-reservlist-period">전체</div>
-            </label>
-            <label for="today"><input type="radio" class="input-radio" name="period" id="today" hidden>
-                <div class="mypage-reservlist-period">오늘</div>
-            </label>
-            <label for="sevenDays"><input type="radio" class="input-radio" name="period" id="sevenDays" hidden>
-                <div class="mypage-reservlist-period">7일</div>
-            </label>
-            <label for="oneMonth"><input type="radio" class="input-radio" name="period" id="oneMonth" hidden>
-                <div class="mypage-reservlist-period">1개월</div>
-            </label>
-            <label for="threeMonths"><input type="radio" class="input-radio" name="period" id="threeMonths" hidden>
-                <div class="mypage-reservlist-period">3개월</div>
-            </label>
+    <form action="MyReservationList">
+        <input type="hidden" name="type" value="${param.type}"/>
+        <div class="mypage-reservlist-top">
+            <div class="top-dateselect-wrapper">
+                <label><input type="radio" class="input-radio" name="period" value="all" checked hidden>
+                    <div class="mypage-reservlist-period">전체</div>
+                </label>
+                <label><input type="radio" class="input-radio" name="period" value="today" hidden>
+                    <div class="mypage-reservlist-period">오늘</div>
+                </label>
+                <label><input type="radio" class="input-radio" name="period" value="sevenDays" hidden>
+                    <div class="mypage-reservlist-period">7일</div>
+                </label>
+                <label><input type="radio" class="input-radio" name="period" value="oneMonth" hidden>
+                    <div class="mypage-reservlist-period">1개월</div>
+                </label>
+                <label><input type="radio" class="input-radio" name="period" value="threeMonths" hidden>
+                    <div class="mypage-reservlist-period">3개월</div>
+                </label>
+            </div>
+
+            <input class="mypage-reservlist-top-datepicker" type="date" name="startDate">
+            <p>&#126;</p>
+            <input class="mypage-reservlist-top-datepicker" type="date" name="endDate">
+            <input type="submit" class="mypage-reservlist-period" id="submit-find" value="조회"/>
         </div>
+        <label><input type="radio" name="period" value="mypick" hidden></label>
+    </form>
 
-        <input class="mypage-reservlist-top-datepicker" type="date">
-        <p>&#126;</p>
-        <input class="mypage-reservlist-top-datepicker" type="date">
-        <button type="submit" class="mypage-reservlist-period" id="submit-find">조회</button>
-
-    </div>
-    <label for="threeMonths"><input type="radio" name="period" id="mypick" hidden></label>
 
     <div class="mypage-reservlist-menu">
         <input type="radio" name="mypage-reservlist-type" id="done" hidden><label for="done"><p>이용완료</p></label>
@@ -243,58 +246,12 @@
         </table>
     </div>
 </div>
+
 <script type="text/javascript">
-    $("#submit-find").click(function (){
 
-        $(".mypage-reservlist-table>tbody>tr").show()
-
-        let start = new Date();
-        let endDate = new Date();
-
-        switch ($("input[name=period]:checked").attr("id")){
-            case "all":
-                start = null;
-                break;
-            case "today":
-                start = new Date();
-                break;
-            case "sevenDays":
-                start.setDate(new Date().getDate() - 6)
-                break;
-            case "oneMonth":
-                start.setMonth(new Date().getMonth() - 1)
-                start.setDate(new Date().getDate() + 1)
-                break;
-            case "threeMonths":
-                start.setMonth(new Date().getMonth() - 3)
-                start.setDate(new Date().getDate() + 1)
-                break;
-            case "mypick":
-                const startPick = $(".mypage-reservlist-top-datepicker:first-of-type").val()
-                start = new Date(startPick.split("-")[0], parseInt(startPick.split("-")[1]) - 1, parseInt(startPick.split("-")[2]))
-
-                const endPick = $(".mypage-reservlist-top-datepicker:last-of-type").val()
-                endDate = new Date(endPick.split("-")[0], parseInt(endPick.split("-")[1]) - 1, parseInt(endPick.split("-")[2]))
-
-                break;
-        }
-
-        if(start != null) {
-            const startDate = new Date(start.getFullYear(), start.getMonth(), start.getDate())
-
-            for (let i = 1; i < $(".mypage-reservlist-table>tbody>tr").length; i++) {
-                const useDate = $(".mypage-reservlist-table>tbody>tr").eq(i).children("td").eq(3)
-                const useDate2 = new Date(useDate.html().split("-")[0], parseInt(useDate.html().split("-")[1]) - 1, parseInt(useDate.html().split("-")[2]))
-
-                if (!(useDate2 >= startDate && useDate2 <= endDate)) {
-                    useDate.parent("tr").hide()
-                }
-            }
-        }
-    })
 
     $(".mypage-reservlist-top-datepicker").change(function (){
-        $("input[id=mypick]").prop('checked', true);
+        $("input[value=mypick]").prop('checked', true);
     })
 
 

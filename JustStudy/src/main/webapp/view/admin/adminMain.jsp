@@ -85,20 +85,14 @@
                 <th width="60">관리</th>
             </tr>
 
-            <c:forEach items="${todayReservation}" var="go">
+            <c:forEach items="${todayReservation}" var="todayReservation">
                 <tr>
                     <form action="AdminReservDetailList" method="get">
-                        <c:set var="name" value="${fn:split(go.key,',')}" />
-                        <c:forEach items="${name}" var="tt" varStatus="no">
-                            <c:if test="${no.index == 0}">
-                                <input type="hidden" name="city" value="${tt}">
-                            </c:if>
-                            <c:if test="${no.index == 1}">
-                                <input type="hidden" name="branch" value="${tt}">
-                            </c:if>
-                                <td>${tt}</td>
-                        </c:forEach>
-                        <td>${go.value}</td>
+                        <input type="hidden" name="city" value="${todayReservation.city}">
+                        <input type="hidden" name="branch" value="${todayReservation.branch}">
+                        <td>${todayReservation.city}</td>
+                        <td>${todayReservation.branch}</td>
+                        <td>${todayReservation.reservationCount}</td>
                         <td><button type="submit">상세보기</button></td>
                     </form>
                 </tr>

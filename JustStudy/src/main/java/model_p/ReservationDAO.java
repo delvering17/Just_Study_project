@@ -180,9 +180,9 @@ public class ReservationDAO {
         return res;
     }
 
-    public HashMap<String,Integer> todayList(LocalDate useDate) {
+    public ArrayList<TodayReservationDTO> todayList(LocalDate useDate) {
 
-        HashMap<String,Integer> res = new HashMap<>();
+        ArrayList<TodayReservationDTO> res = new ArrayList<TodayReservationDTO>();
         sql = "select city, branch from reservation where useDate = ?";
 
         try {
@@ -192,14 +192,24 @@ public class ReservationDAO {
             rs = ptmt.executeQuery();
 
             while (rs.next()) {
-                String name = rs.getString("city")+","+rs.getString("branch");
-                if(res.containsKey(name)) {
-                    res.put(name, res.get(name)+1);
-                } else {
-                    res.put(name,1);
+                boolean hasBranch = false;
+                String city = rs.getString("city");
+                String branch = rs.getString("branch");
+                for(TodayReservationDTO todayReservationDTO : res) {
+                    if( (todayReservationDTO.branch).equals(branch) ) {
+                        todayReservationDTO.reservationCount += 1;
+                        hasBranch = true;
+                        break;
+                    }
                 }
+                if(!hasBranch) {
+                    TodayReservationDTO todayReservationDTO = new TodayReservationDTO();
+                    todayReservationDTO.setCity(city);
+                    todayReservationDTO.setBranch(branch);
+                    res.add(todayReservationDTO);
+                }
+
             }
-            System.out.println(res.size());
         } catch (SQLException e) {
 
         } finally {

@@ -19,7 +19,7 @@ public class AdminPage implements AdminService{
         LocalDate now = LocalDate.now();
         int overlap = 0;
 
-        HashMap<String,Integer> todayReservation = new ReservationDAO().todayList(now);
+        ArrayList<TodayReservationDTO> todayReservation = new ReservationDAO().todayList(now);
 
 
         request.setAttribute("todayReservation",todayReservation);

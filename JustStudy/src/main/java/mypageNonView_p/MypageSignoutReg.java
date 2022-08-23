@@ -41,7 +41,6 @@ public class MypageSignoutReg implements MypageNonViewService{
                 myReservation.add(reservationDTO);
             }
         }
-        System.out.println(myReservation.size());
 
         JSONObject jj = new JSONObject();
         try {

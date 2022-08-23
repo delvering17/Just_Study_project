@@ -72,7 +72,7 @@ public class EventDAO {
             ptmt = con.prepareStatement(sql);
             rs = ptmt.executeQuery();
             if(rs.next()) {
-                dto.setId(rs.getInt(1)+1);
+                dto.setId(rs.getInt(1));
             }
 
 

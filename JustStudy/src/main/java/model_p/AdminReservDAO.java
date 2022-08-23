@@ -34,7 +34,7 @@ public class AdminReservDAO {
 
         sql = "select reservation.id, reservation.orderId, reservation.resDate, member.mem_userid, member" +
                 ".mem_realname, reservation.city, reservation.branch, reservation.room, reservation.useDate, " +
-                "reservation.time, reservation.headcount, reservation.pay, status from reservation join member on " +
+                "reservation.time, reservation.headcount, reservation.pay, status from reservation left outer join member on " +
                 "reservation.userId = member.mem_id";
 
         try {
@@ -286,7 +286,7 @@ public class AdminReservDAO {
         sql = "select ifnull(member.mem_userid, '회원정보없음') AS mem_userid, IFNULL(member.mem_nickname, '회원정보없음') " +
                 "AS mem_nickname, ifnull(member.mem_realname, '회원정보없음') AS mem_realname, reservation.city, " +
                 "reservation.branch, reservation.room, reservation.useDate, " +
-                "reservation.time, reservation.pay from reservation left outer join member on " +
+                "reservation.time, reservation.pay, reservation.status from reservation left outer join member on " +
                 "reservation.userId = member.mem_id where city = ? and branch = ? and reservation.status = '결제완료'";
 
         if(period!=null) {
@@ -326,6 +326,7 @@ public class AdminReservDAO {
                 adminReservDTO.setUseDate(rs.getDate("useDate"));
                 adminReservDTO.setTime(rs.getString("time"));
                 adminReservDTO.setPay(rs.getInt("pay"));
+                adminReservDTO.setStatus(rs.getString("status"));
 
                 res.add(adminReservDTO);
             }

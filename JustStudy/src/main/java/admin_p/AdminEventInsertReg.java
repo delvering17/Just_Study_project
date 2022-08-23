@@ -19,7 +19,7 @@ public class AdminEventInsertReg implements AdminService {
 
         String path = request.getRealPath("/img/event");
         path = "/Users/song-chanwook/workplace/git_repo/ JustStudy/Just_Study_project/JustStudy/src/main/webapp/img/event";
-        path = "C:\\Users\\dieun\\jieun\\coding\\GItHub\\Just_Study_project\\JustStudy\\src\\main\\webapp\\img";
+        path = "C:\\Users\\dieun\\jieun\\coding\\GItHub\\Just_Study_project\\JustStudy\\src\\main\\webapp\\img\\event";
 
         int size = 1024 * 1024 * 10;
 

@@ -163,7 +163,7 @@
                         <td><%=adminReservDTO.getPay()%></td>
                         <td><%=adminReservDTO.getStatus()%></td>
                         <td>
-                            <%if(adminReservDTO.getStatus().equals("이용전")){%>
+                            <%if(adminReservDTO.getStatus().equals("결제완료")){%>
                                 <input type="button" value="취소"/>
                             <%}%>
                         </td>

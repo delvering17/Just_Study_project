@@ -20,12 +20,12 @@
             success:function(response){
                 // alert(response.member_nickname)
                 if(response.loginResult === 'success') {
-                    alert('로그인에 성공했습니다.')
+                    alert('로그인에 성공했습니다.');
                     location.href = '<c:url value="/board/MainPage"/>'
                 } else if(response.loginResult === 'signoutmember'){
-                    alert('회원 정보가 맞지 않습니다.')
-                }else {
-                    // alert(response.loginResult)
+                    alert('회원 정보가 맞지 않습니다.');
+                }else if(response.loginResult === 'fail'){
+                    alert('회원 정보가 맞지 않습니다.');
                 }
             },
             error:function(e){

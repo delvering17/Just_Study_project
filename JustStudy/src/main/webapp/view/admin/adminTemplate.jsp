@@ -232,8 +232,6 @@
             </ul>
             <ul>
                 <li>게시판 관리</li>
-                <li><a href="">게시판 관리</a></li>
-                <li><a href="">게시판 그룹 관리</a></li>
                 <li><a href="AdminEventList">이벤트 관리</a></li>
                 <li><a href="AdminNoticeList">공지사항 관리</a></li>
                 <li><a href="AdminNewsList">뉴스 관리</a></li>

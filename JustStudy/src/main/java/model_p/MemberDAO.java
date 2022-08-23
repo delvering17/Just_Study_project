@@ -298,6 +298,42 @@ public class MemberDAO {
         }
     }
 
+    public MemberDTO blackLevelUp(int black_id) {
+
+        sql = "update member set mem_level = 3 where mem_id = ?";
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, black_id);
+
+            ptmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+
+        return null;
+    }
+
+    public MemberDTO blackLevelDown(int black_id) {
+
+        sql = "update member set mem_level = 1 where mem_id = ?";
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, black_id);
+
+            ptmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+
+        return null;
+    }
+
     public void changePassword(MemberDTO memberDTO) {
         sql = "update member set mem_password = ? where mem_id= ?";
 
@@ -313,7 +349,6 @@ public class MemberDAO {
         } finally {
             close();
         }
-
 
     }
 

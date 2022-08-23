@@ -31,7 +31,7 @@ public class ReservationDAO {
 
         ArrayList<BranchDTO> res = new ArrayList<BranchDTO>();
 
-        sql = "select * from branch";
+        sql = "select * from branch order by name";
         try {
             ptmt = con.prepareStatement(sql);
             rs = ptmt.executeQuery();

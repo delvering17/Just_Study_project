@@ -2,6 +2,8 @@ package admin_p;
 
 import model_p.BlackDAO;
 import model_p.BlackDTO;
+import model_p.MemberDAO;
+import model_p.MemberDTO;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,7 @@ public class AdminBlackList implements AdminService{
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
         ArrayList<BlackDTO> blackData = new BlackDAO().blackList();
+
         request.setAttribute("blackData", blackData);
         request.setAttribute("adminUrl","adminBlackList.jsp");
     }

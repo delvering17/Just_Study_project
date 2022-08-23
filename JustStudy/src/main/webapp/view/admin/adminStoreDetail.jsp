@@ -47,13 +47,7 @@
     float: left;
   }
 
-  .admin-store-detail-holiday-table{
-    border: 1px solid rgb(97, 88, 88);
-    margin-top: 10px;
-  }
-
-  .admin-store-detail-table th,
-  .admin-store-detail-holiday-table th{
+  .admin-store-detail-table th{
     width: 80px;
     border: 1px solid rgb(97, 88, 88);
     font-size: 13px;
@@ -78,21 +72,13 @@
     height: 22%;
   }
 
-  .admin-store-detail-table td,
-  .admin-store-detail-holiday-table td{
+  .admin-store-detail-table td{
     width: 400px;
     padding: 5px 0px 5px 10px;
     font-size: 13px;
     border: 1px solid rgb(97, 88, 88);
   }
-
-  .admin-store-detail-holiday-table tr:first-of-type{
-    height: 100px;
-  }
-
-  .admin-store-detail-holiday-table tr:last-of-type{
-    height: 200px;
-  }
+  
 </style>
 
 <%
@@ -154,17 +140,6 @@
     <tr>
       <th>편의 시설</th>
       <td><%=branchDTO.getFacilities().replaceAll(",", "</br>")%></td>
-    </tr>
-  </table>
-
-  <table class="admin-store-detail-holiday-table" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
-    <tr>
-      <th>정기 휴일</th>
-      <td></td>
-    </tr>
-    <tr>
-      <th>임시 휴일</th>
-      <td></td>
     </tr>
   </table>
 </div>

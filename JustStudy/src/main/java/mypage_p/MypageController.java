@@ -42,7 +42,7 @@ public class MypageController extends HttpServlet {
             if(nonService.containsKey(service)) {
                 request.setAttribute("mainUrl","mypage/mypageTemplete.jsp");
                 request.setAttribute("subUrl",nonService.get(service));
-                request.setAttribute("memberDTO",new MemberDAO().detail((Integer) (request.getSession()).getAttribute("login")));
+                request.setAttribute("memberDTO",new MemberDAO().detail((int) (request.getSession()).getAttribute("login")));
             } else {
                 MypageService bs = (MypageService) Class.forName("mypage_p."+service).newInstance();
                 bs.execute(request, response);

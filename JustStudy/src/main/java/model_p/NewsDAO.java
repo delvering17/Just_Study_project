@@ -68,7 +68,7 @@ public class NewsDAO {
             ptmt = con.prepareStatement(sql);
             rs = ptmt.executeQuery();
             if (rs.next()) {
-                dto.setNews_id(rs.getInt(1)+1);
+                dto.setNews_id(rs.getInt(1));
             }
 
         } catch (SQLException e) {
@@ -184,6 +184,8 @@ public class NewsDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            close();
         }
 
         return 0;

@@ -21,10 +21,9 @@ public class CommunityApplyInsertReg implements NonViewService {
         int input_id = Integer.parseInt(request.getParameter("input_id"));
         String input_content = request.getParameter("input_content");
 
+        int as_id = new ApplyStudyDAO().selectAs_id();
         // db
         new ApplyStudyDAO().insertApply(input_purpose,input_id,input_content);
-
-        int as_id = new ApplyStudyDAO().selectAs_id();
 
         JSONObject jj = new JSONObject();
         try {

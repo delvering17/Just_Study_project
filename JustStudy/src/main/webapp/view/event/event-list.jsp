@@ -162,7 +162,6 @@
                     <div class="event-info">
                         <div class="event-text">
                            <a href="EventDetail?id=${dto.id}" style="width: 50px; height: 50px; border: 1px solid #000" ><i class="fa-solid fa-bars"></i></a>
-                            <%--<button class="event-info-btn"></button>--%>
                             <p>${dto.title}</p>
                         </div>
                         <hr>

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 
-public class AdminNewsImgDelete implements AdminService{
+public class AdminNewsImgThumbNailDelete implements AdminService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("AdminImageDelete 들어왔다");
@@ -39,12 +39,12 @@ public class AdminNewsImgDelete implements AdminService{
             System.out.println(mr.getParameter("type"));
 
             String msg = "이미지 삭제 실패";
-            if(new NewsDAO().imgDelete(dto,Integer.parseInt(mr.getParameter("news_id"))) > 0) {
-                new File(path + "\\" + dto.getNews_img()).delete();
-                msg = "이미지를 삭제했습니다.";
-                dto.setNews_img(null);
-            }
 
+            if (new NewsDAO().thumbnailimgDelete(dto,Integer.parseInt(mr.getParameter("news_id"))) > 0) {
+                new File(path + "\\" + dto.getNews_thumbnail_img()).delete();
+                msg = "이미지를 삭제했습니다.";
+                dto.setNews_thumbnail_img(null);
+            }
 
 
             request.setAttribute("msg",msg);

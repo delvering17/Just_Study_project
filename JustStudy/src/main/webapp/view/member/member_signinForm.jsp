@@ -381,10 +381,7 @@
       })
     }
 
-
-
   }
-
 
   function gofindAddress() {
 
@@ -394,6 +391,7 @@
           document.getElementById("input-address2").focus();
         }
       }).open();
+
   }
 
 

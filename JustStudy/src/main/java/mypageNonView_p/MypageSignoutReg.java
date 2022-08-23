@@ -26,22 +26,26 @@ public class MypageSignoutReg implements MypageNonViewService{
 
 
         // 결과
-        Date today = new Date();
-        boolean hasReservation = false;
-        ArrayList<ReservationDTO> arr_reservationDTO = new ReservationDAO().myReservationList(mem_id);
-        for( ReservationDTO reservationDTO : arr_reservationDTO) {
-            System.out.println(reservationDTO.getUseDate().getTime());
-            System.out.println(today.getTime());
-            if (reservationDTO.getUseDate().getTime() >= today.getTime()) {
-                hasReservation = true;
-                break;
+
+
+        // 예약 중인 내역이 있는지 검사
+
+        MemberDTO memberDTO = new MemberDAO().detail(mem_id);
+        ArrayList<ReservationDTO> myReservation = new ReservationDAO().myReservationListWill(memberDTO.getMem_id());
+        ArrayList<ReservationDTO> myReservationToday = new ReservationDAO().myReservationListToday(memberDTO.getMem_id());
+
+        for(ReservationDTO reservationDTO : myReservationToday){
+            String lastTime = reservationDTO.getTime().split(", ")[reservationDTO.getTime().split(", ").length-1].split(":")[0];
+            int nowTime = new Date().getHours();
+            if(nowTime <= Integer.parseInt(lastTime)){
+                myReservation.add(reservationDTO);
             }
         }
-        System.out.println(hasReservation);
+        System.out.println(myReservation.size());
 
         JSONObject jj = new JSONObject();
         try {
-            if(hasReservation) {
+            if(myReservation.size() >0 ) {
 
                 jj.put("signoutResult","hasReservation");
 

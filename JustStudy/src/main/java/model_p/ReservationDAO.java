@@ -183,7 +183,7 @@ public class ReservationDAO {
     public ArrayList<TodayReservationDTO> todayList(LocalDate useDate) {
 
         ArrayList<TodayReservationDTO> res = new ArrayList<TodayReservationDTO>();
-        sql = "select city, branch from reservation where useDate = ?";
+        sql = "select city, branch, COUNT(id) as cnt from reservation  where usedate = ? group by branch";
 
         try {
             ptmt = con.prepareStatement(sql);
@@ -192,23 +192,11 @@ public class ReservationDAO {
             rs = ptmt.executeQuery();
 
             while (rs.next()) {
-                boolean hasBranch = false;
-                String city = rs.getString("city");
-                String branch = rs.getString("branch");
-                for(TodayReservationDTO todayReservationDTO : res) {
-                    if( (todayReservationDTO.branch).equals(branch) ) {
-                        todayReservationDTO.reservationCount += 1;
-                        hasBranch = true;
-                        break;
-                    }
-                }
-                if(!hasBranch) {
-                    TodayReservationDTO todayReservationDTO = new TodayReservationDTO();
-                    todayReservationDTO.setCity(city);
-                    todayReservationDTO.setBranch(branch);
-                    res.add(todayReservationDTO);
-                }
-
+                TodayReservationDTO todayReservationDTO = new TodayReservationDTO();
+                todayReservationDTO.setCity(rs.getString("city"));
+                todayReservationDTO.setBranch(rs.getString("branch"));
+                todayReservationDTO.setReservationCount(rs.getInt("cnt"));
+                res.add(todayReservationDTO);
             }
         } catch (SQLException e) {
 

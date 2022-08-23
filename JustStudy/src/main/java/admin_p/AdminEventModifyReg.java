@@ -29,7 +29,7 @@ public class AdminEventModifyReg implements AdminService{
             MultipartRequest mr = new MultipartRequest(request, path, size, "UTF-8", new DefaultFileRenamePolicy());
 
             dto.setTitle(mr.getParameter("title"));
-            dto.setContent(mr.getParameter("content"));
+            dto.setContent(mr.getFilesystemName("content"));
             dto.setImg(mr.getFilesystemName("img"));
             dto.setEvent_startdate(sdf.parse(mr.getParameter("event_startdate")));
             dto.setEvent_enddate(sdf.parse(mr.getParameter("event_enddate")));

@@ -160,7 +160,8 @@
         <img id="event-fileup-img" src="<c:url value="/img/event/" />${dto.img}" alt="">
     </div>
     <div id="event-content">
-        ${dto.content}
+        <img  src="<c:url value="/img/event/" />${dto.content}" alt="">
+
     </div>
 
 </div>

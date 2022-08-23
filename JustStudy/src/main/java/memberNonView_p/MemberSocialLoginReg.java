@@ -26,25 +26,26 @@ public class MemberSocialLoginReg implements MemberNonViewService{
 
         int mem_id = new MemberDAO().isSocialId(social_id);
 
+        MemberDTO memberDTO = new MemberDAO().detail(mem_id);
+
         if(mem_id != 0) {
             // 이미 가입된 회원
 
-
-            HttpSession session = request.getSession();
-            session.setAttribute("login", mem_id);
-
-
             try {
-                jj.put("loginResult", URLEncoder.encode("success","UTF-8"));
-                jj.put("goUrl", "../board/MainPage");
-
+                // 탈퇴한 회원
+                if(memberDTO.getMem_level() == 5) {
+                    jj.put("loginResult", "signoutmember");
+                } else {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("login", mem_id);
+                    jj.put("loginResult", URLEncoder.encode("success","UTF-8"));
+                    jj.put("goUrl", "../board/MainPage");
+                }
             } catch (UnsupportedEncodingException e) {
                 throw new RuntimeException(e);
             }
         } else {
             // 가입 되지 않은 회원
-
-
             try {
                 jj.put("loginResult", URLEncoder.encode("가입 되지 않은 회원입니다. 회원가입을 진행해주세요","UTF-8"));
 
@@ -60,25 +61,15 @@ public class MemberSocialLoginReg implements MemberNonViewService{
             } catch (UnsupportedEncodingException e) {
                 throw new RuntimeException(e);
             }
-
-
             request.setAttribute("social_id", social_id);
             request.setAttribute("social_email", social_email);
-
         }
 
-
-
-
-
         try {
-
             response.getWriter().append(jj.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
 
     }
 }

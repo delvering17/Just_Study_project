@@ -28,16 +28,18 @@ public class MemberLoginReg implements MemberNonViewService{
         JSONObject jj = new JSONObject();
 
         try {
-            if(memberDTO != null) {
+            if(memberDTO == null) {
+                jj.put("loginResult", "fail");
 
+            } else if(memberDTO.getMem_level() == 5) {
+                jj.put("loginResult", "signoutmember");
+            } else {
                 HttpSession session = request.getSession();
                 session.setAttribute("login", memberDTO.getMem_id());
                 session.setAttribute("mem_level", memberDTO.getMem_level());
 
                 jj.put("loginResult", "success");
 
-            } else {
-                jj.put("loginResult", "fail");
             }
 
 

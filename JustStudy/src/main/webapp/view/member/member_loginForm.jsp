@@ -22,8 +22,10 @@
                 if(response.loginResult === 'success') {
                     alert('로그인에 성공했습니다.')
                     location.href = '<c:url value="/board/MainPage"/>'
-                } else {
-                    alert(response.loginResult)
+                } else if(response.loginResult === 'signoutmember'){
+                    alert('회원 정보가 맞지 않습니다.')
+                }else {
+                    // alert(response.loginResult)
                 }
             },
             error:function(e){
@@ -47,9 +49,7 @@
                             location.href = response.goUrl
                         } else {
                             isSocialSignIn(response)
-
                         }
-
                     },
                     fail: function (error) {
                         console.log(error)
@@ -135,16 +135,14 @@
             async:false,
             dataType:'JSON',
             success:function(response){
-
                 let msg = decodeURIComponent(response.loginResult).replaceAll("+"," ")
-                alert(msg)
-                location.href = response.goUrl
-                <%--if(response.loginResult === 'success') {--%>
-                <%--  alert('로그인에 성공했습니다.')--%>
-                <%--  location.href = '<c:url value="/board/MainPage"/>'--%>
-                <%--} else {--%>
-                <%--  alert(response.loginResult)--%>
-                <%--}--%>
+
+                if(msg === 'signoutmember') {
+                    alert('회원 정보가 맞지 않습니다.');
+                } else {
+                    alert(msg);
+                    location.href = response.goUrl;
+                }
             },
             error:function(e){
                 console.log(e.responseText)

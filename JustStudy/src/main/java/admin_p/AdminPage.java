@@ -19,15 +19,10 @@ public class AdminPage implements AdminService{
         LocalDate now = LocalDate.now();
         int overlap = 0;
 
-        ArrayList<TodayReservationDTO> todayReservation = new ReservationDAO().todayList(now);
-        int todayReservationAmount = todayReservation.size();
+        HashMap<String,Integer> todayReservation = new ReservationDAO().todayList(now);
 
-        for (TodayReservationDTO dto : todayReservation) {
-            System.out.println(dto.getBranch());
-        }
 
         request.setAttribute("todayReservation",todayReservation);
-        request.setAttribute("todayReservationAmount",todayReservationAmount);
         request.setAttribute("adminUrl","adminMain.jsp");
     }
 }

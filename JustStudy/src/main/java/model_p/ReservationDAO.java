@@ -6,6 +6,7 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ReservationDAO {
 
@@ -179,10 +180,9 @@ public class ReservationDAO {
         return res;
     }
 
-    public ArrayList<TodayReservationDTO> todayList(LocalDate useDate) {
+    public HashMap<String,Integer> todayList(LocalDate useDate) {
 
-        ArrayList<TodayReservationDTO> res = new ArrayList<>();
-
+        HashMap<String,Integer> res = new HashMap<>();
         sql = "select city, branch from reservation where useDate = ?";
 
         try {
@@ -192,12 +192,14 @@ public class ReservationDAO {
             rs = ptmt.executeQuery();
 
             while (rs.next()) {
-                TodayReservationDTO reservationDTO = new TodayReservationDTO();
-                reservationDTO.setCity(rs.getString("city"));
-                reservationDTO.setBranch(rs.getString("branch"));
-                res.add(reservationDTO);
+                String name = rs.getString("city")+","+rs.getString("branch");
+                if(res.containsKey(name)) {
+                    res.put(name, res.get(name)+1);
+                } else {
+                    res.put(name,1);
+                }
             }
-
+            System.out.println(res.size());
         } catch (SQLException e) {
 
         } finally {

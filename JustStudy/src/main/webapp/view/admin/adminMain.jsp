@@ -7,7 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         *{
             margin: 0;
@@ -84,14 +85,20 @@
                 <th width="60">관리</th>
             </tr>
 
-            <c:forEach items="${todayReservation}" var="todayReservation" varStatus="no">
+            <c:forEach items="${todayReservation}" var="go">
                 <tr>
                     <form action="AdminReservDetailList" method="get">
-                        <input type="hidden" name="city" value="${todayReservation.city}">
-                        <input type="hidden" name="branch" value="${todayReservation.branch}">
-                        <td>${todayReservation.city}</td>
-                        <td>${todayReservation.branch}</td>
-                        <td>${todayReservation.reservationCount}</td>
+                        <c:set var="name" value="${fn:split(go.key,',')}" />
+                        <c:forEach items="${name}" var="tt" varStatus="no">
+                            <c:if test="${no.index == 0}">
+                                <input type="hidden" name="city" value="${tt}">
+                            </c:if>
+                            <c:if test="${no.index == 1}">
+                                <input type="hidden" name="branch" value="${tt}">
+                            </c:if>
+                                <td>${tt}</td>
+                        </c:forEach>
+                        <td>${go.value}</td>
                         <td><button type="submit">상세보기</button></td>
                     </form>
                 </tr>

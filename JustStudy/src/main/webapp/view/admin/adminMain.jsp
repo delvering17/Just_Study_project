@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         *{
@@ -34,32 +34,8 @@
             padding: 120px 20px 20px 20px;
         }
 
-
-        #main > div:nth-of-type(1){
-            width: 1300px;
-            background: #fff;
-            margin: 10px 0px 0px 0px;
-
-        }
-
-        #main > div:nth-of-type(1) > h3{
-            height: 40px;
-            padding-top: 15px;
-
-        }
-
         #main > h5{
             margin: 0px 0px 10px 20px;
-        }
-
-        #main > div:nth-of-type(1){
-            width: 1280px;
-            height: 20px;
-            padding: 10px;
-            font-size: 13px;
-            background: rgb(212, 206, 206);
-            margin: 0px 0px 10px 20px;
-
         }
 
         table{
@@ -87,18 +63,9 @@
         td{
             border: 1px solid rgb(97, 88, 88);
             padding: 5px;
+            text-align: center;
         }
 
-        #userList, #recentlyPost{
-            border: 0;
-            width: 120px;
-            height: 30px;
-            background: darkolivegreen;
-            color: #fff;
-            margin-left: 740px;
-            margin-top: 10px;
-            cursor: pointer;
-        }
     </style>
     <meta charset="UTF-8">
     <title>main</title>
@@ -106,113 +73,32 @@
     <div id="headline"><h3>관리자메인</h3></div>
 
     <div id="main">
-        <h5>신규회원가입목록</h5>
-        <div>총회원수 3,452명 중 차단 0명, 탈퇴 : 52명</div>
+        <h5>오늘 예약 현황</h5>
+        <h5>총 예약 수:${todayReservationAmount}</h5>
 
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
             <tr>
-                <th width="100">회원아이디</th>
-                <th width="100">이름</th>
-                <th width="100">닉네임</th>
-                <th width="70">권한</th>
-                <th width="70">수신</th>
-                <th width="70">공개</th>
-                <th width="70">인증</th>
-                <th width="70">차단</th>
-                <th width="100">그룹</th>
+                <th width="70">지역</th>
+                <th width="100">지점</th>
+                <th width="100">예약 수</th>
+                <th width="60">관리</th>
             </tr>
-            <tr>
-                <td>********</td>
-                <td>********</td>
-                <td>********</td>
-                <th>3</th>
-                <th>예</th>
-                <th>예</th>
-                <th>아니오</th>
-                <th>예</th>
-                <th></th>
-            </tr>
-            <tr>
-                <td>********</td>
-                <td>********</td>
-                <td>********</td>
-                <th>3</th>
-                <th>예</th>
-                <th>예</th>
-                <th>아니오</th>
-                <th>예</th>
-                <th></th>
-            </tr>
-            <tr>
-                <td>********</td>
-                <td>********</td>
-                <td>********</td>
-                <th>3</th>
-                <th>예</th>
-                <th>예</th>
-                <th>아니오</th>
-                <th>예</th>
-                <th></th>
-            </tr>
-            <tr>
-                <td>********</td>
-                <td>********</td>
-                <td>********</td>
-                <th>3</th>
-                <th>예</th>
-                <th>예</th>
-                <th>아니오</th>
-                <th>예</th>
-                <th></th>
-            </tr>
-            <tr>
-                <td>********</td>
-                <td>********</td>
-                <td>********</td>
-                <th>3</th>
-                <th>예</th>
-                <th>예</th>
-                <th>아니오</th>
-                <th>예</th>
-                <th></th>
-            </tr>
-            <tr>
-                <td>********</td>
-                <td>********</td>
-                <td>********</td>
-                <th>3</th>
-                <th>예</th>
-                <th>예</th>
-                <th>아니오</th>
-                <th>예</th>
-                <th></th>
-            </tr>
-            <tr>
-                <td>********</td>
-                <td>********</td>
-                <td>********</td>
-                <th>3</th>
-                <th>예</th>
-                <th>예</th>
-                <th>아니오</th>
-                <th>예</th>
-                <th></th>
-            </tr>
-            <tr>
-                <td>********</td>
-                <td>********</td>
-                <td>********</td>
-                <th>3</th>
-                <th>예</th>
-                <th>예</th>
-                <th>아니오</th>
-                <th>예</th>
-                <th></th>
-            </tr>
-        </table>
-        <button id="userList">회원 전체보기</button>
 
-        <h5>최근게시물</h5>
+            <c:forEach items="${todayReservation}" var="todayReservation" varStatus="no">
+                <tr>
+                    <form action="AdminReservDetailList" method="get">
+                        <input type="hidden" name="city" value="${todayReservation.city}">
+                        <input type="hidden" name="branch" value="${todayReservation.branch}">
+                        <td>${todayReservation.city}</td>
+                        <td>${todayReservation.branch}</td>
+                        <td>${todayReservation.reservationCount}</td>
+                        <td><button type="submit">상세보기</button></td>
+                    </form>
+                </tr>
+            </c:forEach>
+        </table>
+
+        <h5>1:1문의</h5>
 
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
             <tr>
@@ -252,6 +138,6 @@
             </tr>
 
         </table>
-        <button id="recentlyPost">최근 게시물 더보기</button>
+
     </div>
 

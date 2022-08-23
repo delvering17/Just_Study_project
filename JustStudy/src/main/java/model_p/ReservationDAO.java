@@ -4,6 +4,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ReservationDAO {
@@ -178,22 +179,22 @@ public class ReservationDAO {
         return res;
     }
 
-    public ArrayList<ReservationDTO> storeSalesList() {
-        ArrayList<ReservationDTO> res = new ArrayList<>();
+    public ArrayList<TodayReservationDTO> todayList(LocalDate useDate) {
 
-        sql = "select * from reservation";
+        ArrayList<TodayReservationDTO> res = new ArrayList<>();
+
+        sql = "select city, branch from reservation where useDate = ?";
 
         try {
             ptmt = con.prepareStatement(sql);
+            ptmt.setDate(1, Date.valueOf(useDate));
+
             rs = ptmt.executeQuery();
 
             while (rs.next()) {
-                ReservationDTO reservationDTO = new ReservationDTO();
+                TodayReservationDTO reservationDTO = new TodayReservationDTO();
                 reservationDTO.setCity(rs.getString("city"));
                 reservationDTO.setBranch(rs.getString("branch"));
-                reservationDTO.setUseDate(rs.getDate("useDate"));
-                reservationDTO.setPay(rs.getInt("pay"));
-
                 res.add(reservationDTO);
             }
 
@@ -202,7 +203,6 @@ public class ReservationDAO {
         } finally {
             close();
         }
-
         return res;
     }
 

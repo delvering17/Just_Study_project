@@ -183,7 +183,7 @@ public class EventDAO {
 
         try {
             ptmt = con.prepareStatement(sql);
-            ptmt.setString(1, "");
+            ptmt.setString(1, null);
             ptmt.setInt(2, eventDTO.getId());
 
             return ptmt.executeUpdate();

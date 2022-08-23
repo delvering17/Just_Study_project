@@ -15,8 +15,12 @@
       <td colspan="3"><input type="text" name="news_title"></td>
     </tr>
     <tr>
-        <td>이미지 첨부</td>
-        <td><input type="file" name="news_img"/></td>
+        <td>썸네일 이미지 첨부</td>
+        <td><input type="file" name="news_thumbnail_img"/></td>
+    </tr>
+    <tr>
+      <td>이미지 첨부</td>
+      <td><input type="file" name="news_img"/></td>
     </tr>
     <tr>
       <td>내용</td>

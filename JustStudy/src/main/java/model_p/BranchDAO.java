@@ -28,7 +28,7 @@ public class BranchDAO {
     public ArrayList<BranchDTO> branchList() {
         ArrayList<BranchDTO> res;
 
-        sql = "select * from branch select * from branch order by name";
+        sql = "select * from branch order by name";
 
         try {
             ptmt = con.prepareStatement(sql);

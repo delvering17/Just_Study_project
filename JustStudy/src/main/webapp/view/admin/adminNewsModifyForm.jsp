@@ -150,11 +150,29 @@
                     <td colspan="3"><input type="text" name="news_title" value="${dto.news_title}">
                 </tr>
                 <tr>
+                    <th>뉴스 썸네일 사진</th>
+                    <c:choose>
+                        <c:when test="${dto.news_thumbnail_img != null}">
+                            <td colspan="3">
+                                <%--<input type="button" value="썸네일 삭제" class="thumbnail-imgDelete"/>--%>
+                                    <input type="button" value="썸네일삭제"  onclick="deleteThumbNailNewsImg('뉴스썸네일사진삭제')"/>
+                                    <input type="hidden" name="news_thumbnail_img" value="${dto.news_thumbnail_img}">
+                                <img src="<c:url value="/img/news/${dto.news_thumbnail_img}"/>"/>
+                            </td>
+                        </c:when>
+                        <c:otherwise>
+                            <td colspan="3">
+                                <input type="file" name="news_thumbnail_img" value="">
+                            </td>
+                        </c:otherwise>
+                    </c:choose>
+                </tr>
+                <tr>
                     <th>뉴스 사진</th>
                     <c:choose>
                         <c:when test="${dto.news_img != null}">
                     <td colspan="3">
-                            <input type="button" value="파일 삭제" class="imgDelete"/>
+                            <input type="button" value="파일삭제"  onclick="deleteNewsImg('뉴스사진삭제')"/>
                             <input type="hidden" name="news_img" value="${dto.news_img}">
                             <img src="<c:url value="/img/news/${dto.news_img}"/>"/>
                     </td>
@@ -181,12 +199,13 @@
 
 <script type="text/javascript">
 
-        $(".imgDelete").click(function (){
-            if(confirm("정말 삭제하시겠습니까?")){
-                $(".admin-modify-form").attr("action", "AdminNewsImgDelete")
-                $(".admin-modify-form").submit()
-            }
-        })
+        function deleteNewsImg(pp) {
+            $(".admin-modify-form").attr("action", "AdminNewsImgDelete?type="+pp);
+            $(".admin-modify-form").submit();
+        }
 
-
+        function deleteThumbNailNewsImg(pp) {
+            $(".admin-modify-form").attr("action", "AdminNewsImgThumbNailDelete?type="+pp);
+            $(".admin-modify-form").submit();
+        }
 </script>

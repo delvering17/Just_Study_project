@@ -14,11 +14,13 @@ public class AdminNewsModifyReg implements AdminService{
         System.out.println("AdminNewsModifyReg 입장~");
 
         String path = request.getRealPath("/img/news");
-        path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\" +
+        /*path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\" +
                 "\\img\\news";
 
-        path = "C:\\Users\\dieun\\jieun\\coding\\GItHub\\Just_Study_project\\JustStudy\\src\\main\\webapp\\img\\news";
+        path = "C:\\Users\\dieun\\jieun\\coding\\GItHub\\Just_Study_project\\JustStudy\\src\\main\\webapp\\img\\news";*/
 
+        path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\" +
+                "\\img\\news";
 
         int size = 1024 * 1024 * 10;
 
@@ -30,17 +32,31 @@ public class AdminNewsModifyReg implements AdminService{
 
             dto.setNews_title(mr.getParameter("news_title"));
             dto.setNews_content(mr.getParameter("news_content"));
-            dto.setNews_img(mr.getFilesystemName("news_img"));
+            if(mr.getFilesystemName("news_img") == null) {
+                dto.setNews_img(mr.getParameter("news_img"));
+            } else {
+                dto.setNews_img(mr.getFilesystemName("news_img"));
+            }
+            if(mr.getFilesystemName("news_thumbnail_img") == null) {
+                dto.setNews_thumbnail_img(mr.getParameter("news_thumbnail_img"));
+            } else {
+                dto.setNews_thumbnail_img(mr.getFilesystemName("news_thumbnail_img"));
+
+            }
+
             dto.setNews_id(Integer.parseInt(mr.getParameter("news_id")));
+
 
             String msg = "수정 실패";
             String adminUrl = "AdminNewsModifyForm.jsp";
 
-            if(new NewsDAO().modify(dto,mr.getFilesystemName("news_img") ) > 0){
+            if(new NewsDAO().modify(dto) > 0){
                 msg = "수정되었습니다.";
                 adminUrl = "alert.jsp";
 
             }
+
+
 
             request.setAttribute("msg", msg);
             request.setAttribute("adminUrl", adminUrl);

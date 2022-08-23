@@ -260,7 +260,7 @@
                                 </c:otherwise>
                             </c:choose>
                             <c:if test="${sessionScope.mem_level == 2}">
-                                <li><a href="../admin/AdminPage" >관리자로그인</a></li>
+                                <li><a href="../admin/AdminPage" >관리자 페이지</a></li>
                             </c:if>
                         </ul>
                         <ul class="gnb-sub-list">

@@ -113,7 +113,7 @@
 
                         <li class="news-li filter-active filter-ing">${dto.news_id}
                             <div class="news-img">
-                                <img src="<c:url value="/img/news/${dto.news_img}"/>" alt="">
+                                <img src="<c:url value="/img/news/${dto.news_thumbnail_img}"/>" alt="">
                             </div>
                             <div class="news-info">
                                 <div class="news-text">

@@ -29,7 +29,7 @@ public class CommunityDAO {
     public ArrayList<CommunityDTO> list(){
         ArrayList<CommunityDTO> res = new ArrayList<CommunityDTO>();
 
-        sql = "select * from studygroup order by regDate desc ";
+        sql = "select * from studygroup order by id desc ";
 
         try {
             ptmt = con.prepareStatement(sql);

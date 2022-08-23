@@ -318,6 +318,51 @@ public class ReservationDAO {
         return res;
     }
 
+    public boolean reservationWill(String branch){
+
+        sql = "select * from reservation where branch = ? and useDate > DATE_FORMAT(SYSDATE(), '%Y-%m-%d')";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, branch);
+
+            rs =  ptmt.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return false;
+    }
+
+    public ArrayList<ReservationDTO> reservationToday(String branch){
+
+        ArrayList<ReservationDTO> res = new ArrayList<ReservationDTO>();
+
+        sql = "select * from reservation where branch = ? and useDate = DATE_FORMAT(SYSDATE(), '%Y-%m-%d')";
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, branch);
+
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                ReservationDTO dto = new ReservationDTO();
+
+                dto.setTime(rs.getString("time"));
+
+                res.add(dto);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return res;
+    }
+
     public void close() {
         if(rs!=null) try { rs.close(); } catch (SQLException e) {}
         if(ptmt!=null) try { ptmt.close(); } catch (SQLException e) {}

@@ -2,10 +2,15 @@ package admin_p;
 
 import model_p.AdminReservDAO;
 import model_p.AdminReservDTO;
+import model_p.BranchDAO;
+import model_p.BranchDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class AdminReservListSearch implements AdminService{
@@ -13,27 +18,70 @@ public class AdminReservListSearch implements AdminService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-        HashMap<String, String> columnName = new HashMap<String, String>();
-        columnName.put("ID", "id");
-        columnName.put("주문번호", "orderId");
-        columnName.put("주문일자", "resDate");
-        columnName.put("사용자ID", "mem_userid");
-        columnName.put("사용자이름", "mem_realname");
-        columnName.put("지역", "city");
-        columnName.put("지점", "branch");
-        columnName.put("룸타입", "room");
-        columnName.put("이용일자", "useDate");
-        columnName.put("시간", "time");
-        columnName.put("인원수", "headcount");
-        columnName.put("결제금액", "pay");
-        columnName.put("상태", "status");
+        ArrayList<BranchDTO> branchList = new BranchDAO().branchList();
 
-        ArrayList<AdminReservDTO> listFilter = new AdminReservDAO().listFilter(
-                columnName.get(request.getParameter("filter")),
-                request.getParameter("word")
-        );
+        Date startDate = null, endDate = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-        request.setAttribute("totalList", listFilter);
+        if(request.getParameter("admin-reserv-list-period")!=null) {
+            try {
+                switch (request.getParameter("admin-reserv-list-period")) {
+                    case "day":
+                        startDate = sdf.parse(request.getParameter("admin-reserv-list-start"));
+                        endDate = sdf.parse(request.getParameter("admin-reserv-list-start"));
+                        endDate.setDate(endDate.getDate()+1);
+                        break;
+                    case "dayBetweenDay":
+                        startDate = sdf.parse(request.getParameter("admin-reserv-list-start"));
+                        endDate = sdf.parse(request.getParameter("admin-reserv-list-end"));
+                        endDate.setDate(endDate.getDate()+1);
+                        break;
+                    case "month":
+                        startDate = sdf.parse(request.getParameter("admin-reserv-list-year") + "-" +
+                                request.getParameter("admin-reserv-list-month") + "-" + 1);
+
+                        endDate = sdf.parse(request.getParameter("admin-reserv-list-year") + "-" +
+                                (Integer.parseInt(request.getParameter("admin-reserv-list-month")) + 1) + "-" + 1);
+
+                        break;
+                    case "year":
+                        startDate = sdf.parse(request.getParameter("admin-reserv-list-year") + "-" +
+                                1 + "-" + 1);
+
+                        endDate = sdf.parse((Integer.parseInt(request.getParameter("admin-reserv-list-year")) + 1)
+                                + "-" + 1 + "-" + 1);
+
+                        break;
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        ArrayList<AdminReservDTO> reservList = new ArrayList<AdminReservDTO>();
+
+        if(request.getParameter("city").equals("전체")){
+            for(BranchDTO branchDTO : branchList){
+                reservList.addAll(new AdminReservDAO().salesStoreList(branchDTO.getCity(), branchDTO.getName(),
+                        request.getParameter("admin-reserv-list-period"), startDate, endDate,
+                        request.getParameter("admin-reserv-list-filter"), request.getParameter("admin-reserv-list-word")));
+            }
+        } else if(request.getParameter("branch").equals("전체")){
+            for (BranchDTO branchDTO : branchList){
+                if(branchDTO.getCity().equals(request.getParameter("city"))){
+                    reservList.addAll(new AdminReservDAO().salesStoreList(branchDTO.getCity(), branchDTO.getName(),
+                            request.getParameter("admin-reserv-list-period"), startDate, endDate,
+                            request.getParameter("admin-reserv-list-filter"), request.getParameter("admin-reserv-list-word")));
+                }
+            }
+        } else{
+            reservList = new AdminReservDAO().salesStoreList(request.getParameter("city"), request.getParameter("branch"),
+                    request.getParameter("admin-reserv-list-period"), startDate, endDate,
+                    request.getParameter("admin-reserv-list-filter"), request.getParameter("admin-reserv-list-word"));
+        }
+
+        request.setAttribute("branchList", branchList);
+        request.setAttribute("totalList", reservList);
         request.setAttribute("adminUrl", "adminReservList.jsp");
     }
 }

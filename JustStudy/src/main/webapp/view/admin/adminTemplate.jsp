@@ -207,16 +207,16 @@
         </div>
         <div class="categoryitem">
             <ul>
-                <li>회원 관리</li>
-                <li><a href="AdminUserList">회원 관리</a></li>
-                <li><a href="AdminBlackList">블랙리스트 관리</a></li>
-
-            </ul>
-            <ul>
                 <li>지점관리</li>
                 <li><a href="AdminStoreList">지점목록</a></li>
                 <li><a href="AdminStoreReview">이용후기</a></li>
                 <li><a href=""></a></li>
+            </ul>
+            <ul>
+                <li>회원 관리</li>
+                <li><a href="AdminUserList">회원 관리</a></li>
+                <li><a href="AdminBlackList">블랙리스트 관리</a></li>
+
             </ul>
             <ul>
                 <li>매출관리</li>

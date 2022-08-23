@@ -269,9 +269,15 @@
                         <td rowspan="2">${i.mem_phone}</td>
                         <td rowspan="2">${i.mem_level}</td>
                         <td rowspan="2">
-                            <button formaction="AdminUserModify" formmethod="get">수정</button>
-                            <button formaction="AdminUserDelete" formmethod="get">삭제</button>
-                            <button formaction="AdminBlackListAdd" formmethod="get">블랙</button>
+                            <c:if test="${i.mem_level==1}">
+                                <button formaction="AdminUserModify" formmethod="get">수정</button>
+                                <button formaction="AdminUserDelete" formmethod="get">탈퇴</button>
+                                <button formaction="AdminBlackListAdd" formmethod="get">블랙</button>
+                            </c:if>
+                            <c:if test="${i.mem_level==3}">
+                                <button formaction="AdminUserModify" formmethod="get">수정</button>
+                                <button formaction="AdminUserDelete" formmethod="get">탈퇴</button>
+                            </c:if>
                         </td>
                     </form>
                 </tr>

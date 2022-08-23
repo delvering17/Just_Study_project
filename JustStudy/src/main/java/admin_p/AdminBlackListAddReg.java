@@ -20,6 +20,9 @@ public class AdminBlackListAddReg implements AdminService{
 
         ArrayList<MemberDTO> adminData = new MemberDAO().list();
 
+        int black_id = Integer.parseInt(request.getParameter("black_id"));
+        new MemberDAO().blackLevelUp(black_id);
+
         String msg = "추가 완료";
         request.setAttribute("adminData", adminData);
         request.setAttribute("blackListData", blackListData);

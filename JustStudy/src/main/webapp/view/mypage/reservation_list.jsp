@@ -2,7 +2,7 @@
 <%@ page import="model_p.ReservationDTO" %>
 <%@ page import="java.util.Date" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <style>
@@ -129,6 +129,28 @@
         color: white;
     }
 
+    .mypage-reservlist-menu{
+        width: 800px;
+        height: 50px;
+        margin-top: 20px;
+    }
+
+    .mypage-reservlist-menu > label > p {
+        width: fit-content;
+        height: fit-content;
+        line-height: 50px;
+        margin-left: 10px;
+        margin-right: 20px;
+        float: left;
+        font-size: 1.2rem;
+        color: gray;
+    }
+
+    input[name=mypage-reservlist-type]:checked + label > p{
+        font-weight: bold;
+        color: black;
+    }
+
 </style>
 
 
@@ -161,53 +183,65 @@
     </div>
     <label for="threeMonths"><input type="radio" name="period" id="mypick" hidden></label>
 
-        <div class="mypage-reservlist-main">
-            <table class="mypage-reservlist-table">
-                <tr>
-                    <td>결제일자</td>
-                    <td>지점</td>
-                    <td>룸타입</td>
-                    <td>이용일자</td>
-                    <td>시간</td>
-                    <td>인원</td>
-                    <td>결제금액</td>
-                    <td>상태</td>
-                    <td></td>
-                </tr>
-                <%
-                    ArrayList<ReservationDTO> myReservation = (ArrayList<ReservationDTO>) request.getAttribute("myReservation");
-                    for (ReservationDTO reservationDTO : myReservation) {
-                %>
+    <div class="mypage-reservlist-menu">
+        <input type="radio" name="mypage-reservlist-type" id="done" hidden><label for="done"><p>이용완료</p></label>
+        <input type="radio" name="mypage-reservlist-type" id="will" hidden><label for="will"><p>이용전</p></label>
+    </div>
+
+    <div class="mypage-reservlist-main">
+        <table class="mypage-reservlist-table">
+            <tr>
+                <td>결제일자</td>
+                <td>지점</td>
+                <td>룸타입</td>
+                <td>이용일자</td>
+                <td>시간</td>
+                <td>인원</td>
+                <td>결제금액</td>
+                <td>상태</td>
+                <td></td>
+            </tr>
+
+            <c:forEach items="${myReservation}" var="myreserv" varStatus="no">
                 <form action="MypageReview" class="mypage-reservlist-review-form">
                     <tr>
-                        <input type="hidden" name="reservId" value="<%=reservationDTO.getId()%>"/>
-                        <td><%=reservationDTO.getResDate()%></td>
-                        <td><%=reservationDTO.getBranch()%></td>
-                        <td><%=reservationDTO.getRoom()%></td>
-                        <td><%=reservationDTO.getUseDate()%></td>
-                        <td><%=reservationDTO.getTime().replaceAll(",", "</br>")%></td>
-                        <td><%=reservationDTO.getHeadcount()%></td>
-                        <td><%=reservationDTO.getPay()%></td>
-                        <td><%=reservationDTO.getStatus()%></td>
-                        <td>
-                            <%
-                                if (reservationDTO.getStatus().equals("결제완료")) {
-                                    if (reservationDTO.getUseDate().before(new Date())) {
-                                        if (reservationDTO.getReview() == 0) {%>
-                            <button type=submit class="mypage-reservlist-review">후기 작성</button>
-                            <%} else if (reservationDTO.getReview() == 1) {%>
-                            <input type="button" class="mypage-reservlist-review-done" value="후기 조회"/>
-                            <%}
-                            }else{%>
-                            <input type="button" class="mypage-reservlist-cancle" value="예약 취소"/>
-                            <% }}%>
-                        </td>
+                        <input type="hidden" name="reservId" value="${myreserv.id}"/>
+                        <td>${myreserv.resDate}</td>
+                        <td>${myreserv.branch}</td>
+                        <td>${myreserv.room}</td>
+                        <td>${myreserv.useDate}</td>
+                        <td>${fn:replace(myreserv.time, ', ', '<br/>')}</td>
+                        <td>${myreserv.headcount}</td>
+                        <td>${myreserv.pay}</td>
+                        <td>${myreserv.status}</td>
+                        <c:choose>
+                            <c:when test="${param.type == \"done\"}">
+                                <c:choose>
+                                    <c:when test="${myreserv.review == 0}">
+                                        <td>
+                                            <button class="mypage-reservlist-review">후기 작성</button>
+                                        </td>
+                                    </c:when>
+                                    <c:when test="${myreserv.review == 1}">
+                                        <td>
+                                            <button class="mypage-reservlist-review-done">후기 조회</button>
+                                        </td>
+                                    </c:when>
+                                </c:choose>
+                            </c:when>
+                            <c:when test="${param.type == \"will\"}">
+                                <c:if test="${myreserv.status == \"결제완료\"}">
+                                    <td>
+                                        <button class="mypage-reservlist-cancle">예약 취소</button>
+                                    </td>
+                                </c:if>
+                            </c:when>
+                        </c:choose>
                     </tr>
                 </form>
-                <%}%>
-            </table>
-        </div>
-
+            </c:forEach>
+        </table>
+    </div>
 </div>
 <script type="text/javascript">
     $("#submit-find").click(function (){
@@ -286,4 +320,18 @@
             $(".mypage-reservlist-top-datepicker").eq(1).val($(".mypage-reservlist-top-datepicker").eq(0).val())
         }
     })
+
+    $("input[name=mypage-reservlist-type]").each(function (key, value){
+        if(value.getAttribute("id") == "${param.type}"){
+            value.setAttribute("checked", true);
+        }
+    })
+
+    $("input[name=mypage-reservlist-type]").change(function (){
+
+        let find_url = "?type=" + $("input[name=mypage-reservlist-type]:checked").attr("id") ;
+
+        location.href = find_url
+    })
+
 </script>

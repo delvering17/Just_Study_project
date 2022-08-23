@@ -125,6 +125,118 @@ public class ReservationDAO {
         return res;
     }
 
+    public ArrayList<ReservationDTO> myReservationListWill(int userId){
+
+        ArrayList<ReservationDTO> res = new ArrayList<ReservationDTO>();
+
+        sql = "select * from reservation where userId = ? and useDate > DATE_FORMAT(SYSDATE(), '%Y-%m-%d') order by resDate desc";
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, userId);
+
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                ReservationDTO dto = new ReservationDTO();
+
+                dto.setId(rs.getInt("id"));
+                dto.setResDate(rs.getDate("resDate"));
+                dto.setUserId(rs.getInt("userId"));
+                dto.setCity(rs.getString("city"));
+                dto.setBranch(rs.getString("branch"));
+                dto.setRoom(rs.getString("room"));
+                dto.setUseDate(rs.getDate("useDate"));
+                dto.setTime(rs.getString("time"));
+                dto.setHeadcount(rs.getInt("headcount"));
+                dto.setPay(rs.getInt("pay"));
+                dto.setPaymentMethod(rs.getString("paymentMethod"));
+                dto.setStatus(rs.getString("status"));
+                dto.setReview(rs.getInt("review"));
+
+                res.add(dto);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+
+        return res;
+    }
+    public ArrayList<ReservationDTO> myReservationListDone(int userId){
+
+        ArrayList<ReservationDTO> res = new ArrayList<ReservationDTO>();
+
+        sql = "select * from reservation where userId = ? and useDate < DATE_FORMAT(SYSDATE(), '%Y-%m-%d') order by resDate desc";
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, userId);
+
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                ReservationDTO dto = new ReservationDTO();
+
+                dto.setId(rs.getInt("id"));
+                dto.setResDate(rs.getDate("resDate"));
+                dto.setUserId(rs.getInt("userId"));
+                dto.setCity(rs.getString("city"));
+                dto.setBranch(rs.getString("branch"));
+                dto.setRoom(rs.getString("room"));
+                dto.setUseDate(rs.getDate("useDate"));
+                dto.setTime(rs.getString("time"));
+                dto.setHeadcount(rs.getInt("headcount"));
+                dto.setPay(rs.getInt("pay"));
+                dto.setPaymentMethod(rs.getString("paymentMethod"));
+                dto.setStatus(rs.getString("status"));
+                dto.setReview(rs.getInt("review"));
+
+                res.add(dto);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+
+        return res;
+    }
+    public ArrayList<ReservationDTO> myReservationListToday(int userId){
+
+        ArrayList<ReservationDTO> res = new ArrayList<ReservationDTO>();
+
+        sql = "select * from reservation where userId = ? and useDate = DATE_FORMAT(SYSDATE(), '%Y-%m-%d') order by resDate desc";
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, userId);
+
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                ReservationDTO dto = new ReservationDTO();
+
+                dto.setId(rs.getInt("id"));
+                dto.setResDate(rs.getDate("resDate"));
+                dto.setUserId(rs.getInt("userId"));
+                dto.setCity(rs.getString("city"));
+                dto.setBranch(rs.getString("branch"));
+                dto.setRoom(rs.getString("room"));
+                dto.setUseDate(rs.getDate("useDate"));
+                dto.setTime(rs.getString("time"));
+                dto.setHeadcount(rs.getInt("headcount"));
+                dto.setPay(rs.getInt("pay"));
+                dto.setPaymentMethod(rs.getString("paymentMethod"));
+                dto.setStatus(rs.getString("status"));
+                dto.setReview(rs.getInt("review"));
+
+                res.add(dto);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+
+        return res;
+    }
+
     public String soldOutList(String city, String branch, String room, java.util.Date useDate){
 
         ArrayList<String> arr = new ArrayList<>();

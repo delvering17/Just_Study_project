@@ -2,31 +2,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<script type="text/javascript">
-    function goSignout() {
-        let form_data = {
-            input_password:$('#input-password').val()
-        }
 
-        $.ajax({
-            url:'<c:url value="/mypageNonView/MypageSignoutReg"/>',
-            type:'GET',
-            data: form_data,
-            async:true,
-            dataType:'JSON',
-            success:function(response){
-                alert(response.signoutResult)
-                
-                location.href = '../board/MainPage'
-
-            },
-            error:function(e){
-                console.log(e.responseText)
-            }
-        })
-    }
-
-</script>
 
 <style type="text/css">
     .mypage-signout {
@@ -78,3 +54,31 @@
     </form>
 </div>
 </div>
+<script type="text/javascript">
+    function goSignout() {
+        let form_data = {
+            input_password:$('#input-password').val()
+        }
+
+        $.ajax({
+            url:'<c:url value="/mypageNonView/MypageSignoutReg"/>',
+            type:'GET',
+            data: form_data,
+            async:false,
+            dataType:'JSON',
+            success:function(response){
+                if(response.signoutResult === "success") {
+                    alert('회원 탈퇴되었습니다.')
+                    location.href = '../board/MainPage'
+                } else {
+                    alert('현재 예약 건이 있으므로 탈퇴를 할 수 없습니다.')
+                    // location.href = "../mypage/MyReservationList"
+                }
+            },
+            error:function(e){
+                console.log(e.responseText)
+            }
+        })
+    }
+
+</script>

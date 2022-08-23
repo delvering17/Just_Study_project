@@ -261,7 +261,7 @@ public class MemberDAO {
     public int delete(int mem_id) {
 
         try {
-            sql = "delete from member where mem_id = ?";
+            sql = "update member set mem_level = 5 where mem_id = ?";
 
             ptmt =con.prepareStatement(sql);
             ptmt.setInt(1, mem_id);
@@ -352,20 +352,7 @@ public class MemberDAO {
 
     }
 
-    public void signOut(int mem_id) {
-        sql = "delete from member where mem_id = ?";
 
-        try {
-            ptmt = con.prepareStatement(sql);
-            ptmt.setInt(1, mem_id);
-            ptmt.executeUpdate();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            close();
-        }
-    }
 
     public int isSocialId(String social_id) {
         int res = 0;

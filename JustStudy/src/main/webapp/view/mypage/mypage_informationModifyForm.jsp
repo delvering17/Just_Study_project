@@ -2,42 +2,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<script type="text/javascript">
 
-    function goInformationModify() {
-        let form_data = {
-            input_realname:$('#input-realname').val(),
-            input_nickname:$('#input-nickname').val(),
-            input_address1:$('#input-address1').val(),
-            input_address2:$('#input-address2').val()
-        }
-
-        $.ajax({
-            url:'<c:url value="/mypageNonView/MypageInformationModifyReg"/>',
-            type:'GET',
-            data: form_data,
-            async:false,
-            dataType:'JSON',
-            success:function(response){
-                alert(response.modifyResult)
-                location.href = "/mypage/MypageInformationModifyForm"
-                <%--if(response.modifyResult === 'success') {--%>
-                <%--    alert(msg)--%>
-                <%--    location.href = '<c:url value="/board/MainPage"/>'--%>
-                <%--} else {--%>
-                <%--    alert(response.modifyResult)--%>
-                <%--}--%>
-            },
-            error:function(e){
-                console.log(e.responseText)
-            }
-        })
-    }
-
-    function gogo() {
-        location.href = "../mypage/MypageSignoutForm"
-    }
-</script>
 
 
 
@@ -131,3 +96,39 @@
         </ul>
     </form>
 </div>
+<script type="text/javascript">
+
+    function goInformationModify() {
+        let form_data = {
+            input_realname:$('#input-realname').val(),
+            input_nickname:$('#input-nickname').val(),
+            input_address1:$('#input-address1').val(),
+            input_address2:$('#input-address2').val()
+        }
+
+        $.ajax({
+            url:'<c:url value="/mypageNonView/MypageInformationModifyReg"/>',
+            type:'GET',
+            data: form_data,
+            async:false,
+            dataType:'JSON',
+            success:function(response){
+                alert(response.modifyResult)
+                location.href = "/mypage/MypageInformationModifyForm"
+                <%--if(response.modifyResult === 'success') {--%>
+                <%--    alert(msg)--%>
+                <%--    location.href = '<c:url value="/board/MainPage"/>'--%>
+                <%--} else {--%>
+                <%--    alert(response.modifyResult)--%>
+                <%--}--%>
+            },
+            error:function(e){
+                console.log(e.responseText)
+            }
+        })
+    }
+
+    function gogo() {
+        location.href = "../mypage/MypageSignoutForm"
+    }
+</script>

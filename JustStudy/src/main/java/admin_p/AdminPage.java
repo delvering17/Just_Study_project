@@ -1,5 +1,7 @@
 package admin_p;
 
+import model_p.InquiryDAO;
+import model_p.InquiryDTO;
 import model_p.ReservationDAO;
 import model_p.TodayReservationDTO;
 
@@ -14,10 +16,17 @@ public class AdminPage implements AdminService{
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
         LocalDate now = LocalDate.now();
+        int unanswered = 0;
 
         ArrayList<TodayReservationDTO> todayReservation = new ReservationDAO().todayList(now);
+        ArrayList<InquiryDTO> inquiryUnansweredDTO = new InquiryDAO().inquiryUnanswered();
+
+        if(inquiryUnansweredDTO!=null){
+            unanswered = inquiryUnansweredDTO.size();
+        }
 
         request.setAttribute("todayReservation",todayReservation);
+        request.setAttribute("unanswered", unanswered);
         request.setAttribute("adminUrl","adminMain.jsp");
     }
 }

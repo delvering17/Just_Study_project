@@ -7,7 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         *{
@@ -32,16 +31,18 @@
             width: 1300px;
             height: 2000px;
             margin: 0px 0px 0px 220px;
-            padding: 120px 20px 20px 20px;
+            padding: 140px 40px 40px 40px;
         }
 
-        #main > h5{
-            margin: 0px 0px 10px 20px;
+        #main > h4{
+            margin: 0px 0px 25px 20px;
         }
 
         table{
+            width: 500px;
+            height: 200px;
             border: 1px solid rgb(122, 115, 115);
-            margin: 10px 0px 10px 20px;
+            margin: 10px 0px 40px 30px;
             font-size: 13px;
         }
 
@@ -74,8 +75,7 @@
     <div id="headline"><h3>관리자메인</h3></div>
 
     <div id="main">
-        <h5>오늘 예약 현황</h5>
-        <h5>총 예약 수:${todayReservationAmount}</h5>
+        <h4>오늘 예약 현황</h4>
 
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
             <tr>
@@ -100,24 +100,7 @@
             </c:forEach>
         </table>
 
-        <h5>1:1문의</h5>
-
-        <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
-            <tr>
-                <th width="100">지점</th>
-                <th width="400">제목</th>
-                <th width="100">이름</th>
-                <th width="100">일시</th>
-            </tr>
-            <c:forEach items="" var="">
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </c:forEach>
-        </table>
+        <h4>미답변 1:1 문의 : <a href="AdminInquiryUnansweredList">${unanswered}개</a></h4>
 
     </div>
 

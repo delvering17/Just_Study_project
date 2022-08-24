@@ -140,6 +140,25 @@
                 <th>지점</th>
                 <th>답변 상태</th>
             </tr>
+            <c:forEach items="${inquiryUnansweredDTO}" var="inquiryUnanswered">
+                <tr>
+                    <td>${inquiryUnanswered.inquiry_date}</td>
+                    <td><a href="AdminInquiryDetail?inquiry_id=${inquiryUnanswered.inquiry_id}">${inquiryUnanswered.inquiry_title}</a></td>
+                    <td>${inquiryUnanswered.inquiry_writer}</td>
+                    <td>${inquiryUnanswered.inquiry_category}</td>
+                    <td>${inquiryUnanswered.inquiry_type}</td>
+                    <td>${inquiryUnanswered.inquiry_branch}</td>
+                    <c:choose>
+                        <c:when test="${inquiryUnanswered.inquiry_state == 1}">
+                            <td>미답변</td>
+                        </c:when>
+                        <c:otherwise>
+                            <td>답변</td>
+                        </c:otherwise>
+                    </c:choose>
+                </tr>
+            </c:forEach>
+
             <c:forEach items="${arr_inquiryDTO}" var="inquiryDTO">
             <tr>
                 <td>${inquiryDTO.inquiry_date}</td>

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style type="text/css">
   #headline {
@@ -205,7 +206,7 @@
             <input type="checkbox" name="roomType" value="<%=room%>"/>
             <div><%=room%></div>
             <input type="button" name="roomMinus" value="-" disabled/>
-            <input type="text" name="roomNum" value="0" disabled readonly>
+            <input type="text" name="roomNum" value="1" disabled readonly>
             <input type="button" name="roomPlus" value="+" disabled/>
           </div>
 
@@ -271,7 +272,7 @@
     })
 
     $("input[name=roomMinus]").click(function () {
-      if($(this).parent().children("input[name=roomNum]").val() > 0){
+      if($(this).parent().children("input[name=roomNum]").val() > 1){
         $(this).parent().children("input[name=roomNum]").val($(this).parent().children("input[name=roomNum]").val()-1)
       }
     })
@@ -281,7 +282,55 @@
     })
 
     $(".admin-store-save").click(function () {
-      $("form").submit()
+
+      let form_data = {
+        input_branchName:$("input[name=branchName]").val(),
+        input_roomType:$("input[name=roomType]:checked").length,
+        input_price:$("input[name=price]").val(),
+        input_open:$("input[name=open]").val(),
+        input_close:$("input[name=close]").val(),
+        input_address:$("input[name=address]").val(),
+        input_addressDetail:$("input[name=addressDetail]").val(),
+        input_phone:$("input[name=phone]").val(),
+        input_img:$("input[name=img]").val(),
+        input_facilities:$("input[name=facilities]:checked").length
+      }
+
+      let nullCheck = true;
+      for (let i in form_data){
+        if(i == 1 || i == 9){
+          if(form_data[i] == 0){
+            nullCheck = false;
+            break;
+          }
+        } else{
+          if(form_data[i] == ""){
+            nullCheck = false;
+            break;
+          }
+        }
+      }
+
+      if (!nullCheck) {
+        alert("값을 모두 입력해 주세요.")
+      } else {
+        $.ajax({
+          url: '<c:url value="/nonView/CheckBranchName"/>',
+          type: "GET",
+          async: false,
+          data: "branchName=" + $("input[name=branchName]").val(),
+          success: function (data) {
+            if (data == "0") {
+              $("form").submit()
+            } else if (data == "1") {
+              alert("중복된 지점명 입니다.")
+            }
+          },
+          error: function (e) {
+            console.log(e.responseText)
+          }
+        })
+      }
     })
 
     $(".admin-store-list").click(function (){

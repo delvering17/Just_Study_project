@@ -47,13 +47,12 @@ public class PaySuccess implements ReservationService {
             try {
                 dto.setUseDate(sdf.parse(useDate[i]));
             } catch (ParseException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
             dto.setHeadcount(Integer.parseInt(headcount[i]));
             dto.setPay(Integer.parseInt(pay[i]));
 
-
-            int a = new ReservationDAO().addReservation(dto);
+            new ReservationDAO().addReservation(dto);
 
             reservArr[i] = dto;
         }
@@ -61,7 +60,7 @@ public class PaySuccess implements ReservationService {
         /*goSuccessEmail(request.getParameter("userEmail"), reservArr);*/
         request.setAttribute("mainUrl", "reservation/alert.jsp");
         request.setAttribute("msg", "예약이 완료되었습니다.");
-        request.setAttribute("goUrl", "../mypage/MyReservationList");
+        request.setAttribute("goUrl", "../mypage/MyReservationList?type=will");
     }
 
     public void goSuccessEmail(String email, ReservationDTO ...reservArr) {

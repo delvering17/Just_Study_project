@@ -32,7 +32,7 @@ public class NewsDAO {
     public ArrayList<NewsDTO> list(){
         ArrayList<NewsDTO> res = new ArrayList<NewsDTO>();
 
-        sql = "select * from news";
+        sql = "select * from news order by news_id desc ";
 
         try {
             ptmt = con.prepareStatement(sql);
@@ -45,7 +45,9 @@ public class NewsDAO {
                 dto.setNews_title(rs.getString("news_title"));
                 dto.setNews_reg_date(rs.getTimestamp("news_reg_date"));
                 dto.setNews_content(rs.getString("news_content"));
-                dto.setNews_img(rs.getString("news_img"));
+                dto.setNews_thumbnail_img(rs.getString("news_thumbnail_img"));
+
+
 
                 res.add(dto);
             }
@@ -68,7 +70,7 @@ public class NewsDAO {
             ptmt = con.prepareStatement(sql);
             rs = ptmt.executeQuery();
             if (rs.next()) {
-                dto.setNews_id(rs.getInt(1)+1);
+                dto.setNews_id(rs.getInt(1));
             }
 
         } catch (SQLException e) {
@@ -78,8 +80,8 @@ public class NewsDAO {
         try {
 
 
-            sql = "insert into news (news_id,news_title,news_content,news_img,news_reg_date) "
-                    + "values (?,?,?,?,sysdate())";
+            sql = "insert into news (news_id,news_title,news_content,news_img,news_thumbnail_img,news_reg_date) "
+                    + "values (?,?,?,?,?,sysdate())";
 
             ptmt =con.prepareStatement(sql);
 
@@ -87,6 +89,7 @@ public class NewsDAO {
             ptmt.setString(2,dto.news_title);
             ptmt.setString(3,dto.news_content);
             ptmt.setString(4,dto.news_img);
+            ptmt.setString(5,dto.news_thumbnail_img);
 
 
             ptmt.executeUpdate();
@@ -117,6 +120,7 @@ public class NewsDAO {
                 res.setNews_title(rs.getString("news_title"));
                 res.setNews_content(rs.getString("news_content"));
                 res.setNews_img(rs.getString("news_img"));
+                res.setNews_thumbnail_img(rs.getString("news_thumbnail_img"));
                 res.setNews_reg_date(rs.getTimestamp("news_reg_date"));
 
             }
@@ -133,15 +137,16 @@ public class NewsDAO {
     }
 
 
-    public int modify(NewsDTO dto, String img){
+    public int modify(NewsDTO dto){
 
-        sql = "update news set news_title = ? ,news_content = ?, news_img = ? where news_id = ?";
+        sql = "update news set news_title = ? ,news_content = ?, news_img = ?, news_thumbnail_img = ? where news_id = ?";
         try {
             ptmt = con.prepareStatement(sql);
             ptmt.setString(1, dto.getNews_title());
             ptmt.setString(2, dto.getNews_content());
             ptmt.setString(3, dto.getNews_img());
-            ptmt.setInt(4, dto.getNews_id());
+            ptmt.setString(4, dto.getNews_thumbnail_img());
+            ptmt.setInt(5, dto.getNews_id());
 
 
             return ptmt.executeUpdate();
@@ -177,18 +182,40 @@ public class NewsDAO {
 
         try {
             ptmt = con.prepareStatement(sql);
-            ptmt.setString(1, "");
+            ptmt.setString(1, null);
             ptmt.setInt(2, id);
 
             return ptmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            close();
         }
 
         return 0;
     }
 
+
+    public int thumbnailimgDelete(NewsDTO dto, int id){
+
+        sql = "update news set news_thumbnail_img = ? where news_id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, null);
+            ptmt.setInt(2, id);
+
+            return ptmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return 0;
+    }
 
 
     public void close() {

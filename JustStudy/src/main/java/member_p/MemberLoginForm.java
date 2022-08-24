@@ -11,7 +11,8 @@ public class MemberLoginForm implements MemberService{
 
 
         request.setAttribute("mainUrl", "member/member_loginForm.jsp");
-//        System.out.println("잘오니");
+
+//      System.out.println("잘오니");
 
 
     }

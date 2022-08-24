@@ -32,9 +32,9 @@ public class AdminReservDAO {
 
         ArrayList<AdminReservDTO> res = new ArrayList<AdminReservDTO>();
 
-        sql = "select reservation.id, reservation.orderId, reservation.resDate, member.mem_userid, member" +
+        sql = "select reservation.id, reservation.orderId, reservation.resDate, member.mem_userid, member.mem_nickname, member" +
                 ".mem_realname, reservation.city, reservation.branch, reservation.room, reservation.useDate, " +
-                "reservation.time, reservation.headcount, reservation.pay, status from reservation join member on " +
+                "reservation.time, reservation.headcount, reservation.pay, status from reservation left outer join member on " +
                 "reservation.userId = member.mem_id";
 
         try {
@@ -47,6 +47,7 @@ public class AdminReservDAO {
                 adminReservDTO.setOrderId(rs.getString("orderId"));
                 adminReservDTO.setResDate(rs.getTimestamp("resDate"));
                 adminReservDTO.setMem_userid(rs.getString("mem_userid"));
+                adminReservDTO.setMem_nickname(rs.getString("mem_nickname"));
                 adminReservDTO.setMem_realname(rs.getString("mem_realname"));
                 adminReservDTO.setCity(rs.getString("city"));
                 adminReservDTO.setBranch(rs.getString("branch"));
@@ -283,10 +284,10 @@ public class AdminReservDAO {
 
         ArrayList<AdminReservDTO> res = new ArrayList<AdminReservDTO>();
 
-        sql = "select ifnull(member.mem_userid, '회원정보없음') AS mem_userid, IFNULL(member.mem_nickname, '회원정보없음') " +
+        sql = "select id, orderId, resDate, ifnull(member.mem_userid, '회원정보없음') AS mem_userid, IFNULL(member.mem_nickname, '회원정보없음') " +
                 "AS mem_nickname, ifnull(member.mem_realname, '회원정보없음') AS mem_realname, reservation.city, " +
                 "reservation.branch, reservation.room, reservation.useDate, " +
-                "reservation.time, reservation.pay from reservation left outer join member on " +
+                "reservation.time, reservation.pay, reservation.status from reservation left outer join member on " +
                 "reservation.userId = member.mem_id where city = ? and branch = ? and reservation.status = '결제완료'";
 
         if(period!=null) {
@@ -316,6 +317,9 @@ public class AdminReservDAO {
             rs = ptmt.executeQuery();
             while(rs.next()){
                 AdminReservDTO adminReservDTO = new AdminReservDTO();
+                adminReservDTO.setId(rs.getInt("id"));
+                adminReservDTO.setOrderId(rs.getString("orderId"));
+                adminReservDTO.setResDate(rs.getDate("resDate"));
                 adminReservDTO.setMem_userid(rs.getString("mem_userid"));
                 adminReservDTO.setMem_realname(rs.getString("mem_realname"));
                 adminReservDTO.setMem_nickname(rs.getString("mem_nickname"));
@@ -326,6 +330,7 @@ public class AdminReservDAO {
                 adminReservDTO.setUseDate(rs.getDate("useDate"));
                 adminReservDTO.setTime(rs.getString("time"));
                 adminReservDTO.setPay(rs.getInt("pay"));
+                adminReservDTO.setStatus(rs.getString("status"));
 
                 res.add(adminReservDTO);
             }

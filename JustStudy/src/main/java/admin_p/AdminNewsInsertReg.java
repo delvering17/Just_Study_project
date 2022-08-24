@@ -17,6 +17,10 @@ public class AdminNewsInsertReg implements AdminService{
         System.out.println("AdminInsertReg 들어왔다");
 
         String path = request.getRealPath("/img/event");
+        /*path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\" +
+                "\\img\\news";
+
+        path = "C:\\Users\\dieun\\jieun\\coding\\GItHub\\Just_Study_project\\JustStudy\\src\\main\\webapp\\img\\news";*/
         path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\" +
                 "\\img\\news";
 
@@ -30,6 +34,7 @@ public class AdminNewsInsertReg implements AdminService{
             dto.setNews_title(mr.getParameter("news_title"));
             dto.setNews_content(mr.getParameter("news_content"));
             dto.setNews_img(mr.getFilesystemName("news_img"));
+            dto.setNews_thumbnail_img(mr.getFilesystemName("news_thumbnail_img"));
 
 
         } catch (IOException e) {

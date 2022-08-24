@@ -177,7 +177,7 @@
                 <tr>
                     <th>내용</th>
                     <td>
-                        <textarea name="content" cols="30" rows="10"></textarea>
+                        <input type="file" name="content">
                     </td>
                 </tr>
             </table>

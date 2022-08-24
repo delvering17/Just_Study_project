@@ -5,7 +5,8 @@
 <%@ page import="reservation_p.Studyroom" %>
 <%@ page import="java.util.Calendar" %>
 <%@ page import="java.util.Date" %>
-<%@ page import="model_p.MemberDTO" %><%--
+<%@ page import="model_p.MemberDTO" %>
+<%@ page import="java.text.SimpleDateFormat" %><%--
   Created by IntelliJ IDEA.
   User: dieun
   Date: 2022-08-11
@@ -492,8 +493,10 @@
     }
 
 </style>
-
-
+<%
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    String today = sdf.format(new Date());
+%>
 <div class="studyroom-reserv-bg">
 
     <h1>스터디룸예약</h1>
@@ -633,7 +636,6 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
         if(${param.city != null}){
-            console.log("${param.city}")
             $("input[name=cityName]").each(function (key, value){
                 if(value.getAttribute("id") == "${param.city}"){
                     value.setAttribute("checked", true)
@@ -743,7 +745,6 @@
                 $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(1)>b").html($(".studyroom-reserv-time > div > .fa-angle-left + div").html())
             } else{
                 alert("이전 일자는 예약할 수 없습니다.")
-
             }
 
             $.ajax({
@@ -764,6 +765,18 @@
             })
 
             $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(2)>b").html("")
+
+
+            if ($(".fa-angle-left+div").html().includes("<%=today%>")) {
+                $(".studyroom-reserv-innerlist-time>input[name=time]").each(function (key, value) {
+                    if (value.getAttribute("id").split(":")[0] <= new Date().getHours()) {
+                        value.nextSibling.firstChild.firstChild.setAttribute("class", "studyroom-reserv-impossible")
+                        value.nextSibling.firstChild.firstChild.innerHTML = "예약완료"
+                        value.nextSibling.firstChild.style.cursor = "default"
+                        value.remove()
+                    }
+                })
+            }
         })
 
         $(".studyroom-reserv-time > div > .fa-angle-right").click(function (){
@@ -790,12 +803,10 @@
             })
 
             $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(2)>b").html("")
-
         })
 
         $(document).on("change", "input[name=\"roomName\"]", function(){
 
-            console.log("sdfas")
             $.ajax({
                 url: '<c:url value="/nonView/SetReservationItems"/>',
                 type: "GET",
@@ -828,6 +839,17 @@
             }
 
             $(".studyroom-reserv-headcount:first-of-type+b").html(minHeadcount)
+
+            if($(".fa-angle-left+div").html().includes("<%=today%>")) {
+                $(".studyroom-reserv-innerlist-time>input[name=time]").each(function (key, value) {
+                    if (value.getAttribute("id").split(":")[0] <= new Date().getHours()) {
+                        value.nextSibling.firstChild.firstChild.setAttribute("class", "studyroom-reserv-impossible")
+                        value.nextSibling.firstChild.firstChild.innerHTML = "예약완료"
+                        value.nextSibling.firstChild.style.cursor = "default"
+                        value.remove()
+                    }
+                })
+            }
         });
 
         $(document).on("change", "input[name=\"time\"]", function (){
@@ -844,8 +866,6 @@
             } else{
                 $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(2)>b").html("")
             }
-
-
         })
 
         $('#datePicker').datepicker({
@@ -936,11 +956,6 @@
 
         $(".studyroom-reserv-selected > button").click(function(){
 
-            console.log($("input[name=cityName]:checked").length)
-            console.log($("input[name=branchName]:checked").length)
-            console.log($("input[name=roomName]:checked").length)
-            console.log($("input[name=time]:checked").length)
-
             if($("input[name=cityName]:checked").length != 0 && $("input[name=branchName]:checked").length != 0 && $("input[name=roomName]:checked").length != 0 && $("input[name=time]:checked").length != 0){
                 const selectedTime = document.querySelectorAll('input[type=checkbox][name=time]:checked')
                 let selectedTimeList = new Array()
@@ -959,12 +974,9 @@
                 big:for(let i = 0 ; i < $(".studyroom-reserv-form>div").length; i++){
                     let check = true;
                     for(let k = 0 ; k < selected.length; k ++){
-                        console.log(selected[k])
-                        console.log($(".studyroom-reserv-form>div").eq(i).children("input").eq(k).val())
                         if(!selected[k].includes($(".studyroom-reserv-form>div").eq(i).children("input").eq(k).val())){
                             check = false;
                         }
-                        console.log(check)
                     }
                     if(check){
                         for(let l = 0 ; l < selectedTimeList.length; l++){
@@ -1028,6 +1040,10 @@
             }
 
             $(".studyroom-reserv-done>button").html("총 "+$(".studyroom-reserv-result>div").length+"건 | "+realTotalWon+"원 결제하기")
+
+            $(".studyroom-reserv-result>div").each(function (key, value){
+                value.firstChild.innerHTML = key+1
+            })
         })
 
         $(".studyroom-reserv-done>button").click(function (){

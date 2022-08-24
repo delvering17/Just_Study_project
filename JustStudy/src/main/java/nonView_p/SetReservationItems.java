@@ -1,5 +1,6 @@
 package nonView_p;
 
+import model_p.BranchDAO;
 import model_p.BranchDTO;
 import model_p.ReservationDAO;
 
@@ -16,7 +17,7 @@ public class SetReservationItems implements NonViewService {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-        ArrayList<BranchDTO> branchList = new ReservationDAO().branchList();
+        ArrayList<BranchDTO> branchList = new BranchDAO().branchList();
         String res = "";
 
         for (BranchDTO dto : branchList) {

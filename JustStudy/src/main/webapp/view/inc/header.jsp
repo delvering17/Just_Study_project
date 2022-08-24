@@ -235,10 +235,25 @@
                         </ul>
                         <ul class="gnb-sub-list">
                             <li><a href="../reservation/UsageInfo">이용안내</a></li>
-                            <li><a href="../reservation/Studyroom">스터디룸예약</a></li>
+                            <c:choose>
+                                <c:when test="${sessionScope.mem_level == 3}">
+                                    <li><a href="../member/MemberLevelAlert">스터디룸예약</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li><a href="../reservation/Studyroom">스터디룸예약</a></li>
+                                </c:otherwise>
+                            </c:choose>
                         </ul>
                         <ul class="gnb-sub-list">
-                            <li><a href="../community/CommunityPage?category=all">스터디모집</a></li>
+                            <c:choose>
+                                <c:when test="${sessionScope.mem_level == 3}">
+                                    <li><a href="../member/MemberLevelAlert">스터디모집</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li><a href="../community/CommunityPage?category=all">스터디모집</a></li>
+                                </c:otherwise>
+                            </c:choose>
+
                         </ul>
                         <ul class="gnb-sub-list">
                             <li><a href="../notice/NoticePage">공지사항</a></li>
@@ -260,7 +275,7 @@
                                 </c:otherwise>
                             </c:choose>
                             <c:if test="${sessionScope.mem_level == 2}">
-                                <li><a href="../admin/AdminPage" >관리자로그인</a></li>
+                                <li><a href="../admin/AdminPage" >관리자 페이지</a></li>
                             </c:if>
                         </ul>
                         <ul class="gnb-sub-list">

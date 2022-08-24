@@ -34,7 +34,14 @@
         </tr>
         <tr>
             <td>내용</td>
-            <td colspan="3"><textarea name="content" cols="50" rows="10">${eventDTO.content}</textarea></td>
+            <c:choose>
+                <c:when test="${eventDTO.img != null}">
+                    <td colspan="3"><input type="file" name="img" value="${eventDTO.img}"></td>
+                </c:when>
+                <c:otherwise>
+                    <td colspan="3"><input type="file" name="img" value=""></td>
+                </c:otherwise>
+            </c:choose>
         </tr>
         <tr>
             <td colspan="4" align="center">

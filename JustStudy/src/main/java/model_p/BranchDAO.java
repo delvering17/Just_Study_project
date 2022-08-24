@@ -3,7 +3,10 @@ package model_p;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class BranchDAO {
@@ -79,6 +82,40 @@ public class BranchDAO {
             e.printStackTrace();
         } finally {
             close();
+        }
+
+        return res;
+    }
+
+    public ArrayList<BranchDTO> branchSearchList(String filter, String word){
+        ArrayList<BranchDTO> res = new ArrayList<BranchDTO>();
+
+        sql = "select * from branch where "+filter+" like ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, "%"+word+"%");
+            System.out.println(ptmt);
+            rs = ptmt.executeQuery();
+
+            while (rs.next()) {
+                BranchDTO branchDTO = new BranchDTO();
+                branchDTO.setCity(rs.getString("city"));
+                branchDTO.setName(rs.getString("name"));
+                branchDTO.setRooms(rs.getString("rooms"));
+                branchDTO.setPrice(rs.getInt("price"));
+                branchDTO.setOpen(rs.getInt("open"));
+                branchDTO.setClose(rs.getInt("close"));
+                branchDTO.setFacilities(rs.getString("facilities"));
+                branchDTO.setAddress(rs.getString("address"));
+                branchDTO.setAddressDetail(rs.getString("addressDetail"));
+                branchDTO.setPhone(rs.getString("phone"));
+                branchDTO.setImg(rs.getString("img"));
+
+                res.add(branchDTO);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return res;

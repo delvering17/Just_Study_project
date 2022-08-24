@@ -27,37 +27,6 @@ public class ReservationDAO {
         }
     }
 
-    public ArrayList<BranchDTO> branchList(){
-
-        ArrayList<BranchDTO> res = new ArrayList<BranchDTO>();
-
-        sql = "select * from branch order by name";
-        try {
-            ptmt = con.prepareStatement(sql);
-            rs = ptmt.executeQuery();
-
-            while(rs.next()){
-                BranchDTO dto = new BranchDTO();
-                dto.setCity(rs.getString("city"));
-                dto.setName(rs.getString("name"));
-                dto.setRooms(rs.getString("rooms"));
-                dto.setPrice(rs.getInt("price"));
-                dto.setOpen(rs.getInt("open"));
-                dto.setClose(rs.getInt("close"));
-                dto.setFacilities(rs.getString("facilities"));
-                dto.setAddress(rs.getString("address"));
-                dto.setAddressDetail(rs.getString("addressDetail"));
-                dto.setPhone(rs.getString("phone"));
-                res.add(dto);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            close();
-        }
-        return res;
-    }
-
     public int addReservation(ReservationDTO dto) {
         sql = "insert into reservation(resDate, userId, city, branch, room, useDate, time, headcount, pay, paymentMethod, status, orderId, review) values" +
                 "(sysdate(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)";

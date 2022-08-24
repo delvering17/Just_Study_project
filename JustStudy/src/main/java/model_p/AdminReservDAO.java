@@ -4,8 +4,10 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+
 
 public class AdminReservDAO {
 
@@ -143,19 +145,20 @@ public class AdminReservDAO {
         return res;
     }
 
-    public ArrayList<AdminReservDTO> viewStoreDetails(String city, String branch) {
+    public ArrayList<AdminReservDTO> viewStoreDetails(String city, String branch, LocalDate useDate) {
 
         ArrayList<AdminReservDTO> res = new ArrayList<AdminReservDTO>();
 
         sql = "select reservation.id, reservation.orderId, reservation.resDate, member.mem_userid, member" +
                 ".mem_realname, reservation.city, reservation.branch, reservation.room, reservation.useDate, " +
                 "reservation.time, reservation.headcount, reservation.pay, status from reservation left outer join member on " +
-                "reservation.userId = member.mem_id where city = ? and branch = ?";
+                "reservation.userId = member.mem_id where city = ? and branch = ? and useDate = ?";
 
         try {
             ptmt = con.prepareStatement(sql);
             ptmt.setString(1, city);
             ptmt.setString(2, branch);
+            ptmt.setDate(3, java.sql.Date.valueOf(useDate));
 
             rs = ptmt.executeQuery();
             while(rs.next()){

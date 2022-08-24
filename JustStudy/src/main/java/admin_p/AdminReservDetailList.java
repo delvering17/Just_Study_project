@@ -5,6 +5,7 @@ import model_p.AdminReservDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class AdminReservDetailList implements AdminService{
@@ -14,7 +15,9 @@ public class AdminReservDetailList implements AdminService{
 
         String city = request.getParameter("city");
         String branch = request.getParameter("branch");
-        ArrayList<AdminReservDTO> totalList = new AdminReservDAO().viewStoreDetails(city, branch);
+        LocalDate now = LocalDate.now();
+
+        ArrayList<AdminReservDTO> totalList = new AdminReservDAO().viewStoreDetails(city, branch, now);
 
         request.setAttribute("totalList", totalList);
         request.setAttribute("adminUrl", "adminReservList.jsp");

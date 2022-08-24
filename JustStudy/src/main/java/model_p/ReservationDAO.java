@@ -6,7 +6,7 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 
 public class ReservationDAO {
 
@@ -183,7 +183,7 @@ public class ReservationDAO {
     public ArrayList<TodayReservationDTO> todayList(LocalDate useDate) {
 
         ArrayList<TodayReservationDTO> res = new ArrayList<TodayReservationDTO>();
-        sql = "select city, branch, COUNT(id) as cnt from reservation  where usedate = ? group by branch";
+        sql = "select city, branch, COUNT(id) as cnt from reservation where usedate = ? group by branch order by COUNT(id) desc";
 
         try {
             ptmt = con.prepareStatement(sql);
@@ -195,7 +195,8 @@ public class ReservationDAO {
                 TodayReservationDTO todayReservationDTO = new TodayReservationDTO();
                 todayReservationDTO.setCity(rs.getString("city"));
                 todayReservationDTO.setBranch(rs.getString("branch"));
-                todayReservationDTO.setReservationCount(rs.getInt("cnt"));
+                todayReservationDTO.setCnt(rs.getInt("cnt"));
+
                 res.add(todayReservationDTO);
             }
         } catch (SQLException e) {

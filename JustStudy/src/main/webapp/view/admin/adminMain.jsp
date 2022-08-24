@@ -90,9 +90,10 @@
                     <form action="AdminReservDetailList" method="get">
                         <input type="hidden" name="city" value="${todayReservation.city}">
                         <input type="hidden" name="branch" value="${todayReservation.branch}">
+                        <input type="hidden" name="useDate" value="${todayReservation.useDate}">
                         <td>${todayReservation.city}</td>
                         <td>${todayReservation.branch}</td>
-                        <td>${todayReservation.reservationCount}</td>
+                        <td>${todayReservation.cnt}</td>
                         <td><button type="submit">상세보기</button></td>
                     </form>
                 </tr>
@@ -103,41 +104,19 @@
 
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
             <tr>
-                <th width="100">그룹</th>
-                <th width="100">게시판</th>
+                <th width="100">지점</th>
                 <th width="400">제목</th>
                 <th width="100">이름</th>
                 <th width="100">일시</th>
             </tr>
-            <tr>
-                <th>화성 스터디 룸</th>
-                <th>후기</th>
-                <th>우와 너무 싸요</th>
-                <th>송찬욱</th>
-                <th>2022-08-12</th>
-            </tr>
-            <tr>
-                <th>사당 스터디 룸</th>
-                <th>자유게시판</th>
-                <th>여기 주변에 맛집 많아요</th>
-                <th>송지은</th>
-                <th>2022-08-13</th>
-            </tr>
-            <tr>
-                <th>수원 스터디 룸</th>
-                <th>1:1 문의</th>
-                <th>옆 방이 자꾸 떠들어요</th>
-                <th>김지원</th>
-                <th>2022-07-24</th>
-            </tr>
-            <tr>
-                <th>인천 스터디 룸</th>
-                <th>후기</th>
-                <th>스터디 끝나고 술 한 잔은 국룰이지</th>
-                <th>김한솔</th>
-                <th>2022-08-01</th>
-            </tr>
-
+            <c:forEach items="" var="">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </c:forEach>
         </table>
 
     </div>

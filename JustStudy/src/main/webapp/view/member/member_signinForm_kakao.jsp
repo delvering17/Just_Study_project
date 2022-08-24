@@ -70,7 +70,11 @@
 
 </style>
 <div id="form-signin">
-  <p id="signin-logo">카카오 계정 회원가입</p>
+  <% if(request.getParameter("type") != null) { %>
+    <p id="signin-logo">네이버 계정 회원가입</p>
+  <% } else {%>
+    <p id="signin-logo">카카오 계정 회원가입</p>
+  <% }%>
   <input type="hidden" id="input-socialid" value="<%=request.getParameter("social_id")%>">
   <div class="wrapper-signin">
     <p>이메일</p>
@@ -192,8 +196,6 @@
 
     let form_data = {
       input_userid:$('#input-userid').val(),
-      input_password1:$('#input-password1').val(),
-      input_password2:$('#input-password2').val(),
       input_nickname:$('#input-nickname').val(),
       input_socialid:$('#input-socialid').val(),
       input_realname:$('#input-realname').val(),
@@ -202,19 +204,16 @@
     }
 
     $.ajax({
-      url:'<c:url value="/memberNonView/MemberSigninReg"/>',
+        url:'<c:url value="/memberNonView/MemberSocialSigninReg"/>',
       type:'GET',
       data: form_data,
       async:false,
       dataType:'JSON',
       success:function(response){
-        alert(response.msg)
-        <%--if(response.loginResult === 'success') {--%>
-        <%--  alert('로그인에 성공했습니다.')--%>
-        <%--  location.href = '<c:url value="/board/MainPage"/>'--%>
-        <%--} else {--%>
-        <%--  alert(response.loginResult)--%>
-        <%--}--%>
+        if(response.msg === 'success') {
+          alert('회원 가입이 완료되었습니다.')
+          location.href = "../board/MainPage"
+        }
       },
       error:function(e){
         console.log(e.responseText)

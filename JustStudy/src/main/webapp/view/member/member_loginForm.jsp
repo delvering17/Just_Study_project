@@ -1,8 +1,57 @@
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
+<style type="text/css">
+    .btn-login {
+        display: flex;
+        justify-content: center;
+    }
+
+    .btn-login > * {
+        width: 183px;
+        height: 45px;
+        margin-top: 5px;
+    }
+</style>
+<div id="wrapper-login">
+    <div>
+        <p>로그인</p>
+    </div>
+    <div>
+        <div>
+            <span><i class="fa-solid fa-key"></i></span>
+            <input type="text" id="input-userid" name="input-userid" placeholder="아이디" aria-label="아이디" required/>
+        </div>
+        <div>
+            <span><i class="fa-solid fa-key"></i></span>
+            <input type="password" id="input-password"  placeholder="비밀번호" aria-label="비밀번호" required/>
+        </div>
+<%--        <div>--%>
+<%--            <input type="checkbox" id="exampleCheck1"/>--%>
+<%--            <label class="form-check-label" for="exampleCheck1">Check me out</label>--%>
+<%--        </div>--%>
+        <div class="wrapper-login">
+            <div class="btn-login">
+                <button onclick="goLogin()" class="btn btn-dark">로그인</button>
+                <button onclick="kakaoLogout()" class="btn btn-dark">로그인</button>
+            </div>
+            <div class="btn-login">
+                <button onclick="kakaoLogin()" class="btn" style="padding: 0px">
+                    <img src="<c:url value="/img/member/kakao_login.png"/>" alt=""/>
+                </button>
+            </div>
+            <div class="btn-login">
+                <div id="naver_id_login">asdf</div>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript">
 
     function goLogin() {
@@ -86,6 +135,17 @@
     //     console.log(Kakao.Auth.getAccessToken());
     // });
 
+    var naver_id_login = new naver_id_login("SM6kP7n6zyadJ15rvs6z", "http://localhost:8080/JustStudy_war_exploded2/member/MemberSocialNaverLoginReg");
+    var state = naver_id_login.getUniqState();
+    naver_id_login.setButton("white", 2,40);
+    naver_id_login.setDomain("http://localhost:8080");
+    naver_id_login.setState(state);
+    // naver_id_login.setPopup();
+
+    naver_id_login.init_naver_id_login();
+
+    // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+
     function getUserInformation() {
         Kakao.API.request({
             url: '/v2/user/me',
@@ -156,45 +216,3 @@
     }
 
 </script>
-<style type="text/css">
-    .btn-login {
-        display: flex;
-        justify-content: center;
-    }
-
-    .btn-login > * {
-        width: 183px;
-        height: 45px;
-        margin-top: 5px;
-    }
-</style>
-<div id="wrapper-login">
-    <div>
-        <p>로그인</p>
-    </div>
-    <div>
-        <div>
-            <span><i class="fa-solid fa-key"></i></span>
-            <input type="text" id="input-userid" name="input-userid" placeholder="아이디" aria-label="아이디" required/>
-        </div>
-        <div>
-            <span><i class="fa-solid fa-key"></i></span>
-            <input type="password" id="input-password"  placeholder="비밀번호" aria-label="비밀번호" required/>
-        </div>
-<%--        <div>--%>
-<%--            <input type="checkbox" id="exampleCheck1"/>--%>
-<%--            <label class="form-check-label" for="exampleCheck1">Check me out</label>--%>
-<%--        </div>--%>
-        <div class="wrapper-login">
-            <div class="btn-login">
-                <button onclick="goLogin()" class="btn btn-dark">로그인</button>
-                <button onclick="kakaoLogout()" class="btn btn-dark">로그인</button>
-            </div>
-            <div class="btn-login">
-                <button onclick="kakaoLogin()" class="btn" style="padding: 0px">
-                    <img src="<c:url value="/img/member/kakao_login.png"/>" alt=""/>
-                </button>
-            </div>
-        </div>
-    </div>
-</div>

@@ -28,8 +28,6 @@ public class MemberSocialLoginReg implements MemberNonViewService{
 
         if(mem_id != 0) {
             // 이미 가입된 회원
-
-
             HttpSession session = request.getSession();
             session.setAttribute("login", mem_id);
 
@@ -43,43 +41,28 @@ public class MemberSocialLoginReg implements MemberNonViewService{
             }
         } else {
             // 가입 되지 않은 회원
-
-
             try {
-                jj.put("loginResult", URLEncoder.encode("가입 되지 않은 회원입니다. 회원가입을 진행해주세요","UTF-8"));
-
                 try {
                     request.setCharacterEncoding("UTF-8");
                 } catch (UnsupportedEncodingException e) {
 
                     e.printStackTrace();
                 }
-
-                jj.put("goUrl", "../member/MemberSocialSigninForm?email="+social_email + "&realname="+ URLEncoder.encode(realname,"UTF-8") + "&social_id="+social_id);
-
+                jj.put("loginResult", "fail");
+                jj.put("email", social_email );
+                jj.put("social_id", social_id );
+                jj.put("realname", URLEncoder.encode(realname,"UTF-8") );
             } catch (UnsupportedEncodingException e) {
                 throw new RuntimeException(e);
             }
-
-
             request.setAttribute("social_id", social_id);
             request.setAttribute("social_email", social_email);
-
         }
-
-
-
-
-
         try {
-
             response.getWriter().append(jj.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
     }
 }
 

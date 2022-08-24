@@ -235,10 +235,25 @@
                         </ul>
                         <ul class="gnb-sub-list">
                             <li><a href="../reservation/UsageInfo">이용안내</a></li>
-                            <li><a href="../reservation/Studyroom">스터디룸예약</a></li>
+                            <c:choose>
+                                <c:when test="${sessionScope.mem_level == 3}">
+                                    <li><a href="../member/MemberLevelAlert">스터디룸예약</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li><a href="../reservation/Studyroom">스터디룸예약</a></li>
+                                </c:otherwise>
+                            </c:choose>
                         </ul>
                         <ul class="gnb-sub-list">
-                            <li><a href="../community/CommunityPage?category=all">스터디모집</a></li>
+                            <c:choose>
+                                <c:when test="${sessionScope.mem_level == 3}">
+                                    <li><a href="../member/MemberLevelAlert">스터디모집</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li><a href="../community/CommunityPage?category=all">스터디모집</a></li>
+                                </c:otherwise>
+                            </c:choose>
+
                         </ul>
                         <ul class="gnb-sub-list">
                             <li><a href="../notice/NoticePage">공지사항</a></li>

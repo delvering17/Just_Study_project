@@ -179,8 +179,8 @@
                         </c:when>
                         <c:otherwise>
                             <input type="button" value="파일 삭제" id="imgDelete" onclick="deleteFile()"/>
-                            <input type="hidden" name="img" value="${eventDTO.img}"></input>
-                            <img src="<c:url value="/img/${eventDTO.img}"/> ">
+                            <input type="hidden" name="img" value="${eventDTO.img}"/>
+                            <img src="<c:url value="/img/event/${eventDTO.img}"/> ">
                         </c:otherwise>
                     </c:choose>
                 </td>
@@ -188,7 +188,16 @@
             <tr>
                 <th>내용</th>
                 <td>
-                    <textarea name="content" cols="30" rows="10">${eventDTO.content}</textarea>
+                    <c:choose>
+                        <c:when test="${eventDTO.img == null}">
+                            <input type="file" name="content">
+                        </c:when>
+                        <c:otherwise>
+                            <input type="button" value="파일 삭제" id="imgDelete" onclick="deleteFile()"/>
+                            <input type="hidden" name="content" value="${eventDTO.img}"/>
+                            <img src="<c:url value="/img/event/${eventDTO.img}"/> ">
+                        </c:otherwise>
+                    </c:choose>
 
                 </td>
             </tr>

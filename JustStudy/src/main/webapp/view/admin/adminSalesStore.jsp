@@ -95,8 +95,6 @@
   ArrayList<BranchDTO> branchList = (ArrayList<BranchDTO>) request.getAttribute("branchList");
 %>
 
-
-
 <div class="admin-sales-store-bg">
 
   <div class="admin-sales-store-headline">

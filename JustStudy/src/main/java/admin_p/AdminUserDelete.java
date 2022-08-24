@@ -18,7 +18,7 @@ public class AdminUserDelete implements AdminService{
         int adminDeleteId = Integer.parseInt(request.getParameter("user"));
 
         MemberDTO memberDTO = new MemberDAO().detail(adminDeleteId);
-        ArrayList<ReservationDTO> myReservation = new ReservationDAO().myReservationListWill(memberDTO.getMem_id());
+        ArrayList<ReservationDTO> myReservation = new ReservationDAO().myReservationListWill(memberDTO.getMem_id(), null);
         ArrayList<ReservationDTO> myReservationToday = new ReservationDAO().myReservationListToday(memberDTO.getMem_id());
 
         for(ReservationDTO reservationDTO : myReservationToday){

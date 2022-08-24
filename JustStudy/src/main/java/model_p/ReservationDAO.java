@@ -27,37 +27,6 @@ public class ReservationDAO {
         }
     }
 
-    public ArrayList<BranchDTO> branchList(){
-
-        ArrayList<BranchDTO> res = new ArrayList<BranchDTO>();
-
-        sql = "select * from branch order by name";
-        try {
-            ptmt = con.prepareStatement(sql);
-            rs = ptmt.executeQuery();
-
-            while(rs.next()){
-                BranchDTO dto = new BranchDTO();
-                dto.setCity(rs.getString("city"));
-                dto.setName(rs.getString("name"));
-                dto.setRooms(rs.getString("rooms"));
-                dto.setPrice(rs.getInt("price"));
-                dto.setOpen(rs.getInt("open"));
-                dto.setClose(rs.getInt("close"));
-                dto.setFacilities(rs.getString("facilities"));
-                dto.setAddress(rs.getString("address"));
-                dto.setAddressDetail(rs.getString("addressDetail"));
-                dto.setPhone(rs.getString("phone"));
-                res.add(dto);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            close();
-        }
-        return res;
-    }
-
     public int addReservation(ReservationDTO dto) {
         sql = "insert into reservation(resDate, userId, city, branch, room, useDate, time, headcount, pay, paymentMethod, status, orderId, review) values" +
                 "(sysdate(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)";
@@ -125,14 +94,25 @@ public class ReservationDAO {
         return res;
     }
 
-    public ArrayList<ReservationDTO> myReservationListWill(int userId){
+    public ArrayList<ReservationDTO> myReservationListWill(int userId, java.util.Date splitDate){
 
         ArrayList<ReservationDTO> res = new ArrayList<ReservationDTO>();
 
-        sql = "select * from reservation where userId = ? and useDate > DATE_FORMAT(SYSDATE(), '%Y-%m-%d') order by resDate desc";
+        sql = "select * from reservation where userId = ? and useDate > DATE_FORMAT(SYSDATE(), '%Y-%m-%d')";
+
+        if(splitDate != null){
+            sql += " and useDate < ?";
+        }
+
+        sql += " order by resDate desc";
+
         try {
             ptmt = con.prepareStatement(sql);
             ptmt.setInt(1, userId);
+
+            if(splitDate != null){
+                ptmt.setDate(2, new java.sql.Date(splitDate.getTime()));
+            }
 
             rs = ptmt.executeQuery();
             while(rs.next()){
@@ -162,14 +142,26 @@ public class ReservationDAO {
 
         return res;
     }
-    public ArrayList<ReservationDTO> myReservationListDone(int userId){
+    public ArrayList<ReservationDTO> myReservationListDone(int userId, java.util.Date splitDate){
 
         ArrayList<ReservationDTO> res = new ArrayList<ReservationDTO>();
 
-        sql = "select * from reservation where userId = ? and useDate < DATE_FORMAT(SYSDATE(), '%Y-%m-%d') order by resDate desc";
+        sql = "select * from reservation where userId = ? and useDate < DATE_FORMAT(SYSDATE(), '%Y-%m-%d')";
+
+        if(splitDate != null){
+            sql += " and useDate > ?";
+        }
+
+        sql += " order by resDate desc";
+
+
         try {
             ptmt = con.prepareStatement(sql);
             ptmt.setInt(1, userId);
+
+            if(splitDate != null){
+                ptmt.setDate(2, new java.sql.Date(splitDate.getTime()));
+            }
 
             rs = ptmt.executeQuery();
             while(rs.next()){

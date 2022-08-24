@@ -241,7 +241,7 @@
             </tr>
             <tr>
                 <th>매장 사진</th>
-                <%if (!branchDTO.getImg().equals(null)) {%>
+                <%if (!branchDTO.getImg().equals("")) {%>
                         <td>
                             <%=branchDTO.getImg()%>
                             <input type="button" value="파일 삭제" class="imgDelete"/>
@@ -290,7 +290,38 @@
         })
 
         $(".admin-store-save").click(function () {
-            $("form").submit()
+            let form_data = {
+                input_roomType:$("input[name=roomType]:checked").length,
+                input_price:$("input[name=price]").val(),
+                input_open:$("input[name=open]").val(),
+                input_close:$("input[name=close]").val(),
+                input_address:$("input[name=address]").val(),
+                input_addressDetail:$("input[name=addressDetail]").val(),
+                input_phone:$("input[name=phone]").val(),
+                input_img:$("input[name=img]").val(),
+                input_facilities:$("input[name=facilities]:checked").length
+            }
+
+            let nullCheck = true;
+            for (let i in form_data){
+                console.log(form_data[i])
+                if(i == 0 || i == 8){
+                    if(form_data[i] == 0){
+                        nullCheck = false;
+                        break;
+                    }
+                } else{
+                    if(form_data[i] == ""){
+                        nullCheck = false;
+                        break;
+                    }
+                }
+            }
+            if (!nullCheck) {
+                alert("값을 모두 입력해 주세요.")
+            } else {
+                $("form").submit()
+            }
         })
 
         $(".imgDelete").click(function (){
@@ -299,6 +330,7 @@
                 $(".admin-store-modify-form").submit()
             }
         })
+
 
 
 </script>

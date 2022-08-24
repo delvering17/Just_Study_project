@@ -99,10 +99,22 @@
 
     <div class="admin-store-list-main">
 
-        <div>
-            <input type="text">
-            <button><i class="fa-solid fa-magnifying-glass"></i></button>
-        </div>
+        <form action="AdminStoreList">
+            <div>
+                <select name="filter">
+                    <option value="city">지역</option>
+                    <option value="name">지점명</option>
+                    <option value="rooms">룸타입</option>
+                    <option value="price">이용요금</option>
+                    <option value="address">매장주소</option>
+                    <option value="addressDetail">상세주소</option>
+                    <option value="phone">전화번호</option>
+                    <option value="facilities">편의시설</option>
+                </select>
+                <input type="text" name="word">
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        </form>
 
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-store-list-table">
             <tr>

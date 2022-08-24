@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<form action="AdminNoticeInsertReg" method="post">
+<form action="AdminNoticeInsertReg" name="myform" method="post" onsubmit="return check()">
 
     <table style="margin: 0 auto; padding-top: 100px">
         <tr>
@@ -19,8 +19,30 @@
             <td colspan="3"><textarea name="content" cols="50" rows="10"></textarea></td>
         </tr>
         <tr>
-            <td colspan="4"><input type="submit" value="등록"></td>
+            <td colspan="4"><input type="submit" id="submit" value="등록" /></td>
         </tr>
     </table>
-
 </form>
+<script type="text/javascript">
+
+    function check(){
+        const f = document.myform;
+        if(f.title.value == ""){
+            alert("빈칸을 입력해주세요");
+            f.title.focus();
+            return false;
+        }
+
+        if(f.content.value == ""){
+            alert("빈칸을 입력해주세요");
+            f.content.focus();
+            return false;
+        }
+
+    }
+
+
+
+
+
+</script>

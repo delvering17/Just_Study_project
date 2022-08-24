@@ -136,7 +136,7 @@
     </div>
 
     <div id="main">
-        <form action="AdminNoticeModifyReg">
+        <form action="AdminNoticeModifyReg" name="myform" onsubmit="return check()">
             <input type="hidden" name="id" value="${dto.id}">
             <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
                 <tr>
@@ -154,3 +154,22 @@
         </form>
     </div>
 </div>
+
+<script>
+    function check(){
+        const f = document.myform;
+        if(f.title.value == ""){
+            alert("빈칸을 입력해주세요");
+            f.title.focus();
+            return false;
+        }
+
+        if(f.content.value == ""){
+            alert("빈칸을 입력해주세요");
+            f.content.focus();
+            return false;
+        }
+
+    }
+
+</script>

@@ -41,6 +41,9 @@ public class MyReservationList implements MypageService{
                     plusMinus = -1;
                 }
                 switch (request.getParameter("period")){
+                    case "all":
+                        endDate = null;
+                        break;
                     case "today":
                         endDate.setDate(endDate.getDate() + 1 * plusMinus);
                         break;
@@ -55,7 +58,9 @@ public class MyReservationList implements MypageService{
                         break;
                     case "mypick":
                         startDate = sdf.parse(request.getParameter("startDate"));
+                        startDate.setDate(startDate.getDate() - 1);
                         endDate = sdf.parse(request.getParameter("endDate"));
+                        endDate.setDate(endDate.getDate() + 1);
                         break;
                 }
 
@@ -68,7 +73,11 @@ public class MyReservationList implements MypageService{
         }
 
         if(request.getParameter("type").equals("will")){
-            myReservation =  new ReservationDAO().myReservationListWill(memberDTO.getMem_id(), endDate);
+            if(request.getParameter("period").equals("mypick")){
+                myReservation = new ReservationDAO().myReservationListWill(memberDTO.getMem_id(), null);
+            } else{
+                myReservation =  new ReservationDAO().myReservationListWill(memberDTO.getMem_id(), endDate);
+            }
             for(ReservationDTO reservationDTO : myReservationToday){
                 String lastTime = reservationDTO.getTime().split(", ")[reservationDTO.getTime().split(", ").length-1].split(":")[0];
                 int nowTime = new Date().getHours();
@@ -77,12 +86,26 @@ public class MyReservationList implements MypageService{
                 }
             }
         } else if(request.getParameter("type").equals("done")){
-            myReservation = new ReservationDAO().myReservationListDone(memberDTO.getMem_id(), endDate);
+            if(request.getParameter("period").equals("mypick")){
+                myReservation = new ReservationDAO().myReservationListDone(memberDTO.getMem_id(), null);
+            } else{
+                myReservation =  new ReservationDAO().myReservationListDone(memberDTO.getMem_id(), endDate);
+            }
             for(ReservationDTO reservationDTO : myReservationToday){
                 String lastTime = reservationDTO.getTime().split(", ")[reservationDTO.getTime().split(", ").length-1].split(":")[0];
                 int nowTime = new Date().getHours();
                 if(nowTime > Integer.parseInt(lastTime)){
                     myReservation.add(reservationDTO);
+                }
+            }
+        }
+
+        if(request.getParameter("period").equals("mypick")){
+            ArrayList<ReservationDTO> myPickList = new ArrayList<ReservationDTO>();
+            for(ReservationDTO reservationDTO : myReservation){
+                if(reservationDTO.getUseDate().after(startDate) && reservationDTO.getUseDate().before(endDate)){
+                    myPickList.add(reservationDTO);
+                    myReservation = myPickList;
                 }
             }
         }

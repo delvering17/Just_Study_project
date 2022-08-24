@@ -47,13 +47,12 @@ public class PaySuccess implements ReservationService {
             try {
                 dto.setUseDate(sdf.parse(useDate[i]));
             } catch (ParseException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
             dto.setHeadcount(Integer.parseInt(headcount[i]));
             dto.setPay(Integer.parseInt(pay[i]));
 
-
-            int a = new ReservationDAO().addReservation(dto);
+            new ReservationDAO().addReservation(dto);
 
             reservArr[i] = dto;
         }

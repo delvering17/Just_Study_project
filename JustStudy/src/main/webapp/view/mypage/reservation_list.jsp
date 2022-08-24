@@ -2,6 +2,7 @@
 <%@ page import="model_p.ReservationDTO" %>
 <%@ page import="java.util.Date" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -153,10 +154,8 @@
 
 </style>
 
-
-
 <div class="mypage-reservlist">
-    <form action="MyReservationList">
+    <form action="MyReservationList" class="mypage-reservlist-form">
         <input type="hidden" name="type" value="${param.type}"/>
         <div class="mypage-reservlist-top">
             <div class="top-dateselect-wrapper">
@@ -177,10 +176,20 @@
                 </label>
             </div>
 
-            <input class="mypage-reservlist-top-datepicker" type="date" name="startDate">
-            <p>&#126;</p>
-            <input class="mypage-reservlist-top-datepicker" type="date" name="endDate">
-            <input type="submit" class="mypage-reservlist-period" id="submit-find" value="조회"/>
+            <fmt:formatDate value="<%=new Date()%>" pattern="yyyy-MM-dd" var="today"/>
+            <c:if test="${param.type == \"done\"}">
+                <input class="mypage-reservlist-top-datepicker" type="date" name="startDate" max="${today}">
+                <p>&#126;</p>
+                <input class="mypage-reservlist-top-datepicker" type="date" name="endDate" max="${today}">
+            </c:if>
+
+            <c:if test="${param.type == \"will\"}">
+                <input class="mypage-reservlist-top-datepicker" type="date" name="startDate" min="${today}">
+                <p>&#126;</p>
+                <input class="mypage-reservlist-top-datepicker" type="date" name="endDate" min="${today}">
+            </c:if>
+
+            <button type="button" class="mypage-reservlist-period" id="submit-find">조회</button>
         </div>
         <label><input type="radio" name="period" value="mypick" hidden></label>
     </form>
@@ -285,10 +294,19 @@
     })
 
     $("input[name=mypage-reservlist-type]").change(function (){
-
         let find_url = "?type=" + $("input[name=mypage-reservlist-type]:checked").attr("id") ;
-
         location.href = find_url
     })
 
+    $("#submit-find").click(function (){
+        if($("input[name=period]:checked").val() == "mypick"){
+            if($(".mypage-reservlist-top-datepicker").eq(0).val() == "" || $(".mypage-reservlist-top-datepicker").eq(1).val() == ""){
+                alert("날짜를 모두 선택해 주세요")
+            }else{
+                $(".mypage-reservlist-form").submit()
+            }
+        } else {
+            $(".mypage-reservlist-form").submit()
+        }
+    })
 </script>

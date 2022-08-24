@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="model_p.CommunityDTO" %><%--
+<%@ page import="model_p.CommunityDTO" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="model_p.ApplyStudyDTO" %><%--
   Created by IntelliJ IDEA.
   User: whgml
   Date: 2022-08-14
@@ -299,7 +301,19 @@
 
 <script type="text/javascript">
     $(".community-apply-btn").click(function (){
-        location.href="CommunityApplyInsertForm?input_purpose=${communityDTO.id}"
+
+        let alreadyApply = false;
+        <c:forEach items="${applyList}" varStatus="no" var="apply">
+            if("${apply.as_mem_id}" == "${login}"){
+                alreadyApply = true;
+            }
+        </c:forEach>
+
+        if(alreadyApply){
+            alert("이미 신청한 스터디 입니다.")
+        } else{
+            location.href="CommunityApplyInsertForm?input_purpose=${communityDTO.id}"
+        }
     })
 
     $(".community-modify-btn").click(function (){

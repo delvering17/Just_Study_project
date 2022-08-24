@@ -35,5 +35,4 @@ public class AdminStoreList implements AdminService{
         request.setAttribute("branchMap", branchMap);
         request.setAttribute("adminUrl","adminStoreList.jsp");
     }
-
 }

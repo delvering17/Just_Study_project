@@ -141,7 +141,7 @@
         <b>이벤트 추가</b>
     </div>
     <div id="main">
-        <form action="AdminEventInsertReg" id="event-detail-form" method="post" enctype="multipart/form-data">
+        <form action="AdminEventInsertReg" name="myform" id="event-detail-form" method="post" enctype="multipart/form-data" onsubmit="return check()">
             <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
                 <tr>
                     <th>제목</th>
@@ -186,3 +186,36 @@
         <a href="AdminEventList">목록으로</a>
     </div>
 </div>
+
+<script>
+
+    function check(){
+        const f = document.myform;
+        if(f.title.value == ""){
+            alert("빈칸을 입력해주세요");
+            f.title.focus();
+            return false;
+        }
+        if(f.event_startdate.value == ""){
+            alert("시작날짜를 입력해주세요");
+            f.event_startdate.focus();
+            return false;
+        }
+        if(f.event_enddate.value == ""){
+            alert("마감날짜를 입력해주세요");
+            f.event_enddate.focus();
+            return false;
+        }
+        if(f.img.value == ""){
+            alert("이미지 파일을 첨부해주세요");
+            f.img.focus();
+            return false;
+        }
+        if(f.content.value == ""){
+            alert("내용 파일을 첨부해주세요");
+            f.content.focus();
+            return false;
+        }
+    }
+
+</script>

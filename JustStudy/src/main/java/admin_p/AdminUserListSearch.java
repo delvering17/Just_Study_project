@@ -36,6 +36,6 @@ public class AdminUserListSearch implements AdminService{
             request.setAttribute("userStatus", adminData.size());
             request.setAttribute("blackStatus", adminBlackData.size());
             request.setAttribute("adminUrl","adminUserList.jsp");
-        }
+    }
     }
 }

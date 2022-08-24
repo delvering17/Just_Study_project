@@ -227,11 +227,9 @@
                     <option value="mem_userid" selected>아이디</option>
                     <option value="mem_nickname">닉네임</option>
                     <option value="mem_realname">이름</option>
-                    <option value="mem_phone">전화번호</option>
-
                 </select>
                 <input type="text" name="searchUserList-input"/>
-                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button type="submit" onclick="onclick()"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
 
         </div>
@@ -244,7 +242,6 @@
                 <th rowspan="2">SMS로그인</th>
                 <th rowspan="2">주소</th>
                 <th rowspan="2">상세주소</th>
-                <th rowspan="2">휴대폰</th>
                 <th rowspan="2">권한</th>
                 <th rowspan="2">관리</th>
             </tr>
@@ -259,13 +256,10 @@
                         <th rowspan="2"><input type="hidden" name="user" value="${i.mem_id}">${i.mem_id}
                         </th>
                         <td>${i.mem_userid}</td>
-
                         <td>${i.mem_realname}</td>
                         <td rowspan="2">${i.mem_social}</td>
-
                         <td rowspan="2">${i.mem_address1}</td>
                         <td rowspan="2">${i.mem_address2}</td>
-                        <td rowspan="2">${i.mem_phone}</td>
                         <td rowspan="2">${i.mem_level}</td>
                         <td rowspan="2">
                             <c:if test="${i.mem_level==1}">
@@ -291,14 +285,17 @@
 </div>
 
 <script type="text/javascript">
-    function selectAll(selectAll)  {
-        const checkboxes = document.querySelectorAll('input[name="user"]');
 
-        checkboxes.forEach((checkbox) => {
-            checkbox.checked = selectAll.checked
-        })
+    var pattern = /\s/g;
+
+    if(button[type=submit].match(pattern) )
+    {
+        alert("공백이 존재합니다.");
     }
-
+    else
+    {
+        alert("공백이 존재하지 않습니다.");
+    }
 </script>
 
 

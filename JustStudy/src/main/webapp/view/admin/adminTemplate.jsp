@@ -178,10 +178,7 @@
         <label for="admin"><a href="AdminPage">ADMINISTRATOR</a></label>
         <div>
             <div>
-                <input type="button" value="매장"/>
-                <input type="button" value="홈"/>
-                <input type="button" value="부가서비스"/>
-                <input type="button" value="관리자"/>
+                <a href=""></a>
             </div>
 
         </div>
@@ -199,8 +196,8 @@
 
     <div class="category">
         <div class="categoryicon">
-            <div><label for="r1"><i class="fa-regular fa-address-card"></i></label></div>
-            <div><label for="r2"><i class="fa-solid fa-house"></i></label></div>
+            <div><label for="r1"><i class="fa-solid fa-house"></i></label></div>
+            <div><label for="r2"><i class="fa-regular fa-address-card"></i></label></div>
             <div><label for="r3"><i class="fa-solid fa-chart-line"></i></label></div>
             <div><label for="r4"><i class="fa-regular fa-calendar-days"></i></label></div>
             <div><label for="r5"><i class="fa-solid fa-list-check"></i></label></div>

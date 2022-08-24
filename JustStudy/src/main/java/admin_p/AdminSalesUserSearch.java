@@ -89,7 +89,7 @@ public class AdminSalesUserSearch implements AdminService {
             request.setAttribute("goUrl", "AdminSalesUser");
         }
 
-        if( (userType.equals("mem_userid") && userId.contains(userValue) && userTotalPay==0) ){
+        /*if( (userType.equals("mem_userid") && userId.contains(userValue) && userTotalPay==0) ){
             String msg = "해당 회원의 매출 정보가 없습니다";
             request.setAttribute("adminUrl", "alert.jsp");
             request.setAttribute("msg", msg);
@@ -104,7 +104,7 @@ public class AdminSalesUserSearch implements AdminService {
             request.setAttribute("adminUrl", "alert.jsp");
             request.setAttribute("msg", msg);
             request.setAttribute("goUrl", "AdminSalesUser");
-        }
+        }*/
 
         if(userValue.equals("")){
             String msg = "빈 칸으로 검색할 수 없습니다";

@@ -228,8 +228,8 @@
                     <option value="mem_nickname">닉네임</option>
                     <option value="mem_realname">이름</option>
                 </select>
-                <input type="text" name="searchUserList-input"/>
-                <button type="submit" onclick="onclick()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <input type="text" name="searchUserList-input" id="searchUserList-input-id"/>
+                <button type="submit" onclick="searchUser()"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
 
         </div>
@@ -285,17 +285,12 @@
 </div>
 
 <script type="text/javascript">
-
-    var pattern = /\s/g;
-
-    if(button[type=submit].match(pattern) )
-    {
-        alert("공백이 존재합니다.");
+    function searchUser(){
+        if(/\s/g.test($('#searchUserList-input-id').val())){
+            alert('공백으로 검색할 수 없습니다')
+        }
     }
-    else
-    {
-        alert("공백이 존재하지 않습니다.");
-    }
+
 </script>
 
 

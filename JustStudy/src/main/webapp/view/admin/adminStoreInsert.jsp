@@ -291,13 +291,14 @@
         input_close:$("input[name=close]").val(),
         input_address:$("input[name=address]").val(),
         input_addressDetail:$("input[name=addressDetail]").val(),
+        input_phone:$("input[name=phone]").val(),
         input_img:$("input[name=img]").val(),
         input_facilities:$("input[name=facilities]:checked").length
       }
 
       let nullCheck = true;
       for (let i in form_data){
-        if(i == 1 || i == 8){
+        if(i == 1 || i == 9){
           if(form_data[i] == 0){
             nullCheck = false;
             break;

@@ -25,12 +25,32 @@
       <tr>
         <td>작성자</td>
         <td>
-          <%=reviewDTO.getMemId()%>
+          <%=reviewDTO.getUserNickname()%>
         </td>
       </tr>
       <tr>
-        <td>주문번호</td>
-        <td><%=reviewDTO.getReservId()%>
+        <td>지역</td>
+        <td>${reservationDTO.city}
+        </td>
+      </tr>
+      <tr>
+        <td>지점</td>
+        <td>${reservationDTO.branch}
+        </td>
+      </tr>
+      <tr>
+        <td>룸타입</td>
+        <td>${reservationDTO.room}
+        </td>
+      </tr>
+      <tr>
+        <td>이용일자</td>
+        <td>${reservationDTO.useDate}
+        </td>
+      </tr>
+      <tr>
+        <td>시간</td>
+        <td>${reservationDTO.time}
         </td>
       </tr>
       <tr>

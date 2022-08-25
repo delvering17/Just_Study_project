@@ -149,6 +149,8 @@
           if(response === 'success') {
             $('#isNicknamedoubleCheck').attr("checked",true);
             $("#input-nickname").attr("readonly",true);
+            $('#notice-nickname').removeClass('show')
+            $('#notice-nickname').addClass('hide')
             alert('사용가능한 닉네임 입니다')
 
           } else if(response === 'regex'){

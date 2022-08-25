@@ -30,7 +30,7 @@
         border: 0;
     }
 
-    .info-modify-form-items .btn-modify{
+    .btn-modify{
         width: 100px;
         height: 40px;
         border: 0;
@@ -38,11 +38,11 @@
         color: aliceblue;
     }
 
-    .info-modify-form-items #btn-memberclose {
+    #btn-memberclose {
         background: rgb(173, 153, 126);
     }
 
-    .info-modify-form-items #btn-confirm-modify {
+    #btn-confirm-modify {
         background: rgb(48, 48, 48);
     }
 
@@ -57,19 +57,44 @@
     #info-modify-confirm-wrapper > .btn-modify{
         width:150px;
     }
+
+
+    .notice-wrapper {
+        width: 200px;
+        height: 50px;
+
+    }
+
+    .notice-wrapper > .signin-notice {
+        width: 200px;
+        font-size: 0.8rem;
+        color: red;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    .show {
+        visibility: visible;
+    }
+
+
 </style>
 
 <div class="info-modify">
-    <form>
+
         <ul>
+            <form id="form-modify">
             <li class="info-modify-form-items">
                 <p>이름</p>
                 <input type="text" class="user-input" id="input-realname" value="${memberDTO.mem_realname}">
             </li>
             <li class="info-modify-form-items">
                 <p>닉네임</p>
-                <input type="text" class="user-input"id="input-nickname" value="${memberDTO.mem_nickname}">
-                <button type="button" class="btn-modify">중복체크</button>
+                <input type="checkbox" id="isNicknamedoubleCheck" checked hidden/>
+                <input type="text" class="user-input" id="input-nickname" value="${memberDTO.mem_nickname}">
+                <button type="button" onclick="goNicknamedoubleCheck()" class="btn-modify">중복체크</button>
             </li>
 <%--            <li class="info-modify-form-items">--%>
 <%--                <p>휴대전화</p>--%>
@@ -84,19 +109,62 @@
             </li>
             <li class="info-modify-form-items">
                 <p></p>
-                <input type="text" class="user-input" id="input-address2" value="${memberDTO.mem_address2}" readonly>
+                <input type="text" class="user-input" id="input-address2" value="${memberDTO.mem_address2}">
             </li>
             <li class="info-modify-form-items">
                 <p></p>
+            </form>
                 <div id="info-modify-confirm-wrapper">
                     <button type="button" class="btn-modify" id="btn-memberclose" onclick="gogo()">회원 탈퇴</button>
                     <button class="btn-modify" id="btn-confirm-modify" onclick="goInformationModify()">수정하기</button>
                 </div>
             </li>
         </ul>
-    </form>
+
 </div>
 <script type="text/javascript">
+
+    $('#input-nickname').change(function () {
+        $('#isNicknamedoubleCheck').attr("checked",false);
+    })
+
+    function goNicknamedoubleCheck() {
+        if($('#input-nickname').val() === '') {
+            alert('빈 칸을 입력해주세요')
+        } else if(!/^(?=[ㄱ-ㅎ|가-힣]).{2,8}$/.test($('#input-nickname').val())) {
+            alert('한글 2~6자리를 입력해주세요')
+        } else if(/\s/g.test($('#input-nickname').val())) {
+            alert('공백을 제거해 주세요')
+        } else {
+
+            let input_nickname = $('#input-nickname').val()
+            $.ajax({
+                url:'<c:url value="/memberNonView/MemberSigninDoubleCheck"/>',
+                type: 'GET',
+                data: 'input_nickname='+input_nickname,
+                async: false,
+                success:function (response){
+                    if(response === 'success') {
+                        $('#isNicknamedoubleCheck').attr("checked",true);
+                        $("#input-nickname").attr("readonly",true);
+                        alert('사용가능한 닉네임 입니다')
+                    } else if(response === 'regex'){
+                        alert('한글은 2~6자리를 입력해주세요')
+                    } else {
+                        alert('중복된 닉네임 입니다.')
+                    }
+
+                },
+                error:function(e){
+                    console.log(e.responseText)
+                }
+            });
+        }
+
+    }
+
+
+
 
     function goInformationModify() {
         let form_data = {
@@ -106,26 +174,54 @@
             input_address2:$('#input-address2').val()
         }
 
-        $.ajax({
-            url:'<c:url value="/mypageNonView/MypageInformationModifyReg"/>',
-            type:'GET',
-            data: form_data,
-            async:false,
-            dataType:'JSON',
-            success:function(response){
-                alert(response.modifyResult)
-                location.href = "/mypage/MypageInformationModifyForm"
-                <%--if(response.modifyResult === 'success') {--%>
-                <%--    alert(msg)--%>
-                <%--    location.href = '<c:url value="/board/MainPage"/>'--%>
-                <%--} else {--%>
-                <%--    alert(response.modifyResult)--%>
-                <%--}--%>
-            },
-            error:function(e){
-                console.log(e.responseText)
-            }
-        })
+        if(form_data.input_nickname === '') {
+            alert('빈 칸을 입력해주세요.')
+            $('#input-nickname').focus()
+        } else if(!/^(?=[ㄱ-ㅎ|가-힣]).{2,8}$/.test($('#input-nickname').val())) {
+            alert('한글 2~6자리를 입력해주세요.')
+            $('#input-nickname').focus()
+        } else if(/\s/g.test($('#input-nickname').val())) {
+            alert('닉네임 공백을 제거해 주세요')
+            $('#input-nickname').focus()
+        } else if($('#isNicknamedoubleCheck').is(":checked") === false) {
+            alert('닉네임 중복 확인을 해주세요.')
+        } else if(form_data.input_realname === '') {
+            alert('빈 칸을 입력해주세요.')
+            $('#input-realname').focus()
+        } else if(/\s/g.test($('#input-realname').val())) {
+            alert('이름 공백을 제거해 주세요')
+            $('#input-userid').focus()
+        } else if(form_data.input_address1 === '') {
+            alert('주소 검색을 이용해 주소를 입력해주세요.')
+            $('#input-address1').focus()
+        } else if(form_data.input_address2 === '') {
+            alert('빈 칸을 입력해주세요.')
+            $('#input-address2').focus()
+        } else {
+            $.ajax({
+                url:'<c:url value="/mypageNonView/MypageInformationModifyReg"/>',
+                type:'GET',
+                data: form_data,
+                async:false,
+                dataType:'JSON',
+                success:function(response){
+                    alert(response.modifyResult)
+
+                    // location.href = "/mypage/MypageInformationModifyForm"
+                    <%--if(response.modifyResult === 'success') {--%>
+                    <%--    alert(msg)--%>
+                    <%--    location.href = '<c:url value="/board/MainPage"/>'--%>
+                    <%--} else {--%>
+                    <%--    alert(response.modifyResult)--%>
+                    <%--}--%>
+                },
+                error:function(e){
+                    console.log(e.responseText)
+                }
+            })
+        }
+
+
     }
 
     function gogo() {

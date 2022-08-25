@@ -276,7 +276,8 @@
             $('#isNicknamedoubleCheck').attr("checked",true);
             $("#input-nickname").attr("readonly",true);
             alert('사용가능한 닉네임 입니다')
-
+            $('#notice-nickname').removeClass('show')
+            $('#notice-nickname').addClass('hide')
           } else if(response === 'regex'){
             alert('한글은 2~6자리를 입력해주세요')
           } else {

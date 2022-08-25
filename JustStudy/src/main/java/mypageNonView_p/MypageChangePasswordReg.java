@@ -21,23 +21,27 @@ public class MypageChangePasswordReg implements MypageNonViewService{
         String input_new_password = request.getParameter("input_new_password");
         String input_new_password_repeat = request.getParameter("input_new_password_repeat");
 
-        // TODO - 유효성 검사 필요
-
-
-
-
-
-        // 결과
-        MemberDTO memberDTO = new MemberDTO();
-        memberDTO.setMem_id(mem_id);
-        memberDTO.setMem_password(input_new_password);
-
-        new MemberDAO().changePassword(memberDTO);
 
         JSONObject jj = new JSONObject();
+        // TODO - 유효성 검사 필요
+        MemberDTO dto = new MemberDAO().detail(mem_id);
+
+        // 현재 비밀번호와 입력한 현재 비밀번호와 다른 경우
+        if(!input_now_password.equals(dto.getMem_password())) {
+            jj.put("changeResult","notCertified");
+        } else {
+            MemberDTO memberDTO = new MemberDTO();
+            memberDTO.setMem_id(mem_id);
+            memberDTO.setMem_password(input_new_password);
+
+            new MemberDAO().changePassword(memberDTO);
+            jj.put("changeResult","success");
+        }
+
+
         try {
 
-            jj.put("changeResult","success");
+
             response.getWriter().append(jj.toJSONString());
         } catch (IOException e) {
             e.printStackTrace();

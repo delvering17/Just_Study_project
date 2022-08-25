@@ -368,6 +368,7 @@ public class ReservationDAO {
             rs.next();
 
             reservationDTO.setId(rs.getInt("id"));
+            reservationDTO.setOrderId(rs.getString("orderId"));
             reservationDTO.setResDate(rs.getDate("resDate"));
             reservationDTO.setUserId(rs.getInt("userId"));
             reservationDTO.setCity(rs.getString("city"));
@@ -383,6 +384,48 @@ public class ReservationDAO {
 
             return reservationDTO;
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+        return null;
+    }
+
+    public int reservationCancel(int id){
+
+        sql = "update reservation set status = '예약취소' where id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, id);
+            return ptmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return 0;
+    }
+
+    public ArrayList<Integer> sameOrderList(String orderId){
+
+        ArrayList<Integer> res = new ArrayList<Integer>();
+
+        sql = "select id from reservation where orderId = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, orderId);
+
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                int id = rs.getInt("id");
+                res.add(id);
+            }
+
+            return res;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

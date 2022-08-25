@@ -230,13 +230,13 @@
       <tr>
         <th>매장 주소</th>
         <td>
-          <input type="text" name="address"/>
-          <input type="button" name="address-search" value="검색"/>
+          <input type="text" id="input-address1" name="address" readonly/>
+          <input type="button" name="address-search" onclick="gofindAddress()" value="검색"/>
         </td>
       </tr>
       <tr>
         <th>상세 주소</th>
-        <td><input type="text" name="addressDetail"/></td>
+        <td><input type="text" id="input-address2" name="addressDetail"/></td>
       </tr>
       <tr>
         <th>전화번호</th>
@@ -258,6 +258,7 @@
   </form>
 </div>
 
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
     $(".admin-store-list").click(function () {
       location.href = "AdminStoreList"
@@ -336,4 +337,16 @@
     $(".admin-store-list").click(function (){
       location.href = "AdminStoreList"
     })
+
+
+    function gofindAddress() {
+
+      new daum.Postcode({
+        oncomplete: function(data) {
+          document.getElementById("input-address1").value = data.address;
+          document.getElementById("input-address2").focus();
+        }
+      }).open();
+
+    }
 </script>

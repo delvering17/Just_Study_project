@@ -225,13 +225,13 @@
             </tr>
             <tr>
                 <th>매장 주소</th>
-                <td><input type="text" name="address"
+                <td><input type="text" id="input-address1" name="address" readonly
                            value="<%=branchDTO.getAddress() != null ? branchDTO.getAddress() : ""%>"/>
-                    <input type="button" name="address-search" value="검색"/></td>
+                    <input type="button" name="address-search" onclick="gofindAddress()" value="검색"/></td>
             </tr>
             <tr>
                 <th>상세 주소</th>
-                <td><input type="text" name="addressDetail"
+                <td><input type="text" id="input-address2" name="addressDetail"
                            value="<%=branchDTO.getAddressDetail() != null ? branchDTO.getAddressDetail() : ""%>"/></td>
             </tr>
             <tr>
@@ -268,6 +268,7 @@
     </form>
 </div>
 
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
         $("input[name=roomType]").change(function (){
             $(this).parent().children("input[name=roomNum]").attr("disabled", !$(this).parent().children("input[name=roomNum]").attr("disabled"));
@@ -331,6 +332,15 @@
             }
         })
 
+        function gofindAddress() {
 
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    document.getElementById("input-address1").value = data.address;
+                    document.getElementById("input-address2").focus();
+                }
+            }).open();
+
+        }
 
 </script>

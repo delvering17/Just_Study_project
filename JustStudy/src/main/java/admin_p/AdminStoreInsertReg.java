@@ -62,7 +62,7 @@ public class AdminStoreInsertReg implements AdminService{
             branchDTO.setImg(mr.getFilesystemName("img"));
             branchDTO.setFacilities((mr.getParameterValues("facilities") != null ? String.join(",", mr.getParameterValues("facilities")) : null));
 
-            double[] latlng = findLatlng();
+            double[] latlng = findLatlng(mr.getParameter("address"));
 
             branchDTO.setLongitude(latlng[0]);
             branchDTO.setLatitude(latlng[1]);
@@ -85,7 +85,7 @@ public class AdminStoreInsertReg implements AdminService{
     }
 
 
-    public double[] findLatlng() {
+    public double[] findLatlng(String inputAddress) {
 
         String GEOCODE_URL="http://dapi.kakao.com/v2/local/search/address.json?query=";
         String GEOCODE_USER_INFO="7cdddba1d52cb71bb4fe171be274adf2";
@@ -94,7 +94,7 @@ public class AdminStoreInsertReg implements AdminService{
         double [] latlng = new double[2];
         try{
             //인코딩한 String을 넘겨야 원하는 데이터를 받을 수 있다.
-            String address = URLEncoder.encode("대구광역시 중구 동성로2가 동성로2길 81", "UTF-8");
+            String address = URLEncoder.encode(inputAddress, "UTF-8");
 
             obj = new URL(GEOCODE_URL+address);
 

@@ -12,7 +12,10 @@ public class AdminStoreReview implements AdminService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-        ArrayList<ArrayList> totalList = new ReviewDAO().totalList();
+        ArrayList<ArrayList> totalList = new ReviewDAO().totalList(
+                request.getParameter("filter"),
+                request.getParameter("word")
+        );
 
         request.setAttribute("totalList", totalList);
         request.setAttribute("adminUrl", "adminReviewList.jsp");

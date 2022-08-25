@@ -8,6 +8,12 @@
   Time: 오후 12:02
   To change this template use File | Settings | File Templates.
 --%>
+<script type="text/javascript">
+  if(<%=((ArrayList<ArrayList>) request.getAttribute("totalList")).size() == 0%>){
+    alert("조회 내역이 없습니다.")
+    location.href = "AdminStoreReview"
+  }
+</script>
 
 <style>
   .admin-store-review-headline {
@@ -97,18 +103,18 @@
   <div class="admin-store-review-main">
 
     <div>
-      <form action="">
+      <form action="AdminStoreReview" class="admin-store-review-search-form">
         <select name="filter">
-          <option>주문번호</option>
-          <option>사용자ID</option>
-          <option>사용자이름</option>
-          <option>지역</option>
-          <option>지점명</option>
-          <option>이용일자</option>
-          <option>상태</option>
+          <option value="orderId">주문번호</option>
+          <option value="mem_userId">사용자ID</option>
+          <option value="mem_realname">사용자이름</option>
+          <option value="city">지역</option>
+          <option value="branch">지점명</option>
+          <option value="useDate">이용일자</option>
+          <option value="content">내용</option>
         </select>
         <input type="text" name="word">
-        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button type="button" class="admin-store-review-search"><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
     </div>
 
@@ -146,3 +152,13 @@
     </table>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(".admin-store-review-search").click(function (){
+    if($("input[name=word]").val().trim()==""){
+      alert("검색어를 입력해주세요.")
+    } else{
+      $(".admin-store-review-search-form").submit()
+    }
+  })
+</script>

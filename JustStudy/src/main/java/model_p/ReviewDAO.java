@@ -28,15 +28,22 @@ public class ReviewDAO {
         }
     }
 
-    public ArrayList<ArrayList> totalList(){
+    public ArrayList<ArrayList> totalList(String filter, String word){
 
         ArrayList<ArrayList> res = new ArrayList<ArrayList>();
 
         sql = "SELECT review.id, reservId, orderId, mem_userid, mem_realname, city, branch, room, useDate, time, content" +
-                " FROM review JOIN reservation ON review.reservId = reservation.id JOIN member ON memId = member.mem_id;";
+                " FROM review JOIN reservation ON review.reservId = reservation.id JOIN member ON memId = member.mem_id";
+
+        if(filter != null){
+            sql += " where "+filter+" like ?";
+        }
 
         try {
             ptmt = con.prepareStatement(sql);
+            if(filter != null){
+                ptmt.setString(1, "%"+word+"%");
+            }
             rs = ptmt.executeQuery();
 
             while(rs.next()){
@@ -65,7 +72,7 @@ public class ReviewDAO {
                 res.add(arr);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         } finally {
             close();
         }
@@ -142,6 +149,8 @@ public class ReviewDAO {
             return ptmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            close();
         }
         return 0;
     }

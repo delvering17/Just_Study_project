@@ -210,12 +210,12 @@
 
             </c:when>
             <c:otherwise>
-                <form action="AdminInquiryInsert" method="get">
+                <form action="AdminInquiryInsert" method="post" id="inquiry-form1">
                     <input type="hidden" name="input_purpose" value="${inquiryDTO.inquiry_id}"/>
                     <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
                         <tr>
                             <th>제목</th>
-                            <td><input name="input_title"  type="text" ></td>
+                            <td><input name="input_title" id="input_title1"  type="text" ></td>
                         </tr>
                         <tr>
                             <th>담당자</th>
@@ -224,11 +224,11 @@
                         </tr>
                         <tr>
                             <th>답변 내용</th>
-                            <td><textarea name="input_content" cols="30" rows="10"></textarea></td>
+                            <td><textarea name="input_content" id="input_content1" cols="30" rows="10"></textarea></td>
                         </tr>
                         <tr>
                             <td colspan="2">
-                            <button type="submit">답변</button>
+                            <button type="button" onclick="inquiryInsert()">답변</button>
                             </td>
                         </tr>
                     </table>
@@ -241,10 +241,24 @@
 </div>
 
 <script type="text/javascript">
-</script>
-<script type="text/javascript">
+    function inquiryInsert() {
+        let input_title1 = $('#input_title1').val()
+        let input_content1 = $('#input_content1').val()
 
+        if(input_title1 === '') {
+            alert('제목을 입력해주세요.')
+            $('#input_title1').focus()
+        } else if(input_content1 === '') {
+            alert('내용을 입력해주세요.')
+            $('#input_content1').focus()
+        } else {
 
+            let inquiry_form1 = $('#inquiry-form1');
+            inquiry_form1.action = "AdminInquiryInsert"
+            inquiry_form1.method = "get"
+            inquiry_form1.submit()
+        }
 
+    }
 
 </script>

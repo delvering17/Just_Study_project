@@ -142,7 +142,7 @@
             </tr>
             <tr>
                 <th>작성자</th>
-                <td>${inquiryDTO.inquiry_writer}</td>
+                <td>${inquiry_writer}</td>
             </tr>
             <tr>
                 <th>카테고리</th>
@@ -191,7 +191,8 @@
                         </tr>
                         <tr>
                             <th>담당자</th>
-                            <td><input type="text" name="input_writer" id="input-writer" value="${answerDTO.inquiry_writer}"></td>
+                            <input type="hidden" name="input_writer"  value="${answerDTO.inquiry_writer}">
+                            <td><input type="text" id="input-writer" value="${answerWriterName}" readonly></td>
                         </tr>
                         <tr>
                             <th>답변 내용</th>
@@ -218,7 +219,8 @@
                         </tr>
                         <tr>
                             <th>담당자</th>
-                            <td><input name="input_writer"  type="text"></td>
+                            <input type="hidden" name="input_writer" value="${sessionScope.login}" readonly>
+                            <td><input type="text" id="" value="${mem_realname}" readonly></td>
                         </tr>
                         <tr>
                             <th>답변 내용</th>
@@ -241,10 +243,8 @@
 <script type="text/javascript">
 </script>
 <script type="text/javascript">
-        $(".admin-store-delete").click(function (){
-            alert($("input[name=branch]:checked").attr("id"))
 
-        })
+
 
 
 </script>

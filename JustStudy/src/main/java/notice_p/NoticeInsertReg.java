@@ -4,14 +4,17 @@ import model_p.EventDAO;
 import model_p.EventDTO;
 import model_p.NoticeDAO;
 import model_p.NoticeDTO;
+import org.json.simple.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class NoticeInsertReg implements NoticeService {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("insertReg 들어왔냐?");
+
+
 
         try {
             NoticeDTO dto = new NoticeDTO();

@@ -32,7 +32,7 @@ public class EventDAO {
     public ArrayList<EventDTO> list(){
         ArrayList<EventDTO> res = new ArrayList<EventDTO>();
 
-        sql = "select * from eventpp";
+        sql = "select * from eventpp order by id desc ";
 
         try {
             ptmt = con.prepareStatement(sql);

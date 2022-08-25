@@ -52,7 +52,8 @@ public class BranchDAO {
                 branchDTO.setAddressDetail(rs.getString("addressDetail"));
                 branchDTO.setPhone(rs.getString("phone"));
                 branchDTO.setImg(rs.getString("img"));
-
+                branchDTO.setLatitude(rs.getDouble("latitude"));
+                branchDTO.setLongitude(rs.getDouble("longitude"));
                 res.add(branchDTO);
             }
 

@@ -1,11 +1,12 @@
 package reservation_p.iamport;
 
-import com.siot.IamportRestClient.exception.IamportResponseException;
-import com.siot.IamportRestClient.request.CancelData;
-import com.siot.IamportRestClient.response.*;
-import com.siot.IamportRestClient.response.IamportResponse;
+
 import org.junit.Before;
 import org.junit.Test;
+import reservation_p.exception.IamportResponseException;
+import reservation_p.request.CancelData;
+import reservation_p.response.IamportResponse;
+import reservation_p.response.Payment;
 
 import java.io.IOException;
 

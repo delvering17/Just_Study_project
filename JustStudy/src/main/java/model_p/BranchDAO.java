@@ -179,6 +179,8 @@ public class BranchDAO {
                 branchDTO.setAddressDetail(rs.getString("addressDetail") != null ? rs.getString("addressDetail") : "");
                 branchDTO.setPhone(rs.getString("phone") != null ? rs.getString("phone") : "");
                 branchDTO.setImg(rs.getString("img") != null ? rs.getString("img") : "");
+                branchDTO.setLatitude(rs.getDouble("latitude"));
+                branchDTO.setLongitude(rs.getDouble("longitude"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -191,7 +193,7 @@ public class BranchDAO {
     }
 
     public int modify(String cityName, String branchName, BranchDTO dto){
-        sql = "update branch set rooms = ?, price = ?, open = ?, close = ?, facilities = ?, address = ?, addressDetail = ?, phone = ?, img = ?" +
+        sql = "update branch set rooms = ?, price = ?, open = ?, close = ?, facilities = ?, address = ?, addressDetail = ?, phone = ?, img = ?, latitude = ?, longitude = ?" +
                 " where city = ? and name = ?";
 
         try {
@@ -205,8 +207,11 @@ public class BranchDAO {
             ptmt.setString(7, dto.getAddressDetail());
             ptmt.setString(8, dto.getPhone());
             ptmt.setString(9, dto.getImg());
-            ptmt.setString(10, cityName);
-            ptmt.setString(11, branchName);
+            ptmt.setDouble(10, dto.getLatitude());
+            ptmt.setDouble(11, dto.getLongitude());
+            ptmt.setString(12, cityName);
+            ptmt.setString(13, branchName);
+
 
             return ptmt.executeUpdate();
         } catch (SQLException e) {

@@ -40,17 +40,15 @@
 
         table{
             width: 500px;
-            height: 200px;
             border: 1px solid rgb(122, 115, 115);
             margin: 10px 0px 40px 30px;
             font-size: 13px;
         }
 
-
-
         tr:nth-of-type(1){
             background: rgba(72, 92, 117, 0.801);
             color: #fff;
+            height: 20px;
         }
 
         tr:nth-of-type(1) > th{
@@ -97,7 +95,13 @@
                         <td><button type="submit">상세보기</button></td>
                     </form>
                 </tr>
+                <c:if test="${todayReservation==null}">
+                    <tr>
+                        <th>오늘 예약이 없습니다</th>
+                    </tr>
+                </c:if>
             </c:forEach>
+
         </table>
 
         <h4>미답변 1:1 문의 : <a href="AdminInquiryUnansweredList">${unanswered}개</a></h4>

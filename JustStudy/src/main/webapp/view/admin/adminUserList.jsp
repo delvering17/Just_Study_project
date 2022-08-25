@@ -229,7 +229,7 @@
                     <option value="mem_realname">이름</option>
                 </select>
                 <input type="text" name="searchUserList-input" id="searchUserList-input-id"/>
-                <button type="submit" onclick="searchUser()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button type="submit" ><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
 
         </div>
@@ -239,7 +239,7 @@
                 <th rowspan="2">회원번호</th>
                 <th>아이디</th>
                 <th>이름</th>
-                <th rowspan="2">SMS로그인</th>
+                <th rowspan="2">SNS로그인</th>
                 <th rowspan="2">주소</th>
                 <th rowspan="2">상세주소</th>
                 <th rowspan="2">권한</th>
@@ -285,11 +285,11 @@
 </div>
 
 <script type="text/javascript">
-    function searchUser(){
-        if(/\s/g.test($('#searchUserList-input-id').val())){
-            alert('공백으로 검색할 수 없습니다')
-        }
-    }
+    // function searchUser(){
+    //     if(/\s/g.test($('#searchUserList-input-id').val())){
+    //         alert('공백으로 검색할 수 없습니다')
+    //     }
+    // }
 
 </script>
 

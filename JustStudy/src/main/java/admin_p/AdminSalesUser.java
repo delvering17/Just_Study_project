@@ -7,6 +7,7 @@ import model_p.BranchDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class AdminSalesUser implements AdminService{
@@ -16,6 +17,8 @@ public class AdminSalesUser implements AdminService{
         ArrayList<AdminReservDTO> salesUserList = new AdminReservDAO().userSalesList();
         ArrayList<BranchDTO> branchList = new BranchDAO().branchList();
 
+
+
         int userTotalPay = 0;
 
         for (AdminReservDTO dto : salesUserList) {
@@ -24,6 +27,7 @@ public class AdminSalesUser implements AdminService{
         request.setAttribute("branchList", branchList);
         request.setAttribute("salesUserList", salesUserList);
         request.setAttribute("userTotalPay", userTotalPay);
+
         request.setAttribute("adminUrl", "adminSalesUser.jsp");
     }
 }

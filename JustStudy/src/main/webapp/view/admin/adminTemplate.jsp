@@ -178,7 +178,7 @@
         <label for="admin"><a href="AdminPage">ADMINISTRATOR</a></label>
         <div>
             <div>
-                <a href=""></a>
+                <a href="../board/MainPage">홈</a>
             </div>
 
         </div>

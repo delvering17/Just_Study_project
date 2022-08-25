@@ -226,6 +226,9 @@ public class AdminReservDAO {
             if(city.equals("전체") && branch.equals("전체") && sqlUseStartDate!=null && sqlUseEndDate!=null){
                 ptmt.setDate(2, sqlUseStartDate);
                 ptmt.setDate(3, sqlUseEndDate);
+            }else if(branch.equals("전체") && sqlUseStartDate!=null && sqlUseEndDate!=null){
+                ptmt.setDate(3, sqlUseStartDate);
+                ptmt.setDate(4, sqlUseEndDate);
             }else if(!city.equals("전체") && !branch.equals("전체") && sqlUseStartDate!=null && sqlUseEndDate!=null){
                 ptmt.setDate(4, sqlUseStartDate);
                 ptmt.setDate(5, sqlUseEndDate);

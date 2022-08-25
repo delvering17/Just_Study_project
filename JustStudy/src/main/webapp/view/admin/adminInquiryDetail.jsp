@@ -177,7 +177,7 @@
         <h2>답변</h2>
         <c:choose>
             <c:when test="${inquiryDTO.inquiry_state == 2}">
-                <form action="" method="get">
+                <form id="form-answer">
                     <input type="hidden" name="input_purpose" value="${inquiryDTO.inquiry_id}"/>
                     <input type="hidden" name="input_id" value="${answerDTO.inquiry_id}"/>
                     <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
@@ -200,7 +200,7 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <button type="submit" formaction="AdminInquiryModify" formmethod="get">수정</button>
+                                <button type="button" onclick="answerInsert()">수정</button>
                                 <button type="submit" formaction="AdminInquiryDelete" formmethod="get">삭제</button>
                             </td>
                         </tr>
@@ -259,6 +259,23 @@
             inquiry_form1.submit()
         }
 
+    }
+    function answerInsert() {
+        let input_title = $('#input-title').val()
+        let input_content = $('#input-content').val()
+
+        if(input_title === '') {
+            alert('제목을 입력해주세요.')
+            $('#input-title').focus()
+        } else if(input_content === '') {
+            alert('내용을 입력해주세요.')
+            $('#input-content').focus()
+        } else {
+            let answer_form = document.getElementById('form-answer');
+            answer_form.action = "AdminInquiryModify"
+            answer_form.method = "get"
+            answer_form.submit()
+        }
     }
 
 </script>

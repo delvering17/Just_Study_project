@@ -7,8 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
     <script src="<c:url value="/jquery/"/>jquery-3.6.0.js"></script>
     <script src="<c:url value="/jquery/"/>jquery-ui.min.js"></script>
@@ -228,11 +227,9 @@
                     <option value="mem_userid" selected>아이디</option>
                     <option value="mem_nickname">닉네임</option>
                     <option value="mem_realname">이름</option>
-                    <option value="mem_phone">전화번호</option>
-
                 </select>
-                <input type="text" name="searchUserList-input"/>
-                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <input type="text" name="searchUserList-input" id="searchUserList-input-id"/>
+                <button type="submit" ><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
 
         </div>
@@ -242,10 +239,9 @@
                 <th rowspan="2">회원번호</th>
                 <th>아이디</th>
                 <th>이름</th>
-                <th rowspan="2">SMS로그인</th>
+                <th rowspan="2">SNS로그인</th>
                 <th rowspan="2">주소</th>
                 <th rowspan="2">상세주소</th>
-                <th rowspan="2">휴대폰</th>
                 <th rowspan="2">권한</th>
                 <th rowspan="2">관리</th>
             </tr>
@@ -260,13 +256,10 @@
                         <th rowspan="2"><input type="hidden" name="user" value="${i.mem_id}">${i.mem_id}
                         </th>
                         <td>${i.mem_userid}</td>
-
                         <td>${i.mem_realname}</td>
                         <td rowspan="2">${i.mem_social}</td>
-
                         <td rowspan="2">${i.mem_address1}</td>
                         <td rowspan="2">${i.mem_address2}</td>
-                        <td rowspan="2">${i.mem_phone}</td>
                         <td rowspan="2">${i.mem_level}</td>
                         <td rowspan="2">
                             <c:if test="${i.mem_level==1}">
@@ -292,13 +285,6 @@
 </div>
 
 <script type="text/javascript">
-    function selectAll(selectAll)  {
-        const checkboxes = document.querySelectorAll('input[name="user"]');
-
-        checkboxes.forEach((checkbox) => {
-            checkbox.checked = selectAll.checked
-        })
-    }
 
 </script>
 

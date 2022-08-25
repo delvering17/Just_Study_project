@@ -182,7 +182,9 @@
         <label for="hamburger"><i class="fa-solid fa-align-justify"></i></label>
         <label for="admin"><a href="AdminPage">ADMINISTRATOR</a></label>
         <div>
+            <div>
                 <a href="../board/MainPage">홈</a>
+            </div>
         </div>
 
     </header>
@@ -198,8 +200,8 @@
 
     <div class="category">
         <div class="categoryicon">
-            <div><label for="r1"><i class="fa-regular fa-address-card"></i></label></div>
-            <div><label for="r2"><i class="fa-solid fa-house"></i></label></div>
+            <div><label for="r1"><i class="fa-solid fa-house"></i></label></div>
+            <div><label for="r2"><i class="fa-regular fa-address-card"></i></label></div>
             <div><label for="r3"><i class="fa-solid fa-chart-line"></i></label></div>
             <div><label for="r4"><i class="fa-regular fa-calendar-days"></i></label></div>
             <div><label for="r5"><i class="fa-solid fa-list-check"></i></label></div>

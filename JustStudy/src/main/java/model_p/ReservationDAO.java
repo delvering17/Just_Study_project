@@ -4,7 +4,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
+
 
 public class ReservationDAO {
 
@@ -282,31 +284,30 @@ public class ReservationDAO {
         return res;
     }
 
-    public ArrayList<ReservationDTO> storeSalesList() {
-        ArrayList<ReservationDTO> res = new ArrayList<>();
+    public ArrayList<TodayReservationDTO> todayList(LocalDate useDate) {
 
-        sql = "select * from reservation";
+        ArrayList<TodayReservationDTO> res = new ArrayList<TodayReservationDTO>();
+        sql = "select city, branch, COUNT(id) as cnt from reservation where usedate = ? group by branch order by COUNT(id) desc";
 
         try {
             ptmt = con.prepareStatement(sql);
+            ptmt.setDate(1, Date.valueOf(useDate));
+
             rs = ptmt.executeQuery();
 
             while (rs.next()) {
-                ReservationDTO reservationDTO = new ReservationDTO();
-                reservationDTO.setCity(rs.getString("city"));
-                reservationDTO.setBranch(rs.getString("branch"));
-                reservationDTO.setUseDate(rs.getDate("useDate"));
-                reservationDTO.setPay(rs.getInt("pay"));
+                TodayReservationDTO todayReservationDTO = new TodayReservationDTO();
+                todayReservationDTO.setCity(rs.getString("city"));
+                todayReservationDTO.setBranch(rs.getString("branch"));
+                todayReservationDTO.setCnt(rs.getInt("cnt"));
 
-                res.add(reservationDTO);
+                res.add(todayReservationDTO);
             }
-
         } catch (SQLException e) {
 
         } finally {
             close();
         }
-
         return res;
     }
 

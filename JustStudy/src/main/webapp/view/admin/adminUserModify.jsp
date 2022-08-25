@@ -55,7 +55,7 @@
 
   <div id="main">
 
-    <form action="AdminUserModifyReg" method="get">
+    <form action="AdminUserModifyReg?&nowPage=${nowPage}" method="get">
             <input type="hidden" name="id" value="${adminModifyDTO.mem_id}"/>
             <table border="" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
               <tr>
@@ -77,10 +77,6 @@
               <tr>
                 <td>상세주소</td>
                 <td><input type="text" name="address2" value="${adminModifyDTO.mem_address2}"/></td>
-              </tr>
-              <tr>
-                <td>휴대폰</td>
-                <td><input type="text" name="phone" value="${adminModifyDTO.mem_phone}"/></td>
               </tr>
               <tr>
                 <td colspan="2"><input type="submit" value="수정"/></td>

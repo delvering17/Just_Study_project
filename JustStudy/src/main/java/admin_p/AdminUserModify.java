@@ -17,6 +17,6 @@ public class AdminUserModify implements AdminService{
 
         request.setAttribute("adminModifyDTO",adminModifyDTO);
         request.setAttribute("adminUrl", "adminUserModify.jsp");
-        /*request.setAttribute("goUrl","AdminUserList");*/
+
     }
 }

@@ -183,7 +183,7 @@
                     <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
                         <tr>
                             <th>답변 일자</th>
-                            <td><input type="text" name="input_date" id="input-date" value="${answerDTO.inquiry_date}"></td>
+                            <td><input type="text" name="input_date" id="input-date" value="${answerDTO.inquiry_date}" readonly></td>
                         </tr>
                         <tr>
                             <th>제목</th>

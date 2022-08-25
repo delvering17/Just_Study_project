@@ -241,8 +241,8 @@ public class BranchDAO {
 
     public int insert(BranchDTO branchDTO){
 
-        sql = "insert into branch (city, name, rooms, price, open, close, facilities, address, addressDetail, phone, img) values " +
-                "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        sql = "insert into branch (city, name, rooms, price, open, close, facilities, address, addressDetail, phone, img, latitude, longitude) values " +
+                "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
 
         try {
             ptmt = con.prepareStatement(sql);
@@ -257,6 +257,8 @@ public class BranchDAO {
             ptmt.setString(9, branchDTO.getAddressDetail());
             ptmt.setString(10, branchDTO.getPhone());
             ptmt.setString(11, branchDTO.getImg());
+            ptmt.setDouble(12, branchDTO.getLatitude());
+            ptmt.setDouble(13, branchDTO.getLongitude());
 
             return ptmt.executeUpdate();
         } catch (SQLException e) {

@@ -15,7 +15,7 @@ public class AdminNewsImgDelete implements AdminService{
     public void execute(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("AdminImageDelete 들어왔다");
 
-        String path = request.getRealPath("/img/event");
+        String path = request.getRealPath("/img/news");
        /* path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\" +
                 "\\img\\news";
 

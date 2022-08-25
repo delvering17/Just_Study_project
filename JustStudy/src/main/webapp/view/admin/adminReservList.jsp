@@ -12,6 +12,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<script type="text/javascript">
+    if(<%=((ArrayList<AdminReservDTO>) request.getAttribute("totalList")).size() == 0%>){
+        alert("조회 내역이 없습니다.")
+        location.href = "AdminReservList"
+    }
+
+</script>
+
 <style>
     .admin-reserv-list-bg {
         width: 100%;

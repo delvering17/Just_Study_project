@@ -18,6 +18,6 @@ public class MypageReviewDelete implements MypageService{
 
         request.setAttribute("msg", msg);
         request.setAttribute("mainUrl","mypage/mypage_alert.jsp");
-        request.setAttribute("goUrl","MyReservationList");
+        request.setAttribute("goUrl","MyReservationList?type=done&period=all");
     }
 }

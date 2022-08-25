@@ -104,7 +104,7 @@ public class ReservationDAO {
             sql += " and useDate < ?";
         }
 
-        sql += " order by resDate desc";
+        sql += " order by useDate desc";
 
         try {
             ptmt = con.prepareStatement(sql);
@@ -152,7 +152,7 @@ public class ReservationDAO {
             sql += " and useDate > ?";
         }
 
-        sql += " order by resDate desc";
+        sql += " order by useDate desc";
 
 
         try {
@@ -195,7 +195,7 @@ public class ReservationDAO {
 
         ArrayList<ReservationDTO> res = new ArrayList<ReservationDTO>();
 
-        sql = "select * from reservation where userId = ? and useDate = DATE_FORMAT(SYSDATE(), '%Y-%m-%d') order by resDate desc";
+        sql = "select * from reservation where userId = ? and useDate = DATE_FORMAT(SYSDATE(), '%Y-%m-%d') order by useDate desc";
         try {
             ptmt = con.prepareStatement(sql);
             ptmt.setInt(1, userId);
@@ -353,6 +353,42 @@ public class ReservationDAO {
         }
 
         return res;
+    }
+
+    public ReservationDTO reservationDetail(int id){
+
+        ReservationDTO reservationDTO = new ReservationDTO();
+
+        sql = "select * from reservation where id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, id);
+            rs = ptmt.executeQuery();
+            rs.next();
+
+            reservationDTO.setId(rs.getInt("id"));
+            reservationDTO.setResDate(rs.getDate("resDate"));
+            reservationDTO.setUserId(rs.getInt("userId"));
+            reservationDTO.setCity(rs.getString("city"));
+            reservationDTO.setBranch(rs.getString("branch"));
+            reservationDTO.setRoom(rs.getString("room"));
+            reservationDTO.setUseDate(rs.getDate("useDate"));
+            reservationDTO.setTime(rs.getString("time"));
+            reservationDTO.setHeadcount(rs.getInt("headcount"));
+            reservationDTO.setPay(rs.getInt("pay"));
+            reservationDTO.setPaymentMethod(rs.getString("paymentMethod"));
+            reservationDTO.setStatus(rs.getString("status"));
+            reservationDTO.setReview(rs.getInt("review"));
+
+            return reservationDTO;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+        return null;
     }
 
     public void close() {

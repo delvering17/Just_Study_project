@@ -236,7 +236,7 @@
                                     </c:when>
                                     <c:when test="${myreserv.review == 1}">
                                         <td>
-                                            <button class="mypage-reservlist-review-done">후기 조회</button>
+                                            <button type="button" class="mypage-reservlist-review-done">후기 조회</button>
                                         </td>
                                     </c:when>
                                 </c:choose>
@@ -244,7 +244,7 @@
                             <c:when test="${param.type == \"will\"}">
                                 <c:if test="${myreserv.status == \"결제완료\"}">
                                     <td>
-                                        <button class="mypage-reservlist-cancle">예약 취소</button>
+                                        <button type="button" class="mypage-reservlist-cancle">예약 취소</button>
                                     </td>
                                 </c:if>
                             </c:when>
@@ -258,9 +258,14 @@
 
 <script type="text/javascript">
 
+    $(".input-radio").each(function (key, value){
+        if(value.getAttribute("value") == "${param.period}"){
+            value.setAttribute("checked", true)
+        }
+    })
 
     $(".mypage-reservlist-top-datepicker").change(function (){
-        $("input[value=mypick]").prop('checked', true);
+        $("input[value=mypick]").prop('checked', true)
     })
 
 
@@ -294,7 +299,7 @@
     })
 
     $("input[name=mypage-reservlist-type]").change(function (){
-        let find_url = "?type=" + $("input[name=mypage-reservlist-type]:checked").attr("id") ;
+        let find_url = "?type=" + $("input[name=mypage-reservlist-type]:checked").attr("id")+"&period=all" ;
         location.href = find_url
     })
 

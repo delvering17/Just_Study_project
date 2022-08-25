@@ -1,5 +1,8 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="model_p.BranchDTO" %><%--
+<%@ page import="model_p.BranchDTO" %>
+<%@ page import="java.lang.reflect.Array" %>
+<%@ page import="model_p.AdminReservDTO" %>
+<%@ page import="java.util.Date" %><%--
   Created by IntelliJ IDEA.
   User: dieun
   Date: 2022-08-18
@@ -8,6 +11,15 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<script type="text/javascript">
+  if(<%=((ArrayList<AdminReservDTO>) request.getAttribute("salesStoreList")).size() == 0%>){
+    alert("조회 내역이 없습니다.")
+    location.href = "AdminSalesStore?city=전체&branch=전체"
+  }
+
+</script>
 
 <style>
   .admin-sales-store-bg{
@@ -104,7 +116,7 @@
   <div class="admin-sales-store-main">
 
     <div>
-      <form action="AdminSalesStore" method="post">
+      <form action="AdminSalesStore" method="post" class="admin-sales-store-form">
         <select name="city">
           <option>전체</option>
           <c:forTokens items="서울,경기,부산,대구,인천,광주,대전,울산,세종,강원,충북,충남,전북,전남,경북,경남,제주" var="city" delims=",">
@@ -121,8 +133,10 @@
         <input type="radio" name="admin-sales-store-period" value="month"/>월간
         <input type="radio" name="admin-sales-store-period" value="year"/>연간
 
-        <input type="date" name="admin-sales-store-start"/>
-        <input type="date" name="admin-sales-store-end"/>
+        <fmt:formatDate value="<%=new Date()%>" pattern="yyyy-MM-dd" var="today"/>
+
+        <input type="date" name="admin-sales-store-start" value="${today}"/>
+        <input type="date" name="admin-sales-store-end" value="${today}"/>
 
         <select name="admin-sales-store-year">
           <option>2021</option>
@@ -141,7 +155,7 @@
             <option value="mem_nickname">사용자닉네임</option>
           </select>
           <input type="text" name="admin-sales-store-word"/>
-          <button type="submit" class="admin-sales-store-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+          <button type="button" class="admin-sales-store-search"><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
       </form>
     </div>
@@ -163,7 +177,6 @@
       </tr>
       <form action="">
         <c:forEach items="${salesStoreList}" var="salesStoreList">
-
           <tr>
             <td>${salesStoreList.mem_userid}</td>
             <td>${salesStoreList.mem_realname}</td>
@@ -176,7 +189,6 @@
             <td>${salesStoreList.pay}</td>
             <td>${salesStoreList.status}</td>
           </tr>
-
         </c:forEach>
       </form>
     </table>
@@ -192,5 +204,41 @@
       }
       <%}%>
     })
+
+    $("input[name=admin-sales-store-start]").change(function (){
+      if($("input[name=admin-sales-store-start]").val() > $("input[name=admin-sales-store-end]").val()){
+        $("input[name=admin-sales-store-end]").val($("input[name=admin-sales-store-start]").val())
+      }
+    })
+
+    $("input[name=admin-sales-store-end]").change(function (){
+      if($("input[name=admin-sales-store-start]").val() > $("input[name=admin-sales-store-end]").val()){
+        $("input[name=admin-sales-store-start]").val($("input[name=admin-sales-store-end]").val())
+      }
+    })
+
+    $(".admin-sales-store-search").click(function () {
+
+      let checkNull = true;
+      switch ($("input[name=admin-sales-store-period]:checked").val()) {
+        case "day":
+          if ($("input[name=admin-sales-store-start]").val() == "") {
+            checkNull = false;
+          }
+          break;
+        case "dayBetweenDay":
+          if ($("input[name=admin-sales-store-start]").val() == "" || $("input[name=admin-sales-store-end]").val() == "") {
+            checkNull = false;
+          }
+          break;
+      }
+
+      if (checkNull) {
+        $(".admin-sales-store-form").submit()
+      } else {
+        alert("날짜를 선택해주세요.");
+      }
+    })
+
 
 </script>

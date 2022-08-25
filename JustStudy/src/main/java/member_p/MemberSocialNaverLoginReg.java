@@ -22,6 +22,7 @@ public class MemberSocialNaverLoginReg implements MemberService {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
+        System.out.println("MemberSocialNaverLoginReg 들어옴");
         request.setAttribute("mainUrl", "member/member_NaverAlert.jsp");
         request.setAttribute("goUrl", "../board/MainPage");
 

@@ -344,8 +344,8 @@
       alert('한글 2~6자리를 입력해주세요.')
       $('#input-nickname').focus()
     } else if(/\s/g.test($('#input-nickname').val())) {
-      alert('비밀번호 확인 공백을 제거해 주세요')
-      $('#input-userid').focus()
+      alert('닉네임 공백을 제거해 주세요')
+      $('#input-nickname').focus()
     } else if($('#isNicknamedoubleCheck').is(":checked") === false) {
       alert('닉네임 중복 확인을 해주세요.')
     } else if(form_data.input_realname === '') {

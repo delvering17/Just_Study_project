@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: dieun
@@ -34,6 +35,9 @@
             type="text/javascript"
             src="../bootstrap/js/bootstrap.bundle.min.js"
     ></script>
+
+
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 </head>
 <body>
 <header>
@@ -42,6 +46,7 @@
 <%--    <jsp:include page="view/mypage/template.jsp"/>--%>
 <main>
 <jsp:include page="${mainUrl}"/>
+
 </main>
 <footer>
 

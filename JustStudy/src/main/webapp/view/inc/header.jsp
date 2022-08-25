@@ -271,7 +271,7 @@
                                     <li><a href="../member/MemberLoginForm" >로그인</a></li>
                                 </c:when>
                                 <c:otherwise>
-                                    <li><a href="../member/MemberLogout" >로그아웃</a></li>
+                                    <li><a href="../member/MemberLogout">로그아웃</a></li>
                                 </c:otherwise>
                             </c:choose>
                             <c:if test="${sessionScope.mem_level == 2}">
@@ -300,7 +300,8 @@
 </body>
 </html>
 
-<script type="text/javascript">
+<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script defer type="text/javascript">
 
     const nav = document.querySelector("nav");
 
@@ -334,23 +335,25 @@
         }
     }
 
-    function goLogin() {
-        $.ajax({
-            url:'<c:url value="/memberNonView/MemberLoginReg"/>',
-            type:'GET',
-            // data:{pname:$("#pname").val()},
-            async:false,
-            // dataType:'json',  //지정하지 않으면 문자열로 처리
-            success:function(dd){
-                // var ttt = decodeURIComponent(dd.name)
-                alert("성공");
-            },
-            error:function(e){
-                console.log(e.responseText)
-            }
-        })
-    }
+    // const naverLogin = new naver.LoginWithNaverId(
+    //     {
+    //         clientId: "SM6kP7n6zyadJ15rvs6z",
+    //         callbackUrl: "http://localhost:8080/JustStudy_war_exploded2/member/MemberLoginForm"
+    //     }
+    // );
+    // naverLogin.init();
 
-
+    // const naverLogin = new naver.LoginWithNaverId(
+    //     {
+    //         clientId: "SM6kP7n6zyadJ15rvs6z",
+    //         callbackUrl: "http://localhost:8080/JustStudy_war_exploded2/member/NaverLogin",
+    //         loginButton: {color: "green", type: 2, height: 40}
+    //     }
+    // );
+    //
+    // function goNaverLogout() {
+    //      naverLogin.logout();
+    //     location.href = "../member/MemberLogout";
+    // }
 
 </script>

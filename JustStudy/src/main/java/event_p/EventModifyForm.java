@@ -11,10 +11,8 @@ public class EventModifyForm implements EventService{
     public void execute(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
 
-
         EventDAO dao = new EventDAO();
         EventDTO dto = dao.detail(id);
-
 
         request.setAttribute("mainUrl", "event/modifyForm.jsp");
         request.setAttribute("dto", dto);

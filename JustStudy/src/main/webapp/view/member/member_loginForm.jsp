@@ -45,13 +45,31 @@
                 </button>
             </div>
             <div class="btn-login">
-                <div id="naver_id_login">asdf</div>
+                <%
+                    String clientId = "SM6kP7n6zyadJ15rvs6z";//애플리케이션 클라이언트 아이디값";
+                    String redirectURI = URLEncoder.encode("http://localhost:8080/JustStudy_war_exploded2/member/NaverLogin", "UTF-8");
+                    SecureRandom random = new SecureRandom();
+                    String state = new BigInteger(130, random).toString();
+                    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+                    apiURL += "&client_id=" + clientId;
+                    apiURL += "&redirect_uri=" + redirectURI;
+                    apiURL += "&state=" + state;
+                    session.setAttribute("state", state);
+                %>
+                <a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+
+<%--                <button onclick="goNaverLogin()">aaaa</button>--%>
             </div>
         </div>
     </div>
 </div>
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+
+<form action="MemberSocialSigninForm" id="fff" method="post">
+    <input type="hidden" name="email" id="email">
+    <input type="hidden" name="social_id" id="social_id">
+    <input type="hidden" name="realname" id="realname">
+    <input type="hidden" name="type" value="Naver">
+</form>
 <script type="text/javascript">
 
     function goLogin() {
@@ -135,15 +153,45 @@
     //     console.log(Kakao.Auth.getAccessToken());
     // });
 
-    var naver_id_login = new naver_id_login("SM6kP7n6zyadJ15rvs6z", "http://localhost:8080/JustStudy_war_exploded2/member/MemberSocialNaverLoginReg");
-    var state = naver_id_login.getUniqState();
-    naver_id_login.setButton("white", 2,40);
-    naver_id_login.setDomain("http://localhost:8080");
-    naver_id_login.setState(state);
+    // var naver_id_login = new naver_id_login("SM6kP7n6zyadJ15rvs6z", "http://localhost:8080/JustStudy_war_exploded2/member/MemberSocialNaverLoginReg");
+    // var state = naver_id_login.getUniqState();
+    // naver_id_login.setButton("white", 2,40);
+    // naver_id_login.setDomain("http://localhost:8080");
+    // naver_id_login.setState(state);
     // naver_id_login.setPopup();
+    //
+    // naver_id_login.init_naver_id_login();
 
-    naver_id_login.init_naver_id_login();
 
+    // const naverLogin = new naver.LoginWithNaverId(
+    //     {
+    //         clientId: "SM6kP7n6zyadJ15rvs6z",
+    //         callbackUrl: "http://localhost:8080/JustStudy_war_exploded2/member/MemberLoginForm",
+    //         loginButton: {color: "green", type: 2, height: 40}
+    //     }
+    // );
+
+
+
+    function setLoginStatus(){
+
+        const message_area=document.getElementById('message');
+        message_area.innerHTML=`
+      <h3> Login 성공 </h3>
+      <div>user Nickname : naverLogin.user.id}</div>
+      <div>user Age(범위) : ${naverLogin.user.name}</div>
+      <div>user Birthday : ${naverLogin.user.email}</div>
+      `;
+
+        // const button_area=document.getElementById('button_area');
+        // button_area.innerHTML="<button id='btn_logout'>로그아웃</button>";
+        //
+        // const logout=document.getElementById('btn_logout');
+        // logout.addEventListener('click',(e)=>{
+        //     naverLogin.logout();
+        //     location.replace("http://127.0.0.1:5500");
+        // })
+    }
     // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
 
     function getUserInformation() {

@@ -6,26 +6,22 @@
   Time: 1:14 AM
   To change this template use File | Settings | File Templates.
 --%>
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <form action="MemberSocialSigninForm" id="fff" method="post">
     <input type="hidden" name="email" id="email">
     <input type="hidden" name="social_id" id="social_id">
     <input type="hidden" name="realname" id="realname">
     <input type="hidden" name="type" value="Naver">
 </form>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript">
+
     var naver_id_login = new naver_id_login("SM6kP7n6zyadJ15rvs6z", "");
     // 접근 토큰 값 출력
     // alert(naver_id_login.oauthParams.access_token);
     // 네이버 사용자 프로필 조회
     naver_id_login.get_naver_userprofile("naverSignInCallback()");
     function naverSignInCallback() {
-        // alert(naver_id_login.getProfileData('email'));
-        // alert(naver_id_login.getProfileData('name'));
-        // alert(naver_id_login.get('email'));
-
         let form_data = {
             social_id:naver_id_login.getProfileData('id'),
             social_email:naver_id_login.getProfileData('email'),
@@ -37,35 +33,24 @@
             type:'GET',
             data: form_data,
             async:false,
-            dataType:'JSON',
+            dataType:'text',
             success:function(response){
-
-                if(response.loginResult === 'success') {
-                    alert('로그인 되었습니다.');
-                    location.href = response.goUrl;
-                } else{
-
-                    let email = decodeURIComponent(response.email).replaceAll("+"," ")
-                    let social_id = decodeURIComponent(response.social_id).replaceAll("+"," ")
-                    let realname = decodeURIComponent(response.realname).replaceAll("+"," ")
-                    $('#email').val(email)
-                    $('#social_id').val(social_id)
-                    $('#realname').val(realname)
-                    alert('가입 되지 않은 회원입니다. 회원가입을 진행해주세요')
-                    $('#fff').submit()
-
-
-                }
-                //var frm = $("<form method='post'></form>")
-
-                //location.href = response.goUrl
-
-                <%--if(response.loginResult === 'success') {--%>
-                <%--  alert('로그인에 성공했습니다.')--%>
-                <%--  location.href = '<c:url value="/board/MainPage"/>'--%>
-                <%--} else {--%>
-                <%--  alert(response.loginResult)--%>
-                <%--}--%>
+                // alert('야호');
+                alert(response)
+                // if(response.loginResult === 'success') {
+                //     alert('로그인 되었습니다.');
+                //     location.href = response.goUrl;
+                // } else{
+                //
+                //     let email = naver_id_login.getProfileData('email')
+                //     let social_id = naver_id_login.getProfileData('id')
+                //     let realname = naver_id_login.getProfileData('name')
+                //     $('#email').val(email)
+                //     $('#social_id').val(social_id)
+                //     $('#realname').val(realname)
+                //     alert('가입 되지 않은 회원입니다. 회원가입을 진행해주세요')
+                //     $('#fff').submit()
+                // }
             },
             error:function(e){
                 console.log(e.responseText)

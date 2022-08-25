@@ -76,6 +76,11 @@
             padding-top: 10px;
             padding-right: 5px;
         }
+        header > div > a{
+            color: #fff;
+            margin-right: 20px;
+        }
+
 
         header > div > div:nth-of-type(1) > input{
             background: rgba(75, 84, 207, 0.897);
@@ -177,13 +182,7 @@
         <label for="hamburger"><i class="fa-solid fa-align-justify"></i></label>
         <label for="admin"><a href="AdminPage">ADMINISTRATOR</a></label>
         <div>
-            <div>
-                <input type="button" value="매장"/>
-                <input type="button" value="홈"/>
-                <input type="button" value="부가서비스"/>
-                <input type="button" value="관리자"/>
-            </div>
-
+                <a href="../board/MainPage">홈</a>
         </div>
 
     </header>

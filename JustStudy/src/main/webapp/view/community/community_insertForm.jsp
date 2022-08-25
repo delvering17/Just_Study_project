@@ -70,7 +70,7 @@
                 <label for="agree">개인정보취급방침을 읽었으며 이에 동의합니다.</label></td>
         </tr>
         <tr>
-            <td colspan="4"><input type="submit" value="등록"></td>
+            <td colspan="4"><input type="submit" id="subbtn" value="등록"></td>
         </tr>
     </table>
 
@@ -82,8 +82,27 @@
     var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
     document.getElementById("Date-start").setAttribute("min", today);
     document.getElementById("Date-end").setAttribute("min", today);
-/*    var aa =  document.getElementById("Date-start").setAttribute("min", today);
-    var bb =  document.getElementById("Date-end").setAttribute("min", today);*/
+
+    $("#subbtn").click(function(){
+
+        var startDate = $( "input[name='startdate']" ).val();
+        var startDateArr = startDate.split('-');
+
+        var endDate = $( "input[name='enddate']" ).val();
+        var endDateArr = endDate.split('-');
+
+        var startDateCompare = new Date(startDateArr[0], startDateArr[1], startDateArr[2]);
+        var endDateCompare = new Date(endDateArr[0], endDateArr[1], endDateArr[2]);
+
+        if(startDateCompare.getTime() > endDateCompare.getTime()) {
+
+            alert("시작날짜와 종료날짜를 확인해 주세요.");
+
+            return false;
+        }
+
+        $("#subbtn").focus();
+    });
 
 
     function CheckForm(Join) {

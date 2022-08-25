@@ -104,7 +104,7 @@ public class ReservationDAO {
             sql += " and useDate < ?";
         }
 
-        sql += " order by resDate desc";
+        sql += " order by useDate desc";
 
         try {
             ptmt = con.prepareStatement(sql);
@@ -152,7 +152,7 @@ public class ReservationDAO {
             sql += " and useDate > ?";
         }
 
-        sql += " order by resDate desc";
+        sql += " order by useDate desc";
 
 
         try {
@@ -195,7 +195,7 @@ public class ReservationDAO {
 
         ArrayList<ReservationDTO> res = new ArrayList<ReservationDTO>();
 
-        sql = "select * from reservation where userId = ? and useDate = DATE_FORMAT(SYSDATE(), '%Y-%m-%d') order by resDate desc";
+        sql = "select * from reservation where userId = ? and useDate = DATE_FORMAT(SYSDATE(), '%Y-%m-%d') order by useDate desc";
         try {
             ptmt = con.prepareStatement(sql);
             ptmt.setInt(1, userId);

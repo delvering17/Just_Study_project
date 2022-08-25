@@ -53,7 +53,7 @@
       </tr>
       <tr>
         <td>
-          <a href="MyReservationList">목록으로</a>
+          <a href="MyReservationList?type=done&period=${param.period}">목록으로</a>
           <a href="MypageReviewDelete?reservId=<%=reviewDTO.getReservId()%>">삭제</a>
         </td>
       </tr>

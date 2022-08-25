@@ -82,7 +82,7 @@ public class MyReservationList implements MypageService{
                 String lastTime = reservationDTO.getTime().split(", ")[reservationDTO.getTime().split(", ").length-1].split(":")[0];
                 int nowTime = new Date().getHours();
                 if(nowTime <= Integer.parseInt(lastTime)){
-                    myReservation.add(reservationDTO);
+                    myReservation.add(0, reservationDTO);
                 }
             }
         } else if(request.getParameter("type").equals("done")){
@@ -95,7 +95,7 @@ public class MyReservationList implements MypageService{
                 String lastTime = reservationDTO.getTime().split(", ")[reservationDTO.getTime().split(", ").length-1].split(":")[0];
                 int nowTime = new Date().getHours();
                 if(nowTime > Integer.parseInt(lastTime)){
-                    myReservation.add(reservationDTO);
+                    myReservation.add(0, reservationDTO);
                 }
             }
         }

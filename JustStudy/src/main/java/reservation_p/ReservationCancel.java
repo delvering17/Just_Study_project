@@ -15,15 +15,24 @@ public class ReservationCancel implements ReservationService{
 
         ArrayList<Integer> sameOrderList = new ReservationDAO().sameOrderList(reservationDTO.getOrderId());
 
+        IamportCancel iamportCancel = new IamportCancel();
+
+
         if(sameOrderList.size() == 1){
-            new IamportCancel().testCancelPaymentAlreadyCancelledImpUid(reservationDTO.getOrderId());
+            iamportCancel.testCancelPaymentAlreadyCancelledImpUid(reservationDTO.getOrderId());
         } else{
-            new IamportCancel().testPartialCancelPaymentAlreadyCancelledImpUid(reservationDTO.getOrderId(), reservationDTO.getPay());
+            iamportCancel.testPartialCancelPaymentAlreadyCancelledImpUid(reservationDTO.getOrderId(), reservationDTO.getPay());
         }
 
-        new ReservationDAO().reservationCancel(reservationDTO.getId());
+        String msg = iamportCancel.getPayment_response().getMessage();
 
-        request.setAttribute("msg", "취소하였습니다.");
+        if(iamportCancel.getPayment_response().getMessage() == null){
+            msg = "취소하였습니다.";
+            System.out.println(reservationDTO.getId());
+            new ReservationDAO().reservationCancel(reservationDTO.getId());
+        }
+
+        request.setAttribute("msg", msg);
         request.setAttribute("mainUrl", "mypage/mypage_alert.jsp");
         request.setAttribute("goUrl", "../mypage/MyReservationList?type=will&period=all");
     }

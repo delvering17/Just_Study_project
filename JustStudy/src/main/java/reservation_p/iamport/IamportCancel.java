@@ -32,7 +32,7 @@ public class IamportCancel {
 
         try {
             payment_response = client.cancelPaymentByImpUid(cancel_data);
-            System.out.println(payment_response.getResponse());
+            System.out.println(payment_response.getMessage()+"전체취소");
         } catch (Exception e) {
 
         }
@@ -43,6 +43,8 @@ public class IamportCancel {
 
         try {
             payment_response = client.cancelPaymentByImpUid(cancel_data);
+            System.out.println(payment_response.getMessage()+"부분취소");
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

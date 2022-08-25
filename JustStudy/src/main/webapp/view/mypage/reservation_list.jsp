@@ -217,7 +217,7 @@
 
                 <tr>
                     <form action="MypageReview" class="mypage-reservlist-review-form">
-                        <input type="hidden" name="reservId" value="${myreserv.id}"/>
+                        <input type=hidden name="reservId" value="${myreserv.id}"/>
                         <td>${myreserv.resDate}</td>
                         <td>${myreserv.branch}</td>
                         <td>${myreserv.room}</td>
@@ -318,7 +318,7 @@
 
     $(".mypage-reservlist-cancle").click(function () {
         if(confirm("정말 취소하시겠습니까?")){
-            location.href = "../reservation/ReservationCancel?reservId="+$("input[name=reservId]").eq($(this).index(".mypage-reservlist-cancle")).val()
+            location.href = "../reservation/ReservationCancel?reservId="+$("input[name=reservId]").eq($(this).parent().parent().index("tr")-1).val()
         }
     })
 </script>

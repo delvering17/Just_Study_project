@@ -18,7 +18,7 @@ public class MypageReviewInsert implements MypageService{
         ReviewDTO reviewDTO = new ReviewDTO();
         reviewDTO.setReservId(Integer.parseInt(request.getParameter("reservId")));
         reviewDTO.setMemId(memberDTO.getMem_id());
-        reviewDTO.setStar(Integer.parseInt(request.getParameter("reviewStar")));
+        reviewDTO.setStar(request.getParameterValues("reviewStar").length);
         reviewDTO.setContent(request.getParameter("reviewContent"));
 
         String msg = "작성 실패";

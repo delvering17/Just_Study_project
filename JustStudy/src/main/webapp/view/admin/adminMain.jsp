@@ -95,7 +95,7 @@
                         <td><button type="submit">상세보기</button></td>
                     </form>
                 </tr>
-                <c:if test="${todayReservation==null}">
+                <c:if test="${unanswered==0}">
                     <tr>
                         <th>오늘 예약이 없습니다</th>
                     </tr>

@@ -285,11 +285,6 @@
 </div>
 
 <script type="text/javascript">
-    // function searchUser(){
-    //     if(/\s/g.test($('#searchUserList-input-id').val())){
-    //         alert('공백으로 검색할 수 없습니다')
-    //     }
-    // }
 
 </script>
 

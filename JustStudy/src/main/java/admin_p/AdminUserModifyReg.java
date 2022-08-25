@@ -10,6 +10,12 @@ public class AdminUserModifyReg implements AdminService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
+        int modifyId = Integer.parseInt(request.getParameter("id"));
+        String realname = request.getParameter("realname");
+        String nickname = request.getParameter("nickname");
+        String address1 = request.getParameter("address1");
+        String address2 = request.getParameter("address2");
+
         MemberDTO userUpdate = new MemberDTO();
 
         userUpdate.setMem_id(Integer.parseInt(request.getParameter("id")));
@@ -20,14 +26,30 @@ public class AdminUserModifyReg implements AdminService{
 
         userUpdate.setMem_address1(request.getParameter("address1"));
         userUpdate.setMem_address2(request.getParameter("address2"));
-        userUpdate.setMem_phone(request.getParameter("phone"));
 
         new MemberDAO().modifyInformation(userUpdate);
 
-        String msg = "수정 완료";
-        request.setAttribute("adminUrl", "alert.jsp");
-        request.setAttribute("msg", msg);
-        request.setAttribute("goUrl","AdminUserList");
+        if(realname.equals("") || nickname.equals("") || address1.equals("") || address2.equals("")) {
+            String msg = "빈 칸으로 수정할 수 없습니다";
+            request.setAttribute("adminUrl", "alert.jsp");
+            request.setAttribute("msg", msg);
+            request.setAttribute("modifyId", modifyId);
+            request.setAttribute("goUrl", "AdminUserModify");
+
+        }else if(realname.contains(" ") || nickname.contains(" ")){
+            String msg = "공백을 포함하여 수정할 수 없습니다";
+            request.setAttribute("adminUrl", "alert.jsp");
+            request.setAttribute("msg", msg);
+            request.setAttribute("modifyId", modifyId);
+            request.setAttribute("goUrl", "AdminUserModify");
+
+        }else{
+            String msg = "수정 완료";
+            request.setAttribute("adminUrl", "alert.jsp");
+            request.setAttribute("msg", msg);
+            request.setAttribute("goUrl","AdminUserList");
+        }
+
 
 
     }

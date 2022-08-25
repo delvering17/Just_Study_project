@@ -203,7 +203,7 @@
             </tr>
         </table>
         <button type="submit" formaction="AdminEventModifyReg?id=${eventDTO.id}" formmethod="post" formenctype="multipart/form-data">수정</button>
-        <button type="submit" href="AdminInquiryList" formmethod="get">삭제</button>
+        <button type="submit" href="AdminEventDeleteReg" formmethod="get">삭제</button>
         </form>
         <a href="AdminEventList">목록으로</a>
     </div>

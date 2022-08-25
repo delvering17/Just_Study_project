@@ -37,7 +37,7 @@ public class AdminStoreInsertReg implements AdminService{
             BranchDTO branchDTO = new BranchDTO();
 
             branchDTO.setCity(mr.getParameter("cityName"));
-            branchDTO.setName(mr.getParameter("branchName"));
+            branchDTO.setName(mr.getParameter("branchName").trim());
 
             if(mr.getParameterValues("roomType").length > 0){
                 ArrayList<String> roomType = new ArrayList<String>();
@@ -53,13 +53,13 @@ public class AdminStoreInsertReg implements AdminService{
                 branchDTO.setRooms("");
             }
 
-            branchDTO.setPrice(Integer.parseInt(mr.getParameter("price")));
-            branchDTO.setOpen(Integer.parseInt(mr.getParameter("open")));
-            branchDTO.setClose(Integer.parseInt(mr.getParameter("close")));
-            branchDTO.setAddress(mr.getParameter("address"));
-            branchDTO.setAddressDetail(mr.getParameter("addressDetail"));
-            branchDTO.setPhone(mr.getParameter("phone"));
-            branchDTO.setImg(mr.getFilesystemName("img"));
+            branchDTO.setPrice(Integer.parseInt(mr.getParameter("price").trim()));
+            branchDTO.setOpen(Integer.parseInt(mr.getParameter("open").trim()));
+            branchDTO.setClose(Integer.parseInt(mr.getParameter("close").trim()));
+            branchDTO.setAddress(mr.getParameter("address").trim());
+            branchDTO.setAddressDetail(mr.getParameter("addressDetail").trim());
+            branchDTO.setPhone(mr.getParameter("phone").trim());
+            branchDTO.setImg(mr.getFilesystemName("img").trim());
             branchDTO.setFacilities((mr.getParameterValues("facilities") != null ? String.join(",", mr.getParameterValues("facilities")) : null));
 
             double[] latlng = findLatlng(mr.getParameter("address"));

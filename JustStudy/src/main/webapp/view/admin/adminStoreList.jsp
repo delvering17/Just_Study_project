@@ -83,13 +83,7 @@
     }
 </style>
 
-<script type="text/javascript">
-    window.onload = function (){
-        $(".admin-store-insert").click(function (){
-            location.href = "AdminStoreInsert"
-        })
-    }
-</script>
+
 <div class="admin-store-list-bg">
 
     <div class="admin-store-list-headline">
@@ -99,7 +93,7 @@
 
     <div class="admin-store-list-main">
 
-        <form action="AdminStoreList">
+        <form action="AdminStoreList" class="admin-store-search-form">
             <div>
                 <select name="filter">
                     <option value="city">지역</option>
@@ -112,7 +106,7 @@
                     <option value="facilities">편의시설</option>
                 </select>
                 <input type="text" name="word">
-                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button type="button" class="admin-store-list-search"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </form>
 
@@ -168,3 +162,17 @@
         </table>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(".admin-store-insert").click(function (){
+        location.href = "AdminStoreInsert"
+    })
+
+    $(".admin-store-list-search").click(function (){
+        if($("input[name=word]").val().trim() == ""){
+            alert("검색어를 입력해주세요.")
+        } else{
+            $(".admin-store-search-form").submit()
+        }
+    })
+</script>

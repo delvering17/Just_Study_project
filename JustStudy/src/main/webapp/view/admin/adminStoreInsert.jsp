@@ -305,7 +305,7 @@
             break;
           }
         } else{
-          if(form_data[i] == ""){
+          if(form_data[i].trim() == ""){
             nullCheck = false;
             break;
           }

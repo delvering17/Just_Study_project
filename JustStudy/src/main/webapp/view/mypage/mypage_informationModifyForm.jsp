@@ -225,6 +225,27 @@
     }
 
     function gogo() {
-        location.href = "../mypage/MypageSignoutForm"
+        if(confirm('정말 탈퇴하시겠습니까?')) {
+            $.ajax({
+                url:'<c:url value="/mypageNonView/MypageSignoutReg"/>',
+                type:'GET',
+                async:false,
+                dataType: 'JSON',
+                success:function(response){
+                    if(response.signoutResult === "success") {
+                        alert('회원 탈퇴되었습니다.')
+                        location.href = '../board/MainPage'
+                    } else {
+                        alert('현재 예약 건이 있으므로 탈퇴를 할 수 없습니다.')
+                        // location.href = "../mypage/MyReservationList"
+                    }
+                },
+                error:function(e){
+                    console.log(e.responseText)
+                }
+            })
+        }
+
+
     }
 </script>

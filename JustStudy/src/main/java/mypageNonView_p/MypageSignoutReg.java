@@ -21,7 +21,7 @@ public class MypageSignoutReg implements MypageNonViewService{
         HttpSession session = request.getSession();
 
         int mem_id = (int) session.getAttribute("login");
-
+        System.out.println("멤아이디"+mem_id);
         // TODO - 유효성 검사 필요
 
 
@@ -39,6 +39,8 @@ public class MypageSignoutReg implements MypageNonViewService{
             int nowTime = new Date().getHours();
             if(nowTime <= Integer.parseInt(lastTime)){
                 myReservation.add(reservationDTO);
+                System.out.println("어디예약"+reservationDTO.getId());
+                System.out.println("누구"+reservationDTO.getUserId());
             }
         }
 

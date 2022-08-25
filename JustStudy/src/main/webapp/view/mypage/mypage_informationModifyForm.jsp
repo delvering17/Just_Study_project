@@ -105,7 +105,7 @@
             <li class="info-modify-form-items" >
                 <p>주소</p>
                 <input type="text" class="user-input" id="input-address1" value="${memberDTO.mem_address1}" readonly>
-                <button type="button" class="btn-modify" id="btn-findaddress">검색</button>
+                <button type="button" class="btn-modify" id="btn-findaddress" onclick="gofindAddress()">검색</button>
             </li>
             <li class="info-modify-form-items">
                 <p></p>
@@ -122,6 +122,9 @@
         </ul>
 
 </div>
+
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 
     $('#input-nickname').change(function () {
@@ -246,6 +249,17 @@
             })
         }
 
+
+    }
+
+    function gofindAddress() {
+
+        new daum.Postcode({
+            oncomplete: function(data) {
+                document.getElementById("input-address1").value = data.address;
+                document.getElementById("input-address2").focus();
+            }
+        }).open();
 
     }
 </script>

@@ -104,7 +104,7 @@
             </tr>
 
             <c:forEach items="${faqList}" varStatus="no" var="faq">
-                <form action="adminFAQModifyDelete" class="admin-faq-list-form">
+                <form action="AdminFAQModifyDelete" class="admin-faq-list-form">
                     <input type="hidden" name="faqId" value="${faq.id}"/>
                     <tr>
                         <td>${faq.id}</td>

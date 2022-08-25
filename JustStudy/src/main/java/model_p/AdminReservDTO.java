@@ -5,7 +5,7 @@ import java.util.Date;
 public class AdminReservDTO {
 
     int id, headcount, pay;
-    String orderId, mem_userid, mem_realname, mem_nickname, city, branch, room, time, status;
+    String orderId, mem_userid, mem_realname, mem_nickname, city, branch, room, time, status, cancelReason;
     Date resDate, useDate;
 
     public int getId() {
@@ -114,5 +114,13 @@ public class AdminReservDTO {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getCancelReason() {
+        return cancelReason;
+    }
+
+    public void setCancelReason(String cancelReason) {
+        this.cancelReason = cancelReason;
     }
 }

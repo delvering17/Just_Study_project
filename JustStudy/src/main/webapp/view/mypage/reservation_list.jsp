@@ -241,14 +241,19 @@
                                 </c:when>
                             </c:choose>
                         </c:when>
-                    <c:when test="${param.type == \"will\"}">
-                        <c:if test="${myreserv.status == \"결제완료\"}">
-                            <td>
-                                <button type="button" class="mypage-reservlist-cancle">예약 취소</button>
-                            </td>
-                        </c:if>
-                    </c:when>
-                    </c:choose>
+                            <c:when test="${param.type == \"will\"}">
+                                <c:choose>
+                                    <c:when test="${myreserv.status == \"결제완료\"}">
+                                        <td>
+                                            <button type="button" class="mypage-reservlist-cancle">예약 취소</button>
+                                        </td>
+                                    </c:when>
+                                    <c:when test="${myreserv.status == \"관리자취소\"}">
+                                        <td>${myreserv.cancelReason}</td>
+                                    </c:when>
+                                </c:choose>
+                            </c:when>
+                        </c:choose>
                     </form>
                 </tr>
 

@@ -84,6 +84,7 @@ public class ReservationDAO {
                 dto.setPaymentMethod(rs.getString("paymentMethod"));
                 dto.setStatus(rs.getString("status"));
                 dto.setReview(rs.getInt("review"));
+                dto.setCancelReason(rs.getString("cancel_reason"));
 
                 res.add(dto);
             }
@@ -133,6 +134,7 @@ public class ReservationDAO {
                 dto.setPaymentMethod(rs.getString("paymentMethod"));
                 dto.setStatus(rs.getString("status"));
                 dto.setReview(rs.getInt("review"));
+                dto.setCancelReason(rs.getString("cancel_reason"));
 
                 res.add(dto);
             }
@@ -182,6 +184,7 @@ public class ReservationDAO {
                 dto.setPaymentMethod(rs.getString("paymentMethod"));
                 dto.setStatus(rs.getString("status"));
                 dto.setReview(rs.getInt("review"));
+                dto.setCancelReason(rs.getString("cancel_reason"));
 
                 res.add(dto);
             }
@@ -219,6 +222,7 @@ public class ReservationDAO {
                 dto.setPaymentMethod(rs.getString("paymentMethod"));
                 dto.setStatus(rs.getString("status"));
                 dto.setReview(rs.getInt("review"));
+                dto.setCancelReason(rs.getString("cancel_reason"));
 
                 res.add(dto);
             }
@@ -369,6 +373,7 @@ public class ReservationDAO {
             rs.next();
 
             reservationDTO.setId(rs.getInt("id"));
+            reservationDTO.setOrderId(rs.getString("orderId"));
             reservationDTO.setResDate(rs.getDate("resDate"));
             reservationDTO.setUserId(rs.getInt("userId"));
             reservationDTO.setCity(rs.getString("city"));
@@ -381,6 +386,7 @@ public class ReservationDAO {
             reservationDTO.setPaymentMethod(rs.getString("paymentMethod"));
             reservationDTO.setStatus(rs.getString("status"));
             reservationDTO.setReview(rs.getInt("review"));
+            reservationDTO.setCancelReason(rs.getString("cancel_reason"));
 
             return reservationDTO;
 
@@ -390,6 +396,66 @@ public class ReservationDAO {
             close();
         }
         return null;
+    }
+
+    public int reservationCancelByUser(int id){
+
+        sql = "update reservation set status = '예약취소' where id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, id);
+            return ptmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return 0;
+    }
+
+    public ArrayList<Integer> sameOrderList(String orderId){
+
+        ArrayList<Integer> res = new ArrayList<Integer>();
+
+        sql = "select id from reservation where orderId = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, orderId);
+
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                int id = rs.getInt("id");
+                res.add(id);
+            }
+
+            return res;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+        return null;
+    }
+
+    public int reservationCancelByAdmin(int id, String cancelReason){
+
+        sql = "update reservation set status = '관리자취소', cancel_reason = ? where id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, cancelReason);
+            ptmt.setInt(2, id);
+            return ptmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return 0;
     }
 
     public void close() {

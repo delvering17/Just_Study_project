@@ -13,7 +13,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <style>
-    .admin-reserv-list-bg{
+    .admin-reserv-list-bg {
         width: 100%;
         height: fit-content;
     }
@@ -36,7 +36,7 @@
         font-size: 20px;
     }
 
-    .admin-reserv-list-main{
+    .admin-reserv-list-main {
         width: 2000px;
         height: fit-content;
         margin: 0px 0px 0px 220px;
@@ -47,8 +47,8 @@
         width: 67%;
         border: 1px solid rgb(122, 115, 115);
         margin-top: 10px;
-/*        table-layout: fixed;
-        word-break: break-all;*/
+        /*        table-layout: fixed;
+                word-break: break-all;*/
     }
 
     .admin-reserv-list-table th {
@@ -59,28 +59,29 @@
     .admin-reserv-list-table th:nth-of-type(1) {
         width: 3%
     }
-/*
-    .admin-reserv-list-table th:nth-of-type(5),
-    .admin-reserv-list-table th:nth-of-type(6),
-    .admin-reserv-list-table th:nth-of-type(11),
-    .admin-reserv-list-table th:nth-of-type(12),
-    .admin-reserv-list-table th:nth-of-type(13),
-    .admin-reserv-list-table th:nth-of-type(14){
-        width: 6%;
-    }
 
-    .admin-reserv-list-table th:nth-of-type(2),
-    .admin-reserv-list-table th:nth-of-type(3),
-    .admin-reserv-list-table th:nth-of-type(10){
-        width: 12%;
-    }
+    /*
+        .admin-reserv-list-table th:nth-of-type(5),
+        .admin-reserv-list-table th:nth-of-type(6),
+        .admin-reserv-list-table th:nth-of-type(11),
+        .admin-reserv-list-table th:nth-of-type(12),
+        .admin-reserv-list-table th:nth-of-type(13),
+        .admin-reserv-list-table th:nth-of-type(14){
+            width: 6%;
+        }
 
-    .admin-reserv-list-table th:nth-of-type(4),
-    .admin-reserv-list-table th:nth-of-type(7),
-    .admin-reserv-list-table th:nth-of-type(8),
-    .admin-reserv-list-table th:nth-of-type(9){
-        width: 9%;
-    }*/
+        .admin-reserv-list-table th:nth-of-type(2),
+        .admin-reserv-list-table th:nth-of-type(3),
+        .admin-reserv-list-table th:nth-of-type(10){
+            width: 12%;
+        }
+
+        .admin-reserv-list-table th:nth-of-type(4),
+        .admin-reserv-list-table th:nth-of-type(7),
+        .admin-reserv-list-table th:nth-of-type(8),
+        .admin-reserv-list-table th:nth-of-type(9){
+            width: 9%;
+        }*/
 
     .admin-reserv-list-table td {
         border: 1px solid rgb(97, 88, 88);
@@ -90,7 +91,7 @@
         padding: 5px 5px 5px 5px;
     }
 
-    .admin-reserv-list-table tr:first-of-type{
+    .admin-reserv-list-table tr:first-of-type {
         height: 50px;
         padding: 10px;
         color: white;
@@ -102,20 +103,20 @@
     }
 
     input[name=admin-reserv-list-start], input[name=admin-reserv-list-end],
-    select[name=admin-reserv-list-month], select[name=admin-reserv-list-year]{
+    select[name=admin-reserv-list-month], select[name=admin-reserv-list-year] {
         display: none;
     }
 
-    input[type=radio][value=day]:checked+input+input+input+input[name=admin-reserv-list-start],
-    input[type=radio][value=dayBetweenDay]:checked+input+input+input[name=admin-reserv-list-start],
-    input[type=radio][value=dayBetweenDay]:checked+input+input+input+input[name=admin-reserv-list-end],
-    input[type=radio][value=month]:checked+input+input+input+select,
-    input[type=radio][value=month]:checked+input+input+input+select+select,
-    input[type=radio][value=year]:checked+input+input+select{
+    input[type=radio][value=day]:checked + input + input + input + input[name=admin-reserv-list-start],
+    input[type=radio][value=dayBetweenDay]:checked + input + input + input[name=admin-reserv-list-start],
+    input[type=radio][value=dayBetweenDay]:checked + input + input + input + input[name=admin-reserv-list-end],
+    input[type=radio][value=month]:checked + input + input + input + select,
+    input[type=radio][value=month]:checked + input + input + input + select + select,
+    input[type=radio][value=year]:checked + input + input + select {
         display: inline-block;
     }
 
-    select[name=branch]{
+    select[name=branch] {
         width: 150px;
     }
 
@@ -178,7 +179,8 @@
                         <option value="status">상태</option>
                     </select>
                     <input type="text" name="admin-reserv-list-word"/>
-                    <button type="button" class="admin-reserv-list-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <button type="button" class="admin-reserv-list-search"><i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
                 </div>
             </form>
         </div>
@@ -201,33 +203,51 @@
                 <th>상태</th>
                 <th></th>
             </tr>
+                <%
+                    ArrayList<AdminReservDTO> totalList = (ArrayList<AdminReservDTO>) request.getAttribute("totalList");
 
-            <%
-                ArrayList<AdminReservDTO> totalList = (ArrayList<AdminReservDTO>) request.getAttribute("totalList");
-
-                for(AdminReservDTO adminReservDTO : totalList){%>
-                    <tr>
-                        <td><%=adminReservDTO.getId()%></td>
-                        <td><%=adminReservDTO.getOrderId()%></td>
-                        <td><%=adminReservDTO.getResDate()%></td>
-                        <td><%=adminReservDTO.getMem_userid()%></td>
-                        <td><%=adminReservDTO.getMem_nickname()%></td>
-                        <td><%=adminReservDTO.getMem_realname()%></td>
-                        <td><%=adminReservDTO.getCity()%></td>
-                        <td><%=adminReservDTO.getBranch()%></td>
-                        <td><%=adminReservDTO.getRoom()%></td>
-                        <td><%=adminReservDTO.getUseDate()%></td>
-                        <td><%=adminReservDTO.getTime().replaceAll(", ", "<br/>")%></td>
-                        <td><%=adminReservDTO.getHeadcount()%></td>
-                        <td><%=adminReservDTO.getPay()%></td>
-                        <td><%=adminReservDTO.getStatus()%></td>
-                        <td>
-                            <%if(adminReservDTO.getStatus().equals("결제완료")){%>
-                                <input type="button" value="취소"/>
-                            <%}%>
-                        </td>
-                    </tr>
-              <%}%>
+                    for (AdminReservDTO adminReservDTO : totalList) {%>
+            <form action="AdminReservationCancelForm">
+                <tr>
+                    <input type="hidden" name="id" value="<%=adminReservDTO.getId()%>"/>
+                    <td><%=adminReservDTO.getId()%>
+                    </td>
+                    <td><%=adminReservDTO.getOrderId()%>
+                    </td>
+                    <td><%=adminReservDTO.getResDate()%>
+                    </td>
+                    <td><%=adminReservDTO.getMem_userid()%>
+                    </td>
+                    <td><%=adminReservDTO.getMem_nickname()%>
+                    </td>
+                    <td><%=adminReservDTO.getMem_realname()%>
+                    </td>
+                    <td><%=adminReservDTO.getCity()%>
+                    </td>
+                    <td><%=adminReservDTO.getBranch()%>
+                    </td>
+                    <td><%=adminReservDTO.getRoom()%>
+                    </td>
+                    <td><%=adminReservDTO.getUseDate()%>
+                    </td>
+                    <td><%=adminReservDTO.getTime().replaceAll(", ", "<br/>")%>
+                    </td>
+                    <td><%=adminReservDTO.getHeadcount()%>
+                    </td>
+                    <td><%=adminReservDTO.getPay()%>
+                    </td>
+                    <td><%=adminReservDTO.getStatus()%>
+                    </td>
+                    <td>
+                        <%if (adminReservDTO.getStatus().equals("결제완료")) {%>
+                            <input type="submit" value="취소"/>
+                        <%} else if (adminReservDTO.getStatus().equals("관리자취소")) {%>
+                        <%=adminReservDTO.getCancelReason()%>
+                        <%}%>
+                    </td>
+                </tr>
+            </form>
+            <%}%>
         </table>
     </div>
 </div>
@@ -236,46 +256,46 @@
 
     <%ArrayList<BranchDTO> branchList = (ArrayList<BranchDTO>) request.getAttribute("branchList");%>
 
-    $("select[name=city]").change(function (){
+    $("select[name=city]").change(function () {
         $("select[name=branch]").html("<option>전체</option>")
         <%for(BranchDTO branchDTO : branchList){%>
-        if($("select[name=city]").val() == "<%=branchDTO.getCity()%>"){
+        if ($("select[name=city]").val() == "<%=branchDTO.getCity()%>") {
             $("select[name=branch]").append("<option><%=branchDTO.getName()%></option>")
         }
         <%}%>
     })
 
-    $("input[name=admin-reserv-list-start]").change(function (){
-        if($("input[name=admin-reserv-list-start]").val() > $("input[name=admin-reserv-list-end]").val()){
+    $("input[name=admin-reserv-list-start]").change(function () {
+        if ($("input[name=admin-reserv-list-start]").val() > $("input[name=admin-reserv-list-end]").val()) {
             $("input[name=admin-reserv-list-end]").val($("input[name=admin-reserv-list-start]").val())
         }
     })
 
-    $("input[name=admin-reserv-list-end]").change(function (){
-        if($("input[name=admin-reserv-list-start]").val() > $("input[name=admin-reserv-list-end]").val()){
+    $("input[name=admin-reserv-list-end]").change(function () {
+        if ($("input[name=admin-reserv-list-start]").val() > $("input[name=admin-reserv-list-end]").val()) {
             $("input[name=admin-reserv-list-start]").val($("input[name=admin-reserv-list-end]").val())
         }
     })
 
-    $(".admin-reserv-list-search").click(function (){
+    $(".admin-reserv-list-search").click(function () {
 
         let checkNull = true;
-        switch ($("input[name=admin-reserv-list-period]:checked").val()){
+        switch ($("input[name=admin-reserv-list-period]:checked").val()) {
             case "day":
-                if($("input[name=admin-reserv-list-start]").val() == ""){
+                if ($("input[name=admin-reserv-list-start]").val() == "") {
                     checkNull = false;
                 }
                 break;
             case "dayBetweenDay":
-                if($("input[name=admin-reserv-list-start]").val() == "" || $("input[name=admin-reserv-list-end]").val() == ""){
+                if ($("input[name=admin-reserv-list-start]").val() == "" || $("input[name=admin-reserv-list-end]").val() == "") {
                     checkNull = false;
                 }
                 break;
         }
 
-        if(checkNull){
+        if (checkNull) {
             $(".admin-reserv-list-form").submit()
-        } else{
+        } else {
             alert("날짜를 선택해주세요.");
         }
     })

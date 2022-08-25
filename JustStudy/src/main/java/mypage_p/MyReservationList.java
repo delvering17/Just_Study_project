@@ -63,10 +63,6 @@ public class MyReservationList implements MypageService{
                         endDate.setDate(endDate.getDate() + 1);
                         break;
                 }
-
-                System.out.println(startDate);
-                System.out.println(endDate);
-
             }catch (Exception e){
                 e.printStackTrace();
             }

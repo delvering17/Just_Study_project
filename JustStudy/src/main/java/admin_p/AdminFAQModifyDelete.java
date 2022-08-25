@@ -5,9 +5,8 @@ import model_p.FaqDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 
-public class adminFAQModifyDelete implements AdminService{
+public class AdminFAQModifyDelete implements AdminService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 

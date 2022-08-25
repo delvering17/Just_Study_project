@@ -3,7 +3,7 @@
 <%@ page import="java.util.Date" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <style>
@@ -81,7 +81,7 @@
 
     .mypage-reservlist-table > tbody > tr > td:nth-of-type(1),
     .mypage-reservlist-table > tbody > tr > td:nth-of-type(3),
-    .mypage-reservlist-table > tbody > tr > td:nth-of-type(4){
+    .mypage-reservlist-table > tbody > tr > td:nth-of-type(4) {
         width: 14%;
     }
 
@@ -89,24 +89,23 @@
     .mypage-reservlist-table > tbody > tr > td:nth-of-type(5),
     .mypage-reservlist-table > tbody > tr > td:nth-of-type(7),
     .mypage-reservlist-table > tbody > tr > td:nth-of-type(8),
-    .mypage-reservlist-table > tbody > tr > td:nth-of-type(9)
-    {
+    .mypage-reservlist-table > tbody > tr > td:nth-of-type(9) {
         width: 10%;
     }
 
-    .mypage-reservlist-table > tbody > tr > td:nth-of-type(6){
+    .mypage-reservlist-table > tbody > tr > td:nth-of-type(6) {
         width: 8%;
     }
 
-    .mypage-reservlist-table > tbody > tr:nth-of-type(1){
+    .mypage-reservlist-table > tbody > tr:nth-of-type(1) {
         font-weight: bold;
     }
 
-    .mypage-reservlist-table > tbody > tr{
+    .mypage-reservlist-table > tbody > tr {
         border-bottom: 1px solid lightgray;
     }
 
-    .mypage-reservlist-review{
+    .mypage-reservlist-review {
         height: 30px;
         border-radius: 10px;
         border: none;
@@ -114,7 +113,7 @@
         color: white;
     }
 
-    .mypage-reservlist-review-done{
+    .mypage-reservlist-review-done {
         height: 30px;
         border-radius: 10px;
         border: none;
@@ -122,7 +121,7 @@
         color: white;
     }
 
-    .mypage-reservlist-cancle{
+    .mypage-reservlist-cancle {
         height: 30px;
         border-radius: 10px;
         border: none;
@@ -130,7 +129,7 @@
         color: white;
     }
 
-    .mypage-reservlist-menu{
+    .mypage-reservlist-menu {
         width: 800px;
         height: 50px;
         margin-top: 20px;
@@ -147,7 +146,7 @@
         color: gray;
     }
 
-    input[name=mypage-reservlist-type]:checked + label > p{
+    input[name=mypage-reservlist-type]:checked + label > p {
         font-weight: bold;
         color: black;
     }
@@ -215,9 +214,10 @@
             </tr>
 
             <c:forEach items="${myReservation}" var="myreserv" varStatus="no">
-                <form action="MypageReview" class="mypage-reservlist-review-form">
-                    <tr>
-                        <input type="hidden" name="reservId" value="${myreserv.id}"/>
+
+                <tr>
+                    <form action="MypageReview" class="mypage-reservlist-review-form">
+                        <input type=hidden name="reservId" value="${myreserv.id}"/>
                         <td>${myreserv.resDate}</td>
                         <td>${myreserv.branch}</td>
                         <td>${myreserv.room}</td>
@@ -227,30 +227,36 @@
                         <td>${myreserv.pay}</td>
                         <td>${myreserv.status}</td>
                         <c:choose>
-                            <c:when test="${param.type == \"done\"}">
+                        <c:when test="${param.type == \"done\"}">
+                            <c:choose>
+                                <c:when test="${myreserv.review == 0}">
+                                    <td>
+                                        <button class="mypage-reservlist-review">후기 작성</button>
+                                    </td>
+                                </c:when>
+                                <c:when test="${myreserv.review == 1}">
+                                    <td>
+                                        <button type="button" class="mypage-reservlist-review-done">후기 조회</button>
+                                    </td>
+                                </c:when>
+                            </c:choose>
+                        </c:when>
+                            <c:when test="${param.type == \"will\"}">
                                 <c:choose>
-                                    <c:when test="${myreserv.review == 0}">
+                                    <c:when test="${myreserv.status == \"결제완료\"}">
                                         <td>
-                                            <button class="mypage-reservlist-review">후기 작성</button>
+                                            <button type="button" class="mypage-reservlist-cancle">예약 취소</button>
                                         </td>
                                     </c:when>
-                                    <c:when test="${myreserv.review == 1}">
-                                        <td>
-                                            <button type="button" class="mypage-reservlist-review-done">후기 조회</button>
-                                        </td>
+                                    <c:when test="${myreserv.status == \"관리자취소\"}">
+                                        <td>${myreserv.cancelReason}</td>
                                     </c:when>
                                 </c:choose>
                             </c:when>
-                            <c:when test="${param.type == \"will\"}">
-                                <c:if test="${myreserv.status == \"결제완료\"}">
-                                    <td>
-                                        <button type="button" class="mypage-reservlist-cancle">예약 취소</button>
-                                    </td>
-                                </c:if>
-                            </c:when>
                         </c:choose>
-                    </tr>
-                </form>
+                    </form>
+                </tr>
+
             </c:forEach>
         </table>
     </div>
@@ -258,60 +264,66 @@
 
 <script type="text/javascript">
 
-    $(".input-radio").each(function (key, value){
-        if(value.getAttribute("value") == "${param.period}"){
+    $(".input-radio").each(function (key, value) {
+        if (value.getAttribute("value") == "${param.period}") {
             value.setAttribute("checked", true)
         }
     })
 
-    $(".mypage-reservlist-top-datepicker").change(function (){
+    $(".mypage-reservlist-top-datepicker").change(function () {
         $("input[value=mypick]").prop('checked', true)
     })
 
 
-    $(".mypage-reservlist-review-done").click(function (){
+    $(".mypage-reservlist-review-done").click(function () {
 
-        location.href = "MypageReviewDetail?reservId="+$(this).parent().parent().children("input[name=reservId]").val()
+        location.href = "MypageReviewDetail?reservId=" + $(this).parent().parent().children("input[name=reservId]").val()
     })
 
-    $("input[name=period]").change(function (){
-        if($("input[name=period]:checked").attr("id") != "mypick"){
+    $("input[name=period]").change(function () {
+        if ($("input[name=period]:checked").attr("id") != "mypick") {
             $(".mypage-reservlist-top-datepicker").val("")
         }
     })
 
-    $(".mypage-reservlist-top-datepicker").eq(1).change(function (){
-        if($(".mypage-reservlist-top-datepicker").eq(0).val() > $(".mypage-reservlist-top-datepicker").eq(1).val()){
+    $(".mypage-reservlist-top-datepicker").eq(1).change(function () {
+        if ($(".mypage-reservlist-top-datepicker").eq(0).val() > $(".mypage-reservlist-top-datepicker").eq(1).val()) {
             $(".mypage-reservlist-top-datepicker").eq(0).val($(".mypage-reservlist-top-datepicker").eq(1).val())
         }
     })
 
-    $(".mypage-reservlist-top-datepicker").eq(0).change(function (){
-        if($(".mypage-reservlist-top-datepicker").eq(0).val() > $(".mypage-reservlist-top-datepicker").eq(1).val()){
+    $(".mypage-reservlist-top-datepicker").eq(0).change(function () {
+        if ($(".mypage-reservlist-top-datepicker").eq(0).val() > $(".mypage-reservlist-top-datepicker").eq(1).val()) {
             $(".mypage-reservlist-top-datepicker").eq(1).val($(".mypage-reservlist-top-datepicker").eq(0).val())
         }
     })
 
-    $("input[name=mypage-reservlist-type]").each(function (key, value){
-        if(value.getAttribute("id") == "${param.type}"){
+    $("input[name=mypage-reservlist-type]").each(function (key, value) {
+        if (value.getAttribute("id") == "${param.type}") {
             value.setAttribute("checked", true);
         }
     })
 
-    $("input[name=mypage-reservlist-type]").change(function (){
-        let find_url = "?type=" + $("input[name=mypage-reservlist-type]:checked").attr("id")+"&period=all" ;
+    $("input[name=mypage-reservlist-type]").change(function () {
+        let find_url = "?type=" + $("input[name=mypage-reservlist-type]:checked").attr("id") + "&period=all";
         location.href = find_url
     })
 
-    $("#submit-find").click(function (){
-        if($("input[name=period]:checked").val() == "mypick"){
-            if($(".mypage-reservlist-top-datepicker").eq(0).val() == "" || $(".mypage-reservlist-top-datepicker").eq(1).val() == ""){
+    $("#submit-find").click(function () {
+        if ($("input[name=period]:checked").val() == "mypick") {
+            if ($(".mypage-reservlist-top-datepicker").eq(0).val() == "" || $(".mypage-reservlist-top-datepicker").eq(1).val() == "") {
                 alert("날짜를 모두 선택해 주세요")
-            }else{
+            } else {
                 $(".mypage-reservlist-form").submit()
             }
         } else {
             $(".mypage-reservlist-form").submit()
+        }
+    })
+
+    $(".mypage-reservlist-cancle").click(function () {
+        if(confirm("정말 취소하시겠습니까?")){
+            location.href = "../reservation/ReservationCancel?reservId="+$("input[name=reservId]").eq($(this).parent().parent().index("tr")-1).val()
         }
     })
 </script>

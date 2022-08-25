@@ -271,7 +271,7 @@
 
     $(".mypage-reservlist-review-done").click(function (){
 
-        location.href = "MypageReviewDetail?reservId="+$(this).parent().parent().children("input[name=reservId]").val()+"&period="+"${param.period}"
+        location.href = "MypageReviewDetail?reservId="+$(this).parent().parent().children("input[name=reservId]").val()
     })
 
     $("input[name=period]").change(function (){

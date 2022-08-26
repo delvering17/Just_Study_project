@@ -30,6 +30,7 @@ public class AdminEventModifyReg implements AdminService{
 
 
         try {
+
             MultipartRequest mr = new MultipartRequest(request, path, size, "UTF-8", new DefaultFileRenamePolicy());
 
             dto.setTitle(mr.getParameter("title"));
@@ -43,6 +44,7 @@ public class AdminEventModifyReg implements AdminService{
             String adminUrl = "adminEventModifyForm.jsp";
 
             if(new EventDAO().modify(dto, mr.getFilesystemName("img") ) > 0){
+
                 msg = "수정되었습니다.";
                 adminUrl = "alert.jsp";
             }

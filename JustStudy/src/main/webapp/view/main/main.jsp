@@ -16,12 +16,10 @@
         width: 100%;
         height: 100%;
     }
-
     #slider-div>img:nth-of-type(1){
         width: 100vw;
         height: 100vh;
     }
-
 </style>
 
 <div class="mainpage-bg">

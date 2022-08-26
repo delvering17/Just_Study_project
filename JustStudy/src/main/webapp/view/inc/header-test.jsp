@@ -31,7 +31,7 @@
         width: 150px;
         height: 150px;
         /*margin-right: 30px;*/
-        /*display: flex;*/
+        position: sticky;
         /*align-items: center;*/
         /*background-color: #fff;*/
         z-index: 3;
@@ -123,7 +123,7 @@
 
     .gnb-list-wrapper {
         /*position: absolute;*/
-        width: 1200px;
+        width: 100%;
         background: #ff0;
 
         margin: 0 auto;
@@ -185,23 +185,21 @@
 
     <div class="header-wrapper">
 
-<%--        <div class="header-logo">--%>
-<%--            <a href="<c:url value="/board/MainPage"/>">--%>
-<%--                <img id="logo" src="<c:url value="/img/inc/logo.png"/>" style="width: 150px; height: 150px">--%>
-<%--            </a>--%>
-<%--        </div>--%>
+
 
         <div class="nav-wrapper">
-            <div class="header-logo">
-                <a href="<c:url value="/board/MainPage"/>">
-                    <img id="logo" src="<c:url value="/img/inc/logo.png"/>" style="width: 150px; height: 150px">
-                </a>
-            </div>
             <nav>
 
                 <div class="gnb">
 
                     <ul>
+                        <li>
+                            <div class="header-logo">
+                                <a href="<c:url value="/board/MainPage"/>">
+                                    <img id="logo" src="<c:url value="/img/inc/logo.png"/>" style="width: 150px; height: 150px">
+                                </a>
+                            </div>
+                        </li>
                         <li>
                             <a>ABOUT</a>
                         </li>

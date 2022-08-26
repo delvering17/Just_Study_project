@@ -42,7 +42,8 @@
 </head>
 <body>
 <header>
-<jsp:include page="inc/header.jsp"/>
+
+<jsp:include page="inc/header-test.jsp"/>
 </header>
 <%--    <jsp:include page="view/mypage/template.jsp"/>--%>
 <main>

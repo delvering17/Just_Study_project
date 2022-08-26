@@ -6,6 +6,14 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<script type="text/javascript">
+    if(<%=((ArrayList<ReservationDTO>) request.getAttribute("myReservation")).size() == 0%>){
+        alert("조회 내역이 없습니다.")
+        location.href = "MyReservationList?type=done&period=all"
+    }
+
+</script>
+
 <style>
 
     .mypage-reservlist {

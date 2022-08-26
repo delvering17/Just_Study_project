@@ -14,7 +14,7 @@ public class AdminStoreReview implements AdminService{
 
         ArrayList<ArrayList> totalList = new ReviewDAO().totalList(
                 request.getParameter("filter"),
-                request.getParameter("word").trim()
+                request.getParameter("word") != null ? request.getParameter("word").trim() : null
         );
 
         request.setAttribute("totalList", totalList);

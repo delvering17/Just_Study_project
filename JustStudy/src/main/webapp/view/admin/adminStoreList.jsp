@@ -15,49 +15,43 @@
 
 </script>
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-    }
-
     .admin-store-list-bg{
         width: 100%;
         height: fit-content;
     }
 
     .admin-store-list-headline {
-        width: 1330px;
-        height: 40px;
+        width: 100%;
+        height: 50px;
         background: #fff;
         border-bottom: 1px solid rgb(184, 177, 177);
-        padding-top: 15px;
         padding-left: 20px;
-        margin-top: 50px;
-        margin-left: 239px;
         position: fixed;
+        display: flex;
         flex-direction: row;
+        justify-content: space-between;
     }
 
     .admin-store-list-headline > b {
-        width: 100px;
+        width: fit-content;
         font-size: 20px;
+        line-height: 50px;
     }
 
     .admin-store-list-headline > input {
-        float: right;
-        margin: 0px 10px 50px 0px;
-
+        position: absolute;
+        left: 0;
+        top: 0;
     }
 
     .admin-store-list-main {
-        width: 2000px;
+        width: 100%;
         height: fit-content;
-        margin: 0px 0px 0px 220px;
-        padding: 120px 20px 20px 40px;
+        padding: 70px 20px 20px 40px;
     }
 
     .admin-store-list-table {
-        width: 60%;
+        width: 1000px;
         border: 1px solid rgb(122, 115, 115);
         margin-top: 10px;
     }

@@ -9,67 +9,62 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        *{
-            margin: 0;
-            padding: 0;
+
+        .admin-main-bg{
+            width: 100%;
+            height: 100%;
+            overflow: auto;
         }
 
-        #headline{
-            width: 1400px;
-            height: 40px;
+        .admin-main-bg #headline{
+            width: 100%;
+            height: 50px;
             background: #fff;
             border-bottom: 1px solid rgb(184, 177, 177);
-            padding-top: 15px;
             padding-left: 20px;
-            margin-top: 50px;
-            margin-left: 239px;
-            position: fixed;
-
+            line-height: 50px;
         }
 
-        #main{
-            width: 1300px;
-            height: 2000px;
-            margin: 0px 0px 0px 220px;
-            padding: 140px 40px 40px 40px;
+        .admin-main-bg #main{
+            width: 100%;
+            height: fit-content;
+            padding: 70px 20px 20px 40px;
         }
 
-        #main > h4{
+        .admin-main-bg #main > h4{
             margin: 0px 0px 25px 20px;
         }
 
-        table{
+        .admin-main-bg table{
             width: 500px;
             border: 1px solid rgb(122, 115, 115);
             margin: 10px 0px 40px 30px;
             font-size: 13px;
         }
 
-        tr:nth-of-type(1){
+        .admin-main-bg tr:nth-of-type(1){
             background: rgba(72, 92, 117, 0.801);
             color: #fff;
             height: 20px;
         }
 
-        tr:nth-of-type(1) > th{
+        .admin-main-bg tr:nth-of-type(1) > th{
             height: 20px;
         }
 
-        th{
+        .admin-main-bg th{
             border: 1px solid rgb(97, 88, 88);
             padding: 5px;
         }
 
-        td{
+        .admin-main-bg td{
             border: 1px solid rgb(97, 88, 88);
             padding: 5px;
             text-align: center;
         }
 
     </style>
-    <meta charset="UTF-8">
-    <title>main</title>
-
+<div class="admin-main-bg">
     <div id="headline"><h3>관리자메인</h3></div>
 
     <div id="main">
@@ -108,3 +103,4 @@
 
     </div>
 
+</div>

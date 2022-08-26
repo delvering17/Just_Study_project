@@ -93,7 +93,7 @@
         <tr>
           <th>분류</th>
           <td>
-            <input type="radio" name="faq-category" value="usage"/>이용방법
+            <input type="radio" name="faq-category" value="usage" checked/>이용방법
             <input type="radio" name="faq-category" value="studyroom"/>스터디룸 예약
             <input type="radio" name="faq-category" value="pay"/>결제
             <input type="radio" name="faq-category" value="etc"/>기타

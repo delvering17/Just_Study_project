@@ -79,8 +79,6 @@
 
 </style>
 
-
-
 <div class="admin-faq-list-bg">
 
     <div class="admin-faq-list-headline">
@@ -125,6 +123,7 @@
 <script type="text/javascript">
     $(".admin-faq-insert").click(function (){
         location.href="AdminFAQInsert";
+
     })
 
     $("input[value=삭제]").click(function (){

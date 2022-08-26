@@ -64,20 +64,20 @@ public class AdminReservListSearch implements AdminService{
             for(BranchDTO branchDTO : branchList){
                 reservList.addAll(new AdminReservDAO().salesStoreList(branchDTO.getCity(), branchDTO.getName(),
                         request.getParameter("admin-reserv-list-period"), startDate, endDate,
-                        request.getParameter("admin-reserv-list-filter"), request.getParameter("admin-reserv-list-word")));
+                        request.getParameter("admin-reserv-list-filter"), request.getParameter("admin-reserv-list-word").trim()));
             }
         } else if(request.getParameter("branch").equals("전체")){
             for (BranchDTO branchDTO : branchList){
                 if(branchDTO.getCity().equals(request.getParameter("city"))){
                     reservList.addAll(new AdminReservDAO().salesStoreList(branchDTO.getCity(), branchDTO.getName(),
                             request.getParameter("admin-reserv-list-period"), startDate, endDate,
-                            request.getParameter("admin-reserv-list-filter"), request.getParameter("admin-reserv-list-word")));
+                            request.getParameter("admin-reserv-list-filter"), request.getParameter("admin-reserv-list-word").trim()));
                 }
             }
         } else{
             reservList = new AdminReservDAO().salesStoreList(request.getParameter("city"), request.getParameter("branch"),
                     request.getParameter("admin-reserv-list-period"), startDate, endDate,
-                    request.getParameter("admin-reserv-list-filter"), request.getParameter("admin-reserv-list-word"));
+                    request.getParameter("admin-reserv-list-filter"), request.getParameter("admin-reserv-list-word").trim());
         }
 
         request.setAttribute("branchList", branchList);

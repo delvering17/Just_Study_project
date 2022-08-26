@@ -3,7 +3,7 @@ package model_p;
 import java.util.Date;
 
 public class ReservationDTO {
-    String orderId, city, branch, room, time, paymentMethod, status;
+    String orderId, city, branch, room, time, paymentMethod, status, cancelReason;
     int id, headcount, pay, userId, review;
     Date resDate, useDate;
 
@@ -117,5 +117,13 @@ public class ReservationDTO {
 
     public void setReview(int review) {
         this.review = review;
+    }
+
+    public String getCancelReason() {
+        return cancelReason;
+    }
+
+    public void setCancelReason(String cancelReason) {
+        this.cancelReason = cancelReason;
     }
 }

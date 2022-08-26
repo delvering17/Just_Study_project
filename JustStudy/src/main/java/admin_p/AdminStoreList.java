@@ -23,7 +23,7 @@ public class AdminStoreList implements AdminService{
         if(request.getParameter("filter")==null){
             branchList = new BranchDAO().branchList();
         }else{
-            branchList = new BranchDAO().branchSearchList(request.getParameter("filter"), request.getParameter("word"));
+            branchList = new BranchDAO().branchSearchList(request.getParameter("filter"), request.getParameter("word").trim());
         }
 
         for (BranchDTO dto : branchList) {

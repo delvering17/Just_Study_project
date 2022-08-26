@@ -208,6 +208,7 @@
                                     </c:when>
                                     <c:otherwise>
                                         <a>신청마감</a>
+
                                     </c:otherwise>
                                 </c:choose>
                             </div>

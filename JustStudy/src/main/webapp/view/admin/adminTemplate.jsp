@@ -76,6 +76,11 @@
             padding-top: 10px;
             padding-right: 5px;
         }
+        header > div > a{
+            color: #fff;
+            margin-right: 20px;
+        }
+
 
         header > div > div:nth-of-type(1) > input{
             background: rgba(75, 84, 207, 0.897);
@@ -180,7 +185,6 @@
             <div>
                 <a href="../board/MainPage">홈</a>
             </div>
-
         </div>
 
     </header>

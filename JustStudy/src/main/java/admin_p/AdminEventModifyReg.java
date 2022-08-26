@@ -17,9 +17,11 @@ public class AdminEventModifyReg implements AdminService{
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
         String path = request.getRealPath("/img/event");
-        path = "/Users/song-chanwook/workplace/git_repo/ JustStudy/Just_Study_project/JustStudy/src/main/webapp/img/event";
-        path = "C:\\Users\\dieun\\jieun\\coding\\GItHub\\Just_Study_project\\JustStudy\\src\\main\\webapp\\img\\event";
+      /*  path = "/Users/song-chanwook/workplace/git_repo/ JustStudy/Just_Study_project/JustStudy/src/main/webapp/img/event";
+        path = "C:\\Users\\dieun\\jieun\\coding\\GItHub\\Just_Study_project\\JustStudy\\src\\main\\webapp\\img\\event";*/
 
+        path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\" +
+                "\\img\\event";
         int size = 1024 * 1024 * 10;
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -31,7 +33,7 @@ public class AdminEventModifyReg implements AdminService{
             MultipartRequest mr = new MultipartRequest(request, path, size, "UTF-8", new DefaultFileRenamePolicy());
 
             dto.setTitle(mr.getParameter("title"));
-            dto.setContent(mr.getParameter("content"));
+            dto.setContent(mr.getFilesystemName("content"));
             dto.setImg(mr.getFilesystemName("img"));
             dto.setEvent_startdate(sdf.parse(mr.getParameter("event_startdate")));
             dto.setEvent_enddate(sdf.parse(mr.getParameter("event_enddate")));

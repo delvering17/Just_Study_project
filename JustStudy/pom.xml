@@ -10,6 +10,13 @@
     <name>JustStudy</name>
     <packaging>war</packaging>
 
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -35,6 +42,11 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.iamport</groupId>
+            <artifactId>iamport-rest-client-java</artifactId>
+            <version>0.2.22</version>
         </dependency>
     </dependencies>
 

@@ -63,7 +63,7 @@ public class AdminStoreImgDelete implements AdminService{
             if(new BranchDAO().imgDelete(branchDTO) > 0){
                 new File(path + "\\" + branchDTO.getImg()).delete();
                 msg = "이미지를 삭제했습니다.";
-                branchDTO.setImg(null);
+                branchDTO.setImg("");
             }
 
             request.setAttribute("adminUrl", "adminStoreModify.jsp");

@@ -39,21 +39,21 @@
         </tr>
         <tr>
             <td>모집인원</td>
-            <td colspan="3"><input type="text" name="people"> 명</td>
+            <td colspan="3"><input type="number" name="people"> 명</td>
 
         </tr>
         <tr>
             <td>스터디 구분</td>
             <td colspan="3">
-                <input type="checkbox" name="studykind" id="all" value="all" data-cate="0" >
+                <input type="checkbox" name="studykind" id="all" value="all" data-cate="0" onclick="validate()" >
                 <label for="all">전체</label>
-                <input type="checkbox" name="studykind" id="cate_0" value="IT" data-cate="IT" >
+                <input type="checkbox" name="studykind" id="cate_0" value="IT" data-cate="IT" onclick="validate()" >
                 <label for="cate_0">IT</label>
-                <input type="checkbox" name="studykind" id="cate_1" value="토익" data-cate="토익">
+                <input type="checkbox" name="studykind" id="cate_1" value="토익" data-cate="토익" onclick="validate()">
                 <label for="cate_1">토익</label>
-                <input type="checkbox" name="studykind" id="cate_2" value="자격증" data-cate="자격증">
+                <input type="checkbox" name="studykind" id="cate_2" value="자격증" data-cate="자격증" onclick="validate()">
                 <label for="cate_2">자격증</label>
-                <input type="checkbox" name="studykind" id="cate_3" value="기타" data-cate="기타">
+                <input type="checkbox" name="studykind" id="cate_3" value="기타" data-cate="기타" onclick="validate()">
                 <label for="cate_3">기타</label>
                </td>
         </tr>
@@ -70,7 +70,7 @@
                 <label for="agree">개인정보취급방침을 읽었으며 이에 동의합니다.</label></td>
         </tr>
         <tr>
-            <td colspan="4"><input type="submit" value="등록"></td>
+            <td colspan="4"><input type="submit" id="subbtn" value="등록"></td>
         </tr>
     </table>
 
@@ -83,14 +83,82 @@
     document.getElementById("Date-start").setAttribute("min", today);
     document.getElementById("Date-end").setAttribute("min", today);
 
-    function CheckForm(Join){
-        var chk = document.frmJoin.agree.checked;
-        if(!chk){
-            alert("약관에 동의해주세요")
+    $("#subbtn").click(function(){
+
+        var startDate = $( "input[name='startdate']" ).val();
+        var startDateArr = startDate.split('-');
+
+        var endDate = $( "input[name='enddate']" ).val();
+        var endDateArr = endDate.split('-');
+
+        var startDateCompare = new Date(startDateArr[0], startDateArr[1], startDateArr[2]);
+        var endDateCompare = new Date(endDateArr[0], endDateArr[1], endDateArr[2]);
+
+        if(startDateCompare.getTime() > endDateCompare.getTime()) {
+
+            alert("시작날짜와 종료날짜를 확인해 주세요.");
+
             return false;
         }
 
+        $("#subbtn").focus();
+    });
 
+
+    function CheckForm(Join) {
+
+        const f = document.frmJoin;
+
+
+        if (f.location.value == "") {
+            alert("지점 선택을 해주세요.");
+            f.location.focus();
+            return false;
+        }
+
+        if (f.startdate.value == "") {
+            alert("시작 기간을 입력해주세요.");
+            f.startdate.focus();
+            return false;
+        }
+        if (f.enddate.value == "") {
+            alert("종료 기간을 입력해주세요.");
+            f.enddate.focus();
+            return false;
+        }
+        if (f.title.value == "") {
+            alert("빈칸을 입력해주세요");
+            f.title.focus();
+            return false;
+        }
+        if (f.people.value == "") {
+            alert("빈칸을 입력해주세요");
+            f.people.focus();
+            return false;
+        }
+
+        if (f.content.value == "") {
+            alert("빈칸을 입력해주세요");
+            f.content.focus();
+            return false;
+        }
+        if (f.openChatting.value == "") {
+            alert("빈칸을 입력해주세요");
+            f.openChatting.focus();
+            return false;
+        }
+        if (!$("input:checked[Name='studykind']").is(":checked")){
+            alert("스터디 구분을 체크해주세요");
+            $("#all").focus();
+            return false;
+        }
+        if (!$("input:checked[Name='agree']").is(":checked")){
+            alert("개인정보 취급방침을 동의해주세요");
+            $("#agree").focus();
+            return false;
+        }
     }
+
+
 
 </script>

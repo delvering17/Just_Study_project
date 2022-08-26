@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class NewsDTO {
     int news_id;
-    String news_title,news_content,news_img;
+    String news_title,news_content,news_img,news_thumbnail_img;
     Date news_reg_date;
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -47,6 +47,14 @@ public class NewsDTO {
         this.news_img = news_img;
     }
 
+    public String getNews_thumbnail_img() {
+        return news_thumbnail_img;
+    }
+
+    public void setNews_thumbnail_img(String news_thumbnail_img) {
+        this.news_thumbnail_img = news_thumbnail_img;
+    }
+
     public Date getNews_reg_date() {
         return news_reg_date;
     }
@@ -57,5 +65,18 @@ public class NewsDTO {
 
     public void setNews_reg_date(Date news_reg_date) {
         this.news_reg_date = news_reg_date;
+    }
+
+    @Override
+    public String toString() {
+        return "NewsDTO{" +
+                "news_id=" + news_id +
+                ", news_title='" + news_title + '\'' +
+                ", news_content='" + news_content + '\'' +
+                ", news_img='" + news_img + '\'' +
+                ", news_thumbnail_img='" + news_thumbnail_img + '\'' +
+                ", news_reg_date=" + news_reg_date +
+                ", sdf=" + sdf +
+                '}';
     }
 }

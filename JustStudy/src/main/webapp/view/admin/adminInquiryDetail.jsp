@@ -142,7 +142,7 @@
             </tr>
             <tr>
                 <th>작성자</th>
-                <td>${inquiryDTO.inquiry_writer}</td>
+                <td>${inquiry_writer}</td>
             </tr>
             <tr>
                 <th>카테고리</th>
@@ -177,13 +177,13 @@
         <h2>답변</h2>
         <c:choose>
             <c:when test="${inquiryDTO.inquiry_state == 2}">
-                <form action="" method="get">
+                <form id="form-answer">
                     <input type="hidden" name="input_purpose" value="${inquiryDTO.inquiry_id}"/>
                     <input type="hidden" name="input_id" value="${answerDTO.inquiry_id}"/>
                     <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
                         <tr>
                             <th>답변 일자</th>
-                            <td><input type="text" name="input_date" id="input-date" value="${answerDTO.inquiry_date}"></td>
+                            <td><input type="text" name="input_date" id="input-date" value="${answerDTO.inquiry_date}" readonly></td>
                         </tr>
                         <tr>
                             <th>제목</th>
@@ -191,7 +191,8 @@
                         </tr>
                         <tr>
                             <th>담당자</th>
-                            <td><input type="text" name="input_writer" id="input-writer" value="${answerDTO.inquiry_writer}"></td>
+                            <input type="hidden" name="input_writer"  value="${answerDTO.inquiry_writer}">
+                            <td><input type="text" id="input-writer" value="${answerWriterName}" readonly></td>
                         </tr>
                         <tr>
                             <th>답변 내용</th>
@@ -199,7 +200,7 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <button type="submit" formaction="AdminInquiryModify" formmethod="get">수정</button>
+                                <button type="button" onclick="answerInsert()">수정</button>
                                 <button type="submit" formaction="AdminInquiryDelete" formmethod="get">삭제</button>
                             </td>
                         </tr>
@@ -209,24 +210,25 @@
 
             </c:when>
             <c:otherwise>
-                <form action="AdminInquiryInsert" method="get">
+                <form action="AdminInquiryInsert" method="post" id="inquiry-form1">
                     <input type="hidden" name="input_purpose" value="${inquiryDTO.inquiry_id}"/>
                     <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
                         <tr>
                             <th>제목</th>
-                            <td><input name="input_title"  type="text" ></td>
+                            <td><input name="input_title" id="input_title1"  type="text" ></td>
                         </tr>
                         <tr>
                             <th>담당자</th>
-                            <td><input name="input_writer"  type="text"></td>
+                            <input type="hidden" name="input_writer" value="${sessionScope.login}" readonly>
+                            <td><input type="text" id="" value="${mem_realname}" readonly></td>
                         </tr>
                         <tr>
                             <th>답변 내용</th>
-                            <td><textarea name="input_content" cols="30" rows="10"></textarea></td>
+                            <td><textarea name="input_content" id="input_content1" cols="30" rows="10"></textarea></td>
                         </tr>
                         <tr>
                             <td colspan="2">
-                            <button type="submit">답변</button>
+                            <button type="button" onclick="inquiryInsert()">답변</button>
                             </td>
                         </tr>
                     </table>
@@ -239,12 +241,41 @@
 </div>
 
 <script type="text/javascript">
-</script>
-<script type="text/javascript">
-        $(".admin-store-delete").click(function (){
-            alert($("input[name=branch]:checked").attr("id"))
+    function inquiryInsert() {
+        let input_title1 = $('#input_title1').val()
+        let input_content1 = $('#input_content1').val()
 
-        })
+        if(input_title1 === '') {
+            alert('제목을 입력해주세요.')
+            $('#input_title1').focus()
+        } else if(input_content1 === '') {
+            alert('내용을 입력해주세요.')
+            $('#input_content1').focus()
+        } else {
 
+            let inquiry_form1 = $('#inquiry-form1');
+            inquiry_form1.action = "AdminInquiryInsert"
+            inquiry_form1.method = "get"
+            inquiry_form1.submit()
+        }
+
+    }
+    function answerInsert() {
+        let input_title = $('#input-title').val()
+        let input_content = $('#input-content').val()
+
+        if(input_title === '') {
+            alert('제목을 입력해주세요.')
+            $('#input-title').focus()
+        } else if(input_content === '') {
+            alert('내용을 입력해주세요.')
+            $('#input-content').focus()
+        } else {
+            let answer_form = document.getElementById('form-answer');
+            answer_form.action = "AdminInquiryModify"
+            answer_form.method = "get"
+            answer_form.submit()
+        }
+    }
 
 </script>

@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<form action="AdminNewsInsertReg" method="post" enctype="multipart/form-data">
+<form action="AdminNewsInsertReg" name="myform" method="post" enctype="multipart/form-data" onsubmit="return check()">
 
   <table border="" style="margin: 0 auto; padding-top: 100px">
     <tr>
@@ -15,8 +15,12 @@
       <td colspan="3"><input type="text" name="news_title"></td>
     </tr>
     <tr>
-        <td>이미지 첨부</td>
-        <td><input type="file" name="news_img"/></td>
+        <td>썸네일 이미지 첨부</td>
+        <td><input type="file" name="news_thumbnail_img"/></td>
+    </tr>
+    <tr>
+      <td>이미지 첨부</td>
+      <td><input type="file" name="news_img"/></td>
     </tr>
     <tr>
       <td>내용</td>
@@ -29,3 +33,31 @@
 
 </form>
 
+<script>
+
+  function check(){
+    const f = document.myform;
+    if(f.news_title.value == ""){
+      alert("빈칸을 입력해주세요");
+      f.news_title.focus();
+      return false;
+    }
+
+    if(f.news_thumbnail_img.value == ""){
+      alert("파일 선택을 해주세요");
+      f.news_thumbnail_img.focus();
+      return false;
+    }
+    if(f.news_img.value == ""){
+      alert("파일 선택을 해주세요");
+      f.news_img.focus();
+      return false;
+    }
+    if(f.news_content.value == ""){
+      alert("빈칸을 입력해주세요");
+      f.news_content.focus();
+      return false;
+    }
+
+  }
+</script>

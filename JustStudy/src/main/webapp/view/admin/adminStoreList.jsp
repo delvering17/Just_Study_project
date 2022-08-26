@@ -6,6 +6,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
       integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
       crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+<script type="text/javascript">
+    if(<%=((ArrayList<BranchDTO>) request.getAttribute("branchList")).size() == 0%>){
+        alert("조회 내역이 없습니다.")
+        location.href = "AdminStoreList"
+    }
+
+</script>
 <style>
     * {
         margin: 0;
@@ -83,13 +91,7 @@
     }
 </style>
 
-<script type="text/javascript">
-    window.onload = function (){
-        $(".admin-store-insert").click(function (){
-            location.href = "AdminStoreInsert"
-        })
-    }
-</script>
+
 <div class="admin-store-list-bg">
 
     <div class="admin-store-list-headline">
@@ -99,10 +101,22 @@
 
     <div class="admin-store-list-main">
 
-        <div>
-            <input type="text">
-            <button><i class="fa-solid fa-magnifying-glass"></i></button>
-        </div>
+        <form action="AdminStoreList" class="admin-store-search-form">
+            <div>
+                <select name="filter">
+                    <option value="city">지역</option>
+                    <option value="name">지점명</option>
+                    <option value="rooms">룸타입</option>
+                    <option value="price">이용요금</option>
+                    <option value="address">매장주소</option>
+                    <option value="addressDetail">상세주소</option>
+                    <option value="phone">전화번호</option>
+                    <option value="facilities">편의시설</option>
+                </select>
+                <input type="text" name="word">
+                <button type="button" class="admin-store-list-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        </form>
 
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-store-list-table">
             <tr>
@@ -156,3 +170,17 @@
         </table>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(".admin-store-insert").click(function (){
+        location.href = "AdminStoreInsert"
+    })
+
+    $(".admin-store-list-search").click(function (){
+        if($("input[name=word]").val().trim() == ""){
+            alert("검색어를 입력해주세요.")
+        } else{
+            $(".admin-store-search-form").submit()
+        }
+    })
+</script>

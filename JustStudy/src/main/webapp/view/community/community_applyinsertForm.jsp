@@ -99,25 +99,34 @@
             input_purpose:$('#input-purpose').val()
         }
 
-        $.ajax({
-            url:'<c:url value="/nonView/CommunityApplyInsertReg"/>',
-            type:'GET',
-            data: form_data,
-            async:false,
-            dataType:'JSON',
-            success:function(response){
-                if(response.applyResult === 'success') {
-                    alert('신청되었습니다.')
-                    location.href = 'CommunityApplyDetail?as_id=' + response.as_id
-                } else {
-                    alert(response.applyResult)
+        if(form_data.input_content === ''){
+            alert('빈 칸을 입력해주세요.')
+            $('#input-content').focus()
+        }else{
+            $.ajax({
+                url:'<c:url value="/nonView/CommunityApplyInsertReg"/>',
+                type:'GET',
+                data: form_data,
+                async:false,
+                dataType:'JSON',
+                success:function(response){
+                    if(response.applyResult === 'success') {
+                        alert('신청되었습니다.')
+                        location.href = 'CommunityApplyDetail?as_id=' + response.as_id
+                    } else {
+                        alert(response.applyResult)
+                    }
+                },
+                error:function(e){
+                    console.log(e.responseText)
                 }
-            },
-            error:function(e){
-                console.log(e.responseText)
-            }
-        })
+            })
+        }
+
+
     }
+
+
 
 </script>
 

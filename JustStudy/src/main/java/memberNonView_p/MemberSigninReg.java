@@ -16,7 +16,6 @@ public class MemberSigninReg implements MemberNonViewService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-
         String input_userid = request.getParameter("input_userid");
         String input_password1 = request.getParameter("input_password1");
         String input_password2 = request.getParameter("input_password2");
@@ -25,11 +24,6 @@ public class MemberSigninReg implements MemberNonViewService{
         String input_address1 = request.getParameter("input_address1");
         String input_address2 = request.getParameter("input_address2");
         String input_socialid = request.getParameter("input_socialid");
-
-
-
-
-
 
         MemberDTO memberDTO = new MemberDTO();
 

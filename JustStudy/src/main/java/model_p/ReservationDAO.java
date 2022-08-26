@@ -29,37 +29,6 @@ public class ReservationDAO {
         }
     }
 
-    public ArrayList<BranchDTO> branchList(){
-
-        ArrayList<BranchDTO> res = new ArrayList<BranchDTO>();
-
-        sql = "select * from branch";
-        try {
-            ptmt = con.prepareStatement(sql);
-            rs = ptmt.executeQuery();
-
-            while(rs.next()){
-                BranchDTO dto = new BranchDTO();
-                dto.setCity(rs.getString("city"));
-                dto.setName(rs.getString("name"));
-                dto.setRooms(rs.getString("rooms"));
-                dto.setPrice(rs.getInt("price"));
-                dto.setOpen(rs.getInt("open"));
-                dto.setClose(rs.getInt("close"));
-                dto.setFacilities(rs.getString("facilities"));
-                dto.setAddress(rs.getString("address"));
-                dto.setAddressDetail(rs.getString("addressDetail"));
-                dto.setPhone(rs.getString("phone"));
-                res.add(dto);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            close();
-        }
-        return res;
-    }
-
     public int addReservation(ReservationDTO dto) {
         sql = "insert into reservation(resDate, userId, city, branch, room, useDate, time, headcount, pay, paymentMethod, status, orderId, review) values" +
                 "(sysdate(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)";
@@ -115,6 +84,145 @@ public class ReservationDAO {
                 dto.setPaymentMethod(rs.getString("paymentMethod"));
                 dto.setStatus(rs.getString("status"));
                 dto.setReview(rs.getInt("review"));
+                dto.setCancelReason(rs.getString("cancel_reason"));
+
+                res.add(dto);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+
+        return res;
+    }
+
+    public ArrayList<ReservationDTO> myReservationListWill(int userId, java.util.Date splitDate){
+
+        ArrayList<ReservationDTO> res = new ArrayList<ReservationDTO>();
+
+        sql = "select * from reservation where userId = ? and useDate > DATE_FORMAT(SYSDATE(), '%Y-%m-%d')";
+
+        if(splitDate != null){
+            sql += " and useDate < ?";
+        }
+
+        sql += " order by useDate desc";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, userId);
+
+            if(splitDate != null){
+                ptmt.setDate(2, new java.sql.Date(splitDate.getTime()));
+            }
+
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                ReservationDTO dto = new ReservationDTO();
+
+                dto.setId(rs.getInt("id"));
+                dto.setResDate(rs.getDate("resDate"));
+                dto.setUserId(rs.getInt("userId"));
+                dto.setCity(rs.getString("city"));
+                dto.setBranch(rs.getString("branch"));
+                dto.setRoom(rs.getString("room"));
+                dto.setUseDate(rs.getDate("useDate"));
+                dto.setTime(rs.getString("time"));
+                dto.setHeadcount(rs.getInt("headcount"));
+                dto.setPay(rs.getInt("pay"));
+                dto.setPaymentMethod(rs.getString("paymentMethod"));
+                dto.setStatus(rs.getString("status"));
+                dto.setReview(rs.getInt("review"));
+                dto.setCancelReason(rs.getString("cancel_reason"));
+
+                res.add(dto);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+
+        return res;
+    }
+    public ArrayList<ReservationDTO> myReservationListDone(int userId, java.util.Date splitDate){
+
+        ArrayList<ReservationDTO> res = new ArrayList<ReservationDTO>();
+
+        sql = "select * from reservation where userId = ? and useDate < DATE_FORMAT(SYSDATE(), '%Y-%m-%d')";
+
+        if(splitDate != null){
+            sql += " and useDate > ?";
+        }
+
+        sql += " order by useDate desc";
+
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, userId);
+
+            if(splitDate != null){
+                ptmt.setDate(2, new java.sql.Date(splitDate.getTime()));
+            }
+
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                ReservationDTO dto = new ReservationDTO();
+
+                dto.setId(rs.getInt("id"));
+                dto.setResDate(rs.getDate("resDate"));
+                dto.setUserId(rs.getInt("userId"));
+                dto.setCity(rs.getString("city"));
+                dto.setBranch(rs.getString("branch"));
+                dto.setRoom(rs.getString("room"));
+                dto.setUseDate(rs.getDate("useDate"));
+                dto.setTime(rs.getString("time"));
+                dto.setHeadcount(rs.getInt("headcount"));
+                dto.setPay(rs.getInt("pay"));
+                dto.setPaymentMethod(rs.getString("paymentMethod"));
+                dto.setStatus(rs.getString("status"));
+                dto.setReview(rs.getInt("review"));
+                dto.setCancelReason(rs.getString("cancel_reason"));
+
+                res.add(dto);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+
+        return res;
+    }
+    public ArrayList<ReservationDTO> myReservationListToday(int userId){
+
+        ArrayList<ReservationDTO> res = new ArrayList<ReservationDTO>();
+
+        sql = "select * from reservation where userId = ? and useDate = DATE_FORMAT(SYSDATE(), '%Y-%m-%d') order by useDate desc";
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, userId);
+
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                ReservationDTO dto = new ReservationDTO();
+
+                dto.setId(rs.getInt("id"));
+                dto.setResDate(rs.getDate("resDate"));
+                dto.setUserId(rs.getInt("userId"));
+                dto.setCity(rs.getString("city"));
+                dto.setBranch(rs.getString("branch"));
+                dto.setRoom(rs.getString("room"));
+                dto.setUseDate(rs.getDate("useDate"));
+                dto.setTime(rs.getString("time"));
+                dto.setHeadcount(rs.getInt("headcount"));
+                dto.setPay(rs.getInt("pay"));
+                dto.setPaymentMethod(rs.getString("paymentMethod"));
+                dto.setStatus(rs.getString("status"));
+                dto.setReview(rs.getInt("review"));
+                dto.setCancelReason(rs.getString("cancel_reason"));
 
                 res.add(dto);
             }
@@ -205,6 +313,149 @@ public class ReservationDAO {
             close();
         }
         return res;
+    }
+
+    public boolean reservationWill(String branch){
+
+        sql = "select * from reservation where branch = ? and useDate > DATE_FORMAT(SYSDATE(), '%Y-%m-%d')";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, branch);
+
+            rs =  ptmt.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return false;
+    }
+
+    public ArrayList<ReservationDTO> reservationToday(String branch){
+
+        ArrayList<ReservationDTO> res = new ArrayList<ReservationDTO>();
+
+        sql = "select * from reservation where branch = ? and useDate = DATE_FORMAT(SYSDATE(), '%Y-%m-%d')";
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, branch);
+
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                ReservationDTO dto = new ReservationDTO();
+
+                dto.setTime(rs.getString("time"));
+
+                res.add(dto);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return res;
+    }
+
+    public ReservationDTO reservationDetail(int id){
+
+        ReservationDTO reservationDTO = new ReservationDTO();
+
+        sql = "select * from reservation where id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, id);
+            rs = ptmt.executeQuery();
+            rs.next();
+
+            reservationDTO.setId(rs.getInt("id"));
+            reservationDTO.setOrderId(rs.getString("orderId"));
+            reservationDTO.setResDate(rs.getDate("resDate"));
+            reservationDTO.setUserId(rs.getInt("userId"));
+            reservationDTO.setCity(rs.getString("city"));
+            reservationDTO.setBranch(rs.getString("branch"));
+            reservationDTO.setRoom(rs.getString("room"));
+            reservationDTO.setUseDate(rs.getDate("useDate"));
+            reservationDTO.setTime(rs.getString("time"));
+            reservationDTO.setHeadcount(rs.getInt("headcount"));
+            reservationDTO.setPay(rs.getInt("pay"));
+            reservationDTO.setPaymentMethod(rs.getString("paymentMethod"));
+            reservationDTO.setStatus(rs.getString("status"));
+            reservationDTO.setReview(rs.getInt("review"));
+            reservationDTO.setCancelReason(rs.getString("cancel_reason"));
+
+            return reservationDTO;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+        return null;
+    }
+
+    public int reservationCancelByUser(int id){
+
+        sql = "update reservation set status = '예약취소' where id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, id);
+            return ptmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return 0;
+    }
+
+    public ArrayList<Integer> sameOrderList(String orderId){
+
+        ArrayList<Integer> res = new ArrayList<Integer>();
+
+        sql = "select id from reservation where orderId = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, orderId);
+
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                int id = rs.getInt("id");
+                res.add(id);
+            }
+
+            return res;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+        return null;
+    }
+
+    public int reservationCancelByAdmin(int id, String cancelReason){
+
+        sql = "update reservation set status = '관리자취소', cancel_reason = ? where id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, cancelReason);
+            ptmt.setInt(2, id);
+            return ptmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return 0;
     }
 
     public void close() {

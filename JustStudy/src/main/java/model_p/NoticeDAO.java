@@ -31,7 +31,7 @@ public class NoticeDAO {
     public ArrayList<NoticeDTO> list(){
         ArrayList<NoticeDTO> res = new ArrayList<NoticeDTO>();
 
-        sql = "select * from notice";
+        sql = "select * from notice order by id desc";
 
         try {
             ptmt = con.prepareStatement(sql);
@@ -64,7 +64,7 @@ public class NoticeDAO {
 
     public void insert(NoticeDTO dto) {
 
-        sql = "select max(id) from notice";
+        sql = "SELECT AUTO_INCREMENT FROM information_schema.tables WHERE table_name = 'notice' AND table_schema = DATABASE( )";
 
         try {
             ptmt = con.prepareStatement(sql);

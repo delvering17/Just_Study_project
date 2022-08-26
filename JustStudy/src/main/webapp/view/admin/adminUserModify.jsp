@@ -72,7 +72,10 @@
               </tr>
               <tr>
                 <td>주소</td>
-                <td><input type="text" name="address1" value="${adminModifyDTO.mem_address1}"/></td>
+                <td>
+                  <input type="text" id="address1" name="address1" value="${adminModifyDTO.mem_address1}" readonly/>
+                  <button type="button" id="address2" class="btn-signin" id="btn-findaddress" onclick="gofindAddress()">검색</button>
+                </td>
               </tr>
               <tr>
                 <td>상세주소</td>
@@ -87,6 +90,22 @@
 
   </div>
 </div>
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript">
+
+  function gofindAddress() {
+
+    new daum.Postcode({
+      oncomplete: function(data) {
+        document.getElementById("address1").value = data.address;
+        document.getElementById("address2").focus();
+      }
+    }).open();
+
+  }
+
+</script>
 
 
 

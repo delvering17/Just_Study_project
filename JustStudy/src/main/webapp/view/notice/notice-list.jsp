@@ -60,17 +60,15 @@
        border: 1px solid #000;
        float: left
    }
+
 </style>
 
 <div class="main">
 
     <div class="notice-title-area">
         <p id="notice-title">공지사항</p>
-
     </div>
-
     <div class="notice-area">
-
         <div class="notice-subject" style="width: 80%; margin: 0 auto; background: #ffa"></div>
         <ul class="notice-ul">
             <c:forEach items="${mainData}" var="dto" varStatus="no">
@@ -87,8 +85,6 @@
                 </li>
             </c:forEach>
         </ul>
-
     </div>
-
 
 </div>

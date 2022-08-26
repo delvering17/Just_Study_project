@@ -83,12 +83,12 @@
             </li>
             <li class="inquiry-insert-form-items">
                 <p>카테고리</p>
-                <input type="radio" class="user-input" name="input_category" id="input-reveravtion" value="예약">예약
+                <input type="radio" class="user-input" name="input_category" id="input-reveravtion" checked value="예약">예약
                 <input type="radio" class="user-input" name="input_category" id="input-study" value="스터디">스터디
             </li>
             <li class="inquiry-insert-form-items">
                 <p>종류</p>
-                <input type="radio" class="user-input" name="input_type" id="input-service" value="서비스">서비스
+                <input type="radio" class="user-input" name="input_type" id="input-service" checked  value="서비스">서비스
                 <input type="radio" class="user-input" name="input_type" id="input-suggest" value="제안">제안
                 <input type="radio" class="user-input" name="input_type" id="input-declaration" value="신고">신고
             </li>
@@ -131,26 +131,42 @@
             input_branch: $("#input_branch option:selected").val()
         }
 
-        $.ajax({
-            url:'<c:url value="/mypageNonView/MypageInsertInquiryReg"/>',
-            type:'GET',
-            data: form_data,
-            async:false,
-            dataType:'JSON',
-            success:function(response){
-                alert(response.insertResult)
-                location.href = "MypageInquiryDetail?inquiry_id=" + response.inquiry_id + "&nowPage=1&date_period=today" ;
-                <%--if(response.insertResult === 'success') {--%>
-                <%--    alert(msg)--%>
-                <%--    location.href = '<c:url value="/board/MainPage"/>'--%>
-                <%--} else {--%>
-                <%--    alert(response.modifyResult)--%>
-                <%--}--%>
-            },
-            error:function(e){
-                console.log(e.responseText)
-            }
-        })
+        if(form_data.input_title === '') {
+            alert('빈 칸을 입력해주세요.')
+            $('#input-title').focus()
+        } else if(/\s/g.test($('#input-title').val())) {
+            alert('문의제목 공백을 제거해 주세요')
+            $('#input-title').focus()
+        } else if(form_data.input_content === '') {
+            alert('빈 칸을 입력해주세요.')
+            $('#input-content').focus()
+        } else if(/\s/g.test($('#input-content').val())) {
+            alert('문의내용 공백을 제거해 주세요')
+            $('#input-content').focus()
+        } else {
+            $.ajax({
+                url:'<c:url value="/mypageNonView/MypageInsertInquiryReg"/>',
+                type:'GET',
+                data: form_data,
+                async:false,
+                dataType:'JSON',
+                success:function(response){
+                    alert(response.insertResult)
+                    location.href = "MypageInquiryDetail?inquiry_id=" + response.inquiry_id + "&nowPage=1&date_period=today" ;
+                    <%--if(response.insertResult === 'success') {--%>
+                    <%--    alert(msg)--%>
+                    <%--    location.href = '<c:url value="/board/MainPage"/>'--%>
+                    <%--} else {--%>
+                    <%--    alert(response.modifyResult)--%>
+                    <%--}--%>
+                },
+                error:function(e){
+                    console.log(e.responseText)
+                }
+            })
+        }
+
+
     }
 
     function gogo() {

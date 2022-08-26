@@ -107,8 +107,8 @@
         /*vertical-align: middle;*/
     }
 
-
 </style>
+
 <div class="notice-title-area">
     <p id="notice-title">공지사항</p>
     <hr class="title-line">
@@ -129,7 +129,4 @@
 
 <div class="listlink">
     <a href="NoticePage">목록으로</a>
-<%--    <a href="NoticeModifyForm?id=${dto.id}">수정</a>
-    <a href="NoticeDeleteForm?id=${dto.id}">삭제</a>--%>
-
 </div>

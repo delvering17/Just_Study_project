@@ -32,7 +32,7 @@ public class EventDAO {
     public ArrayList<EventDTO> list(){
         ArrayList<EventDTO> res = new ArrayList<EventDTO>();
 
-        sql = "select * from eventpp";
+        sql = "select * from eventpp order by id desc ";
 
         try {
             ptmt = con.prepareStatement(sql);
@@ -183,7 +183,7 @@ public class EventDAO {
 
         try {
             ptmt = con.prepareStatement(sql);
-            ptmt.setString(1, "");
+            ptmt.setString(1, null);
             ptmt.setInt(2, eventDTO.getId());
 
             return ptmt.executeUpdate();

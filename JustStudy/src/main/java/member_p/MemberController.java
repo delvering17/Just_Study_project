@@ -21,7 +21,10 @@ public class MemberController extends HttpServlet {
 
         nonService.put("MemberLoginForm","member/member_loginForm.jsp");
         nonService.put("MemberSigninForm","member/member_signinForm.jsp");
-        nonService.put("MemberSocialSigninForm","member/member_signinForm_kakao.jsp");
+//        nonService.put("MemberSocialSigninForm","member/member_signinForm_kakao.jsp");
+        nonService.put("MemberSocialNaverLoginReg","member/member_NaverAlert.jsp");
+        nonService.put("MemberLevelAlert","member/member_levelAlert.jsp");
+        nonService.put("NaverLogin","member/member_NaverLogin.jsp");
     }
 
     @Override
@@ -35,7 +38,8 @@ public class MemberController extends HttpServlet {
         }
 
         String service = request.getRequestURI().substring((request.getContextPath()+"/member/").length());
-
+        System.out.println(request.getRequestURI());
+        System.out.println("서비스 =" + service);
         try {
 
 

@@ -1,8 +1,75 @@
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<style type="text/css">
+    .btn-login {
+        display: flex;
+        justify-content: center;
+    }
+
+    .btn-login > * {
+        width: 183px;
+        height: 45px;
+        margin-top: 5px;
+    }
+</style>
+<div id="wrapper-login">
+    <div>
+        <p>로그인</p>
+    </div>
+    <div>
+        <div>
+            <span><i class="fa-solid fa-key"></i></span>
+            <input type="text" id="input-userid" name="input-userid" placeholder="아이디" aria-label="아이디" required/>
+        </div>
+        <div>
+            <span><i class="fa-solid fa-key"></i></span>
+            <input type="password" id="input-password"  placeholder="비밀번호" aria-label="비밀번호" required/>
+        </div>
+<%--        <div>--%>
+<%--            <input type="checkbox" id="exampleCheck1"/>--%>
+<%--            <label class="form-check-label" for="exampleCheck1">Check me out</label>--%>
+<%--        </div>--%>
+        <div class="wrapper-login">
+            <div class="btn-login">
+                <button onclick="goLogin()" class="btn btn-dark">로그인</button>
+                <button onclick="kakaoLogout()" class="btn btn-dark">로그인</button>
+            </div>
+            <div class="btn-login">
+                <button onclick="kakaoLogin()" class="btn" style="padding: 0px">
+                    <img src="<c:url value="/img/member/kakao_login.png"/>" alt=""/>
+                </button>
+            </div>
+            <div class="btn-login">
+                <%
+                    String clientId = "SM6kP7n6zyadJ15rvs6z";//애플리케이션 클라이언트 아이디값";
+                    String redirectURI = URLEncoder.encode("http://localhost:8080/JustStudy_war_exploded2/member/NaverLogin", "UTF-8");
+                    SecureRandom random = new SecureRandom();
+                    String state = new BigInteger(130, random).toString();
+                    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+                    apiURL += "&client_id=" + clientId;
+                    apiURL += "&redirect_uri=" + redirectURI;
+                    apiURL += "&state=" + state;
+                    session.setAttribute("state", state);
+                %>
+                <a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+
+<%--                <button onclick="goNaverLogin()">aaaa</button>--%>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form action="MemberSocialSigninForm" id="fff" method="post">
+    <input type="hidden" name="email" id="email">
+    <input type="hidden" name="social_id" id="social_id">
+    <input type="hidden" name="realname" id="realname">
+    <input type="hidden" name="type" value="Naver">
+</form>
 <script type="text/javascript">
 
     function goLogin() {
@@ -20,10 +87,12 @@
             success:function(response){
                 // alert(response.member_nickname)
                 if(response.loginResult === 'success') {
-                    alert('로그인에 성공했습니다.')
+                    alert('로그인에 성공했습니다.');
                     location.href = '<c:url value="/board/MainPage"/>'
-                } else {
-                    alert(response.loginResult)
+                } else if(response.loginResult === 'signoutmember'){
+                    alert('회원 정보가 맞지 않습니다.');
+                }else if(response.loginResult === 'fail'){
+                    alert('회원 정보가 맞지 않습니다.');
                 }
             },
             error:function(e){
@@ -47,9 +116,7 @@
                             location.href = response.goUrl
                         } else {
                             isSocialSignIn(response)
-
                         }
-
                     },
                     fail: function (error) {
                         console.log(error)
@@ -85,6 +152,47 @@
     // Kakao.Auth.logout(function() {
     //     console.log(Kakao.Auth.getAccessToken());
     // });
+
+    // var naver_id_login = new naver_id_login("SM6kP7n6zyadJ15rvs6z", "http://localhost:8080/JustStudy_war_exploded2/member/MemberSocialNaverLoginReg");
+    // var state = naver_id_login.getUniqState();
+    // naver_id_login.setButton("white", 2,40);
+    // naver_id_login.setDomain("http://localhost:8080");
+    // naver_id_login.setState(state);
+    // naver_id_login.setPopup();
+    //
+    // naver_id_login.init_naver_id_login();
+
+
+    // const naverLogin = new naver.LoginWithNaverId(
+    //     {
+    //         clientId: "SM6kP7n6zyadJ15rvs6z",
+    //         callbackUrl: "http://localhost:8080/JustStudy_war_exploded2/member/MemberLoginForm",
+    //         loginButton: {color: "green", type: 2, height: 40}
+    //     }
+    // );
+
+
+
+    function setLoginStatus(){
+
+        const message_area=document.getElementById('message');
+        message_area.innerHTML=`
+      <h3> Login 성공 </h3>
+      <div>user Nickname : naverLogin.user.id}</div>
+      <div>user Age(범위) : ${naverLogin.user.name}</div>
+      <div>user Birthday : ${naverLogin.user.email}</div>
+      `;
+
+        // const button_area=document.getElementById('button_area');
+        // button_area.innerHTML="<button id='btn_logout'>로그아웃</button>";
+        //
+        // const logout=document.getElementById('btn_logout');
+        // logout.addEventListener('click',(e)=>{
+        //     naverLogin.logout();
+        //     location.replace("http://127.0.0.1:5500");
+        // })
+    }
+    // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
 
     function getUserInformation() {
         Kakao.API.request({
@@ -135,16 +243,14 @@
             async:false,
             dataType:'JSON',
             success:function(response){
-
                 let msg = decodeURIComponent(response.loginResult).replaceAll("+"," ")
-                alert(msg)
-                location.href = response.goUrl
-                <%--if(response.loginResult === 'success') {--%>
-                <%--  alert('로그인에 성공했습니다.')--%>
-                <%--  location.href = '<c:url value="/board/MainPage"/>'--%>
-                <%--} else {--%>
-                <%--  alert(response.loginResult)--%>
-                <%--}--%>
+
+                if(msg === 'signoutmember') {
+                    alert('회원 정보가 맞지 않습니다.');
+                } else {
+                    alert(msg);
+                    location.href = response.goUrl;
+                }
             },
             error:function(e){
                 console.log(e.responseText)
@@ -156,45 +262,3 @@
     }
 
 </script>
-<style type="text/css">
-    .btn-login {
-        display: flex;
-        justify-content: center;
-    }
-
-    .btn-login > * {
-        width: 183px;
-        height: 45px;
-        margin-top: 5px;
-    }
-</style>
-<div id="wrapper-login">
-    <div>
-        <p>로그인</p>
-    </div>
-    <div>
-        <div>
-            <span><i class="fa-solid fa-key"></i></span>
-            <input type="text" id="input-userid" name="input-userid" placeholder="아이디" aria-label="아이디" required/>
-        </div>
-        <div>
-            <span><i class="fa-solid fa-key"></i></span>
-            <input type="password" id="input-password"  placeholder="비밀번호" aria-label="비밀번호" required/>
-        </div>
-<%--        <div>--%>
-<%--            <input type="checkbox" id="exampleCheck1"/>--%>
-<%--            <label class="form-check-label" for="exampleCheck1">Check me out</label>--%>
-<%--        </div>--%>
-        <div class="wrapper-login">
-            <div class="btn-login">
-                <button onclick="goLogin()" class="btn btn-dark">로그인</button>
-                <button onclick="kakaoLogout()" class="btn btn-dark">로그인</button>
-            </div>
-            <div class="btn-login">
-                <button onclick="kakaoLogin()" class="btn" style="padding: 0px">
-                    <img src="<c:url value="/img/member/kakao_login.png"/>" alt=""/>
-                </button>
-            </div>
-        </div>
-    </div>
-</div>

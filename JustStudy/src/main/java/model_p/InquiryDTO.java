@@ -18,6 +18,8 @@ public class InquiryDTO {
 
     int inquiry_purpose;
 
+    String inquiry_email;
+
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 
     public int getInquiry_id() {

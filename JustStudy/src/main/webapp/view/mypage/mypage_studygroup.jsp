@@ -175,7 +175,6 @@
       <tr>
         <td>ID</td>
         <td>제목</td>
-
         <td>지점</td>
         <td>시작일</td>
         <td>종료일</td>

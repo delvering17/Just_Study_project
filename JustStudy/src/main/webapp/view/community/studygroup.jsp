@@ -1,5 +1,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.util.Date" %><%--
+<%@ page import="java.util.Date" %>
+<%@ page import="model_p.BranchDTO" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: whgml
   Date: 2022-08-13
@@ -154,31 +156,30 @@
     <div class="community-bottom">
         <div class="commuity-bottom-selector">
             <div>
-                <select>
+                <select name="city">
+                    <option>전체</option>
+                    <c:forTokens items="서울,경기,부산,대구,인천,광주,대전,울산,세종,강원,충북,충남,전북,전남,경북,경남,제주" var="city" delims=",">
+                        <option>${city}</option>
+                    </c:forTokens>
+                </select>
+                <%--<select name="local">
                     <option value="">지역 선택 👇</option>
                     <option value="서울">서울</option>
                     <option value="부산">부산</option>
-                    <option value="대구">대구</option>
-                    <option value="인천">인천</option>
-                    <option value="광주">광주</option>
-                    <option value="대전">대전</option>
-                    <option value="울산">울산</option>
-                    <option value="세종">세종</option>
-                    <option value="경기">경기</option>
-                    <option value="강원">강원</option>
-                    <option value="충북">충북</option>
-                    <option value="충남">충남</option>
-                    <option value="전북">전북</option>
-                    <option value="전남">전남</option>
-                    <option value="경북">경북</option>
-                    <option value="경남">경남</option>
-                    <option value="제주">제주</option>
+                </select>--%>
+            </div>
+            <div>
+                <select name="branch">
+                    <option>전체</option>
                 </select>
+                <%--<select name="jijum">
+                    <option value="">지점 선택 👇</option>
+                </select>--%>
             </div>
             <form>
                 <input type="text" id="search" onkeyup="filter()" placeholder="제목을 입력하세요">
-                <button type="button">검색</button>
             </form>
+
         </div>
         <div class="commuity-main">
             <ul class="main-list-selector">
@@ -188,19 +189,6 @@
             </ul>
 
             <form class="main-form">
-                <p>스터디 구분</p>
-                <div class="main-form-item-wrapper">
-                <input class="input-main-form" type="checkbox" name="devision02" id="all" data-cate="0" checked>
-                <label class="label-main-form" for="all" >전체</label>
-                <input class="input-main-form" type="checkbox" name="devision02" id="cate_0" data-cate="IT" checked>
-                <label class="label-main-form" for="cate_0">IT</label>
-                <input class="input-main-form" type="checkbox" name="devision02" id="cate_1" data-cate="토익" checked>
-                <label class="label-main-form" for="cate_1">토익</label>
-                <input class="input-main-form" type="checkbox" name="devision02" id="cate_2" data-cate="자격증" checked>
-                <label class="label-main-form" for="cate_2">자격증</label>
-                <input class="input-main-form" type="checkbox" name="devision02" id="cate_3" data-cate="기타" checked>
-                <label class="label-main-form" for="cate_3">기타</label>
-                </div>
                 <a href="CommunityInsertForm">새 글쓰기</a>
             </form>
             <ul class="main-study-list-wrapper">
@@ -208,7 +196,7 @@
                     <div class="listInner">
                         <li class="study-list-item">
                             <div>
-                                    <p>${dto.location}</p>
+                                    <p class="event-srch-branch">${dto.location}</p>
                                     <span class="event-srch-title" style="display: inline">${dto.title}</span>
                                 <div class="list-item-sub-text">
                                     <p>${dto.studykind}</p>
@@ -220,6 +208,7 @@
                                     </c:when>
                                     <c:otherwise>
                                         <a>신청마감</a>
+
                                     </c:otherwise>
                                 </c:choose>
                             </div>
@@ -261,6 +250,46 @@
                 listInner[i].style.display = "none"
             }
         }
+
     }
+
+
+    <%ArrayList<BranchDTO> branchList = (ArrayList<BranchDTO>) request.getAttribute("branchList");%>
+
+    $("select[name=city]").change(function (){
+        $("select[name=branch]").html("<option>전체</option>")
+        <%for(BranchDTO branchDTO : branchList){%>
+        if($("select[name=city]").val() == "<%=branchDTO.getCity()%>"){
+            $("select[name=branch]").append("<option><%=branchDTO.getName()%></option>")
+        }
+        <%}%>
+    });
+
+
+/////////////////////////////////////////////////////////////////
+
+
+    $(function(){
+        $('select[name="branch"] ').on('change', function()  {
+
+            let search = $('select[name="branch"]').val();
+            let listInner = document.getElementsByClassName("listInner");
+
+            for (let i = 0; i < listInner.length; i++) {
+                ttsrch = listInner[i].getElementsByClassName("event-srch-branch");
+
+                if (ttsrch[0].innerHTML.toLowerCase().indexOf(search) != -1
+                ) {
+                    listInner[i].style.display = "inline"
+                } else {
+                    listInner[i].style.display = "none"
+                }
+            }
+
+        });
+    });
+
+
+
 
 </script>

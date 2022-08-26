@@ -306,6 +306,80 @@ public class CommunityDAO {
         return res;
     }
 
+    public void checkState(int purpose) {
+
+        CommunityDTO communityDTO = null;
+
+        sql = "select * from studygroup where id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, purpose);
+            rs = ptmt.executeQuery(); //실행~
+
+            if(rs.next()) { // rs가 존재한다면~ 가지고 나가거라~(pw를 제외하고 다 가져옴)
+                communityDTO = new CommunityDTO();
+                communityDTO.setId(rs.getInt("id"));
+                communityDTO.setMemId(rs.getInt("memId"));
+                communityDTO.setLocation(rs.getString("location"));
+                communityDTO.setStartdate(rs.getDate("startdate"));
+                communityDTO.setEnddate(rs.getDate("enddate"));
+                communityDTO.setTitle(rs.getString("title"));
+                communityDTO.setPeople(rs.getInt("people"));
+                communityDTO.setStudykind(rs.getString("studykind"));
+                communityDTO.setContent(rs.getString("content"));
+                communityDTO.setRegDate(rs.getDate("regDate"));
+                communityDTO.setOpenChatting(rs.getString("openChatting"));
+
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        int nowPeople = 0;
+        sql = "select count(as_id) from applystudy where as_purpose = ? and as_state = 2";
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, purpose);
+            rs = ptmt.executeQuery();
+            if(rs.next()) {
+                nowPeople = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        boolean isMaxPeople = false ;
+        System.out.println(nowPeople);
+        System.out.println(communityDTO.getPeople());
+        if(communityDTO.getPeople() == nowPeople) {
+            isMaxPeople = true;
+        }
+
+        boolean isPassed = false;
+        java.util.Date nowDate = new java.util.Date();
+        if(nowDate.getTime() > communityDTO.getEnddate().getTime()) {
+            isPassed = true;
+        }
+
+        System.out.println(isMaxPeople);
+        System.out.println(isPassed);
+        if(isMaxPeople || isPassed) {
+            sql = "update applystudy set as_state = 3 where as_purpose = ? and as_state = 1";
+            try {
+                ptmt = con.prepareStatement(sql);
+                ptmt.setInt(1,purpose);
+                ptmt.executeUpdate();
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        close();
+
+    }
+
     public void close() {
         if(rs!=null) try {rs.close();} catch (SQLException e) {}
         if(ptmt!=null) try { ptmt.close();} catch (SQLException e) {}

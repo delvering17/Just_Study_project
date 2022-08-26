@@ -1,9 +1,6 @@
 package community_p;
 
-import model_p.ApplyStudyDAO;
-import model_p.ApplyStudyDTO;
-import model_p.CommunityDAO;
-import model_p.CommunityDTO;
+import model_p.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +15,7 @@ public class CommunityPage implements CommunityService {
         ArrayList<CommunityDTO> totalList = new CommunityDAO().list();
         ArrayList<CommunityDTO> openList = new ArrayList<CommunityDTO>();
         ArrayList<CommunityDTO> closeList = new ArrayList<CommunityDTO>();
+        ArrayList<BranchDTO> branchList = new BranchDAO().branchList();
 
         for(CommunityDTO communityDTO : totalList){
             int cnt = 0;
@@ -43,6 +41,8 @@ public class CommunityPage implements CommunityService {
         } else if(request.getParameter("category").equals("close")){
             request.setAttribute("mainData", closeList);
         }
+
+        request.setAttribute("branchList",branchList);
 
         request.setAttribute("mainUrl", "community/studygroup.jsp");
     }

@@ -48,8 +48,10 @@ public class MypageStudygroup implements MypageService{
                         studygroupList = new CommunityDAO().makedList(memberDTO.getMem_id());
 
                         for(CommunityDTO communityDTO : studygroupList){
+                            new CommunityDAO().checkState(communityDTO.getId());
                             int cnt = 0;
                             for (ApplyStudyDTO applyStudyDTO : new ApplyStudyDAO().applyListPurpose(communityDTO.getId())){
+
                                 if(applyStudyDTO.getAs_state() == 2){
                                     cnt ++;
                                 }
@@ -67,7 +69,7 @@ public class MypageStudygroup implements MypageService{
 
                         for(ApplyStudyDTO applyStudyDTO : myApplyList){
                             studygroupList.add(new CommunityDAO().communityApplyDetail(applyStudyDTO.getAs_purpose(), applyStudyDTO.getReg_date()));
-
+                            new CommunityDAO().checkState(applyStudyDTO.getAs_purpose());
                         }
 
                         request.setAttribute("myApplyList", myApplyList);
@@ -78,6 +80,7 @@ public class MypageStudygroup implements MypageService{
                         studygroupList = new CommunityDAO().communityPeriodList(memberDTO.getMem_id(), date_today   , date_today);
 
                         for(CommunityDTO communityDTO : studygroupList){
+                            new CommunityDAO().checkState(communityDTO.getId());
                             int cnt = 0;
                             for (ApplyStudyDTO applyStudyDTO : new ApplyStudyDAO().applyListPurpose(communityDTO.getId())){
                                 if(applyStudyDTO.getAs_state() == 2){
@@ -96,7 +99,7 @@ public class MypageStudygroup implements MypageService{
 
                         for(ApplyStudyDTO applyStudyDTO : myApplyList){
                             studygroupList.add(new CommunityDAO().communityApplyDetail(applyStudyDTO.getAs_purpose(), applyStudyDTO.getReg_date()));
-
+                            new CommunityDAO().checkState(applyStudyDTO.getAs_purpose());
                         }
 
                         request.setAttribute("myApplyList", myApplyList);
@@ -112,6 +115,7 @@ public class MypageStudygroup implements MypageService{
                         studygroupList = new CommunityDAO().communityPeriodList(memberDTO.getMem_id(), date_bb, date_today);
 
                         for(CommunityDTO communityDTO : studygroupList){
+                            new CommunityDAO().checkState(communityDTO.getId());
                             int cnt = 0;
                             for (ApplyStudyDTO applyStudyDTO : new ApplyStudyDAO().applyListPurpose(communityDTO.getId())){
                                 if(applyStudyDTO.getAs_state() == 2){
@@ -130,7 +134,7 @@ public class MypageStudygroup implements MypageService{
 
                         for(ApplyStudyDTO applyStudyDTO : myApplyList){
                             studygroupList.add(new CommunityDAO().communityApplyDetail(applyStudyDTO.getAs_purpose(), applyStudyDTO.getReg_date()));
-
+                            new CommunityDAO().checkState(applyStudyDTO.getAs_purpose());
                         }
 
                         request.setAttribute("myApplyList", myApplyList);
@@ -146,6 +150,7 @@ public class MypageStudygroup implements MypageService{
                         studygroupList = new CommunityDAO().communityPeriodList(memberDTO.getMem_id(), date_bb, date_today);
 
                         for(CommunityDTO communityDTO : studygroupList){
+                            new CommunityDAO().checkState(communityDTO.getId());
                             int cnt = 0;
                             for (ApplyStudyDTO applyStudyDTO : new ApplyStudyDAO().applyListPurpose(communityDTO.getId())){
                                 if(applyStudyDTO.getAs_state() == 2){
@@ -163,6 +168,7 @@ public class MypageStudygroup implements MypageService{
                         ArrayList<ApplyStudyDTO> myApplyList = new ApplyStudyDAO().myApplyPeriodList(memberDTO.getMem_id(),date_bb, date_today );
 
                         for(ApplyStudyDTO applyStudyDTO : myApplyList){
+                            new CommunityDAO().checkState(applyStudyDTO.getAs_purpose());
                             studygroupList.add(new CommunityDAO().communityApplyDetail(applyStudyDTO.getAs_purpose(), applyStudyDTO.getReg_date()));
 
                         }
@@ -178,6 +184,7 @@ public class MypageStudygroup implements MypageService{
                         studygroupList = new CommunityDAO().communityPeriodList(memberDTO.getMem_id(), date_bb, date_today);
 
                         for(CommunityDTO communityDTO : studygroupList){
+                            new CommunityDAO().checkState(communityDTO.getId());
                             int cnt = 0;
                             for (ApplyStudyDTO applyStudyDTO : new ApplyStudyDAO().applyListPurpose(communityDTO.getId())){
                                 if(applyStudyDTO.getAs_state() == 2){
@@ -194,6 +201,7 @@ public class MypageStudygroup implements MypageService{
                         ArrayList<ApplyStudyDTO> myApplyList = new ApplyStudyDAO().myApplyPeriodList(memberDTO.getMem_id(),date_bb, date_today );
 
                         for(ApplyStudyDTO applyStudyDTO : myApplyList){
+                            new CommunityDAO().checkState(applyStudyDTO.getAs_purpose());
                             studygroupList.add(new CommunityDAO().communityApplyDetail(applyStudyDTO.getAs_purpose(), applyStudyDTO.getReg_date()));
                         }
 
@@ -211,6 +219,7 @@ public class MypageStudygroup implements MypageService{
                 studygroupList = new CommunityDAO().communityPeriodList(memberDTO.getMem_id(), date_before, date_after);
 
                 for(CommunityDTO communityDTO : studygroupList){
+                    new CommunityDAO().checkState(communityDTO.getId());
                     int cnt = 0;
                     for (ApplyStudyDTO applyStudyDTO : new ApplyStudyDAO().applyListPurpose(communityDTO.getId())){
                         if(applyStudyDTO.getAs_state() == 2){
@@ -228,6 +237,7 @@ public class MypageStudygroup implements MypageService{
                 ArrayList<ApplyStudyDTO> myApplyList = new ApplyStudyDAO().myApplyPeriodList(memberDTO.getMem_id(),date_before, date_after );
 
                 for(ApplyStudyDTO applyStudyDTO : myApplyList){
+                    new CommunityDAO().checkState(applyStudyDTO.getAs_purpose());
                     studygroupList.add(new CommunityDAO().communityApplyDetail(applyStudyDTO.getAs_purpose(), applyStudyDTO.getReg_date()));
                 }
 

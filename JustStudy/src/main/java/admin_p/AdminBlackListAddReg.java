@@ -13,21 +13,40 @@ public class AdminBlackListAddReg implements AdminService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-        BlackDTO blackListData = new BlackDTO();
-        blackListData.setBlack_id(Integer.parseInt(request.getParameter("black_id")));
-        blackListData.setBlack_reason(request.getParameter("black_reason"));
-        new BlackDAO().add(blackListData);
+        String black_id = request.getParameter("black_id");
+        String black_reason = request.getParameter("black_reason");
 
-        ArrayList<MemberDTO> adminData = new MemberDAO().list();
+        if(black_reason==""){
+            String msg = "사유를 적어주세요";
+            request.setAttribute("adminUrl","alert.jsp");
+            request.setAttribute("msg", msg);
+            request.setAttribute("goUrl","AdminBlackListAdd?user="+black_id);
 
-        int black_id = Integer.parseInt(request.getParameter("black_id"));
-        new MemberDAO().blackLevelUp(black_id);
+        }else if(black_reason.isBlank()) {
+            String msg = "공백으로만 수정할 수 없습니다";
+            request.setAttribute("adminUrl", "alert.jsp");
+            request.setAttribute("msg", msg);
+            request.setAttribute("goUrl", "AdminBlackListAdd?user="+black_id);
+            
+        }else{
+            BlackDTO blackListData = new BlackDTO();
+            blackListData.setBlack_id(Integer.parseInt(request.getParameter("black_id")));
+            blackListData.setBlack_reason(request.getParameter("black_reason"));
+            new BlackDAO().add(blackListData);
 
-        String msg = "추가 완료";
-        request.setAttribute("adminData", adminData);
-        request.setAttribute("blackListData", blackListData);
-        request.setAttribute("adminUrl", "alert.jsp");
-        request.setAttribute("msg", msg);
-        request.setAttribute("goUrl","AdminBlackList");
+            ArrayList<MemberDTO> adminData = new MemberDAO().list();
+
+            int black_id_level = Integer.parseInt(request.getParameter("black_id"));
+            new MemberDAO().blackLevelUp(black_id_level);
+
+            String msg = "추가 완료";
+            request.setAttribute("adminData", adminData);
+            request.setAttribute("blackListData", blackListData);
+            request.setAttribute("adminUrl", "alert.jsp");
+            request.setAttribute("msg", msg);
+            request.setAttribute("goUrl","AdminBlackList");
+        }
+
+
     }
 }

@@ -22,6 +22,7 @@ public class AdminEventModifyReg implements AdminService{
 
         path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\" +
                 "\\img\\event";
+
         int size = 1024 * 1024 * 10;
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -33,8 +34,17 @@ public class AdminEventModifyReg implements AdminService{
             MultipartRequest mr = new MultipartRequest(request, path, size, "UTF-8", new DefaultFileRenamePolicy());
 
             dto.setTitle(mr.getParameter("title"));
-            dto.setContent(mr.getFilesystemName("content"));
-            dto.setImg(mr.getFilesystemName("img"));
+            if(mr.getFilesystemName("content") == null){
+                dto.setContent(mr.getParameter("content"));
+            }else{
+                dto.setContent(mr.getFilesystemName("content"));
+            }
+            if(mr.getFilesystemName("img") == null){
+                dto.setImg(mr.getParameter("img"));
+            }else{
+                dto.setImg(mr.getFilesystemName("img"));
+            }
+
             dto.setEvent_startdate(sdf.parse(mr.getParameter("event_startdate")));
             dto.setEvent_enddate(sdf.parse(mr.getParameter("event_enddate")));
             dto.setId(Integer.parseInt(mr.getParameter("id")));

@@ -141,7 +141,7 @@
         <b>이벤트 상세보기</b>
     </div>
     <div id="main">
-        <form id="event-detail-form" method="post" enctype="multipart/form-data">
+        <form  name="myform" id="event-detail-form" method="post" enctype="multipart/form-data" onclick="return check()">
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
             <input type="hidden" name="id" value="${eventDTO.id}">
             <tr>
@@ -203,7 +203,11 @@
             </tr>
         </table>
         <button type="submit" formaction="AdminEventModifyReg?id=${eventDTO.id}" formmethod="post" formenctype="multipart/form-data">수정</button>
+<<<<<<< HEAD
         <button type="submit" href="AdminEventDeleteReg" formmethod="get">삭제</button>
+=======
+        <button type="submit" formaction="AdminEventModifyReg" formmethod="get">삭제</button>
+>>>>>>> 잠깐만지원아
         </form>
         <a href="AdminEventList">목록으로</a>
     </div>
@@ -215,6 +219,35 @@
             $("#event-detail-form").attr("action", "AdminEventImgDelete")
 
             $("#event-detail-form").submit()
+        }
+    }
+
+    function check() {
+        const f = document.myform;
+        if (f.title.value == "") {
+            alert("빈칸을 입력해주세요");
+            f.title.focus();
+            return false;
+        }
+        if (f.event_startdate.value == "") {
+            alert("시작날짜를 입력해주세요");
+            f.event_startdate.focus();
+            return false;
+        }
+        if (f.event_enddate.value == "") {
+            alert("마감날짜를 입력해주세요");
+            f.event_enddate.focus();
+            return false;
+        }
+        if (f.img.value == "") {
+            alert("파일을 첨부해주세요");
+            f.img.focus();
+            return false;
+        }
+        if (f.content.value == "") {
+            alert("파일을 첨부해주세요");
+            f.content.focus();
+            return false;
         }
     }
 </script>

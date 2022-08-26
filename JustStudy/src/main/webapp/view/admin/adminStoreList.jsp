@@ -17,7 +17,7 @@
 <style>
     .admin-store-list-bg{
         width: 100%;
-        height: fit-content;
+        height: 100%;
     }
 
     .admin-store-list-headline {
@@ -26,9 +26,9 @@
         background: #fff;
         border-bottom: 1px solid rgb(184, 177, 177);
         padding-left: 20px;
-        position: fixed;
         display: flex;
         flex-direction: row;
+        align-items: center;
         justify-content: space-between;
     }
 
@@ -39,15 +39,14 @@
     }
 
     .admin-store-list-headline > input {
-        position: absolute;
-        left: 0;
-        top: 0;
+        margin-right: 10px;
     }
 
     .admin-store-list-main {
         width: 100%;
-        height: fit-content;
-        padding: 70px 20px 20px 40px;
+        height: 100%;
+        padding: 20px 20px;
+        overflow: auto;
     }
 
     .admin-store-list-table {
@@ -89,7 +88,7 @@
 <div class="admin-store-list-bg">
 
     <div class="admin-store-list-headline">
-        <b>지점관리</b>
+        <b>지점 목록</b>
         <input type="button" class="admin-store-insert" value="지점추가">
     </div>
 

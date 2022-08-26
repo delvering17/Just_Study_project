@@ -19,6 +19,13 @@
     <script type="text/javascript" src="<c:url value="/jquery/"/>jquery-ui.min.js"></script>
 
     <style type="text/css">
+
+        body{
+            min-width: 100vw;
+            height: 100%;
+            overflow: hidden;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -80,22 +87,22 @@
             line-height: 50px;
         }
 
-        .admin-template-content {
+        .admin-template-bg .admin-template-content {
             width: 100%;
             height: 100%;
             display: flex;
         }
 
-        .admin-template-content tr{
+        .admin-template-bg .admin-template-content tr{
             width: 100%;
             height: 100%;
         }
 
-        #hamburger:checked + .categoryitem {
+        .admin-template-bg #hamburger:checked + .categoryitem {
             display: none;
         }
 
-        .category {
+        .admin-template-bg .category {
             width: fit-content;
             height: 100%;
             display: flex;
@@ -104,7 +111,7 @@
 /*            position: fixed;*/
         }
 
-        .categoryicon {
+        .admin-template-bg .categoryicon {
             width: 50px;
             height: 100%;
             background: rgba(175, 170, 170, 0.822);
@@ -112,7 +119,7 @@
             float: left;*/
         }
 
-        .categoryicon > div:nth-child(n) {
+        .admin-template-bg .categoryicon > div:nth-child(n) {
             width: 50px;
             height: 50px;
             text-align: center;
@@ -120,25 +127,25 @@
             border-bottom: 1px solid rgb(167, 152, 152);
         }
 
-        .categoryicon > div:nth-child(n) > label {
+        .admin-template-bg .categoryicon > div:nth-child(n) > label {
             cursor: pointer;
         }
 
-        .categoryicon > div:nth-child(n) > label > i {
+        .admin-template-bg .categoryicon > div:nth-child(n) > label > i {
             width: 100%;
             height: 100%;
             line-height: 50px;
         }
 
-        #r1:checked ~ div > div:nth-of-type(1),
-        #r2:checked ~ div > div:nth-of-type(2),
-        #r3:checked ~ div > div:nth-of-type(3),
-        #r4:checked ~ div > div:nth-of-type(4),
-        #r5:checked ~ div > div:nth-of-type(5) {
+        .admin-template-bg #r1:checked ~ div > div:nth-of-type(1),
+        .admin-template-bg #r2:checked ~ div > div:nth-of-type(2),
+        .admin-template-bg #r3:checked ~ div > div:nth-of-type(3),
+        .admin-template-bg #r4:checked ~ div > div:nth-of-type(4),
+        .admin-template-bg #r5:checked ~ div > div:nth-of-type(5) {
             background: #fff;
         }
 
-        .categoryitem {
+        .admin-template-bg .categoryitem {
             width: 189px;
             height: 100%;
             background: #fff;
@@ -148,48 +155,48 @@
             padding: 10px 40px;
         }
 
-        ul {
+        .admin-template-bg ul {
             width: 138px;
             height: 100%;
             display: none;
         }
 
-        ul > li {
+        .admin-template-bg ul > li {
             list-style: none;
             line-height: 40px;
         }
 
-        ul > li:nth-of-type(1) {
+        .admin-template-bg ul > li:nth-of-type(1) {
             font-weight: 800;
         }
 
-        ul > li:nth-of-type(n+2) {
+        .admin-template-bg ul > li:nth-of-type(n+2) {
             font-size: 13px;
         }
 
-        ul > li > a {
+        .admin-template-bg ul > li > a {
             color: #000;
             cursor: pointer;
             text-decoration: none;
         }
 
-        ul > li > a:hover {
+        .admin-template-bg ul > li > a:hover {
             color: rgb(206, 19, 223);
         }
 
-        #r1:checked ~ .categoryitem > ul:nth-of-type(1),
-        #r2:checked ~ .categoryitem > ul:nth-of-type(2),
-        #r3:checked ~ .categoryitem > ul:nth-of-type(3),
-        #r4:checked ~ .categoryitem > ul:nth-of-type(4),
-        #r5:checked ~ .categoryitem > ul:nth-of-type(5) {
+        .admin-template-bg #r1:checked ~ .categoryitem > ul:nth-of-type(1),
+        .admin-template-bg #r2:checked ~ .categoryitem > ul:nth-of-type(2),
+        .admin-template-bg #r3:checked ~ .categoryitem > ul:nth-of-type(3),
+        .admin-template-bg #r4:checked ~ .categoryitem > ul:nth-of-type(4),
+        .admin-template-bg #r5:checked ~ .categoryitem > ul:nth-of-type(5) {
             display: block;
         }
 
-        .admin-main {
+        .admin-template-bg .admin-main {
             width: 100%;
             max-height: 100%;
-            overflow: auto;
             padding-top: 50px;
+            overflow: hidden;
         }
     </style>
 </head>
@@ -221,9 +228,9 @@
                 <input type="checkbox" id="hamburger"/>
                 <div class="categoryitem">
                     <ul>
-                        <li>지점관리</li>
-                        <li><a href="AdminStoreList">지점목록</a></li>
-                        <li><a href="AdminStoreReview">이용후기</a></li>
+                        <li>지점 관리</li>
+                        <li><a href="AdminStoreList">지점 목록</a></li>
+                        <li><a href="AdminStoreReview">이용 후기</a></li>
                         <li><a href=""></a></li>
                     </ul>
                     <ul>
@@ -233,14 +240,14 @@
 
                     </ul>
                     <ul>
-                        <li>매출관리</li>
+                        <li>매출 관리</li>
                         <li><a href="AdminSalesStore?city=전체&branch=전체">지점별 매출</a></li>
                         <li><a href="AdminSalesUser">회원별 매출</a></li>
                         <li><a href=""></a></li>
                     </ul>
                     <ul>
-                        <li>예약관리</li>
-                        <li><a href="AdminReservList">예약목록</a></li>
+                        <li>예약 관리</li>
+                        <li><a href="AdminReservList">예약 목록</a></li>
                         <li><a href=""></a></li>
                         <li><a href=""></a></li>
                     </ul>

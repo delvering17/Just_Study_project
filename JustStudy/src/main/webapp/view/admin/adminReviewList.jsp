@@ -16,37 +16,41 @@
 </script>
 
 <style>
+
+  .admin-store-review-bg{
+    width: 100%;
+    height: 100%;
+  }
+
   .admin-store-review-headline {
-    width: 1330px;
-    height: 40px;
+    width: 100%;
+    height: 50px;
     background: #fff;
     border-bottom: 1px solid rgb(184, 177, 177);
-    padding-top: 15px;
     padding-left: 20px;
-    margin-top: 50px;
-    margin-left: 239px;
-    position: fixed;
+    display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .admin-store-review-headline > b {
-    width: 100px;
+    width: fit-content;
     font-size: 20px;
+    line-height: 50px;
   }
 
   .admin-store-review-main{
-    width: 2000px;
-    height: fit-content;
-    margin: 0px 0px 0px 220px;
-    padding: 120px 20px 20px 40px;
+    width: 100%;
+    height: 100%;
+    padding: 20px 20px;
+    overflow: auto;
   }
 
   .admin-store-review-table {
-    width: 60%;
+    width: 1000px;
     border: 1px solid rgb(122, 115, 115);
     margin-top: 10px;
-    table-layout: fixed;
-    word-break: break-all;
   }
 
   .admin-store-review-table th {

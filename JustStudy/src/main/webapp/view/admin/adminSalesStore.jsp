@@ -14,6 +14,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <script type="text/javascript">
+
+  $("#r3").attr("checked", true)
+
   if(<%=((ArrayList<AdminReservDTO>) request.getAttribute("salesStoreList")).size() == 0%>){
     alert("조회 내역이 없습니다.")
     location.href = "AdminSalesStore?city=전체&branch=전체"
@@ -24,25 +27,25 @@
 <style>
   .admin-sales-store-bg{
     width: 100%;
-    height: fit-content;
+    height: 100%;
   }
 
   .admin-sales-store-headline {
-    width: 1330px;
-    height: 40px;
+    width: 100%;
+    height: 50px;
     background: #fff;
     border-bottom: 1px solid rgb(184, 177, 177);
-    padding-top: 15px;
     padding-left: 20px;
-    margin-top: 50px;
-    margin-left: 239px;
-    position: fixed;
+    display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .admin-sales-store-headline > b {
-    width: 100px;
+    width: fit-content;
     font-size: 20px;
+    line-height: 50px;
   }
 
   input[name=admin-sales-store-start], input[name=admin-sales-store-end],
@@ -60,18 +63,16 @@
   }
 
   .admin-sales-store-main{
-    width: 1700px;
-    height: fit-content;
-    margin: 0px 0px 0px 220px;
-    padding: 120px 20px 20px 40px;
+    width: 100%;
+    height: 100%;
+    padding: 20px 20px;
+    overflow: auto;
   }
 
   .admin-sales-store-table {
-    width: 67%;
+    width: 1000px;
     border: 1px solid rgb(122, 115, 115);
     margin-top: 10px;
-    table-layout: fixed;
-    word-break: break-all;
   }
 
   .admin-sales-store-table th {

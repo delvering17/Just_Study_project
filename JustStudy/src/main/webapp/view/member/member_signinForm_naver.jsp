@@ -92,6 +92,7 @@
     <p id="signin-logo">네이버 계정 회원가입</p>
 
   <input type="hidden" id="input-socialid" value="${socialid}">
+  <input type="hidden" id="type" value="naver">
   <div class="wrapper-signin">
     <p>이메일</p>
     <input type="text" class="input-signin" id="input-userid" value="${social_email}" readonly/>
@@ -184,7 +185,8 @@
       input_socialid:$('#input-socialid').val(),
       input_realname:$('#input-realname').val(),
       input_address1:$('#input-address1').val(),
-      input_address2:$('#input-address2').val()
+      input_address2:$('#input-address2').val(),
+      type:$('#type').val()
     }
 
     if(form_data.input_nickname === '') {

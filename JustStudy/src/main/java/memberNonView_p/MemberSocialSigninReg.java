@@ -21,12 +21,16 @@ public class MemberSocialSigninReg implements MemberNonViewService{
         String input_realname = request.getParameter("input_realname");
         String input_address1 = request.getParameter("input_address1");
         String input_address2 = request.getParameter("input_address2");
-
-        // 여기 유효성 검사 다 해줘야함 찬욱아 까먹지마라
+        String type = request.getParameter("type");
 
         MemberDTO memberDTO = new MemberDTO();
 
-        memberDTO.setMem_social(2); // 나중에 바꿔라
+        if(type.equals("kakao")) {
+            memberDTO.setMem_social(1);
+        } else if(type.equals("naver")) {
+            memberDTO.setMem_social(2);
+
+        }
 
         memberDTO.setMem_userid(input_userid);
         memberDTO.setMem_nickname(input_nickname);

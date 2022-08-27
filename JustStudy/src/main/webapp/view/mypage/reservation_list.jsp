@@ -5,15 +5,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<script type="text/javascript">
-    if(<%=((ArrayList<ReservationDTO>) request.getAttribute("myReservation")).size() == 0%>){
-        alert("조회 내역이 없습니다.")
-        location.href = "MyReservationList?type=done&period=all"
-    }
-
-</script>
-
 <style>
 
     .mypage-reservlist {
@@ -220,52 +211,60 @@
                 <td>상태</td>
                 <td></td>
             </tr>
-
-            <c:forEach items="${myReservation}" var="myreserv" varStatus="no">
-
-                <tr>
-                    <form action="MypageReview" class="mypage-reservlist-review-form">
-                        <input type=hidden name="reservId" value="${myreserv.id}"/>
-                        <td>${myreserv.resDate}</td>
-                        <td>${myreserv.branch}</td>
-                        <td>${myreserv.room}</td>
-                        <td>${myreserv.useDate}</td>
-                        <td>${fn:replace(myreserv.time, ', ', '<br/>')}</td>
-                        <td>${myreserv.headcount}</td>
-                        <td>${myreserv.pay}</td>
-                        <td>${myreserv.status}</td>
-                        <c:choose>
-                        <c:when test="${param.type == \"done\"}">
-                            <c:choose>
-                                <c:when test="${myreserv.review == 0}">
-                                    <td>
-                                        <button class="mypage-reservlist-review">후기 작성</button>
-                                    </td>
-                                </c:when>
-                                <c:when test="${myreserv.review == 1}">
-                                    <td>
-                                        <button type="button" class="mypage-reservlist-review-done">후기 조회</button>
-                                    </td>
-                                </c:when>
-                            </c:choose>
-                        </c:when>
-                            <c:when test="${param.type == \"will\"}">
+            <c:choose>
+                <c:when test="<%((ArrayList<ReservationDTO>) request.getAttribute(\"myReservation\")).size() != 0%>">
+                    <c:forEach items="${myReservation}" var="myreserv" varStatus="no">
+                        <tr>
+                            <form action="MypageReview" class="mypage-reservlist-review-form">
+                                <input type=hidden name="reservId" value="${myreserv.id}"/>
+                                <td>${myreserv.resDate}</td>
+                                <td>${myreserv.branch}</td>
+                                <td>${myreserv.room}</td>
+                                <td>${myreserv.useDate}</td>
+                                <td>${fn:replace(myreserv.time, ', ', '<br/>')}</td>
+                                <td>${myreserv.headcount}</td>
+                                <td>${myreserv.pay}</td>
+                                <td>${myreserv.status}</td>
                                 <c:choose>
-                                    <c:when test="${myreserv.status == \"결제완료\"}">
-                                        <td>
-                                            <button type="button" class="mypage-reservlist-cancle">예약 취소</button>
-                                        </td>
+                                    <c:when test="${param.type == \"done\"}">
+                                        <c:choose>
+                                            <c:when test="${myreserv.review == 0}">
+                                                <td>
+                                                    <button class="mypage-reservlist-review">후기 작성</button>
+                                                </td>
+                                            </c:when>
+                                            <c:when test="${myreserv.review == 1}">
+                                                <td>
+                                                    <button type="button" class="mypage-reservlist-review-done">후기 조회</button>
+                                                </td>
+                                            </c:when>
+                                        </c:choose>
                                     </c:when>
-                                    <c:when test="${myreserv.status == \"관리자취소\"}">
-                                        <td>${myreserv.cancelReason}</td>
+                                    <c:when test="${param.type == \"will\"}">
+                                        <c:choose>
+                                            <c:when test="${myreserv.status == \"결제완료\"}">
+                                                <td>
+                                                    <button type="button" class="mypage-reservlist-cancle">예약 취소</button>
+                                                </td>
+                                            </c:when>
+                                            <c:when test="${myreserv.status == \"관리자취소\"}">
+                                                <td>${myreserv.cancelReason}</td>
+                                            </c:when>
+                                        </c:choose>
                                     </c:when>
                                 </c:choose>
-                            </c:when>
-                        </c:choose>
-                    </form>
-                </tr>
+                            </form>
+                        </tr>
 
-            </c:forEach>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <tr>
+                        <td colspan="9">일치하는 항목이 없습니다.</td>
+                    </tr>
+                </c:otherwise>
+            </c:choose>
+
         </table>
     </div>
 </div>

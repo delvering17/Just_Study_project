@@ -21,8 +21,9 @@ public class MemberController extends HttpServlet {
 
         nonService.put("MemberLoginForm","member/member_loginForm.jsp");
         nonService.put("MemberSigninForm","member/member_signinForm.jsp");
-//        nonService.put("MemberSocialSigninForm","member/member_signinForm_kakao.jsp");
-        nonService.put("MemberSocialNaverLoginReg","member/member_NaverAlert.jsp");
+        nonService.put("MemberSocialSigninForm","member/member_signinForm_kakao.jsp");
+        nonService.put("MemberSocialNaverSigninForm","member/member_signinForm_naver.jsp");
+        nonService.put("NaverAlert","member/member_NaverAlert.jsp");
         nonService.put("MemberLevelAlert","member/member_levelAlert.jsp");
         nonService.put("NaverLogin","member/member_NaverLogin.jsp");
     }

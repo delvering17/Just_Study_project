@@ -75,7 +75,7 @@
 //                System.out.println("돼냐?"+go);
 
     %>
-    location.href = '../member/MemberSocialLoginReg?access_token=<%=go%>&logintype=naver'
+    location.href = '../member/MemberSocialNaverLoginReg?access_token=<%=go%>&logintype=naver'
 
     <%--naverLogin.getLoginStatus(function (status) {--%>
     <%--    alert('여기왔당 '+ status)--%>

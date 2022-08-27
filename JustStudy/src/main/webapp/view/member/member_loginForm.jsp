@@ -64,12 +64,6 @@
     </div>
 </div>
 
-<form action="MemberSocialSigninForm" id="fff" method="post">
-    <input type="hidden" name="email" id="email">
-    <input type="hidden" name="social_id" id="social_id">
-    <input type="hidden" name="realname" id="realname">
-    <input type="hidden" name="type" value="Naver">
-</form>
 <script type="text/javascript">
 
     function goLogin() {

@@ -13,25 +13,19 @@ public class AdminFAQInsertReg implements AdminService{
         String question = request.getParameter("faq-question");
         String answer = request.getParameter("faq-answer");
 
-        if(question==""){
+        if((question.trim()).equals("")){
             String msg = "질문을 적어주세요";
             request.setAttribute("adminUrl","alert.jsp");
             request.setAttribute("msg", msg);
             request.setAttribute("goUrl", "AdminFAQInsert");
 
-        }else if(answer==""){
+        }else if((answer.trim()).equals("")){
             String msg = "답변을 적어주세요";
             request.setAttribute("adminUrl","alert.jsp");
             request.setAttribute("msg", msg);
             request.setAttribute("goUrl", "AdminFAQInsert");
 
-        }else if(question.isBlank() || answer.isBlank()) {
-            String msg = "공백으로만 수정할 수 없습니다";
-            request.setAttribute("adminUrl", "alert.jsp");
-            request.setAttribute("msg", msg);
-            request.setAttribute("goUrl", "AdminFAQInsert");
-
-        }else{
+        } else {
             FaqDTO faqDTO = new FaqDTO();
             faqDTO.setCategory(request.getParameter("faq-category"));
             faqDTO.setQuestion(request.getParameter("faq-question"));

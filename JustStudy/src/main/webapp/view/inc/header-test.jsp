@@ -436,7 +436,7 @@
     const header_front = document.querySelector(".header-front");
     //
     const header_behind = document.querySelector(".header-behind");
-    // // const header = document.querySelector(".header-wrapper");
+    // 자// const header = document.querySelector(".header-wrapper");
     //
     header_front.addEventListener("mouseover", function () {
         header_behind.classList.add("gnb-active");

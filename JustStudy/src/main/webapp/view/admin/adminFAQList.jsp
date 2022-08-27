@@ -41,6 +41,11 @@
         padding: 120px 20px 20px 40px;
     }
 
+    .admin-faq-list-main > div{
+        display: flex;
+        flex-direction: row;
+    }
+
     .admin-faq-list-table {
         width: 40%;
         border: 1px solid rgb(122, 115, 115);
@@ -90,8 +95,15 @@
 
     <div class="admin-faq-list-main">
         <div>
-            <input type="text">
-            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+            <form action="AdminFAQListSearch">
+                <select name="FAQSort">
+                    <option value="usage" selected>이용방법</option>
+                    <option value="studyroom">스터디룸 예약</option>
+                    <option value="pay">결제</option>
+                    <option value="etc">기타</option>
+                </select>
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
             <button class="admin-faq-insert">추가</button>
         </div>
 
@@ -124,6 +136,11 @@
 
 </div>
 <script type="text/javascript">
+    $(".admin-faq-search").click(function (){
+        location.href="AdminFAQListSearch";
+
+    })
+
     $(".admin-faq-insert").click(function (){
         location.href="AdminFAQInsert";
 

@@ -274,7 +274,7 @@
                     </form>
                 </tr>
                 <tr>
-                    <td>${i.mem_password}</td>
+                    <td>${i.mem_social}</td>
                     <td>${i.mem_nickname}</td>
                 </tr>
             </c:forEach>

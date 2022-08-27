@@ -86,6 +86,34 @@ public class FaqDAO {
         return res;
     }
 
+    public ArrayList<FaqDTO> searchList(String filter){
+
+        ArrayList<FaqDTO> res = new ArrayList<FaqDTO>();
+
+        sql = "select * from faq where category = '"+filter+"' ";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            rs = ptmt.executeQuery();
+
+            while(rs.next()){
+                FaqDTO faqDTO = new FaqDTO();
+                faqDTO.setId(rs.getInt("id"));
+                faqDTO.setQuestion(rs.getString("question"));
+                faqDTO.setAnswer(rs.getString("answer"));
+                faqDTO.setCategory(rs.getString("category"));
+
+                res.add(faqDTO);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return res;
+    }
+
     public FaqDTO detail(int id){
 
         FaqDTO faqDTO = new FaqDTO();

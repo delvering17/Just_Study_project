@@ -40,7 +40,7 @@
 
   function check(){
     const f = document.myform;
-    if(f.news_title.value == ""){
+    if(f.news_title.value.trim() == ""){
       alert("빈칸을 입력해주세요");
       f.news_title.focus();
       return false;
@@ -56,7 +56,7 @@
       f.news_img.focus();
       return false;
     }
-    if(f.news_content.value == ""){
+    if(f.news_content.value.trim() == ""){
       alert("빈칸을 입력해주세요");
       f.news_content.focus();
       return false;

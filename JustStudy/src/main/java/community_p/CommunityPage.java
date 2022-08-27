@@ -4,7 +4,6 @@ import model_p.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -12,10 +11,13 @@ public class CommunityPage implements CommunityService {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
+
         ArrayList<CommunityDTO> totalList = new CommunityDAO().list();
         ArrayList<CommunityDTO> openList = new ArrayList<CommunityDTO>();
         ArrayList<CommunityDTO> closeList = new ArrayList<CommunityDTO>();
         ArrayList<BranchDTO> branchList = new BranchDAO().branchList();
+
+        ArrayList<Integer> arr_nowPeople = new ArrayList<>();
 
         for(CommunityDTO communityDTO : totalList){
             int cnt = 0;
@@ -24,7 +26,7 @@ public class CommunityPage implements CommunityService {
                     cnt ++;
                 }
             }
-
+            arr_nowPeople.add(cnt);
             if(cnt == communityDTO.getPeople() || communityDTO.getEnddate().before(new Date())){
                 communityDTO.setStatus("모집마감");
                 closeList.add(communityDTO);
@@ -43,6 +45,7 @@ public class CommunityPage implements CommunityService {
         }
 
         request.setAttribute("branchList",branchList);
+        request.setAttribute("arr_nowPeople",arr_nowPeople);
 
         request.setAttribute("mainUrl", "community/studygroup.jsp");
     }

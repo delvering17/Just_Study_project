@@ -200,7 +200,7 @@
                                     <span class="event-srch-title" style="display: inline">${dto.title}</span>
                                 <div class="list-item-sub-text">
                                     <p>${dto.studykind}</p>
-                                    <p>모집인원&nbsp;&colon; ${dto.people}명</p>
+                                    <p>모집인원&nbsp;&colon; ${arr_nowPeople.get(no.index)} / ${dto.people}명</p>
                                 </div>
                                 <c:choose>
                                     <c:when test="${dto.status == '모집중'}">

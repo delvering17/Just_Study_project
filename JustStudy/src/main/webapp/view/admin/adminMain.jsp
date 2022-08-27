@@ -26,7 +26,7 @@
         }
 
         .admin-main-bg #main{
-            width: 100%;
+            width: 1100px;
             height: fit-content;
             padding: 70px 20px 20px 40px;
         }

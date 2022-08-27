@@ -37,7 +37,7 @@
     }
 
     .admin-news-detail-main{
-      width: 100%;
+        width: 1100px;
       height: 100%;
       padding: 20px 20px;
       overflow: auto;

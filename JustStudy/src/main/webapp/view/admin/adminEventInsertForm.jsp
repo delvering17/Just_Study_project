@@ -163,13 +163,6 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>게시일</th>
-                    <td>
-                        <input type="hidden" name="reg_date" >
-                        ${eventDTO.reg_date_sdf}
-                    </td>
-                </tr>
-                <tr>
                     <th>이미지</th>
                     <td>
                         <input type="file" name="img">

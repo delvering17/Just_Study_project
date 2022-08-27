@@ -259,7 +259,16 @@
                         <td>${i.mem_realname}</td>
                         <td rowspan="2">${i.mem_address1}</td>
                         <td rowspan="2">${i.mem_address2}</td>
-                        <td rowspan="2">${i.mem_level}</td>
+                        <c:if test="${i.mem_level==1}">
+                            <td rowspan="2">일반회원</td>
+                        </c:if>
+                        <c:if test="${i.mem_level==2}">
+                            <td rowspan="2">관리자</td>
+                        </c:if>
+                        <c:if test="${i.mem_level==3}">
+                            <td rowspan="2">블랙리스트</td>
+                        </c:if>
+
                         <td rowspan="2">
                             <c:if test="${i.mem_level==1}">
                                 <button formaction="AdminUserModify" formmethod="get">수정</button>
@@ -274,7 +283,12 @@
                     </form>
                 </tr>
                 <tr>
-                    <td>${i.mem_social}</td>
+                    <c:if test="${i.mem_social==1}">
+                        <td>카카오</td>
+                    </c:if>
+                    <c:if test="${i.mem_social==2}">
+                        <td>네이버</td>
+                    </c:if>
                     <td>${i.mem_nickname}</td>
                 </tr>
             </c:forEach>

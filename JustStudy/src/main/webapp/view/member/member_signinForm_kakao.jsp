@@ -92,7 +92,7 @@
 
     <p id="signin-logo">카카오 계정 회원가입</p>
 
-  <input type="hidden" id="input-socialid" value="${param.socialid}">
+  <input type="hidden" id="input-socialid" value="${sessionScope.social_id}">
   <div class="wrapper-signin">
     <p>이메일</p>
     <input type="text" class="input-signin" id="input-userid" value="${param.social_email}" readonly/>

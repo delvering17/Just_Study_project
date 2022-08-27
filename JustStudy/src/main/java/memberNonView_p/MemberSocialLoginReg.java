@@ -33,7 +33,7 @@ public class MemberSocialLoginReg implements MemberNonViewService {
         String social_email = request.getParameter("social_email");
         String social_id = request.getParameter("social_id");
         String realname = request.getParameter("realname");
-        System.out.println(social_email);
+
         int mem_id = new MemberDAO().isSocialId(social_id);
 
         MemberDTO memberDTO = new MemberDAO().detail(mem_id);
@@ -71,7 +71,9 @@ public class MemberSocialLoginReg implements MemberNonViewService {
             } catch (UnsupportedEncodingException e) {
                 throw new RuntimeException(e);
             }
-            request.setAttribute("social_id", social_id);
+            HttpSession session = request.getSession();
+            session.setAttribute("social_id", social_id);
+            System.out.println(social_id);
             request.setAttribute("social_email", social_email);
         }
 

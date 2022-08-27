@@ -19,6 +19,10 @@
         width: 100%;
         background: #F5F5F5;
     }
+
+    header {
+        position: relative;
+    }
 </style>
 <head>
     <title>template</title>
@@ -31,10 +35,7 @@
     <script src="../bootstrap/js/bootstrap-datepicker.js"></script>
 
     <script src="https://unpkg.com/scrollreveal"></script>
-    <script
-            type="text/javascript"
-            src="../bootstrap/js/bootstrap.bundle.min.js"
-    ></script>
+    <script type="text/javascript" src="../bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
     <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>

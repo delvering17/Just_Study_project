@@ -15,38 +15,11 @@
       integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
       crossorigin="anonymous" referrerpolicy="no-referrer"/>
 <style>
-    .admin-notice-list-bg {
-        width: 100%;
-        height: 100%;
-    }
-
-    #headline {
-        width: 100%;
-        height: 50px;
-        background: #fff;
-        border-bottom: 1px solid rgb(184, 177, 177);
-        padding-left: 20px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    #headline > b {
-        width: fit-content;
-        font-size: 20px;
-        line-height: 50px;
-    }
-
-    #headline > input {
-        margin-right: 10px;
-    }
 
     #main {
-        width: 1100px;
-        height: 100%;
+        width: 100%;
+        height: fit-content;
         padding: 20px 20px;
-        overflow: auto;
     }
 
     #main > div:first-of-type > input[type=button] {
@@ -127,15 +100,6 @@
     }
 </style>
 
-
-<div class="admin-notice-list-bg">
-
-    <div id="headline">
-        <b>공지사항 관리</b>
-        <a href="AdminNoticeInsertForm" style="align-items: center">글쓰기</a>
-
-    </div>
-
     <div id="main">
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
             <tr>
@@ -152,7 +116,6 @@
             </c:forEach>
         </table>
     </div>
-</div>
 
 <script type="text/javascript">
     $(".admin-store-delete").click(function () {

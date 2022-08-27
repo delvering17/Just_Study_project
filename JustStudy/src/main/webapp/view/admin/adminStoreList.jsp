@@ -135,19 +135,19 @@
 </div>
 
 <script type="text/javascript">
+    $(".admin-template-header>b").html("지점 목록")
+    $(".admin-template-header>div").append("<input type=button class='admin-store-insert' value='추가'/>")
+
     $(".admin-store-insert").click(function () {
         location.href = "AdminStoreInsert"
-    })
 
+    })
     $(".admin-store-list-search").click(function () {
         if ($("input[name=word]").val().trim() == "") {
             alert("검색어를 입력해주세요.")
         } else {
             $(".admin-store-search-form").submit()
         }
+
     })
-
-    $(".admin-template-header>b").html("지점 목록")
-
-    $(".admin-template-header>div").append("<input type=button value='추가'/>")
 </script>

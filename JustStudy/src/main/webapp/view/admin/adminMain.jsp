@@ -9,50 +9,28 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-
-        .admin-main-bg{
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-        }
-
-        .admin-main-bg #headline{
-            width: 100%;
-            height: 50px;
-            background: #fff;
-            border-bottom: 1px solid rgb(184, 177, 177);
-            padding-left: 20px;
-            line-height: 50px;
-        }
-
-        .admin-main-bg #main{
-            width: 1100px;
-            height: fit-content;
-            padding: 70px 20px 20px 40px;
-        }
-
-        .admin-main-bg #main > h4{
+        #main > h4{
             margin: 0px 0px 25px 20px;
         }
 
-        .admin-main-bg table{
+        table{
             width: 500px;
             border: 1px solid rgb(122, 115, 115);
             margin: 10px 0px 40px 30px;
             font-size: 13px;
         }
 
-        .admin-main-bg tr:nth-of-type(1){
+        tr:nth-of-type(1){
             background: rgba(72, 92, 117, 0.801);
             color: #fff;
             height: 20px;
         }
 
-        .admin-main-bg tr:nth-of-type(2n+3){
+        tr:nth-of-type(2n+3){
             background: rgba(227, 233, 240, 0.726);
         }
 
-        .admin-main-bg tr:nth-of-type(1) > th{
+        tr:nth-of-type(1) > th{
             height: 20px;
         }
 
@@ -60,20 +38,18 @@
             text-align: center;
         }
 
-        .admin-main-bg th{
+        th{
             border: 1px solid rgb(97, 88, 88);
             padding: 5px;
         }
 
-        .admin-main-bg td{
+        td{
             border: 1px solid rgb(97, 88, 88);
             padding: 5px;
             text-align: center;
         }
 
     </style>
-<div class="admin-main-bg">
-    <div id="headline"><h3>관리자메인</h3></div>
 
     <div id="main">
         <h4>오늘 예약 현황</h4>
@@ -108,7 +84,5 @@
         </table>
 
         <h4>미답변 1:1 문의 : <a href="AdminInquiryUnansweredList">${unanswered}개</a></h4>
-
-    </div>
 
 </div>

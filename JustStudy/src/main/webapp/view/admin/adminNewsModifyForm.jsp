@@ -16,38 +16,10 @@
       integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
       crossorigin="anonymous" referrerpolicy="no-referrer"/>
 <style>
-.admin-news-modify-bg{
-    width: 100%;
-    height: 100%;
-}
-
-    #headline {
-        width: 100%;
-        height: 50px;
-        background: #fff;
-        border-bottom: 1px solid rgb(184, 177, 177);
-        padding-left: 20px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    #headline > b {
-        width: fit-content;
-        font-size: 20px;
-        line-height: 50px;
-    }
-
-    #headline > input {
-        margin-right: 10px;
-    }
-
     #main {
-        width: 1100px;
-        height: 100%;
+        width: 100%;
+        height: fit-content;
         padding: 20px 20px;
-        overflow: auto;
     }
 
     #main > div:first-of-type > input[type=button] {
@@ -136,102 +108,96 @@
     <%}%>
 </script>
 
-<div class="admin-news-modify-bg">
-
-    <div id="headline">
-        <b>뉴스 수정</b>
-    </div>
-
-    <div id="main">
-        <form action="AdminNewsModifyReg" name="myform" method="post" enctype="multipart/form-data" class="admin-modify-form" onsubmit="return check()">
-            <input type="hidden" name="news_id" value="${dto.news_id}">
-            <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
-                <tr>
-                    <td>타이틀</td>
-                    <td colspan="3"><input type="text" name="news_title" value="${dto.news_title}">
-                </tr>
-                <tr>
-                    <th>뉴스 썸네일 사진</th>
-                    <c:choose>
-                        <c:when test="${dto.news_thumbnail_img != null}">
-                            <td colspan="3">
-                                    <input type="button" value="썸네일삭제"  onclick="deleteThumbNailNewsImg('뉴스썸네일사진삭제')"/>
-                                    <input type="hidden" name="news_thumbnail_img" value="${dto.news_thumbnail_img}">
-                                <img src="<c:url value="/img/news/${dto.news_thumbnail_img}"/>"/>
-                            </td>
-                        </c:when>
-                        <c:otherwise>
-                            <td colspan="3">
-                                <input type="file" name="news_thumbnail_img" value="">
-                            </td>
-                        </c:otherwise>
-                    </c:choose>
-                </tr>
-                <tr>
-                    <th>뉴스 사진</th>
-                    <c:choose>
-                        <c:when test="${dto.news_img != null}">
-                    <td colspan="3">
-                            <input type="button" value="파일삭제"  onclick="deleteNewsImg('뉴스사진삭제')"/>
+<div id="main">
+    <form action="AdminNewsModifyReg" name="myform" method="post" enctype="multipart/form-data"
+          class="admin-modify-form" onsubmit="return check()">
+        <input type="hidden" name="news_id" value="${dto.news_id}">
+        <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+            <tr>
+                <td>타이틀</td>
+                <td colspan="3"><input type="text" name="news_title" value="${dto.news_title}">
+            </tr>
+            <tr>
+                <th>뉴스 썸네일 사진</th>
+                <c:choose>
+                    <c:when test="${dto.news_thumbnail_img != null}">
+                        <td colspan="3">
+                            <input type="button" value="썸네일삭제" onclick="deleteThumbNailNewsImg('뉴스썸네일사진삭제')"/>
+                            <input type="hidden" name="news_thumbnail_img" value="${dto.news_thumbnail_img}">
+                            <img src="<c:url value="/img/news/${dto.news_thumbnail_img}"/>"/>
+                        </td>
+                    </c:when>
+                    <c:otherwise>
+                        <td colspan="3">
+                            <input type="file" name="news_thumbnail_img" value="">
+                        </td>
+                    </c:otherwise>
+                </c:choose>
+            </tr>
+            <tr>
+                <th>뉴스 사진</th>
+                <c:choose>
+                    <c:when test="${dto.news_img != null}">
+                        <td colspan="3">
+                            <input type="button" value="파일삭제" onclick="deleteNewsImg('뉴스사진삭제')"/>
                             <input type="hidden" name="news_img" value="${dto.news_img}">
                             <img src="<c:url value="/img/news/${dto.news_img}"/>"/>
-                    </td>
-                        </c:when>
-                        <c:otherwise>
-                            <td colspan="3">
-                                <input type="file" name="news_img" value="">
-                            </td>
-                        </c:otherwise>
-                    </c:choose>
-                </tr>
+                        </td>
+                    </c:when>
+                    <c:otherwise>
+                        <td colspan="3">
+                            <input type="file" name="news_img" value="">
+                        </td>
+                    </c:otherwise>
+                </c:choose>
+            </tr>
 
-                <tr>
-                    <td>내용</td>
-                    <td colspan="3"><textarea name="news_content" cols="50" rows="10">${dto.news_content}</textarea></td>
-                </tr>
-                <tr>
-                    <td colspan="4"><input type="submit" value="등록"></td>
-                </tr>
-            </table>
-        </form>
-    </div>
+            <tr>
+                <td>내용</td>
+                <td colspan="3"><textarea name="news_content" cols="50" rows="10">${dto.news_content}</textarea></td>
+            </tr>
+            <tr>
+                <td colspan="4"><input type="submit" value="등록"></td>
+            </tr>
+        </table>
+    </form>
 </div>
 
 <script type="text/javascript">
 
-        function deleteNewsImg(pp) {
-            $(".admin-modify-form").attr("action", "AdminNewsImgDelete?type="+pp);
-            $(".admin-modify-form").submit();
+    function deleteNewsImg(pp) {
+        $(".admin-modify-form").attr("action", "AdminNewsImgDelete?type=" + pp);
+        $(".admin-modify-form").submit();
+    }
+
+    function deleteThumbNailNewsImg(pp) {
+        $(".admin-modify-form").attr("action", "AdminNewsImgThumbNailDelete?type=" + pp);
+        $(".admin-modify-form").submit();
+    }
+
+    function check() {
+        const f = document.myform;
+        if (f.news_title.value.trim() == "") {
+            alert("빈칸을 입력해주세요");
+            f.news_title.focus();
+            return false;
         }
 
-        function deleteThumbNailNewsImg(pp) {
-            $(".admin-modify-form").attr("action", "AdminNewsImgThumbNailDelete?type="+pp);
-            $(".admin-modify-form").submit();
+        if (f.news_thumbnail_img.value == "") {
+            alert("파일 선택을 해주세요");
+            f.news_thumbnail_img.focus();
+            return false;
+        }
+        if (f.news_img.value == "") {
+            alert("파일 선택을 해주세요");
+            f.news_img.focus();
+            return false;
+        }
+        if (f.news_content.value.trim() == "") {
+            alert("빈칸을 입력해주세요");
+            f.news_content.focus();
+            return false;
         }
 
-        function check(){
-            const f = document.myform;
-            if(f.news_title.value.trim() == ""){
-                alert("빈칸을 입력해주세요");
-                f.news_title.focus();
-                return false;
-            }
-
-            if(f.news_thumbnail_img.value == ""){
-                alert("파일 선택을 해주세요");
-                f.news_thumbnail_img.focus();
-                return false;
-            }
-            if(f.news_img.value == ""){
-                alert("파일 선택을 해주세요");
-                f.news_img.focus();
-                return false;
-            }
-            if(f.news_content.value.trim() == ""){
-                alert("빈칸을 입력해주세요");
-                f.news_content.focus();
-                return false;
-            }
-
-        }
+    }
 </script>

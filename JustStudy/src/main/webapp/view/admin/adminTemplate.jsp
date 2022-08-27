@@ -19,12 +19,12 @@
     <script type="text/javascript" src="<c:url value="/jquery/"/>jquery-ui.min.js"></script>
 
     <style type="text/css">
-
+/*
         body {
             min-width: 100vw;
             height: 100%;
             overflow: hidden;
-        }
+        }*/
 
         * {
             margin: 0;

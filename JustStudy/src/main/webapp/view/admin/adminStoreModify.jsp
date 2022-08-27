@@ -16,38 +16,10 @@
 
 <style type="text/css">
 
-    .admin-store-modify-bg{
-        width: 100%;
-        height: 100%;
-    }
-
-    #headline {
-        width: 100%;
-        height: 50px;
-        background: #fff;
-        border-bottom: 1px solid rgb(184, 177, 177);
-        padding-left: 20px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    #headline > b {
-        width: fit-content;
-        font-size: 20px;
-        line-height: 50px;
-    }
-
-    #headline > input {
-        margin-right: 10px;
-    }
-
     #main {
-        width: 1100px;
-        height: 100%;
+        width: 100%;
+        height: fit-content;
         padding: 20px 20px;
-        overflow: auto;
     }
 
     .admin-store-modify-table {
@@ -157,139 +129,129 @@
 <%
     BranchDTO branchDTO = (BranchDTO) request.getAttribute("branchDTO");
 %>
-
-<div class="admin-store-modify-bg">
-    <div id="headline">
-        <b>지점관리 > 지점 수정</b>
-        <input type="button" class="admin-store-list" value="목록으로">
-        <input type="button" class="admin-store-save" value="저장">
-    </div>
-
-
-    <div id="main">
-        <form action="AdminStoreModifyReg" method="post" enctype="multipart/form-data" class="admin-store-modify-form">
-            <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-store-modify-table">
-                <tr>
-                    <th>지역</th>
-                    <td><input type="text" name="cityName" value="<%=branchDTO.getCity()%>" readonly/></td>
-                </tr>
-                <tr>
-                    <th>지점명</th>
-                    <td><input type="text" name="branchName" value="<%=branchDTO.getName()%>" readonly/></td>
-                </tr>
-                <tr>
-                    <th>룸타입</th>
-                    <td>
+<div id="main">
+    <form action="AdminStoreModifyReg" method="post" enctype="multipart/form-data" class="admin-store-modify-form">
+        <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-store-modify-table">
+            <tr>
+                <th>지역</th>
+                <td><input type="text" name="cityName" value="<%=branchDTO.getCity()%>" readonly/></td>
+            </tr>
+            <tr>
+                <th>지점명</th>
+                <td><input type="text" name="branchName" value="<%=branchDTO.getName()%>" readonly/></td>
+            </tr>
+            <tr>
+                <th>룸타입</th>
+                <td>
+                    <%
+                        for (String room : "4인실,6인실,8인실,대회의실".split(",")) { %>
+                    <div>
+                        <%if (branchDTO.getRooms().contains(room)) {%>
+                        <input type="checkbox" name="roomType" value="<%=room%>" checked/>
+                        <%} else {%>
+                        <input type="checkbox" name="roomType" value="<%=room%>"/>
+                        <%}%>
                         <%
-                            for (String room : "4인실,6인실,8인실,대회의실".split(",")) { %>
-                        <div>
-                            <%if (branchDTO.getRooms().contains(room)) {%>
-                            <input type="checkbox" name="roomType" value="<%=room%>" checked/>
-                            <%} else {%>
-                            <input type="checkbox" name="roomType" value="<%=room%>"/>
-                            <%}%>
-                            <%
-                                int cnt = 0;
-                                if (!branchDTO.getRooms().equals("")) {
-                                    for (String dtoRoom : branchDTO.getRooms().split(",")) {
-                                        if (dtoRoom.contains(room)) {
-                                            cnt++;
-                                        }
+                            int cnt = 0;
+                            if (!branchDTO.getRooms().equals("")) {
+                                for (String dtoRoom : branchDTO.getRooms().split(",")) {
+                                    if (dtoRoom.contains(room)) {
+                                        cnt++;
                                     }
                                 }
-                            %>
-                            <div><%=room%>
-                            </div>
-                            <%if (branchDTO.getRooms().contains(room)) {%>
-                            <input type="button" name="roomMinus" value="-"/>
-                            <input type="text" name="roomNum" value="<%=cnt%>" readonly>
-                            <input type="button" name="roomPlus" value="+"/>
-                            <%} else {%>
-                            <input type="button" name="roomMinus" value="-" disabled/>
-                            <input type="text" name="roomNum" value="<%=cnt%>" disabled readonly>
-                            <input type="button" name="roomPlus" value="+" disabled/>
-                            <%}%>
-
+                            }
+                        %>
+                        <div><%=room%>
                         </div>
-
+                        <%if (branchDTO.getRooms().contains(room)) {%>
+                        <input type="button" name="roomMinus" value="-"/>
+                        <input type="text" name="roomNum" value="<%=cnt%>" readonly>
+                        <input type="button" name="roomPlus" value="+"/>
+                        <%} else {%>
+                        <input type="button" name="roomMinus" value="-" disabled/>
+                        <input type="text" name="roomNum" value="<%=cnt%>" disabled readonly>
+                        <input type="button" name="roomPlus" value="+" disabled/>
                         <%}%>
 
-                    </td>
-                </tr>
-                <tr>
-                    <th>이용요금<br/>(1시간)</th>
-                    <td><input type="text" name="price" value="<%=branchDTO.getPrice()%>"/>원</td>
-                </tr>
-                <tr>
-                    <th>운영 시간</th>
-                    <td>
-                        <select name="open">
-                            <c:forEach var="i" begin="0" end="24" step="1">
-                                <c:if test="${branchDTO.open == i}">
-                                    <option selected>${i}</option>
-                                </c:if>
-                                <option>${i}</option>
-                            </c:forEach>
-                        </select>
-                        :00 ~
-                        <select name="close">
-                            <c:forEach var="i" begin="0" end="24" step="1">
-                                <c:if test="${branchDTO.close == i}">
-                                    <option selected>${i}</option>
-                                </c:if>
-                                <option>${i}</option>
-                            </c:forEach>
-                        </select>
-                        :00
-                    </td>
-                </tr>
-                <tr>
-                    <th>매장 주소</th>
-                    <td><input type="text" id="input-address1" name="address" readonly
-                               value="<%=branchDTO.getAddress() != null ? branchDTO.getAddress() : ""%>"/>
-                        <input type="button" name="address-search" onclick="gofindAddress()" value="검색"/></td>
-                </tr>
-                <tr>
-                    <th>상세 주소</th>
-                    <td><input type="text" id="input-address2" name="addressDetail"
-                               value="<%=branchDTO.getAddressDetail() != null ? branchDTO.getAddressDetail() : ""%>"/>
-                    </td>
-                </tr>
-                <tr>
-                    <th>전화번호</th>
-                    <td><input type="text" name="phone"
-                               value="<%=branchDTO.getPhone() != null ? branchDTO.getPhone() : ""%>"/></td>
-                </tr>
-                <tr>
-                    <th>매장 사진</th>
-                    <%if (!branchDTO.getImg().equals("")) {%>
-                    <td>
-                        <%=branchDTO.getImg()%>
-                        <input type="button" value="파일 삭제" class="imgDelete"/>
-                        <input type="hidden" name="img" value="<%=branchDTO.getImg()%>"/>
-                    </td>
-                    <%} else {%>
-                    <td><input type="file" name="img"></td>
+                    </div>
+
                     <%}%>
 
-                </tr>
-                <tr>
-                    <th>편의 시설</th>
-                    <td>
-                        <%for (String facility : "정수기,휴게실,흡연실,프린터,빔프로젝터,컴퓨터,주차,와이파이".split(",")) {%>
-                        <%if (branchDTO.getFacilities().contains(facility)) {%>
-                        <div><input type="checkbox" name="facilities" value="<%=facility%>" checked><%=facility%>
-                        </div>
-                        <%} else {%>
-                        <div><input type="checkbox" name="facilities" value="<%=facility%>"><%=facility%>
-                        </div>
-                        <%}%>
-                        <%}%>
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>이용요금<br/>(1시간)</th>
+                <td><input type="text" name="price" value="<%=branchDTO.getPrice()%>"/>원</td>
+            </tr>
+            <tr>
+                <th>운영 시간</th>
+                <td>
+                    <select name="open">
+                        <c:forEach var="i" begin="0" end="24" step="1">
+                            <c:if test="${branchDTO.open == i}">
+                                <option selected>${i}</option>
+                            </c:if>
+                            <option>${i}</option>
+                        </c:forEach>
+                    </select>
+                    :00 ~
+                    <select name="close">
+                        <c:forEach var="i" begin="0" end="24" step="1">
+                            <c:if test="${branchDTO.close == i}">
+                                <option selected>${i}</option>
+                            </c:if>
+                            <option>${i}</option>
+                        </c:forEach>
+                    </select>
+                    :00
+                </td>
+            </tr>
+            <tr>
+                <th>매장 주소</th>
+                <td><input type="text" id="input-address1" name="address" readonly
+                           value="<%=branchDTO.getAddress() != null ? branchDTO.getAddress() : ""%>"/>
+                    <input type="button" name="address-search" onclick="gofindAddress()" value="검색"/></td>
+            </tr>
+            <tr>
+                <th>상세 주소</th>
+                <td><input type="text" id="input-address2" name="addressDetail"
+                           value="<%=branchDTO.getAddressDetail() != null ? branchDTO.getAddressDetail() : ""%>"/>
+                </td>
+            </tr>
+            <tr>
+                <th>전화번호</th>
+                <td><input type="text" name="phone"
+                           value="<%=branchDTO.getPhone() != null ? branchDTO.getPhone() : ""%>"/></td>
+            </tr>
+            <tr>
+                <th>매장 사진</th>
+                <%if (!branchDTO.getImg().equals("")) {%>
+                <td>
+                    <%=branchDTO.getImg()%>
+                    <input type="button" value="파일 삭제" class="imgDelete"/>
+                    <input type="hidden" name="img" value="<%=branchDTO.getImg()%>"/>
+                </td>
+                <%} else {%>
+                <td><input type="file" name="img"></td>
+                <%}%>
+
+            </tr>
+            <tr>
+                <th>편의 시설</th>
+                <td>
+                    <%for (String facility : "정수기,휴게실,흡연실,프린터,빔프로젝터,컴퓨터,주차,와이파이".split(",")) {%>
+                    <%if (branchDTO.getFacilities().contains(facility)) {%>
+                    <div><input type="checkbox" name="facilities" value="<%=facility%>" checked><%=facility%>
+                    </div>
+                    <%} else {%>
+                    <div><input type="checkbox" name="facilities" value="<%=facility%>"><%=facility%>
+                    </div>
+                    <%}%>
+                    <%}%>
+                </td>
+            </tr>
+        </table>
+    </form>
 </div>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

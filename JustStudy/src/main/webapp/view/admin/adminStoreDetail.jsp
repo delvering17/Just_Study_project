@@ -9,38 +9,10 @@
 
 <style type="text/css">
 
-   .admin-store-detail-bg{
-     width: 100%;
-     height: 100%;
-   }
-
-    #headline {
-      width: 100%;
-      height: 50px;
-      background: #fff;
-      border-bottom: 1px solid rgb(184, 177, 177);
-      padding-left: 20px;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    #headline > b {
-      width: fit-content;
-      font-size: 20px;
-      line-height: 50px;
-    }
-
-    #headline > div > input {
-      margin-right: 10px;
-    }
-
     #main {
-        width: 1100px;
-      height: 100%;
-      padding: 20px 20px;
-      overflow: auto;
+        width: 100%;
+        height: fit-content;
+        padding: 20px 20px;
     }
 
     .admin-store-detail-table {
@@ -86,75 +58,63 @@
 <%
     BranchDTO branchDTO = (BranchDTO) request.getAttribute("branchDTO");
 %>
-
-<div class="admin-store-detail-bg">
-    <div id="headline">
-        <b>지점 목록 > 지점 상세보기</b>
-      <div>
-        <input type="button" class="admin-store-modify" value="수정">
-        <input type="button" class="admin-store-delete" value="삭제">
-        <input type="button" class="admin-store-list" value="목록으로">
-      </div>
-    </div>
-
-    <div id="main">
-        <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-store-detail-table">
-            <tr>
-                <th>지역</th>
-                <td><%=branchDTO.getCity()%>
-                </td>
-            </tr>
-            <tr>
-                <th>지점명</th>
-                <td><%=branchDTO.getName()%>
-                </td>
-            </tr>
-            <tr>
-                <th>룸타입</th>
-                <td><%=branchDTO.getRooms().replaceAll(",", "</br>")%>
-                </td>
-            </tr>
-            <tr>
-                <th>이용요금<br/>(1시간)</th>
-                <td><%=branchDTO.getPrice()%>원</td>
-            </tr>
-            <tr>
-                <th>운영 시간</th>
-                <td>
-                    <%
-                        String openTime = (branchDTO.getOpen() > 9 ? "" : "0") + branchDTO.getOpen() + ":00";
-                        String closeTime = (branchDTO.getClose() > 9 ? "" : "0") + branchDTO.getClose() + ":00";
-                    %>
-                    <%=openTime%> ~ <%=closeTime%>
-                </td>
-            </tr>
-            <tr>
-                <th>매장 주소</th>
-                <td><%=branchDTO.getAddress()%>
-                </td>
-            </tr>
-            <tr>
-                <th>상세 주소</th>
-                <td><%=branchDTO.getAddressDetail()%>
-                </td>
-            </tr>
-            <tr>
-                <th>전화번호</th>
-                <td><%=branchDTO.getPhone()%>
-                </td>
-            </tr>
-            <tr>
-                <th>매장 사진</th>
-                <td><%=branchDTO.getImg()%>
-                </td>
-            </tr>
-            <tr>
-                <th>편의 시설</th>
-                <td><%=branchDTO.getFacilities().replaceAll(",", "</br>")%>
-                </td>
-            </tr>
-        </table>
-    </div>
+<div id="main">
+    <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-store-detail-table">
+        <tr>
+            <th>지역</th>
+            <td><%=branchDTO.getCity()%>
+            </td>
+        </tr>
+        <tr>
+            <th>지점명</th>
+            <td><%=branchDTO.getName()%>
+            </td>
+        </tr>
+        <tr>
+            <th>룸타입</th>
+            <td><%=branchDTO.getRooms().replaceAll(",", "</br>")%>
+            </td>
+        </tr>
+        <tr>
+            <th>이용요금<br/>(1시간)</th>
+            <td><%=branchDTO.getPrice()%>원</td>
+        </tr>
+        <tr>
+            <th>운영 시간</th>
+            <td>
+                <%
+                    String openTime = (branchDTO.getOpen() > 9 ? "" : "0") + branchDTO.getOpen() + ":00";
+                    String closeTime = (branchDTO.getClose() > 9 ? "" : "0") + branchDTO.getClose() + ":00";
+                %>
+                <%=openTime%> ~ <%=closeTime%>
+            </td>
+        </tr>
+        <tr>
+            <th>매장 주소</th>
+            <td><%=branchDTO.getAddress()%>
+            </td>
+        </tr>
+        <tr>
+            <th>상세 주소</th>
+            <td><%=branchDTO.getAddressDetail()%>
+            </td>
+        </tr>
+        <tr>
+            <th>전화번호</th>
+            <td><%=branchDTO.getPhone()%>
+            </td>
+        </tr>
+        <tr>
+            <th>매장 사진</th>
+            <td><%=branchDTO.getImg()%>
+            </td>
+        </tr>
+        <tr>
+            <th>편의 시설</th>
+            <td><%=branchDTO.getFacilities().replaceAll(",", "</br>")%>
+            </td>
+        </tr>
+    </table>
 </div>
 
 <script type="text/javascript">

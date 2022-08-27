@@ -197,7 +197,25 @@ public class EventDAO {
         return 0;
     }
 
+    public int contentDelete(EventDTO eventDTO){
 
+        sql = "update eventpp set content = ? where id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, null);
+            ptmt.setInt(2, eventDTO.getId());
+
+            return ptmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return 0;
+    }
     public void close() {
         if(rs!=null) try {rs.close();} catch (SQLException e) {}
         if(ptmt!=null) try { ptmt.close();} catch (SQLException e) {}

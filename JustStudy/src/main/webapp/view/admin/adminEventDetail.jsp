@@ -179,7 +179,7 @@
                             <input type="file" name="img">
                         </c:when>
                         <c:otherwise>
-                            <input type="button" value="파일 삭제" id="imgDelete" onclick="deleteFile()"/>
+                            <input type="button" value="파일 삭제" id="imgDelete" onclick="deleteImgFile()"/>
                             <input type="hidden" name="img" value="${eventDTO.img}"/>
                             <img src="<c:url value="/img/event/${eventDTO.img}"/> ">
                         </c:otherwise>
@@ -194,7 +194,7 @@
                             <input type="file" name="content">
                         </c:when>
                         <c:otherwise>
-                            <input type="button" value="파일 삭제" id="imgDelete" onclick="deleteFile()"/>
+                            <input type="button" value="파일 삭제" id="imgDelete" onclick="deleteContentFile()"/>
                             <input type="hidden" name="content" value="${eventDTO.img}"/>
                             <img src="<c:url value="/img/event/${eventDTO.img}"/> ">
                         </c:otherwise>
@@ -215,9 +215,17 @@
 </div>
 
 <script type="text/javascript">
-    function deleteFile() {
+    function deleteContentFile() {
         if(confirm("이미지 파일을 삭제하시겠습니까?")){
             $("#event-detail-form").attr("action", "AdminEventImgDelete")
+
+            $("#event-detail-form").submit()
+        }
+    }
+
+    function deleteImgFile() {
+        if(confirm("이미지 파일을 삭제하시겠습니까?")){
+            $("#event-detail-form").attr("action", "AdminEventContentDelete")
 
             $("#event-detail-form").submit()
         }

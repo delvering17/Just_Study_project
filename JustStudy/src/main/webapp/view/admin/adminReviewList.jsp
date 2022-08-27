@@ -18,9 +18,11 @@
     }
 
     .admin-store-review-table {
-        width: 1000px;
+        width: 1111px;
         border: 1px solid rgb(122, 115, 115);
         margin-top: 10px;
+        table-layout: fixed;
+        word-break: break-all;
     }
 
     .admin-store-review-table th {
@@ -37,22 +39,25 @@
 
     .admin-store-review-table th:nth-of-type(1),
     .admin-store-review-table th:nth-of-type(2) {
-        width: 5%;
+        width: 50px;
     }
 
     .admin-store-review-table th:nth-of-type(3),
+    .admin-store-review-table th:nth-of-type(4){
+        width: 130px;
+    }
     .admin-store-review-table th:nth-of-type(11) {
-        width: 17%;
+        width: 150px;
     }
 
-    .admin-store-review-table th:nth-of-type(4),
+
     .admin-store-review-table th:nth-of-type(5),
     .admin-store-review-table th:nth-of-type(6),
     .admin-store-review-table th:nth-of-type(7),
     .admin-store-review-table th:nth-of-type(8),
     .admin-store-review-table th:nth-of-type(9),
     .admin-store-review-table th:nth-of-type(10) {
-        width: 8%;
+        width: 100px;
     }
 
 
@@ -95,7 +100,7 @@
                 <th>사용자ID</th>
                 <th>사용자이름</th>
                 <th>지역</th>
-                <th>지점</th>
+                <th>지점명</th>
                 <th>룸타입</th>
                 <th>이용일자</th>
                 <th>시간</th>
@@ -141,6 +146,9 @@
     </div>
 
 <script type="text/javascript">
+    $(".admin-template-header>b").html("이용 후기")
+
+
     $(".admin-store-review-search").click(function () {
         if ($("input[name=word]").val().trim() == "") {
             alert("검색어를 입력해주세요.")

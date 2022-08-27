@@ -162,23 +162,23 @@
             f.enddate.focus();
             return false;
         }
-        if (f.title.value == "") {
+        if (f.title.value.trim() == "") {
             alert("빈칸을 입력해주세요");
             f.title.focus();
             return false;
         }
-        if (f.people.value == "") {
+        if (f.people.value.trim() == "") {
             alert("빈칸을 입력해주세요");
             f.people.focus();
             return false;
         }
 
-        if (f.content.value == "") {
+        if (f.content.value.trim() == "") {
             alert("빈칸을 입력해주세요");
             f.content.focus();
             return false;
         }
-        if (f.openChatting.value == "") {
+        if (f.openChatting.value.trim() == "") {
             alert("빈칸을 입력해주세요");
             f.openChatting.focus();
             return false;

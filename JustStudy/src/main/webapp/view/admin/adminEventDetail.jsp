@@ -233,7 +233,7 @@
 
     function check() {
         const f = document.myform;
-        if (f.title.value == "") {
+        if (f.title.value.trim() == "") {
             alert("빈칸을 입력해주세요");
             f.title.focus();
             return false;

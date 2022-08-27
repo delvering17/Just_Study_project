@@ -12,32 +12,32 @@
 <style type="text/css">
   .admin-faq-modify-bg{
     width: 100%;
-    height: fit-content;
+    height: 100%;
   }
 
   .admin-faq-modify-headline {
-    width: 1330px;
-    height: 40px;
+    width: 100%;
+    height: 50px;
     background: #fff;
     border-bottom: 1px solid rgb(184, 177, 177);
-    padding-top: 15px;
     padding-left: 20px;
-    margin-top: 50px;
-    margin-left: 239px;
-    position: fixed;
+    display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .admin-faq-modify-headline > b {
-    width: 100px;
+    width: fit-content;
     font-size: 20px;
+    line-height: 50px;
   }
 
   .admin-faq-modify-main {
-    width: 2000px;
-    height: fit-content;
-    margin: 0px 0px 0px 220px;
-    padding: 120px 20px 20px 40px;
+    width: 100%;
+    height: 100%;
+    padding: 20px 20px;
+    overflow: auto;
   }
 
   .admin-faq-modify-table {

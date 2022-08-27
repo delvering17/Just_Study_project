@@ -16,40 +16,38 @@
       integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
       crossorigin="anonymous" referrerpolicy="no-referrer"/>
 <style>
-    * {
-        margin: 0;
-        padding: 0;
+    .admin-event-list-bg {
+        width: 100%;
+        height: 100%;
     }
 
     #headline {
-        width: 1330px;
-        height: 40px;
+        width: 100%;
+        height: 50px;
         background: #fff;
         border-bottom: 1px solid rgb(184, 177, 177);
-        padding-top: 15px;
         padding-left: 20px;
-        margin-top: 50px;
-        margin-left: 239px;
-        position: fixed;
+        display: flex;
         flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
     }
 
     #headline > b {
-        width: 100px;
+        width: fit-content;
         font-size: 20px;
+        line-height: 50px;
     }
 
     #headline > input {
-        float: right;
-        margin: 0px 10px 50px 0px;
-
+        margin-right: 10px;
     }
 
     #main {
-        width: 2000px;
-        height: 2000px;
-        margin: 0px 0px 0px 220px;
-        padding: 120px 20px 20px 40px;
+        width: 100%;
+        height: 100%;
+        padding: 20px 20px;
+        overflow: auto;
     }
 
     #main > div:first-of-type > input[type=button] {
@@ -131,7 +129,7 @@
 </style>
 
 
-<div class="wrapper">
+<div class="admin-event-list-bg">
 
     <div id="headline">
         <b>이벤트 관리</b>
@@ -159,7 +157,7 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(".admin-event-insert").click(function (){
+    $(".admin-event-insert").click(function () {
         location.href = "AdminEventInsertForm"
     })
 

@@ -9,72 +9,65 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script type="text/javascript">
-  $("#r2").attr("checked", true)
+    $("#r2").attr("checked", true)
 </script>
 <style>
-  *{
-    margin: 0;
-    padding: 0;
+  .admin-blacklist-bg{
+    width: 100%;
+    height: 100%;
   }
+    #headline {
+      width: 100%;
+      height: 50px;
+      background: #fff;
+      border-bottom: 1px solid rgb(184, 177, 177);
+      padding-left: 20px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-  #headline{
-    width: 1330px;
-    height: 40px;
-    background: #fff;
-    border-bottom: 1px solid rgb(184, 177, 177);
-    padding-top: 15px;
-    padding-left: 20px;
-    margin-top: 50px;
-    margin-left: 239px;
-    position: fixed;
-    flex-direction: row;
+    #headline > b {
+      width: fit-content;
+      font-size: 20px;
+      line-height: 50px;
+    }
 
-  }
-
-  #headline > b{
-    width: 100px;
-    font-size: 20px;
-  }
-
-  #headline > input{
-    float: right;
-    margin: 0px 10px 50px 0px;
-
-  }
-
-  #main{
-    width: 2000px;
-    height: 2000px;
-    margin: 0px 0px 0px 220px;
-    padding: 120px 20px 20px 40px;
-  }
+    #main {
+      width: 100%;
+      height: 100%;
+      padding: 20px 20px;
+      overflow: auto;
+    }
 </style>
 
-<div id="headline">
-  <b>블랙리스트 관리</b>
-</div>
-  <div id="main">
-    <table border="" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
-      <tr>
-        <th>회원번호</th>
-        <th>이메일</th>
-        <th>사유</th>
-        <th>관리</th>
-      </tr>
+<div class="admin-blacklist-bg">
+    <div id="headline">
+        <b>블랙리스트 관리</b>
+    </div>
+    <div id="main">
+        <table border="" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+            <tr>
+                <th>회원번호</th>
+                <th>이메일</th>
+                <th>사유</th>
+                <th>관리</th>
+            </tr>
 
-      <c:forEach items="${blackData}" var="i">
-        <tr>
-          <form action="" method="">
-            <th><input type="hidden" name="user" value="${i.black_id}">${i.black_id}</th>
-            <td>${i.mem_userid}</td>
-            <td>${i.black_reason}</td>
-            <td>
-              <button formaction="AdminBlackListDelete" formmethod="get">삭제</button>
-            </td>
-          </form>
-        </tr>
-      </c:forEach>
+            <c:forEach items="${blackData}" var="i">
+                <tr>
+                    <form action="" method="">
+                        <th><input type="hidden" name="user" value="${i.black_id}">${i.black_id}</th>
+                        <td>${i.mem_userid}</td>
+                        <td>${i.black_reason}</td>
+                        <td>
+                            <button formaction="AdminBlackListDelete" formmethod="get">삭제</button>
+                        </td>
+                    </form>
+                </tr>
+            </c:forEach>
 
-    </table>
-  </div>
+        </table>
+    </div>
 </div>

@@ -13,32 +13,36 @@
 <style type="text/css">
     .admin-faq-list-bg{
         width: 100%;
-        height: fit-content;
+        height: 100%;
     }
 
     .admin-faq-list-headline {
-        width: 1330px;
-        height: 40px;
+        width: 100%;
+        height: 50px;
         background: #fff;
         border-bottom: 1px solid rgb(184, 177, 177);
-        padding-top: 15px;
         padding-left: 20px;
-        margin-top: 50px;
-        margin-left: 239px;
-        position: fixed;
+        display: flex;
         flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .admin-faq-list-headline > b {
-        width: 100px;
+        width: fit-content;
         font-size: 20px;
+        line-height: 50px;
+    }
+
+    .admin-faq-list-headline > input {
+        margin-right: 10px;
     }
 
     .admin-faq-list-main {
-        width: 2000px;
-        height: fit-content;
-        margin: 0px 0px 0px 220px;
-        padding: 120px 20px 20px 40px;
+        width: 100%;
+        height: 100%;
+        padding: 20px 20px;
+        overflow: auto;
     }
 
     .admin-faq-list-main > div{
@@ -91,6 +95,7 @@
 
     <div class="admin-faq-list-headline">
         <b>FAQ</b>
+        <input type="button" class="admin-faq-insert" value="추가"/>
     </div>
 
     <div class="admin-faq-list-main">
@@ -104,7 +109,6 @@
                 </select>
                 <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
-            <button class="admin-faq-insert">추가</button>
         </div>
 
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-faq-list-table">

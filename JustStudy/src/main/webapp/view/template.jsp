@@ -23,6 +23,10 @@
     header {
         position: relative;
     }
+    .menu-side {
+        height: 100px;
+        background: #0dcaf0;
+    }
 </style>
 <head>
     <title>template</title>
@@ -46,6 +50,7 @@
 
 <jsp:include page="inc/header-test.jsp"/>
 </header>
+<div class="menu-side"></div>
 <%--    <jsp:include page="view/mypage/template.jsp"/>--%>
 <main>
 <jsp:include page="${mainUrl}"/>

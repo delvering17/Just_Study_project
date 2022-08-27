@@ -15,13 +15,13 @@ public class AdminFAQModifyReg implements AdminService{
         String question = request.getParameter("faq-question");
         String answer = request.getParameter("faq-answer");
 
-        if(question.equals("")){
+        if((question.trim()).equals("")){
             String msg = "질문을 적어주세요";
             request.setAttribute("adminUrl","alert.jsp");
             request.setAttribute("msg", msg);
             request.setAttribute("goUrl", "AdminFAQModifyDelete?faqId="+faq_id+"&type=수정");
 
-        }else if(answer.equals("")){
+        }else if((answer.trim()).equals("")){
             String msg = "답변을 적어주세요";
             request.setAttribute("adminUrl","alert.jsp");
             request.setAttribute("msg", msg);

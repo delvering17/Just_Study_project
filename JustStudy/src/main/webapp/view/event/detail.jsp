@@ -156,9 +156,6 @@
 
 
 <div class="event-list-area">
-    <div id="event-img">
-        <img id="event-fileup-img" src="<c:url value="/img/event/" />${dto.img}" alt="">
-    </div>
     <div id="event-content">
         <img  src="<c:url value="/img/event/" />${dto.content}" alt="">
 

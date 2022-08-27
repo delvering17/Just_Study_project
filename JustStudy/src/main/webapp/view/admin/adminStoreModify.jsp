@@ -15,35 +15,39 @@
 </script>
 
 <style type="text/css">
+
+    .admin-store-modify-bg{
+        width: 100%;
+        height: 100%;
+    }
+
     #headline {
-        width: 1330px;
-        height: 40px;
+        width: 100%;
+        height: 50px;
         background: #fff;
         border-bottom: 1px solid rgb(184, 177, 177);
-        padding-top: 15px;
         padding-left: 20px;
-        margin-top: 50px;
-        margin-left: 239px;
-        position: fixed;
+        display: flex;
         flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
     }
 
     #headline > b {
-        width: 100px;
+        width: fit-content;
         font-size: 20px;
+        line-height: 50px;
     }
 
     #headline > input {
-        float: right;
-        margin: 0px 10px 50px 0px;
-
+        margin-right: 10px;
     }
 
     #main {
         width: 1100px;
-        height: 2000px;
-        margin: 0px 0px 0px 220px;
-        padding: 120px 20px 20px 40px;
+        height: 100%;
+        padding: 20px 20px;
+        overflow: auto;
     }
 
     .admin-store-modify-table {

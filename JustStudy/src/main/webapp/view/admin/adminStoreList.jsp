@@ -8,38 +8,11 @@
       crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
 <style>
-    .admin-store-list-bg {
-        width: 100%;
-        height: 100%;
-    }
-
-    .admin-store-list-headline {
-        width: 100%;
-        height: 50px;
-        background: #fff;
-        border-bottom: 1px solid rgb(184, 177, 177);
-        padding-left: 20px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .admin-store-list-headline > b {
-        width: fit-content;
-        font-size: 20px;
-        line-height: 50px;
-    }
-
-    .admin-store-list-headline > input {
-        margin-right: 10px;
-    }
 
     .admin-store-list-main {
-        width: 1100px;
-        height: 100%;
+        width: 100%;
+        height: fit-content;
         padding: 20px 20px;
-        overflow: auto;
     }
 
     .admin-store-list-table {
@@ -77,97 +50,88 @@
     }
 </style>
 
+<div class="admin-store-list-main">
 
-<div class="admin-store-list-bg">
+    <form action="AdminStoreList" class="admin-store-search-form">
+        <div>
+            <select name="filter">
+                <option value="city">지역</option>
+                <option value="name">지점명</option>
+                <option value="rooms">룸타입</option>
+                <option value="price">이용요금</option>
+                <option value="address">매장주소</option>
+                <option value="addressDetail">상세주소</option>
+                <option value="phone">전화번호</option>
+                <option value="facilities">편의시설</option>
+            </select>
+            <input type="text" name="word">
+            <button type="button" class="admin-store-list-search"><i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </div>
+    </form>
 
-    <div class="admin-store-list-headline">
-        <b>지점 목록</b>
-        <input type="button" class="admin-store-insert" value="지점추가">
-    </div>
+    <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-store-list-table">
+        <tr>
+            <th>지역</th>
+            <th>지점명</th>
+            <th>룸타입</th>
+            <th>이용요금(1시간)</th>
+            <th>운영 시간</th>
+            <th>매장 주소</th>
+            <th>상세 주소</th>
+            <th>전화번호</th>
+            <th>편의 시설</th>
+        </tr>
 
-    <div class="admin-store-list-main">
+        <%
+            LinkedHashMap<String, Integer> branchMap = (LinkedHashMap<String, Integer>) request.getAttribute("branchMap");
+            ArrayList<BranchDTO> branchList = (ArrayList<BranchDTO>) request.getAttribute("branchList");
 
-        <form action="AdminStoreList" class="admin-store-search-form">
-            <div>
-                <select name="filter">
-                    <option value="city">지역</option>
-                    <option value="name">지점명</option>
-                    <option value="rooms">룸타입</option>
-                    <option value="price">이용요금</option>
-                    <option value="address">매장주소</option>
-                    <option value="addressDetail">상세주소</option>
-                    <option value="phone">전화번호</option>
-                    <option value="facilities">편의시설</option>
-                </select>
-                <input type="text" name="word">
-                <button type="button" class="admin-store-list-search"><i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </div>
-        </form>
-
-        <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-store-list-table">
-            <tr>
-                <th>지역</th>
-                <th>지점명</th>
-                <th>룸타입</th>
-                <th>이용요금(1시간)</th>
-                <th>운영 시간</th>
-                <th>매장 주소</th>
-                <th>상세 주소</th>
-                <th>전화번호</th>
-                <th>편의 시설</th>
-            </tr>
-
-            <%
-                LinkedHashMap<String, Integer> branchMap = (LinkedHashMap<String, Integer>) request.getAttribute("branchMap");
-                ArrayList<BranchDTO> branchList = (ArrayList<BranchDTO>) request.getAttribute("branchList");
-
-                if (branchList.size() != 0) {
-                    for (String city : branchMap.keySet()) {
-                        if (branchMap.get(city) != 0) {%>
-            <tr>
-                <td rowspan="<%=branchMap.get(city) +1%>"><%=city%>
-                </td>
-            </tr>
-            <%
-                for (BranchDTO branchDTO : branchList) {
-                    if (city.equals(branchDTO.getCity())) {
-            %>
-            <tr class="branch">
-                <td><a href="AdminStoreDetail?branchName=<%=branchDTO.getName()%>"><%=branchDTO.getName()%>
-                </a></td>
-                <td><%=(branchDTO.getRooms() != null ? branchDTO.getRooms().replaceAll(",", "<br/>") : "")%>
-                </td>
-                <td><%=branchDTO.getPrice()%>
-                </td>
-                <td>
-                    <%
-                        String openTime = (branchDTO.getOpen() > 9 ? "" : "0") + branchDTO.getOpen() + ":00";
-                        String closeTime = (branchDTO.getClose() > 9 ? "" : "0") + branchDTO.getClose() + ":00";
-                    %>
-                    <%=openTime%> ~ <%=closeTime%>
-                </td>
-                <td><%=(branchDTO.getAddress() != null ? branchDTO.getAddress() : "")%>
-                </td>
-                <td><%=(branchDTO.getAddressDetail() != null ? branchDTO.getAddressDetail() : "")%>
-                </td>
-                <td><%=(branchDTO.getPhone() != null ? branchDTO.getPhone() : "")%>
-                </td>
-                <td><%=(branchDTO.getFacilities() != null ? branchDTO.getFacilities().replaceAll(",", "<br/>") : "")%>
-                </td>
-            </tr>
-            <%
-                                }
-                            }
+            if (branchList.size() != 0) {
+                for (String city : branchMap.keySet()) {
+                    if (branchMap.get(city) != 0) {%>
+        <tr>
+            <td rowspan="<%=branchMap.get(city) +1%>"><%=city%>
+            </td>
+        </tr>
+        <%
+            for (BranchDTO branchDTO : branchList) {
+                if (city.equals(branchDTO.getCity())) {
+        %>
+        <tr class="branch">
+            <td><a href="AdminStoreDetail?branchName=<%=branchDTO.getName()%>"><%=branchDTO.getName()%>
+            </a></td>
+            <td><%=(branchDTO.getRooms() != null ? branchDTO.getRooms().replaceAll(",", "<br/>") : "")%>
+            </td>
+            <td><%=branchDTO.getPrice()%>
+            </td>
+            <td>
+                <%
+                    String openTime = (branchDTO.getOpen() > 9 ? "" : "0") + branchDTO.getOpen() + ":00";
+                    String closeTime = (branchDTO.getClose() > 9 ? "" : "0") + branchDTO.getClose() + ":00";
+                %>
+                <%=openTime%> ~ <%=closeTime%>
+            </td>
+            <td><%=(branchDTO.getAddress() != null ? branchDTO.getAddress() : "")%>
+            </td>
+            <td><%=(branchDTO.getAddressDetail() != null ? branchDTO.getAddressDetail() : "")%>
+            </td>
+            <td><%=(branchDTO.getPhone() != null ? branchDTO.getPhone() : "")%>
+            </td>
+            <td><%=(branchDTO.getFacilities() != null ? branchDTO.getFacilities().replaceAll(",", "<br/>") : "")%>
+            </td>
+        </tr>
+        <%
                         }
                     }
-                } else{%>
-            <tr>
-                    <td colspan="9">일치하는 항목이 없습니다.</td>
-            </tr>
-              <%}%>
-        </table>
-    </div>
+                }
+            }
+        } else {%>
+        <tr>
+            <td colspan="9">일치하는 항목이 없습니다.</td>
+        </tr>
+        <%}%>
+    </table>
 </div>
 
 <script type="text/javascript">
@@ -182,4 +146,8 @@
             $(".admin-store-search-form").submit()
         }
     })
+
+    $(".admin-template-header>b").html("지점 목록")
+
+    $(".admin-template-header>div").append("<input type=button value='추가'/>")
 </script>

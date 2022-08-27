@@ -44,7 +44,7 @@
         }
 
         #main{
-            width: 1100px;
+            width: 100%;
             height: 100%;
             padding: 20px 20px;
             overflow: auto;

@@ -20,7 +20,7 @@
 
     <style type="text/css">
 
-        body{
+        body {
             min-width: 100vw;
             height: 100%;
             overflow: hidden;
@@ -93,7 +93,7 @@
             display: flex;
         }
 
-        .admin-template-bg .admin-template-content tr{
+        .admin-template-bg .admin-template-content tr {
             width: 100%;
             height: 100%;
         }
@@ -106,17 +106,17 @@
             width: fit-content;
             height: 100%;
             display: flex;
-/*            float: left;*/
+            /*            float: left;*/
             padding-top: 50px;
-/*            position: fixed;*/
+            /*            position: fixed;*/
         }
 
         .admin-template-bg .categoryicon {
             width: 50px;
             height: 100%;
             background: rgba(175, 170, 170, 0.822);
-/*            display: inline-block;
-            float: left;*/
+            /*            display: inline-block;
+                        float: left;*/
         }
 
         .admin-template-bg .categoryicon > div:nth-child(n) {
@@ -149,8 +149,8 @@
             width: 189px;
             height: 100%;
             background: #fff;
-/*            display: inline-block;
-            float: left;*/
+            /*            display: inline-block;
+                        float: left;*/
             border-right: 1px solid #000;
             padding: 10px 40px;
         }
@@ -192,11 +192,40 @@
             display: block;
         }
 
+        .admin-template-right {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: auto;
+        }
+
+        .admin-template-bg .admin-template-header {
+            width: 100%;
+            height: 110px;
+            border-bottom: 1px solid rgb(184, 177, 177);
+            padding: 50px 0px 0px 20px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .admin-template-bg .admin-template-header > b {
+            width: fit-content;
+            font-size: 20px;
+            line-height: 50px;
+        }
+
+        .admin-template-bg .admin-template-header > div > input {
+            margin-right: 10px;
+        }
+
+
         .admin-template-bg .admin-main {
             width: 100%;
-            max-height: 100%;
-            padding-top: 50px;
-            overflow: hidden;
+            height: 100%;
+            overflow: auto;
         }
     </style>
 </head>
@@ -212,58 +241,66 @@
     </header>
 
     <div class="admin-template-content">
-            <div class="category">
-                <input type="radio" id="r1" name="categorys" checked="checked"/>
-                <input type="radio" id="r2" name="categorys"/>
-                <input type="radio" id="r3" name="categorys"/>
-                <input type="radio" id="r4" name="categorys"/>
-                <input type="radio" id="r5" name="categorys"/>
-                <div class="categoryicon">
-                    <div><label for="r1"><i class="fa-solid fa-house"></i></label></div>
-                    <div><label for="r2"><i class="fa-regular fa-address-card"></i></label></div>
-                    <div><label for="r3"><i class="fa-solid fa-chart-line"></i></label></div>
-                    <div><label for="r4"><i class="fa-regular fa-calendar-days"></i></label></div>
-                    <div><label for="r5"><i class="fa-solid fa-list-check"></i></label></div>
-                </div>
-                <input type="checkbox" id="hamburger"/>
-                <div class="categoryitem">
-                    <ul>
-                        <li>지점 관리</li>
-                        <li><a href="AdminStoreList">지점 목록</a></li>
-                        <li><a href="AdminStoreReview">이용 후기</a></li>
-                        <li><a href=""></a></li>
-                    </ul>
-                    <ul>
-                        <li>회원 관리</li>
-                        <li><a href="AdminUserList">회원 관리</a></li>
-                        <li><a href="AdminBlackList">블랙리스트 관리</a></li>
+        <div class="category">
+            <input type="radio" id="r1" name="categorys" checked="checked"/>
+            <input type="radio" id="r2" name="categorys"/>
+            <input type="radio" id="r3" name="categorys"/>
+            <input type="radio" id="r4" name="categorys"/>
+            <input type="radio" id="r5" name="categorys"/>
+            <div class="categoryicon">
+                <div><label for="r1"><i class="fa-solid fa-house"></i></label></div>
+                <div><label for="r2"><i class="fa-regular fa-address-card"></i></label></div>
+                <div><label for="r3"><i class="fa-solid fa-chart-line"></i></label></div>
+                <div><label for="r4"><i class="fa-regular fa-calendar-days"></i></label></div>
+                <div><label for="r5"><i class="fa-solid fa-list-check"></i></label></div>
+            </div>
+            <input type="checkbox" id="hamburger"/>
+            <div class="categoryitem">
+                <ul>
+                    <li>지점 관리</li>
+                    <li><a href="AdminStoreList">지점 목록</a></li>
+                    <li><a href="AdminStoreReview">이용 후기</a></li>
+                    <li><a href=""></a></li>
+                </ul>
+                <ul>
+                    <li>회원 관리</li>
+                    <li><a href="AdminUserList">회원 관리</a></li>
+                    <li><a href="AdminBlackList">블랙리스트 관리</a></li>
 
-                    </ul>
-                    <ul>
-                        <li>매출 관리</li>
-                        <li><a href="AdminSalesStore?city=전체&branch=전체">지점별 매출</a></li>
-                        <li><a href="AdminSalesUser">회원별 매출</a></li>
-                        <li><a href=""></a></li>
-                    </ul>
-                    <ul>
-                        <li>예약 관리</li>
-                        <li><a href="AdminReservList">예약 목록</a></li>
-                        <li><a href=""></a></li>
-                        <li><a href=""></a></li>
-                    </ul>
-                    <ul>
-                        <li>게시판 관리</li>
-                        <li><a href="AdminEventList">이벤트 관리</a></li>
-                        <li><a href="AdminNoticeList">공지사항 관리</a></li>
-                        <li><a href="AdminNewsList">뉴스 관리</a></li>
-                        <li><a href="AdminInquiryList">1:1문의</a></li>
-                        <li><a href="AdminFAQList">FAQ</a></li>
-                    </ul>
+                </ul>
+                <ul>
+                    <li>매출 관리</li>
+                    <li><a href="AdminSalesStore?city=전체&branch=전체">지점별 매출</a></li>
+                    <li><a href="AdminSalesUser">회원별 매출</a></li>
+                    <li><a href=""></a></li>
+                </ul>
+                <ul>
+                    <li>예약 관리</li>
+                    <li><a href="AdminReservList">예약 목록</a></li>
+                    <li><a href=""></a></li>
+                    <li><a href=""></a></li>
+                </ul>
+                <ul>
+                    <li>게시판 관리</li>
+                    <li><a href="AdminEventList">이벤트 관리</a></li>
+                    <li><a href="AdminNoticeList">공지사항 관리</a></li>
+                    <li><a href="AdminNewsList">뉴스 관리</a></li>
+                    <li><a href="AdminInquiryList">1:1문의</a></li>
+                    <li><a href="AdminFAQList">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="admin-template-right">
+            <div class="admin-template-header">
+                <b>Header</b>
+                <div>
+
                 </div>
             </div>
             <div class="admin-main">
                 <jsp:include page="${adminUrl}"/>
             </div>
+        </div>
     </div>
 </div>
 </body>

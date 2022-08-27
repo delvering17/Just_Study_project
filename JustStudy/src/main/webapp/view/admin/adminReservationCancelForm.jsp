@@ -11,29 +11,35 @@
 </script>
 
 <style type="text/css">
+
+    .admin-reserv-cancel-bg{
+        width: 100%;
+        height: 100%;
+    }
+
     .admin-reserv-cancel-headline {
-        width: 1330px;
-        height: 40px;
+        width: 100%;
+        height: 50px;
         background: #fff;
         border-bottom: 1px solid rgb(184, 177, 177);
-        padding-top: 15px;
         padding-left: 20px;
-        margin-top: 50px;
-        margin-left: 239px;
-        position: fixed;
+        display: flex;
         flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .admin-reserv-cancel-headline > b {
-        width: 100px;
+        width: fit-content;
         font-size: 20px;
+        line-height: 50px;
     }
 
     .admin-reserv-cancel-main {
         width: 1100px;
-        height: fit-content;
-        margin: 0px 0px 0px 220px;
-        padding: 120px 20px 20px 40px;
+        height: 100%;
+        padding: 20px 20px;
+        overflow: auto;
     }
 </style>
 

@@ -15,7 +15,7 @@
         flex-direction: row;
 
         padding-top: 100px;
-        padding-bottom: 50px;
+        padding-bottom: 120px;
     }
 
     .mypage-menu-wrapper {

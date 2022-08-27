@@ -100,23 +100,21 @@
     }
 </style>
 
-</div>
 
 <div id="main">
     <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
         <tr>
             <th>제목</th>
             <th>게시 일자</th>
-            <th>썸네일 사진</th>
         </tr>
         <c:forEach items="${mainData}" var="newsDTO">
             <tr>
-                <td><a href="AdminNewsDetail?id=${newsDTO.news_id}"/>${newsDTO.news_title}</td>
+                <td><a href="AdminNewsDetail?id=${newsDTO.news_id}" />${newsDTO.news_title}</td>
                 <td>${newsDTO.news_reg_date_sdf }</td>
-                <td><img id="news-fileup-img" src="<c:url value="/img/news/" />${newsDTO.news_thumbnail_img}" alt="">
-                </td>
             </tr>
         </c:forEach>
     </table>
 </div>
+
+
 

@@ -10,6 +10,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <script>
+    $("#r5").attr("checked", true)
     <%
         if(request.getAttribute("msg") != null){%>
     alert("<%=request.getAttribute("msg")%>")

@@ -8,43 +8,44 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript">
+    $("#r3").attr("checked", true)
+</script>
 <style>
     .admin-sales-user-bg{
         width: 100%;
-        height: fit-content;
+        height: 100%;
     }
 
     .admin-sales-user-headline {
-        width: 1330px;
-        height: 40px;
+        width: 100%;
+        height: 50px;
         background: #fff;
         border-bottom: 1px solid rgb(184, 177, 177);
-        padding-top: 15px;
         padding-left: 20px;
-        margin-top: 50px;
-        margin-left: 239px;
-        position: fixed;
+        display: flex;
         flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .admin-sales-user-headline > b {
-        width: 100px;
+        width: fit-content;
         font-size: 20px;
+        line-height: 50px;
     }
 
     .admin-sales-user-main{
-        width: 1700px;
-        height: fit-content;
-        margin: 0px 0px 0px 220px;
-        padding: 120px 20px 20px 40px;
+        width: 100%;
+        height: 100%;
+        padding: 20px 20px;
+        overflow: auto;
     }
 
     .admin-sales-store-table {
-        width: 67%;
+        width: 1000px;
         border: 1px solid rgb(122, 115, 115);
         margin-top: 10px;
-        table-layout: fixed;
-        word-break: break-all;
     }
 
     .admin-sales-store-table th {

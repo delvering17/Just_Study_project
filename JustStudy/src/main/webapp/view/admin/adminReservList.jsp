@@ -13,6 +13,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <script type="text/javascript">
+    $("#r4").attr("checked", true)
+
     if(<%=((ArrayList<AdminReservDTO>) request.getAttribute("totalList")).size() == 0%>){
         alert("조회 내역이 없습니다.")
         location.href = "AdminReservList"
@@ -23,40 +25,38 @@
 <style>
     .admin-reserv-list-bg {
         width: 100%;
-        height: fit-content;
+        height: 100%;
     }
 
     .admin-reserv-list-headline {
-        width: 1330px;
-        height: 40px;
+        width: 100%;
+        height: 50px;
         background: #fff;
         border-bottom: 1px solid rgb(184, 177, 177);
-        padding-top: 15px;
         padding-left: 20px;
-        margin-top: 50px;
-        margin-left: 239px;
-        position: fixed;
+        display: flex;
         flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .admin-reserv-list-headline > b {
-        width: 100px;
+        width: fit-content;
         font-size: 20px;
+        line-height: 50px;
     }
 
     .admin-reserv-list-main {
-        width: 2000px;
-        height: fit-content;
-        margin: 0px 0px 0px 220px;
-        padding: 120px 20px 20px 40px;
+        width: 100%;
+        height: 100%;
+        padding: 20px 20px;
+        overflow: auto;
     }
 
     .admin-reserv-list-table {
-        width: 67%;
+        width: 1000px;
         border: 1px solid rgb(122, 115, 115);
         margin-top: 10px;
-        /*        table-layout: fixed;
-                word-break: break-all;*/
     }
 
     .admin-reserv-list-table th {

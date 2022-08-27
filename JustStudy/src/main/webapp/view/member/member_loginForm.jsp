@@ -166,28 +166,6 @@
     // );
 
 
-
-    function setLoginStatus(){
-
-        const message_area=document.getElementById('message');
-        message_area.innerHTML=`
-      <h3> Login 성공 </h3>
-      <div>user Nickname : naverLogin.user.id}</div>
-      <div>user Age(범위) : ${naverLogin.user.name}</div>
-      <div>user Birthday : ${naverLogin.user.email}</div>
-      `;
-
-        // const button_area=document.getElementById('button_area');
-        // button_area.innerHTML="<button id='btn_logout'>로그아웃</button>";
-        //
-        // const logout=document.getElementById('btn_logout');
-        // logout.addEventListener('click',(e)=>{
-        //     naverLogin.logout();
-        //     location.replace("http://127.0.0.1:5500");
-        // })
-    }
-    // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
-
     function getUserInformation() {
         Kakao.API.request({
             url: '/v2/user/me',

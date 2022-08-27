@@ -14,12 +14,6 @@
 
 <script type="text/javascript">
     $("#r4").attr("checked", true)
-
-    if(<%=((ArrayList<AdminReservDTO>) request.getAttribute("totalList")).size() == 0%>){
-        alert("조회 내역이 없습니다.")
-        location.href = "AdminReservList"
-    }
-
 </script>
 
 <style>
@@ -47,7 +41,7 @@
     }
 
     .admin-reserv-list-main {
-        width: 100%;
+        width: 1100px;
         height: 100%;
         padding: 20px 20px;
         overflow: auto;
@@ -214,6 +208,7 @@
                 <%
                     ArrayList<AdminReservDTO> totalList = (ArrayList<AdminReservDTO>) request.getAttribute("totalList");
 
+                    if(totalList.size() != 0){
                     for (AdminReservDTO adminReservDTO : totalList) {%>
             <form action="AdminReservationCancelForm">
                 <tr>
@@ -255,6 +250,10 @@
                     </td>
                 </tr>
             </form>
+            <%}} else{%>
+                <tr>
+                    <td colspan="15">일치하는 항목이 없습니다.</td>
+                </tr>
             <%}%>
         </table>
     </div>

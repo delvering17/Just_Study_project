@@ -9,73 +9,66 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script type="text/javascript">
-  $("#r2").attr("checked", true)
+    $("#r2").attr("checked", true)
 </script>
 <style>
-  *{
-    margin: 0;
-    padding: 0;
-  }
+    .admin-blacklist-add-bg {
+      width: 100%;
+      height: 100%;
+    }
 
-  #headline{
-    width: 1330px;
-    height: 40px;
-    background: #fff;
-    border-bottom: 1px solid rgb(184, 177, 177);
-    padding-top: 15px;
-    padding-left: 20px;
-    margin-top: 50px;
-    margin-left: 239px;
-    position: fixed;
-    flex-direction: row;
+    #headline {
+      width: 100%;
+      height: 50px;
+      background: #fff;
+      border-bottom: 1px solid rgb(184, 177, 177);
+      padding-left: 20px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-  }
+    #headline > b {
+      width: fit-content;
+      font-size: 20px;
+      line-height: 50px;
+    }
 
-  #headline > b{
-    width: 100px;
-    font-size: 20px;
-  }
-
-  #headline > input{
-    float: right;
-    margin: 0px 10px 50px 0px;
-
-  }
-
-  #main{
-    width: 2000px;
-    height: 2000px;
-    margin: 0px 0px 0px 220px;
-    padding: 120px 20px 20px 40px;
-  }
+    #main {
+        width: 1100px;
+      height: 100%;
+      padding: 20px 20px;
+      overflow: auto;
+    }
 
 </style>
+<div class="admin-blacklist-add-bg">
+    <div id="headline">
+        <b>블랙리스트 추가</b>
+    </div>
 
-  <div id="headline">
-    <b>블랙리스트 추가</b>
-  </div>
+    <div id="main">
 
-  <div id="main">
-
-    <form action="AdminBlackListAddReg" method="get">
+        <form action="AdminBlackListAddReg" method="get">
 
             <table border="" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
-              <tr>
-                <td>회원번호</td>
-                <td><input type="text" name="black_id" value="${blackListAddId}" readonly/></td>
-              </tr>
-              <tr>
-                <td>사유</td>
-                <td><input type="text" name="black_reason" value=""/></td>
-              </tr>
-              <tr>
-                <td colspan="2"><input type="submit" value="추가"/></td>
-              </tr>
+                <tr>
+                    <td>회원번호</td>
+                    <td><input type="text" name="black_id" value="${blackListAddId}" readonly/></td>
+                </tr>
+                <tr>
+                    <td>사유</td>
+                    <td><input type="text" name="black_reason" value=""/></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value="추가"/></td>
+                </tr>
 
-      </table>
-    </form>
+            </table>
+        </form>
 
-  </div>
+    </div>
 </div>
 
 

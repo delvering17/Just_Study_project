@@ -30,7 +30,7 @@
     }
 
     .admin-reserv-cancel-main {
-        width: 2000px;
+        width: 1100px;
         height: fit-content;
         margin: 0px 0px 0px 220px;
         padding: 120px 20px 20px 40px;

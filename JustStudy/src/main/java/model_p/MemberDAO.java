@@ -352,7 +352,29 @@ public class MemberDAO {
 
     }
 
+    public int isKakaoSocialId(String social_id) {
+        int res = 0;
+        sql = "select mem_id from member where mem_social = 1 and mem_socialid = ?";
 
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1,social_id);
+            rs = ptmt.executeQuery();
+
+            if(rs.next()) {
+                res = rs.getInt("mem_id");
+            }
+
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+
+        return res;
+    }
 
     public int isSocialId(String social_id) {
         int res = 0;

@@ -20,40 +20,34 @@
       integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
       crossorigin="anonymous" referrerpolicy="no-referrer"/>
 <style>
-    * {
-        margin: 0;
-        padding: 0;
+    .admin-event-detail-bg {
+        width: 100%;
+        height: 100%;
     }
 
     #headline {
-        width: 1330px;
-        height: 40px;
+        width: 100%;
+        height: 50px;
         background: #fff;
         border-bottom: 1px solid rgb(184, 177, 177);
-        padding-top: 15px;
         padding-left: 20px;
-        margin-top: 50px;
-        margin-left: 239px;
-        position: fixed;
+        display: flex;
         flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
     }
 
     #headline > b {
-        width: 100px;
+        width: fit-content;
         font-size: 20px;
-    }
-
-    #headline > input {
-        float: right;
-        margin: 0px 10px 50px 0px;
-
+        line-height: 50px;
     }
 
     #main {
-        width: 2000px;
-        height: 2000px;
-        margin: 0px 0px 0px 220px;
-        padding: 120px 20px 20px 40px;
+        width: 1100px;
+        height: 100%;
+        padding: 20px 20px;
+        overflow: auto;
     }
 
     #main > div:first-of-type > input[type=button] {
@@ -136,79 +130,81 @@
 </style>
 
 
-<div class="wrapper">
+<div class="admin-event-detail-bg">
 
     <div id="headline">
         <b>이벤트 상세보기</b>
     </div>
     <div id="main">
-        <form  name="myform" id="event-detail-form" method="post" enctype="multipart/form-data" onclick="return check()">
-        <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
-            <input type="hidden" name="id" value="${eventDTO.id}">
-            <tr>
-                <th>제목</th>
-                <td>
-                    <input type="text" name="title" value="${eventDTO.title}">
-                </td>
-            </tr>
-            <tr>
-                <th>이벤트 시작일</th>
-                <td>
-                    <input type="date" name="event_startdate" value="${eventDTO.event_startdate_sdf}">
-                </td>
-            </tr>
-            <tr>
-                <th>이벤트 종료일</th>
-                <td>
-                    <input type="date" name="event_enddate" value="${eventDTO.event_enddate_sdf}">
-                </td>
-            </tr>
-            <tr>
-                <th>게시일</th>
-                <td>
-                    <input type="hidden" name="reg_date" value="${eventDTO.reg_date_sdf}">
-                    ${eventDTO.reg_date_sdf}
-                </td>
-            </tr>
-            <tr>
-                <th>이미지</th>
-                <td>
+        <form name="myform" id="event-detail-form" method="post" enctype="multipart/form-data" onclick="return check()">
+            <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+                <input type="hidden" name="id" value="${eventDTO.id}">
+                <tr>
+                    <th>제목</th>
+                    <td>
+                        <input type="text" name="title" value="${eventDTO.title}">
+                    </td>
+                </tr>
+                <tr>
+                    <th>이벤트 시작일</th>
+                    <td>
+                        <input type="date" name="event_startdate" value="${eventDTO.event_startdate_sdf}">
+                    </td>
+                </tr>
+                <tr>
+                    <th>이벤트 종료일</th>
+                    <td>
+                        <input type="date" name="event_enddate" value="${eventDTO.event_enddate_sdf}">
+                    </td>
+                </tr>
+                <tr>
+                    <th>게시일</th>
+                    <td>
+                        <input type="hidden" name="reg_date" value="${eventDTO.reg_date_sdf}">
+                        ${eventDTO.reg_date_sdf}
+                    </td>
+                </tr>
+                <tr>
+                    <th>이미지</th>
+                    <td>
 
-                    <c:choose>
-                        <c:when test="${eventDTO.img == null}">
-                            <input type="file" name="img">
-                        </c:when>
-                        <c:otherwise>
-                            <input type="button" value="파일 삭제" id="imgDelete" onclick="deleteImgFile()"/>
-                            <input type="hidden" name="img" value="${eventDTO.img}"/>
-                            <img src="<c:url value="/img/event/${eventDTO.img}"/> ">
-                        </c:otherwise>
-                    </c:choose>
-                </td>
-            </tr>
-            <tr>
-                <th>내용</th>
-                <td>
-                    <c:choose>
-                        <c:when test="${eventDTO.img == null}">
-                            <input type="file" name="content">
-                        </c:when>
-                        <c:otherwise>
-                            <input type="button" value="파일 삭제" id="imgDelete" onclick="deleteContentFile()"/>
-                            <input type="hidden" name="content" value="${eventDTO.img}"/>
-                            <img src="<c:url value="/img/event/${eventDTO.img}"/> ">
-                        </c:otherwise>
-                    </c:choose>
+                        <c:choose>
+                            <c:when test="${eventDTO.img == null}">
+                                <input type="file" name="img">
+                            </c:when>
+                            <c:otherwise>
+                                <input type="button" value="파일 삭제" id="imgDelete" onclick="deleteImgFile()"/>
+                                <input type="hidden" name="img" value="${eventDTO.img}"/>
+                                <img src="<c:url value="/img/event/${eventDTO.img}"/> ">
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td>
+                        <c:choose>
+                            <c:when test="${eventDTO.img == null}">
+                                <input type="file" name="content">
+                            </c:when>
+                            <c:otherwise>
+                                <input type="button" value="파일 삭제" id="imgDelete" onclick="deleteContentFile()"/>
+                                <input type="hidden" name="content" value="${eventDTO.img}"/>
+                                <img src="<c:url value="/img/event/${eventDTO.img}"/> ">
+                            </c:otherwise>
+                        </c:choose>
 
-                </td>
-            </tr>
-        </table>
-        <button type="submit" formaction="AdminEventModifyReg?id=${eventDTO.id}" formmethod="post" formenctype="multipart/form-data">수정</button>
-<<<<<<< HEAD
-        <button type="submit" href="AdminEventDeleteReg" formmethod="get">삭제</button>
-=======
-        <button type="submit" formaction="AdminEventModifyReg" formmethod="get">삭제</button>
->>>>>>> 잠깐만지원아
+                    </td>
+                </tr>
+            </table>
+            <button type="submit" formaction="AdminEventModifyReg?id=${eventDTO.id}" formmethod="post"
+                    formenctype="multipart/form-data">수정
+            </button>
+            <<<<<<< HEAD
+            <button type="submit" href="AdminEventDeleteReg" formmethod="get">삭제</button>
+            =======
+            <button type="submit" formaction="AdminEventModifyReg" formmethod="get">삭제</button>
+            >>>>>>> 잠깐만지원아
         </form>
         <a href="AdminEventList">목록으로</a>
     </div>
@@ -216,7 +212,7 @@
 
 <script type="text/javascript">
     function deleteContentFile() {
-        if(confirm("이미지 파일을 삭제하시겠습니까?")){
+        if (confirm("이미지 파일을 삭제하시겠습니까?")) {
             $("#event-detail-form").attr("action", "AdminEventImgDelete")
 
             $("#event-detail-form").submit()
@@ -224,7 +220,7 @@
     }
 
     function deleteImgFile() {
-        if(confirm("이미지 파일을 삭제하시겠습니까?")){
+        if (confirm("이미지 파일을 삭제하시겠습니까?")) {
             $("#event-detail-form").attr("action", "AdminEventContentDelete")
 
             $("#event-detail-form").submit()

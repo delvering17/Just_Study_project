@@ -20,40 +20,38 @@
       integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
       crossorigin="anonymous" referrerpolicy="no-referrer"/>
 <style>
-    * {
-        margin: 0;
-        padding: 0;
+    .admin-event-insert-bg {
+        width: 100%;
+        height: 100%;
     }
 
     #headline {
-        width: 1330px;
-        height: 40px;
+        width: 100%;
+        height: 50px;
         background: #fff;
         border-bottom: 1px solid rgb(184, 177, 177);
-        padding-top: 15px;
         padding-left: 20px;
-        margin-top: 50px;
-        margin-left: 239px;
-        position: fixed;
+        display: flex;
         flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
     }
 
     #headline > b {
-        width: 100px;
+        width: fit-content;
         font-size: 20px;
+        line-height: 50px;
     }
 
     #headline > input {
-        float: right;
-        margin: 0px 10px 50px 0px;
-
+        margin-right: 10px;
     }
 
     #main {
-        width: 2000px;
-        height: 2000px;
-        margin: 0px 0px 0px 220px;
-        padding: 120px 20px 20px 40px;
+        width: 1100px;
+        height: 100%;
+        padding: 20px 20px;
+        overflow: auto;
     }
 
     #main > div:first-of-type > input[type=button] {
@@ -136,18 +134,19 @@
 </style>
 
 
-<div class="wrapper">
+<div class="admin-event-insert-bg">
 
     <div id="headline">
         <b>이벤트 추가</b>
     </div>
     <div id="main">
-        <form action="AdminEventInsertReg" name="myform" id="event-detail-form" method="post" enctype="multipart/form-data" onsubmit="return check()">
+        <form action="AdminEventInsertReg" name="myform" id="event-detail-form" method="post"
+              enctype="multipart/form-data" onsubmit="return check()">
             <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
                 <tr>
                     <th>제목</th>
                     <td>
-                        <input type="text" name="title" >
+                        <input type="text" name="title">
                     </td>
                 </tr>
                 <tr>
@@ -175,7 +174,7 @@
                     </td>
                 </tr>
             </table>
-             <button type="submit" id="subbtn" >추가</button>
+            <button type="submit" id="subbtn">추가</button>
         </form>
         <a href="AdminEventList">목록으로</a>
     </div>
@@ -184,24 +183,24 @@
 <script>
 
     var now_utc = Date.now()
-    var timeOff = new Date().getTimezoneOffset()*60000;
-    var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+    var timeOff = new Date().getTimezoneOffset() * 60000;
+    var today = new Date(now_utc - timeOff).toISOString().split("T")[0];
     document.getElementById("event_startdate").setAttribute("min", today);
     document.getElementById("event_enddate").setAttribute("min", today);
 
 
-    $("#subbtn").click(function(){
+    $("#subbtn").click(function () {
 
-        var startDate = $( "input[name='event_startdate']" ).val();
+        var startDate = $("input[name='event_startdate']").val();
         var startDateArr = startDate.split('-');
 
-        var endDate = $( "input[name='event_enddate']" ).val();
+        var endDate = $("input[name='event_enddate']").val();
         var endDateArr = endDate.split('-');
 
         var startDateCompare = new Date(startDateArr[0], startDateArr[1], startDateArr[2]);
         var endDateCompare = new Date(endDateArr[0], endDateArr[1], endDateArr[2]);
 
-        if(startDateCompare.getTime() > endDateCompare.getTime()) {
+        if (startDateCompare.getTime() > endDateCompare.getTime()) {
 
             alert("시작날짜와 종료날짜를 확인해 주세요.");
 
@@ -212,29 +211,29 @@
     });
 
 
-    function check(){
+    function check() {
         const f = document.myform;
-        if(f.title.value.trim() == ""){
+        if (f.title.value.trim() == "") {
             alert("빈칸을 입력해주세요");
             f.title.focus();
             return false;
         }
-        if(f.event_startdate.value == ""){
+        if (f.event_startdate.value == "") {
             alert("시작날짜를 입력해주세요");
             f.event_startdate.focus();
             return false;
         }
-        if(f.event_enddate.value == ""){
+        if (f.event_enddate.value == "") {
             alert("마감날짜를 입력해주세요");
             f.event_enddate.focus();
             return false;
         }
-        if(f.img.value == ""){
+        if (f.img.value == "") {
             alert("이미지 파일을 첨부해주세요");
             f.img.focus();
             return false;
         }
-        if(f.content.value == ""){
+        if (f.content.value == "") {
             alert("내용 파일을 첨부해주세요");
             f.content.focus();
             return false;

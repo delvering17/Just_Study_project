@@ -34,7 +34,7 @@ public class MemberSocialLoginReg implements MemberNonViewService {
         String social_id = request.getParameter("social_id");
         String realname = request.getParameter("realname");
 
-        int mem_id = new MemberDAO().isSocialId(social_id);
+        int mem_id = new MemberDAO().isKakaoSocialId(social_id);
 
         MemberDTO memberDTO = new MemberDAO().detail(mem_id);
 
@@ -48,7 +48,7 @@ public class MemberSocialLoginReg implements MemberNonViewService {
                 } else {
                     HttpSession session = request.getSession();
                     session.setAttribute("login", mem_id);
-                    jj.put("loginResult", URLEncoder.encode("success","UTF-8"));
+                    jj.put("loginResult", URLEncoder.encode("로그인 되었습니다.","UTF-8"));
                     jj.put("goUrl", "../board/MainPage");
                 }
             } catch (UnsupportedEncodingException e) {
@@ -73,7 +73,6 @@ public class MemberSocialLoginReg implements MemberNonViewService {
             }
             HttpSession session = request.getSession();
             session.setAttribute("social_id", social_id);
-            System.out.println(social_id);
             request.setAttribute("social_email", social_email);
         }
 

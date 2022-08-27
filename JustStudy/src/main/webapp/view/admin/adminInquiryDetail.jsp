@@ -11,40 +11,38 @@
     $("#r5").attr("checked", true)
 </script>
 <style>
-    * {
-        margin: 0;
-        padding: 0;
+    .admin-inquiry-detail-bg {
+        width: 100%;
+        height: 100%;
     }
 
     #headline {
-        width: 1330px;
-        height: 40px;
+        width: 100%;
+        height: 50px;
         background: #fff;
         border-bottom: 1px solid rgb(184, 177, 177);
-        padding-top: 15px;
         padding-left: 20px;
-        margin-top: 50px;
-        margin-left: 239px;
-        position: fixed;
+        display: flex;
         flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
     }
 
     #headline > b {
-        width: 100px;
+        width: fit-content;
         font-size: 20px;
+        line-height: 50px;
     }
 
     #headline > input {
-        float: right;
-        margin: 0px 10px 50px 0px;
-
+        margin-right: 10px;
     }
 
     #main {
-        width: 2000px;
-        height: 2000px;
-        margin: 0px 0px 0px 220px;
-        padding: 120px 20px 20px 40px;
+        width: 1100px;
+        height: 100%;
+        padding: 20px 20px;
+        overflow: auto;
     }
 
     #main > div:first-of-type > input[type=button] {
@@ -127,7 +125,7 @@
 </style>
 
 
-<div class="wrapper">
+<div class="admin-inquiry-detail-bg">
 
     <div id="headline">
         <b>1:1 문의 상세보기</b>
@@ -179,67 +177,69 @@
 
         <h2>답변</h2>
         <c:choose>
-            <c:when test="${inquiryDTO.inquiry_state == 2}">
-                <form id="form-answer">
-                    <input type="hidden" name="input_purpose" value="${inquiryDTO.inquiry_id}"/>
-                    <input type="hidden" name="input_id" value="${answerDTO.inquiry_id}"/>
-                    <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
-                        <tr>
-                            <th>답변 일자</th>
-                            <td><input type="text" name="input_date" id="input-date" value="${answerDTO.inquiry_date}" readonly></td>
-                        </tr>
-                        <tr>
-                            <th>제목</th>
-                            <td><input type="text" name="input_title" id="input-title" value="${answerDTO.inquiry_title}"></td>
-                        </tr>
-                        <tr>
-                            <th>담당자</th>
-                            <input type="hidden" name="input_writer"  value="${answerDTO.inquiry_writer}">
-                            <td><input type="text" id="input-writer" value="${answerWriterName}" readonly></td>
-                        </tr>
-                        <tr>
-                            <th>답변 내용</th>
-                            <td><textarea name="input_content" id="input-content" cols="30" rows="10">${answerDTO.inquiry_content}</textarea></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <button type="button" onclick="answerInsert()">수정</button>
-                                <button type="submit" formaction="AdminInquiryDelete" formmethod="get">삭제</button>
-                            </td>
-                        </tr>
-                        <tr></tr>
+        <c:when test="${inquiryDTO.inquiry_state == 2}">
+        <form id="form-answer">
+            <input type="hidden" name="input_purpose" value="${inquiryDTO.inquiry_id}"/>
+            <input type="hidden" name="input_id" value="${answerDTO.inquiry_id}"/>
+            <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+                <tr>
+                    <th>답변 일자</th>
+                    <td><input type="text" name="input_date" id="input-date" value="${answerDTO.inquiry_date}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <th>제목</th>
+                    <td><input type="text" name="input_title" id="input-title" value="${answerDTO.inquiry_title}"></td>
+                </tr>
+                <tr>
+                    <th>담당자</th>
+                    <input type="hidden" name="input_writer" value="${answerDTO.inquiry_writer}">
+                    <td><input type="text" id="input-writer" value="${answerWriterName}" readonly></td>
+                </tr>
+                <tr>
+                    <th>답변 내용</th>
+                    <td><textarea name="input_content" id="input-content" cols="30"
+                                  rows="10">${answerDTO.inquiry_content}</textarea></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="button" onclick="answerInsert()">수정</button>
+                        <button type="submit" formaction="AdminInquiryDelete" formmethod="get">삭제</button>
+                    </td>
+                </tr>
+                <tr></tr>
 
-                    </table>
+            </table>
 
             </c:when>
             <c:otherwise>
-                <form action="AdminInquiryInsert" method="post" id="inquiry-form1">
-                    <input type="hidden" name="input_purpose" value="${inquiryDTO.inquiry_id}"/>
-                    <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
-                        <tr>
-                            <th>제목</th>
-                            <td><input name="input_title" id="input_title1"  type="text" ></td>
-                        </tr>
-                        <tr>
-                            <th>담당자</th>
-                            <input type="hidden" name="input_writer" value="${sessionScope.login}" readonly>
-                            <td><input type="text" id="" value="${mem_realname}" readonly></td>
-                        </tr>
-                        <tr>
-                            <th>답변 내용</th>
-                            <td><textarea name="input_content" id="input_content1" cols="30" rows="10"></textarea></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
+            <form action="AdminInquiryInsert" method="post" id="inquiry-form1">
+                <input type="hidden" name="input_purpose" value="${inquiryDTO.inquiry_id}"/>
+                <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+                    <tr>
+                        <th>제목</th>
+                        <td><input name="input_title" id="input_title1" type="text"></td>
+                    </tr>
+                    <tr>
+                        <th>담당자</th>
+                        <input type="hidden" name="input_writer" value="${sessionScope.login}" readonly>
+                        <td><input type="text" id="" value="${mem_realname}" readonly></td>
+                    </tr>
+                    <tr>
+                        <th>답변 내용</th>
+                        <td><textarea name="input_content" id="input_content1" cols="30" rows="10"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
                             <button type="button" onclick="inquiryInsert()">답변</button>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
+                        </td>
+                    </tr>
+                </table>
+            </form>
             </c:otherwise>
 
-        </c:choose>
-                    <a href="AdminInquiryList">목록으로</a>
+            </c:choose>
+            <a href="AdminInquiryList">목록으로</a>
     </div>
 </div>
 
@@ -248,10 +248,10 @@
         let input_title1 = $('#input_title1').val()
         let input_content1 = $('#input_content1').val()
 
-        if(input_title1.trim() === '') {
+        if (input_title1.trim() === '') {
             alert('제목을 입력해주세요.')
             $('#input_title1').focus()
-        } else if(input_content1.trim() === '') {
+        } else if (input_content1.trim() === '') {
             alert('내용을 입력해주세요.')
             $('#input_content1').focus()
         } else {
@@ -263,14 +263,15 @@
         }
 
     }
+
     function answerInsert() {
         let input_title = $('#input-title').val()
         let input_content = $('#input-content').val()
 
-        if(input_title === '') {
+        if (input_title === '') {
             alert('제목을 입력해주세요.')
             $('#input-title').focus()
-        } else if(input_content === '') {
+        } else if (input_content === '') {
             alert('내용을 입력해주세요.')
             $('#input-content').focus()
         } else {

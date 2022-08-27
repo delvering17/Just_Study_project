@@ -7,15 +7,8 @@
       integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
       crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
-<script type="text/javascript">
-    if(<%=((ArrayList<BranchDTO>) request.getAttribute("branchList")).size() == 0%>){
-        alert("조회 내역이 없습니다.")
-        location.href = "AdminStoreList"
-    }
-
-</script>
 <style>
-    .admin-store-list-bg{
+    .admin-store-list-bg {
         width: 100%;
         height: 100%;
     }
@@ -66,7 +59,7 @@
         font-size: 13px;
     }
 
-    .admin-store-list-table tr:first-of-type{
+    .admin-store-list-table tr:first-of-type {
         height: 50px;
         padding: 10px;
         color: #fff;
@@ -78,7 +71,7 @@
         padding-top: 5px;
         padding-bottom: 5px;
     }
-    
+
     .branch:nth-of-type(2n) {
         background: rgba(227, 233, 240, 0.726)
     }
@@ -107,7 +100,8 @@
                     <option value="facilities">편의시설</option>
                 </select>
                 <input type="text" name="word">
-                <button type="button" class="admin-store-list-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button type="button" class="admin-store-list-search"><i class="fa-solid fa-magnifying-glass"></i>
+                </button>
             </div>
         </form>
 
@@ -127,8 +121,10 @@
             <%
                 LinkedHashMap<String, Integer> branchMap = (LinkedHashMap<String, Integer>) request.getAttribute("branchMap");
                 ArrayList<BranchDTO> branchList = (ArrayList<BranchDTO>) request.getAttribute("branchList");
-                for (String city : branchMap.keySet()) {
-                    if (branchMap.get(city) != 0) {%>
+
+                if (branchList.size() != 0) {
+                    for (String city : branchMap.keySet()) {
+                        if (branchMap.get(city) != 0) {%>
             <tr>
                 <td rowspan="<%=branchMap.get(city) +1%>"><%=city%>
                 </td>
@@ -138,9 +134,12 @@
                     if (city.equals(branchDTO.getCity())) {
             %>
             <tr class="branch">
-                <td><a href="AdminStoreDetail?branchName=<%=branchDTO.getName()%>"><%=branchDTO.getName()%></a></td>
-                <td><%=(branchDTO.getRooms() != null ? branchDTO.getRooms().replaceAll(",", "<br/>") : "")%></td>
-                <td><%=branchDTO.getPrice()%></td>
+                <td><a href="AdminStoreDetail?branchName=<%=branchDTO.getName()%>"><%=branchDTO.getName()%>
+                </a></td>
+                <td><%=(branchDTO.getRooms() != null ? branchDTO.getRooms().replaceAll(",", "<br/>") : "")%>
+                </td>
+                <td><%=branchDTO.getPrice()%>
+                </td>
                 <td>
                     <%
                         String openTime = (branchDTO.getOpen() > 9 ? "" : "0") + branchDTO.getOpen() + ":00";
@@ -148,31 +147,38 @@
                     %>
                     <%=openTime%> ~ <%=closeTime%>
                 </td>
-                <td><%=(branchDTO.getAddress() != null ? branchDTO.getAddress() : "")%></td>
-                <td><%=(branchDTO.getAddressDetail() != null ? branchDTO.getAddressDetail() : "")%></td>
-                <td><%=(branchDTO.getPhone() != null ? branchDTO.getPhone() : "")%></td>
-                <td><%=(branchDTO.getFacilities() != null ? branchDTO.getFacilities().replaceAll(",", "<br/>") : "")%></td>
+                <td><%=(branchDTO.getAddress() != null ? branchDTO.getAddress() : "")%>
+                </td>
+                <td><%=(branchDTO.getAddressDetail() != null ? branchDTO.getAddressDetail() : "")%>
+                </td>
+                <td><%=(branchDTO.getPhone() != null ? branchDTO.getPhone() : "")%>
+                </td>
+                <td><%=(branchDTO.getFacilities() != null ? branchDTO.getFacilities().replaceAll(",", "<br/>") : "")%>
+                </td>
             </tr>
             <%
+                                }
+                            }
                         }
                     }
-                }
-            %>
-            <%}%>
-
+                } else{%>
+            <tr>
+                    <td colspan="9">일치하는 항목이 없습니다.</td>
+            </tr>
+              <%}%>
         </table>
     </div>
 </div>
 
 <script type="text/javascript">
-    $(".admin-store-insert").click(function (){
+    $(".admin-store-insert").click(function () {
         location.href = "AdminStoreInsert"
     })
 
-    $(".admin-store-list-search").click(function (){
-        if($("input[name=word]").val().trim() == ""){
+    $(".admin-store-list-search").click(function () {
+        if ($("input[name=word]").val().trim() == "") {
             alert("검색어를 입력해주세요.")
-        } else{
+        } else {
             $(".admin-store-search-form").submit()
         }
     })

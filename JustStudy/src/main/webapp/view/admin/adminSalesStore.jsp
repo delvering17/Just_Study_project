@@ -14,14 +14,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <script type="text/javascript">
-
   $("#r3").attr("checked", true)
-
-  if(<%=((ArrayList<AdminReservDTO>) request.getAttribute("salesStoreList")).size() == 0%>){
-    alert("조회 내역이 없습니다.")
-    location.href = "AdminSalesStore?city=전체&branch=전체"
-  }
-
 </script>
 
 <style>
@@ -177,20 +170,30 @@
         <th>상태</th>
       </tr>
       <form action="">
-        <c:forEach items="${salesStoreList}" var="salesStoreList">
-          <tr>
-            <td>${salesStoreList.mem_userid}</td>
-            <td>${salesStoreList.mem_realname}</td>
-            <td>${salesStoreList.mem_nickname}</td>
-            <td>${salesStoreList.city}</td>
-            <td>${salesStoreList.branch}</td>
-            <td>${salesStoreList.room}</td>
-            <td>${salesStoreList.useDate}</td>
-            <td>${salesStoreList.time}</td>
-            <td>${salesStoreList.pay}</td>
-            <td>${salesStoreList.status}</td>
-          </tr>
-        </c:forEach>
+        <c:choose>
+          <c:when test="<%((ArrayList)request.getAttribute(\"salesStoreList\")).size() != 0%>">
+            <c:forEach items="${salesStoreList}" var="salesStoreList">
+              <tr>
+                <td>${salesStoreList.mem_userid}</td>
+                <td>${salesStoreList.mem_realname}</td>
+                <td>${salesStoreList.mem_nickname}</td>
+                <td>${salesStoreList.city}</td>
+                <td>${salesStoreList.branch}</td>
+                <td>${salesStoreList.room}</td>
+                <td>${salesStoreList.useDate}</td>
+                <td>${salesStoreList.time}</td>
+                <td>${salesStoreList.pay}</td>
+                <td>${salesStoreList.status}</td>
+              </tr>
+            </c:forEach>
+          </c:when>
+          <c:otherwise>
+            <tr>
+              <td colspan="10">일치하는 항목이 없습니다.</td>
+            </tr>
+          </c:otherwise>
+        </c:choose>
+
       </form>
     </table>
   </div>

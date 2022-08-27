@@ -90,6 +90,8 @@
         left: 0;
         z-index: 1;
 
+        transition: .3s linear;
+
     }
 
     .ul-behind-nav-left-wrapper {
@@ -145,6 +147,8 @@
         color: #bbbbbb;
         font-size: 1rem;
     }
+
+
 
 
     <%--    .wrapper * {--%>
@@ -303,6 +307,7 @@
         /*bottom: -100px;*/
         /*opacity: 1;*/
         /*height: 100px;*/
+
         visibility: visible;
     }
 
@@ -438,10 +443,15 @@
         header_behind.style.top = "100px";
 
     })
-    header_front.addEventListener("mouseout", function () {
+
+    header_behind.addEventListener("mouseover", function () {
+        header_behind.classList.add("gnb-active");
+        header_behind.style.top = "100px";
+    })
+
+    header_behind.addEventListener("mouseout", function () {
         header_behind.classList.remove("gnb-active");
         header_behind.style.top = "0px";
-
     })
     //
     // function navigo() {

@@ -29,7 +29,7 @@
         }
 
         $.ajax({
-            url:'<c:url value="/memberNonView/MemberSocialLoginReg"/>',
+            url:'<c:url value="/member/MemberSocialNaverLoginReg"/>',
             type:'GET',
             data: form_data,
             async:false,

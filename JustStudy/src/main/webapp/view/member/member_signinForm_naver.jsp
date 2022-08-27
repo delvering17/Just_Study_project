@@ -89,13 +89,12 @@
 
 </style>
 <div id="form-signin">
+    <p id="signin-logo">네이버 계정 회원가입</p>
 
-    <p id="signin-logo">카카오 계정 회원가입</p>
-
-  <input type="hidden" id="input-socialid" value="${param.socialid}">
+  <input type="hidden" id="input-socialid" value="${socialid}">
   <div class="wrapper-signin">
     <p>이메일</p>
-    <input type="text" class="input-signin" id="input-userid" value="${param.social_email}" readonly/>
+    <input type="text" class="input-signin" id="input-userid" value="${social_email}" readonly/>
   </div>
   <div class="wrapper-signin">
     <p>닉네임</p>
@@ -106,7 +105,7 @@
   </div>
   <div class="wrapper-signin">
     <p>이름</p>
-    <input type="text" class="input-signin" id="input-realname"  value="${param.realname}"/>
+    <input type="text" class="input-signin" id="input-realname"  value="${realname}"/>
   </div>
   <div class="wrapper-signin" id="wrapper-address">
     <p>주소</p>

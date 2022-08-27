@@ -28,6 +28,8 @@
     .header-front {
         background: yellowgreen;
         position: sticky;
+
+        z-index: 2;
     }
 
     .ul-front-wrapper {
@@ -84,7 +86,9 @@
         flex-direction: row;
 
         position: absolute;
-
+        top: 0;
+        left: 0;
+        z-index: 1;
 
     }
 
@@ -294,14 +298,13 @@
 <%--    }--%>
 
 
-<%--    .gnb-sub, .gnb-active {--%>
-<%--        background-color: white;--%>
-<%--        /*background: transparent;*/--%>
-<%--        /*bottom: -100px;*/--%>
-<%--        /*opacity: 1;*/--%>
-<%--        /*height: 100px;*/--%>
-<%--        visibility: visible;--%>
-<%--    }--%>
+    .header-behind, .gnb-active {
+        /*background: transparent;*/
+        /*bottom: -100px;*/
+        /*opacity: 1;*/
+        /*height: 100px;*/
+        visibility: visible;
+    }
 
 <%--    a:link {--%>
 <%--        color: black;--%>
@@ -313,10 +316,10 @@
 <%--        text-decoration: none;--%>
 <%--    }--%>
 
-<%--    a:hover {--%>
-<%--        color: rgb(216, 205, 143);--%>
-<%--        text-decoration: none;--%>
-<%--    }--%>
+    /*a:hover {*/
+    /*    color: rgb(216, 205, 143);*/
+    /*    text-decoration: none;*/
+    /*}*/
 
 </style>
 
@@ -425,21 +428,21 @@
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script defer type="text/javascript">
 
-    // const nav = document.querySelector("nav");
+    const header_front = document.querySelector(".header-front");
     //
-    // const gnbSub = document.querySelector(".gnb-sub");
+    const header_behind = document.querySelector(".header-behind");
     // // const header = document.querySelector(".header-wrapper");
     //
-    // nav.addEventListener("mouseover", function () {
-    //     gnbSub.classList.add("gnb-active");
-    //     gnbSub.style.bottom = "-100px";
-    //
-    // })
-    // nav.addEventListener("mouseout", function () {
-    //     gnbSub.classList.remove("gnb-active");
-    //     gnbSub.style.bottom = "0px";
-    //
-    // })
+    header_front.addEventListener("mouseover", function () {
+        header_behind.classList.add("gnb-active");
+        header_behind.style.top = "100px";
+
+    })
+    header_front.addEventListener("mouseout", function () {
+        header_behind.classList.remove("gnb-active");
+        header_behind.style.top = "0px";
+
+    })
     //
     // function navigo() {
     //     /*const main = document.querySelector('.main');*/

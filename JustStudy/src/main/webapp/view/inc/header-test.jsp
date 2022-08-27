@@ -13,8 +13,16 @@
         padding: 0;
     }
 
+    #logo  {
+        margin: 0 20px;
+
+        height: 100px;
+    }
+
     .header-wrapper {
+        width: 100%;
         position: fixed;
+        z-index: 1;
     }
 
     .header-front {
@@ -28,7 +36,7 @@
     }
 
     .ul-front-nav-left-wrapper {
-        height: 150px;
+        height: 100px;
 
         display: flex;
         flex-direction: row;
@@ -44,7 +52,7 @@
     }
 
     .ul-front-nav-right-wrapper {
-        height: 150px;
+        height: 100px;
 
         display: flex;
         flex-direction: row;
@@ -65,7 +73,7 @@
 
     /* behind*/
     .behind-sizebox {
-        margin-left: 300px;
+        margin-left: 290px;
     }
 
     .header-behind {
@@ -131,7 +139,7 @@
     .header-behind a {
         text-decoration: none;
         color: #bbbbbb;
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 
 
@@ -320,7 +328,7 @@
                 <li>
                     <div class="header-logo">
                         <a href="<c:url value="/board/MainPage"/>">
-                            <img id="logo" src="<c:url value="/img/inc/logo.png"/>" style="width: 150px; height: 150px">
+                            <img id="logo" src="<c:url value="/img/inc/logo.png"/>">
                         </a>
                     </div>
                 </li>

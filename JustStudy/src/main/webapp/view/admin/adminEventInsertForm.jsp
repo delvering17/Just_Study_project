@@ -20,38 +20,11 @@
       integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
       crossorigin="anonymous" referrerpolicy="no-referrer"/>
 <style>
-    .admin-event-insert-bg {
-        width: 100%;
-        height: 100%;
-    }
-
-    #headline {
-        width: 100%;
-        height: 50px;
-        background: #fff;
-        border-bottom: 1px solid rgb(184, 177, 177);
-        padding-left: 20px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    #headline > b {
-        width: fit-content;
-        font-size: 20px;
-        line-height: 50px;
-    }
-
-    #headline > input {
-        margin-right: 10px;
-    }
 
     #main {
-        width: 1100px;
-        height: 100%;
+        width: 100%;
+        height: fit-content;
         padding: 20px 20px;
-        overflow: auto;
     }
 
     #main > div:first-of-type > input[type=button] {
@@ -133,51 +106,44 @@
     }
 </style>
 
-
-<div class="admin-event-insert-bg">
-
-    <div id="headline">
-        <b>이벤트 추가</b>
-    </div>
-    <div id="main">
-        <form action="AdminEventInsertReg" name="myform" id="event-detail-form" method="post"
-              enctype="multipart/form-data" onsubmit="return check()">
-            <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
-                <tr>
-                    <th>제목</th>
-                    <td>
-                        <input type="text" name="title">
-                    </td>
-                </tr>
-                <tr>
-                    <th>이벤트 시작일</th>
-                    <td>
-                        <input type="date" id="event_startdate" name="event_startdate">
-                    </td>
-                </tr>
-                <tr>
-                    <th>이벤트 종료일</th>
-                    <td>
-                        <input type="date" id="event_enddate" name="event_enddate">
-                    </td>
-                </tr>
-                <tr>
-                    <th>이미지</th>
-                    <td>
-                        <input type="file" name="img">
-                    </td>
-                </tr>
-                <tr>
-                    <th>내용</th>
-                    <td>
-                        <input type="file" name="content">
-                    </td>
-                </tr>
-            </table>
-            <button type="submit" id="subbtn">추가</button>
-        </form>
-        <a href="AdminEventList">목록으로</a>
-    </div>
+<div id="main">
+    <form action="AdminEventInsertReg" name="myform" id="event-detail-form" method="post"
+          enctype="multipart/form-data" onsubmit="return check()">
+        <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+            <tr>
+                <th>제목</th>
+                <td>
+                    <input type="text" name="title">
+                </td>
+            </tr>
+            <tr>
+                <th>이벤트 시작일</th>
+                <td>
+                    <input type="date" id="event_startdate" name="event_startdate">
+                </td>
+            </tr>
+            <tr>
+                <th>이벤트 종료일</th>
+                <td>
+                    <input type="date" id="event_enddate" name="event_enddate">
+                </td>
+            </tr>
+            <tr>
+                <th>이미지</th>
+                <td>
+                    <input type="file" name="img">
+                </td>
+            </tr>
+            <tr>
+                <th>내용</th>
+                <td>
+                    <input type="file" name="content">
+                </td>
+            </tr>
+        </table>
+        <button type="submit" id="subbtn">추가</button>
+    </form>
+    <a href="AdminEventList">목록으로</a>
 </div>
 
 <script>

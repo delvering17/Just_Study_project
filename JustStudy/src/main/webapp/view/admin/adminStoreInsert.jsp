@@ -10,38 +10,10 @@
 
 <style type="text/css">
 
-    .admin-store-insert-bg {
-        width: 100%;
-        height: 100%;
-    }
-
-    #headline {
-        width: 100%;
-        height: 50px;
-        background: #fff;
-        border-bottom: 1px solid rgb(184, 177, 177);
-        padding-left: 20px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    #headline > b {
-        width: fit-content;
-        font-size: 20px;
-        line-height: 50px;
-    }
-
-    #headline > div > input {
-      margin-right: 10px;
-    }
-
     #main {
-        width: 1100px;
-        height: 100%;
+        width: 100%;
+        height: fit-content;
         padding: 20px 20px;
-        overflow: auto;
     }
 
     .admin-store-insert-table {
@@ -158,117 +130,106 @@
 
 </style>
 
-<div class="admin-store-insert-bg">
-
-    <div id="headline">
-        <b>지점 목록 > 지점 추가</b>
-        <div>
-          <input type="button" class="admin-store-save" value="저장">
-          <input type="button" class="admin-store-list" value="목록으로">
-        </div>
-    </div>
-
-    <div id="main">
-        <form action="AdminStoreInsertReg" method="post" enctype="multipart/form-data">
-            <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-store-insert-table">
-                <tr>
-                    <th>지역</th>
-                    <td>
-                        <select name="cityName">
-                            <option>서울</option>
-                            <option>경기</option>
-                            <option>부산</option>
-                            <option>대구</option>
-                            <option>인천</option>
-                            <option>광주</option>
-                            <option>대전</option>
-                            <option>울산</option>
-                            <option>세종</option>
-                            <option>강원</option>
-                            <option>충북</option>
-                            <option>충남</option>
-                            <option>전북</option>
-                            <option>전남</option>
-                            <option>경북</option>
-                            <option>경남</option>
-                            <option>제주</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th>지점명</th>
-                    <td><input type="text" name="branchName"/></td>
-                </tr>
-                <tr>
-                    <th>룸타입</th>
-                    <td>
-                        <%
-                            for (String room : "4인실,6인실,8인실,대회의실".split(",")) { %>
-                        <div>
-                            <input type="checkbox" name="roomType" value="<%=room%>"/>
-                            <div><%=room%>
-                            </div>
-                            <input type="button" name="roomMinus" value="-" disabled/>
-                            <input type="text" name="roomNum" value="1" disabled readonly>
-                            <input type="button" name="roomPlus" value="+" disabled/>
+<div id="main">
+    <form action="AdminStoreInsertReg" method="post" enctype="multipart/form-data">
+        <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-store-insert-table">
+            <tr>
+                <th>지역</th>
+                <td>
+                    <select name="cityName">
+                        <option>서울</option>
+                        <option>경기</option>
+                        <option>부산</option>
+                        <option>대구</option>
+                        <option>인천</option>
+                        <option>광주</option>
+                        <option>대전</option>
+                        <option>울산</option>
+                        <option>세종</option>
+                        <option>강원</option>
+                        <option>충북</option>
+                        <option>충남</option>
+                        <option>전북</option>
+                        <option>전남</option>
+                        <option>경북</option>
+                        <option>경남</option>
+                        <option>제주</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>지점명</th>
+                <td><input type="text" name="branchName"/></td>
+            </tr>
+            <tr>
+                <th>룸타입</th>
+                <td>
+                    <%
+                        for (String room : "4인실,6인실,8인실,대회의실".split(",")) { %>
+                    <div>
+                        <input type="checkbox" name="roomType" value="<%=room%>"/>
+                        <div><%=room%>
                         </div>
+                        <input type="button" name="roomMinus" value="-" disabled/>
+                        <input type="text" name="roomNum" value="1" disabled readonly>
+                        <input type="button" name="roomPlus" value="+" disabled/>
+                    </div>
 
-                        <%}%>
+                    <%}%>
 
-                    </td>
-                </tr>
-                <tr>
-                    <th>이용요금<br/>(1시간)</th>
-                    <td><input type="text" name="price"/>원</td>
-                </tr>
-                <tr>
-                    <th>운영 시간</th>
-                    <td>
-                        <select name="open">
-                            <c:forEach var="i" begin="0" end="24" step="1">
-                                <option>${i}</option>
-                            </c:forEach>
-                        </select>
-                        :00 ~
-                        <select name="close">
-                            <c:forEach var="i" begin="0" end="24" step="1">
-                                <option>${i}</option>
-                            </c:forEach>
-                        </select>
-                        :00
-                    </td>
-                </tr>
-                <tr>
-                    <th>매장 주소</th>
-                    <td>
-                        <input type="text" id="input-address1" name="address" readonly/>
-                        <input type="button" name="address-search" onclick="gofindAddress()" value="검색"/>
-                    </td>
-                </tr>
-                <tr>
-                    <th>상세 주소</th>
-                    <td><input type="text" id="input-address2" name="addressDetail"/></td>
-                </tr>
-                <tr>
-                    <th>전화번호</th>
-                    <td><input type="text" name="phone"/></td>
-                </tr>
-                <tr>
-                    <th>매장 사진</th>
-                    <td><input type="file" name="img"></td>
-                </tr>
-                <tr>
-                    <th>편의 시설</th>
-                    <td>
-                        <%for (String facility : "정수기,휴게실,흡연실,프린터,빔프로젝터,컴퓨터,주차,와이파이".split(",")) {%>
-                        <div><input type="checkbox" name="facilities" value="<%=facility%>"><%=facility%>
-                        </div>
-                        <%}%>
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>이용요금<br/>(1시간)</th>
+                <td><input type="text" name="price"/>원</td>
+            </tr>
+            <tr>
+                <th>운영 시간</th>
+                <td>
+                    <select name="open">
+                        <c:forEach var="i" begin="0" end="24" step="1">
+                            <option>${i}</option>
+                        </c:forEach>
+                    </select>
+                    :00 ~
+                    <select name="close">
+                        <c:forEach var="i" begin="0" end="24" step="1">
+                            <option>${i}</option>
+                        </c:forEach>
+                    </select>
+                    :00
+                </td>
+            </tr>
+            <tr>
+                <th>매장 주소</th>
+                <td>
+                    <input type="text" id="input-address1" name="address" readonly/>
+                    <input type="button" name="address-search" onclick="gofindAddress()" value="검색"/>
+                </td>
+            </tr>
+            <tr>
+                <th>상세 주소</th>
+                <td><input type="text" id="input-address2" name="addressDetail"/></td>
+            </tr>
+            <tr>
+                <th>전화번호</th>
+                <td><input type="text" name="phone"/></td>
+            </tr>
+            <tr>
+                <th>매장 사진</th>
+                <td><input type="file" name="img"></td>
+            </tr>
+            <tr>
+                <th>편의 시설</th>
+                <td>
+                    <%for (String facility : "정수기,휴게실,흡연실,프린터,빔프로젝터,컴퓨터,주차,와이파이".split(",")) {%>
+                    <div><input type="checkbox" name="facilities" value="<%=facility%>"><%=facility%>
+                    </div>
+                    <%}%>
+                </td>
+            </tr>
+        </table>
+    </form>
 </div>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

@@ -11,38 +11,11 @@
     $("#r5").attr("checked", true)
 </script>
 <style>
-    .admin-inquiry-detail-bg {
-        width: 100%;
-        height: 100%;
-    }
-
-    #headline {
-        width: 100%;
-        height: 50px;
-        background: #fff;
-        border-bottom: 1px solid rgb(184, 177, 177);
-        padding-left: 20px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    #headline > b {
-        width: fit-content;
-        font-size: 20px;
-        line-height: 50px;
-    }
-
-    #headline > input {
-        margin-right: 10px;
-    }
 
     #main {
-        width: 1100px;
-        height: 100%;
+        width: 100%;
+        height: fit-content;
         padding: 20px 20px;
-        overflow: auto;
     }
 
     #main > div:first-of-type > input[type=button] {
@@ -124,123 +97,116 @@
     }
 </style>
 
+<div id="main">
+    <h2>문의</h2>
+    <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+        <tr>
+            <th>문의 일자</th>
+            <td>${inquiryDTO.inquiry_date}</td>
+        </tr>
+        <tr>
+            <th>제목</th>
+            <td>${inquiryDTO.inquiry_title}</td>
+        </tr>
+        <tr>
+            <th>작성자</th>
+            <td>${inquiry_writer}</td>
+        </tr>
+        <tr>
+            <th>카테고리</th>
+            <td>${inquiryDTO.inquiry_category}</td>
+        </tr>
+        <tr>
+            <th>종류</th>
+            <td>${inquiryDTO.inquiry_type}</td>
+        </tr>
+        <tr>
+            <th>지점</th>
+            <td>${inquiryDTO.inquiry_branch}</td>
 
-<div class="admin-inquiry-detail-bg">
+        </tr>
+        <tr>
+            <th>답변 상태</th>
+            <c:choose>
+                <c:when test="${inquiryDTO.inquiry_state == 1}">
+                    <td>미답변</td>
+                </c:when>
+                <c:otherwise>
+                    <td>답변</td>
+                </c:otherwise>
+            </c:choose>
+        </tr>
+        <tr>
+            <th>문의 내용</th>
+            <td>${inquiryDTO.inquiry_content_String}</td>
+        </tr>
+    </table>
 
-    <div id="headline">
-        <b>1:1 문의 상세보기</b>
-    </div>
-    <div id="main">
-        <h2>문의</h2>
+    <h2>답변</h2>
+    <c:choose>
+    <c:when test="${inquiryDTO.inquiry_state == 2}">
+    <form id="form-answer">
+        <input type="hidden" name="input_purpose" value="${inquiryDTO.inquiry_id}"/>
+        <input type="hidden" name="input_id" value="${answerDTO.inquiry_id}"/>
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
             <tr>
-                <th>문의 일자</th>
-                <td>${inquiryDTO.inquiry_date}</td>
+                <th>답변 일자</th>
+                <td><input type="text" name="input_date" id="input-date" value="${answerDTO.inquiry_date}" readonly>
+                </td>
             </tr>
             <tr>
                 <th>제목</th>
-                <td>${inquiryDTO.inquiry_title}</td>
+                <td><input type="text" name="input_title" id="input-title" value="${answerDTO.inquiry_title}"></td>
             </tr>
             <tr>
-                <th>작성자</th>
-                <td>${inquiry_writer}</td>
+                <th>담당자</th>
+                <input type="hidden" name="input_writer" value="${answerDTO.inquiry_writer}">
+                <td><input type="text" id="input-writer" value="${answerWriterName}" readonly></td>
             </tr>
             <tr>
-                <th>카테고리</th>
-                <td>${inquiryDTO.inquiry_category}</td>
+                <th>답변 내용</th>
+                <td><textarea name="input_content" id="input-content" cols="30"
+                              rows="10">${answerDTO.inquiry_content}</textarea></td>
             </tr>
             <tr>
-                <th>종류</th>
-                <td>${inquiryDTO.inquiry_type}</td>
+                <td colspan="2">
+                    <button type="button" onclick="answerInsert()">수정</button>
+                    <button type="submit" formaction="AdminInquiryDelete" formmethod="get">삭제</button>
+                </td>
             </tr>
-            <tr>
-                <th>지점</th>
-                <td>${inquiryDTO.inquiry_branch}</td>
+            <tr></tr>
 
-            </tr>
-            <tr>
-                <th>답변 상태</th>
-                <c:choose>
-                    <c:when test="${inquiryDTO.inquiry_state == 1}">
-                        <td>미답변</td>
-                    </c:when>
-                    <c:otherwise>
-                        <td>답변</td>
-                    </c:otherwise>
-                </c:choose>
-            </tr>
-            <tr>
-                <th>문의 내용</th>
-                <td>${inquiryDTO.inquiry_content_String}</td>
-            </tr>
         </table>
 
-        <h2>답변</h2>
-        <c:choose>
-        <c:when test="${inquiryDTO.inquiry_state == 2}">
-        <form id="form-answer">
+        </c:when>
+        <c:otherwise>
+        <form action="AdminInquiryInsert" method="post" id="inquiry-form1">
             <input type="hidden" name="input_purpose" value="${inquiryDTO.inquiry_id}"/>
-            <input type="hidden" name="input_id" value="${answerDTO.inquiry_id}"/>
             <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
                 <tr>
-                    <th>답변 일자</th>
-                    <td><input type="text" name="input_date" id="input-date" value="${answerDTO.inquiry_date}" readonly>
-                    </td>
-                </tr>
-                <tr>
                     <th>제목</th>
-                    <td><input type="text" name="input_title" id="input-title" value="${answerDTO.inquiry_title}"></td>
+                    <td><input name="input_title" id="input_title1" type="text"></td>
                 </tr>
                 <tr>
                     <th>담당자</th>
-                    <input type="hidden" name="input_writer" value="${answerDTO.inquiry_writer}">
-                    <td><input type="text" id="input-writer" value="${answerWriterName}" readonly></td>
+                    <input type="hidden" name="input_writer" value="${sessionScope.login}" readonly>
+                    <td><input type="text" id="" value="${mem_realname}" readonly></td>
                 </tr>
                 <tr>
                     <th>답변 내용</th>
-                    <td><textarea name="input_content" id="input-content" cols="30"
-                                  rows="10">${answerDTO.inquiry_content}</textarea></td>
+                    <td><textarea name="input_content" id="input_content1" cols="30" rows="10"></textarea></td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <button type="button" onclick="answerInsert()">수정</button>
-                        <button type="submit" formaction="AdminInquiryDelete" formmethod="get">삭제</button>
+                        <button type="button" onclick="inquiryInsert()">답변</button>
                     </td>
                 </tr>
-                <tr></tr>
-
             </table>
+        </form>
+        </c:otherwise>
 
-            </c:when>
-            <c:otherwise>
-            <form action="AdminInquiryInsert" method="post" id="inquiry-form1">
-                <input type="hidden" name="input_purpose" value="${inquiryDTO.inquiry_id}"/>
-                <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
-                    <tr>
-                        <th>제목</th>
-                        <td><input name="input_title" id="input_title1" type="text"></td>
-                    </tr>
-                    <tr>
-                        <th>담당자</th>
-                        <input type="hidden" name="input_writer" value="${sessionScope.login}" readonly>
-                        <td><input type="text" id="" value="${mem_realname}" readonly></td>
-                    </tr>
-                    <tr>
-                        <th>답변 내용</th>
-                        <td><textarea name="input_content" id="input_content1" cols="30" rows="10"></textarea></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <button type="button" onclick="inquiryInsert()">답변</button>
-                        </td>
-                    </tr>
-                </table>
-            </form>
-            </c:otherwise>
-
-            </c:choose>
-            <a href="AdminInquiryList">목록으로</a>
-    </div>
+        </c:choose>
+        <a href="AdminInquiryList">목록으로</a>
 </div>
 
 <script type="text/javascript">

@@ -11,38 +11,11 @@
     $("#r5").attr("checked", true)
 </script>
 <style>
-.admin-inquiry-list-bg{
-    width: 100%;
-    height: 100%;
-}
-
-    #headline {
-        width: 100%;
-        height: 50px;
-        background: #fff;
-        border-bottom: 1px solid rgb(184, 177, 177);
-        padding-left: 20px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    #headline > b {
-        width: fit-content;
-        font-size: 20px;
-        line-height: 50px;
-    }
-
-    #headline > input {
-        margin-right: 10px;
-    }
 
     #main {
-        width: 1100px;
-        height: 100%;
+        width: 100%;
+        height: fit-content;
         padding: 20px 20px;
-        overflow: auto;
     }
 
     #main > div:first-of-type > input[type=button] {
@@ -123,47 +96,43 @@
     }
 </style>
 
-
-<div class="admin-inquiry-list-bg">
-
-    <div id="headline">
-        <b>1:1 문의 관리</b>
-    </div>
-
-    <div id="main">
-        <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+<div id="main">
+    <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+        <tr>
+            <th>문의 일자</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>카테고리</th>
+            <th>종류</th>
+            <th>지점</th>
+            <th>답변 상태</th>
+        </tr>
+        <c:forEach items="${inquiryUnansweredDTO}" var="inquiryUnanswered">
             <tr>
-                <th>문의 일자</th>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>카테고리</th>
-                <th>종류</th>
-                <th>지점</th>
-                <th>답변 상태</th>
+                <td>${inquiryUnanswered.inquiry_date}</td>
+                <td>
+                    <a href="AdminInquiryDetail?inquiry_id=${inquiryUnanswered.inquiry_id}">${inquiryUnanswered.inquiry_title}</a>
+                </td>
+                <td>${inquiryUnanswered.inquiry_writer}</td>
+                <td>${inquiryUnanswered.inquiry_category}</td>
+                <td>${inquiryUnanswered.inquiry_type}</td>
+                <td>${inquiryUnanswered.inquiry_branch}</td>
+                <c:choose>
+                    <c:when test="${inquiryUnanswered.inquiry_state == 1}">
+                        <td>미답변</td>
+                    </c:when>
+                    <c:otherwise>
+                        <td>답변</td>
+                    </c:otherwise>
+                </c:choose>
             </tr>
-            <c:forEach items="${inquiryUnansweredDTO}" var="inquiryUnanswered">
-                <tr>
-                    <td>${inquiryUnanswered.inquiry_date}</td>
-                    <td><a href="AdminInquiryDetail?inquiry_id=${inquiryUnanswered.inquiry_id}">${inquiryUnanswered.inquiry_title}</a></td>
-                    <td>${inquiryUnanswered.inquiry_writer}</td>
-                    <td>${inquiryUnanswered.inquiry_category}</td>
-                    <td>${inquiryUnanswered.inquiry_type}</td>
-                    <td>${inquiryUnanswered.inquiry_branch}</td>
-                    <c:choose>
-                        <c:when test="${inquiryUnanswered.inquiry_state == 1}">
-                            <td>미답변</td>
-                        </c:when>
-                        <c:otherwise>
-                            <td>답변</td>
-                        </c:otherwise>
-                    </c:choose>
-                </tr>
-            </c:forEach>
+        </c:forEach>
 
-            <c:forEach items="${arr_inquiryDTO}" var="inquiryDTO">
+        <c:forEach items="${arr_inquiryDTO}" var="inquiryDTO">
             <tr>
                 <td>${inquiryDTO.inquiry_date}</td>
-                <td><a href="AdminInquiryDetail?inquiry_id=${inquiryDTO.inquiry_id}">${inquiryDTO.inquiry_title}</a></td>
+                <td><a href="AdminInquiryDetail?inquiry_id=${inquiryDTO.inquiry_id}">${inquiryDTO.inquiry_title}</a>
+                </td>
                 <td>${inquiryDTO.inquiry_writer}</td>
                 <td>${inquiryDTO.inquiry_category}</td>
                 <td>${inquiryDTO.inquiry_type}</td>
@@ -177,16 +146,13 @@
                     </c:otherwise>
                 </c:choose>
             </tr>
-            </c:forEach>
-        </table>
-    </div>
+        </c:forEach>
+    </table>
 </div>
 
 <script type="text/javascript">
-        $(".admin-store-delete").click(function (){
-            alert($("input[name=branch]:checked").attr("id"))
+    $(".admin-store-delete").click(function () {
+        alert($("input[name=branch]:checked").attr("id"))
 
-        })
-
-
+    })
 </script>

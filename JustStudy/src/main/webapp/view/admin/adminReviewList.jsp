@@ -11,35 +11,10 @@
 </script>
 
 <style>
-
-    .admin-store-review-bg {
-        width: 100%;
-        height: 100%;
-    }
-
-    .admin-store-review-headline {
-        width: 100%;
-        height: 50px;
-        background: #fff;
-        border-bottom: 1px solid rgb(184, 177, 177);
-        padding-left: 20px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .admin-store-review-headline > b {
-        width: fit-content;
-        font-size: 20px;
-        line-height: 50px;
-    }
-
     .admin-store-review-main {
-        width: 1100px;
-        height: 100%;
+        width: 100%;
+        height: fit-content;
         padding: 20px 20px;
-        overflow: auto;
     }
 
     .admin-store-review-table {
@@ -92,11 +67,6 @@
 </style>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%ArrayList<ArrayList> totalList = (ArrayList<ArrayList>) request.getAttribute("totalList");%>
-
-<div class="admin-store-review-bg">
-    <div class="admin-store-review-headline">
-        <b>이용 후기</b>
-    </div>
 
     <div class="admin-store-review-main">
 
@@ -169,7 +139,6 @@
             <%}%>
         </table>
     </div>
-</div>
 
 <script type="text/javascript">
     $(".admin-store-review-search").click(function () {

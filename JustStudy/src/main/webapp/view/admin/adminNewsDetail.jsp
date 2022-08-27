@@ -13,34 +13,10 @@
 </script>
 <style>
 
-    .admin-news-detail-bg {
+    .admin-news-detail-main {
         width: 100%;
-        height: 100%;
-    }
-
-    .admin-news-detail-headline {
-        width: 100%;
-        height: 50px;
-        background: #fff;
-        border-bottom: 1px solid rgb(184, 177, 177);
-        padding-left: 20px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .admin-news-detail-headline > b {
-        width: fit-content;
-        font-size: 20px;
-        line-height: 50px;
-    }
-
-    .admin-news-detail-main{
-        width: 1100px;
-      height: 100%;
-      padding: 20px 20px;
-      overflow: auto;
+        height: fit-content;
+        padding: 20px 20px;
     }
 
     .news-title-area {
@@ -143,41 +119,35 @@
     }
 
 </style>
-<div class="admin-news-detail-bg">
 
-    <div class="admin-news-detail-headline">
-        <b>뉴스 > 상세보기</b>
+<div class="admin-news-detail-main">
+    <div class="news-title-area">
+        <p id="news-title">뉴스</p>
+        <hr class="title-line">
     </div>
 
-    <div class="admin-news-detail-main">
-        <div class="news-title-area">
-            <p id="news-title">뉴스</p>
-            <hr class="title-line">
+    <div class="news-status">
+        <h2> ${dto.news_title} </h2>
+        <p class="date" style="margin-top: 30px"> ${dto.news_reg_date_sdf}</p>
+
+    </div>
+    <hr style="width: 80%; height: 1px; margin-left: 10%; background: lightgray">
+
+
+    <div class="news-list-area">
+        <div class="news-img">
+            <img id="news-fileup-img" src="<c:url value="/img/news/" />${dto.news_img}" alt="">
         </div>
-
-        <div class="news-status">
-            <h2> ${dto.news_title} </h2>
-            <p class="date" style="margin-top: 30px"> ${dto.news_reg_date_sdf}</p>
-
+        <div class="news_content">
+            ${dto.news_content}
         </div>
-        <hr style="width: 80%; height: 1px; margin-left: 10%; background: lightgray">
+    </div>
 
 
-        <div class="news-list-area">
-            <div class="news-img">
-                <img id="news-fileup-img" src="<c:url value="/img/news/" />${dto.news_img}" alt="">
-            </div>
-            <div class="news_content">
-                ${dto.news_content}
-            </div>
-        </div>
+    <div class="listlink">
+        <a href="AdminNewsList">목록으로</a>
+        <a href="AdminNewsModifyForm?id=${dto.news_id}">수정</a>
+        <a href="AdminNewsDeleteReg?id=${dto.news_id}">삭제</a>
 
-
-        <div class="listlink">
-            <a href="AdminNewsList">목록으로</a>
-            <a href="AdminNewsModifyForm?id=${dto.news_id}">수정</a>
-            <a href="AdminNewsDeleteReg?id=${dto.news_id}">삭제</a>
-
-        </div>
     </div>
 </div>

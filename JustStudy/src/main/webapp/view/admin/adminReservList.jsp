@@ -17,34 +17,10 @@
 </script>
 
 <style>
-    .admin-reserv-list-bg {
-        width: 100%;
-        height: 100%;
-    }
-
-    .admin-reserv-list-headline {
-        width: 100%;
-        height: 50px;
-        background: #fff;
-        border-bottom: 1px solid rgb(184, 177, 177);
-        padding-left: 20px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .admin-reserv-list-headline > b {
-        width: fit-content;
-        font-size: 20px;
-        line-height: 50px;
-    }
-
     .admin-reserv-list-main {
-        width: 1100px;
-        height: 100%;
+        width: 100%;
+        height: fit-content;
         padding: 20px 20px;
-        overflow: auto;
     }
 
     .admin-reserv-list-table {
@@ -124,139 +100,135 @@
 
 </style>
 
-<div class="admin-reserv-list-bg">
+<div class="admin-reserv-list-main">
 
-    <div class="admin-reserv-list-headline">
-        <b>예약 목록</b>
+    <div>
+        <form action="AdminReservListSearch" class="admin-reserv-list-form">
+            <select name="city">
+                <option>전체</option>
+                <c:forTokens items="서울,경기,부산,대구,인천,광주,대전,울산,세종,강원,충북,충남,전북,전남,경북,경남,제주" var="city" delims=",">
+                    <option>${city}</option>
+                </c:forTokens>
+            </select>
+
+            <select name="branch">
+                <option>전체</option>
+            </select>
+
+            <input type="radio" name="admin-reserv-list-period" value="day"/>일일
+            <input type="radio" name="admin-reserv-list-period" value="dayBetweenDay"/>일간
+            <input type="radio" name="admin-reserv-list-period" value="month"/>월간
+            <input type="radio" name="admin-reserv-list-period" value="year"/>연간
+
+            <fmt:formatDate value="<%=new Date()%>" pattern="yyyy-MM-dd" var="today"/>
+
+            <input type="date" name="admin-reserv-list-start" value="${today}"/>
+            <input type="date" name="admin-reserv-list-end" value="${today}"/>
+
+            <select name="admin-reserv-list-year">
+                <option>2021</option>
+                <option>2022</option>
+            </select>
+            <select name="admin-reserv-list-month">
+                <c:forEach var="month" begin="1" end="12" step="1">
+                    <option>${month}</option>
+                </c:forEach>
+            </select>
+
+            <div>
+                <select name="admin-reserv-list-filter">
+                    <option value="id">ID</option>
+                    <option value="orderId">주문번호</option>
+                    <option value="resDate">주문일자</option>
+                    <option value="mem_userid">사용자ID</option>
+                    <option value="mem_realname">사용자이름</option>
+                    <option value="mem_nickname">사용자닉네임</option>
+                    <option value="room">룸타입</option>
+                    <option value="useDate">이용일자</option>
+                    <option value="time">시간</option>
+                    <option value="headcount">인원수</option>
+                    <option value="pay">결제금액</option>
+                    <option value="status">상태</option>
+                </select>
+                <input type="text" name="admin-reserv-list-word"/>
+                <button type="button" class="admin-reserv-list-search"><i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+        </form>
     </div>
 
-    <div class="admin-reserv-list-main">
+    <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-reserv-list-table">
+        <tr>
+            <th>ID</th>
+            <th>주문번호</th>
+            <th>주문일자</th>
+            <th>사용자ID</th>
+            <th>사용자<br/>닉네임</th>
+            <th>사용자<br/>이름</th>
+            <th>지역</th>
+            <th>지점</th>
+            <th>룸타입</th>
+            <th>이용일자</th>
+            <th>시간</th>
+            <th>인원수</th>
+            <th>결제금액</th>
+            <th>상태</th>
+            <th></th>
+        </tr>
+        <%
+            ArrayList<AdminReservDTO> totalList = (ArrayList<AdminReservDTO>) request.getAttribute("totalList");
 
-        <div>
-            <form action="AdminReservListSearch" class="admin-reserv-list-form">
-                <select name="city">
-                    <option>전체</option>
-                    <c:forTokens items="서울,경기,부산,대구,인천,광주,대전,울산,세종,강원,충북,충남,전북,전남,경북,경남,제주" var="city" delims=",">
-                        <option>${city}</option>
-                    </c:forTokens>
-                </select>
-
-                <select name="branch">
-                    <option>전체</option>
-                </select>
-
-                <input type="radio" name="admin-reserv-list-period" value="day"/>일일
-                <input type="radio" name="admin-reserv-list-period" value="dayBetweenDay"/>일간
-                <input type="radio" name="admin-reserv-list-period" value="month"/>월간
-                <input type="radio" name="admin-reserv-list-period" value="year"/>연간
-
-                <fmt:formatDate value="<%=new Date()%>" pattern="yyyy-MM-dd" var="today"/>
-
-                <input type="date" name="admin-reserv-list-start" value="${today}"/>
-                <input type="date" name="admin-reserv-list-end" value="${today}"/>
-
-                <select name="admin-reserv-list-year">
-                    <option>2021</option>
-                    <option>2022</option>
-                </select>
-                <select name="admin-reserv-list-month">
-                    <c:forEach var="month" begin="1" end="12" step="1">
-                        <option>${month}</option>
-                    </c:forEach>
-                </select>
-
-                <div>
-                    <select name="admin-reserv-list-filter">
-                        <option value="id">ID</option>
-                        <option value="orderId">주문번호</option>
-                        <option value="resDate">주문일자</option>
-                        <option value="mem_userid">사용자ID</option>
-                        <option value="mem_realname">사용자이름</option>
-                        <option value="mem_nickname">사용자닉네임</option>
-                        <option value="room">룸타입</option>
-                        <option value="useDate">이용일자</option>
-                        <option value="time">시간</option>
-                        <option value="headcount">인원수</option>
-                        <option value="pay">결제금액</option>
-                        <option value="status">상태</option>
-                    </select>
-                    <input type="text" name="admin-reserv-list-word"/>
-                    <button type="button" class="admin-reserv-list-search"><i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
-                </div>
-            </form>
-        </div>
-
-        <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-reserv-list-table">
+            if (totalList.size() != 0) {
+                for (AdminReservDTO adminReservDTO : totalList) {%>
+        <form action="AdminReservationCancelForm">
             <tr>
-                <th>ID</th>
-                <th>주문번호</th>
-                <th>주문일자</th>
-                <th>사용자ID</th>
-                <th>사용자<br/>닉네임</th>
-                <th>사용자<br/>이름</th>
-                <th>지역</th>
-                <th>지점</th>
-                <th>룸타입</th>
-                <th>이용일자</th>
-                <th>시간</th>
-                <th>인원수</th>
-                <th>결제금액</th>
-                <th>상태</th>
-                <th></th>
+                <input type="hidden" name="id" value="<%=adminReservDTO.getId()%>"/>
+                <td><%=adminReservDTO.getId()%>
+                </td>
+                <td><%=adminReservDTO.getOrderId()%>
+                </td>
+                <td><%=adminReservDTO.getResDate()%>
+                </td>
+                <td><%=adminReservDTO.getMem_userid()%>
+                </td>
+                <td><%=adminReservDTO.getMem_nickname()%>
+                </td>
+                <td><%=adminReservDTO.getMem_realname()%>
+                </td>
+                <td><%=adminReservDTO.getCity()%>
+                </td>
+                <td><%=adminReservDTO.getBranch()%>
+                </td>
+                <td><%=adminReservDTO.getRoom()%>
+                </td>
+                <td><%=adminReservDTO.getUseDate()%>
+                </td>
+                <td><%=adminReservDTO.getTime().replaceAll(", ", "<br/>")%>
+                </td>
+                <td><%=adminReservDTO.getHeadcount()%>
+                </td>
+                <td><%=adminReservDTO.getPay()%>
+                </td>
+                <td><%=adminReservDTO.getStatus()%>
+                </td>
+                <td>
+                    <%if (adminReservDTO.getStatus().equals("결제완료")) {%>
+                    <input type="submit" value="취소"/>
+                    <%} else if (adminReservDTO.getStatus().equals("관리자취소")) {%>
+                    <%=adminReservDTO.getCancelReason()%>
+                    <%}%>
+                </td>
             </tr>
-                <%
-                    ArrayList<AdminReservDTO> totalList = (ArrayList<AdminReservDTO>) request.getAttribute("totalList");
-
-                    if(totalList.size() != 0){
-                    for (AdminReservDTO adminReservDTO : totalList) {%>
-            <form action="AdminReservationCancelForm">
-                <tr>
-                    <input type="hidden" name="id" value="<%=adminReservDTO.getId()%>"/>
-                    <td><%=adminReservDTO.getId()%>
-                    </td>
-                    <td><%=adminReservDTO.getOrderId()%>
-                    </td>
-                    <td><%=adminReservDTO.getResDate()%>
-                    </td>
-                    <td><%=adminReservDTO.getMem_userid()%>
-                    </td>
-                    <td><%=adminReservDTO.getMem_nickname()%>
-                    </td>
-                    <td><%=adminReservDTO.getMem_realname()%>
-                    </td>
-                    <td><%=adminReservDTO.getCity()%>
-                    </td>
-                    <td><%=adminReservDTO.getBranch()%>
-                    </td>
-                    <td><%=adminReservDTO.getRoom()%>
-                    </td>
-                    <td><%=adminReservDTO.getUseDate()%>
-                    </td>
-                    <td><%=adminReservDTO.getTime().replaceAll(", ", "<br/>")%>
-                    </td>
-                    <td><%=adminReservDTO.getHeadcount()%>
-                    </td>
-                    <td><%=adminReservDTO.getPay()%>
-                    </td>
-                    <td><%=adminReservDTO.getStatus()%>
-                    </td>
-                    <td>
-                        <%if (adminReservDTO.getStatus().equals("결제완료")) {%>
-                            <input type="submit" value="취소"/>
-                        <%} else if (adminReservDTO.getStatus().equals("관리자취소")) {%>
-                        <%=adminReservDTO.getCancelReason()%>
-                        <%}%>
-                    </td>
-                </tr>
-            </form>
-            <%}} else{%>
-                <tr>
-                    <td colspan="15">일치하는 항목이 없습니다.</td>
-                </tr>
-            <%}%>
-        </table>
-    </div>
+        </form>
+        <%
+            }
+        } else {
+        %>
+        <tr>
+            <td colspan="15">일치하는 항목이 없습니다.</td>
+        </tr>
+        <%}%>
+    </table>
 </div>
 
 <script type="text/javascript">

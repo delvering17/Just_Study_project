@@ -10,35 +10,10 @@
     $("#r5").attr("checked", true)
 </script>
 <style>
-
-    .admin-notice-detail-bg {
+    .admin-notice-detail-main {
         width: 100%;
-        height: 100%;
-    }
-
-    .admin-notice-detail-headline {
-        width: 100%;
-        height: 50px;
-        background: #fff;
-        border-bottom: 1px solid rgb(184, 177, 177);
-        padding-left: 20px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .admin-notice-detail-headline > b {
-        width: fit-content;
-        font-size: 20px;
-        line-height: 50px;
-    }
-
-    .admin-notice-detail-main{
-        width: 1100px;
-        height: 100%;
+        height: fit-content;
         padding: 20px 20px;
-        overflow: auto;
     }
 
     .event-title-area {
@@ -147,39 +122,32 @@
 
 </style>
 
-<div class="admin-notice-detail-bg">
-
-    <div class="admin-notice-detail-headline">
-        <b>공지사항 > 상세보기</b>
+<div class="admin-notice-detail-main">
+    <div class="event-title-area">
+        <p id="event-title">공지사항</p>
+        <hr class="title-line">
     </div>
 
-    <div class="admin-notice-detail-main">
-        <div class="event-title-area">
-            <p id="event-title">공지사항</p>
-            <hr class="title-line">
-        </div>
+    <div class="event-status">
+        <h2> ${dto.title} </h2>
+        <p class="date" style="margin-top: 30px"> ${dto.reg_date_sdf}</p>
 
-        <div class="event-status">
-            <h2> ${dto.title} </h2>
-            <p class="date" style="margin-top: 30px"> ${dto.reg_date_sdf}</p>
-
-        </div>
-        <hr style="width: 80%; height: 1px; margin-left: 10%; background: lightgray">
+    </div>
+    <hr style="width: 80%; height: 1px; margin-left: 10%; background: lightgray">
 
 
-        <div class="event-list-area">
-            <%--    <div class="event-upload-img">  TODO 이미지 파일 업로드 되는 위치
-                    <img style="width: 100%" src="<%=request.getContextPath()%>/img/background.jpeg">
-                </div>--%>
-            ${dto.content}
-        </div>
+    <div class="event-list-area">
+        <%--    <div class="event-upload-img">  TODO 이미지 파일 업로드 되는 위치
+                <img style="width: 100%" src="<%=request.getContextPath()%>/img/background.jpeg">
+            </div>--%>
+        ${dto.content}
+    </div>
 
 
-        <div class="listlink">
-            <a href="AdminNoticeList">목록으로</a>
-            <a href="AdminNoticeModifyForm?id=${dto.id}">수정</a>
-            <a href="AdminNoticeDeleteReg?id=${dto.id}">삭제</a>
+    <div class="listlink">
+        <a href="AdminNoticeList">목록으로</a>
+        <a href="AdminNoticeModifyForm?id=${dto.id}">수정</a>
+        <a href="AdminNoticeDeleteReg?id=${dto.id}">삭제</a>
 
-        </div>
     </div>
 </div>

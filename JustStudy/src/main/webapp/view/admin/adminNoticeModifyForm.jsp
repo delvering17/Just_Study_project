@@ -16,38 +16,11 @@
       integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
       crossorigin="anonymous" referrerpolicy="no-referrer"/>
 <style>
-    .admin-notice-modify-bg {
-        width: 100%;
-        height: 100%;
-    }
-
-    #headline {
-        width: 100%;
-        height: 50px;
-        background: #fff;
-        border-bottom: 1px solid rgb(184, 177, 177);
-        padding-left: 20px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    #headline > b {
-        width: fit-content;
-        font-size: 20px;
-        line-height: 50px;
-    }
-
-    #headline > input {
-        margin-right: 10px;
-    }
 
     #main {
-        width: 1100px;
-        height: 100%;
+        width: 100%;
+        height: fit-content;
         padding: 20px 20px;
-        overflow: auto;
     }
 
     #main > div:first-of-type > input[type=button] {
@@ -128,32 +101,25 @@
     }
 </style>
 
-
-<div class="admin-notice-modify-bg">
-
-    <div id="headline">
-        <b>공지사항 수정</b>
-    </div>
-
-    <div id="main">
-        <form action="AdminNoticeModifyReg" name="myform" onsubmit="return check()">
-            <input type="hidden" name="id" value="${dto.id}">
-            <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
-                <tr>
-                    <td>타이틀</td>
-                    <td colspan="3"><input type="text" name="title" value="${dto.title}"></td>
-                </tr>
-                <tr>
-                    <td>내용</td>
-                    <td colspan="3"><textarea name="content" cols="50" rows="10">${dto.content}</textarea></td>
-                </tr>
-                <tr>
-                    <td colspan="4"><input type="submit" value="등록"></td>
-                </tr>
-            </table>
-        </form>
-    </div>
+<div id="main">
+    <form action="AdminNoticeModifyReg" name="myform" onsubmit="return check()">
+        <input type="hidden" name="id" value="${dto.id}">
+        <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+            <tr>
+                <td>타이틀</td>
+                <td colspan="3"><input type="text" name="title" value="${dto.title}"></td>
+            </tr>
+            <tr>
+                <td>내용</td>
+                <td colspan="3"><textarea name="content" cols="50" rows="10">${dto.content}</textarea></td>
+            </tr>
+            <tr>
+                <td colspan="4"><input type="submit" value="등록"></td>
+            </tr>
+        </table>
+    </form>
 </div>
+
 
 <script>
     function check() {

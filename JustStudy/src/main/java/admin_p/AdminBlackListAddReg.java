@@ -16,19 +16,14 @@ public class AdminBlackListAddReg implements AdminService{
         String black_id = request.getParameter("black_id");
         String black_reason = request.getParameter("black_reason");
 
-        if(black_reason==""){
-            String msg = "사유를 적어주세요";
-            request.setAttribute("adminUrl","alert.jsp");
-            request.setAttribute("msg", msg);
-            request.setAttribute("goUrl","AdminBlackListAdd?user="+black_id);
+        if(black_reason.trim().equals("")) {
 
-        }else if(black_reason.isBlank()) {
-            String msg = "공백으로만 수정할 수 없습니다";
+            String msg = "사유를 적어주세요";
             request.setAttribute("adminUrl", "alert.jsp");
             request.setAttribute("msg", msg);
-            request.setAttribute("goUrl", "AdminBlackListAdd?user="+black_id);
-            
-        }else{
+            request.setAttribute("goUrl", "AdminBlackListAdd?user=" + black_id);
+
+        } else{
             BlackDTO blackListData = new BlackDTO();
             blackListData.setBlack_id(Integer.parseInt(request.getParameter("black_id")));
             blackListData.setBlack_reason(request.getParameter("black_reason"));

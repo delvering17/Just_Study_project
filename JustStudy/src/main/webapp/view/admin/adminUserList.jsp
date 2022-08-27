@@ -119,10 +119,8 @@
             margin-right: 5px;
         }
 
-        tr:nth-of-type(5),
-        tr:nth-of-type(6),
-        tr:nth-of-type(9),
-        tr:nth-of-type(10){
+        tr:nth-of-type(4n+1),
+        tr:nth-of-type(4n+2){
             background: rgba(227, 233, 240, 0.726);
         }
 
@@ -243,25 +241,22 @@
                 <th rowspan="2">회원번호</th>
                 <th>아이디</th>
                 <th>이름</th>
-                <th rowspan="2">SNS로그인</th>
                 <th rowspan="2">주소</th>
                 <th rowspan="2">상세주소</th>
                 <th rowspan="2">권한</th>
                 <th rowspan="2">관리</th>
             </tr>
             <tr>
-                <th>비밀번호</th>
+                <th>SNS</th>
                 <th>닉네임</th>
             </tr>
 
             <c:forEach items="${adminData}" var="i">
                 <tr>
                     <form action="" method="">
-                        <th rowspan="2"><input type="hidden" name="user" value="${i.mem_id}">${i.mem_id}
-                        </th>
+                        <th rowspan="2"><input type="hidden" name="user" value="${i.mem_id}">${i.mem_id}</th>
                         <td>${i.mem_userid}</td>
                         <td>${i.mem_realname}</td>
-                        <td rowspan="2">${i.mem_social}</td>
                         <td rowspan="2">${i.mem_address1}</td>
                         <td rowspan="2">${i.mem_address2}</td>
                         <td rowspan="2">${i.mem_level}</td>

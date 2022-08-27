@@ -17,6 +17,7 @@ public class AdminPage implements AdminService{
 
         LocalDate now = LocalDate.now();
         int unanswered = 0;
+        int today_Reserv = 0;
 
         ArrayList<TodayReservationDTO> todayReservation = new ReservationDAO().todayList(now);
         ArrayList<InquiryDTO> inquiryUnansweredDTO = new InquiryDAO().inquiryUnanswered();
@@ -25,8 +26,15 @@ public class AdminPage implements AdminService{
             unanswered = inquiryUnansweredDTO.size();
         }
 
+        if(todayReservation!=null){
+            today_Reserv = todayReservation.size();
+        }
+
+
+
         request.setAttribute("todayReservation",todayReservation);
         request.setAttribute("unanswered", unanswered);
+        request.setAttribute("today_Reserv", today_Reserv);
         request.setAttribute("adminUrl","adminMain.jsp");
     }
 }

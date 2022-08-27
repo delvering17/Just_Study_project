@@ -119,7 +119,8 @@ public class AdminReservDAO {
 
         ArrayList<AdminReservDTO> res = new ArrayList<AdminReservDTO>();
 
-        sql="select mem_userid, mem_realname, mem_nickname, city, branch, time, room, useDate, pay from reservation join member on reservation.userId = member.mem_id";
+        sql="select mem_userid, mem_realname, mem_nickname, city, branch, time, room, useDate, pay from reservation" +
+                " join member on reservation.userId = member.mem_id where status='결제완료'";
 
         try {
             ptmt = con.prepareStatement(sql);

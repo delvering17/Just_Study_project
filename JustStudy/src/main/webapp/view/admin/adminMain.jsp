@@ -48,8 +48,16 @@
             height: 20px;
         }
 
+        .admin-main-bg tr:nth-of-type(2n+3){
+            background: rgba(227, 233, 240, 0.726);
+        }
+
         .admin-main-bg tr:nth-of-type(1) > th{
             height: 20px;
+        }
+
+        #noReserv{
+            text-align: center;
         }
 
         .admin-main-bg th{
@@ -90,9 +98,9 @@
                         <td><button type="submit">상세보기</button></td>
                     </form>
                 </tr>
-                <c:if test="${unanswered==0}">
-                    <tr>
-                        <th>오늘 예약이 없습니다</th>
+                <c:if test="${today_Reserv==0}">
+                    <tr id="noReserv">
+                        <th colspan="4">오늘 예약이 없습니다</th>
                     </tr>
                 </c:if>
             </c:forEach>

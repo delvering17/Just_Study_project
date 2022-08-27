@@ -291,7 +291,7 @@ public class ReservationDAO {
     public ArrayList<TodayReservationDTO> todayList(LocalDate useDate) {
 
         ArrayList<TodayReservationDTO> res = new ArrayList<TodayReservationDTO>();
-        sql = "select city, branch, COUNT(id) as cnt from reservation where usedate = ? group by branch order by COUNT(id) desc";
+        sql = "select city, branch, COUNT(id) as cnt from reservation where usedate = ? and status='결제완료' group by branch order by COUNT(id) desc";
 
         try {
             ptmt = con.prepareStatement(sql);

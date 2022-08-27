@@ -248,10 +248,10 @@
         let input_title1 = $('#input_title1').val()
         let input_content1 = $('#input_content1').val()
 
-        if(input_title1 === '') {
+        if(input_title1.trim() === '') {
             alert('제목을 입력해주세요.')
             $('#input_title1').focus()
-        } else if(input_content1 === '') {
+        } else if(input_content1.trim() === '') {
             alert('내용을 입력해주세요.')
             $('#input_content1').focus()
         } else {

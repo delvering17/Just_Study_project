@@ -131,17 +131,11 @@
             input_branch: $("#input_branch option:selected").val()
         }
 
-        if(form_data.input_title === '') {
+        if(form_data.input_title.trim() === '') {
             alert('빈 칸을 입력해주세요.')
             $('#input-title').focus()
-        } else if(/\s/g.test($('#input-title').val())) {
-            alert('문의제목 공백을 제거해 주세요')
-            $('#input-title').focus()
-        } else if(form_data.input_content === '') {
+        } else if(form_data.input_content.trim() === '') {
             alert('빈 칸을 입력해주세요.')
-            $('#input-content').focus()
-        } else if(/\s/g.test($('#input-content').val())) {
-            alert('문의내용 공백을 제거해 주세요')
             $('#input-content').focus()
         } else {
             $.ajax({

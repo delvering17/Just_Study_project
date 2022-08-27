@@ -405,7 +405,6 @@
         height: 30px;
     }
 
-
     .studyroom-reserv-paylist > div > div > div:last-of-type {
         text-align: right;
         font-size: 1.3rem;
@@ -850,10 +849,18 @@
                     }
                 })
             }
+
+            $(".studyroom-reserv-totalprice").html("0")
         });
 
-        $(document).on("change", "input[name=\"time\"]", function (){
+        $(document).on("click", ".studyroom-reserv-innerlist-time > label", function (){
+            if(document.querySelectorAll('input[type=checkbox][name=time]:checked').length == 1
+            && $("input[name=time]").eq($(this).index(".studyroom-reserv-innerlist-time > label")).prop("checked")){
+                $(".studyroom-reserv-totalprice").html("0")
+            }
+        })
 
+        $(document).on("change", "input[name=\"time\"]", function (){
             if(document.querySelector('input[type=checkbox][name=time]:checked+label>div>div:last-of-type') != null){
                 let str = document.querySelector('input[type=checkbox][name=time]:checked+label>div>div:last-of-type').innerHTML
                     + ((document.querySelectorAll('input[type=checkbox][name=time]:checked').length - 1) > 0 ? " 외 "+(document.querySelectorAll('input[type=checkbox][name=time]:checked').length - 1)+"건" : "")

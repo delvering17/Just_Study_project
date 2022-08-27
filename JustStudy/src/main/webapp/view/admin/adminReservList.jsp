@@ -14,6 +14,8 @@
 
 <script type="text/javascript">
     $("#r4").attr("checked", true)
+
+    $(".admin-template-header>b").html("예약 목록")
 </script>
 
 <style>
@@ -24,9 +26,11 @@
     }
 
     .admin-reserv-list-table {
-        width: 1000px;
+        width: 1101px;
         border: 1px solid rgb(122, 115, 115);
         margin-top: 10px;
+        table-layout: fixed;
+        word-break: break-all;
     }
 
     .admin-reserv-list-table th {
@@ -34,32 +38,36 @@
         font-size: 13px;
     }
 
-    .admin-reserv-list-table th:nth-of-type(1) {
-        width: 3%
+    .admin-reserv-list-table th:nth-of-type(1){
+        width: 25px;
+    }
+    .admin-reserv-list-table th:nth-of-type(2),
+    .admin-reserv-list-table th:nth-of-type(4){
+        width: 125px;
     }
 
-    /*
-        .admin-reserv-list-table th:nth-of-type(5),
-        .admin-reserv-list-table th:nth-of-type(6),
-        .admin-reserv-list-table th:nth-of-type(11),
-        .admin-reserv-list-table th:nth-of-type(12),
-        .admin-reserv-list-table th:nth-of-type(13),
-        .admin-reserv-list-table th:nth-of-type(14){
-            width: 6%;
-        }
+    .admin-reserv-list-table th:nth-of-type(3),
+    .admin-reserv-list-table th:nth-of-type(5),
+    .admin-reserv-list-table th:nth-of-type(8),
+    .admin-reserv-list-table th:nth-of-type(9),
+    .admin-reserv-list-table th:nth-of-type(10){
+        width: 89px;
+    }
 
-        .admin-reserv-list-table th:nth-of-type(2),
-        .admin-reserv-list-table th:nth-of-type(3),
-        .admin-reserv-list-table th:nth-of-type(10){
-            width: 12%;
-        }
+    .admin-reserv-list-table th:nth-of-type(6),
+    .admin-reserv-list-table th:nth-of-type(7),
+    .admin-reserv-list-table th:nth-of-type(11),
+    .admin-reserv-list-table th:nth-of-type(12) {
+        width: 50px;
+    }
 
-        .admin-reserv-list-table th:nth-of-type(4),
-        .admin-reserv-list-table th:nth-of-type(7),
-        .admin-reserv-list-table th:nth-of-type(8),
-        .admin-reserv-list-table th:nth-of-type(9){
-            width: 9%;
-        }*/
+    .admin-reserv-list-table th:nth-of-type(13),
+    .admin-reserv-list-table th:nth-of-type(14){
+        width: 69px;
+    }
+    .admin-reserv-list-table th:nth-of-type(15){
+        width: 42px;
+    }
 
     .admin-reserv-list-table td {
         border: 1px solid rgb(97, 88, 88);

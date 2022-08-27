@@ -26,7 +26,7 @@
     }
 
     .admin-reserv-list-table {
-        width: 1101px;
+        width: 1117px;
         border: 1px solid rgb(122, 115, 115);
         margin-top: 10px;
         table-layout: fixed;
@@ -63,7 +63,7 @@
 
     .admin-reserv-list-table th:nth-of-type(13),
     .admin-reserv-list-table th:nth-of-type(14){
-        width: 69px;
+        width: 77px;
     }
     .admin-reserv-list-table th:nth-of-type(15){
         width: 42px;

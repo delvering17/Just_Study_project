@@ -33,7 +33,6 @@
         width: 1200px;
         position: relative;
         display: flex;
-        margin: 20px auto;
 
         /* align-items: center;
         flex-direction: row; */
@@ -41,8 +40,14 @@
     }
 
     .top-left {
+        margin: 40px 0;
         width: 300px;
         height: 100px;
+    }
+
+    .top-left-review > p {
+        margin-top: 20px;
+        margin-bottom: 0;
     }
 
     .top-right {
@@ -67,10 +72,13 @@
         width: 800px;
         background: #ff0;
         margin-bottom: 40px;
+
+        border-top: 1px solid #bbbbbb ;
     }
 
     .items-header {
         font-size: 2rem;
+        font-weight: 600;
         margin-bottom: 40px;
     }
 
@@ -152,6 +160,26 @@
         background: #f00;
     }
 
+    .facilities-item > i {
+        font-size: 2.8rem;
+    }
+
+    .facilities-item > p {
+        margin-top: 15px;
+        font-size: 1.2rem;
+    }
+
+    #bottom-map {
+        z-index: 0;
+    }
+
+    #branch-position-map {
+        width: 800px;
+        height: 300px;
+
+        z-index: 1;
+    }
+
     #bottom-review {
     }
 
@@ -185,10 +213,8 @@
                 <div class="top-left-review">
                     <p>${reviewAverage}점</p>
                     <a href="">${reviewTotal}개 리뷰</a>
+
                 </div>
-            </div>
-            <div class="top-right">
-                <h4>${branchDTO.address}</h4>
             </div>
         </div>
         <div class="branch-info-bottom">
@@ -211,22 +237,48 @@
                 <div class="facilities-item-wrapper">
                     <c:forEach items="${facilities}" var="fac">
                         <div class="facilities-item">
-                            ${fac}
+                            <c:choose>
+                                <c:when test="${fac eq '정수기'}">
+                                    <i class="fa-solid fa-glass-water"></i>
+                                </c:when>
+                                <c:when test="${fac eq '휴게실'}">
+                                    <i class="fas fa-couch"></i>
+                                </c:when>
+                                <c:when test="${fac eq '흡연실'}">
+                                    <i class="fas fa-smoking"></i>
+                                </c:when>
+                                <c:when test="${fac eq '프린터'}">
+                                    <i class="fas fa-print"></i>
+                                </c:when>
+                                <c:when test="${fac eq '빔프로젝터'}">
+                                    <i class="fas fa-video"></i>
+                                </c:when>
+                                <c:when test="${fac eq '컴퓨터'}">
+                                    <i class="fas fa-desktop"></i>
+                                </c:when>
+                                <c:when test="${fac eq '주차'}">
+                                    <i class="fas fa-parking"></i>
+                                </c:when>
+                                <c:when test="${fac eq '와이파이'}">
+                                    <i class="fas fa-wifi"></i>
+                                </c:when>
+                            </c:choose>
+                            <p>${fac}</p>
                         </div>
                     </c:forEach>
-
                 </div>
             </div>
             <div class="branch-info-bottom-items" id="bottom-map">
                 <p class="items-header">위치</p>
                 <div>
                     <p>${branchDTO.address}</p>
+                    <p>${branchDTO.addressDetail}</p>
+
                 </div>
-                <div class="branch-info-bottom-items" id="branch-position-map"></div>
+                <div id="branch-position-map"></div>
             </div>
             <div class="branch-info-bottom-items" id="bottom-review">
                 <p class="items-header">후기</p>
-                <hr />
                 <c:forEach items="${reviewList}" var="review" varStatus="no">
                     <div class="review-item">
                         <p class="review-id">${review.userNickname}</p>
@@ -240,6 +292,8 @@
     </div>
 </div>
 </body>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	ff02c77cc518953296a556a4691cd2f8&libraries=services"></script>
 <script type="text/javascript">
     $("#btn-reservation").click(function (){
         location.href = "../reservation/Studyroom?city=${branchDTO.city}&branch=${branchDTO.name}"
@@ -249,5 +303,24 @@
         location.href = "../mypage/MypageInquiryInsertForm?inquiry_category=예약&inquiry_branch=${branchDTO.name}"
     })
 
+
+    var mapContainer = document.getElementById('branch-position-map'), // 지도를 표시할 div
+        mapOption = {
+            center: new kakao.maps.LatLng(${branchDTO.latitude}, ${branchDTO.longitude}), // 지도의 중심좌표
+            level: 8 // 지도의 확대 레벨
+        };
+
+    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+    // 마커가 표시될 위치입니다
+    var markerPosition  = new kakao.maps.LatLng(${branchDTO.latitude}, ${branchDTO.longitude});
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        position: markerPosition
+    });
+
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker.setMap(map);
 
 </script>

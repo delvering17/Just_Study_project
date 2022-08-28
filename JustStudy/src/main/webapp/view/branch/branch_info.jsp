@@ -287,6 +287,9 @@
                         <div class="review-content">${review.content}</div>
                     </div>
                 </c:forEach>
+                <c:if test="${reviewList.size() eq 0}">
+                    <p>후기가 없습니다.</p>
+                </c:if>
             </div>
         </div>
     </div>

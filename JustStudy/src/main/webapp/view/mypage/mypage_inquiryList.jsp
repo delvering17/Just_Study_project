@@ -115,10 +115,11 @@
 
 
     .mypage-inquiry-main {
-        width: 100%;
+        width: 800px;
     }
 
     .mypage-inquiry-table {
+        width: 800px;
         margin-top: 20px;
         margin-bottom: 30px;
         table-layout: fixed;
@@ -132,17 +133,17 @@
     }
 
     .mypage-inquiry-table > tbody > tr > td:nth-of-type(1) {
-        width: 40%;
+        width: 35%;
     }
 
     .mypage-inquiry-table > tbody > tr > td:nth-of-type(2),
     .mypage-inquiry-table > tbody > tr > td:nth-of-type(3),
     .mypage-inquiry-table > tbody > tr > td:nth-of-type(5) {
-        width: 10%;
+        width: 15%;
     }
 
     .mypage-inquiry-table > tbody > tr > td:nth-of-type(4) {
-        width: 30%;
+        width: 20%;
     }
 
     .mypage-inquiry-table > tbody > tr:nth-of-type(1) {
@@ -240,7 +241,7 @@
                     <td><a class="btn-Detail" onclick="goDetail(${inquiryDTO.inquiry_id})">${inquiryDTO.inquiry_title}</a></td>
                     <td>${inquiryDTO.inquiry_category}</td>
                     <td>${inquiryDTO.inquiry_type}</td>
-                    <td>${inquiryDTO.inquiry_date_String}}</td>
+                    <td>${inquiryDTO.inquiry_date_String}</td>
                     <c:choose>
                         <c:when test="${inquiryDTO.inquiry_state eq 1}">
                             <td>미답변</td>

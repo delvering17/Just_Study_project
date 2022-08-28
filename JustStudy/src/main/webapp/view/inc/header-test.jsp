@@ -148,7 +148,10 @@
         font-size: 1rem;
     }
 
-
+    .header-icon {
+        color: black;
+        text-decoration: none;
+    }
 
 
     <%--    .wrapper * {--%>
@@ -352,18 +355,18 @@
                     <ul class="ul-header ul-front-nav-right-wrapper">
                         <c:choose>
                             <c:when test="${sessionScope.login == null}">
-                                <li><a href="../member/MemberLoginForm" ><i class="fa-solid fa-user"></i></a></li>
+                                <li><a href="../member/MemberLoginForm" ><i class="header-icon fa-solid fa-user"></i></a></li>
                             </c:when>
                             <c:otherwise>
-                                <li><a href="../member/MemberLogout"><i class="fa-solid fa-door-open"></i></a></li>
+                                <li><a href="../member/MemberLogout"><i class="header-icon fa-solid fa-door-open"></i></a></li>
                             </c:otherwise>
                         </c:choose>
                         <c:choose>
                             <c:when test="${sessionScope.login == null}">
-                                <li><a href="../member/MemberSigninForm" >회원가입</a></li>
+                                <li><a class="header-icon" href="../member/MemberSigninForm" >회원가입</a></li>
                             </c:when>
                             <c:otherwise>
-                                <li><a href="../mypage/MypageInfomationModifyForm" >마이페이지</a></li>
+                                <li><a class="header-icon" href="../mypage/MypageInfomationModifyForm" >마이페이지</a></li>
                             </c:otherwise>
                         </c:choose>
                     </ul>

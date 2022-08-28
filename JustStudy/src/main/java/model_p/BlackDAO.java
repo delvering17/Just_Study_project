@@ -30,7 +30,7 @@ public class BlackDAO {
     public ArrayList<BlackDTO> blackList(){
 
         ArrayList<BlackDTO> res = new ArrayList<>();
-        sql = "SELECT black_id, mem_userid, black_reason FROM blacklist JOIN member ON black_id = mem_id";
+        sql = "SELECT black_id, mem_userid, black_reason FROM blacklist JOIN member ON black_id = mem_id where mem_level = 3";
 
         try {
             ptmt = con.prepareStatement(sql);

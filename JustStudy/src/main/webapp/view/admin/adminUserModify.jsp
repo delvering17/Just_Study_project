@@ -10,6 +10,8 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script type="text/javascript">
     $("#r2").attr("checked", true)
+    $(".admin-template-header>b").html("회원 정보 수정")
+    $(".admin-template-header>div").append("<input type=button class='admin-user-modify' value='수정'/>")
 </script>
 <style>
     #main {
@@ -18,27 +20,60 @@
         padding: 20px 20px;
     }
 
+    table{
+        width: 300px;
+        border: 1px solid rgb(122, 115, 115);
+        margin-top: 10px;
+    }
+
+    th{
+        border: 1px solid rgb(97, 88, 88);
+        font-size: 13px;
+        padding: 5px 0px 5px 0px;
+        background: rgba(83, 104, 167, 0.856);
+        color: #fff;
+    }
+
+    input{
+        margin-left: 5px;
+    }
+
+    input[name=userid],
+    input[name=realname],
+    input[name=nickname]{
+        width: 150px;
+    }
+
+    input[name=address2]{
+        width: 200px;
+    }
+
+    button[type=button]{
+        float: right;
+        margin-right: 5px;
+    }
+
 </style>
 
 <div id="main">
 
-    <form action="AdminUserModifyReg?&nowPage=${nowPage}" method="get">
+    <form action="AdminUserModifyReg?&nowPage=${nowPage}" class="admin-user-modify-action" method="get">
         <input type="hidden" name="id" value="${adminModifyDTO.mem_id}"/>
         <table border="" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
             <tr>
-                <td>아이디</td>
+                <th>아이디</th>
                 <td><input type="text" name="userid" value="${adminModifyDTO.mem_userid}"/></td>
             </tr>
             <tr>
-                <td>이름</td>
+                <th>이름</th>
                 <td><input type="text" name="realname" value="${adminModifyDTO.mem_realname}"/></td>
             </tr>
             <tr>
-                <td>닉네임</td>
+                <th>닉네임</th>
                 <td><input type="text" name="nickname" value="${adminModifyDTO.mem_nickname}"/></td>
             </tr>
             <tr>
-                <td>주소</td>
+                <th>주소</th>
                 <td>
                     <input type="text" id="address1" name="address1" value="${adminModifyDTO.mem_address1}"
                            readonly/>
@@ -48,13 +83,9 @@
                 </td>
             </tr>
             <tr>
-                <td>상세주소</td>
+                <th>상세주소</th>
                 <td><input type="text" name="address2" value="${adminModifyDTO.mem_address2}"/></td>
             </tr>
-            <tr>
-                <td colspan="2"><input type="submit" value="수정"/></td>
-            </tr>
-
         </table>
     </form>
 </div>
@@ -70,8 +101,11 @@
                 document.getElementById("address2").focus();
             }
         }).open();
-
     }
+
+    $(".admin-user-modify").click(function () {
+        $(".admin-user-modify-action").submit()
+    })
 
 </script>
 

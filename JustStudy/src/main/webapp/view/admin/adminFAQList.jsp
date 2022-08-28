@@ -9,6 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script type="text/javascript">
     $("#r5").attr("checked", true)
+    $(".admin-template-header>b").html("FAQ")
 </script>
 <style type="text/css">
 

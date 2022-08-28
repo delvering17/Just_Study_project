@@ -16,7 +16,7 @@
         height: 200px;
         /*border: solid 1px #000;*/
         padding-top: 60px;
-        margin-top: 60px;
+
     }
 
     .news-line{
@@ -28,7 +28,7 @@
     .news-under-line{
         width: 1100px;
         height: 1px;
-        margin: 0 auto;
+        margin: 20px auto;
         background: lightgray;
     }
 
@@ -41,10 +41,11 @@
     .listlink{
         width: 1100px;
         height: 50px;
-        margin: 20px auto;
+        margin: 0px auto;
+        padding-bottom: 50px;
         padding-top: 13px;
         text-align: center;
-        border: 1px solid #000;
+
     }
 
 
@@ -57,11 +58,9 @@
 
     .news-list-area{
         width: 1100px;
-        height: 100%;
-        background: #f8f5f5;
         display: flex;
         margin: 20px auto;
-        border: solid 1px #000;
+
     }
 
     .event-ul > li{
@@ -92,13 +91,13 @@
     }
 
     #news-img{
-        width: 1100px;
-
+        width: 600px;
         margin: 0 auto;
-        border: 1px solid #000;
+
     }
 
     #news-img>img{
+        width: 100%;
         margin: 0 auto;
     }
 

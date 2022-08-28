@@ -95,6 +95,12 @@
   .branch:nth-of-type(2n) {
     background: rgba(227, 233, 240, 0.726)
   }
+  #submit-btn{
+    width: 80px;
+    height: 30px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
 
 </style>
 
@@ -127,7 +133,7 @@
     </tr>
 
   </table>
-  <input type="submit" value="등록">
+  <input id="submit-btn" type="submit" value="등록">
 </form>
 </div>
 <script>

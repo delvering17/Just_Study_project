@@ -74,7 +74,6 @@
     .news-list-area {
         width: 1100px;
         height: 100%;
-        background: #f8f5f5;
         display: flex;
         margin: 20px auto;
     }
@@ -112,22 +111,27 @@
     .news-img>img{
         width: 1100px;
        margin: 0 auto;
+        border-radius: 7px;
+
     }
     .news-img> p{
         text-align: center;
         font-weight: bold;
         padding-bottom: 20px;
+        padding-top: 50px;
     }
 
     .news-thumbnail-img{
-        width: 1100px;
-        height: 100%;
+        width: 300px;
+        height: 300px;
         margin: 30px auto;
 
     }
     .news-thumbnail-img>img{
-        width: 1100px;
+        width: 300px;
+        height: 300px;
         margin: 0 auto;
+        border-radius: 7px;
     }
     .news-thumbnail-img> p {
         text-align: center;

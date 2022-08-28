@@ -229,15 +229,22 @@
                                 <c:choose>
                                     <c:when test="${param.type == \"done\"}">
                                         <c:choose>
-                                            <c:when test="${myreserv.review == 0}">
-                                                <td>
-                                                    <button class="mypage-reservlist-review">후기 작성</button>
-                                                </td>
+                                            <c:when test="${myreserv.status == \"결제완료\"}">
+                                                <c:choose>
+                                                    <c:when test="${myreserv.review == 0}">
+                                                        <td>
+                                                            <button class="mypage-reservlist-review">후기 작성</button>
+                                                        </td>
+                                                    </c:when>
+                                                    <c:when test="${myreserv.review == 1}">
+                                                        <td>
+                                                            <button type="button" class="mypage-reservlist-review-done">후기 조회</button>
+                                                        </td>
+                                                    </c:when>
+                                                </c:choose>
                                             </c:when>
-                                            <c:when test="${myreserv.review == 1}">
-                                                <td>
-                                                    <button type="button" class="mypage-reservlist-review-done">후기 조회</button>
-                                                </td>
+                                            <c:when test="${myreserv.status == \"관리자취소\"}">
+                                                <td>${myreserv.cancelReason}</td>
                                             </c:when>
                                         </c:choose>
                                     </c:when>

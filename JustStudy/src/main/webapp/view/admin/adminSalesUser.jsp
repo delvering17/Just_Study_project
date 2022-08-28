@@ -10,6 +10,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
     $("#r3").attr("checked", true)
+    $(".admin-template-header>b").html("회원별 매출")
+
 </script>
 <style>
     .admin-sales-user-main {
@@ -18,8 +20,24 @@
         padding: 20px 20px;
     }
 
+    .admin-sales-user-main > div:nth-of-type(2){
+        width: 1100px;
+        margin-top: 5px;
+    }
+
+    .admin-sales-user-main > div:nth-of-type(2) > div{
+        float: right;
+        margin-right: 60px;
+    }
+
+    .admin-sales-user-main > div:nth-of-type(2) > b{
+        color: #ff0000;
+        float: right;
+        margin-right: 10px;
+    }
+
     .admin-sales-store-table {
-        width: 1000px;
+        width: 1100px;
         border: 1px solid rgb(122, 115, 115);
         margin-top: 10px;
     }
@@ -81,8 +99,6 @@
         </form>
     </div>
 
-    <div>총 매출:${userTotalPay}</div>
-
     <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-sales-store-table">
         <tr>
             <th>아이디</th>
@@ -113,6 +129,7 @@
             </c:forEach>
         </form>
     </table>
+    <div><b>${userTotalPay}</b><div>총 매출:</div></div>
 </div>
 
 <script type="text/javascript">

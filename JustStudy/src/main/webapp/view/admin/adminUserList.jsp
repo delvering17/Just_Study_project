@@ -11,13 +11,8 @@
 
 <script type="text/javascript">
     $("#r2").attr("checked", true)
+    $(".admin-template-header>b").html("회원 관리")
 </script>
-
-<script src="<c:url value="/jquery/"/>jquery-3.6.0.js"></script>
-<script src="<c:url value="/jquery/"/>jquery-ui.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
-      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
-      crossorigin="anonymous" referrerpolicy="no-referrer"/>
 <style>
 
     #main {
@@ -82,6 +77,7 @@
     }
 
     table {
+        width: 1100px;
         border: 1px solid rgb(122, 115, 115);
         margin-top: 10px;
 
@@ -115,6 +111,7 @@
     }
 
     tr:first-of-type > th:first-child {
+        width: 50px;
         height: 50px;
         padding: 10px;
         background: rgba(83, 104, 167, 0.856);
@@ -198,7 +195,6 @@
             <input type="text" name="searchUserList-input" id="searchUserList-input-id"/>
             <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
-
     </div>
 
     <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
@@ -225,13 +221,16 @@
                     <td rowspan="2">${i.mem_address1}</td>
                     <td rowspan="2">${i.mem_address2}</td>
                     <c:if test="${i.mem_level==1}">
-                        <td rowspan="2">일반회원</td>
+                        <td rowspan="2">일반 회원</td>
                     </c:if>
                     <c:if test="${i.mem_level==2}">
                         <td rowspan="2">관리자</td>
                     </c:if>
                     <c:if test="${i.mem_level==3}">
                         <td rowspan="2">블랙리스트</td>
+                    </c:if>
+                    <c:if test="${i.mem_level==5}">
+                        <td rowspan="2">탈퇴 회원</td>
                     </c:if>
 
                     <td rowspan="2">
@@ -261,8 +260,5 @@
     </table>
 </div>
 
-<script type="text/javascript">
-
-</script>
 
 

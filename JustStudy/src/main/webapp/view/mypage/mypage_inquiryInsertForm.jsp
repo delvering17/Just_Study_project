@@ -161,14 +161,13 @@
                 async:false,
                 dataType:'JSON',
                 success:function(response){
-                    alert(response.insertResult)
-                    location.href = "MypageInquiryDetail?inquiry_id=" + response.inquiry_id + "&nowPage=1&date_period=today" ;
-                    <%--if(response.insertResult === 'success') {--%>
-                    <%--    alert(msg)--%>
-                    <%--    location.href = '<c:url value="/board/MainPage"/>'--%>
-                    <%--} else {--%>
-                    <%--    alert(response.modifyResult)--%>
-                    <%--}--%>
+
+
+                    if(response.insertResult === 'success') {
+                        alert('문의 작성이 완료되었습니다.')
+                        location.href = "MypageInquiryDetail?inquiry_id=" + response.inquiry_id + "&nowPage=1&date_period=today" ;
+                    }
+
                 },
                 error:function(e){
                     console.log(e.responseText)

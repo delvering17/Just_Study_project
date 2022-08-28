@@ -90,7 +90,7 @@
                 🦔김지원 ekdhwldnjsdl@gmail.com <br/><br/>
                 🐢김한솔 whay1216@gmail.com <br/><br/>
                 🐳송지은 s.dieunn@gmail.com <br/><br/>
-                🐝송찬욱 delvering@gmail.com
+                🐝송찬욱 delvering17@gmail.com
             </div>
         </div>
     </div>

@@ -9,6 +9,7 @@
       crossorigin="anonymous" referrerpolicy="no-referrer"/>
 <script type="text/javascript">
     $("#r5").attr("checked", true)
+    $(".admin-template-header>b").html("1:1 문의")
 </script>
 <style>
 

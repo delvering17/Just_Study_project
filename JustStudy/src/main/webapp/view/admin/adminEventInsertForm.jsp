@@ -61,6 +61,8 @@
     th {
         border: 1px solid rgb(97, 88, 88);
         font-size: 13px;
+        background: rgba(83, 104, 167, 0.856);
+        color: #fff;
     }
 
     td {
@@ -69,28 +71,16 @@
         font-size: 13px;
     }
 
-    tr:first-of-type > th:first-of-type,
-    tr:first-of-type > th:last-of-type {
-        width: 50px;
+    tr:first-of-type > th:first-of-type{
+        width: 100px;
         height: 50px;
         padding: 10px;
         color: #fff;
         background: rgba(83, 104, 167, 0.856);
     }
 
-    tr:first-of-type > th:nth-of-type(2),
-    tr:first-of-type > th:nth-of-type(3),
-    tr:first-of-type > th:nth-of-type(4),
-    tr:first-of-type > th:nth-of-type(5),
-    tr:first-of-type > th:nth-of-type(7),
-    tr:first-of-type > th:nth-of-type(8) {
+    tr:first-of-type > th:nth-of-type(2){
         width: 140px;
-        background: rgba(83, 104, 167, 0.856);
-        color: #fff;
-    }
-
-    tr:first-of-type > th:nth-of-type(6) {
-        width: 250px;
         background: rgba(83, 104, 167, 0.856);
         color: #fff;
     }
@@ -101,9 +91,9 @@
         padding-bottom: 5px;
     }
 
-    .branch:nth-of-type(2n) {
+  /*  .branch:nth-of-type(2n) {
         background: rgba(227, 233, 240, 0.726)
-    }
+    }*/
 </style>
 
 <div id="main">
@@ -141,17 +131,22 @@
                 </td>
             </tr>
         </table>
-        <button type="submit" id="subbtn">추가</button>
     </form>
-    <input type='button' class='admin-event-list' value='목록으로' />
 </div>
 
 <script>
 
     $(".admin-template-header>b").html("이벤트 목록")
 
+    $(".admin-template-header>div").append("<input type=button class='admin-event-add' value='추가'/>")
+    $(".admin-template-header>div").append("<input type=button class='admin-event-list' value='목록으로'/>")
+
     $(".admin-event-list").click(function () {
         location.href = "AdminEventList"
+    })
+
+    $(".admin-event-add").click(function () {
+        $("#event-detail-form").submit()
     })
 
     var now_utc = Date.now()

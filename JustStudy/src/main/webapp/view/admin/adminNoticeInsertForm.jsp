@@ -94,6 +94,13 @@
     .branch:nth-of-type(2n) {
         background: rgba(227, 233, 240, 0.726)
     }
+
+    #submit-btn{
+        width: 80px;
+        height: 30px;
+        font-weight: bold;
+        margin-top: 20px;
+    }
 </style>
 <div id="main">
 <form action="AdminNoticeInsertReg" name="myform" method="post" onsubmit="return check()">
@@ -113,7 +120,7 @@
         </tr>
 
     </table>
-    <input type="submit" id="submit" value="등록" />
+    <input id="submit-btn" type="submit" id="submit" value="등록" />
 </form>
 </div>
 <script type="text/javascript">

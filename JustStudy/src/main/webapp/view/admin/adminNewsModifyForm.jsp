@@ -129,6 +129,9 @@
         margin-top: 30px;
         margin-left: 650px;
     }
+    img{
+        border-radius: 7px;
+    }
 
 </style>
 

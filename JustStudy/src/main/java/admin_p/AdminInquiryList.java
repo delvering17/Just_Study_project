@@ -1,9 +1,6 @@
 package admin_p;
 
-import model_p.BranchDTO;
-import model_p.InquiryDAO;
-import model_p.InquiryDTO;
-import model_p.ReservationDAO;
+import model_p.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +15,10 @@ public class AdminInquiryList implements AdminService{
         ArrayList<InquiryDTO> arr_inquiryDTO = new InquiryDAO().inquiryList();
 
         request.setAttribute("arr_inquiryDTO", arr_inquiryDTO);
+
+
+        ArrayList<BranchDTO> branchList = new BranchDAO().branchList();
+        request.setAttribute("branchList", branchList);
 
         request.setAttribute("adminUrl","adminInquiryList.jsp");
     }

@@ -111,7 +111,7 @@
 <div class="admin-reserv-list-main">
 
     <div>
-        <form action="AdminReservListSearch" class="admin-reserv-list-form">
+        <form action="AdminReservListSearch" method="post" class="admin-reserv-list-form">
             <select name="city">
                 <option>전체</option>
                 <c:forTokens items="서울,경기,부산,대구,인천,광주,대전,울산,세종,강원,충북,충남,전북,전남,경북,경남,제주" var="city" delims=",">
@@ -215,7 +215,7 @@
                 </td>
                 <td><%=adminReservDTO.getHeadcount()%>
                 </td>
-                <td><%=adminReservDTO.getPay()%>
+                <td><fmt:formatNumber value="<%=adminReservDTO.getPay()%>" type="number"/>
                 </td>
                 <td><%=adminReservDTO.getStatus()%>
                 </td>
@@ -242,6 +242,52 @@
 <script type="text/javascript">
 
     <%ArrayList<BranchDTO> branchList = (ArrayList<BranchDTO>) request.getAttribute("branchList");%>
+
+    $("select[name=city] > option").each(function (key, value){
+        if(value.innerHTML == "<%=request.getParameter("city")%>"){
+            value.setAttribute("selected", true)
+        }
+
+        $("select[name=branch]").html("<option>전체</option>")
+        <%for(BranchDTO branchDTO : branchList){%>
+        if ($("select[name=city]").val() == "<%=branchDTO.getCity()%>") {
+            $("select[name=branch]").append("<option><%=branchDTO.getName()%></option>")
+        }
+        <%}%>
+    })
+
+    $("select[name=branch] > option").each(function (key, value){
+        if(value.innerHTML == "<%=request.getParameter("branch")%>"){
+            value.setAttribute("selected", true)
+        }
+    })
+
+    $("input[name=admin-reserv-list-period]").each(function (key, value){
+        if(value.getAttribute("value") == "<%=request.getParameter("admin-reserv-list-period")%>"){
+            value.setAttribute("checked", true)
+        }
+    })
+
+    $("input[name=admin-reserv-list-start]").val("<%=request.getParameter("admin-reserv-list-start")%>")
+    $("input[name=admin-reserv-list-end]").val("<%=request.getParameter("admin-reserv-list-end")%>")
+
+    $("select[name=admin-reserv-list-year] > option").each(function (key, value){
+        if(value.innerHTML == "<%=request.getParameter("admin-reserv-list-year")%>"){
+            value.setAttribute("selected", true)
+        }
+    })
+
+    $("select[name=admin-reserv-list-month] > option").each(function (key, value){
+        if(value.innerHTML == "<%=request.getParameter("admin-reserv-list-month")%>"){
+            value.setAttribute("selected", true)
+        }
+    })
+
+    $("select[name=admin-reserv-list-filter] > option").each(function (key, value){
+        if(value.getAttribute("value") == "<%=request.getParameter("admin-reserv-list-filter")%>"){
+            value.setAttribute("selected", true)
+        }
+    })
 
     $("select[name=city]").change(function () {
         $("select[name=branch]").html("<option>전체</option>")

@@ -11,6 +11,7 @@
 
     $(".admin-template-header>b").html("예약 취소")
     $(".admin-template-header>div").append("<input type=button class='admin-reserv-cancel-submit' value='완료'/>")
+    $(".admin-template-header>div").append("<input type=button class='admin-reserv-list' value='목록으로'/>")
 
 </script>
 
@@ -45,7 +46,7 @@
     }
 </style>
 <div class="admin-reserv-cancel-main">
-    <form action="AdminReservationCancelReg" class="admin-reserv-cancel-form">
+    <form action="AdminReservationCancelReg" class="admin-reserv-cancel-form" method="post">
         <table cellspacing="0" class="admin-reserv-cancel-table">
             <input type="hidden" name="reservId" value="${reservationDTO.id}"/>
             <tr>
@@ -102,5 +103,9 @@
                 $(".admin-reserv-cancel-form").submit()
             }
         }
+    })
+
+    $(".admin-reserv-list").click(function (){
+        location.href = "AdminReservList"
     })
 </script>

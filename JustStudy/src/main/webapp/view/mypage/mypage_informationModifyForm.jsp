@@ -152,7 +152,7 @@
                         $("#input-nickname").attr("readonly",true);
                         alert('사용가능한 닉네임 입니다')
                     } else if(response === 'regex'){
-                        alert('한글은 2~6자리를 입력해주세요')
+                        alert('한글 2~6자리를 입력해주세요')
                     } else {
                         alert('중복된 닉네임 입니다.')
                     }
@@ -208,15 +208,12 @@
                 async:false,
                 dataType:'JSON',
                 success:function(response){
-                    alert(response.modifyResult)
 
-                    // location.href = "/mypage/MypageInformationModifyForm"
-                    <%--if(response.modifyResult === 'success') {--%>
-                    <%--    alert(msg)--%>
-                    <%--    location.href = '<c:url value="/board/MainPage"/>'--%>
-                    <%--} else {--%>
-                    <%--    alert(response.modifyResult)--%>
-                    <%--}--%>
+                    if(response.modifyResult === 'success') {
+                        alert('회원정보 수정이 완료되었습니다.');
+                    } else {
+                        alert(response.modifyResult);
+                    }
                 },
                 error:function(e){
                     console.log(e.responseText)

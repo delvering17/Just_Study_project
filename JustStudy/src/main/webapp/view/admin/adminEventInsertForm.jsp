@@ -136,7 +136,7 @@
 
 <script>
 
-    $(".admin-template-header>b").html("이벤트 목록")
+    $(".admin-template-header>b").html("이벤트 추가")
 
     $(".admin-template-header>div").append("<input type=button class='admin-event-add' value='추가'/>")
     $(".admin-template-header>div").append("<input type=button class='admin-event-list' value='목록으로'/>")

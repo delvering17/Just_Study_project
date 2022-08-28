@@ -12,7 +12,7 @@
 <style>
 
     .news-title-area{
-        width: 100%;
+        width: 1100px;
         height: 200px;
         /*border: solid 1px #000;*/
         padding-top: 60px;
@@ -20,11 +20,16 @@
     }
 
     .news-line{
-        width: 80%;
+        width: 1100px;
         height: 3px;
-        margin-top: 2%;
-        margin: 0 auto;
+        margin: 10px auto;
         background: black;
+    }
+    .news-under-line{
+        width: 1100px;
+        height: 1px;
+        margin: 0 auto;
+        background: lightgray;
     }
 
     #news-title{
@@ -34,9 +39,10 @@
     }
 
     .listlink{
-        width: 80%;
-        height: 100px;
-        margin: 0 auto;
+        width: 1100px;
+        height: 50px;
+        margin: 20px auto;
+        padding-top: 13px;
         text-align: center;
         border: 1px solid #000;
     }
@@ -45,37 +51,18 @@
     .news-title-area{
         width: 100%;
         height: 200px;
-        /*border: solid 1px #000;*/
-
         padding-top: 60px;
         margin-top: 60px;
     }
 
-    .news-line{
-        width: 80%;
-        height: 3px;
-        margin-top: 2%;
-        margin-left: 10%;
-        background: black;
-    }
-
-    #news-title{
-        font-size: 3.5rem;
-        font-weight: bold;
-        text-align: center;
-    }
-
     .news-list-area{
-        width: 80%;
+        width: 1100px;
         height: 100%;
-        background: #ffa;
+        background: #f8f5f5;
         display: flex;
-        margin-left: 10%;
-        margin-top: 50px;
-        margin-bottom: 2%;
+        margin: 20px auto;
+        border: solid 1px #000;
     }
-
-
 
     .event-ul > li{
         /*width: 100px;*/
@@ -89,38 +76,30 @@
 
 
     .news-status{
-        width: 80%;
+        width: 1100px;
         height: 150px;
-        padding: 35px 80px;
         position: relative;
         text-align: center;
-        margin-left: 10%;
+        margin: 0 auto;
+        padding-top: 20px;
 
     }
-
-    .event-status > div{
-        width: 150px;
-        height: 70px;
-        background: aqua;
-        border: solid 1px #000;
-        float: left;
-        padding: 20px;
-        text-align: center;
-        margin-top: 35px;
-    }
-
 
 
     textarea{
         font-size: 1rem;
         outline: none;
-        /*vertical-align: middle;*/
     }
 
     #news-img{
-        width: 300px;
-        height: 300px;
+        width: 1100px;
+
+        margin: 0 auto;
         border: 1px solid #000;
+    }
+
+    #news-img>img{
+        margin: 0 auto;
     }
 
 </style>
@@ -137,18 +116,24 @@
    <p class="date" style="margin-top: 30px"> ${dto.news_reg_date_sdf}</p>
 
 </div>
-<hr style="width: 80%; height: 1px; margin-left: 10%; background: lightgray">
+<hr class="news-under-line">
 
 <div id="news-img">
     <img id="news-fileup-img" src="<c:url value="/img/news/" />${dto.news_img}" alt="">
 </div>
 
 <div class="news-list-area">
-    ${dto.news_content}
+    ${dto.news_contentBr}
 </div>
 
 
 <div class="listlink">
-    <a href="NewsPage">목록으로</a>
+    <input type='button' class='admin-news-list' value='목록으로' />
 </div>
 
+<script>
+
+    $(".admin-news-list").click(function () {
+        location.href = "NewsPage"
+    })
+</script>

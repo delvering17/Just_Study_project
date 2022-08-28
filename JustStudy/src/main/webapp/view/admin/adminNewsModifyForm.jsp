@@ -48,11 +48,13 @@
     }
 
     table {
+        width: 1300px;
         border: 1px solid rgb(122, 115, 115);
         margin-top: 10px;
     }
 
     th {
+
         border: 1px solid rgb(97, 88, 88);
         font-size: 13px;
     }
@@ -65,7 +67,7 @@
 
     tr:first-of-type > th:first-of-type,
     tr:first-of-type > th:last-of-type {
-        width: 140px;
+        width: 120px;
         height: 50px;
         padding: 10px;
         color: #fff;
@@ -98,6 +100,36 @@
     .branch:nth-of-type(2n) {
         background: rgba(227, 233, 240, 0.726)
     }
+    #news_title{
+        width: 400px;
+    }
+    #news-thumbnail-img{
+        width: 300px;
+        height: 300px;
+    }
+    #news-img{
+        width: 1100px;
+        height: 600px;
+    }
+    .file-btn-wrapper{
+        width: 1100px;
+        height: 50px;
+    }
+    .file-btn-wrapper>input{
+        width: 150px;
+        height: 40px;
+        margin-left: 80px;
+        font-weight: bold;
+
+    }
+    #submit-btn{
+        width: 100px;
+        height: 30px;
+        font-weight: bold;
+        margin-top: 30px;
+        margin-left: 650px;
+    }
+
 </style>
 
 
@@ -114,21 +146,24 @@
         <input type="hidden" name="news_id" value="${dto.news_id}">
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
             <tr>
-                <td>타이틀</td>
-                <td colspan="3"><input type="text" name="news_title" value="${dto.news_title}">
+                <th>타이틀</th>
+                <td><input type="text" id="news_title" name="news_title" value="${dto.news_title}">
             </tr>
             <tr>
                 <th>뉴스 썸네일 사진</th>
                 <c:choose>
                     <c:when test="${dto.news_thumbnail_img != null}">
-                        <td colspan="3">
-                            <input type="button" value="썸네일삭제" onclick="deleteThumbNailNewsImg('뉴스썸네일사진삭제')"/>
-                            <input type="hidden" name="news_thumbnail_img" value="${dto.news_thumbnail_img}">
-                            <img src="<c:url value="/img/news/${dto.news_thumbnail_img}"/>"/>
+                        <td>
+                            <div class="file-btn-wrapper" >
+                                <input type="button" value="썸네일삭제" onclick="deleteThumbNailNewsImg('뉴스썸네일사진삭제')"/>
+                            </div>
+
+                            <input type="hidden"  name="news_thumbnail_img" value="${dto.news_thumbnail_img}">
+                            <img id="news-thumbnail-img" src="<c:url value="/img/news/${dto.news_thumbnail_img}"/>"/>
                         </td>
                     </c:when>
                     <c:otherwise>
-                        <td colspan="3">
+                        <td>
                             <input type="file" name="news_thumbnail_img" value="">
                         </td>
                     </c:otherwise>
@@ -138,14 +173,17 @@
                 <th>뉴스 사진</th>
                 <c:choose>
                     <c:when test="${dto.news_img != null}">
-                        <td colspan="3">
-                            <input type="button" value="파일삭제" onclick="deleteNewsImg('뉴스사진삭제')"/>
-                            <input type="hidden" name="news_img" value="${dto.news_img}">
-                            <img src="<c:url value="/img/news/${dto.news_img}"/>"/>
+                        <td>
+                            <div class="file-btn-wrapper">
+                                <input type="button" value="파일삭제" onclick="deleteNewsImg('뉴스사진삭제')"/>
+                            </div>
+
+                            <input type="hidden"  name="news_img" value="${dto.news_img}">
+                            <img id="news-img" src="<c:url value="/img/news/${dto.news_img}"/>"/>
                         </td>
                     </c:when>
                     <c:otherwise>
-                        <td colspan="3">
+                        <td>
                             <input type="file" name="news_img" value="">
                         </td>
                     </c:otherwise>
@@ -153,13 +191,11 @@
             </tr>
 
             <tr>
-                <td>내용</td>
-                <td colspan="3"><textarea name="news_content" cols="50" rows="10">${dto.news_content}</textarea></td>
-            </tr>
-            <tr>
-                <td colspan="4"><input type="submit" value="등록"></td>
+                <th>내용</th>
+                <td><textarea name="news_content" cols="100%" rows="10">${dto.news_content}</textarea></td>
             </tr>
         </table>
+        <input id="submit-btn" type="submit" value="등록">
     </form>
 </div>
 

@@ -21,7 +21,8 @@
     }
 
     table{
-        width: 300px;
+        width: 320px;
+        height: 200px;
         border: 1px solid rgb(122, 115, 115);
         margin-top: 10px;
     }
@@ -29,13 +30,13 @@
     th{
         border: 1px solid rgb(97, 88, 88);
         font-size: 13px;
-        padding: 5px 0px 5px 0px;
+        padding: 10px 0px 10px 0px;
         background: rgba(83, 104, 167, 0.856);
         color: #fff;
     }
 
     input{
-        margin-left: 5px;
+        margin-left: 10px;
     }
 
     input[name=userid],
@@ -44,13 +45,14 @@
         width: 150px;
     }
 
+    input[name=address1],
     input[name=address2]{
         width: 200px;
     }
 
     button[type=button]{
         float: right;
-        margin-right: 5px;
+        margin-right: 10px;
     }
 
 </style>

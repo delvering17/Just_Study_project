@@ -17,14 +17,14 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-evenly;
         font-size: 1rem;
         /* text-align: center; */
     }
 
     .mypage-reservlist-top > p {
         /* font-size: 1.2rem; */
-        width: 20px;
+        width: fit-content;
         font-size: 1.2rem;
         vertical-align: middle;
         margin-block-start: 1em;
@@ -65,6 +65,7 @@
     }
 
     .mypage-reservlist-table {
+        width: 800px;
         margin-top: 20px;
         margin-bottom: 30px;
         table-layout: fixed;
@@ -81,7 +82,7 @@
     .mypage-reservlist-table > tbody > tr > td:nth-of-type(1),
     .mypage-reservlist-table > tbody > tr > td:nth-of-type(3),
     .mypage-reservlist-table > tbody > tr > td:nth-of-type(4) {
-        width: 14%;
+        width: 110px;
     }
 
     .mypage-reservlist-table > tbody > tr > td:nth-of-type(2),
@@ -89,11 +90,11 @@
     .mypage-reservlist-table > tbody > tr > td:nth-of-type(7),
     .mypage-reservlist-table > tbody > tr > td:nth-of-type(8),
     .mypage-reservlist-table > tbody > tr > td:nth-of-type(9) {
-        width: 10%;
+        width: 80px;
     }
 
     .mypage-reservlist-table > tbody > tr > td:nth-of-type(6) {
-        width: 8%;
+        width: 70px;
     }
 
     .mypage-reservlist-table > tbody > tr:nth-of-type(1) {
@@ -212,7 +213,7 @@
                 <td></td>
             </tr>
             <c:choose>
-                <c:when test="<%((ArrayList<ReservationDTO>) request.getAttribute(\"myReservation\")).size() != 0%>">
+                <c:when test="${myReservation.size() != 0}">
                     <c:forEach items="${myReservation}" var="myreserv" varStatus="no">
                         <tr>
                             <form action="MypageReview" class="mypage-reservlist-review-form">
@@ -223,7 +224,7 @@
                                 <td>${myreserv.useDate}</td>
                                 <td>${fn:replace(myreserv.time, ', ', '<br/>')}</td>
                                 <td>${myreserv.headcount}</td>
-                                <td>${myreserv.pay}</td>
+                                <td><fmt:formatNumber value="${myreserv.pay }" type="number"/></td>
                                 <td>${myreserv.status}</td>
                                 <c:choose>
                                     <c:when test="${param.type == \"done\"}">

@@ -95,19 +95,26 @@ public class MyReservationList implements MypageService{
                 }
             }
         }
+        ArrayList<ReservationDTO> myPickList = new ArrayList<>();
 
         if(request.getParameter("period").equals("mypick")){
-            ArrayList<ReservationDTO> myPickList = new ArrayList<ReservationDTO>();
+            myPickList = new ArrayList<ReservationDTO>();
             for(ReservationDTO reservationDTO : myReservation){
                 if(reservationDTO.getUseDate().after(startDate) && reservationDTO.getUseDate().before(endDate)){
                     myPickList.add(reservationDTO);
-                    myReservation = myPickList;
                 }
+                System.out.println(myPickList.toString());
             }
         }
 
+        System.out.println(startDate);
+        System.out.println(endDate);
 
-        request.setAttribute("myReservation", myReservation);
+        if(request.getParameter("period")!=null && request.getParameter("period").equals("mypick")){
+            request.setAttribute("myReservation", myPickList);
+        } else{
+            request.setAttribute("myReservation", myReservation);
+        }
         request.setAttribute("memberDTO", memberDTO);
         request.setAttribute("mainUrl","mypage/mypageTemplete.jsp");
         request.setAttribute("subUrl","reservation_list.jsp");

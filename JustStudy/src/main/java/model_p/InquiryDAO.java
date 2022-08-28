@@ -104,7 +104,7 @@ public class InquiryDAO {
     public ArrayList<InquiryDTO> inquiryPeriodList(int mem_id, int first, int limit, String date_before, String date_after) {
         ArrayList<InquiryDTO> res = new ArrayList<>();
 
-        sql = "select * from inquiry where inquiry_writer =  ? and inquiry_date >= ? and inquiry_date <= ? order by inquiry_date desc, inquiry_id limit ?,? ";
+        sql = "select * from inquiry where inquiry_writer =  ? and inquiry_date >= ? and inquiry_date <= ? and inquiry_level = 1 order by inquiry_date desc, inquiry_id limit ?,? ";
         try {
             ptmt = con.prepareStatement(sql);
             ptmt.setInt(1, mem_id);
@@ -144,7 +144,7 @@ public class InquiryDAO {
     public ArrayList<InquiryDTO> inquiryDateList(int mem_id, int first, int limit, String date_before, String date_after) {
         ArrayList<InquiryDTO> res = new ArrayList<>();
 
-        sql = "select * from inquiry where inquiry_writer =  ? and inquiry_date >= ? and inquiry_date <= ? order by inquiry_date desc, inquiry_id limit ?,? ";
+        sql = "select * from inquiry where inquiry_writer =  ? and inquiry_date >= ? and inquiry_date <= ? and inquiry_level = 1 order by inquiry_date desc, inquiry_id limit ?,? ";
         try {
             ptmt = con.prepareStatement(sql);
             ptmt.setInt(1, mem_id);
@@ -184,7 +184,7 @@ public class InquiryDAO {
 
     public int inquiryTotal (int mem_id, String date_before, String date_after) {
 
-        sql = "select count(*) from inquiry where inquiry_writer = ? and inquiry_date >= ? and inquiry_date <= ?";
+        sql = "select count(*) from inquiry where inquiry_writer = ? and inquiry_date >= ? and inquiry_date <= ? and inquiry_level = 1";
 
         try {
             ptmt = con.prepareStatement(sql);

@@ -86,6 +86,10 @@
         color: rgb(173, 153, 126);
 
     }
+
+    h3 {
+        margin: 20px 30px;
+    }
 </style>
 
 <div>
@@ -121,22 +125,35 @@
         </li>
     </ul>
     <hr>
-    <ul>
-        <li class="inquiry-insert-form-items">
-            <p>제목</p>
-            <input type="text" class="user-input" name="input_title"  value="${answerDTO.inquiry_title}" readonly>
-        </li>
-        <li class="inquiry-insert-form-items">
-            <p>답변일자</p>
-            <input type="text" class="user-input" name="input_title"  value="${answerDTO.inquiry_date_String}" readonly>
-        </li>
-        <li class="inquiry-insert-form-items">
-            <p>답변 내용</p>
-            <textarea class="input-content"  name="input_content"  cols="30" rows="10" readonly>
-                ${inquiryDTO.inquiry_content_String}
-            </textarea>
-        </li>
-    </ul>
+    <h3>답변</h3>
+    <c:choose>
+        <c:when test="${answerDTO != null}">
+            <ul>
+                <li class="inquiry-insert-form-items">
+                    <p>제목</p>
+                    <input type="text" class="user-input" name="input_title"  value="${answerDTO.inquiry_title}" readonly>
+                </li>
+                <li class="inquiry-insert-form-items">
+                    <p>답변일자</p>
+                    <input type="text" class="user-input" name="input_title"  value="${answerDTO.inquiry_date_String}" readonly>
+                </li>
+                <li class="inquiry-insert-form-items">
+                    <p>답변 내용</p>
+                    <textarea class="input-content"  name="input_content"  cols="30" rows="10" readonly>
+                            ${inquiryDTO.inquiry_content_String}
+                    </textarea>
+                </li>
+            </ul>
+        </c:when>
+        <c:otherwise>
+            <ul>
+                <li>
+                    <p colspan="5">답변이 등록되지 않았습니다.</p>
+                </li>
+            </ul>
+        </c:otherwise>
+    </c:choose>
+    <hr>
 
 
     <c:if test="${date_period != null}">

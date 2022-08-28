@@ -240,7 +240,7 @@
                     <td><a class="btn-Detail" onclick="goDetail(${inquiryDTO.inquiry_id})">${inquiryDTO.inquiry_title}</a></td>
                     <td>${inquiryDTO.inquiry_category}</td>
                     <td>${inquiryDTO.inquiry_type}</td>
-                    <td>${inquiryDTO.inquiry_date_String}}</td>
+                    <td>${inquiryDTO.inquiry_date_String}</td>
                     <c:choose>
                         <c:when test="${inquiryDTO.inquiry_state eq 1}">
                             <td>미답변</td>

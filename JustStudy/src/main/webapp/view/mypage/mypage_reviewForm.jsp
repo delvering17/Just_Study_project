@@ -8,80 +8,105 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <style>
-    .mypage-review-bg .mypage-review-table td {
-        width: fit-content;
-        height: fit-content;
+
+    .review-insert-form-items {
+        display: flex;
+    }
+
+    .review-insert-form-items > p {
+        width: 100px;
+        height: 40px;
+        font-size: 1.2rem;
+        line-height: 40px;
+    }
+
+    .review-insert-form-items .user-input{
+        width: 200px;
+        height: 40px;
+        border: 0;
+        margin-right: 20px;
+    }
+
+    .fa-star{
+        font-size: 1.5rem;
+        line-height: 40px;
+        margin-right: 5px;
+    }
+
+    .review-insert-form-items .btn-modify{
+        width: 100px;
+        height: 40px;
+        border: 0;
+        background: rgb(28, 63, 90);
+        color: aliceblue;
+    }
+
+    #review-insert-confirm-wrapper {
+        width: 400px;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    #review-insert-confirm-wrapper > .btn-modify{
+        width:150px;
     }
 
 </style>
 
 <div class="mypage-review-bg">
+    <h1>후기 작성</h1>
+    <hr>
     <form action="MypageReviewInsert" method="post" class="mypage-review-form">
-
-        <table class="mypage-review-table" border="">
-            <input type="hidden" name="reservId" value="<%=request.getAttribute("reservId")%>">
-            <tr>
-                <td>작성자</td>
-                <td>
-                    <input type="hidden" name="memId"
-                           value="<%=((MemberDTO) request.getAttribute("memberDTO")).getMem_id()%>">
-                    <%=((MemberDTO) request.getAttribute("memberDTO")).getMem_nickname()%>
-                </td>
-            </tr>
-            <tr>
-                <td>지역</td>
-                <td>${reservationDTO.city}
-                </td>
-            </tr>
-            <tr>
-                <td>지점</td>
-                <td>${reservationDTO.branch}
-                </td>
-            </tr>
-            <tr>
-                <td>룸타입</td>
-                <td>${reservationDTO.room}
-                </td>
-            </tr>
-            <tr>
-                <td>이용일자</td>
-                <td>${reservationDTO.useDate}
-                </td>
-            </tr>
-            <tr>
-                <td>시간</td>
-                <td>${reservationDTO.time}
-                </td>
-            </tr>
-
-            <tr>
-                <td>별점</td>
-                <td>
-                    <input type="checkbox" name="reviewStar" hidden/>
-                    <i class="fa-regular fa-star" id="1"></i>
-                    <input type="checkbox" name="reviewStar" hidden/>
-                    <i class="fa-regular fa-star" id="2"></i>
-                    <input type="checkbox" name="reviewStar" hidden/>
-                    <i class="fa-regular fa-star" id="3"></i>
-                    <input type="checkbox" name="reviewStar" hidden/>
-                    <i class="fa-regular fa-star" id="4"></i>
-                    <input type="checkbox" name="reviewStar" hidden/>
-                    <i class="fa-regular fa-star" id="5"></i>
-                </td>
-            </tr>
-            <tr>
-                <td>내용</td>
-                <td>
-                    <textarea name="reviewContent" cols="20" rows="5"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <button type="button"class="mypage-review-save">저장</button>
-                </td>
-            </tr>
-        </table>
-
+        <input type="hidden" name="reservId" value="${param.reservId}"/>
+        <ul>
+            <li class="review-insert-form-items">
+                <p>작성자</p>
+                <input type="hidden" name="memId" value="<%=((MemberDTO) request.getAttribute("memberDTO")).getMem_id()%>">
+                <input type="text" class="user-input" value="<%=((MemberDTO) request.getAttribute("memberDTO")).getMem_nickname()%>" readonly>
+            </li>
+            <li class="review-insert-form-items">
+                <p>지역</p>
+                <input type="text" class="user-input" value="${reservationDTO.city}" readonly>
+                <p>지점명</p>
+                <input type="text" class="user-input" value="${reservationDTO.branch}" readonly>
+            </li>
+            <li class="review-insert-form-items">
+                <p>룸타입</p>
+                <input type="text" class="user-input" value="${reservationDTO.room}" readonly>
+            </li>
+            <li class="review-insert-form-items">
+                <p>이용일자</p>
+                <input type="text" class="user-input" value="${reservationDTO.useDate}" readonly>
+                <p>시간</p>
+                <input type="text" class="user-input" value="${reservationDTO.time}" readonly>
+            </li>
+            <li class="review-insert-form-items">
+                <p>별점</p>
+                <input type="checkbox" name="reviewStar" hidden/>
+                <i class="fa-regular fa-star" id="1"></i>
+                <input type="checkbox" name="reviewStar" hidden/>
+                <i class="fa-regular fa-star" id="2"></i>
+                <input type="checkbox" name="reviewStar" hidden/>
+                <i class="fa-regular fa-star" id="3"></i>
+                <input type="checkbox" name="reviewStar" hidden/>
+                <i class="fa-regular fa-star" id="4"></i>
+                <input type="checkbox" name="reviewStar" hidden/>
+                <i class="fa-regular fa-star" id="5"></i>
+            </li>
+            <li class="review-insert-form-items">
+                <p>내용</p>
+                <textarea name="reviewContent" cols="65" rows="5"></textarea>
+            </li>
+            <li class="review-insert-form-items">
+                <p></p>
+                <div id="review-insert-confirm-wrapper">
+                    <button type="button" class="btn-modify mypage-review-save">후기 작성</button>
+                    <button type="button" class="btn-modify mypage-review-list">이용 내역</button>
+                </div>
+            </li>
+        </ul>
     </form>
 </div>
 
@@ -108,6 +133,10 @@
         } else{
             $(".mypage-review-form").submit()
         }
+    })
+
+    $(".mypage-review-list").click(function (){
+        location.href = "MyReservationList?type=done&period=all"
     })
 
 </script>

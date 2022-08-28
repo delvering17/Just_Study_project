@@ -152,6 +152,10 @@
         text-decoration: none;
     }
 
+    .ul-behind-nav-left-wrapper a:hover {
+        color: black;
+    }
+
 
     <%--    .wrapper * {--%>
 <%--         width: 100%;--%>

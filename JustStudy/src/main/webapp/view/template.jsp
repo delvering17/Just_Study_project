@@ -48,7 +48,7 @@
 <body>
 <header>
 
-<jsp:include page="inc/header-test.jsp"/>
+<jsp:include page="inc/header.jsp"/>
 </header>
 <div class="menu-side"></div>
 <%--    <jsp:include page="view/mypage/template.jsp"/>--%>

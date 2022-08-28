@@ -13,7 +13,6 @@
     $(".admin-template-header>div").append("<input type=button class='admin-store-insert' value='추가'/>")
 </script>
 <style>
-
     #main {
         width: 100%;
         height: fit-content;
@@ -125,7 +124,6 @@
         <tr>
             <th>지점</th>
             <td>${inquiryDTO.inquiry_branch}</td>
-
         </tr>
         <tr>
             <th>답변 상태</th>
@@ -143,7 +141,6 @@
             <td>${inquiryDTO.inquiry_content_String}</td>
         </tr>
     </table>
-
     <h2>답변</h2>
     <c:choose>
     <c:when test="${inquiryDTO.inquiry_state == 2}">
@@ -176,9 +173,7 @@
                 </td>
             </tr>
             <tr></tr>
-
         </table>
-
         </c:when>
         <c:otherwise>
         <form action="AdminInquiryInsert" method="post" id="inquiry-form1">

@@ -161,13 +161,10 @@
                 async:false,
                 dataType:'JSON',
                 success:function(response){
-
-
                     if(response.insertResult === 'success') {
                         alert('문의 작성이 완료되었습니다.')
                         location.href = "MypageInquiryDetail?inquiry_id=" + response.inquiry_id + "&nowPage=1&date_period=today" ;
                     }
-
                 },
                 error:function(e){
                     console.log(e.responseText)

@@ -9,6 +9,8 @@
       crossorigin="anonymous" referrerpolicy="no-referrer"/>
 <script type="text/javascript">
     $("#r5").attr("checked", true)
+    $(".admin-template-header>b").html("1:1 문의 목록 > 상세 보기")
+    $(".admin-template-header>div").append("<input type=button class='admin-store-insert' value='추가'/>")
 </script>
 <style>
 
@@ -165,8 +167,7 @@
             </tr>
             <tr>
                 <th>답변 내용</th>
-                <td><textarea name="input_content" id="input-content" cols="30"
-                              rows="10">${answerDTO.inquiry_content}</textarea></td>
+                <td><textarea name="input_content" id="input-content" cols="30"rows="10">${answerDTO.inquiry_content}</textarea></td>
             </tr>
             <tr>
                 <td colspan="2">

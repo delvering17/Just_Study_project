@@ -9,6 +9,7 @@
       crossorigin="anonymous" referrerpolicy="no-referrer"/>
 <script type="text/javascript">
     $("#r5").attr("checked", true)
+    $(".admin-template-header>b").html("1:1 문의 목록")
 </script>
 <style>
 
@@ -59,6 +60,12 @@
         font-size: 13px;
     }
 
+    .admin-inquiry-list-table {
+        width: 801px;
+        border: 1px solid rgb(122, 115, 115);
+        margin-top: 10px;
+    }
+
     tr:first-of-type > th:first-of-type,
     tr:first-of-type > th:last-of-type {
         width: 50px;
@@ -68,22 +75,24 @@
         background: rgba(83, 104, 167, 0.856);
     }
 
-    tr:first-of-type > th:nth-of-type(2),
-    tr:first-of-type > th:nth-of-type(3),
-    tr:first-of-type > th:nth-of-type(4),
-    tr:first-of-type > th:nth-of-type(5),
-    tr:first-of-type > th:nth-of-type(7),
-    tr:first-of-type > th:nth-of-type(8) {
+    tr:first-of-type > th:nth-of-type(1),
+    tr:first-of-type > th:nth-of-type(2){
         width: 140px;
+        height: 30px;
         background: rgba(83, 104, 167, 0.856);
         color: #fff;
     }
 
-    tr:first-of-type > th:nth-of-type(6) {
-        width: 250px;
+    tr:first-of-type > th:nth-of-type(3),
+    tr:first-of-type > th:nth-of-type(4),
+    tr:first-of-type > th:nth-of-type(5),
+    tr:first-of-type > th:nth-of-type(6),
+    tr:first-of-type > th:nth-of-type(7) {
+        width: 80px;
         background: rgba(83, 104, 167, 0.856);
         color: #fff;
     }
+
 
     td {
         height: 30px;
@@ -94,10 +103,13 @@
     .branch:nth-of-type(2n) {
         background: rgba(227, 233, 240, 0.726)
     }
+
+
+
 </style>
 
 <div id="main">
-    <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+    <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-inquiry-list-table">
         <tr>
             <th>문의 일자</th>
             <th>제목</th>

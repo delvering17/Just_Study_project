@@ -119,9 +119,7 @@
         </li>
         <li class="inquiry-insert-form-items">
             <p>문의 내용</p>
-            <textarea class="input-content" name="input_content" cols="30" rows="10" readonly>
-                ${inquiryDTO.inquiry_content_String}
-            </textarea>
+            <textarea class="input-content" name="input_content" cols="30" rows="10" readonly>${inquiryDTO.inquiry_content}</textarea>
         </li>
     </ul>
     <hr>
@@ -139,9 +137,7 @@
                 </li>
                 <li class="inquiry-insert-form-items">
                     <p>답변 내용</p>
-                    <textarea class="input-content"  name="input_content"  cols="30" rows="10" readonly>
-                            ${inquiryDTO.inquiry_content_String}
-                    </textarea>
+                    <textarea class="input-content"  name="input_content"  cols="30" rows="10" readonly>${answerDTO.inquiry_content}</textarea>
                 </li>
             </ul>
         </c:when>

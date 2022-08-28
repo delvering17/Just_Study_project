@@ -13,7 +13,7 @@
 <style>
 
     .mypage-inquiry {
-        width: 900px;
+        width: 800px;
         height: 100%;
         background: #F5F5F5;
 
@@ -28,9 +28,10 @@
         /* text-align: center; */
     }
 
-    .inquiry-top button {
+    .inquiry-top > button {
         border: 1px solid #a9a8a8;
-        background: rgba(0, 0, 0, 0);
+        /*background: rgba(0, 0, 0, 0);*/
+        color: white;
     }
 
     .inquiry-top > p{
@@ -52,17 +53,26 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        margin-right: 40px;
     }
 
     .btn-inquiry {
         width: 60px;
         height: 40px;
+        background: rgb(28, 63, 90);
+        color: white;
+
+        border: 1px solid #a9a8a8;
     }
 
     #submit-find {
-        margin-top: 12px;
+        width: 100px;
         background: rgb(28, 63, 90);
-        color: aliceblue;
+
+        position: absolute;
+
+        left: 1180px;
+
     }
 
     .inquiry-top > .top-datepicker {
@@ -76,21 +86,31 @@
     }
 
     .inquiry-bottom {
-        width: 500px;
-        background: #ff0;
-        margin: 0 auto;
+        width: 800px;
+    }
 
+
+
+    .inquiry-bottom-top {
+        width: 200px;
+        display: flex;
+        justify-content: space-around;
+        margin-left: 30%;
     }
 
     .inquiry-bottom > a {
-        width: 40px;
         /*background: #fff;*/
     }
 
-    .inquiry-bottom > .inquiry-bottom-button {
-        width: 60px;
-        background: rgb(28, 63, 90);
-        color: white;
+    .inquiry-bottom-top > .inquiry-bottom-button {
+        width: 40px;
+        height: 40px;
+        /*background: rgb(28, 63, 90);*/
+
+        border: 1px solid #a9a8a8;
+        color: black;
+        text-align: center;
+        line-height: 32px;
     }
 
 
@@ -133,26 +153,71 @@
         border-bottom: 1px solid lightgray;
     }
 
+    .find-button {
+        width: 60px;
+        height: 40px;
+        border: 1px solid #a9a8a8;
+        background: rgba(0, 0, 0, 0);
+        text-align: center;
+        line-height: 40px;
+    }
+
+    .input-radio:checked + .find-button {
+        background: lightgray;
+    }
+
+
+    .inquiry-bottom-bottom {
+        display: block;
+    }
+
+    .btn-Detail {
+        text-decoration: none;
+        color: black;
+    }
+
+    .btn-Detail:hover {
+        color: rgb(173, 153, 126);
+    }
+
+    .btn-goPage {
+        text-decoration: none;
+        color: black;
+        line-height: 40px;
+    }
+
+    .btn-goPage:hover {
+        color: rgb(173, 153, 126);
+
+    }
+
+    .btn-nowPage {
+        line-height: 40px;
+        text-decoration: none;
+        color: black;
+        line-height: 40px;
+    }
 
 </style>
 <div class="mypage-inquiry">
     <div class="inquiry-top">
-        <p>문의일자 조회</p>
         <div class="top-dateselect-wrapper">
-
-            <input type="radio" class="input-radio" name="date-period" id="find-today" value="today"/>
-            <input type="radio" class="input-radio" name="date-period" id="find-day7" value="day7"/>
-            <input type="radio" class="input-radio" name="date-period" id="find-month" value="month" />
-            <input type="radio" class="input-radio" name="date-period" id="find-month3" value="month3" />
-
-<%--                <input type="radio" class="input-radio" name="find_group" id="find-today" value="today" hidden/>--%>
-<%--                <input type="radio" class="input-radio" name="find_group" id="find-day7" value="day7" hidden/>--%>
-<%--                <input type="radio" class="input-radio" name="find_group" id="find-month" value="month" hidden/>--%>
-<%--                <input type="radio" class="input-radio" name="find_group" id="find-month3" value="month3" hidden/>--%>
-            <label for="find-today"><div class="find-button">오늘</div></label>
-            <label for="find-day7"><div class="find-button">7일</div></label>
-            <label for="find-month"><div class="find-button">1개월</div></label>
-            <label for="find-month3"><div class="find-button">3개월</div></label>
+            <label for="find-today">
+                <input type="radio" class="input-radio" name="date-period" id="find-today" value="today" hidden/>
+                <div class="find-button">오늘</div>
+            </label>
+            <label for="find-day7">
+                <input type="radio" class="input-radio" name="date-period" id="find-day7" value="day7" hidden/>
+                <div class="find-button">7일</div>
+            </label>
+            <label for="find-month">
+                <input type="radio" class="input-radio" name="date-period" id="find-month" value="month" hidden/>
+                <div class="find-button">1개월</div>
+            </label>
+            <label for="find-month3">
+                <input type="radio" class="input-radio" name="date-period" id="find-month3" value="month3" hidden/>
+                <div class="find-button">3개월</div>
+            </label>
         </div>
         <input class="top-datepicker" id="datepicker-before" max="" type="date">
         <p id="inquiry-date-wave">&#126;</p>
@@ -172,7 +237,7 @@
             <c:forEach items="${arr_inquiryDTO}" var="inquiryDTO" varStatus="no">
                 <tr>
                     <input type=hidden name="reservId" value="${myreserv.id}"/>
-                    <td><a id="btn-Detail" onclick="goDetail(${inquiryDTO.inquiry_id})">${inquiryDTO.inquiry_title}</a></td>
+                    <td><a class="btn-Detail" onclick="goDetail(${inquiryDTO.inquiry_id})">${inquiryDTO.inquiry_title}</a></td>
                     <td>${inquiryDTO.inquiry_category}</td>
                     <td>${inquiryDTO.inquiry_type}</td>
                     <td>${inquiryDTO.inquiry_date_String}}</td>
@@ -194,25 +259,28 @@
         </table>
     </div>
     <div class="inquiry-bottom">
+        <div class="inquiry-bottom-top">
     <c:if test="${firstPage > 1}">
-        <a class="inquiry-bottom-button" onclick="goPageFind(${firstPage - 1})" >이전</a>
+        <a class="inquiry-bottom-button" onclick="goPageFind(${firstPage - 1})" >&#60;</a>
     </c:if>
     <c:forEach begin="${firstPage}" end="${endPage}" var="i">
         <c:choose>
             <c:when test="${i == nowPage}">
-                [${i}]
+                <a class="btn-nowPage"  >[ ${i} ]</a>
             </c:when>
             <c:otherwise>
-                <a onclick="goPageFind(${i})" >${i}</a>
+                <a class="btn-goPage" onclick="goPageFind(${i})" >${i}</a>
             </c:otherwise>
         </c:choose>
     </c:forEach>
     <c:if test="${endPage < totalPage}">
-        <a type="submit" class="inquiry-bottom-button" onclick="goPageFind(${endPage + 1})" >다음</a>
+        <a class="inquiry-bottom-button" onclick="goPageFind(${endPage + 1})">&#62;</a>
     </c:if>
-        <br/>
-    <button class="btn-inquiry" id="submit-find" onclick="goInquiryInsert()">문의하기</button>
+        <button class="btn-inquiry" id="submit-find" onclick="goInquiryInsert()">문의하기</button>
+        </div>
+        <div class="inquiry-bottom-bottom">
 
+        </div>
     </div>
 </div>
 

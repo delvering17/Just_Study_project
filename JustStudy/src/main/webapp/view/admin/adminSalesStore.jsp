@@ -41,7 +41,7 @@
 
     .admin-sales-store-table {
         width: 1101px;
-        border: 1px solid rgb(122, 115, 115);
+/*        border: 1px solid rgb(122, 115, 115);*/
         margin-top: 10px;
         table-layout: fixed;
         word-break: break-all;
@@ -70,12 +70,14 @@
     }
 
     .admin-sales-store-table td {
-        border: 1px solid rgb(97, 88, 88);
+/*        border: 1px solid rgb(97, 88, 88);*/
         text-align: center;
         font-size: 13px;
         height: 30px;
         padding: 5px 5px 5px 5px;
     }
+
+
 
     .admin-sales-store-table tr:first-of-type {
         height: 50px;
@@ -86,6 +88,10 @@
 
     .admin-sales-store-table tr:nth-of-type(2n) {
         background: rgba(227, 233, 240, 0.726);
+    }
+
+    .admin-sales-store-table-td{
+        border: 1px solid rgb(97, 88, 88);
     }
 
     select[name=branch] {
@@ -108,6 +114,7 @@
     #admin-sales-store-align-right{
         text-align: right;
     }
+
 </style>
 
 <%
@@ -118,7 +125,7 @@
 <div class="admin-sales-store-main">
 
     <div>
-        <form action="AdminSalesStore" class="admin-sales-store-form">
+        <form action="AdminSalesStore" style="border-collapse: collapse" class="admin-sales-store-form">
             <select name="city">
                 <option>전체</option>
                 <c:forTokens items="서울,경기,부산,대구,인천,광주,대전,울산,세종,강원,충북,충남,전북,전남,경북,경남,제주" var="city" delims=",">
@@ -181,17 +188,17 @@
                 <c:when test="${salesStoreList.size() != 0}">
                     <c:forEach items="${salesStoreList}" var="salesStoreList">
                         <tr>
-                            <td>${salesStoreList.mem_userid}</td>
-                            <td>${salesStoreList.mem_realname}</td>
-                            <td>${salesStoreList.mem_nickname}</td>
-                            <td>${salesStoreList.city}</td>
-                            <td>${salesStoreList.branch}</td>
-                            <td>${salesStoreList.room}</td>
-                            <td>${salesStoreList.useDate}</td>
-                            <td>${salesStoreList.time}</td>
-                            <td>${salesStoreList.status}</td>
+                            <td class="admin-sales-store-table-td">${salesStoreList.mem_userid}</td>
+                            <td class="admin-sales-store-table-td">${salesStoreList.mem_realname}</td>
+                            <td class="admin-sales-store-table-td">${salesStoreList.mem_nickname}</td>
+                            <td class="admin-sales-store-table-td">${salesStoreList.city}</td>
+                            <td class="admin-sales-store-table-td">${salesStoreList.branch}</td>
+                            <td class="admin-sales-store-table-td">${salesStoreList.room}</td>
+                            <td class="admin-sales-store-table-td">${salesStoreList.useDate}</td>
+                            <td class="admin-sales-store-table-td">${salesStoreList.time}</td>
+                            <td class="admin-sales-store-table-td">${salesStoreList.status}</td>
  <%--                           <td id="admin-sales-store-align-right">${salesStoreList.pay}</td>--%>
-                            <td id="admin-sales-store-align-right"><fmt:formatNumber value="${salesStoreList.pay }" type="number"/></td>
+                            <td class="admin-sales-store-table-td" id="admin-sales-store-align-right"><fmt:formatNumber value="${salesStoreList.pay }" type="number"/></td>
                         </tr>
                     </c:forEach>
                     <tr>

@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model_p.BranchDTO" %>
@@ -16,7 +17,7 @@
     }
 
     .admin-store-list-table {
-        width: 1000px;
+        width: 1101px;
         border: 1px solid rgb(122, 115, 115);
         margin-top: 10px;
     }
@@ -26,10 +27,31 @@
         font-size: 13px;
     }
 
+    .admin-store-list-table th:nth-of-type(1),
+    .admin-store-list-table th:nth-of-type(2),
+    .admin-store-list-table th:nth-of-type(4){
+        width: 70px;
+    }
+    .admin-store-list-table th:nth-of-type(3),
+    .admin-store-list-table th:nth-of-type(5),
+    .admin-store-list-table th:nth-of-type(8),
+    .admin-store-list-table th:nth-of-type(9){
+        width: 120px;
+    }
+    .admin-store-list-table th:nth-of-type(6){
+        width: 250px;
+    }
+    .admin-store-list-table th:nth-of-type(7){
+        width: 160px;
+    }
+
     .admin-store-list-table td {
         border: 1px solid rgb(97, 88, 88);
         text-align: center;
         font-size: 13px;
+        height: 30px;
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
 
     .admin-store-list-table tr:first-of-type {
@@ -37,12 +59,6 @@
         padding: 10px;
         color: #fff;
         background: rgba(83, 104, 167, 0.856);
-    }
-
-    .admin-store-list-table td {
-        height: 30px;
-        padding-top: 5px;
-        padding-bottom: 5px;
     }
 
     .branch:nth-of-type(2n) {
@@ -75,7 +91,7 @@
             <th>지역</th>
             <th>지점명</th>
             <th>룸타입</th>
-            <th>이용요금(1시간)</th>
+            <th>이용요금<br/>(1시간)</th>
             <th>운영 시간</th>
             <th>매장 주소</th>
             <th>상세 주소</th>
@@ -103,7 +119,7 @@
             </a></td>
             <td><%=(branchDTO.getRooms() != null ? branchDTO.getRooms().replaceAll(",", "<br/>") : "")%>
             </td>
-            <td><%=branchDTO.getPrice()%>
+            <td><fmt:formatNumber value="<%=branchDTO.getPrice()%>" type="number"/>
             </td>
             <td>
                 <%

@@ -106,6 +106,10 @@
         width: 150px;
     }
 
+    #admin-sales-store-align-right{
+        text-align: right;
+    }
+
 </style>
 
 <div class="admin-reserv-list-main">
@@ -215,7 +219,7 @@
                 </td>
                 <td><%=adminReservDTO.getHeadcount()%>
                 </td>
-                <td><fmt:formatNumber value="<%=adminReservDTO.getPay()%>" type="number"/>
+                <td id="admin-sales-store-align-right"><fmt:formatNumber value="<%=adminReservDTO.getPay()%>" type="number"/>
                 </td>
                 <td><%=adminReservDTO.getStatus()%>
                 </td>

@@ -65,7 +65,6 @@
     .find-branch-bottom-right {
         width: 500px;
         height: 750px;
-        background: #ff0;
     }
 
     ul {
@@ -88,6 +87,10 @@
     #branch-map {
         width: 500px;
         height: 750px;
+    }
+
+    .branch-ll {
+        z-index: 0;
     }
 </style>
 <%         ArrayList<BranchDTO> arr_BranchDTO = new BranchDAO().branchList();
@@ -114,7 +117,7 @@
             </ul>
         </div>
         <div class="find-branch-bottom-right">
-            <div id="map" style="width:500px;height:750px;"></div>
+            <div id="map" style="width:500px;height:700px; z-index: 0"></div>
 
         </div>
     </div>

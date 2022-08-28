@@ -60,6 +60,7 @@
     }
 
     #submit-find {
+        margin-top: 12px;
         background: rgb(28, 63, 90);
         color: aliceblue;
     }
@@ -93,86 +94,126 @@
     }
 
 
+    .mypage-inquiry-main {
+        width: 100%;
+    }
 
+    .mypage-inquiry-table {
+        margin-top: 20px;
+        margin-bottom: 30px;
+        table-layout: fixed;
+        word-break: break-all;
+        border-top: 1px solid black;
+    }
+    .mypage-inquiry-table > tbody > tr > td {
+        height: 60px;
+        padding: 10px 0px 10px 0px;
+        text-align: center;
+    }
+
+    .mypage-inquiry-table > tbody > tr > td:nth-of-type(1) {
+        width: 40%;
+    }
+
+    .mypage-inquiry-table > tbody > tr > td:nth-of-type(2),
+    .mypage-inquiry-table > tbody > tr > td:nth-of-type(3),
+    .mypage-inquiry-table > tbody > tr > td:nth-of-type(5) {
+        width: 10%;
+    }
+
+    .mypage-inquiry-table > tbody > tr > td:nth-of-type(4) {
+        width: 30%;
+    }
+
+    .mypage-inquiry-table > tbody > tr:nth-of-type(1) {
+        font-weight: bold;
+    }
+
+    .mypage-inquiry-table > tbody > tr {
+        border-bottom: 1px solid lightgray;
+    }
 
 
 </style>
 <div class="mypage-inquiry">
-        <div class="inquiry-top">
-            <p>문의일자 조회</p>
-            <div class="top-dateselect-wrapper">
+    <div class="inquiry-top">
+        <p>문의일자 조회</p>
+        <div class="top-dateselect-wrapper">
 
-                <input type="radio" class="input-radio" name="date-period" id="find-today" value="today"/>
-                <input type="radio" class="input-radio" name="date-period" id="find-day7" value="day7"/>
-                <input type="radio" class="input-radio" name="date-period" id="find-month" value="month" />
-                <input type="radio" class="input-radio" name="date-period" id="find-month3" value="month3" />
+            <input type="radio" class="input-radio" name="date-period" id="find-today" value="today"/>
+            <input type="radio" class="input-radio" name="date-period" id="find-day7" value="day7"/>
+            <input type="radio" class="input-radio" name="date-period" id="find-month" value="month" />
+            <input type="radio" class="input-radio" name="date-period" id="find-month3" value="month3" />
 
 <%--                <input type="radio" class="input-radio" name="find_group" id="find-today" value="today" hidden/>--%>
 <%--                <input type="radio" class="input-radio" name="find_group" id="find-day7" value="day7" hidden/>--%>
 <%--                <input type="radio" class="input-radio" name="find_group" id="find-month" value="month" hidden/>--%>
 <%--                <input type="radio" class="input-radio" name="find_group" id="find-month3" value="month3" hidden/>--%>
-                <label for="find-today"><div class="find-button">오늘</div></label>
-                <label for="find-day7"><div class="find-button">7일</div></label>
-                <label for="find-month"><div class="find-button">1개월</div></label>
-                <label for="find-month3"><div class="find-button">3개월</div></label>
-            </div>
-            <input class="top-datepicker" id="datepicker-before" max="" type="date">
-            <p id="inquiry-date-wave">&#126;</p>
-            <input class="top-datepicker" id="datepicker-after" type="date">
-                <button class="btn-inquiry" onclick="goFind()">조회</button>
+            <label for="find-today"><div class="find-button">오늘</div></label>
+            <label for="find-day7"><div class="find-button">7일</div></label>
+            <label for="find-month"><div class="find-button">1개월</div></label>
+            <label for="find-month3"><div class="find-button">3개월</div></label>
         </div>
-    <hr/>
-    <div class="inquiry-main">
-        <c:forEach items="${arr_inquiryDTO}" var="inquiryDTO">
-            <div class="inquiry-items">
-                <div class="inquiry-items-title">
-                    <a id="btn-Detail" onclick="goDetail(${inquiryDTO.inquiry_id})">${inquiryDTO.inquiry_title}</a>
-                </div>
-                <div class="inquiry-items-category">
-                        ${inquiryDTO.inquiry_category}
-
-                </div>
-                <div class="inquiry-items-type">
-                        ${inquiryDTO.inquiry_type}
-
-                </div>
-                <div class="inquiry-items-date">
-                    ${inquiryDTO.inquiry_date_String}
-
-                </div>
-                <div class="inquiry-items-state">
-                    ${inquiryDTO.inquiry_state}
-                </div>
-            </div>
-        </c:forEach>
-<%--        <p>문의하신 내용이 없습니다</p>--%>
+        <input class="top-datepicker" id="datepicker-before" max="" type="date">
+        <p id="inquiry-date-wave">&#126;</p>
+        <input class="top-datepicker" id="datepicker-after" type="date">
+            <button class="btn-inquiry" onclick="goFind()">조회</button>
     </div>
-    <hr/>
 
+    <div class="mypage-inquiry-main">
+        <table class="mypage-inquiry-table">
+            <tr>
+                <td>문의제목</td>
+                <td>카테고리</td>
+                <td>종류</td>
+                <td>문의일자</td>
+                <td>문의상태</td>
+            </tr>
+            <c:forEach items="${arr_inquiryDTO}" var="inquiryDTO" varStatus="no">
+                <tr>
+                    <input type=hidden name="reservId" value="${myreserv.id}"/>
+                    <td><a id="btn-Detail" onclick="goDetail(${inquiryDTO.inquiry_id})">${inquiryDTO.inquiry_title}</a></td>
+                    <td>${inquiryDTO.inquiry_category}</td>
+                    <td>${inquiryDTO.inquiry_type}</td>
+                    <td>${inquiryDTO.inquiry_date_String}}</td>
+                    <c:choose>
+                        <c:when test="${inquiryDTO.inquiry_state eq 1}">
+                            <td>미답변</td>
+                        </c:when>
+                        <c:otherwise>
+                            <td>답변 완료</td>
+                        </c:otherwise>
+                    </c:choose>
+                </tr>
+            </c:forEach>
+            <c:if test="${arr_inquiryDTO.size() eq 0}">
+                <tr>
+                    <td colspan="5">일치하는 항목이 없습니다.</td>
+                </tr>
+            </c:if>
+        </table>
+    </div>
     <div class="inquiry-bottom">
-        <c:if test="${firstPage > 1}">
-            <a class="inquiry-bottom-button" onclick="goPageFind(${firstPage - 1})" >이전</a>
-        </c:if>
-        <c:forEach begin="${firstPage}" end="${endPage}" var="i">
-            <c:choose>
-                <c:when test="${i == nowPage}">
-                    [${i}]
-                </c:when>
-                <c:otherwise>
-                    <a onclick="goPageFind(${i})" >${i}</a>
-                </c:otherwise>
-            </c:choose>
-        </c:forEach>
-        <c:if test="${endPage < totalPage}">
-            <a type="submit" class="inquiry-bottom-button" onclick="goPageFind(${endPage + 1})" >다음</a>
-        </c:if>
-        <button class="btn-inquiry" id="submit-find" onclick="goInquiryInsert()">문의하기</button>
+    <c:if test="${firstPage > 1}">
+        <a class="inquiry-bottom-button" onclick="goPageFind(${firstPage - 1})" >이전</a>
+    </c:if>
+    <c:forEach begin="${firstPage}" end="${endPage}" var="i">
+        <c:choose>
+            <c:when test="${i == nowPage}">
+                [${i}]
+            </c:when>
+            <c:otherwise>
+                <a onclick="goPageFind(${i})" >${i}</a>
+            </c:otherwise>
+        </c:choose>
+    </c:forEach>
+    <c:if test="${endPage < totalPage}">
+        <a type="submit" class="inquiry-bottom-button" onclick="goPageFind(${endPage + 1})" >다음</a>
+    </c:if>
+        <br/>
+    <button class="btn-inquiry" id="submit-find" onclick="goInquiryInsert()">문의하기</button>
 
     </div>
-
-    <hr/>
-
-
 </div>
 
 <script type="text/javascript">

@@ -122,6 +122,14 @@
     </div>
 
 <script type="text/javascript">
+
+    $(".admin-template-header>b").html("이벤트 목록")
+    $(".admin-template-header>div").append("<input type='button' class='admin-event-insert' value='추가' />")
+
+    $(".admin-news-insert").click(function () {
+        location.href = "AdminEventInsertForm"
+    })
+
     $(".admin-event-insert").click(function () {
         location.href = "AdminEventInsertForm"
     })

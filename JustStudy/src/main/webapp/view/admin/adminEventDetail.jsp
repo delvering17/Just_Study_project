@@ -172,10 +172,17 @@
         </button>
         <button type="submit" formaction="AdminEventDeleteReg" formmethod="get">삭제</button>
     </form>
-    <a href="AdminEventList">목록으로</a>
+    <input type='button' class='admin-event-list' value='목록으로' />
 </div>
 
 <script type="text/javascript">
+
+    $(".admin-template-header>b").html("이벤트 목록")
+
+    $(".admin-event-list").click(function () {
+        location.href = "AdminEventList"
+    })
+
     function deleteContentFile() {
         if (confirm("이미지 파일을 삭제하시겠습니까?")) {
             $("#event-detail-form").attr("action", "AdminEventImgDelete")

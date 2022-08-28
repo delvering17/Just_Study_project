@@ -164,6 +164,7 @@
 </div>
 
 <script type="text/javascript">
+    $(".admin-template-header>b").html("뉴스 목록")
 
     function deleteNewsImg(pp) {
         $(".admin-modify-form").attr("action", "AdminNewsImgDelete?type=" + pp);

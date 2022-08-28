@@ -61,8 +61,10 @@
         width: 300px;
         height: 300px;
         border: solid 1px #000;
-
-
+    }
+    .news-img >img{
+        width: 300px;
+        height: 300px;
     }
 
     .news-info{

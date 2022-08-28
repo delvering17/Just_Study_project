@@ -14,13 +14,14 @@
 <style>
 
     .admin-news-detail-main {
-        width: 100%;
+        width: 1100px;
         height: fit-content;
+        margin: 0 auto;
         padding: 20px 20px;
     }
 
     .news-title-area {
-        width: 100%;
+        width: 1100px;
         height: 200px;
         /*border: solid 1px #000;*/
         padding-top: 60px;
@@ -34,40 +35,48 @@
     }
 
     .listlink {
-        width: 80%;
-        height: 100px;
+        width: 1100px;
+        height: 50px;
         margin: 0 auto;
+        padding-top: 13px;
         text-align: center;
-        border: 1px solid #000;
+    }
+    .listlink>input{
+        margin-left: 30px;
+        font-weight: bold;
+        width: 60px;
+        height: 30px;
     }
 
 
     .news-title-area {
-        width: 100%;
+        width: 1100px;
         height: 200px;
         /*border: solid 1px #000;*/
-
         padding-top: 60px;
         margin-top: 60px;
     }
 
     .title-line {
-        width: 80%;
+        width: 1100px;
         height: 3px;
-        margin-top: 2%;
-        margin-left: 10%;
+        margin: 10px auto;
         background: black;
     }
 
+    .news-under-line{
+        width: 1100px;
+        height: 1px;
+        margin: 0 auto;
+        background: lightgray;
+    }
 
     .news-list-area {
-        width: 80%;
+        width: 1100px;
         height: 100%;
-        background: #ffa;
+        background: #f8f5f5;
         display: flex;
-        margin-left: 10%;
-        margin-top: 50px;
-        margin-bottom: 2%;
+        margin: 20px auto;
     }
 
 
@@ -79,26 +88,14 @@
 
 
     .news-status {
-        width: 80%;
+        width: 1100px;
         height: 150px;
-        padding: 35px 80px;
         position: relative;
         text-align: center;
-        margin-left: 10%;
+        margin: 0 auto;
+        padding-top: 20px;
 
     }
-
-    .news-status > div {
-        width: 150px;
-        height: 70px;
-        background: aqua;
-        border: solid 1px #000;
-        float: left;
-        padding: 20px;
-        text-align: center;
-        margin-top: 35px;
-    }
-
 
     textarea {
         font-size: 1rem;
@@ -107,15 +104,41 @@
     }
 
     .news-img {
-        width: 300px;
-        height: 300px;
-        border: 1px solid #000;
+        width: 1100px;
+        height: 100%;
+        margin: 30px auto;
+
+    }
+    .news-img>img{
+        width: 1100px;
+       margin: 0 auto;
+    }
+    .news-img> p{
+        text-align: center;
+        font-weight: bold;
+        padding-bottom: 20px;
+    }
+
+    .news-thumbnail-img{
+        width: 1100px;
+        height: 100%;
+        margin: 30px auto;
+
+    }
+    .news-thumbnail-img>img{
+        width: 1100px;
+        margin: 0 auto;
+    }
+    .news-thumbnail-img> p {
+        text-align: center;
+        font-weight: bold;
+        padding-bottom: 20px;
     }
 
     .news_content {
-        width: 70%;
-        height: 90%;
-        border: 1px solid #000;
+        width: 1100px;
+        height: 100%;
+
     }
 
 </style>
@@ -131,15 +154,21 @@
         <p class="date" style="margin-top: 30px"> ${dto.news_reg_date_sdf}</p>
 
     </div>
-    <hr style="width: 80%; height: 1px; margin-left: 10%; background: lightgray">
+    <hr class="news-under-line">
 
+    <div class="news-thumbnail-img">
+        <p>썸네일 이미지</p>
+        <img id="news-fileup-thumbnail-img" src="<c:url value="/img/news/" />${dto.news_thumbnail_img}" alt="">
+    </div>
+
+    <div class="news-img">
+        <p>본문 이미지</p>
+        <img id="news-fileup-img" src="<c:url value="/img/news/" />${dto.news_img}" alt="">
+    </div>
 
     <div class="news-list-area">
-        <div class="news-img">
-            <img id="news-fileup-img" src="<c:url value="/img/news/" />${dto.news_img}" alt="">
-        </div>
         <div class="news_content">
-            ${dto.news_content}
+            ${dto.news_contentBr}
         </div>
     </div>
 

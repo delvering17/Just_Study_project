@@ -40,14 +40,33 @@
     }
 
     .admin-sales-store-table {
-        width: 1000px;
+        width: 1101px;
         border: 1px solid rgb(122, 115, 115);
         margin-top: 10px;
+        table-layout: fixed;
+        word-break: break-all;
     }
 
     .admin-sales-store-table th {
+        width: 100px;
         border: 1px solid rgb(97, 88, 88);
         font-size: 13px;
+    }
+
+    .admin-sales-store-table th:nth-of-type(1),
+    .admin-sales-store-table th:nth-of-type(3){
+        width: 150px;
+    }
+
+    .admin-sales-store-table th:nth-of-type(2),
+    .admin-sales-store-table th:nth-of-type(4),
+    .admin-sales-store-table th:nth-of-type(5),
+    .admin-sales-store-table th:nth-of-type(6),
+    .admin-sales-store-table th:nth-of-type(7),
+    .admin-sales-store-table th:nth-of-type(8),
+    .admin-sales-store-table th:nth-of-type(9),
+    .admin-sales-store-table th:nth-of-type(10){
+        width: 100px;
     }
 
     .admin-sales-store-table td {
@@ -72,16 +91,34 @@
     select[name=branch] {
         width: 150px;
     }
+
+    .admin-sales-store-total{
+        text-align: right;
+        font-size: 1rem;
+        width: fit-content;
+        float: right;
+        margin-left: 60px;
+        font-weight: bold;
+    }
+
+    .admin-sales-store-total:nth-of-type(1){
+        color: red;
+    }
+
+    #admin-sales-store-align-right{
+        text-align: right;
+    }
 </style>
 
 <%
     ArrayList<BranchDTO> branchList = (ArrayList<BranchDTO>) request.getAttribute("branchList");
+    System.out.println(branchList.size());
 %>
 
 <div class="admin-sales-store-main">
 
     <div>
-        <form action="AdminSalesStore" method="post" class="admin-sales-store-form">
+        <form action="AdminSalesStore" class="admin-sales-store-form">
             <select name="city">
                 <option>전체</option>
                 <c:forTokens items="서울,경기,부산,대구,인천,광주,대전,울산,세종,강원,충북,충남,전북,전남,경북,경남,제주" var="city" delims=",">
@@ -126,8 +163,6 @@
         </form>
     </div>
 
-    <div>총 매출:${storeTotalPay}</div>
-
     <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-sales-store-table">
         <tr>
             <th>사용자ID</th>
@@ -138,12 +173,12 @@
             <th>룸타입</th>
             <th>이용일자</th>
             <th>시간</th>
-            <th>결제금액</th>
             <th>상태</th>
+            <th>결제금액</th>
         </tr>
         <form action="">
             <c:choose>
-                <c:when test="<%((ArrayList)request.getAttribute(\"salesStoreList\")).size() != 0%>">
+                <c:when test="${salesStoreList.size() != 0}">
                     <c:forEach items="${salesStoreList}" var="salesStoreList">
                         <tr>
                             <td>${salesStoreList.mem_userid}</td>
@@ -154,10 +189,17 @@
                             <td>${salesStoreList.room}</td>
                             <td>${salesStoreList.useDate}</td>
                             <td>${salesStoreList.time}</td>
-                            <td>${salesStoreList.pay}</td>
                             <td>${salesStoreList.status}</td>
+ <%--                           <td id="admin-sales-store-align-right">${salesStoreList.pay}</td>--%>
+                            <td id="admin-sales-store-align-right"><fmt:formatNumber value="${salesStoreList.pay }" type="number"/></td>
                         </tr>
                     </c:forEach>
+                    <tr>
+                        <td colspan="10">
+                            <div class="admin-sales-store-total"><fmt:formatNumber value="${storeTotalPay }" type="number"/></div>
+                            <div class="admin-sales-store-total">총 매출: </div>
+                        </td>
+                    </tr>
                 </c:when>
                 <c:otherwise>
                     <tr>
@@ -170,6 +212,54 @@
     </table>
 </div>
 <script type="text/javascript">
+
+    $(".admin-template-header>b").html("지점별 매출")
+
+    $("select[name=city] > option").each(function (key, value){
+        if(value.innerHTML == "<%=request.getParameter("city")%>"){
+            value.setAttribute("selected", true)
+        }
+
+        $("select[name=branch]").html("<option>전체</option>")
+        <%for(BranchDTO branchDTO : branchList){%>
+        if ($("select[name=city]").val() == "<%=branchDTO.getCity()%>") {
+            $("select[name=branch]").append("<option><%=branchDTO.getName()%></option>")
+        }
+        <%}%>
+    })
+
+    $("select[name=branch] > option").each(function (key, value){
+        if(value.innerHTML == "<%=request.getParameter("branch")%>"){
+            value.setAttribute("selected", true)
+        }
+    })
+
+    $("input[name=admin-sales-store-period]").each(function (key, value){
+        if(value.getAttribute("value") == "<%=request.getParameter("admin-sales-store-period")%>"){
+            value.setAttribute("checked", true)
+        }
+    })
+
+    $("input[name=admin-sales-store-start]").val("<%=request.getParameter("admin-sales-store-start")%>")
+    $("input[name=admin-sales-store-end]").val("<%=request.getParameter("admin-sales-store-end")%>")
+
+    $("select[name=admin-sales-store-year] > option").each(function (key, value){
+        if(value.innerHTML == "<%=request.getParameter("admin-sales-store-year")%>"){
+            value.setAttribute("selected", true)
+        }
+    })
+
+    $("select[name=admin-sales-store-month] > option").each(function (key, value){
+        if(value.innerHTML == "<%=request.getParameter("admin-sales-store-month")%>"){
+            value.setAttribute("selected", true)
+        }
+    })
+
+    $("select[name=admin-sales-store-filter] > option").each(function (key, value){
+        if(value.getAttribute("value") == "<%=request.getParameter("admin-sales-store-filter")%>"){
+            value.setAttribute("selected", true)
+        }
+    })
 
     $("select[name=city]").change(function () {
         $("select[name=branch]").html("<option>전체</option>")

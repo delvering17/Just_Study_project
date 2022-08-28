@@ -63,6 +63,23 @@
     #inquiry-insert-confirm-wrapper > .btn-modify{
         width:150px;
     }
+
+    .user-input-radio {
+        width: 20px;
+        height: 20px;
+        margin: 0 10px;
+    }
+
+    #input_branch {
+        width: 120px;
+        height: 30px;
+    }
+
+    #input-content {
+        width: 400px;
+
+    }
+
 </style>
 
 <div class="inquiry-insert">
@@ -73,24 +90,23 @@
                 <p>이름</p>
                 <input type="text" class="user-input" name="input_realname" id="input-realname" value="${memberDTO.mem_realname}" readonly>
             </li>
-            <li class="inquiry-insert-form-items">
-                <p>닉네임</p>
-                <input type="text" class="user-input" name="input_nickname" id="input-nickname" value="${memberDTO.mem_nickname}" readonly>
-            </li>
+
+                <input type="hidden" class="user-input" name="input_nickname" id="input-nickname" value="" readonly>
+
             <li class="inquiry-insert-form-items">
                 <p>제목</p>
                 <input type="text" class="user-input" name="input_title"  id="input-title">
             </li>
             <li class="inquiry-insert-form-items">
                 <p>카테고리</p>
-                <input type="radio" class="user-input" name="input_category" id="input-reveravtion" checked value="예약">예약
-                <input type="radio" class="user-input" name="input_category" id="input-study" value="스터디">스터디
+                <input type="radio" class="user-input-radio" name="input_category" id="input-study" value="스터디">스터디
+                <input type="radio" class="user-input-radio" name="input_category" id="input-reveravtion" checked value="예약">예약
             </li>
             <li class="inquiry-insert-form-items">
                 <p>종류</p>
-                <input type="radio" class="user-input" name="input_type" id="input-service" checked  value="서비스">서비스
-                <input type="radio" class="user-input" name="input_type" id="input-suggest" value="제안">제안
-                <input type="radio" class="user-input" name="input_type" id="input-declaration" value="신고">신고
+                <input type="radio" class="user-input-radio" name="input_type" id="input-service" checked  value="서비스">서비스
+                <input type="radio" class="user-input-radio" name="input_type" id="input-suggest" value="제안">제안
+                <input type="radio" class="user-input-radio" name="input_type" id="input-declaration" value="신고">신고
             </li>
             <li class="inquiry-insert-form-items">
                 <p>지점</p>

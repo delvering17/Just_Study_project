@@ -122,6 +122,9 @@
 
 
 <script>
+
+    $(".admin-template-header>b").html("공지 목록")
+
     function check() {
         const f = document.myform;
         if (f.title.value.trim() == "") {

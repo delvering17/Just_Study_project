@@ -116,5 +116,14 @@
     </table>
 </div>
 
+<script>
 
+    $(".admin-template-header>b").html("뉴스 목록")
+    $(".admin-template-header>div").append("<input type='button' class='admin-news-insert' value='추가' />")
+
+    $(".admin-news-insert").click(function () {
+        location.href = "AdminNewsInsertForm"
+    })
+
+</script>
 

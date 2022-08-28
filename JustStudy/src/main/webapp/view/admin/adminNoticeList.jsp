@@ -123,5 +123,11 @@
 
     })
 
+    $(".admin-template-header>b").html("공지 목록")
+    $(".admin-template-header>div").append("<input type='button' class='admin-notice-insert' value='추가' />")
+
+    $(".admin-notice-insert").click(function () {
+        location.href = "AdminNoticeInsertForm"
+    })
 
 </script>

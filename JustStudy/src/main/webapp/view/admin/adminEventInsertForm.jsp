@@ -143,10 +143,16 @@
         </table>
         <button type="submit" id="subbtn">추가</button>
     </form>
-    <a href="AdminEventList">목록으로</a>
+    <input type='button' class='admin-event-list' value='목록으로' />
 </div>
 
 <script>
+
+    $(".admin-template-header>b").html("이벤트 목록")
+
+    $(".admin-event-list").click(function () {
+        location.href = "AdminEventList"
+    })
 
     var now_utc = Date.now()
     var timeOff = new Date().getTimezoneOffset() * 60000;

@@ -37,6 +37,7 @@
 </form>
 
 <script>
+  $(".admin-template-header>b").html("뉴스 목록")
 
   function check(){
     const f = document.myform;

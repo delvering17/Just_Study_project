@@ -145,9 +145,23 @@
 
 
     <div class="listlink">
-        <a href="AdminNoticeList">목록으로</a>
-        <a href="AdminNoticeModifyForm?id=${dto.id}">수정</a>
-        <a href="AdminNoticeDeleteReg?id=${dto.id}">삭제</a>
-
+        <input type='button' class='admin-notice-list' value='목록으로' />
+        <input type='button' class='admin-notice-modify' value='수정' />
+        <input type='button' class='admin-notice-delete' value='삭제' />
     </div>
 </div>
+
+<script>
+
+    $(".admin-template-header>b").html("공지 목록")
+
+    $(".admin-notice-list").click(function () {
+        location.href = "AdminNoticeList"
+    })
+    $(".admin-notice-modify").click(function () {
+        location.href = "AdminNoticeModifyForm?id=${dto.id}"
+    })
+    $(".admin-notice-delete").click(function () {
+        location.href = "AdminNoticeDeleteReg?id=${dto.id}"
+    })
+</script>

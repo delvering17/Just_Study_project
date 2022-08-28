@@ -15,6 +15,8 @@
 
 <script type="text/javascript">
     $("#r3").attr("checked", true)
+
+    $(".admin-template-header>b").html("지점별 매출")
 </script>
 
 <style>
@@ -103,7 +105,7 @@
         font-size: 1rem;
         width: fit-content;
         float: right;
-        margin-left: 60px;
+        padding-left: 60px;
         font-weight: bold;
     }
 
@@ -219,8 +221,6 @@
     </table>
 </div>
 <script type="text/javascript">
-
-    $(".admin-template-header>b").html("지점별 매출")
 
     $("select[name=city] > option").each(function (key, value){
         if(value.innerHTML == "<%=request.getParameter("city")%>"){

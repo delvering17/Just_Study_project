@@ -10,7 +10,7 @@
 
 <style type="text/css">
 
-    #main {
+    .admin-store-insert-main {
         width: 100%;
         height: fit-content;
         padding: 20px 20px;
@@ -130,7 +130,7 @@
 
 </style>
 
-<div id="main">
+<div class="admin-store-insert-main">
     <form action="AdminStoreInsertReg" method="post" enctype="multipart/form-data">
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-store-insert-table">
             <tr>
@@ -234,6 +234,12 @@
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
+
+    $(".admin-template-header>b").html("지점 목록 > 지점 추가")
+    $(".admin-template-header>div").append("<input type=button class='admin-store-save' value='저장'/>")
+    $(".admin-template-header>div").append("<input type=button class='admin-store-list' value='목록으로'/>")
+
+
     $(".admin-store-list").click(function () {
         location.href = "AdminStoreList"
     })

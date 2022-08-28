@@ -23,15 +23,18 @@
     }
 
     .admin-store-modify-table {
-        height: 730px;
+        height: 610px;
         border: 1px solid rgb(97, 88, 88);
-        margin-top: 10px;
+        margin-bottom: 50px;
     }
 
     .admin-store-modify-table > tbody > tr > th {
         width: 80px;
         border: 1px solid rgb(97, 88, 88);
         font-size: 13px;
+        padding: 10px;
+        background: rgba(83, 104, 167, 0.856);
+        color: white;
     }
 
     .admin-store-modify-table tr:nth-of-type(1),
@@ -42,18 +45,14 @@
     .admin-store-modify-table tr:nth-of-type(7),
     .admin-store-modify-table tr:nth-of-type(9),
     .admin-store-modify-table tr:nth-of-type(8) {
-        height: 7%;
+        height: 60px;
+
     }
 
     .admin-store-modify-table tr:nth-of-type(3),
     .admin-store-modify-table tr:nth-of-type(10) {
-        height: 22%;
-    }
+        height: 165px;
 
-    .admin-store-modify-table th {
-        padding: 10px;
-        background: rgba(83, 104, 167, 0.856);
-        color: white;
     }
 
     .admin-store-modify-table td {
@@ -256,6 +255,12 @@
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+
+    $(".admin-template-header>b").html("지점 목록 > 지점 수정")
+    $(".admin-template-header>div").append("<input type=button class='admin-store-save' value='저장'/>")
+    $(".admin-template-header>div").append("<input type=button class='admin-store-detail' value='취소'/>")
+    $(".admin-template-header>div").append("<input type=button class='admin-store-list' value='목록으로'/>")
+
     $("input[name=roomType]").change(function () {
         $(this).parent().children("input[name=roomNum]").attr("disabled", !$(this).parent().children("input[name=roomNum]").attr("disabled"));
         $(this).parent().children("input[type=button]").attr("disabled", !$(this).parent().children("input[type=button]").attr("disabled"))
@@ -274,6 +279,10 @@
 
     $(".admin-store-list").click(function () {
         location.href = "AdminStoreList"
+    })
+
+    $(".admin-store-detail").click(function (){
+        location.href = "AdminStoreDetail?branchName=${param.branchName}"
     })
 
     $(".admin-store-save").click(function () {

@@ -16,7 +16,7 @@
     }
 
     .admin-store-detail-table {
-        height: 730px;
+        height: 610px;
         border: 1px solid rgb(97, 88, 88);
         margin-bottom: 50px;
     }
@@ -38,12 +38,12 @@
     .admin-store-detail-table tr:nth-of-type(7),
     .admin-store-detail-table tr:nth-of-type(9),
     .admin-store-detail-table tr:nth-of-type(8) {
-        height: 7%;
+        height: 60px;
     }
 
     .admin-store-detail-table tr:nth-of-type(3),
     .admin-store-detail-table tr:nth-of-type(10) {
-        height: 22%;
+        height: 165px;
     }
 
     .admin-store-detail-table td {
@@ -118,6 +118,12 @@
 </div>
 
 <script type="text/javascript">
+
+    $(".admin-template-header>b").html("지점 목록 > 지점 상세보기")
+    $(".admin-template-header>div").append("<input type=button class='admin-store-modify' value='수정'/>")
+    $(".admin-template-header>div").append("<input type=button class='admin-store-delete' value='삭제'/>")
+    $(".admin-template-header>div").append("<input type=button class='admin-store-list' value='목록으로'/>")
+
     $(".admin-store-list").click(function () {
         location.href = "AdminStoreList"
     })

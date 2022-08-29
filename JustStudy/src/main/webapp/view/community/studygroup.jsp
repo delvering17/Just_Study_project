@@ -16,65 +16,72 @@
 
     .community-wrapper {
         width: 100%;
-
     }
 
     .community-top {
+        width: 1200px;
+        height: 200px;
         text-align: center;
-        font-size: 3.4rem;
+        padding-top: 100px;
+        margin: 0 auto;
+    }
+    #community-title{
+        font-size: 3.5rem;
         font-weight: bold;
+        text-align: center;
     }
 
     .community-bottom {
         width: 1200px;
-        background: #ff0;
-        margin: 0 auto;
+        margin: 30px auto;
     }
 
     .commuity-bottom-selector {
-
         display: flex;
         flex-direction: row;
 
-        background: white;
     }
 
     .main-list-selector {
         width: 600px;
         list-style: none;
         font-size: 1.5rem;
-
         display: flex;
         flex-direction: row;
-        margin: 0 auto;
+        margin: 60px auto;
+
     }
 
     .main-list-selector > li {
         width: 200px;
         height: 70px;
         border: 1px solid #aaa;
-
+        border-radius: 7px;
         display: flex;
         align-items: center;
         justify-content: center;
 
     }
 
-    dl, ol, ul {
-        padding-left: 0px;
-        margin-bottom: 0px;
+
+    .main-form {
+        width: 100px;
+        height: 40px;
+        margin: 0 auto;
+        border: 1px solid #000;
+        border-radius: 7px;
+        display: flex;
+        flex-direction: row;
+        margin-left: 600px;
 
     }
 
-    .main-form {
-
-        width: 1000px;
-        height: 100px;
-        margin: 0 auto;
-        background: #f0f;
-
-        display: flex;
-        flex-direction: row;
+    .main-form > a {
+        width: 100px;
+        justify-content: center;
+        text-align: center;
+        margin: auto 0;
+        color: white;
     }
 
     .main-form > p {
@@ -90,27 +97,6 @@
         border-right: 1px solid #aaa;
     }
 
-    .main-form > a {
-        width: 100px;
-        justify-content: center;
-        margin: auto 0;
-    }
-
-    .label-main-form {
-        width: 60px;
-
-        display: flex;
-        align-items: center;
-    }
-
-    .main-form-item-wrapper {
-
-        margin-left: 20px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-    }
-
     .main-study-list-wrapper {
         list-style: none;
 
@@ -118,30 +104,135 @@
 
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        grid-gap: 2rem;
+        grid-gap: 4rem;
         place-items: center;
 
 
     }
 
     .study-list-item {
-
-        width: 200px;
-        border: 1px solid #aaa;
+        width: 250px;
         background: #fff;
     }
 
-    .list-item-sub-text {
+    .study-item{
+        width: 250px;
+        height: 270px;
+        border: 1px solid #c2c2c2;
+        border-radius: 7px;
+    }
 
+    .event-srch-branch{
+        font-weight: bold;
+        font-size: 1.1rem;
+        text-align: center;
+        margin: 10px auto;
+        color: #99996b;
+    }
+
+
+    .underline{
+        width: 210px;
+        height: 1px;
+        margin: 10px auto;
+        background: lightgray;
+    }
+
+    .event-srch-title{
+        font-weight: bold;
+        font-size: 1.1rem;
+        text-align: center;
+        margin: 20px auto;
+        width: 250px;
+        height:  50px;
+
+    }
+
+
+    .listInner{
+        width: 250px;
+        height: 250px;
+    }
+
+    .list-item-sub-text {
         display: flex;
         flex-direction: column;
         text-align: center;
 
     }
 
+    .study-kind{
+        text-align: center;
+        font-size: 1rem;
+        font-weight: bold;
+        width: 250px;
+        height: 20px;
+        color: #ababab;
+    }
+    .study-people{
+        text-align: center;
+        font-size: 1rem;
+        font-weight: bold;
+        width: 250px;
+        height: 40px;
+        padding-top: 10px;
+    }
+
     .btn-apply {
         text-align: center;
+        width: 100px;
+        height: 50px;
+        padding: 4px 4px;
+        border: 1px solid #000;
+        border-radius: 7px;
+        margin-left: 90px;
+        background: #f0eeee;
     }
+    .btn-close{
+        text-align: center;
+        width: 100px;
+        height: 50px;
+        border: 1px solid #000;
+        margin-left: 90px;
+    }
+
+    a{
+        text-decoration: none;
+    }
+    a:link{
+        color: black;
+    }
+    a:visited{
+        color: black;
+    }
+    a:hover{
+        color: purple;
+    }
+    a:active{
+        color: black;
+    }
+
+    #city{
+        width: 100px;
+        height: 40px;
+        text-align: center;
+        border-radius: 7px;
+    }
+    #branch{
+        width: 100px;
+        height: 40px;
+        text-align: center;
+        border-radius: 7px;
+        margin-left: 10px;
+    }
+    #search{
+        width: 200px;
+        height: 40px;
+        border-radius: 7px;
+        margin-left: 10px;
+    }
+
+
 
 
 </style>
@@ -150,26 +241,24 @@
 <title>커뮤니티 | ABOUT LANGS :: 랭스 커피&amp;워크 : 랭스터디카페</title>
 
 <div class="community-wrapper">
+
     <div class="community-top">
-        <p>커뮤니티</p>
+        <p id="community-title">커뮤니티</p>
     </div>
+
     <div class="community-bottom">
         <div class="commuity-bottom-selector">
             <div>
-                <select name="city">
+                <select id="city" name="city">
                     <option>전체</option>
                     <c:forTokens items="서울,경기,부산,대구,인천,광주,대전,울산,세종,강원,충북,충남,전북,전남,경북,경남,제주" var="city" delims=",">
                         <option>${city}</option>
                     </c:forTokens>
                 </select>
-                <%--<select name="local">
-                    <option value="">지역 선택 👇</option>
-                    <option value="서울">서울</option>
-                    <option value="부산">부산</option>
-                </select>--%>
+
             </div>
             <div>
-                <select name="branch">
+                <select id="branch" name="branch">
                     <option>전체</option>
                 </select>
                 <%--<select name="jijum">
@@ -180,6 +269,10 @@
                 <input type="text" id="search" onkeyup="filter()" placeholder="제목을 입력하세요">
             </form>
 
+            <form class="main-form">
+                <a href="CommunityInsertForm">새 글쓰기</a>
+            </form>
+
         </div>
         <div class="commuity-main">
             <ul class="main-list-selector">
@@ -188,26 +281,25 @@
                 <li><a href="CommunityPage?category=close" >모집완료</a></li>
             </ul>
 
-            <form class="main-form">
-                <a href="CommunityInsertForm">새 글쓰기</a>
-            </form>
+
             <ul class="main-study-list-wrapper">
                 <c:forEach items="${mainData}" var="dto" varStatus="no">
                     <div class="listInner">
                         <li class="study-list-item">
-                            <div>
+                            <div class="study-item">
                                     <p class="event-srch-branch">${dto.location}</p>
-                                    <span class="event-srch-title" style="display: inline">${dto.title}</span>
+                                    <p class="event-srch-title" >${dto.title}</p>
                                 <div class="list-item-sub-text">
-                                    <p>${dto.studykind}</p>
-                                    <p>모집인원&nbsp;&colon; ${arr_nowPeople.get(no.index)} / ${dto.people}명</p>
+                                    <p class="study-kind">${dto.studykind}</p>
+                                        <hr class="underline">
+                                    <p class="study-people">모집인원&nbsp;&colon; ${arr_nowPeople.get(no.index)} / ${dto.people}명</p>
                                 </div>
                                 <c:choose>
                                     <c:when test="${dto.status == '모집중'}">
                                         <a class="btn-apply" href="CommunityDetail?id=${dto.id}">신청하기</a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a>신청마감</a>
+                                        <a class="btn-close">신청마감</a>
 
                                     </c:otherwise>
                                 </c:choose>
@@ -288,6 +380,7 @@
 
         });
     });
+
 
 
 

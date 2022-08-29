@@ -15,7 +15,8 @@
         width: 1100px;
         height: 200px;
         /*border: solid 1px #000;*/
-        padding-top: 60px;
+        padding-top: 100px;
+        margin: 0 auto;
 
     }
 
@@ -46,14 +47,6 @@
         padding-top: 13px;
         text-align: center;
 
-    }
-
-
-    .news-title-area{
-        width: 100%;
-        height: 200px;
-        padding-top: 60px;
-        margin-top: 60px;
     }
 
     .news-list-area{
@@ -127,12 +120,12 @@
 
 
 <div class="listlink">
-    <input type='button' class='admin-news-list' value='목록으로' />
+    <input type='button' class='news-list' value='목록으로' />
 </div>
 
 <script>
 
-    $(".admin-news-list").click(function () {
+    $(".news-list").click(function () {
         location.href = "NewsPage"
     })
 </script>

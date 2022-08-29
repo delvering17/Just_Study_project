@@ -10,19 +10,25 @@
 <style>
 
     .notice-title-area{
-        width: 100%;
+        width: 1100px;
         height: 200px;
         /*border: solid 1px #000;*/
-        padding-top: 60px;
-        margin-top: 60px;
+        padding-top: 100px;
+        margin: 0 auto;
+
     }
 
     .title-line{
-        width: 80%;
+        width: 1100px;
         height: 3px;
-        margin-top: 2%;
-        margin: 0 auto;
+        margin: 10px auto;
         background: black;
+    }
+    .notice-under-line{
+        width: 1100px;
+        height: 1px;
+        margin: 20px auto;
+        background: lightgray;
     }
 
     #notice-title{
@@ -32,73 +38,30 @@
     }
 
     .listlink{
-        width: 80%;
-        height: 100px;
+        width: 1100px;
+        height: 50px;
         margin: 0 auto;
-        text-align: center;
-        border: 1px solid #000;
-    }
-
-
-
-    .title-line{
-        width: 80%;
-        height: 3px;
-        margin-top: 2%;
-        margin-left: 10%;
-        background: black;
-    }
-
-    #notice-title{
-        font-size: 3.5rem;
-        font-weight: bold;
+        padding-bottom: 50px;
+        padding-top: 13px;
         text-align: center;
     }
 
     .notice-list-area{
-        width: 80%;
-        height: 100%;
-        background: #ffa;
+        width: 1100px;
         display: flex;
-        margin-left: 10%;
-        margin-top: 50px;
-        margin-bottom: 2%;
+        margin: 20px auto;
     }
-
-
-
-    .notice-ul > li{
-        /*width: 100px;*/
-        /*height: 100px;*/
-        margin: 10px;
-        float: left;
-        /*background: black;*/
-        list-style: none;
-    }
-
 
 
     .notice-status{
-        width: 80%;
+        width: 1100px;
         height: 150px;
-        padding: 35px 80px;
         position: relative;
         text-align: center;
-        margin-left: 10%;
+        margin: 0 auto;
+        padding-top: 20px;
 
     }
-
-    .notice-status > div{
-        width: 150px;
-        height: 70px;
-        background: aqua;
-        border: solid 1px #000;
-        float: left;
-        padding: 20px;
-        text-align: center;
-        margin-top: 35px;
-    }
-
 
 
     textarea{
@@ -117,16 +80,22 @@
 <div class="notice-status">
     <h2> ${dto.title} </h2>
     <p class="date" style="margin-top: 30px"> ${dto.reg_date_sdf}</p>
-
 </div>
-<hr style="width: 80%; height: 1px; margin-left: 10%; background: lightgray">
+<hr class="notice-under-line">
 
 
 <div class="notice-list-area">
     ${dto.content}
 </div>
+<hr class="notice-under-line">
 
 
 <div class="listlink">
-    <a href="NoticePage">목록으로</a>
+    <input type='button' class='notice-list' value='목록으로' />
 </div>
+
+<script>
+    $(".notice-list").click(function () {
+        location.href = "NoticePage"
+    })
+</script>

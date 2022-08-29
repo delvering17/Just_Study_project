@@ -12,28 +12,36 @@
 <style>
     .main{
         width: 100%;
-
-        border: solid 1px #000;
-
     }
 
     .notice-title-area{
-        width: 100%;
+        width: 1100px;
         height: 200px;
-        border: solid 1px #000;
         text-align: center;
         padding-top: 60px;
-        margin-top: 60px;
-
+        margin: 0 auto;
     }
     #notice-title{
         font-size: 3.5rem;
         font-weight: bold;
         text-align: center;
     }
+    .title-line {
+        width: 1100px;
+        height: 3px;
+        margin: 10px auto;
+        background: black;
+
+    }
+
+    .notice-area{
+        width: 1100px;
+        margin: 10px auto;
+
+    }
 
    .notice-ul{
-       width: 80%;
+       width: 1100px;
        margin: 0 auto;
        border: 1px solid #000;
    }
@@ -61,6 +69,67 @@
        float: left
    }
 
+   table{
+       width: 1100px;
+
+   }
+
+   #list > th:nth-of-type(1){
+       width: 150px;
+       height: 70px;
+       text-align: center;
+   }
+   #list > th:nth-of-type(2){
+       width: 700px;
+       height: 70px;
+       text-align: center;
+   }
+    #list > th:nth-of-type(3){
+        width: 250px;
+        height: 70px;
+        text-align: center;
+    }
+
+    #info > td:nth-of-type(1){
+        width: 150px;
+        height: 70px;
+        border: 2px solid #d4d2d2;
+        border-left: none;
+        border-right: none;
+        text-align: center;
+    }
+    #info > td:nth-of-type(2){
+        width: 700px;
+        height: 70px;
+        border: 2px solid #d4d2d2;
+        border-left: none;
+        border-right: none;
+        text-align: center;
+    }
+    #info > td:nth-of-type(3){
+        width: 250px;
+        height: 70px;
+        border: 2px solid #d4d2d2;
+        border-left: none;
+        border-right: none;
+        text-align: center;
+    }
+    a{
+        text-decoration: none;
+    }
+    a:link{
+        color: black;
+    }
+    a:visited{
+        color: black;
+    }
+    a:hover{
+        color: purple;
+    }
+    a:active{
+        color: black;
+    }
+
 </style>
 
 <div class="main">
@@ -68,9 +137,27 @@
     <div class="notice-title-area">
         <p id="notice-title">공지사항</p>
     </div>
+    <hr class="title-line">
+
     <div class="notice-area">
-        <div class="notice-subject" style="width: 80%; margin: 0 auto; background: #ffa"></div>
-        <ul class="notice-ul">
+      <%--  <div class="notice-subject" style="width: 80%; margin: 0 auto; background: #ffa"></div>--%>
+        <table >
+
+            <tr id="list">
+                <th>번호</th>
+                <th>제목</th>
+                <th>등록일</th>
+            </tr>
+            <c:forEach items="${mainData}" var="dto" varStatus="no">
+            <tr id="info">
+                <td><p>${dto.id}</p></td>
+                <td><a href="NoticeDetail?id=${dto.id}" /><p>${dto.title}</p></td>
+                <td>${dto.reg_date_sdf}</td>
+            </tr>
+            </c:forEach>
+        </table>
+
+<%--        <ul class="notice-ul">
             <c:forEach items="${mainData}" var="dto" varStatus="no">
                 <li class="notice-li"><a href="NoticeDetail?id=${dto.id}" />
                     <div class="notice-num">
@@ -84,7 +171,7 @@
                     </div>
                 </li>
             </c:forEach>
-        </ul>
+        </ul>--%>
     </div>
 
 </div>

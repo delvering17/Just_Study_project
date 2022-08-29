@@ -51,8 +51,8 @@
                 <td>스터디 기간</td>
                 <fmt:formatDate value="${communityDTO.startdate}" pattern="yyyy-MM-dd" var="startdateFmt"/>
                 <fmt:formatDate value="${communityDTO.enddate}" pattern="yyyy-MM-dd" var="enddateFmt"/>
-                <td><input type="date"  name="startdate" value="${startdateFmt}"></td>
-                <td> ~ <input type="date" name="enddate" value="${enddateFmt}"></td>
+                <td><input type="date" id="startdate"  name="startdate" value="${startdateFmt}"></td>
+                <td> ~ <input type="date" id="enddate" name="enddate" value="${enddateFmt}"></td>
                 <td></td>
             </tr>
             <tr>
@@ -116,6 +116,12 @@
             value.setAttribute("checked", true)
         }
     })
+
+    var now_utc = Date.now()
+    var timeOff = new Date().getTimezoneOffset() * 60000;
+    var today = new Date(now_utc - timeOff).toISOString().split("T")[0];
+    document.getElementById("startdate").setAttribute("min", today);
+    document.getElementById("enddate").setAttribute("min", today);
 
 
     $("#modifybtn").click(function(){

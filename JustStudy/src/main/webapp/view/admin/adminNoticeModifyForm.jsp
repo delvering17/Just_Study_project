@@ -59,6 +59,7 @@
     }
 
     td {
+        width: 300px;
         border: 1px solid rgb(97, 88, 88);
         text-align: center;
         font-size: 13px;
@@ -99,6 +100,12 @@
     .branch:nth-of-type(2n) {
         background: rgba(227, 233, 240, 0.726)
     }
+    #submit-btn{
+        width: 80px;
+        height: 30px;
+        font-weight: bold;
+        margin-top: 20px;
+    }
 </style>
 
 <div id="main">
@@ -106,17 +113,15 @@
         <input type="hidden" name="id" value="${dto.id}">
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
             <tr>
-                <td>타이틀</td>
-                <td colspan="3"><input type="text" name="title" value="${dto.title}"></td>
+                <th>타이틀</th>
+                <td><input type="text" name="title" value="${dto.title}"></td>
             </tr>
             <tr>
-                <td>내용</td>
-                <td colspan="3"><textarea name="content" cols="50" rows="10">${dto.content}</textarea></td>
-            </tr>
-            <tr>
-                <td colspan="4"><input type="submit" value="등록"></td>
+                <th>내용</th>
+                <td><textarea name="content" cols="50" rows="10">${dto.content}</textarea></td>
             </tr>
         </table>
+        <input id="submit-btn" type="submit" value="등록">
     </form>
 </div>
 

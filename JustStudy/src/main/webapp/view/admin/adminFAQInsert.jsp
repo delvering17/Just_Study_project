@@ -8,6 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script type="text/javascript">
     $("#r5").attr("checked", true)
+    $(".admin-template-header>b").html("FAQ 추가")
+    $(".admin-template-header>div").append("<input type=button class='admin-faq-add' value='추가'/>")
 </script>
 <style type="text/css">
 
@@ -60,7 +62,7 @@
 
 <div class="admin-faq-insert-main">
 
-    <form action="AdminFAQInsertReg" method="get">
+    <form action="AdminFAQInsertReg" class="admin-faq-add-action" method="get">
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-faq-insert-table">
             <tr>
                 <th>분류</th>
@@ -80,6 +82,12 @@
                 <td><textarea name="faq-answer" rows="17" cols="50"></textarea></td>
             </tr>
         </table>
-        <input type="submit" value="저장"/>
     </form>
 </div>
+
+<script type="text/javascript">
+    $(".admin-faq-add").click(function () {
+        $(".admin-faq-add-action").submit()
+    })
+
+</script>

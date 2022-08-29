@@ -8,6 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script type="text/javascript">
     $("#r5").attr("checked", true)
+    $(".admin-template-header>b").html("FAQ 수정")
+    $(".admin-template-header>div").append("<input type=button class='admin-faq-modify' value='수정'/>")
 </script>
 <style type="text/css">
 
@@ -60,7 +62,7 @@
 
 <div class="admin-faq-modify-main">
 
-    <form action="AdminFAQModifyReg" method="get">
+    <form action="AdminFAQModifyReg" class="admin-faq-modify-action" method="get">
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" class="admin-faq-modify-table">
             <input type="hidden" name="faq-id" value="${faqDTO.id}"/>
             <tr>
@@ -81,7 +83,6 @@
                 <td><textarea name="faq-answer" rows="17" cols="50">${faqDTO.answer}</textarea></td>
             </tr>
         </table>
-        <input type="submit" value="저장"/>
     </form>
 </div>
 
@@ -91,5 +92,9 @@
             value.setAttribute("Checked", true)
         }
     });
+
+    $(".admin-faq-modify").click(function () {
+        $(".admin-faq-modify-action").submit()
+    })
 
 </script>

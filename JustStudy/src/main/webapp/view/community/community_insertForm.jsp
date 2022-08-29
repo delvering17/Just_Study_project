@@ -8,72 +8,177 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
-</style>
-<form name="frmJoin" action=" CommunityInsertReg" method="post" onsubmit="return CheckForm(this)">
+    .main{
+        width: 1400px;
+        /*border: 1px solid  #000;*/
+        margin: 0 auto;
+        padding-top: 150px;
+        padding-bottom: 50px;
+    }
 
-    <table>
-        <tr>
-            <td>지역</td>
+    .study-top {
+        width: 1200px;
+        height: 200px;
+        text-align: center;
+        margin: 0 auto;
+    }
+    #study-title{
+        font-size: 3.5rem;
+        font-weight: bold;
+        text-align: center;
+    }
+    .underline{
+        width: 1200px;
+        height: 3px;
+        margin: 20px auto;
+        background: black;
+    }
+
+    th{
+        height: 70px;
+       padding-top: 10px;
+        text-align: center;
+       border: 1px solid #000;
+        border-left: none;
+        background: #edecec;
+    }
+    td{
+        border: 1px solid #000;
+        border-left: none;
+        border-right: none;
+        height: 40px;
+        text-align: center;
+    }
+    .tr-ten > td{
+        border-bottom: none;
+        border-top: none;
+    }
+    .tr-nine > td{
+        border-bottom: none;
+    }
+    .main-table{
+        width: 800px;
+        /*border: 1px solid #000;*/
+        margin: 0 auto;
+    }
+   #location_01{
+       width: 150px;
+       height: 30px;
+       border: 1px solid #000;
+       border-radius: 7px;
+   }
+   #Date-start, #Date-end{
+       width: 150px;
+       height: 30px;
+       border: 1px solid #000;
+       border-radius: 7px;
+   }
+   #title{
+       width: 300px;
+       height: 30px;
+       border: 1px solid #000;
+       border-radius: 7px;
+   }
+   .user{
+       width: 150px;
+       height: 30px;
+       border: 1px solid #000;
+       border-radius: 7px;
+   }
+   #people{
+       width: 150px;
+       height: 30px;
+       border: 1px solid #000;
+       border-radius: 7px;
+   }
+   #open-url{
+       width: 400px;
+       height: 30px;
+       border: 1px solid #000;
+       border-radius: 7px;
+   }
+   #agree-chk{
+       font-weight: bold;
+   }
+
+   .label{
+       font-size: 1rem;
+
+   }
+
+</style>
+
+<form name="frmJoin" action=" CommunityInsertReg" method="post" onsubmit="return CheckForm(this)">
+    <div class="main">
+
+        <div class="study-top">
+            <p id="study-title">스터디 글작성</p>
+            <hr class="underline">
+        </div>
+
+    <table class="main-table">
+        <tr class="tr-one">
+            <th>지역</th>
             <td colspan="3">
                 <select id="location_01" name="location" class="local-selector">
                     <option value="">지점 선택</option>
                     <c:forEach items="${branchList}" var="branch" varStatus="no">
                         <option value="${branch.name}">${branch.name}</option>
                     </c:forEach>
-                </select></td>
+                </select>
+            </td>
         </tr>
-        <tr>
-            <td>스터디 기간</td>
-            <td><input type="date" id="Date-start" name="startdate"></td>
-            <td> ~ <input type="date" id="Date-end" name="enddate"></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>타이틀</td>
-            <td colspan="3"><input type="text" name="title"></td>
-        </tr>
-        <tr>
-            <td>작성자</td>
-            <input type="hidden" name="memId" value="${memberDTO.mem_id}"/>
-            <td colspan="3"><input type="text" name="nickname" value="${memberDTO.mem_nickname}" readonly></td>
-        </tr>
-        <tr>
-            <td>모집인원</td>
-            <td colspan="3"><input type="number" name="people"> 명</td>
+        <tr class="tr-two">
+            <th>스터디 기간</th>
+            <td><input type="date" id="Date-start" name="startdate"> ~ <input type="date" id="Date-end" name="enddate"></td>
 
         </tr>
-        <tr>
-            <td>스터디 구분</td>
+        <tr class="tr-three">
+            <th>타이틀</th>
+            <td colspan="3"><input id="title" type="text" name="title"></td>
+        </tr>
+        <tr class="tr-four">
+            <th>작성자</th>
+            <input class="user" type="hidden" name="memId" value="${memberDTO.mem_id}"/>
+            <td colspan="3"><input class="user" type="text" name="nickname" value="${memberDTO.mem_nickname}" readonly></td>
+        </tr>
+        <tr class="tr-five">
+            <th>모집인원</th>
+            <td colspan="3"><input id="people" type="number" name="people"> 명</td>
+
+        </tr>
+        <tr class="tr-six">
+            <th>스터디 구분</th>
             <td colspan="3">
-                <input type="checkbox" name="studykind" id="all" value="all" data-cate="0" onclick="validate()" >
-                <label for="all">전체</label>
-                <input type="checkbox" name="studykind" id="cate_0" value="IT" data-cate="IT" onclick="validate()" >
-                <label for="cate_0">IT</label>
-                <input type="checkbox" name="studykind" id="cate_1" value="토익" data-cate="토익" onclick="validate()">
-                <label for="cate_1">토익</label>
-                <input type="checkbox" name="studykind" id="cate_2" value="자격증" data-cate="자격증" onclick="validate()">
-                <label for="cate_2">자격증</label>
-                <input type="checkbox" name="studykind" id="cate_3" value="기타" data-cate="기타" onclick="validate()">
-                <label for="cate_3">기타</label>
+                <input class="chbox" type="checkbox" name="studykind" id="all" value="all" data-cate="0" onclick="validate()" >
+                <label class="label" for="all">전체</label>
+                <input class="chbox" type="checkbox" name="studykind" id="cate_0" value="IT" data-cate="IT" onclick="validate()" >
+                <label class="label" for="cate_0">IT</label>
+                <input class="chbox" type="checkbox" name="studykind" id="cate_1" value="토익" data-cate="토익" onclick="validate()">
+                <label class="label" for="cate_1">토익</label>
+                <input class="chbox" type="checkbox" name="studykind" id="cate_2" value="자격증" data-cate="자격증" onclick="validate()">
+                <label class="label" for="cate_2">자격증</label>
+                <input class="chbox" type="checkbox" name="studykind" id="cate_3" value="기타" data-cate="기타" onclick="validate()">
+                <label class="label" for="cate_3">기타</label>
                </td>
         </tr>
-        <tr>
-            <td>내용</td>
+        <tr class="tr-seven">
+            <th>내용</th>
             <td colspan="3"><textarea name="content" cols="50" rows="10"></textarea></td>
         </tr>
-        <tr>
-            <td>오픈채팅 URL</td>
-            <td colspan="3"><input type="text" name="openChatting"/></td>
+        <tr class="tr-eight">
+            <th>오픈채팅 URL</th>
+            <td colspan="3"><input id="open-url" type="text" name="openChatting"/></td>
         </tr>
-        <tr>
+        <tr class="tr-nine">
             <td colspan="4"><input type="checkbox" name="agree" id="agree" value="">
-                <label for="agree">개인정보취급방침을 읽었으며 이에 동의합니다.</label></td>
+                <label id="agree-chk" for="agree">개인정보취급방침을 읽었으며 이에 동의합니다.</label></td>
         </tr>
-        <tr>
+        <tr class="tr-ten">
             <td colspan="4"><input type="submit" id="subbtn" value="등록"></td>
         </tr>
     </table>
-
+    </div>
 </form>
 
 <script>

@@ -18,7 +18,7 @@
         width: 1100px;
         height: 200px;
         text-align: center;
-        padding-top: 60px;
+        padding-top: 100px;
         margin: 0 auto;
     }
     #notice-title{

@@ -12,7 +12,7 @@
 <script type="text/javascript">
     $("#r5").attr("checked", true)
     $(".admin-template-header>b").html("뉴스 수정")
-    $(".admin-template-header>div").append("<input type='button' id='submit-btn' value='등록' />")
+    $(".admin-template-header>div").append("<input type='button' id='submit-btn' value='수정' />")
 
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"

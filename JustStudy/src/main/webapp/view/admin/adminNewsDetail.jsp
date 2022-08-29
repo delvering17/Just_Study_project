@@ -180,14 +180,6 @@
             ${dto.news_contentBr}
         </div>
     </div>
-
-
-    <div class="listlink">
-        <input type='button' class='admin-news-list' value='목록으로' />
-        <input type='button' class='admin-news-modify' value='수정' />
-        <input type='button' class='admin-news-delete' value='삭제' />
-    </div>
-
 </div>
 <script>
 

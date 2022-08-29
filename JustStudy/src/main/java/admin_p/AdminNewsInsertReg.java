@@ -21,7 +21,8 @@ public class AdminNewsInsertReg implements AdminService{
                 "\\img\\news";
 
         path = "C:\\Users\\dieun\\jieun\\coding\\GItHub\\Just_Study_project\\JustStudy\\src\\main\\webapp\\img\\news";*/
-        path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\img\\news";
+        /*path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\img\\news";*/
+        path = "C:\\juststudy\\JustStudy\\src\\main\\webapp\\img\\news";
 
         int size = 1024 * 1024 * 10;
 
@@ -45,7 +46,7 @@ public class AdminNewsInsertReg implements AdminService{
         System.out.println(dto);
 
         request.setAttribute("adminUrl","alert.jsp");
-        request.setAttribute("msg","입력되었습니다.");
+        request.setAttribute("msg","등록되었습니다.");
         request.setAttribute("goUrl","AdminNewsDetail?id="+dto.getNews_id());
 
 

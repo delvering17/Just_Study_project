@@ -11,6 +11,9 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script type="text/javascript">
     $("#r5").attr("checked", true)
+    $(".admin-template-header>b").html("뉴스 수정")
+    $(".admin-template-header>div").append("<input type='button' id='submit-btn' value='등록' />")
+
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
       integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
@@ -126,8 +129,7 @@
         width: 100px;
         height: 30px;
         font-weight: bold;
-        margin-top: 30px;
-        margin-left: 650px;
+        margin: 30px 10px 20px 650px;
     }
 
 </style>
@@ -195,12 +197,12 @@
                 <td><textarea name="news_content" cols="100%" rows="10">${dto.news_content}</textarea></td>
             </tr>
         </table>
-        <input id="submit-btn" type="submit" value="등록">
+        <%--<input id="submit-btn" type="submit" value="등록">--%>
     </form>
 </div>
 
 <script type="text/javascript">
-    $(".admin-template-header>b").html("뉴스 목록")
+
 
     function deleteNewsImg(pp) {
         $(".admin-modify-form").attr("action", "AdminNewsImgDelete?type=" + pp);
@@ -237,4 +239,10 @@
         }
 
     }
+
+    $("#submit-btn").click(function () {
+        $(".admin-modify-form").attr("action", "AdminNewsModifyReg")
+        $(".admin-modify-form").submit()
+    })
+
 </script>

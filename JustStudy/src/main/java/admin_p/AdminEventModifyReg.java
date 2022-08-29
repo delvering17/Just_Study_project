@@ -23,6 +23,8 @@ public class AdminEventModifyReg implements AdminService{
         path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\" +
                 "\\img\\event";
 
+        path = "C:\\juststudy\\JustStudy\\src\\main\\webapp\\img\\event";
+
         int size = 1024 * 1024 * 10;
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

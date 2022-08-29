@@ -11,6 +11,8 @@
 
 <script type="text/javascript">
     $("#r5").attr("checked", true)
+    $(".admin-template-header>b").html("이벤트 목록")
+    $(".admin-template-header>div").append("<input type='button' class='admin-event-insert' value='추가' />")
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
       integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
@@ -122,9 +124,6 @@
     </div>
 
 <script type="text/javascript">
-
-    $(".admin-template-header>b").html("이벤트 목록")
-    $(".admin-template-header>div").append("<input type='button' class='admin-event-insert' value='추가' />")
 
     $(".admin-news-insert").click(function () {
         location.href = "AdminEventInsertForm"

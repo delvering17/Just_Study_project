@@ -10,6 +10,11 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script type="text/javascript">
     $("#r5").attr("checked", true)
+    $(".admin-template-header>b").html("뉴스 목록")
+    $(".admin-template-header>div").append("<input type='button' class='admin-news-modify' value='수정' />")
+    $(".admin-template-header>div").append("<input type='button' class='admin-news-delete' value='삭제' />")
+    $(".admin-template-header>div").append("<input type='button' class='admin-news-list' value='목록으로' />")
+
 </script>
 <style>
 
@@ -185,7 +190,7 @@
 
 </div>
 <script>
-    $(".admin-template-header>b").html("뉴스 목록")
+
 
     $(".admin-news-list").click(function () {
         location.href = "AdminNewsList"

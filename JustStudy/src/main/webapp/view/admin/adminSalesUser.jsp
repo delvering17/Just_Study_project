@@ -8,6 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script type="text/javascript">
     $("#r3").attr("checked", true)
     $(".admin-template-header>b").html("회원별 매출")
@@ -25,12 +26,12 @@
         margin-top: 5px;
     }
 
-    .admin-sales-user-main > div:nth-of-type(2) > div{
+    .admin-sales-user-main > div:nth-of-type(2) > b:nth-of-type(2){
         float: right;
         margin-right: 60px;
     }
 
-    .admin-sales-user-main > div:nth-of-type(2) > b{
+    .admin-sales-user-main > div:nth-of-type(2) > b:first-child{
         color: #ff0000;
         float: right;
         margin-right: 10px;
@@ -123,13 +124,13 @@
                     <td>${salesUserList.useDate}</td>
                     <td>${salesUserList.time}</td>
                     <td>${salesUserList.room}</td>
-                    <td>${salesUserList.pay}</td>
+                    <td><fmt:formatNumber value="${salesUserList.pay}" type="number"/></td>
                 </tr>
 
             </c:forEach>
         </form>
     </table>
-    <div><b>${userTotalPay}</b><div>총 매출:</div></div>
+    <div><b><fmt:formatNumber value="${userTotalPay}" type="number"/></b><b>총 매출:</b></div>
 </div>
 
 <script type="text/javascript">

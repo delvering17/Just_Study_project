@@ -20,8 +20,10 @@ public class AdminEventModifyReg implements AdminService{
       /*  path = "/Users/song-chanwook/workplace/git_repo/ JustStudy/Just_Study_project/JustStudy/src/main/webapp/img/event";
         path = "C:\\Users\\dieun\\jieun\\coding\\GItHub\\Just_Study_project\\JustStudy\\src\\main\\webapp\\img\\event";*/
 
-        path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\" +
-                "\\img\\event";
+//        path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\" +
+//                "\\img\\event";
+
+//        path = "C:\\juststudy\\JustStudy\\src\\main\\webapp\\img\\event";
 
         int size = 1024 * 1024 * 10;
 

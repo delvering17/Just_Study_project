@@ -15,6 +15,10 @@
         if(request.getAttribute("msg") != null){%>
     alert("<%=request.getAttribute("msg")%>")
     <%}%>
+    $(".admin-template-header>b").html("이벤트 상세보기")
+    $(".admin-template-header>div").append("<input type='button' class='admin-event-update' value='수정' />")
+    $(".admin-template-header>div").append("<input type='button' class='admin-event-delete' value='삭제' />")
+    $(".admin-template-header>div").append("<input type='button' class='admin-event-list' value='목록으로' />")
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
       integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
@@ -167,17 +171,10 @@
                 </td>
             </tr>
         </table>
-        <button type="submit" id="subbtn" formaction="AdminEventModifyReg?id=${eventDTO.id}" formmethod="post"
-                formenctype="multipart/form-data">수정
-        </button>
-        <button type="submit" formaction="AdminEventDeleteReg" formmethod="get">삭제</button>
     </form>
-    <input type='button' class='admin-event-list' value='목록으로' />
 </div>
 
 <script type="text/javascript">
-
-    $(".admin-template-header>b").html("이벤트 목록")
 
     $(".admin-event-list").click(function () {
         location.href = "AdminEventList"
@@ -254,4 +251,14 @@
             return false;
         }
     }
+
+    $(".admin-event-update").click(function () {
+        $("#event-detail-form").attr("action", "AdminEventModifyReg?id=${eventDTO.id}")
+        $("#event-detail-form").submit()
+    })
+
+    $(".admin-event-delete").click(function () {
+        $("#event-detail-form").attr("action", "AdminEventDeleteReg?id=${eventDTO.id}")
+        $("#event-detail-form").submit()
+    })
 </script>

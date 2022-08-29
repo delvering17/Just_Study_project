@@ -8,6 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script type="text/javascript">
   $("#r5").attr("checked", true)
+  $(".admin-template-header>b").html("뉴스 등록")
+  $(".admin-template-header>div").append("<input type='button' class='admin-news-add' value='등록' />")
 </script>
 
 <style>
@@ -105,7 +107,7 @@
 </style>
 
 <div id="main">
-<form action="AdminNewsInsertReg" name="myform" method="post" enctype="multipart/form-data" onsubmit="return check()">
+<form action="AdminNewsInsertReg" id="news-insert-form" name="myform" method="post" enctype="multipart/form-data" onsubmit="return check()">
   <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" >
     <tr>
       <th>타이틀</th>
@@ -137,7 +139,7 @@
 </form>
 </div>
 <script>
-  $(".admin-template-header>b").html("뉴스 목록")
+
 
   function check(){
     const f = document.myform;
@@ -164,4 +166,9 @@
     }
 
   }
+
+  $(".admin-news-add").click(function () {
+    $("#news-insert-form").attr("action", "AdminNewsInsertReg")
+    $("#news-insert-form").submit()
+  })
 </script>

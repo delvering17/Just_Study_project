@@ -383,7 +383,7 @@
             </div>
             <div class="ul-behind-nav-left-wrapper">
                 <ul class="ul-header ul-behind-wrapper">
-                    <li><a href="">기업소개</a></li>
+                    <li><a href="../branch/CompanyIntroduction">기업소개</a></li>
                     <li><a href="../branch/BranchFind">지점찾기</a></li>
                 </ul>
                 <ul class="ul-header  ul-behind-wrapper">

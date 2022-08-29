@@ -8,22 +8,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <style>
     .main{
         width: 100%;
-        height: 100%;
-        /*border: solid 1px #000;*/
-
     }
 
     .event-title-area{
-        width: 100%;
-        height: 150px;
-        /*border: solid 1px #000;*/
+        width: 1100px;
+        height: 200px;
         text-align: center;
         padding-top: 60px;
-        margin-top: 60px;
-
+        margin: 0 auto;
     }
     #event-title{
         font-size: 3.5rem;
@@ -32,48 +28,43 @@
     }
 
     .event-list-area{
-        width: 100%;
-        height: 100%;
-        /*background: #ffa;*/
+        width: 1400px;
+        margin: 0 auto;
         display: flex;
     }
 
     .event-ul{
-        width: 80%;
+        width: 1300px;
+        margin: 0 auto;
         height: 100%;
-        margin-left: 180px;
-        /*border: solid 1px #000;*/
+        padding-left: 170px;
         display: block;
-        padding-left: 300px;    /* TODO 고쳐야함 리스트 가운데 정렬 */
+        list-style: none;
+
     }
 
     .event-ul > li{
-        /*width: 100px;*/
-        /*height: 100px;*/
         margin: 10px;
         float: left;
-        /*background: black;*/
         list-style: none;
     }
 
     .event-img{
         width: 300px;
         height: 300px;
-        border: solid 1px #000;
 
-
+    }
+    .event-img img{
+        width: 300px;
+        height: 300px;
+        margin: 0 auto;
+        border-radius: 7px;
     }
 
     .event-info{
         width: 300px;
-        height: 150px;
-        border: solid 1px #000;
+        height: 200px;
 
-    }
-
-    .event-info-btn{
-        float: right;
-        margin: 5px;
 
     }
 
@@ -83,23 +74,13 @@
         /*border: solid 1px #000;*/
 
     }
-    .ing{
-        width: 60px;
-        height: 30px;
-        float: right;
-        margin: 10px;
-        padding-top: 3px;
-        border: solid 1px #000;
+    .event-text >p{
+        font-weight: bold;
+    }
+    .event-date p{
         text-align: center;
     }
 
-    .event-status{
-        width: 100%;
-        height: 150px;
-        /*border: solid 1px #000;*/
-        padding-left: 38%;
-
-    }
 
     .event-status > div{
         width: 150px;
@@ -111,17 +92,38 @@
         text-align: center;
         margin-top: 35px;
     }
-    .admin-write{
-        width: 100px;
-        height: 50px;
-        border: 1px solid #000;
+    a{
+        text-decoration: none;
     }
+    a:link{
+        color: black;
+    }
+    a:visited{
+        color: black;
+    }
+    a:hover{
+        color: purple;
+    }
+    a:active{
+        color: black;
+    }
+
     .tabmenu li.on a{
         background:#001f2e;
         font-family:'NotoSansKR-Bold';
         color:#fff;
         border-color:#001f2e
     } /*메뉴 버튼 3개 클릭 시 변경*/
+
+
+
+    .event-status{
+        width: 100%;
+        height: 150px;
+        /*border: solid 1px #000;*/
+        padding-left: 38%;
+
+    }
 </style>
 
 <div class="main">
@@ -129,24 +131,14 @@
     <div class="event-title-area">
         <p id="event-title">이벤트</p>
     </div>
-
     <div class="event-status">
         <ul class="tabmenu">
             <li class="on"><a href="#none" data-filter=".filter-active" data-sca="" >전체</a></li>
             <li class=""><a href="#none" data-filter=".filter-ing" data-sca="ing" >진행중</a></li><%--진행중--%>
             <li class=""><a href="#none" data-filter=".filter-close" data-sca="close" >마감</a></li><%--마감--%>
-
-
         </ul>
-        <%--<div>전체</div>
-        <div>진행중</div>
-        <div>마감</div>--%>
     </div>
-
-
     <div class="event-list-area">
-
-
         <ul class="event-ul">
             <jsp:useBean id="now" class="java.util.Date" />
             <fmt:formatDate var="today" value="${now}" pattern="yyyy-MM-dd"/>
@@ -154,56 +146,55 @@
             <c:forEach items="${mainData}" var="dto" varStatus="no">
                 <c:choose>
                     <c:when test="${today < dto.event_enddate}">
-
-                <li class="event-li filter-active filter-ing">${dto.id}
-                    <div class="event-img">
-                        <img src="<c:url value="/img/event/${dto.img}"/>" alt="">
-                    </div>
-                    <div class="event-info">
-                        <div class="event-text">
-                           <a href="EventDetail?id=${dto.id}" style="width: 50px; height: 50px; border: 1px solid #000" ><i class="fa-solid fa-bars"></i></a>
-                            <p>${dto.title}</p>
-                        </div>
-                        <hr>
-                        <div class="event-date">
-                            <p>${dto.event_startdate_sdf} ~ ${dto.event_enddate_sdf}</p>
-                            <div class="ing">
-                                <p>상시 <a href="EventDetail?id=${dto.id}" /></p>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                    </c:when>
-                    <c:otherwise>
-                        <li class="event-li filter-active filter-close">${dto.id}
+                        <li class="event-li filter-active filter-ing" value="${dto.id}">
                             <div class="event-img">
-                                <img src="<c:url value="/img/event/${dto.img}"/>" alt="">
-
+                                <a href="EventDetail?id=${dto.id}"><img src="<c:url value="/img/event/${dto.img}"/>" alt=""></a>
                             </div>
                             <div class="event-info">
                                 <div class="event-text">
-                                    <a d="close-event" href="#" style="width: 50px; height: 50px; border: 1px solid #000" ><i class="fa-solid fa-bars"></i></a>
-                                        <%--<button class="event-info-btn"></button>--%>
-                                    <p>${dto.title}</p>
+                                    <a href="EventDetail?id=${dto.id}"><p>${dto.title}</p></a>
                                 </div>
                                 <hr>
+                                <div class="ing">
+
+                                </div>
                                 <div class="event-date">
+                                    <p>상시 <a href="EventDetail?id=${dto.id}" /></p>
                                     <p>${dto.event_startdate_sdf} ~ ${dto.event_enddate_sdf}</p>
-                                    <div class="ing">
-                                        <p>이벤트마감</p>
-                                    </div>
                                 </div>
                             </div>
                         </li>
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="event-li filter-active filter-close" value="${dto.id}">
+                            <div class="event-img">
+                                <a href="EventDetail?id=${dto.id}"><img src="<c:url value="/img/event/${dto.img}"/>" alt=""></a>
+                            </div>
+                            <div class="event-info">
+                                <div class="event-text">
+                                    <a href="EventDetail?id=${dto.id}"><p>${dto.title}</p></a>
+                                </div>
+                                <hr>
+                                <div class="ing">
+
+                                </div>
+                                <div class="event-date">
+                                    <p>이벤트마감</p>
+                                    <p>${dto.event_startdate_sdf} ~ ${dto.event_enddate_sdf}</p>
+
+                                </div>
+                            </div>
+                        </li>
+                </c:otherwise>
+
+            </c:choose>
+        </c:forEach>
         </ul>
     </div>
 </div>
 
 <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
-<script>
+<script type="text/javascript">
     $(document).ready( function() {
 
         $('.event-ul').isotope({

@@ -23,11 +23,14 @@
     }
 
     .noticebox {
-        width: 80%;
+        width: 1400px;
         height: 200px;
         margin: 0 auto;
         margin-bottom: 50px;
 
+    }
+    .noticebox >p:nth-of-type(1){
+        padding-top: 20px;
     }
 
     .noticebox-img {
@@ -35,7 +38,7 @@
         height: 150px;
         background: #001f4a;
         float: left;
-        margin-top: 25px;
+        margin-bottom: 10px;
         margin-left: 150px;
         margin-right: 100px;
         border-radius: 100px;
@@ -52,7 +55,7 @@
     }
 
     .community-detail-main {
-        width: 80%;
+        width: 1200px;
         height: fit-content;
         margin: 0 auto;
         padding: 50px 0;
@@ -73,14 +76,14 @@
     }
 
     .community-title-area {
-        width: 100%;
+        width: 1400px;
         height: 200px;
         padding-top: 60px;
-        margin-top: 60px;
+        margin: 60px auto;
     }
 
     .community-detail-table{
-        width: 60%;
+        width: 850px;
         margin-top: 50px;
         margin-bottom: 50px;
         border-bottom: 1px solid lightgray;
@@ -199,6 +202,23 @@
     .community-detail-apply-list input[type=submit]{
         display: block;
     }
+
+    a{
+        text-decoration: none;
+    }
+    a:link{
+        color: black;
+    }
+    a:visited{
+        color: black;
+    }
+    a:hover{
+        color: purple;
+    }
+    a:active{
+        color: black;
+    }
+
 </style>
 
 <div class="community-detail-bg">

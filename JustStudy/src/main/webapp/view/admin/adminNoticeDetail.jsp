@@ -11,13 +11,14 @@
 </script>
 <style>
     .admin-notice-detail-main {
-        width: 100%;
+        width: 1100px;
         height: fit-content;
+        margin: 0 auto;
         padding: 20px 20px;
     }
 
     .event-title-area {
-        width: 100%;
+        width: 1100px;
         height: 200px;
         /*border: solid 1px #000;*/
         padding-top: 60px;
@@ -25,11 +26,17 @@
     }
 
     .title-line {
-        width: 80%;
+        width: 1100px;
         height: 3px;
-        margin-top: 2%;
-        margin: 0 auto;
+        margin: 10px auto;
         background: black;
+    }
+
+    .notice-under-line{
+        width: 1100px;
+        height: 1px;
+        margin: 0 auto;
+        background: lightgray;
     }
 
     #event-title {
@@ -39,77 +46,43 @@
     }
 
     .listlink {
-        width: 80%;
-        height: 100px;
+        width: 1100px;
+        height: 50px;
         margin: 0 auto;
+        padding-top: 13px;
         text-align: center;
-        border: 1px solid #000;
     }
 
-
-    .event-title-area {
-        width: 100%;
-        height: 200px;
-        /*border: solid 1px #000;*/
-
-        padding-top: 60px;
-        margin-top: 60px;
-    }
-
-    .title-line {
-        width: 80%;
-        height: 3px;
-        margin-top: 2%;
-        margin-left: 10%;
-        background: black;
-    }
-
-    #event-title {
-        font-size: 3.5rem;
+    .listlink>input{
+        margin-left: 30px;
         font-weight: bold;
-        text-align: center;
+        width: 60px;
+        height: 30px;
     }
 
     .event-list-area {
-        width: 80%;
+        width: 1100px;
         height: 100%;
-        background: #ffa;
         display: flex;
-        margin-left: 10%;
-        margin-top: 50px;
-        margin-bottom: 2%;
+        margin: 20px auto;
     }
 
 
     .event-ul > li {
-        /*width: 100px;*/
-        /*height: 100px;*/
         margin: 10px;
         float: left;
-        /*background: black;*/
         list-style: none;
     }
 
 
     .event-status {
-        width: 80%;
+        width: 1100px;
         height: 150px;
-        padding: 35px 80px;
         position: relative;
         text-align: center;
-        margin-left: 10%;
+        margin: 0 auto;
+        padding-top: 20px;
 
-    }
-
-    .event-status > div {
-        width: 150px;
-        height: 70px;
-        background: aqua;
-        border: solid 1px #000;
-        float: left;
-        padding: 20px;
-        text-align: center;
-        margin-top: 35px;
     }
 
 
@@ -133,16 +106,14 @@
         <p class="date" style="margin-top: 30px"> ${dto.reg_date_sdf}</p>
 
     </div>
-    <hr style="width: 80%; height: 1px; margin-left: 10%; background: lightgray">
+    <hr class="notice-under-line" >
 
 
     <div class="event-list-area">
-        <%--    <div class="event-upload-img">  TODO 이미지 파일 업로드 되는 위치
-                <img style="width: 100%" src="<%=request.getContextPath()%>/img/background.jpeg">
-            </div>--%>
         ${dto.content}
     </div>
 
+    <hr class="notice-under-line" >
 
     <div class="listlink">
         <input type='button' class='admin-notice-list' value='목록으로' />

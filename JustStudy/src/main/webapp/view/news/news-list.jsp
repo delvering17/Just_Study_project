@@ -12,19 +12,14 @@
 <style>
     .main{
         width: 100%;
-
-        border: solid 1px #000;
-
     }
 
     .news-title-area{
-        width: 100%;
+        width: 1100px;
         height: 200px;
-        border: solid 1px #000;
         text-align: center;
         padding-top: 60px;
-        margin-top: 60px;
-
+        margin: 0 auto;
     }
     #news-title{
         font-size: 3.5rem;
@@ -33,44 +28,42 @@
     }
 
     .news-list-area{
-        width: 100%;
-        height: 100%;
-        /*background: #ffa;*/
+        width: 1400px;
+       margin: 0 auto;
         display: flex;
     }
 
     .news-ul{
-        width: 80%;
-        height: 100%;
-        margin-left: 180px;
-        /*border: solid 1px #000;*/
+        width: 1300px;
+        margin: 0 auto;
+        padding-left: 170px;
         display: block;
-        padding-left: 300px;    /* TODO 고쳐야함 리스트 가운데 정렬 */
+        list-style: none;
+
     }
 
     .news-ul > li{
-        /*width: 100px;*/
-        /*height: 100px;*/
         margin: 10px;
         float: left;
-        /*background: black;*/
         list-style: none;
     }
 
     .news-img{
         width: 300px;
         height: 300px;
-        border: solid 1px #000;
+
     }
-    .news-img >img{
+    .news-img img{
         width: 300px;
         height: 300px;
+        margin: 0 auto;
+        border-radius: 7px;
     }
 
     .news-info{
         width: 300px;
         height: 150px;
-        border: solid 1px #000;
+
 
     }
 
@@ -79,6 +72,12 @@
         height: 75px;
         /*border: solid 1px #000;*/
 
+    }
+    .news-text >p{
+        font-weight: bold;
+    }
+    .news-date >p{
+        text-align: center;
     }
 
 
@@ -91,6 +90,21 @@
         padding: 20px;
         text-align: center;
         margin-top: 35px;
+    }
+    a{
+        text-decoration: none;
+    }
+    a:link{
+        color: black;
+    }
+    a:visited{
+        color: black;
+    }
+    a:hover{
+        color: purple;
+    }
+    a:active{
+        color: black;
     }
 
     .tabmenu li.on a{
@@ -113,14 +127,13 @@
         <ul class="news-ul">
             <c:forEach items="${mainData}" var="dto" varStatus="no">
 
-                        <li class="news-li filter-active filter-ing">${dto.news_id}
+                        <li class="news-li filter-active filter-ing" value="${dto.news_id}">
                             <div class="news-img">
-                                <img src="<c:url value="/img/news/${dto.news_thumbnail_img}"/>" alt="">
+                                <a href="NewsDetail?id=${dto.news_id}"><img src="<c:url value="/img/news/${dto.news_thumbnail_img}"/>" alt=""/></a>
                             </div>
                             <div class="news-info">
                                 <div class="news-text">
-                                    <a href="NewsDetail?id=${dto.news_id}" style="width: 50px; height: 50px; border: 1px solid #000" ><i class="fa-solid fa-bars"></i></a>
-                                    <p>${dto.news_title}</p>
+                                    <a href="NewsDetail?id=${dto.news_id}"><p>${dto.news_title}</p></a>
                                 </div>
                                 <hr>
                                 <div class="news-date">

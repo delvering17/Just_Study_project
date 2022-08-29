@@ -131,6 +131,9 @@
         font-weight: bold;
         margin: 30px 10px 20px 650px;
     }
+    img{
+        border-radius: 7px;
+    }
 
 </style>
 

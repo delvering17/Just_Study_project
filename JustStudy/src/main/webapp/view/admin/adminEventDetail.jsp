@@ -122,13 +122,13 @@
             <tr>
                 <th>이벤트 시작일</th>
                 <td>
-                    <input type="date" name="event_startdate" value="${eventDTO.event_startdate_sdf}">
+                    <input type="date" id="event_startdate" name="event_startdate" value="${eventDTO.event_startdate_sdf}">
                 </td>
             </tr>
             <tr>
                 <th>이벤트 종료일</th>
                 <td>
-                    <input type="date" name="event_enddate" value="${eventDTO.event_enddate_sdf}">
+                    <input type="date" id="event_enddate" name="event_enddate" value="${eventDTO.event_enddate_sdf}">
                 </td>
             </tr>
             <tr>
@@ -171,11 +171,7 @@
                 </td>
             </tr>
         </table>
-       <%-- <button type="submit" formaction="AdminEventModifyReg?id=${eventDTO.id}" formmethod="post"
-                formenctype="multipart/form-data">수정
-        </button>
-        <button type="submit" formaction="AdminEventDeleteReg" formmethod="post">삭제</button>
-    </form>--%>
+    </form>
 </div>
 
 <script type="text/javascript">
@@ -183,6 +179,33 @@
     $(".admin-event-list").click(function () {
         location.href = "AdminEventList"
     })
+
+    var now_utc = Date.now()
+    var timeOff = new Date().getTimezoneOffset() * 60000;
+    var today = new Date(now_utc - timeOff).toISOString().split("T")[0];
+    document.getElementById("event_startdate").setAttribute("min", today);
+    document.getElementById("event_enddate").setAttribute("min", today);
+
+    $("#subbtn").click(function () {
+
+        var startDate = $("input[name='event_startdate']").val();
+        var startDateArr = startDate.split('-');
+
+        var endDate = $("input[name='event_enddate']").val();
+        var endDateArr = endDate.split('-');
+
+        var startDateCompare = new Date(startDateArr[0], startDateArr[1], startDateArr[2]);
+        var endDateCompare = new Date(endDateArr[0], endDateArr[1], endDateArr[2]);
+
+        if (startDateCompare.getTime() > endDateCompare.getTime()) {
+
+            alert("시작날짜와 종료날짜를 확인해 주세요.");
+
+            return false;
+        }
+
+        $("#subbtn").focus();
+    });
 
     function deleteContentFile() {
         if (confirm("이미지 파일을 삭제하시겠습니까?")) {

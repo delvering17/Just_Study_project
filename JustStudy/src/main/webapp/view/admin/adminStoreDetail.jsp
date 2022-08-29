@@ -122,7 +122,7 @@
     $(".admin-template-header>b").html("지점 목록 > 지점 상세보기")
     $(".admin-template-header>div").append("<input type=button class='admin-store-modify' value='수정'/>")
     $(".admin-template-header>div").append("<input type=button class='admin-store-delete' value='삭제'/>")
-    $(".admin-template-header>div").append("<input type=button class='admin-store-list' value='목록으로'/>")
+
 
     $(".admin-store-list").click(function () {
         location.href = "AdminStoreList"

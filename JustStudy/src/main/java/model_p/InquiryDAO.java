@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class InquiryDAO {
 
@@ -392,6 +393,76 @@ public class InquiryDAO {
         }
         return res;
     }
+
+
+
+
+    public ArrayList<InquiryDTO> adminInquiryListSearch(String city, String branch, String period, java.util.Date startDate, Date endDate, String filter, String word, String state){
+
+        ArrayList<InquiryDTO> res = new ArrayList<InquiryDTO>();
+
+        sql = "select inquiry_id, inquiry_title, inquiry_content, inquiry_writer,inquiry_category, inquiry_type, inquiry_branch, inquiry_date,inquiry_level,inquiry_state,inquiry_purpose " +
+                " from inquiry  where inquiry_branch = ? and inquiry_level = 1 and inquiry_state = ?";
+
+        if(period!=null) {
+            sql += " and inquiry_date >= ? and inquiry_date < ?";
+        }
+
+        if(filter!=null){
+            sql += " and "+filter+" like ?";
+        }
+
+
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, branch);
+
+            if(state.equals("미답변")) {
+                ptmt.setInt(2, 1);
+            } else {
+                ptmt.setInt(2, 2);
+            }
+
+            if(period!=null){
+                ptmt.setDate(3, new java.sql.Date(startDate.getTime()));
+                ptmt.setDate(4, new java.sql.Date(endDate.getTime()));
+            }
+
+            if(period == null & filter!=null){
+                ptmt.setString(3,"%"+word+"%");
+            } else if(period != null & filter!=null){
+                ptmt.setString(5,"%"+word+"%");
+            }
+
+            rs = ptmt.executeQuery();
+            while(rs.next()) {
+                InquiryDTO inquiryDTO = new InquiryDTO();
+
+                inquiryDTO.setInquiry_id(rs.getInt("inquiry_id"));
+                inquiryDTO.setInquiry_title(rs.getString("inquiry_title"));
+                inquiryDTO.setInquiry_content(rs.getString("inquiry_content"));
+                inquiryDTO.setInquiry_writer(rs.getInt("inquiry_writer"));
+                inquiryDTO.setInquiry_category(rs.getString("inquiry_category"));
+                inquiryDTO.setInquiry_type(rs.getString("inquiry_type"));
+                inquiryDTO.setInquiry_branch(rs.getString("inquiry_branch"));
+                inquiryDTO.setInquiry_date(rs.getDate("inquiry_date"));
+                inquiryDTO.setInquiry_level(rs.getInt("inquiry_level"));
+                inquiryDTO.setInquiry_state(rs.getInt("inquiry_state"));
+
+                res.add(inquiryDTO);
+            }
+
+            return res;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return null;
+    }
+
 
     public void close() {
         if(rs!=null) try { rs.close(); } catch (SQLException e) {}

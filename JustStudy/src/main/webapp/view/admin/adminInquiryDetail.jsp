@@ -7,13 +7,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
       integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
       crossorigin="anonymous" referrerpolicy="no-referrer"/>
-<script type="text/javascript">
-    $("#r5").attr("checked", true)
-    $(".admin-template-header>b").html("1:1 문의 목록 > 상세 보기")
-    $(".admin-template-header>div").append("<input type=button class='admin-store-insert' value='추가'/>")
-</script>
-<style>
 
+<style>
     #main {
         width: 100%;
         height: fit-content;
@@ -64,8 +59,8 @@
 
     tr:first-of-type > th:first-of-type,
     tr:first-of-type > th:last-of-type {
-        width: 50px;
-        height: 50px;
+        width: 140px;
+        height: 60px;
         padding: 10px;
         color: #fff;
         background: rgba(83, 104, 167, 0.856);
@@ -97,11 +92,29 @@
     .branch:nth-of-type(2n) {
         background: rgba(227, 233, 240, 0.726)
     }
+
+    .inquriy-detail-logo {
+        margin-top: 14px;
+    }
+
+    .inquiry-detail-table th {
+        width: 80px;
+        border: 1px solid rgb(97, 88, 88);
+        font-size: 13px;
+        padding: 10px;
+        background: rgba(83, 104, 167, 0.856);
+        color: white;
+    }
+
+    textarea {
+        border: none;
+    }
+
 </style>
 
 <div id="main">
-    <h2>문의</h2>
-    <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+    <h2 class="inquriy-detail-logo">문의</h2>
+    <table class="inquiry-detail-table" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
         <tr>
             <th>문의 일자</th>
             <td>${inquiryDTO.inquiry_date}</td>
@@ -125,7 +138,6 @@
         <tr>
             <th>지점</th>
             <td>${inquiryDTO.inquiry_branch}</td>
-
         </tr>
         <tr>
             <th>답변 상태</th>
@@ -140,17 +152,18 @@
         </tr>
         <tr>
             <th>문의 내용</th>
-            <td>${inquiryDTO.inquiry_content_String}</td>
+            <td>
+                <textarea name="input_content" cols="30"rows="10" readonly>${inquiryDTO.inquiry_content}</textarea>
+            </td>
         </tr>
     </table>
-
-    <h2>답변</h2>
+    <h2 class="inquriy-detail-logo">답변</h2>
     <c:choose>
     <c:when test="${inquiryDTO.inquiry_state == 2}">
     <form id="form-answer">
         <input type="hidden" name="input_purpose" value="${inquiryDTO.inquiry_id}"/>
         <input type="hidden" name="input_id" value="${answerDTO.inquiry_id}"/>
-        <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+        <table class="inquiry-detail-table" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
             <tr>
                 <th>답변 일자</th>
                 <td><input type="text" name="input_date" id="input-date" value="${answerDTO.inquiry_date}" readonly>
@@ -176,14 +189,12 @@
                 </td>
             </tr>
             <tr></tr>
-
         </table>
-
         </c:when>
         <c:otherwise>
         <form action="AdminInquiryInsert" method="post" id="inquiry-form1">
             <input type="hidden" name="input_purpose" value="${inquiryDTO.inquiry_id}"/>
-            <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+            <table class="inquiry-detail-table" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
                 <tr>
                     <th>제목</th>
                     <td><input name="input_title" id="input_title1" type="text"></td>
@@ -207,7 +218,7 @@
         </c:otherwise>
 
         </c:choose>
-        <a href="AdminInquiryList">목록으로</a>
+
 </div>
 
 <script type="text/javascript">
@@ -248,5 +259,15 @@
             answer_form.submit()
         }
     }
+    $("#r5").attr("checked", true)
+    $(".admin-template-header>b").html("1:1 문의 목록 > 상세 보기")
+    $(".admin-template-header>div").append("<input type=button class='admin-inquiry-detail-golist' value='목록으로'/>")
+
+    $(".admin-inquiry-detail-golist").click(function () {
+        location.href = "AdminInquiryList";
+    })
+</script>
+
+
 
 </script>

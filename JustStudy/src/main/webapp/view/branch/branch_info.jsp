@@ -45,8 +45,13 @@
         height: 100px;
     }
 
+    .branch-name {
+        font-size: 40px;
+        font-weight: 870;
+    }
+
     .top-left-review > p {
-        margin-top: 20px;
+        margin-top: 10px;
         margin-bottom: 0;
     }
 
@@ -70,7 +75,6 @@
 
     .branch-info-bottom-items {
         width: 800px;
-        background: #ff0;
         margin-bottom: 40px;
 
         border-top: 1px solid #bbbbbb ;
@@ -79,7 +83,7 @@
     .items-header {
         font-size: 2rem;
         font-weight: 600;
-        margin-bottom: 40px;
+        margin-bottom: 30px;
     }
 
     #bottom-infomation {
@@ -137,8 +141,6 @@
     }
 
     #bottom-facilities {
-        background: #ff0;
-        /* padding: 40px; */
     }
 
     .facilities-item-wrapper {
@@ -149,15 +151,11 @@
         align-items: center;
         justify-content: center;
         text-align: center;
-
-        /* margin: 0 auto; */
     }
 
     .facilities-item {
         width: 140px;
         height: 100px;
-
-        background: #f00;
     }
 
     .facilities-item > i {
@@ -209,12 +207,13 @@
     <div class="branch-info">
         <div class="branch-info-top">
             <div class="top-left">
-                <h1>${branchDTO.name}</h1>
-                <div class="top-left-review">
-                    <p>${reviewAverage}점</p>
-                    <a href="">${reviewTotal}개 리뷰</a>
-
-                </div>
+                <p  class="branch-name">${branchDTO.name}</p>
+                <c:if test="${!(reviewList.size() eq 0)}">
+                    <div class="top-left-review">
+                        <p>${reviewAverage}점</p>
+                        <p>${reviewTotal}개 리뷰</p>
+                    </div>
+                </c:if>
             </div>
         </div>
         <div class="branch-info-bottom">
@@ -280,6 +279,7 @@
             <div class="branch-info-bottom-items" id="bottom-review">
                 <p class="items-header">후기</p>
                 <c:forEach items="${reviewList}" var="review" varStatus="no">
+                    <p>${reviewAverage}점 / ${reviewTotal}개 리뷰</p>
                     <div class="review-item">
                         <p class="review-id">${review.userNickname}</p>
                         <p class="review-date">${review.reviewDate}</p>

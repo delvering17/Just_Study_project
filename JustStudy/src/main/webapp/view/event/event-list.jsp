@@ -70,8 +70,9 @@
 
     .event-text{
         width: 300px;
-        height: 75px;
+        height: 50px;
         /*border: solid 1px #000;*/
+        text-align: center;
 
     }
     .event-text >p{
@@ -108,22 +109,38 @@
         color: black;
     }
 
-    .tabmenu li.on a{
-        background:#001f2e;
+    .tabmenu {
+        width: 600px;
+        list-style: none;
+        font-size: 1.5rem;
+        display: flex;
+        flex-direction: row;
+        margin: 60px auto;
+
+    }
+
+    .tabmenu > li {
+        width: 200px;
+        height: 70px;
+        border: 1px solid #aaa;
+        border-radius: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #bbbbbb;
+
+    }
+
+    .tabmenu li.on {
+        /*background:#001f2e;*/
         font-family:'NotoSansKR-Bold';
-        color:#fff;
-        border-color:#001f2e
+        /*color:#fff;*/
+        border-color:#001f2e;
+        font-weight: 600;
     } /*메뉴 버튼 3개 클릭 시 변경*/
 
 
 
-    .event-status{
-        width: 100%;
-        height: 150px;
-        /*border: solid 1px #000;*/
-        padding-left: 38%;
-
-    }
 </style>
 
 <div class="main">

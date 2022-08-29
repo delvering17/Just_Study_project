@@ -11,11 +11,13 @@
 
 
 <style>
+    .event-detail-wrapper {
+
+    }
 
     .event-title-area{
         width: 1100px;
         height: 200px;
-        /*border: solid 1px #000;*/
         padding-top: 100px;
         margin: 0 auto;
 
@@ -30,7 +32,7 @@
     .event-under-line{
         width: 1100px;
         height: 1px;
-        margin: 20px auto;
+        margin: 0 auto;
         background: lightgray;
     }
 
@@ -39,22 +41,28 @@
         font-weight: bold;
         text-align: center;
     }
-
+    .btn-wrapper {
+        width: 100%;
+        height: 100px;
+    }
     .listlink{
-        width: 1100px;
-        height: 50px;
-        margin: 0px auto;
-        padding-bottom: 50px;
-        padding-top: 13px;
-        text-align: center;
+        width: 100px;
+        height: 40px;
+        margin: 40px auto;
+        border: 1px solid #000;
+        border-radius: 7px;
+        display: flex;
+        flex-direction: row;
 
     }
 
-    .event-list-area{
-        width: 1100px;
-        display: flex;
-        margin: 20px auto;
-
+    .listlink > a {
+        width: 120px;
+        justify-content: center;
+        text-align: center;
+        margin: auto 0;
+        color: black;
+        text-decoration: none;
     }
 
     .event-ul > li{
@@ -96,30 +104,25 @@
     }
 
 </style>
+<div class="event-detail-wrapper">
+    <div class="event-title-area">
+        <p id="event-title">이벤트</p>
+        <hr class="event-line">
+    </div>
 
-<div class="event-title-area">
-    <p id="event-title">이벤트</p>
-    <hr class="event-line">
+    <div class="event-status">
+        <h2> ${dto.title} </h2>
+        <p class="date" style="margin-top: 30px">${dto.event_startdate_sdf}~${dto.event_enddate_sdf}</p>
+
+    </div>
+    <hr class="event-under-line">
+
+    <div id="event-img">
+        <img id="event-fileup-img"   src="<c:url value="/img/event/" />${dto.content}" alt="">
+    </div>
+    <div class="btn-wrapper">
+        <div class="listlink">
+            <a href="EventPage">목록으로</a>
+        </div>
+    </div>
 </div>
-
-<div class="event-status">
-    <h2> ${dto.title} </h2>
-    <p class="date" style="margin-top: 30px">${dto.event_startdate_sdf}~${dto.event_enddate_sdf}</p>
-
-</div>
-<hr class="event-under-line">
-
-<div id="event-img">
-    <img id="event-fileup-img"   src="<c:url value="/img/event/" />${dto.content}" alt="">
-</div>
-
-<div class="listlink">
-    <input type='button' class='event-list' value='목록으로' />
-</div>
-
-<script>
-
-    $(".event-list").click(function () {
-        location.href = "EventPage"
-    })
-</script>

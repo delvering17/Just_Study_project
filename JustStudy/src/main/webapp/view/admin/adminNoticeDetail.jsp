@@ -115,24 +115,25 @@
 
     <hr class="notice-under-line" >
 
-    <div class="listlink">
-        <input type='button' class='admin-notice-list' value='목록으로' />
-        <input type='button' class='admin-notice-modify' value='수정' />
-        <input type='button' class='admin-notice-delete' value='삭제' />
-    </div>
 </div>
 
 <script>
 
-    $(".admin-template-header>b").html("공지 목록")
+    $(".admin-template-header>b").html("공지 상세보기")
+    $(".admin-template-header>div").append("<input type=button class='admin-notice-modify' value='수정'/>")
+    $(".admin-template-header>div").append("<input type=button class='admin-notice-delete' value='삭제'/>")
+    $(".admin-template-header>div").append("<input type=button class='admin-notice-list' value='목록으로'/>")
 
-    $(".admin-notice-list").click(function () {
-        location.href = "AdminNoticeList"
-    })
+
     $(".admin-notice-modify").click(function () {
         location.href = "AdminNoticeModifyForm?id=${dto.id}"
     })
     $(".admin-notice-delete").click(function () {
         location.href = "AdminNoticeDeleteReg?id=${dto.id}"
     })
+    $(".admin-notice-list").click(function () {
+        location.href = "AdminNoticeList"
+    })
+
+
 </script>

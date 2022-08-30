@@ -29,6 +29,8 @@
         flex-direction: column;
         align-items: center;
         margin: 0 auto;
+        padding-top: 20px;
+        padding-bottom: 60px;
     }
 
     .find-branch-top {
@@ -117,8 +119,7 @@
             </ul>
         </div>
         <div class="find-branch-bottom-right">
-            <div id="map" style="width:500px;height:700px; z-index: 0"></div>
-
+            <div id="map" style="width:500px;height:750px; z-index: 0"></div>
         </div>
     </div>
 </div>

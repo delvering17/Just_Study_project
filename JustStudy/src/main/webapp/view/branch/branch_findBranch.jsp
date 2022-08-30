@@ -98,7 +98,7 @@
 <div class="wrapper-find-branch">
     <div class="find-branch-top">
         <i class="fa fa-search fa-xl"></i>
-        <input type="text" id="search" onkeyup="filter()" placeholder="제목을 입력하세요">
+        <input type="text" id="search" onkeyup="filter()" placeholder="지점명을 입력하세요">
         <%--        <button onclick="hideMarkers()">asdf</button>--%>
     </div>
     <div class="find-branch-bottom">

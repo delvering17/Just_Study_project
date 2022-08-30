@@ -277,10 +277,18 @@
         } else if (f.content.value == "") {
             alert("내용 사진을 첨부해주세요");
             return false;
+        } else if(!/^.+\.(jpe?g|gif|png)$/i.test(f.img.value)){
+            alert("썸네일 사진 파일 형식을 맞춰주세요")
+            return false;
+        } else if   (!/^.+\.(jpe?g|gif|png)$/i.test(f.content.value)){
+            alert("내용 사진 파일 형식을 맞춰주세요")
+            return false;
         } else {
             $("#event-detail-form").attr("action", "AdminEventModifyReg?id=${eventDTO.id}")
             $("#event-detail-form").submit()
         }
+
+
     })
 
     $(".admin-event-delete").click(function () {

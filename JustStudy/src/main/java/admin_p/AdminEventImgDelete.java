@@ -22,7 +22,8 @@ public class AdminEventImgDelete implements AdminService{
       /*  path = "/Users/song-chanwook/workplace/git_repo/JustStudy/Just_Study_project/JustStudy/src/main/webapp/img/event";
         path = "C:\\Users\\dieun\\jieun\\coding\\GItHub\\Just_Study_project\\JustStudy\\src\\main\\webapp\\img\\event";*/
 
-        path = "/Users/song-chanwook/workplace/git_repo/JustStudy/Just_Study_project/JustStudy/src/main/webapp/img/event";
+        /*path = "/Users/song-chanwook/workplace/git_repo/JustStudy/Just_Study_project/JustStudy/src/main/webapp/img/event";*/
+        path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\img\\event";
 
         //todo : 배포할땐 뒤에꺼 주석처리
 

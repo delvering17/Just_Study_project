@@ -8,5 +8,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div>
-    <img src="<c:url value="/img/branch/sample1.jpeg"/>">
+    <img src="<c:url value="/img/branch/companyintroduce.jpg"/>">
 </div>

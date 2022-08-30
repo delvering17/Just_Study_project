@@ -103,7 +103,7 @@
     }
 </style>
 <div id="main">
-<form action="AdminNoticeInsertReg" name="myform" method="post" onsubmit="return check()">
+<form id="notice-insert-form" name="myform">
 
     <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
         <tr>
@@ -120,26 +120,33 @@
         </tr>
 
     </table>
-    <input id="submit-btn" type="submit" id="submit" value="등록" />
 </form>
 </div>
 <script type="text/javascript">
 
-    $(".admin-template-header>b").html("공지 목록")
+    $(".admin-template-header>b").html("공지 추가")
+    $(".admin-template-header>div").append("<input type=button id='submit-btn' onclick='goNoticeInsert()' value='추가'/>")
+    $(".admin-template-header>div").append("<input type=button class='admin-notice-insert' value='목록으로'/>")
 
+    $(".admin-notice-insert").click(function () {
+        location.href = "AdminNoticeList"
+    })
 
-    function check(){
+    function goNoticeInsert(){
         const f = document.myform;
+
         if(f.title.value.trim() == ""){
             alert("빈칸을 입력해주세요");
             f.title.focus();
             return false;
-        }
-
-        if(f.content.value.trim() == ""){
+        } else if(f.content.value.trim() == ""){
             alert("빈칸을 입력해주세요");
             f.content.focus();
             return false;
+        } else {
+            $("#notice-insert-form").attr("action", "AdminNoticeInsertReg");
+            $("#notice-insert-form").attr("method", "post")
+            $("#notice-insert-form").submit();
         }
 
     }

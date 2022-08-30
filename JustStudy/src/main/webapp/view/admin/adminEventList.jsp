@@ -103,25 +103,24 @@
     }
 </style>
 
-    <div id="main">
-        <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
-
+<div id="main">
+    <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+        <tr>
+            <th>제목</th>
+            <th>이벤트 시작일</th>
+            <th>이벤트 종료일</th>
+            <th>게시 일자</th>
+        </tr>
+        <c:forEach items="${arr_eventDTO}" var="eventDTO">
             <tr>
-                <th>제목</th>
-                <th>이벤트 시작일</th>
-                <th>이벤트 종료일</th>
-                <th>게시 일자</th>
+                <td><a href="AdminEventDetail?id=${eventDTO.id}">${eventDTO.title}</a></td>
+                <td>${eventDTO.event_startdate_sdf}</td>
+                <td>${eventDTO.event_enddate_sdf}</td>
+                <td>${eventDTO.reg_date_sdf}</td>
             </tr>
-            <c:forEach items="${arr_eventDTO}" var="eventDTO">
-                <tr>
-                    <td><a href="AdminEventDetail?id=${eventDTO.id}">${eventDTO.title}</a></td>
-                    <td>${eventDTO.event_startdate_sdf}</td>
-                    <td>${eventDTO.event_enddate_sdf}</td>
-                    <td>${eventDTO.reg_date_sdf}</td>
-                </tr>
-            </c:forEach>
-        </table>
-    </div>
+        </c:forEach>
+    </table>
+</div>
 
 <script type="text/javascript">
 

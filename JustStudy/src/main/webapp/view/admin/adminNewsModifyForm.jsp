@@ -146,8 +146,7 @@
 </script>
 
 <div id="main">
-    <form action="AdminNewsModifyReg" name="myform" method="post" enctype="multipart/form-data"
-          class="admin-modify-form" >
+    <form action="AdminNewsModifyReg" name="myform" method="post" enctype="multipart/form-data" class="admin-modify-form">
         <input type="hidden" name="news_id" value="${dto.news_id}">
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
             <tr>
@@ -221,39 +220,33 @@
 
     $("#submit-btn").click(function () {
 
-            const f = document.myform;
-            if (f.news_title.value.trim() == "") {
-                alert("빈칸을 입력해주세요");
-                f.news_title.focus();
-                return false;
-            }
-            if (f.news_thumbnail_img.value == "") {
-                alert("썸네일 사진을 첨부해주세요");
-                f.news_thumbnail_img.focus();
-                return false;
-            }
-            if (f.news_img.value == "") {
-                alert("내용 사진을 첨부해주세요");
-                f.news_img.focus();
-                return false;
-            }
-            if (f.news_content.value.trim() == "") {
-                alert("빈칸을 입력해주세요");
-                f.news_content.focus();
-                return false;
-            }
-            else if(!/^.+\.(jpe?g|gif|png)$/i.test(f.news_thumbnail_img.value)){
-                alert("썸네일 사진 파일 형식을 맞춰주세요")
-                return false;
-            }
-            else if(!/^.+\.(jpe?g|gif|png)$/i.test(f.news_img.value)){
-                alert("내용 사진 파일 형식을 맞춰주세요")
-                return false;
-            }
-            else{
-                $(".admin-modify-form").attr("action", "AdminNewsModifyReg")
-                $(".admin-modify-form").submit()
-            }
+        const f = document.myform;
+        if (f.news_title.value.trim() == "") {
+            alert("빈칸을 입력해주세요");
+            f.news_title.focus();
+            return false;
+        } else if (f.news_thumbnail_img.value == "") {
+            alert("썸네일 사진을 첨부해주세요");
+            f.news_thumbnail_img.focus();
+            return false;
+        } else if (f.news_img.value == "") {
+            alert("내용 사진을 첨부해주세요");
+            f.news_img.focus();
+            return false;
+        } else if (f.news_content.value.trim() == "") {
+            alert("빈칸을 입력해주세요");
+            f.news_content.focus();
+            return false;
+        } else if(!/^.+\.(jpe?g|gif|png)$/i.test(f.news_thumbnail_img.value)){
+            alert("썸네일 사진 파일 형식을 맞춰주세요")
+            return false;
+        } else if(!/^.+\.(jpe?g|gif|png)$/i.test(f.news_img.value)){
+            alert("내용 사진 파일 형식을 맞춰주세요")
+            return false;
+        } else{
+            $(".admin-modify-form").attr("action", "AdminNewsModifyReg")
+            $(".admin-modify-form").submit()
+        }
 
 
     })

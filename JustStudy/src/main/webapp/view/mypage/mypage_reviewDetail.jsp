@@ -106,68 +106,6 @@
       </div>
     </li>
   </ul>
-    <%--<table class="mypage-review-detail-table" border="">
-      <tr>
-        <td>작성자</td>
-        <td>
-          <%=reviewDTO.getUserNickname()%>
-        </td>
-      </tr>
-      <tr>
-        <td>지역</td>
-        <td>${reservationDTO.city}
-        </td>
-      </tr>
-      <tr>
-        <td>지점</td>
-        <td>${reservationDTO.branch}
-        </td>
-      </tr>
-      <tr>
-        <td>룸타입</td>
-        <td>${reservationDTO.room}
-        </td>
-      </tr>
-      <tr>
-        <td>이용일자</td>
-        <td>${reservationDTO.useDate}
-        </td>
-      </tr>
-      <tr>
-        <td>시간</td>
-        <td>${reservationDTO.time}
-        </td>
-      </tr>
-      <tr>
-      <tr>
-        <td>작성일자</td>
-        <td><%=reviewDTO.getReviewDate()%>
-        </td>
-      </tr>
-      <tr>
-        <td>별점</td>
-        <td>
-          <c:forEach var="i" begin="1" end="${reviewDTO.star}" step="1">
-            <i class="fa-solid fa-star"></i>
-          </c:forEach>
-          <c:forEach var="i" begin="${reviewDTO.star}" end="4" step="1">
-            <i class="fa-regular fa-star"></i>
-          </c:forEach>
-        </td>
-      </tr>
-      <tr>
-        <td>내용</td>
-        <td>
-          <%=reviewDTO.getContent()%>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <a href="MyReservationList?type=done&period=all">목록으로</a>
-          <a href="MypageReviewDelete?reservId=<%=reviewDTO.getReservId()%>">삭제</a>
-        </td>
-      </tr>
-    </table>--%>
 </div>
 
 <script type="text/javascript">

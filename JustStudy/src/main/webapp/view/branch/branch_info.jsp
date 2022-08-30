@@ -182,7 +182,10 @@
     }
 
     .review-item {
-        margin: 10px 0;
+        margin: 20px 0;
+        border: 1px solid lightgray;
+        border-radius: 20px;
+        padding: 10px;
     }
 
     .review-id {
@@ -278,12 +281,19 @@
             </div>
             <div class="branch-info-bottom-items" id="bottom-review">
                 <p class="items-header">후기</p>
+                <p>${reviewAverage}점 / ${reviewTotal}개 리뷰</p>
                 <c:forEach items="${reviewList}" var="review" varStatus="no">
-                    <p>${reviewAverage}점 / ${reviewTotal}개 리뷰</p>
                     <div class="review-item">
                         <p class="review-id">${review.userNickname}</p>
                         <p class="review-date">${review.reviewDate}</p>
-                        <div class="review-star">${review.star}</div>
+                        <div class="review-star">
+                            <c:forEach var="i" begin="1" end="${review.star}" step="1">
+                                <i class="fa-solid fa-star"></i>
+                            </c:forEach>
+                            <c:forEach var="i" begin="${review.star}" end="4" step="1">
+                                <i class="fa-regular fa-star"></i>
+                            </c:forEach>
+                        </div>
                         <div class="review-content">${review.content}</div>
                     </div>
                 </c:forEach>

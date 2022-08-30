@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="model_p.BranchDTO" %><%--
   Created by IntelliJ IDEA.
   User: dieun
@@ -51,6 +52,10 @@
         padding: 5px 0px 5px 10px;
         font-size: 13px;
         border: 1px solid rgb(97, 88, 88);
+    }
+
+    #store-img{
+        width: 350px;
     }
 
 </style>
@@ -107,6 +112,7 @@
         <tr>
             <th>매장 사진</th>
             <td><%=branchDTO.getImg()%>
+                <img id="store-img" src="<c:url value="/img/branch/" /><%=branchDTO.getImg()%>" alt="">
             </td>
         </tr>
         <tr>
@@ -122,6 +128,7 @@
     $(".admin-template-header>b").html("지점 목록 > 지점 상세보기")
     $(".admin-template-header>div").append("<input type=button class='admin-store-modify' value='수정'/>")
     $(".admin-template-header>div").append("<input type=button class='admin-store-delete' value='삭제'/>")
+    $(".admin-template-header>div").append("<input type=button class='admin-store-list' value='목록으로'/>")
 
 
     $(".admin-store-list").click(function () {

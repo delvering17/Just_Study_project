@@ -143,7 +143,7 @@
 
     .header-behind a {
         text-decoration: none;
-        color: #bbbbbb;
+        color: #808080;
         font-size: 1rem;
     }
 

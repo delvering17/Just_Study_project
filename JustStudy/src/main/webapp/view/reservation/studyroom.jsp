@@ -299,6 +299,7 @@
 
     .studyroom-reserv-result {
         width: 1164px;
+        margin-bottom: 100px;
     }
 
     .studyroom-reserv-result > h5 {
@@ -891,8 +892,8 @@
 
                 $(".studyroom-reserv-time > div > .fa-angle-left + div")
                     .html(e.date.getFullYear()+"-"+
-                        (e.date.getMonth() > 8 ? "" : "0")
-                        +(parseInt(e.date.getMonth())+1)+"-"+e.date.getDate()+" ("+"일월화수목금토".split("")[e.date.getDay()]+")")
+                        (e.date.getMonth() > 8 ? "" : "0") +(parseInt(e.date.getMonth())+1)+"-"+
+                        (e.date.getDate() > 9 ? "" : "0")+e.date.getDate()+" ("+"일월화수목금토".split("")[e.date.getDay()]+")")
 
                 $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(1)>b").html($(".studyroom-reserv-time > div > .fa-angle-left + div").html())
 

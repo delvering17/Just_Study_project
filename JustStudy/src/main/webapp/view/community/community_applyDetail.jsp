@@ -158,7 +158,7 @@
     .community-apply-detail-list:visited,
     .community-apply-detail-list:visited:active{
         color: black;
-    
+
 
     .community-apply-detail-list:hover{
         color: purple;

@@ -128,7 +128,7 @@
 <script>
 
     $(".admin-template-header>b").html("공지 수정")
-    $(".admin-template-header>div").append("<input type=button id='submit-btn' onclick='goNoticeInsert()' value='수정'/>")
+    $(".admin-template-header>div").append("<input type=button onclick='goNoticeInsert()' value='수정'/>")
     $(".admin-template-header>div").append("<input type=button class='admin-notice-modify' value='목록으로'/>")
 
 

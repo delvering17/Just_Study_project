@@ -125,7 +125,7 @@
 <script type="text/javascript">
 
     $(".admin-template-header>b").html("공지 추가")
-    $(".admin-template-header>div").append("<input type=button id='submit-btn' onclick='goNoticeInsert()' value='추가'/>")
+    $(".admin-template-header>div").append("<input type=button onclick='goNoticeInsert()' value='추가'/>")
     $(".admin-template-header>div").append("<input type=button class='admin-notice-insert' value='목록으로'/>")
 
     $(".admin-notice-insert").click(function () {

@@ -205,6 +205,14 @@
             f.content.focus();
             return false;
         }
+        if(!/^.+\.(jpe?g|gif|png)$/i.test(f.img.value)){
+            alert("썸네일 사진 파일 형식을 맞춰주세요")
+            return false;
+        }
+        if(!/^.+\.(jpe?g|gif|png)$/i.test(f.content.value)){
+            alert("내용 사진 파일 형식을 맞춰주세요")
+            return false;
+        }
     }
 
 </script>

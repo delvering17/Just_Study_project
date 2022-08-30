@@ -143,9 +143,9 @@
 
   function check(){
     const f = document.myform;
+
     if(f.news_title.value.trim() == ""){
       alert("빈칸을 입력해주세요");
-      f.news_title.focus();
       return false;
     }
 
@@ -156,15 +156,21 @@
     }
     if(f.news_img.value == ""){
       alert("파일 선택을 해주세요");
-      f.news_img.focus();
       return false;
     }
     if(f.news_content.value.trim() == ""){
       alert("빈칸을 입력해주세요");
-      f.news_content.focus();
       return false;
     }
 
+    if(!/^.+\.(jpe?g|gif|png)$/i.test(f.news_thumbnail_img.value)){
+      alert("썸네일 사진 파일 형식을 맞춰주세요")
+      return false;
+    }
+    if(!/^.+\.(jpe?g|gif|png)$/i.test(f.news_img.value)){
+      alert("내용 사진 파일 형식을 맞춰주세요")
+      return false;
+    }
   }
 
   $(".admin-news-add").click(function () {

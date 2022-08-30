@@ -114,17 +114,17 @@
             <th>이름</th>
             <th>닉네임</th>
             <th>지역</th>
-            <th>이용지점</th>
+            <th>지점명</th>
+            <th>룸 타입</th>
             <th>이용일자</th>
             <th>이용시간</th>
-            <th>룸 타임</th>
             <th>결제금액</th>
         </tr>
         <form action="">
             <c:choose>
                 <c:when test="${userTotalPay==0}">
                     <tr class="noneReserv">
-                        <td colspan="9">일치하는 항목이 없습니다.</td>
+                        <td colspan="10">일치하는 항목이 없습니다.</td>
                     </tr>
                 </c:when>
                 <c:otherwise>
@@ -135,9 +135,9 @@
                             <td>${salesUserList.mem_nickname}</td>
                             <td>${salesUserList.city}</td>
                             <td>${salesUserList.branch}</td>
+                            <td>${salesUserList.room}</td>
                             <td>${salesUserList.useDate}</td>
                             <td>${salesUserList.time}</td>
-                            <td>${salesUserList.room}</td>
                             <td><fmt:formatNumber value="${salesUserList.pay}" type="number"/></td>
                         </tr>
                     </c:forEach>

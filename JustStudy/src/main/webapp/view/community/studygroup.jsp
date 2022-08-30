@@ -25,6 +25,7 @@
         padding-top: 100px;
         margin: 0 auto;
     }
+
     #community-title{
         font-size: 3.5rem;
         font-weight: bold;
@@ -39,7 +40,6 @@
     .commuity-bottom-selector {
         display: flex;
         flex-direction: row;
-
     }
 
     .main-list-selector {
@@ -49,7 +49,6 @@
         display: flex;
         flex-direction: row;
         margin: 60px auto;
-
     }
 
     .main-list-selector > li {
@@ -60,9 +59,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-
     }
-
 
     .main-form {
         width: 100px;
@@ -85,7 +82,6 @@
     }
 
     .main-form > p {
-
         width: 200px;
         height: 50px;
         text-align: center;
@@ -93,21 +89,16 @@
         font-size: 1.1rem;
         line-height: 50px;
         margin: auto 0;
-
         border-right: 1px solid #aaa;
     }
 
     .main-study-list-wrapper {
         list-style: none;
-
         margin-top: 30px;
-
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         grid-gap: 4rem;
         place-items: center;
-
-
     }
 
     .study-list-item {
@@ -130,7 +121,6 @@
         color: #99996b;
     }
 
-
     .underline{
         width: 210px;
         height: 1px;
@@ -144,10 +134,8 @@
         text-align: center;
         margin: 20px auto;
         width: 250px;
-        height:  50px;
-
+        height: 50px;
     }
-
 
     .listInner{
         width: 250px;
@@ -158,7 +146,6 @@
         display: flex;
         flex-direction: column;
         text-align: center;
-
     }
 
     .study-kind{
@@ -240,8 +227,6 @@
         border: 1px solid #000;
         font-weight: 600;
     }
-
-
 
 </style>
 
@@ -398,12 +383,5 @@
         case 'close':
             $('#select-close').addClass('onclicked');
             break;
-
-
-
     }
-
-
-
-
 </script>

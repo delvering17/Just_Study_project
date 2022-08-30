@@ -57,7 +57,7 @@
     </style>
 
     <div id="main">
-        <h4>오늘 예약 현황</h4>
+        <h4>금일 예약 현황</h4>
 
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
             <tr>

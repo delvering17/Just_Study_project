@@ -87,25 +87,30 @@
         width: 150px;
         height: 70px;
         background: white;
-        border: solid 0.5px lightgray;
+        border: solid 1px lightgray;
         float: left;
         padding: 20px;
         text-align: center;
         margin-top: 35px;
     }
-    a{
+
+    .main a{
         text-decoration: none;
     }
-    a:link{
+
+    .main a:link{
         color: black;
     }
-    a:visited{
+
+    .main a:visited {
         color: black;
     }
-    a:hover{
+
+    .main a:hover{
         color: purple;
     }
-    a:active{
+
+    .main a:active{
         color: black;
     }
 

@@ -55,7 +55,7 @@
     .main-list-selector > li {
         width: 200px;
         height: 70px;
-        border: 1px solid #aaa;
+
         border-radius: 7px;
         display: flex;
         align-items: center;
@@ -196,19 +196,19 @@
         margin-left: 90px;
     }
 
-    a{
+    .community-wrapper a{
         text-decoration: none;
     }
-    a:link{
+    .community-wrapper a:link{
         color: black;
     }
-    a:visited{
+    .community-wrapper a:visited{
         color: black;
     }
-    a:hover{
+    .community-wrapper a:hover{
         color: purple;
     }
-    a:active{
+    .community-wrapper a:active{
         color: black;
     }
 
@@ -232,6 +232,14 @@
         margin-left: 10px;
     }
 
+    .offclicked {
+        border: 1px solid #aaa;
+    }
+
+    .onclicked {
+        border: 1px solid #000;
+        font-weight: 600;
+    }
 
 
 
@@ -276,12 +284,10 @@
         </div>
         <div class="commuity-main">
             <ul class="main-list-selector">
-                <li><a href="CommunityPage?category=all" >전체</a></li>
-                <li><a href="CommunityPage?category=open" >모집중</a></li>
-                <li><a href="CommunityPage?category=close" >모집완료</a></li>
+                <li class="offclicked" id="select-all"><a href="CommunityPage?category=all" >전체</a></li>
+                <li class="offclicked"  id="select-open"><a href="CommunityPage?category=open" >모집중</a></li>
+                <li class="offclicked"  id="select-close"><a href="CommunityPage?category=close" >모집완료</a></li>
             </ul>
-
-
             <ul class="main-study-list-wrapper">
                 <c:forEach items="${mainData}" var="dto" varStatus="no">
                     <div class="listInner">
@@ -379,6 +385,23 @@
         });
     });
 
+    switch ('<%=request.getParameter("category")%>') {
+
+        case 'all':
+            $('#select-all').addClass('onclicked');
+
+            break;
+        case 'open':
+            $('#select-open').addClass('onclicked');
+
+            break;
+        case 'close':
+            $('#select-close').addClass('onclicked');
+            break;
+
+
+
+    }
 
 
 

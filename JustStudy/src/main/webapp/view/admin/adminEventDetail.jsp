@@ -142,7 +142,7 @@
 </style>
 
 <div id="main">
-    <form name="myform" id="event-detail-form" method="post" enctype="multipart/form-data" onclick="return check()">
+    <form name="myform" id="event-detail-form" method="post" enctype="multipart/form-data">
         <table class="event-detail-table" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
             <input class="input-title" type="hidden" name="id" value="${eventDTO.id}">
             <tr>
@@ -194,7 +194,7 @@
                             <input type="file" name="content">
                         </c:when>
                         <c:otherwise>
-                            <input type="button" value="파일 삭제" id="imgDelete" onclick="deleteContentFile()"/>
+                            <input type="button" value="파일 삭제" id="contentDelete" onclick="deleteContentFile()"/>
                             <input type="hidden" name="content" value="${eventDTO.content}"/>
                             <img class="example-img"  src="<c:url value="/img/event/${eventDTO.content}"/> ">
                         </c:otherwise>
@@ -253,40 +253,34 @@
 
             $("#event-detail-form").submit()
         }
+
     }
 
-    function check() {
+
+    $(".admin-event-update").click(function () {
         const f = document.myform;
         if (f.title.value.trim() == "") {
             alert("빈칸을 입력해주세요");
             f.title.focus();
             return false;
-        }
-        if (f.event_startdate.value == "") {
+        } else if (f.event_startdate.value == "") {
             alert("시작날짜를 입력해주세요");
             f.event_startdate.focus();
             return false;
-        }
-        if (f.event_enddate.value == "") {
+        } else if (f.event_enddate.value == "") {
             alert("마감날짜를 입력해주세요");
             f.event_enddate.focus();
             return false;
-        }
-/*        if (f.img.value == "") {
-            alert("파일을 첨부해주세요");
-            f.img.focus();
+        } else if (f.img.value == "") {
+            alert("썸네일 사진을 첨부해주세요");
             return false;
-        }*/
-        if (f.content.value == "") {
-            alert("파일을 첨부해주세요");
-            f.content.focus();
+        } else if (f.content.value == "") {
+            alert("내용 사진을 첨부해주세요");
             return false;
+        } else {
+            $("#event-detail-form").attr("action", "AdminEventModifyReg?id=${eventDTO.id}")
+            $("#event-detail-form").submit()
         }
-    }
-
-    $(".admin-event-update").click(function () {
-        $("#event-detail-form").attr("action", "AdminEventModifyReg?id=${eventDTO.id}")
-        $("#event-detail-form").submit()
     })
 
     $(".admin-event-delete").click(function () {

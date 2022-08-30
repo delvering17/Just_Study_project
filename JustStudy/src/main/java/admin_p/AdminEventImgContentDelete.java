@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 public class AdminEventImgContentDelete implements AdminService{
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("AdminImageDelete 들어왔다");
@@ -26,7 +27,6 @@ public class AdminEventImgContentDelete implements AdminService{
 
         int size = 1024 * 1024 * 10;
 
-        EventDTO dto = new EventDTO();
 
         try {
             MultipartRequest mr= new MultipartRequest(request, path, size, "UTF-8", new DefaultFileRenamePolicy());
@@ -44,10 +44,10 @@ public class AdminEventImgContentDelete implements AdminService{
 
             String msg = "이미지 삭제 실패";
 
-            if (new EventDAO().contentDelete(dto) > 0) {
-                new File(path + "\\" + dto.getContent()).delete();
+            if (new EventDAO().contentDelete(eventDTO) > 0) {
+                new File(path + "\\" + eventDTO.getContent()).delete();
                 msg = "이미지를 삭제했습니다.";
-                dto.setContent(null);
+                eventDTO.setContent(null);
             }
 
 

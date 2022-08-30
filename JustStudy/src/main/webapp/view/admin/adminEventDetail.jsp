@@ -259,6 +259,18 @@
 
     $(".admin-event-update").click(function () {
         const f = document.myform;
+
+
+        var startDate = $("input[name='event_startdate']").val();
+        var startDateArr = startDate.split('-');
+
+        var endDate = $("input[name='event_enddate']").val();
+        var endDateArr = endDate.split('-');
+
+        var startDateCompare = new Date(startDateArr[0], startDateArr[1], startDateArr[2]);
+        var endDateCompare = new Date(endDateArr[0], endDateArr[1], endDateArr[2]);
+
+
         if (f.title.value.trim() == "") {
             alert("빈칸을 입력해주세요");
             f.title.focus();
@@ -270,6 +282,9 @@
         } else if (f.event_enddate.value == "") {
             alert("마감날짜를 입력해주세요");
             f.event_enddate.focus();
+            return false;
+        } else if (startDateCompare.getTime() > endDateCompare.getTime()) {
+            alert("시작날짜와 종료날짜를 확인해 주세요.");
             return false;
         } else if (f.img.value == "") {
             alert("썸네일 사진을 첨부해주세요");

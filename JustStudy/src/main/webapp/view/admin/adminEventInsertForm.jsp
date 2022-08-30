@@ -140,10 +140,6 @@
     $(".admin-template-header>div").append("<input type=button class='admin-event-add' onclick='goEventInsert()' value='추가'/>")
     $(".admin-template-header>div").append("<input type=button class='admin-event-list' value='목록으로'/>")
 
-    $(".admin-event-list").click(function () {
-        location.href = "AdminEventList"
-    })
-
     var now_utc = Date.now()
     var timeOff = new Date().getTimezoneOffset() * 60000;
     var today = new Date(now_utc - timeOff).toISOString().split("T")[0];
@@ -203,5 +199,9 @@
         }
 
     }
+
+    $(".admin-event-list").click(function () {
+        location.href = "AdminEventList"
+    })
 
 </script>

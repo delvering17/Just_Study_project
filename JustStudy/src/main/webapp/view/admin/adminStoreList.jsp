@@ -61,6 +61,15 @@
         background: rgba(83, 104, 167, 0.856);
     }
 
+    .admin-store-list-detail:link,
+    .admin-store-list-detail:visited {
+        color: mediumblue;
+    }
+
+    .admin-store-list-detail:hover {
+        color: dodgerblue;
+    }
+
     .branch:nth-of-type(2n) {
         background: rgba(227, 233, 240, 0.726)
     }
@@ -115,7 +124,7 @@
                 if (city.equals(branchDTO.getCity())) {
         %>
         <tr class="branch">
-            <td><a href="AdminStoreDetail?branchName=<%=branchDTO.getName()%>"><%=branchDTO.getName()%>
+            <td><a class="admin-store-list-detail" href="AdminStoreDetail?branchName=<%=branchDTO.getName()%>"><%=branchDTO.getName()%>
             </a></td>
             <td><%=(branchDTO.getRooms() != null ? branchDTO.getRooms().replaceAll(",", "<br/>") : "")%>
             </td>

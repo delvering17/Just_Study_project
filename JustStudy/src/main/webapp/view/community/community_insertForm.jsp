@@ -144,14 +144,12 @@
         </tr>
         <tr class="tr-five">
             <th>모집인원</th>
-            <td colspan="3"><input id="people" type="number" name="people"> 명</td>
+            <td colspan="3"><input id="people" type="number" min="1" name="people"> 명</td>
 
         </tr>
         <tr class="tr-six">
             <th>스터디 구분</th>
             <td colspan="3">
-                <input class="chbox" type="checkbox" name="studykind" id="all" value="all" data-cate="0" onclick="validate()" >
-                <label class="label" for="all">전체</label>
                 <input class="chbox" type="checkbox" name="studykind" id="cate_0" value="IT" data-cate="IT" onclick="validate()" >
                 <label class="label" for="cate_0">IT</label>
                 <input class="chbox" type="checkbox" name="studykind" id="cate_1" value="토익" data-cate="토익" onclick="validate()">

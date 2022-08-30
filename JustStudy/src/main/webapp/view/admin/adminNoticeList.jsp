@@ -104,13 +104,13 @@
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
             <tr>
                 <th>제목</th>
-                <th>공지사항 내용</th>
+
                 <th>게시 일자</th>
             </tr>
             <c:forEach items="${mainData}" var="noticeDTO">
                 <tr>
-                    <td>${noticeDTO.title}</td>
-                    <td><a href="AdminNoticeDetail?id=${noticeDTO.id}"/>${noticeDTO.content}</td>
+                    <td><a href="AdminNoticeDetail?id=${noticeDTO.id}">${noticeDTO.title}</a></td>
+
                     <td>${noticeDTO.reg_date_sdf }</td>
                 </tr>
             </c:forEach>

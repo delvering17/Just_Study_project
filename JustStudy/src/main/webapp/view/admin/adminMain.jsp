@@ -66,28 +66,30 @@
                 <th width="100">예약 수</th>
                 <th width="60">관리</th>
             </tr>
-
-            <c:if test="${today_Reserv==0}">
-                <tr>
-                    <th colspan="4">금일 예약이 없습니다</th>
-                </tr>
-            </c:if>
-
-            <c:if test="${today_Reserv!=0}">
-                <c:forEach items="${todayReservation}" var="todayReservation">
+            <c:choose>
+                <c:when test="${today_Reserv==0}">
                     <tr>
-                        <form action="AdminReservDetailList" method="get">
-                            <input type="hidden" name="city" value="${todayReservation.city}">
-                            <input type="hidden" name="branch" value="${todayReservation.branch}">
-                            <input type="hidden" name="useDate" value="${todayReservation.useDate}">
-                            <td>${todayReservation.city}</td>
-                            <td>${todayReservation.branch}</td>
-                            <td>${todayReservation.cnt}</td>
-                            <td><button type="submit">상세보기</button></td>
-                        </form>
+                        <th colspan="4">금일 예약이 없습니다</th>
                     </tr>
-                </c:forEach>
-            </c:if>
+                </c:when>
+
+                <c:otherwise>
+                    <c:forEach items="${todayReservation}" var="todayReservation">
+                        <tr>
+                            <form action="AdminReservDetailList" method="get">
+                                <input type="hidden" name="city" value="${todayReservation.city}">
+                                <input type="hidden" name="branch" value="${todayReservation.branch}">
+                                <input type="hidden" name="useDate" value="${todayReservation.useDate}">
+                                <td>${todayReservation.city}</td>
+                                <td>${todayReservation.branch}</td>
+                                <td>${todayReservation.cnt}</td>
+                                <td><button type="submit">상세보기</button></td>
+                            </form>
+                        </tr>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>
+
         </table>
 
         <h4>미답변 1:1 문의 : <a href="AdminInquiryUnansweredList">${unanswered}개</a></h4>

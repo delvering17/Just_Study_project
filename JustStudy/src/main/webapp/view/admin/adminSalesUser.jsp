@@ -39,21 +39,8 @@
 
     .admin-sales-store-table {
         width: 1100px;
-        border: 1px solid rgb(122, 115, 115);
+        /*border: 1px solid rgb(122, 115, 115);*/
         margin-top: 10px;
-    }
-
-    .admin-sales-store-table th {
-        border: 1px solid rgb(97, 88, 88);
-        font-size: 13px;
-    }
-
-    .admin-sales-store-table td {
-        border: 1px solid rgb(97, 88, 88);
-        text-align: center;
-        font-size: 13px;
-        height: 30px;
-        padding: 5px 5px 5px 5px;
     }
 
     .admin-sales-store-table tr:first-of-type {
@@ -61,6 +48,27 @@
         padding: 10px;
         color: white;
         background: rgba(83, 104, 167, 0.856);
+    }
+
+    .admin-sales-store-table tr:first-of-type > th {
+        border: 1px solid rgb(97, 88, 88);
+        font-size: 13px;
+    }
+
+    .noneReserv td{
+        border: none;
+        height: 20px;
+        text-align: center;
+        font-size: 13px;
+        padding: 5px 5px 5px 5px;
+    }
+
+    .isReserv td{
+        border: 1px solid rgb(97, 88, 88);
+        text-align: center;
+        font-size: 13px;
+        height: 30px;
+        padding: 5px 5px 5px 5px;
     }
 
     .admin-sales-store-table tr:nth-of-type(2n) {
@@ -113,24 +121,33 @@
             <th>결제금액</th>
         </tr>
         <form action="">
-            <c:forEach items="${salesUserList}" var="salesUserList">
-
-                <tr>
-                    <td>${salesUserList.mem_userid}</td>
-                    <td>${salesUserList.mem_realname}</td>
-                    <td>${salesUserList.mem_nickname}</td>
-                    <td>${salesUserList.city}</td>
-                    <td>${salesUserList.branch}</td>
-                    <td>${salesUserList.useDate}</td>
-                    <td>${salesUserList.time}</td>
-                    <td>${salesUserList.room}</td>
-                    <td><fmt:formatNumber value="${salesUserList.pay}" type="number"/></td>
-                </tr>
-
-            </c:forEach>
+            <c:choose>
+                <c:when test="${userTotalPay==0}">
+                    <tr class="noneReserv">
+                        <td colspan="9">일치하는 항목이 없습니다.</td>
+                    </tr>
+                </c:when>
+                <c:otherwise>
+                    <c:forEach items="${salesUserList}" var="salesUserList">
+                        <tr class="isReserv">
+                            <td>${salesUserList.mem_userid}</td>
+                            <td>${salesUserList.mem_realname}</td>
+                            <td>${salesUserList.mem_nickname}</td>
+                            <td>${salesUserList.city}</td>
+                            <td>${salesUserList.branch}</td>
+                            <td>${salesUserList.useDate}</td>
+                            <td>${salesUserList.time}</td>
+                            <td>${salesUserList.room}</td>
+                            <td><fmt:formatNumber value="${salesUserList.pay}" type="number"/></td>
+                        </tr>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>
         </form>
     </table>
-    <div><b><fmt:formatNumber value="${userTotalPay}" type="number"/></b><b>총 매출:</b></div>
+    <c:if test="${userTotalPay!=0}">
+        <div><b><fmt:formatNumber value="${userTotalPay}" type="number"/></b><b>총 매출:</b></div>
+    </c:if>
 </div>
 
 <script type="text/javascript">

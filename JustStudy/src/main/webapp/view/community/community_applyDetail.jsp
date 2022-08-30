@@ -151,6 +151,20 @@
 
     }
 
+    .community-apply-detail-list{
+        text-decoration: none;
+    }
+    .community-apply-detail-list:link,
+    .community-apply-detail-list:visited,
+    .community-apply-detail-list:visited:active{
+        color: black;
+    
+
+    .community-apply-detail-list:hover{
+        color: purple;
+    }
+
+
 </style>
 
 <script type="text/javascript">
@@ -185,7 +199,7 @@
         </table>
 
         <div class="community-detail-btns">
-            <a href="CommunityPage?category=all"><i class="fa-regular fa-circle-left"></i>목록</a>
+            <a class="community-apply-detail-list" href="CommunityPage?category=all"><i class="fa-regular fa-circle-left"></i>목록</a>
             <c:choose>
                 <c:when test="${login == null}"></c:when>
                 <c:when test="${login == applyStudyDTO.as_mem_id}">

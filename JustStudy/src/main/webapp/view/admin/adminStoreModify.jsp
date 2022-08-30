@@ -382,22 +382,7 @@
         }
 
         if (nullCheck) {
-            $.ajax({
-                url: '<c:url value="/nonView/CheckBranchName"/>',
-                type: "GET",
-                async: false,
-                data: "branchName=" + $("input[name=branchName]").val(),
-                success: function (data) {
-                    if (data == "0") {
-                        $("form").submit()
-                    } else if (data == "1") {
-                        alert("중복된 지점명 입니다.")
-                    }
-                },
-                error: function (e) {
-                    console.log(e.responseText)
-                }
-            })
+            $("form").submit()
         }
     })
 

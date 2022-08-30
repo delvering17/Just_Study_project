@@ -9,7 +9,7 @@
 <script type="text/javascript">
     $("#r5").attr("checked", true)
     $(".admin-template-header>b").html("FAQ 수정")
-    $(".admin-template-header>div").append("<input type=button class='admin-faq-modify' value='수정'/>")
+    $(".admin-template-header>div").append("<input type=button class='admin-faq-modify' value='저장'/>")
 </script>
 <style type="text/css">
 

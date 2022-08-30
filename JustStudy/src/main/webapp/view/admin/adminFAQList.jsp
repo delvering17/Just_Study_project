@@ -26,7 +26,7 @@
     }
 
     .admin-faq-list-table {
-        width: 40%;
+        width: 700px;
         border: 1px solid rgb(122, 115, 115);
         margin-top: 10px;
     }

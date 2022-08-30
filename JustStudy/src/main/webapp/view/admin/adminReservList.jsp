@@ -174,11 +174,11 @@
             <th>ID</th>
             <th>주문번호</th>
             <th>주문일자</th>
-            <th>사용자ID</th>
-            <th>사용자<br/>닉네임</th>
-            <th>사용자<br/>이름</th>
+            <th>사용자아이디</th>
+            <th>닉네임</th>
+            <th>이름</th>
             <th>지역</th>
-            <th>지점</th>
+            <th>지점명</th>
             <th>룸타입</th>
             <th>이용일자</th>
             <th>시간</th>

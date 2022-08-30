@@ -26,7 +26,6 @@
 <style>
     #main {
         width: 100%;
-        height: fit-content;
         padding: 20px 20px;
     }
 
@@ -56,7 +55,7 @@
     }
 
     table {
-        width: 400px;
+        width: 1000px;
         border: 1px solid rgb(122, 115, 115);
         margin-top: 10px;
     }
@@ -75,31 +74,29 @@
     tr:first-of-type > th:first-of-type,
     tr:first-of-type > th:last-of-type {
         width: 50px;
-        height: 50px;
         padding: 10px;
         color: #fff;
         background: rgba(83, 104, 167, 0.856);
     }
 
-    tr:first-of-type > th:nth-of-type(2),
-    tr:first-of-type > th:nth-of-type(3),
-    tr:first-of-type > th:nth-of-type(4),
-    tr:first-of-type > th:nth-of-type(5),
-    tr:first-of-type > th:nth-of-type(7),
-    tr:first-of-type > th:nth-of-type(8) {
-        width: 140px;
-        background: rgba(83, 104, 167, 0.856);
-        color: #fff;
-    }
+    /*tr:first-of-type > th:nth-of-type(2),*/
+    /*tr:first-of-type > th:nth-of-type(3),*/
+    /*tr:first-of-type > th:nth-of-type(4),*/
+    /*tr:first-of-type > th:nth-of-type(5),*/
+    /*tr:first-of-type > th:nth-of-type(7),*/
+    /*tr:first-of-type > th:nth-of-type(8) {*/
+    /*    width: 140px;*/
+    /*    background: rgba(83, 104, 167, 0.856);*/
+    /*    color: #fff;*/
+    /*}*/
 
-    tr:first-of-type > th:nth-of-type(6) {
-        width: 250px;
-        background: rgba(83, 104, 167, 0.856);
-        color: #fff;
-    }
+    /*tr:first-of-type > th:nth-of-type(6) {*/
+    /*    width: 250px;*/
+    /*    background: rgba(83, 104, 167, 0.856);*/
+    /*    color: #fff;*/
+    /*}*/
 
     td {
-        height: 30px;
         padding-top: 5px;
         padding-bottom: 5px;
     }
@@ -107,28 +104,63 @@
     .branch:nth-of-type(2n) {
         background: rgba(227, 233, 240, 0.726)
     }
+
+
+    .event-detail-table th {
+        width: 100px;
+        border: 1px solid rgb(97, 88, 88);
+        font-size: 13px;
+        padding: 10px;
+        background: rgba(83, 104, 167, 0.856);
+        color: white;
+    }
+
+    .input-title {
+        width: 500px;
+        height: 40px;
+
+    }
+
+    input {
+
+    }
+    .example-img {
+        width: 400px;
+
+    }
+
+    .td-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding: 20px ;
+    }
+
+    .td-content > * {
+        margin: 10px auto;
+    }
 </style>
 
 <div id="main">
     <form name="myform" id="event-detail-form" method="post" enctype="multipart/form-data" onclick="return check()">
-        <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
-            <input type="hidden" name="id" value="${eventDTO.id}">
+        <table class="event-detail-table" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
+            <input class="input-title" type="hidden" name="id" value="${eventDTO.id}">
             <tr>
                 <th>제목</th>
                 <td>
-                    <input type="text" name="title" value="${eventDTO.title}">
+                    <input type="text" class="input-title" name="title" value="${eventDTO.title}">
                 </td>
             </tr>
             <tr>
                 <th>이벤트 시작일</th>
                 <td>
-                    <input type="date" id="event_startdate" name="event_startdate" value="${eventDTO.event_startdate_sdf}">
+                    <input type="date" class="input-title" id="event_startdate" name="event_startdate" value="${eventDTO.event_startdate_sdf}">
                 </td>
             </tr>
             <tr>
                 <th>이벤트 종료일</th>
                 <td>
-                    <input type="date" id="event_enddate" name="event_enddate" value="${eventDTO.event_enddate_sdf}">
+                    <input type="date" class="input-title" id="event_enddate" name="event_enddate" value="${eventDTO.event_enddate_sdf}">
                 </td>
             </tr>
             <tr>
@@ -140,7 +172,7 @@
             </tr>
             <tr>
                 <th>이미지</th>
-                <td>
+                <td class="td-content">
 
                     <c:choose>
                         <c:when test="${eventDTO.img == null}">
@@ -149,22 +181,22 @@
                         <c:otherwise>
                             <input type="button" value="파일 삭제" id="imgDelete" onclick="deleteImgFile()"/>
                             <input type="hidden" name="img" value="${eventDTO.img}"/>
-                            <img src="<c:url value="/img/event/${eventDTO.img}"/> ">
+                            <img class="example-img" src="<c:url value="/img/event/${eventDTO.img}"/> ">
                         </c:otherwise>
                     </c:choose>
                 </td>
             </tr>
             <tr>
                 <th>내용</th>
-                <td>
+                <td class="td-content">
                     <c:choose>
-                        <c:when test="${eventDTO.img == null}">
+                        <c:when test="${eventDTO.content == null}">
                             <input type="file" name="content">
                         </c:when>
                         <c:otherwise>
                             <input type="button" value="파일 삭제" id="imgDelete" onclick="deleteContentFile()"/>
-                            <input type="hidden" name="content" value="${eventDTO.img}"/>
-                            <img src="<c:url value="/img/event/${eventDTO.img}"/> ">
+                            <input type="hidden" name="content" value="${eventDTO.content}"/>
+                            <img class="example-img"  src="<c:url value="/img/event/${eventDTO.content}"/> ">
                         </c:otherwise>
                     </c:choose>
 
@@ -209,7 +241,7 @@
 
     function deleteContentFile() {
         if (confirm("이미지 파일을 삭제하시겠습니까?")) {
-            $("#event-detail-form").attr("action", "AdminEventImgDelete")
+            $("#event-detail-form").attr("action", "AdminEventImgContentDelete")
 
             $("#event-detail-form").submit()
         }
@@ -217,7 +249,7 @@
 
     function deleteImgFile() {
         if (confirm("이미지 파일을 삭제하시겠습니까?")) {
-            $("#event-detail-form").attr("action", "AdminEventContentDelete")
+            $("#event-detail-form").attr("action", "AdminEventImgDelete")
 
             $("#event-detail-form").submit()
         }

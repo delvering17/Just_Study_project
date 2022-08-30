@@ -8,6 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <style>
+    .notice-detail-wrapper{
+        width: 1400px;
+        margin: 0 auto;
+
+        padding-bottom: 70px;
+    }
 
     .notice-title-area{
         width: 1100px;
@@ -31,6 +37,7 @@
         background: lightgray;
     }
 
+
     #notice-title{
         font-size: 3.5rem;
         font-weight: bold;
@@ -44,6 +51,9 @@
         padding-bottom: 50px;
         padding-top: 13px;
         text-align: center;
+    }
+    .notice-list-btn{
+        margin-top: 30px;
     }
 
     .notice-list-area{
@@ -71,29 +81,29 @@
     }
 
 </style>
-
+<div class="notice-detail-wrapper" >
 <div class="notice-title-area">
     <p id="notice-title">공지사항</p>
     <hr class="title-line">
 </div>
 
-<div class="notice-status">
-    <h2> ${dto.title} </h2>
-    <p class="date" style="margin-top: 30px"> ${dto.reg_date_sdf}</p>
+    <div class="notice-status">
+        <h2> ${dto.title} </h2>
+        <p class="date" style="margin-top: 30px"> ${dto.reg_date_sdf}</p>
+    </div>
+    <hr class="notice-under-line">
+
+
+    <div class="notice-list-area">
+        ${dto.contentBr}
+    </div>
+    <hr class="notice-under-line">
+
+
+    <div class="listlink">
+        <input type='button' class='notice-list-btn' value='목록으로' />
+    </div>
 </div>
-<hr class="notice-under-line">
-
-
-<div class="notice-list-area">
-    ${dto.content}
-</div>
-<hr class="notice-under-line">
-
-
-<div class="listlink">
-    <input type='button' class='notice-list' value='목록으로' />
-</div>
-
 <script>
     $(".notice-list").click(function () {
         location.href = "NoticePage"

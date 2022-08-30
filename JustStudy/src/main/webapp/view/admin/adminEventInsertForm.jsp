@@ -97,8 +97,7 @@
 </style>
 
 <div id="main">
-    <form action="AdminEventInsertReg" name="myform" id="event-detail-form" method="post"
-          enctype="multipart/form-data" onsubmit="return check()">
+    <form name="myform" id="event-insert-form">
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
             <tr>
                 <th>제목</th>
@@ -138,16 +137,8 @@
 
     $(".admin-template-header>b").html("이벤트 추가")
 
-    $(".admin-template-header>div").append("<input type=button class='admin-event-add' value='추가'/>")
+    $(".admin-template-header>div").append("<input type=button class='admin-event-add' onclick='goEventInsert()' value='추가'/>")
     $(".admin-template-header>div").append("<input type=button class='admin-event-list' value='목록으로'/>")
-
-    $(".admin-event-list").click(function () {
-        location.href = "AdminEventList"
-    })
-
-    $(".admin-event-add").click(function () {
-        $("#event-detail-form").submit()
-    })
 
     var now_utc = Date.now()
     var timeOff = new Date().getTimezoneOffset() * 60000;
@@ -156,7 +147,12 @@
     document.getElementById("event_enddate").setAttribute("min", today);
 
 
-    $("#subbtn").click(function () {
+
+
+
+    function goEventInsert() {
+        const f = document.myform;
+
 
         var startDate = $("input[name='event_startdate']").val();
         var startDateArr = startDate.split('-');
@@ -167,52 +163,45 @@
         var startDateCompare = new Date(startDateArr[0], startDateArr[1], startDateArr[2]);
         var endDateCompare = new Date(endDateArr[0], endDateArr[1], endDateArr[2]);
 
-        if (startDateCompare.getTime() > endDateCompare.getTime()) {
 
-            alert("시작날짜와 종료날짜를 확인해 주세요.");
-
-            return false;
-        }
-
-        $("#subbtn").focus();
-    });
-
-
-    function check() {
-        const f = document.myform;
         if (f.title.value.trim() == "") {
             alert("빈칸을 입력해주세요");
             f.title.focus();
             return false;
-        }
-        if (f.event_startdate.value == "") {
+        } else if (f.event_startdate.value == "") {
             alert("시작날짜를 입력해주세요");
             f.event_startdate.focus();
             return false;
-        }
-        if (f.event_enddate.value == "") {
+        } else if (f.event_enddate.value == "") {
             alert("마감날짜를 입력해주세요");
             f.event_enddate.focus();
             return false;
-        }
-        if (f.img.value == "") {
+        } else if (startDateCompare.getTime() > endDateCompare.getTime()) {
+            alert("시작날짜와 종료날짜를 확인해 주세요.");
+            return false;
+        } else if (f.img.value == "") {
             alert("이미지 파일을 첨부해주세요");
-            f.img.focus();
             return false;
-        }
-        if (f.content.value == "") {
+        } else if (f.content.value == "") {
             alert("내용 파일을 첨부해주세요");
-            f.content.focus();
             return false;
-        }
-        if(!/^.+\.(jpe?g|gif|png)$/i.test(f.img.value)){
+        } else if(!/^.+\.(jpe?g|gif|png)$/i.test(f.img.value)){
             alert("썸네일 사진 파일 형식을 맞춰주세요")
             return false;
-        }
-        if(!/^.+\.(jpe?g|gif|png)$/i.test(f.content.value)){
+        } else if(!/^.+\.(jpe?g|gif|png)$/i.test(f.content.value)){
             alert("내용 사진 파일 형식을 맞춰주세요")
             return false;
+        } else {
+            $("#event-insert-form").attr("action", "AdminEventInsertReg");
+            $("#event-insert-form").attr("method", "post");
+            $("#event-insert-form").attr("enctype", "multipart/form-data");
+            $("#event-insert-form").submit();
         }
+
     }
+
+    $(".admin-event-list").click(function () {
+        location.href = "AdminEventList"
+    })
 
 </script>

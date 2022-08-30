@@ -29,6 +29,8 @@
         flex-direction: column;
         align-items: center;
         margin: 0 auto;
+        padding-top: 20px;
+        padding-bottom: 60px;
     }
 
     .find-branch-top {
@@ -98,7 +100,7 @@
 <div class="wrapper-find-branch">
     <div class="find-branch-top">
         <i class="fa fa-search fa-xl"></i>
-        <input type="text" id="search" onkeyup="filter()" placeholder="제목을 입력하세요">
+        <input type="text" id="search" onkeyup="filter()" placeholder="지점명을 입력하세요">
         <%--        <button onclick="hideMarkers()">asdf</button>--%>
     </div>
     <div class="find-branch-bottom">
@@ -117,8 +119,7 @@
             </ul>
         </div>
         <div class="find-branch-bottom-right">
-            <div id="map" style="width:500px;height:700px; z-index: 0"></div>
-
+            <div id="map" style="width:500px;height:750px; z-index: 0"></div>
         </div>
     </div>
 </div>

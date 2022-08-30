@@ -6,11 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<script type="text/javascript">
-  $("#r5").attr("checked", true)
-  $(".admin-template-header>b").html("뉴스 등록")
-  $(".admin-template-header>div").append("<input type='button' class='admin-news-add' value='등록' />")
-</script>
 
 <style>
 
@@ -107,7 +102,7 @@
 </style>
 
 <div id="main">
-<form action="AdminNewsInsertReg" id="news-insert-form" name="myform" method="post" enctype="multipart/form-data" onsubmit="return check()">
+<form id="news-insert-form" name="myform">
   <table cellspacing="0" cellpadding="0" style="border-collapse:collapse" >
     <tr>
       <th>타이틀</th>
@@ -138,43 +133,40 @@
   <input id="submit-btn" type="submit" value="등록">
 </form>
 </div>
-<script>
+<script type="text/javascript">
+    $("#r5").attr("checked", true)
+    $(".admin-template-header>b").html("뉴스 등록")
+    $(".admin-template-header>div").append("<input type='button' class='admin-news-add' onclick='goNewsInsert()' value='등록' />")
 
 
-  function check(){
+  function goNewsInsert(){
     const f = document.myform;
 
     if(f.news_title.value.trim() == ""){
       alert("빈칸을 입력해주세요");
       return false;
-    }
-
-    if(f.news_thumbnail_img.value == ""){
+    } else if(f.news_thumbnail_img.value == ""){
       alert("파일 선택을 해주세요");
       f.news_thumbnail_img.focus();
       return false;
-    }
-    if(f.news_img.value == ""){
+    } else if(f.news_img.value == ""){
       alert("파일 선택을 해주세요");
       return false;
-    }
-    if(f.news_content.value.trim() == ""){
+    } else if(f.news_content.value.trim() == ""){
       alert("빈칸을 입력해주세요");
       return false;
-    }
-
-    if(!/^.+\.(jpe?g|gif|png)$/i.test(f.news_thumbnail_img.value)){
+    } else if(!/^.+\.(jpe?g|gif|png)$/i.test(f.news_thumbnail_img.value)){
       alert("썸네일 사진 파일 형식을 맞춰주세요")
       return false;
-    }
-    if(!/^.+\.(jpe?g|gif|png)$/i.test(f.news_img.value)){
+    } else if(!/^.+\.(jpe?g|gif|png)$/i.test(f.news_img.value)){
       alert("내용 사진 파일 형식을 맞춰주세요")
       return false;
+    } else {
+      $("#news-insert-form").attr("action", "AdminNewsInsertReg");
+      $("#news-insert-form").attr("method", "post");
+      $("#news-insert-form").attr("enctype", "multipart/form-data");
+      $("#news-insert-form").submit();
     }
   }
 
-  $(".admin-news-add").click(function () {
-    $("#news-insert-form").attr("action", "AdminNewsInsertReg")
-    $("#news-insert-form").submit()
-  })
 </script>

@@ -115,10 +115,15 @@
         display: inline-block;
     }
 
-    .admin-store-insert-table input[type=button] {
+    .admin-store-insert-table tr:nth-of-type(3) input[type=button] {
         width: 25px;
         height: 25px;
         clear: right;
+    }
+
+    input[name=address-search] {
+        width: 40px;
+        height: 25px;
     }
 
     .admin-store-insert-table tr:last-of-type div {

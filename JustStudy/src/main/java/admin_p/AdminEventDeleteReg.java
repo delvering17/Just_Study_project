@@ -16,7 +16,7 @@ public class AdminEventDeleteReg implements AdminService{
 
         String path = request.getRealPath("/img/news");
         /*path = "/Users/song-chanwook/workplace/git_repo/ JustStudy/Just_Study_project/JustStudy/src/main/webapp/img/event";*/
-        path = "C:\\juststudy\\JustStudy\\src\\main\\webapp\\img\\event";
+        path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\img\\event";
 
         EventDTO eventDTO = new EventDAO().detail(Integer.parseInt(request.getParameter("id")));
 

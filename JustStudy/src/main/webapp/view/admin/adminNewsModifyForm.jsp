@@ -225,11 +225,11 @@
             return false;
         }
 
-        if (f.news_thumbnail_img.value == "") {
+       /* if (f.news_thumbnail_img.value == "") {
             alert("파일 선택을 해주세요");
             f.news_thumbnail_img.focus();
             return false;
-        }
+        }*/
         if (f.news_img.value == "") {
             alert("파일 선택을 해주세요");
             f.news_img.focus();

@@ -240,11 +240,11 @@
             f.event_enddate.focus();
             return false;
         }
-        if (f.img.value == "") {
+/*        if (f.img.value == "") {
             alert("파일을 첨부해주세요");
             f.img.focus();
             return false;
-        }
+        }*/
         if (f.content.value == "") {
             alert("파일을 첨부해주세요");
             f.content.focus();

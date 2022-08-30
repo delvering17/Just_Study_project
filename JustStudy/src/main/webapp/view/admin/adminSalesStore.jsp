@@ -57,7 +57,7 @@
 
     .admin-sales-store-table th:nth-of-type(1),
     .admin-sales-store-table th:nth-of-type(3){
-        width: 150px;
+        width: 180px;
     }
 
     .admin-sales-store-table th:nth-of-type(2),
@@ -66,9 +66,8 @@
     .admin-sales-store-table th:nth-of-type(6),
     .admin-sales-store-table th:nth-of-type(7),
     .admin-sales-store-table th:nth-of-type(8),
-    .admin-sales-store-table th:nth-of-type(9),
-    .admin-sales-store-table th:nth-of-type(10){
-        width: 100px;
+    .admin-sales-store-table th:nth-of-type(9){
+        width: 110px;
     }
 
     .admin-sales-store-table td {
@@ -182,7 +181,6 @@
             <th>룸타입</th>
             <th>이용일자</th>
             <th>이용시간</th>
-            <th>상태</th>
             <th>결제금액</th>
         </tr>
         <form action="">
@@ -198,13 +196,11 @@
                             <td class="admin-sales-store-table-td">${salesStoreList.room}</td>
                             <td class="admin-sales-store-table-td">${salesStoreList.useDate}</td>
                             <td class="admin-sales-store-table-td">${salesStoreList.time}</td>
-                            <td class="admin-sales-store-table-td">${salesStoreList.status}</td>
- <%--                           <td id="admin-sales-store-align-right">${salesStoreList.pay}</td>--%>
                             <td class="admin-sales-store-table-td" id="admin-sales-store-align-right"><fmt:formatNumber value="${salesStoreList.pay }" type="number"/></td>
                         </tr>
                     </c:forEach>
                     <tr>
-                        <td colspan="10">
+                        <td colspan="9">
                             <div class="admin-sales-store-total"><fmt:formatNumber value="${storeTotalPay }" type="number"/></div>
                             <div class="admin-sales-store-total">총 매출: </div>
                         </td>
@@ -212,7 +208,7 @@
                 </c:when>
                 <c:otherwise>
                     <tr>
-                        <td colspan="10">일치하는 항목이 없습니다.</td>
+                        <td colspan="9">일치하는 항목이 없습니다.</td>
                     </tr>
                 </c:otherwise>
             </c:choose>

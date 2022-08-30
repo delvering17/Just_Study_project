@@ -264,7 +264,7 @@
                 </ul>
                 <ul>
                     <li>회원 관리</li>
-                    <li><a href="AdminUserList">회원 관리</a></li>
+                    <li><a href="AdminUserList">회원 목록</a></li>
                     <li><a href="AdminBlackList">블랙리스트 관리</a></li>
 
                 </ul>

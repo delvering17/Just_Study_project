@@ -11,7 +11,7 @@
 
 <script type="text/javascript">
     $("#r2").attr("checked", true)
-    $(".admin-template-header>b").html("회원 관리")
+    $(".admin-template-header>b").html("회원 목록")
 </script>
 <style>
 
@@ -181,8 +181,8 @@
         <form action="AdminUserAllList">
             <button type="submit" name="allUserList">전체 목록</button>
 
-            <div>총 회원수 ${userStatus}명</div>
-            <div>차단 ${blackStatus}명</div>
+            <div>총 회원 수 ${userStatus}명</div>
+            <div>블랙 ${blackStatus}명</div>
         </form>
     </div>
     <div>

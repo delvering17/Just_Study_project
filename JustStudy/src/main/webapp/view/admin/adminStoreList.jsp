@@ -70,9 +70,6 @@
         color: dodgerblue;
     }
 
-    .branch:nth-of-type(2n) {
-        background: rgba(227, 233, 240, 0.726)
-    }
 </style>
 
 <div class="admin-store-list-main">
@@ -175,4 +172,11 @@
         }
 
     })
+
+    $(".branch").each(function (key, value){
+        if(key % 2 == 1){
+            value.style.background = 'rgba(227, 233, 240, 0.726)'
+        }
+    })
+
 </script>

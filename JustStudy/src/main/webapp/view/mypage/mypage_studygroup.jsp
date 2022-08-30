@@ -125,24 +125,24 @@
     }
 
     .mypage-studygroup-table td:nth-of-type(1) {
-        width: 3%;
+        width: 50px;
     }
 
     .mypage-studygroup-table td:nth-of-type(2) {
-        width: 19%;
+        width: 130px;
+    }
+
+    .mypage-studygroup-table td:nth-of-type(4),
+    .mypage-studygroup-table td:nth-of-type(5),
+    .mypage-studygroup-table td:nth-of-type(8){
+        width: 100px;
     }
 
     .mypage-studygroup-table td:nth-of-type(3),
-    .mypage-studygroup-table td:nth-of-type(4),
-    .mypage-studygroup-table td:nth-of-type(5),
     .mypage-studygroup-table td:nth-of-type(6),
-    .mypage-studygroup-table td:nth-of-type(7) {
-        width: 12%;
-    }
-
-    .mypage-studygroup-table td:nth-of-type(8),
+    .mypage-studygroup-table td:nth-of-type(7),
     .mypage-studygroup-table td:nth-of-type(9) {
-        width: 9%;
+        width: 80px;
     }
 
 </style>

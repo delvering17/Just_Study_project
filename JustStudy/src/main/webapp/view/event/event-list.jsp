@@ -18,11 +18,11 @@
         width: 1100px;
         height: 200px;
         text-align: center;
-        padding-top: 60px;
+        padding-top: 100px;
         margin: 0 auto;
     }
     #event-title{
-        font-size: 3.5rem;
+
         font-weight: bold;
         text-align: center;
     }
@@ -146,7 +146,7 @@
 <div class="main">
 
     <div class="event-title-area">
-        <p id="event-title">이벤트</p>
+        <h1 id="event-title">이벤트</h1>
     </div>
     <div class="event-status">
         <ul class="tabmenu">
@@ -176,7 +176,7 @@
 
                                 </div>
                                 <div class="event-date">
-                                    <p>상시 <a href="EventDetail?id=${dto.id}" /></p>
+                                    <p>이벤트 진행중 <a href="EventDetail?id=${dto.id}" /></p>
                                     <p>${dto.event_startdate_sdf} ~ ${dto.event_enddate_sdf}</p>
                                 </div>
                             </div>

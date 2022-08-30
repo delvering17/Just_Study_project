@@ -219,6 +219,12 @@
         color: black;
     }
 
+    #success{
+       height: 104px;
+        margin-left: 20px;
+        color: red;
+    }
+
 </style>
 
 <div class="community-detail-bg">
@@ -293,13 +299,15 @@
             <c:forEach items="${applyList}" var="apply" varStatus="no">
                 <form action="CommunityApplyAnswer">
                     <input type="hidden" name="studyId" value="${communityDTO.id}"/>
-                    <input type="hidden" name="as_id" value="${apply.as_id}"/>
+                    <input type="hidden" id="as_id" name="as_id" value="${apply.as_id}"/>
                     <div>
                         <i class="fa-solid fa-circle-user"></i>
-                        <div>
-                            <p>${applyMemList[no.index].mem_nickname}</p>
-                            <p>${apply.as_content}</p>
+                        <div id="ripple-id">
+                            <p>${applyMemList[no.index].mem_nickname}</p><br>
+                            <p>내용:&nbsp;&nbsp;${apply.as_content}</p>
+
                         </div>
+
                         <c:choose>
                             <c:when test="${apply.as_state == 1}">
                                 <div>
@@ -308,7 +316,7 @@
                                 </div>
                             </c:when>
                             <c:otherwise>
-                                <div>처리 완료</div>
+                                <div id="success">처리 완료</div>
                             </c:otherwise>
                         </c:choose>
                     </div>

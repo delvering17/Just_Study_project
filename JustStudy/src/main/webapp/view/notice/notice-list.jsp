@@ -75,9 +75,10 @@
    }
 
    #list > th:nth-of-type(1){
-       width: 150px;
+       width: 1200px;
        height: 70px;
        text-align: center;
+
    }
    #list > th:nth-of-type(2){
        width: 700px;
@@ -93,7 +94,7 @@
     #info > td:nth-of-type(1){
         width: 150px;
         height: 70px;
-        border: 2px solid #d4d2d2;
+        border: 3px solid #d4d2d2;
         border-left: none;
         border-right: none;
         text-align: center;
@@ -101,7 +102,7 @@
     #info > td:nth-of-type(2){
         width: 700px;
         height: 70px;
-        border: 2px solid #d4d2d2;
+        border: 3px solid #d4d2d2;
         border-left: none;
         border-right: none;
         text-align: center;
@@ -144,13 +145,11 @@
         <table >
 
             <tr id="list">
-                <th>번호</th>
                 <th>제목</th>
                 <th>등록일</th>
             </tr>
             <c:forEach items="${mainData}" var="dto" varStatus="no">
             <tr id="info">
-                <td><p>${dto.id}</p></td>
                 <td><a href="NoticeDetail?id=${dto.id}" /><p>${dto.title}</p></td>
                 <td>${dto.reg_date_sdf}</td>
             </tr>

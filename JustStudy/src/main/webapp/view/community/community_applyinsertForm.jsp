@@ -9,22 +9,28 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <style>
 
+    .apply-wrapper{
+        width: 1400px;
+
+        margin: 0 auto;
+        padding-bottom: 30px;
+    }
     .studyapply-title-area{
-        width: 100%;
+        width: 1100px;
         height: 200px;
         /*border: solid 1px #000;*/
-
-        padding-top: 60px;
-        margin-top: 60px;
+        padding-top: 100px;
+        margin: 0 auto;
     }
+
 
     .title-line{
-        width: 80%;
+        width: 1100px;
         height: 3px;
-        margin-top: 2%;
-        margin-left: 10%;
+        margin: 0 auto;
         background: black;
     }
+
 
     #studyapply-title{
         font-size: 3.5rem;
@@ -32,63 +38,105 @@
         text-align: center;
     }
     .infobox{
-        width: 80%;
+        width: 1100px;
         height: 50px;
-        border: 1px solid #000;
-        margin: 0 auto;
+
+        margin: 50px auto;
+    }
+    .infobox > p{
+        text-align: center;
     }
 
     textarea{
-        overflow:auto;
-        width:772px;
-        height:230px;
-        padding:20px;
-        border:1px solid #ececec
+        width: 500px;
+        height:100px;
+        /*overflow:auto;
+
+
+
+        padding:20px;*/
+
+  /*      border:1px solid #ececec
     ;background:#fff;
         font-family: 'NotoSansKR-DemiLight';
         font-size:16px;
         line-height:160%;
         outline-style: none;
         resize:none;
-        color:#000;
+        color:#000;*/
     }
+    #submit-btn{
+        width: 70px;
+        height: 30px;
+        border-radius: 7px;
+        margin-left: 700px;
+
+    }
+    table{
+        width: 1100px;
+        height: 200px;
+        padding-bottom: 30px;
+        padding-top: 30px;
+        margin: 30px auto;
+
+    }
+    th{
+        font-size: 1.3rem;
+        text-align: center;
+        border: 1px solid #000;
+        border-left: none;
+        border-right: none;
+        background: #edecec;
+
+    }
+    td{
+        font-size: 1.2rem;
+        border: 1px solid #000;
+        border-left: none;
+        border-right: none;
+    }
+    #p2{
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
 
 </style>
 
 
-
+<div class="apply-wrapper">
 <div class="studyapply-title-area">
     <p id="studyapply-title">스터디 신청</p>
     <hr class="title-line">
 </div>
 
 <div class="infobox">
-    <p style="font-weight: bold; float: left;">상담자 정보</p>
-    <p>간단한 신청자 정보를 입력해 주세요.</p>
+    <p style=" font-size: 2rem; font-weight: bold;">상담자 정보</p>
+    <p id="p2">간단한 신청자 정보를 입력해 주세요.</p>
 </div>
 
-<table border="">
+<table >
     <input type="hidden" name="mem_id" id="mem-id" value="${mem_id}">
     <input type="hidden" name="input_purpose" id="input-purpose" value="${input_purpose}">
     <colgroup>
         <col width="200px"/>
         <col width="*"/>
     </colgroup>
-    <tr>
-        <th><p>닉네임</p></th>
+    <tr id="first">
+        <th>닉네임</th>
         <td width="500px">
             ${memberDTO.mem_nickname}
         </td>
     </tr>
     <tr>
-        <th><p>내용</p></th>
+        <th>내용</th>
         <td>
             <textarea id="input-content" name="input_content" cols="30" rows="10"></textarea>
         </td>
     </tr>
 </table>
-<a onclick="goApplyInsert()">등록</a>
-
+<button id="submit-btn" onclick="goApplyInsert()">등록</button>
+</div>
 
 <script type="text/javascript">
 

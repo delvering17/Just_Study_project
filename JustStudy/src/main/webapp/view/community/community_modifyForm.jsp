@@ -24,56 +24,161 @@
     }
 
     .community-modify-bg {
-        width: 100%;
+        width: 1400px;
         height: fit-content;
+        margin: 0 auto;
+    }
+    table{
+        margin: 0 auto;
+        padding-bottom: 50px;
+    }
+    .study-top {
+        width: 1200px;
+        height: 200px;
+        text-align: center;
+        margin: 0 auto;
+        padding-top: 100px;
+    }
+    #study-title{
+        font-size: 3.5rem;
+        font-weight: bold;
+        text-align: center;
+    }
+    .underline{
+        width: 1200px;
+        height: 3px;
+        margin: 20px auto;
+        background: black;
+    }
+    form{
+        margin-top: 50px;
+    }
+
+
+
+
+    th{
+        height: 70px;
+        padding-top: 10px;
+        text-align: center;
+        border: 1px solid #000;
+        border-left: none;
+        background: #edecec;
+    }
+    td{
+        border: 1px solid #000;
+        border-left: none;
+        border-right: none;
+        height: 40px;
+        text-align: center;
+    }
+
+    .tr-ten > td{
+        border-bottom: none;
+        border-top: none;
+    }
+    .tr-nine > td{
+        border-bottom: none;
+    }
+    .main-table{
+        width: 800px;
+        /*border: 1px solid #000;*/
+        margin: 0 auto;
+    }
+    #location_01{
+        width: 150px;
+        height: 30px;
+        border: 1px solid #000;
+        border-radius: 7px;
+    }
+    #startdate, #enddate{
+        width: 150px;
+        height: 30px;
+        border: 1px solid #000;
+        border-radius: 7px;
+    }
+    #title{
+        width: 300px;
+        height: 30px;
+        border: 1px solid #000;
+        border-radius: 7px;
+    }
+    .user{
+        width: 150px;
+        height: 30px;
+        border: 1px solid #000;
+        border-radius: 7px;
+    }
+    #people{
+        width: 150px;
+        height: 30px;
+        border: 1px solid #000;
+        border-radius: 7px;
+    }
+    #open-url{
+        width: 400px;
+        height: 30px;
+        border: 1px solid #000;
+        border-radius: 7px;
+    }
+    .tr-nine>th{
+        border: none;
+        background: none;
     }
 
 </style>
 
 
 
+
+
+
+
 <div class="community-modify-bg">
 
-    <form name="frmJoin" action="CommunityModifyReg" method="post" onclick="return CheckForm()">
-        <table>
+    <div class="study-top">
+        <p id="study-title">스터디 수정</p>
+        <hr class="underline">
+    </div>
+
+    <form id="community-modify-form" name="frmJoin">
+        <table class="main-table">
             <input type="hidden" name="id" value="${communityDTO.id}"/>
-            <tr>
-                <td>지점명</td>
+            <tr class="tr-one">
+                <th>지점명</th>
                 <td colspan="3">
                     <select id="location_01" name="location" class="local-selector">
-                        <option value="">지점 선택</option>
                         <c:forEach items="${branchList}" var="branch" varStatus="no">
                             <option value="${branch.name}">${branch.name}</option>
                         </c:forEach>
-                    </select></td>
+                    </select>
+                </td>
             </tr>
-            <tr>
-                <td>스터디 기간</td>
+            <tr class="tr-two">
+                <th>스터디 기간</th>
                 <fmt:formatDate value="${communityDTO.startdate}" pattern="yyyy-MM-dd" var="startdateFmt"/>
                 <fmt:formatDate value="${communityDTO.enddate}" pattern="yyyy-MM-dd" var="enddateFmt"/>
-                <td><input type="date" id="startdate"  name="startdate" value="${startdateFmt}"></td>
-                <td> ~ <input type="date" id="enddate" name="enddate" value="${enddateFmt}"></td>
+                <td><input type="date" id="startdate"  name="startdate" value="${startdateFmt}"> ~ <input type="date" id="enddate" name="enddate" value="${enddateFmt}"></td>
+                <td></td>
                 <td></td>
             </tr>
-            <tr>
-                <td>타이틀</td>
-                <td colspan="3"><input type="text" name="title" value="${communityDTO.title}"></td>
+            <tr class="tr-three">
+                <th>타이틀</th>
+                <td colspan="3"><input id="title" type="text" name="title" value="${communityDTO.title}"></td>
             </tr>
-            <tr>
-                <td>작성자</td>
-                <input type="hidden" name="memId" value="${communityDTO.memId}">
+            <tr class="tr-four">
+                <th>작성자</th>
+                <input class="user" type="hidden" name="memId" value="${communityDTO.memId}">
                 <td colspan="3"><input type="text" name="nickname" value="${communityDTO.nickname}" readonly></td>
             </tr>
-            <tr>
-                <td>모집인원</td>
-                <td colspan="3"><input type="text" name="people" value="${communityDTO.people}"> 명</td>
+            <tr class="tr-five">
+                <th>모집인원</th>
+                <td colspan="3"><input id="people" type="number" name="people" min="1" value="${communityDTO.people}"> 명</td>
 
             </tr>
-            <tr>
-                <td>스터디 구분</td>
+            <tr class="tr-six">
+                <th>스터디 구분</th>
                 <td colspan="3">
-                    <input type="checkbox" name="studykind" id="all" value="all" data-cate="0">
-                    <label for="all">전체</label>
                     <input type="checkbox" name="studykind" id="cate_0" value="IT" data-cate="IT">
                     <label for="cate_0">IT</label>
                     <input type="checkbox" name="studykind" id="cate_1" value="토익" data-cate="토익">
@@ -84,17 +189,18 @@
                     <label for="cate_3">기타</label>
                 </td>
             </tr>
-            <tr>
-                <td>내용</td>
+            <tr class="tr-seven">
+                <th>내용</th>
                 <td colspan="3"><textarea name="content" cols="50" rows="10">${communityDTO.content}</textarea></td>
             </tr>
-            <tr>
-                <td>오픈채팅 URL</td>
-                <td colspan="3"><input type="text" name="openChatting" value="${communityDTO.openChatting}"/></td>
+            <tr class="tr-eight">
+                <th>오픈채팅 URL</th>
+                <td colspan="3"><input id="open-url" type="text" name="openChatting" value="${communityDTO.openChatting}"/></td>
             </tr>
-            <tr>
+            <tr class="tr-nine">
+                <th></th>
                 <td>
-                    <input type="submit" id="modifybtn" value="수정완료">
+                    <input type="button" onclick="goModify()" id="modifybtn" value="수정완료">
                 </td>
             </tr>
         </table>
@@ -146,53 +252,46 @@
     });
 
 
+    function goModify() {
 
-    function CheckForm() {
+        const fff = document.frmJoin;
 
-        const f = document.frmJoin;
-
-
-        if (f.location.value == "") {
+        if (fff.location.value == "") {
             alert("지점 선택을 해주세요.");
-            f.location.focus();
+            fff.location.focus();
             return false;
-        }
-
-        if (f.startdate.value == "") {
+        } else if (fff.startdate.value == "") {
             alert("시작 기간을 입력해주세요.");
-            f.startdate.focus();
+            fff.startdate.focus();
             return false;
-        }
-        if (f.enddate.value == "") {
+        } else if (fff.enddate.value == "") {
             alert("종료 기간을 입력해주세요.");
-            f.enddate.focus();
+            fff.enddate.focus();
             return false;
-        }
-        if (f.title.value.trim() == "") {
+        } else if (fff.title.value.trim() == "") {
             alert("빈칸을 입력해주세요");
-            f.title.focus();
+            fff.title.focus();
             return false;
-        }
-        if (f.people.value.trim() == "") {
+        } else if (fff.people.value.trim() == "") {
             alert("빈칸을 입력해주세요");
-            f.people.focus();
+            fff.people.focus();
             return false;
-        }
-
-        if (f.content.value.trim() == "") {
+        } else if (fff.content.value.trim() == "") {
             alert("빈칸을 입력해주세요");
-            f.content.focus();
+            fff.content.focus();
             return false;
-        }
-        if (f.openChatting.value.trim() == "") {
+        } else if (fff.openChatting.value.trim() == "") {
             alert("빈칸을 입력해주세요");
-            f.openChatting.focus();
+            fff.openChatting.focus();
             return false;
-        }
-        if (!$("input:checked[Name='studykind']").is(":checked")){
+        } else if (!$("input:checked[Name='studykind']").is(":checked")){
             alert("스터디 구분을 체크해주세요");
             $("#all").focus();
             return false;
+        } else{
+            $("#community-modify-form").attr("action", "CommunityModifyReg");
+            $("#community-modify-form").attr("method", "post");
+            $("#community-modify-form").submit();
         }
 
     }

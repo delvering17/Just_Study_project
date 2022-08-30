@@ -46,7 +46,7 @@
 /*        border: 1px solid rgb(122, 115, 115);*/
         margin-top: 10px;
         table-layout: fixed;
-        word-break: break-all;
+        word-break: break-word;
     }
 
     .admin-sales-store-table th {
@@ -78,8 +78,6 @@
         padding: 5px 5px 5px 5px;
     }
 
-
-
     .admin-sales-store-table tr:first-of-type {
         height: 50px;
         padding: 10px;
@@ -87,11 +85,12 @@
         background: rgba(83, 104, 167, 0.856);
     }
 
-    .admin-sales-store-table tr:nth-of-type(2n) {
+    .admin-sales-store-table .admin-sales-each:nth-of-type(2n) {
         background: rgba(227, 233, 240, 0.726);
     }
 
-    .admin-sales-store-table-td{
+    .admin-sales-store-table-td,
+    .admin-sales-store-nothing{
         border: 1px solid rgb(97, 88, 88);
     }
 
@@ -187,7 +186,7 @@
             <c:choose>
                 <c:when test="${salesStoreList.size() != 0}">
                     <c:forEach items="${salesStoreList}" var="salesStoreList">
-                        <tr>
+                        <tr class="admin-sales-each">
                             <td class="admin-sales-store-table-td">${salesStoreList.mem_userid}</td>
                             <td class="admin-sales-store-table-td">${salesStoreList.mem_realname}</td>
                             <td class="admin-sales-store-table-td">${salesStoreList.mem_nickname}</td>
@@ -207,7 +206,7 @@
                     </tr>
                 </c:when>
                 <c:otherwise>
-                    <tr>
+                    <tr class="admin-sales-store-nothing">
                         <td colspan="9">일치하는 항목이 없습니다.</td>
                     </tr>
                 </c:otherwise>

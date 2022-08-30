@@ -12,6 +12,11 @@
     $(".admin-template-header>b").html("관리자 메인")
 </script>
     <style>
+
+        #main{
+            padding-top: 40px;
+        }
+
         #main > h4{
             margin: 0px 0px 25px 20px;
         }

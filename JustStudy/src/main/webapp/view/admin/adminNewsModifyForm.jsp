@@ -147,7 +147,7 @@
 
 <div id="main">
     <form action="AdminNewsModifyReg" name="myform" method="post" enctype="multipart/form-data"
-          class="admin-modify-form" onsubmit="return check()">
+          class="admin-modify-form" >
         <input type="hidden" name="news_id" value="${dto.news_id}">
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
             <tr>
@@ -217,35 +217,36 @@
         $(".admin-modify-form").submit();
     }
 
-    function check() {
-        const f = document.myform;
-        if (f.news_title.value.trim() == "") {
-            alert("빈칸을 입력해주세요");
-            f.news_title.focus();
-            return false;
-        }
 
-       /* if (f.news_thumbnail_img.value == "") {
-            alert("파일 선택을 해주세요");
-            f.news_thumbnail_img.focus();
-            return false;
-        }*/
-        if (f.news_img.value == "") {
-            alert("파일 선택을 해주세요");
-            f.news_img.focus();
-            return false;
-        }
-        if (f.news_content.value.trim() == "") {
-            alert("빈칸을 입력해주세요");
-            f.news_content.focus();
-            return false;
-        }
-
-    }
 
     $("#submit-btn").click(function () {
-        $(".admin-modify-form").attr("action", "AdminNewsModifyReg")
-        $(".admin-modify-form").submit()
+
+            const f = document.myform;
+            if (f.news_title.value.trim() == "") {
+                alert("빈칸을 입력해주세요");
+                f.news_title.focus();
+                return false;
+            }
+            if (f.news_thumbnail_img.value == "") {
+                alert("썸네일 사진을 첨부해주세요");
+                f.news_thumbnail_img.focus();
+                return false;
+            }
+            if (f.news_img.value == "") {
+                alert("내용 사진을 첨부해주세요");
+                f.news_img.focus();
+                return false;
+            }
+            if (f.news_content.value.trim() == "") {
+                alert("빈칸을 입력해주세요");
+                f.news_content.focus();
+                return false;
+            }else{
+                $(".admin-modify-form").attr("action", "AdminNewsModifyReg")
+                $(".admin-modify-form").submit()
+            }
+
+
     })
 
 </script>

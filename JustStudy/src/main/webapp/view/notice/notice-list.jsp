@@ -22,7 +22,6 @@
         margin: 0 auto;
     }
     #notice-title{
-        font-size: 3.5rem;
         font-weight: bold;
         text-align: center;
     }
@@ -36,38 +35,11 @@
 
     .notice-area{
         width: 1100px;
-        margin: 10px auto;
+        margin: 0px auto;
+        padding-bottom: 100px;
 
     }
 
-   .notice-ul{
-       width: 1100px;
-       margin: 0 auto;
-       border: 1px solid #000;
-   }
-
-   .notice-li{
-        width: 80%;
-       height: 50px;
-   }
-   .notice-num{
-       width: 100px;
-       height: 50px;
-       border: 1px solid #000;
-       float: left;
-   }
-   .notice-title{
-       width: 300px;
-       height: 50px;
-       border: 1px solid #000;
-       float: left
-   }
-   .notice-date{
-       width: 100px;
-       height: 50px;
-       border: 1px solid #000;
-       float: left
-   }
 
    table{
        width: 1100px;
@@ -75,24 +47,26 @@
    }
 
    #list > th:nth-of-type(1){
-       width: 1200px;
+       width: 800px;
        height: 70px;
        text-align: center;
-
+       font-size: 1.7rem;
    }
    #list > th:nth-of-type(2){
-       width: 700px;
+       width: 300px;
        height: 70px;
        text-align: center;
+       font-size: 1.7rem;
    }
-    #list > th:nth-of-type(3){
+/*    #list > th:nth-of-type(3){
         width: 250px;
         height: 70px;
         text-align: center;
-    }
+        font-size: 1.7rem;
+    }*/
 
     #info > td:nth-of-type(1){
-        width: 150px;
+        width: 900px;
         height: 70px;
         border: 3px solid #d4d2d2;
         border-left: none;
@@ -100,21 +74,21 @@
         text-align: center;
     }
     #info > td:nth-of-type(2){
-        width: 700px;
+        width: 200px;
         height: 70px;
         border: 3px solid #d4d2d2;
         border-left: none;
         border-right: none;
         text-align: center;
     }
-    #info > td:nth-of-type(3){
+/*    #info > td:nth-of-type(3){
         width: 250px;
         height: 70px;
         border: 2px solid #d4d2d2;
         border-left: none;
         border-right: none;
         text-align: center;
-    }
+    }*/
     a{
         text-decoration: none;
     }
@@ -136,7 +110,7 @@
 <div class="main">
 
     <div class="notice-title-area">
-        <p id="notice-title">공지사항</p>
+        <h1 id="notice-title">공지사항</h1>
     </div>
     <hr class="title-line">
 

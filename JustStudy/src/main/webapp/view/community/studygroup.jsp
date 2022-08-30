@@ -16,6 +16,10 @@
 
     .community-wrapper {
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        padding-bottom: 100px;
     }
 
     .community-top {
@@ -27,7 +31,7 @@
     }
 
     #community-title{
-        font-size: 3.5rem;
+
         font-weight: bold;
         text-align: center;
     }
@@ -108,7 +112,7 @@
 
     .study-item{
         width: 250px;
-        height: 270px;
+        height: 300px;
         border: 1px solid #c2c2c2;
         border-radius: 7px;
     }
@@ -139,7 +143,7 @@
 
     .listInner{
         width: 250px;
-        height: 250px;
+        height: 300px;
     }
 
     .list-item-sub-text {
@@ -236,7 +240,7 @@
 <div class="community-wrapper">
 
     <div class="community-top">
-        <p id="community-title">커뮤니티</p>
+        <h1 id="community-title">커뮤니티</h1>
     </div>
 
     <div class="community-bottom">

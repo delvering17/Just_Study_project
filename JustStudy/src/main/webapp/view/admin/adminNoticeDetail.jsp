@@ -110,7 +110,7 @@
 
 
     <div class="event-list-area">
-        ${dto.content}
+        ${dto.contentBr}
     </div>
 
     <hr class="notice-under-line" >

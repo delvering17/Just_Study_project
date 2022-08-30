@@ -197,49 +197,57 @@
                 <td>상태</td>
             </tr>
 
-            <c:forEach items="${studygroupList}" var="studygroup" varStatus="no">
-                <form action="<c:url value="/community/CommunityApplyDetail"/>" class="mypage-studygroup-review-form">
-                    <input type="hidden" name="as_id" value="${myApplyList[no.index].as_id}">
-                    <tr>
-                        <td>${studygroup.id}</td>
-                        <td>
-                            <a class=mypage-studygroup-list-detail href="<c:url value="/community/CommunityDetail?id=${studygroup.id}"/>">${studygroup.title}</a>
-                        </td>
+            <c:choose>
+                <c:when test="${studygroupList.size() != 0}">
+                    <c:forEach items="${studygroupList}" var="studygroup" varStatus="no">
+                        <form action="<c:url value="/community/CommunityApplyDetail"/>" class="mypage-studygroup-review-form">
+                            <input type="hidden" name="as_id" value="${myApplyList[no.index].as_id}">
+                            <tr>
+                                <td>${studygroup.id}</td>
+                                <td>
+                                    <a class=mypage-studygroup-list-detail href="<c:url value="/community/CommunityDetail?id=${studygroup.id}"/>">${studygroup.title}</a>
+                                </td>
 
-                        <td>${studygroup.location}</td>
-                        <td>${studygroup.startdate}</td>
-                        <td>${studygroup.enddate}</td>
-                        <td>${studygroup.people}</td>
-                        <td>${studygroup.studykind}</td>
-                        <td>${studygroup.regDate}</td>
+                                <td>${studygroup.location}</td>
+                                <td>${studygroup.startdate}</td>
+                                <td>${studygroup.enddate}</td>
+                                <td>${studygroup.people}</td>
+                                <td>${studygroup.studykind}</td>
+                                <td>${studygroup.regDate}</td>
 
-                        <c:choose>
-                            <c:when test="${param.type == 'maked'}">
-                                <td>${studygroup.status}</td>
-                            </c:when>
-                            <c:when test="${param.type == 'apply'}">
                                 <c:choose>
-                                    <c:when test="${myApplyList[no.index].as_state == 1}">
-                                        <td>
-                                            <input type="submit" value="대기중"/>
-                                        </td>
+                                    <c:when test="${param.type == 'maked'}">
+                                        <td>${studygroup.status}</td>
                                     </c:when>
-                                    <c:when test="${myApplyList[no.index].as_state == 2}">
-                                        <td>
-                                            <input type="submit" value="승인"/>
-                                        </td>
-                                    </c:when>
-                                    <c:when test="${myApplyList[no.index].as_state == 3}">
-                                        <td>
-                                            <input type="submit" value="반려"/>
-                                        </td>
+                                    <c:when test="${param.type == 'apply'}">
+                                        <c:choose>
+                                            <c:when test="${myApplyList[no.index].as_state == 1}">
+                                                <td>
+                                                    <input type="submit" value="대기중"/>
+                                                </td>
+                                            </c:when>
+                                            <c:when test="${myApplyList[no.index].as_state == 2}">
+                                                <td>
+                                                    <input type="submit" value="승인"/>
+                                                </td>
+                                            </c:when>
+                                            <c:when test="${myApplyList[no.index].as_state == 3}">
+                                                <td>
+                                                    <input type="submit" value="반려"/>
+                                                </td>
+                                            </c:when>
+                                        </c:choose>
                                     </c:when>
                                 </c:choose>
-                            </c:when>
-                        </c:choose>
-                    </tr>
-                </form>
-            </c:forEach>
+                            </tr>
+                        </form>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <td colspan="9">일치하는 항목이 없습니다.</td>
+                </c:otherwise>
+            </c:choose>
+
         </table>
     </div>
 

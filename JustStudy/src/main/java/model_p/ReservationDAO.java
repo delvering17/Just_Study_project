@@ -317,7 +317,7 @@ public class ReservationDAO {
 
     public boolean reservationWill(String branch){
 
-        sql = "select * from reservation where branch = ? and useDate > DATE_FORMAT(SYSDATE(), '%Y-%m-%d')";
+        sql = "select * from reservation where branch = ? and useDate > DATE_FORMAT(SYSDATE(), '%Y-%m-%d') and status = '결제완료'";
 
         try {
             ptmt = con.prepareStatement(sql);

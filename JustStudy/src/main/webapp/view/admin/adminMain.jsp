@@ -24,7 +24,7 @@
         }
 
         tr:nth-of-type(1){
-            background: rgba(72, 92, 117, 0.801);
+            background: rgba(83, 104, 167, 0.856);
             color: #fff;
             height: 20px;
         }
@@ -37,7 +37,9 @@
             height: 20px;
         }
 
-        #noReserv{
+        a{
+            text-decoration: none;
+            color: rgba(83, 104, 167, 0.856);
 
         }
 

@@ -121,7 +121,7 @@
 
     $("input[value=삭제]").click(function () {
         if (confirm("정말 삭제하시겠습니까?")) {
-            $(".admin-faq-list-form").submit()
+            $(".admin-faq-list-form").eq($(this).index("input[type=button][value=삭제]")).submit()
         }
     })
 

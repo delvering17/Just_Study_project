@@ -109,7 +109,7 @@
 </style>
 
 <div id="main">
-    <form action="AdminNoticeModifyReg" name="myform" onsubmit="return check()">
+    <form id="notice-modify-form" name="myform">
         <input type="hidden" name="id" value="${dto.id}">
         <table cellspacing="0" cellpadding="0" style="border-collapse:collapse">
             <tr>
@@ -128,7 +128,7 @@
 <script>
 
     $(".admin-template-header>b").html("공지 수정")
-    $(".admin-template-header>div").append("<input type=button onclick='goNoticeInsert()' value='수정'/>")
+    $(".admin-template-header>div").append("<input type=button onclick='goNoticeModify()' value='수정'/>")
     $(".admin-template-header>div").append("<input type=button class='admin-notice-modify' value='목록으로'/>")
 
 
@@ -137,7 +137,7 @@
     })
 
 
-    function check() {
+    function goNoticeModify() {
         const f = document.myform;
         if (f.title.value.trim() == "") {
             alert("빈칸을 입력해주세요");
@@ -147,7 +147,12 @@
             alert("빈칸을 입력해주세요");
             f.content.focus();
             return false;
+        } else {
+            $("#notice-modify-form").attr("action", "AdminNoticeModifyReg");
+            $("#notice-modify-form").attr("method", "post")
+            $("#notice-modify-form").submit();
         }
+
 
     }
 

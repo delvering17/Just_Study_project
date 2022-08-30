@@ -867,9 +867,13 @@
 
                 $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(2)>b").html(str)
 
-                $(".studyroom-reserv-totalprice").html($(".studyroom-reserv-headcount:last-of-type+font>b").html()
+                const totalPrice = $(".studyroom-reserv-headcount:last-of-type+font>b").html()
                     * document.querySelectorAll('input[type=checkbox][name=time]:checked').length
-                    * $(".studyroom-reserv-headcount:first-of-type+b").html())
+                    * $(".studyroom-reserv-headcount:first-of-type+b").html()
+
+
+
+                $(".studyroom-reserv-totalprice").html(totalPrice.toLocaleString('en-AU'))
             } else{
                 $(".studyroom-reserv-selected>div:nth-of-type(2)>div:nth-of-type(2)>b").html("")
             }
@@ -927,11 +931,17 @@
                 minHeadcount = 10;
             }
 
+
             if($(".studyroom-reserv-headcount:first-of-type+b").html() > minHeadcount){
                 $(".studyroom-reserv-headcount:first-of-type+b").html($(".studyroom-reserv-headcount:first-of-type+b").html() - 1)
-                $(".studyroom-reserv-totalprice").html($(".studyroom-reserv-headcount:last-of-type+font>b").html()
+
+                let totalPrice2 = $(".studyroom-reserv-headcount:last-of-type+font>b").html()
                     * document.querySelectorAll('input[type=checkbox][name=time]:checked').length
-                    * $(".studyroom-reserv-headcount:first-of-type+b").html())
+                    * $(".studyroom-reserv-headcount:first-of-type+b").html()
+
+                totalPrice2 = totalPrice2.toLocaleString('en-US')
+
+                $(".studyroom-reserv-totalprice").html(totalPrice2)
             } else{
                 alert(minHeadcount+"인 이상 이용 가능합니다.")
             }
@@ -952,9 +962,14 @@
 
             if($(".studyroom-reserv-headcount:first-of-type+b").html() < maxHeadcount){
                 $(".studyroom-reserv-headcount:first-of-type+b").html(parseInt($(".studyroom-reserv-headcount:first-of-type+b").html()) + 1)
-                $(".studyroom-reserv-totalprice").html($(".studyroom-reserv-headcount:last-of-type+font>b").html()
+
+                let totalPrice3 = $(".studyroom-reserv-headcount:last-of-type+font>b").html()
                     * document.querySelectorAll('input[type=checkbox][name=time]:checked').length
-                    * $(".studyroom-reserv-headcount:first-of-type+b").html())
+                    * $(".studyroom-reserv-headcount:first-of-type+b").html()
+
+                totalPrice3 = totalPrice3.toLocaleString('en-US')
+
+                $(".studyroom-reserv-totalprice").html(totalPrice3)
             } else{
                 alert(maxHeadcount+"인 이하만 이용 가능합니다.")
             }
@@ -1012,10 +1027,10 @@
                     let realTotalWon = 0;
 
                     for(let i = 0; i < $(".studyroom-reserv-result>div").length; i++){
-                        realTotalWon += parseInt($(".studyroom-reserv-result>div").eq(i).children("div").eq(2).html().split("원")[0])
+                        realTotalWon += parseInt($(".studyroom-reserv-result>div").eq(i).children("div").eq(2).html().split("원")[0].replaceAll(",",""))
                     }
 
-                    $(".studyroom-reserv-done>button").html("총 "+$(".studyroom-reserv-result>div").length+"건 | "+realTotalWon+"원 결제하기")
+                    $(".studyroom-reserv-done>button").html("총 "+$(".studyroom-reserv-result>div").length+"건 | "+realTotalWon.toLocaleString('en-us')+"원 결제하기")
 
                     const reserveNum = $(".studyroom-reserv-form>div").length
                     $(".studyroom-reserv-form").append("<div></div>")
@@ -1025,7 +1040,7 @@
                     $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='useDate' value='"+selected[3].split(" ")[0]+"'></input>")
                     $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='time' value='"+selectedTimeList.join (", ")+"'></input>")
                     $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='headcount' value='"+$(".studyroom-reserv-headcount:first-of-type+b").html()+"'></input>")
-                    $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='pay' value='"+$(".studyroom-reserv-totalprice").html()+"'></input>")
+                    $(".studyroom-reserv-form>div").eq(reserveNum).append("<input name='pay' value='"+$(".studyroom-reserv-totalprice").html().replaceAll(",", "")+"'></input>")
                 } else{
                     alert("중복된 예약은 추가할 수 없습니다.")
                 }
@@ -1081,16 +1096,16 @@
                         $(".studyroom-reserv-paylist>div").eq(i).children("div").append("<div>총 "+
                             $(".studyroom-reserv-form>div").eq(i).children("input[name=\"time\"]").val().split(",").length+"시간 / "+
                             $(".studyroom-reserv-form>div").eq(i).children("input[name=\"headcount\"]").val()+"인 / "+
-                            $(".studyroom-reserv-form>div").eq(i).children("input[name=\"pay\"]").val()+"원</div>")
+                            parseInt($(".studyroom-reserv-form>div").eq(i).children("input[name=\"pay\"]").val()).toLocaleString('en-US')+"원</div>")
 
                         totalWon += parseInt($(".studyroom-reserv-form>div").eq(i).children("input[name=\"pay\"]").val())
                     }
 
                     $(".studyroom-reserv-paylist+div>div:last-of-type").html($(".studyroom-reserv-paylist>div").length+"건")
-                    $(".studyroom-reserv-paylist+div+div>div:last-of-type").html(totalWon+"원")
+                    $(".studyroom-reserv-paylist+div+div>div:last-of-type").html(totalWon.toLocaleString('en-US')+"원")
                     $(".studyroom-reserv-paylist-username").val($("input[name='userName']").val())
                     $(".studyroom-reserv-paylist-useremail").val($("input[name='userEmail']").val())
-                    $("#studyroom-reserv-receipt .modal-body > button:nth-of-type(1)").html("총 "+$(".studyroom-reserv-paylist>div").length+"건 | <b>"+totalWon+"</b>원 결제하기")
+                    $("#studyroom-reserv-receipt .modal-body > button:nth-of-type(1)").html("총 "+$(".studyroom-reserv-paylist>div").length+"건 | <b>"+totalWon.toLocaleString('en-US')+"</b>원 결제하기")
 
                 } else{
                     alert("예약을 추가해 주세요.")
@@ -1110,7 +1125,7 @@
                     pay_method : 'card',
                     merchant_uid : 'merchant_' + new Date().getTime(),
                     name : 'JustStudy',
-                    amount : $("#studyroom-reserv-receipt .modal-body > button:nth-of-type(1)>b").html(),
+                    amount : $("#studyroom-reserv-receipt .modal-body > button:nth-of-type(1)>b").html().replaceAll(",", ""),
                     buyer_name : $("input[name=userName]").val(),
                     buyer_tel : $("input[name=userPhone]").val()
                 }, function(rsp) {

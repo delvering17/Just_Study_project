@@ -121,14 +121,21 @@
                 <td><textarea name="content" cols="50" rows="10">${dto.content}</textarea></td>
             </tr>
         </table>
-        <input id="submit-btn" type="submit" value="등록">
     </form>
 </div>
 
 
 <script>
 
-    $(".admin-template-header>b").html("공지 목록")
+    $(".admin-template-header>b").html("공지 수정")
+    $(".admin-template-header>div").append("<input type=button id='submit-btn' onclick='goNoticeInsert()' value='수정'/>")
+    $(".admin-template-header>div").append("<input type=button class='admin-notice-modify' value='목록으로'/>")
+
+
+    $(".admin-notice-modify").click(function () {
+        location.href = "AdminNoticeDetail?id=${dto.id}"
+    })
+
 
     function check() {
         const f = document.myform;
@@ -136,9 +143,7 @@
             alert("빈칸을 입력해주세요");
             f.title.focus();
             return false;
-        }
-
-        if (f.content.value.trim() == "") {
+        } else if (f.content.value.trim() == "") {
             alert("빈칸을 입력해주세요");
             f.content.focus();
             return false;

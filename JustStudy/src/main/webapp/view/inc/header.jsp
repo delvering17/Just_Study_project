@@ -17,8 +17,7 @@
         margin-top: 40px;
         margin-left: 10px;
     }
-
-    #logo  {
+    .logo  {
         width: 160px;
         height: 30px;
         margin: 0 20px;
@@ -32,15 +31,15 @@
     }
 
     .header-front {
-        background: yellowgreen;
+        background: white;
         position: sticky;
-
         z-index: 2;
     }
 
     .ul-front-wrapper {
         display: flex;
         flex-direction: row;
+        justify-content: space-around;
     }
 
     .ul-front-nav-left-wrapper {
@@ -49,7 +48,6 @@
         display: flex;
         flex-direction: row;
 
-        margin-left: 80px;
     }
 
     .ul-front-nav-left-wrapper > li {
@@ -74,14 +72,19 @@
         font-weight: 600;
     }
 
+    .list-front-left {
+        width: 300px;
+    }
+
     .li-header-front-wrapper {
+        width: 1200px;
         display: flex;
         flex-direction: row;
     }
 
     /* behind*/
     .behind-sizebox {
-        margin-left: 290px;
+        width: 300px;
     }
 
     .header-behind {
@@ -97,12 +100,16 @@
         background: white;
         transition: .3s linear;
 
+        justify-content: space-around;
+    }
+
+    .ul-behind-nav {
+        width: 1200px;
     }
 
     .ul-behind-nav-left-wrapper {
         display: flex;
         flex-direction: row;
-
     }
 
     .ul-behind-wrapper {
@@ -111,6 +118,7 @@
 
         /*margin: auto 30px;*/
     }
+
 
     /* 드르륵 메뉴 넓이 조정*/
     .ul-behind-nav-left-wrapper > ul:nth-of-type(1) {
@@ -138,7 +146,7 @@
     }
 
     .ul-behind-wrapper > li {
-        margin: 5px auto;
+        margin: 0 auto;
     }
 
     .header-behind a {
@@ -332,6 +340,10 @@
     /*    text-decoration: none;*/
     /*}*/
 
+    .ul-behind-nav {
+        display: flex;
+    }
+
 </style>
 
 
@@ -339,10 +351,10 @@
     <div class="header-wrapper">
         <div class="header-front">
             <ul class="ul-header ul-front-wrapper">
-                <li>
+                <li class="list-front-left">
                     <div class="header-logo">
                         <a id="a-logo" href="<c:url value="/board/MainPage"/>">
-                            <img id="logo" src="<c:url value="/img/inc/logo3.png"/>">
+                            <img class="logo" src="<c:url value="/img/inc/logo3.png"/>">
                         </a>
                     </div>
                 </li>
@@ -379,57 +391,67 @@
 
         <div class="header-behind">
             <div class="behind-sizebox">
-
             </div>
-            <div class="ul-behind-nav-left-wrapper">
-                <ul class="ul-header ul-behind-wrapper">
-                    <li><a href="../branch/CompanyIntroduction">기업소개</a></li>
-                    <li><a href="../branch/BranchFind">지점찾기</a></li>
-                </ul>
-                <ul class="ul-header  ul-behind-wrapper">
-                    <li><a href="../reservation/UsageInfo">이용안내</a></li>
+
+            <div class="ul-behind-nav">
+                <div class="ul-behind-nav-left-wrapper">
+                    <ul class="ul-header ul-behind-wrapper">
+                        <li><a href="../branch/CompanyIntroduction">기업소개</a></li>
+                        <li><a href="../branch/BranchFind">지점찾기</a></li>
+                    </ul>
+                    <ul class="ul-header  ul-behind-wrapper">
+                        <li><a href="../reservation/UsageInfo">이용안내</a></li>
+                        <c:choose>
+                            <c:when test="${sessionScope.mem_level == 3}">
+                                <li><a href="../member/MemberLevelAlert">스터디룸예약</a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li><a href="../reservation/Studyroom">스터디룸예약</a></li>
+                            </c:otherwise>
+                        </c:choose>
+                    </ul>
+                    <ul class="ul-header ul-behind-wrapper">
+                        <c:choose>
+                            <c:when test="${sessionScope.mem_level == 3}">
+                                <li><a href="../member/MemberLevelAlert">스터디모집</a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li><a href="../community/CommunityPage?category=all">스터디모집</a></li>
+                            </c:otherwise>
+                        </c:choose>
+
+                    </ul>
+                    <ul class="ul-header ul-behind-wrapper">
+                        <li><a href="../notice/NoticePage">공지사항</a></li>
+                        <li><a href="../event/EventPage">이벤트</a></li>
+                        <li><a href="../news/NewsPage">뉴스</a></li>
+                    </ul>
+                    <ul class="ul-header ul-behind-wrapper">
+
+                        <li><a href="../mypage/MypageInquiryInsertForm">1:1 문의</a></li>
+                        <li><a href="../customer/Faq?category=usage">FAQ</a></li>
+                    </ul>
+                </div>
+                <ul style="display: none" class="ul-header ul-front-nav-right-wrapper">
                     <c:choose>
-                        <c:when test="${sessionScope.mem_level == 3}">
-                            <li><a href="../member/MemberLevelAlert">스터디룸예약</a></li>
+                        <c:when test="${sessionScope.login == null}">
+                            <li style="margin: auto 30px; font-size: 1.5rem; font-weight: 600;"><a href="../member/MemberLoginForm" ><i class="header-icon fa-solid fa-user"></i></a></li>
                         </c:when>
                         <c:otherwise>
-                            <li><a href="../reservation/Studyroom">스터디룸예약</a></li>
+                            <li style="margin: auto 30px; font-size: 1.5rem; font-weight: 600;"><a href="../member/MemberLogout"><i class="header-icon fa-solid fa-door-open"></i></a></li>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:choose>
+                        <c:when test="${sessionScope.login == null}">
+                            <li style="margin: auto 30px; font-size: 1.5rem; font-weight: 600;"><a class="header-icon" href="../member/MemberSigninForm" >회원가입</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li style="margin: auto 30px; font-size: 1.5rem; font-weight: 600;"><a class="header-icon" href="../mypage/MypageInfomationModifyForm" >마이페이지</a></li>
                         </c:otherwise>
                     </c:choose>
                 </ul>
-                <ul class="ul-header ul-behind-wrapper">
-                    <c:choose>
-                        <c:when test="${sessionScope.mem_level == 3}">
-                            <li><a href="../member/MemberLevelAlert">스터디모집</a></li>
-                        </c:when>
-                        <c:otherwise>
-                            <li><a href="../community/CommunityPage?category=all">스터디모집</a></li>
-                        </c:otherwise>
-                    </c:choose>
 
-                </ul>
-                <ul class="ul-header ul-behind-wrapper">
-                    <li><a href="../notice/NoticePage">공지사항</a></li>
-                    <li><a href="../event/EventPage">이벤트</a></li>
-                    <li><a href="../news/NewsPage">뉴스</a></li>
-                </ul>
-                <ul class="ul-header ul-behind-wrapper">
-
-                    <li><a href="../mypage/MypageInquiryInsertForm">1:1 문의</a></li>
-                    <li><a href="../customer/Faq?category=usage">FAQ</a></li>
-                </ul>
             </div>
-<%--            <ul class="ul-header ">--%>
-
-<%--                <c:if test="${sessionScope.mem_level == 2}">--%>
-<%--                    <li><a href="../admin/AdminPage" >관리자 페이지</a></li>--%>
-<%--                </c:if>--%>
-<%--            </ul>--%>
-<%--            <ul class="ul-header">--%>
-<%--                <li></li>--%>
-<%--                <li></li>--%>
-<%--                <li></li>--%>
-<%--            </ul>--%>
         </div>
     </div>
 

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 
@@ -47,17 +48,21 @@
             margin-top: 5%;
             height: 500px;
         }
+
+        .btn-footer-admin {
+            text-decoration: none;
+        }
     </style>
-
-
-
 <div class="footer-bg">
     <div>
         <button class="footer-link" data-bs-toggle="modal" data-bs-target="#personal-info">개인정보처리방침</button>
         <button class="footer-link" data-bs-toggle="modal" data-bs-target="#email-ban">이메일무단수집거부</button>
         <button class="footer-link customer-service" data-bs-toggle="modal" data-bs-target="#customer-service">고객센터</button>
         <button class="footer-link-dev" data-bs-toggle="modal" data-bs-target="#developer">개발자정보</button>
-        <button class="footer-link-dev"><a href="../admin/AdminPage" >관리자 페이지</a></button>
+        <c:if test="${sessionScope.mem_level == 2}">
+            <button class="footer-link-dev"><a class="btn-footer-admin" href="../admin/AdminPage" >관리자 페이지</a></button>
+        </c:if>
+
     </div>
     <div class="footer-info">
         (주)JustStudy 김김송송 사업자등록번호:000-11-22222 통신판매번호:2022-서울 강남-3333 서울 강남구 테헤란로5길 24, 4층 T.3481-1005 juststudy@juststudycafe.com<br/>

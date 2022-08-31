@@ -403,11 +403,11 @@ public class MemberDAO {
 
     public boolean findInformation(String findType, String ff) {
         boolean res = false;
-        sql = "select * from member where " + findType +  " = ?";
+        sql = "select * from member where " + findType +  " like ?";
 
         try {
             ptmt = con.prepareStatement(sql);
-            ptmt.setString(1, ff);
+            ptmt.setString(1, "%"+ff+"%");
 
             rs = ptmt.executeQuery();
             res = rs.next();

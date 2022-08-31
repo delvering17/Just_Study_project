@@ -96,7 +96,7 @@
         })
     }
 
-    Kakao.init('ff02c77cc518953296a556a4691cd2f8'); //발급받은 키 중 javascript키를 사용해준다.
+    Kakao.init('3c5da3fc6108feaa82c28a0b561cdb3e'); //발급받은 키 중 javascript키를 사용해준다.
     console.log(Kakao.isInitialized()); // sdk초기화여부판단
     //카카오로그인1
     function kakaoLogin() {

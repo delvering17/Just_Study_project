@@ -69,6 +69,10 @@
         padding: 5px 5px 5px 5px;
     }
 
+    .admin-store-review-each:nth-of-type(2n+1){
+        background: rgba(227, 233, 240, 0.726);
+    }
+
 </style>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%ArrayList<ArrayList> totalList = (ArrayList<ArrayList>) request.getAttribute("totalList");%>
@@ -110,7 +114,7 @@
             <%
                 if (totalList.size() != 0) {
                     for (ArrayList review : totalList) {%>
-            <tr>
+            <tr class="admin-store-review-each">
                 <td><%=((ReviewDTO) review.get(0)).getId()%>
                 </td>
                 <td><%=((ReviewDTO) review.get(0)).getReservId()%>

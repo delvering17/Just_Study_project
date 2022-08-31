@@ -378,7 +378,7 @@
                         </c:choose>
                         <c:choose>
                             <c:when test="${sessionScope.login == null}">
-                                <li><a class="header-icon" href="../member/MemberSigninForm" >회원가입</a></li>
+                                <li><a class="header-icon" href="../member/MemberSigninForm" ></a></li>
                             </c:when>
                             <c:otherwise>
                                 <li><a class="header-icon" href="../mypage/MypageInfomationModifyForm" >마이페이지</a></li>
@@ -404,14 +404,23 @@
                         <li><a href="../reservation/Studyroom">스터디룸예약</a></li>
                     </ul>
                     <ul class="ul-header ul-behind-wrapper">
+
                         <c:choose>
-                            <c:when test="${sessionScope.level == 3}">
-                                <li><a href="../member/MemberLevelAlert">스터디모집</a></li>
+                            <c:when test="${sessionScope.login == null}">
+                                <li><a href="../member/MemberLoginAlert">스터디모집</a></li>
                             </c:when>
                             <c:otherwise>
-                                <li><a href="../community/CommunityPage?category=all">스터디모집</a></li>
+                                <c:choose>
+                                    <c:when test="${sessionScope.level == 3}">
+                                        <li><a href="../member/MemberLevelAlert">스터디모집</a></li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li><a href="../community/CommunityPage?category=all">스터디모집</a></li>
+                                    </c:otherwise>
+                                </c:choose>
                             </c:otherwise>
                         </c:choose>
+
 
                     </ul>
                     <ul class="ul-header ul-behind-wrapper">

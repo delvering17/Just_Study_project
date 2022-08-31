@@ -34,7 +34,6 @@
     .login-box {
         width: 400px;
         height: 300px;
-        border: 1px solid #000;
         position: absolute;
         top: 16%;
         left: 38%;

@@ -19,13 +19,14 @@ public class MemberController extends HttpServlet {
     public MemberController() {
         super();
 
-        nonService.put("MemberLoginForm","member/member_loginForm.jsp");
+        nonService.put("MemberLoginForm","member/member_loginForm_real.jsp");
         nonService.put("MemberSigninForm","member/member_signinForm.jsp");
         nonService.put("MemberSocialSigninForm","member/member_signinForm_kakao.jsp");
         nonService.put("MemberSocialNaverSigninForm","member/member_signinForm_naver.jsp");
         nonService.put("NaverAlert","member/member_NaverAlert.jsp");
         nonService.put("MemberLevelAlert","member/member_levelAlert.jsp");
         nonService.put("NaverLogin","member/member_NaverLogin.jsp");
+        nonService.put("MemberLoginAlert","member/member_loginAlert.jsp");
     }
 
     @Override

@@ -15,8 +15,10 @@ public class AdminBlackList implements AdminService{
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
         ArrayList<BlackDTO> blackData = new BlackDAO().blackList();
+        int blackSize = blackData.size();
 
         request.setAttribute("blackData", blackData);
+        request.setAttribute("blackSize", blackSize);
         request.setAttribute("adminUrl","adminBlackList.jsp");
     }
 }

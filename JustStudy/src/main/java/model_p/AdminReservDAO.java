@@ -216,7 +216,7 @@ public class AdminReservDAO {
         }
 
         sql="select mem_userid, mem_realname, mem_nickname, city, branch, time, room, useDate, pay from reservation join member on " +
-                "reservation.userId = member.mem_id where "+filter+" like ?"+cityFilter+" "+branchFilter+" "+useDateFilter+" ";
+                "reservation.userId = member.mem_id where status = '결제완료' and "+filter+" like ?"+cityFilter+" "+branchFilter+" "+useDateFilter+" ";
 
         try {
             ptmt = con.prepareStatement(sql);

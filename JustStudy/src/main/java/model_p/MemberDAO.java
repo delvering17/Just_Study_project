@@ -401,6 +401,27 @@ public class MemberDAO {
     }
 
 
+    public boolean findInformation(String findType, String ff) {
+        boolean res = false;
+        sql = "select * from member where " + findType +  " = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, ff);
+
+            rs = ptmt.executeQuery();
+            res = rs.next();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            close();
+        }
+
+        return  res;
+    }
+
+
 
     public void close() {
         if(rs!=null) try { rs.close(); } catch (SQLException e) {}

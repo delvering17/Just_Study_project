@@ -48,15 +48,10 @@ public class AdminSalesUserSearch implements AdminService {
 
         ArrayList<BranchDTO> branchList = new BranchDAO().branchList();
 
-        String userId = "";
-        String userNickname = "";
-        String userRealname = "";
+
         int userTotalPay = 0;
 
         for (AdminReservDTO dto : salesUserList) {
-            userId = dto.getMem_userid();
-            userNickname = dto.getMem_nickname();
-            userRealname = dto.getMem_realname();
             userTotalPay += dto.getPay();
         }
 
@@ -64,9 +59,44 @@ public class AdminSalesUserSearch implements AdminService {
         boolean dateCheck1 = user_startDate.before(user_endDate);
         boolean dateCheck2 = user_startDate.equals(user_endDate);
 
+        boolean isHasData = false;
 
+        switch (userType) {
+            case "mem_userid":
+                isHasData = new MemberDAO().findInformation("mem_userid", userValue);
+                break;
+            case "mem_nickname":
+                isHasData = new MemberDAO().findInformation("mem_nickname", userValue);
 
-        if(!endDate.equals("") && startDate.equals("")) {
+                break;
+            case "mem_realname":
+                isHasData = new MemberDAO().findInformation("mem_realname", userValue);
+
+                break;
+        }
+        System.out.println(userValue);
+        System.out.println(isHasData);
+        if (!isHasData) {
+            String msg = "";
+            switch (userType) {
+                case "mem_userid":
+                    msg = "일치하는 아이디가 없습니다";
+                    break;
+                case "mem_nickname":
+                    msg = "일치하는 닉네임이 없습니다";
+
+                    break;
+                case "mem_realname":
+                    msg = "일치하는 이름이 없습니다";
+
+                    break;
+            }
+
+            request.setAttribute("adminUrl", "alert.jsp");
+            request.setAttribute("msg", msg);
+            request.setAttribute("goUrl", "AdminSalesUser");
+
+        } else if(!endDate.equals("") && startDate.equals("")) {
             String msg = "시작 날짜를 지정해야합니다";
             request.setAttribute("adminUrl", "alert.jsp");
             request.setAttribute("msg", msg);
@@ -98,24 +128,6 @@ public class AdminSalesUserSearch implements AdminService {
 
         }else if (userTotalPay==0) {
             String msg = "매출 정보가 없습니다";
-            request.setAttribute("adminUrl", "alert.jsp");
-            request.setAttribute("msg", msg);
-            request.setAttribute("goUrl", "AdminSalesUser");
-
-        }else if (userType.equals("mem_userid") && !userId.contains(userValue)) {
-            String msg = "일치하는 아이디가 없습니다";
-            request.setAttribute("adminUrl", "alert.jsp");
-            request.setAttribute("msg", msg);
-            request.setAttribute("goUrl", "AdminSalesUser");
-
-        }else if (userType.equals("mem_nickname") && !userNickname.contains(userValue)) {
-            String msg = "일치하는 닉네임이 없습니다";
-            request.setAttribute("adminUrl", "alert.jsp");
-            request.setAttribute("msg", msg);
-            request.setAttribute("goUrl", "AdminSalesUser");
-
-        }else if (userType.equals("mem_realname") && !userRealname.contains(userValue)) {
-            String msg = "일치하는 이름이 없습니다";
             request.setAttribute("adminUrl", "alert.jsp");
             request.setAttribute("msg", msg);
             request.setAttribute("goUrl", "AdminSalesUser");

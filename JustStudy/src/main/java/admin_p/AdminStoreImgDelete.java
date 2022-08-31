@@ -16,8 +16,6 @@ public class AdminStoreImgDelete implements AdminService{
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
         String path = request.getRealPath("/img/branch");
-        path = "C:\\Users\\dieun\\jieun\\coding\\GItHub\\Just_Study_project\\JustStudy\\src\\main\\webapp" +
-                "\\img\\branch";
 
 
         int size = 1024 * 1024 * 10;

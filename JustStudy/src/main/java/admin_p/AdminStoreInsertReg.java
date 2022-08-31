@@ -24,7 +24,6 @@ public class AdminStoreInsertReg implements AdminService{
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
         String path = request.getRealPath("/img/branch");
-        path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\img\\branch";
 
 
         int size = 1024 * 1024 * 10;

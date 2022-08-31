@@ -16,13 +16,7 @@ public class AdminEventImgContentDelete implements AdminService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-        String path = request.getRealPath("/img/news");
-       /* path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\" +
-                "\\img\\news";
-
-        path = "C:\\Users\\dieun\\jieun\\coding\\GItHub\\Just_Study_project\\JustStudy\\src\\main\\webapp\\img\\news";*/
-
-        path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\img\\event";
+        String path = request.getRealPath("/img/event");
 
         int size = 1024 * 1024 * 10;
 

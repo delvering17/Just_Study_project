@@ -53,7 +53,7 @@ public class SetReservationItems implements NonViewService {
                     String soldOutList = null;
                     try {
                         soldOutList = new ReservationDAO().soldOutList(city, branch, room, sdf.parse(selectedDay));
-                        System.out.println(soldOutList);
+
                     } catch (ParseException e) {
                         throw new RuntimeException(e);
                     }

@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 public class AdminNoticeModifyReg implements AdminService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("AdminNoticeModifyReg 입장~");
 
 
         NoticeDTO dto = new NoticeDTO();

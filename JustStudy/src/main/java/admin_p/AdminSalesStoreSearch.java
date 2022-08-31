@@ -44,7 +44,6 @@ public class AdminSalesStoreSearch implements AdminService {
         c_end_date.setTime(end_date);
 
         while(c_start_date.compareTo(c_end_date) !=1 ){
-            System.out.println(c_start_date.getTime());
             c_start_date.add(Calendar.DATE, 1);
         }
 

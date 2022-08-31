@@ -20,10 +20,6 @@ public class AdminInquiryModify implements AdminService{
         int input_purpose = Integer.parseInt(request.getParameter("input_purpose"));
         int input_id = Integer.parseInt(request.getParameter("input_id"));
 
-        // TODO - 유효성 필요
-
-
-        // 수정
 
         InquiryDTO inquiryDTO = new InquiryDTO();
         inquiryDTO.setInquiry_date(new Date());

@@ -14,16 +14,8 @@ import java.text.SimpleDateFormat;
 public class AdminNewsInsertReg implements AdminService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("AdminInsertReg 들어왔다");
 
-        String path = request.getRealPath("/img/event");
-        /*path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\" +
-                "\\img\\news";
-
-        path = "C:\\Users\\dieun\\jieun\\coding\\GItHub\\Just_Study_project\\JustStudy\\src\\main\\webapp\\img\\news";*/
-        path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\img\\news";
-        /*path = "C:\\juststudy\\JustStudy\\src\\main\\webapp\\img\\news";*/
-
+        String path = request.getRealPath("/img/news");
         int size = 1024 * 1024 * 10;
 
         NewsDTO dto = new NewsDTO();
@@ -43,7 +35,6 @@ public class AdminNewsInsertReg implements AdminService{
 
         new NewsDAO().insert(dto);
 
-        System.out.println(dto);
 
         request.setAttribute("adminUrl","alert.jsp");
         request.setAttribute("msg","등록되었습니다.");

@@ -289,7 +289,7 @@ public class MemberDAO {
             ptmt.setString(4, memberDTO.getMem_address2());
             ptmt.setInt(5, memberDTO.getMem_id());
             int a = ptmt.executeUpdate();
-            System.out.println(a);
+
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -21,9 +21,7 @@ public class EventController extends HttpServlet {
 
     public EventController(){
         super();
-        nonService.put("EventInsertForm", "event/insertForm.jsp");
-        nonService.put("EventDeleteForm", "event/deleteForm.jsp");
-}
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
@@ -40,13 +38,8 @@ public class EventController extends HttpServlet {
         String service = request.getRequestURI().substring((request.getContextPath()+"/event/").length());
 
         try {
-            if(nonService.containsKey(service)){
-                request.setAttribute("mainUrl",nonService.get(service));
-
-            }else {
-                EventService es = (EventService) Class.forName("event_p." + service).newInstance();
-                es.execute(request, response);
-            }
+            EventService es = (EventService) Class.forName("event_p." + service).newInstance();
+            es.execute(request, response);
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("/view/template.jsp");
             dispatcher.forward(request, response);

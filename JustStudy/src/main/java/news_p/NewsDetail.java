@@ -14,7 +14,7 @@ public class NewsDetail implements NewsService {
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
         int id = Integer.parseInt(request.getParameter("id"));
-        System.out.println(id);
+
 
         NewsDAO dao = new NewsDAO();
 

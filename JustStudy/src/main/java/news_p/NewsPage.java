@@ -12,8 +12,6 @@ public class NewsPage implements NewsService {
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
         ArrayList<NewsDTO> mainData = new NewsDAO().list();
-        System.out.println("Newspage 들어왔따 : "+mainData);
-
 
         request.setAttribute("mainData",mainData);
         request.setAttribute("mainUrl", "news/news-list.jsp");

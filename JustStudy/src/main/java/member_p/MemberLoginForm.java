@@ -9,11 +9,7 @@ public class MemberLoginForm implements MemberService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-
         request.setAttribute("mainUrl", "member/member_loginForm.jsp");
-
-//      System.out.println("잘오니");
-
 
     }
 }

@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 public class AdminNewsDetail implements AdminService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("AdminNewsDetail 들어왔소");
+
 
         int id = Integer.parseInt(request.getParameter("id"));
-        System.out.println(id);
+
 
         NewsDAO dao = new NewsDAO();
         NewsDTO dto = dao.detail(id);

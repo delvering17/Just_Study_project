@@ -74,8 +74,7 @@ public class AdminSalesUserSearch implements AdminService {
 
                 break;
         }
-        System.out.println(userValue);
-        System.out.println(isHasData);
+
         if (!isHasData) {
             String msg = "";
             switch (userType) {

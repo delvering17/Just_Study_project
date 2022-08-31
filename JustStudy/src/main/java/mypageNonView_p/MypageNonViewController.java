@@ -16,11 +16,6 @@ public class MypageNonViewController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//        try {
-//            request.setCharacterEncoding("UTF-8");
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//        }
 
         String service = request.getRequestURI().substring((request.getContextPath()+"/mypageNonView/").length());
         try {

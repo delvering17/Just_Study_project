@@ -20,8 +20,6 @@ public class PaySuccess implements ReservationService {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-        System.out.println(request.getParameter("userName"));
-
         String[] city = request.getParameterValues("city");
         String[] branch = request.getParameterValues("branch");
         String[] room = request.getParameterValues("room");

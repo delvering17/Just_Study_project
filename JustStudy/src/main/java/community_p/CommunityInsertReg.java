@@ -40,7 +40,6 @@ public class CommunityInsertReg implements CommunityService{
         request.setAttribute("msg", "입력되었습니다.");
         request.setAttribute("goUrl", "CommunityDetail?id="+communityDTO.getId());
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

@@ -40,8 +40,7 @@ public class MemberController extends HttpServlet {
         }
 
         String service = request.getRequestURI().substring((request.getContextPath()+"/member/").length());
-        System.out.println(request.getRequestURI());
-        System.out.println("서비스 =" + service);
+
         try {
 
 

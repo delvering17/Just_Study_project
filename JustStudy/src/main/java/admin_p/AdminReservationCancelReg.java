@@ -36,14 +36,11 @@ public class AdminReservationCancelReg implements AdminService{
 
         if(iamportCancel.getPayment_response().getMessage() == null){
             msg = "취소하였습니다.";
-            System.out.println(reservationDTO.getId());
             new ReservationDAO().reservationCancelByAdmin(reservationDTO.getId(), request.getParameter("cancel-reason"));
         }
 
         MemberDTO memberDTO = new MemberDAO().detail(reservationDTO.getUserId());
-/*        goCancelEmail(memberDTO.getMem_userid(),  request.getParameter("cancel-reason"));*/
-        System.out.println(memberDTO.getMem_userid());
-        System.out.println( request.getParameter("cancel-reason"));
+
 
         request.setAttribute("msg", msg);
         request.setAttribute("adminUrl", "alert.jsp");

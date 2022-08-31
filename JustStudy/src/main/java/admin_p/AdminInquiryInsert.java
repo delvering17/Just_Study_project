@@ -19,10 +19,7 @@ public class AdminInquiryInsert implements AdminService{
         int input_writer = Integer.parseInt(request.getParameter("input_writer"));
         String input_content = request.getParameter("input_content");
         int input_purpose = Integer.parseInt(request.getParameter("input_purpose"));
-        // TODO - 유효성 필요
 
-
-        // 추가
 
         InquiryDTO inquiryDTO = new InquiryDTO();
         inquiryDTO.setInquiry_date(new Date());

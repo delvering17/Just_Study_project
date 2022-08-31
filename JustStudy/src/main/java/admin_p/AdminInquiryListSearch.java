@@ -75,7 +75,7 @@ public class AdminInquiryListSearch implements AdminService{
                     request.getParameter("admin-inquiry-list-period"), startDate, endDate,
                     request.getParameter("admin-inquiry-list-filter"), request.getParameter("admin-inquiry-list-word").trim(), request.getParameter("admin-inquiry-state-search"));
         }
-        System.out.println(inquiryList.size());
+
         request.setAttribute("branchList", branchList);
         request.setAttribute("arr_inquiryDTO", inquiryList);
         request.setAttribute("adminUrl", "adminInquiryList.jsp");

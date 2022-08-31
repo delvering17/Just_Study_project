@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 public class AdminNoticeInsertReg implements AdminService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("admininsertReg 들어왔냐?");
+
 
         try {
             NoticeDTO dto = new NoticeDTO();
@@ -25,7 +25,6 @@ public class AdminNoticeInsertReg implements AdminService{
             request.setAttribute("msg", "입력되었습니다.");
             request.setAttribute("goUrl", "AdminNoticeDetail?id=" + dto.getId());
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

@@ -23,7 +23,7 @@ public class MypageChangePasswordReg implements MypageNonViewService{
 
 
         JSONObject jj = new JSONObject();
-        // TODO - 유효성 검사 필요
+
         MemberDTO dto = new MemberDAO().detail(mem_id);
 
         // 현재 비밀번호와 입력한 현재 비밀번호와 다른 경우

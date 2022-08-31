@@ -19,15 +19,9 @@ public class MypageInformationModifyReg implements MypageNonViewService{
         int mem_id = (int) session.getAttribute("login");
         String input_realname = request.getParameter("input_realname");
         String input_nickname = request.getParameter("input_nickname");
-//        String input_phone = request.getParameter("input_phone");
+
         String input_address1 = request.getParameter("input_address1");
         String input_address2 = request.getParameter("input_address2");
-
-
-        // TODO - 유효성 검사 필요
-
-
-
 
         // 결과
         MemberDTO memberDTO = new MemberDTO();

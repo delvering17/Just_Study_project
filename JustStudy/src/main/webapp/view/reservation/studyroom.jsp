@@ -538,7 +538,7 @@
             </h4>
             <div>
                 <i class="fa-solid fa-angle-left"></i>
-                <div><fmt:formatDate value="<%=new Date()%>" pattern="yyyy-MM-d (E)"/></div>
+                <div><fmt:formatDate value="<%=new Date()%>" pattern="yyyy-MM-dd (E)"/></div>
                 <i class="fa-solid fa-angle-right"></i>
                 <i class="fa-solid fa-calendar-days fa-2x form-control" id="datePicker"></i>
             </div>
@@ -554,7 +554,7 @@
             <div>룸타입<b></b></div>
         </div>
         <div>
-            <div>날짜<b><fmt:formatDate value="<%=new Date()%>" pattern="yyyy-MM-d (E)"/></b></div>
+            <div>날짜<b><fmt:formatDate value="<%=new Date()%>" pattern="yyyy-MM-dd (E)"/></b></div>
             <div>시간<b></b></div>
         </div>
         <i class="fa-solid fa-chevron-right fa-2x"></i>

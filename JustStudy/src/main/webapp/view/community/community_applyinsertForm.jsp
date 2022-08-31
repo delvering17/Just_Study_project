@@ -33,7 +33,7 @@
 
 
     #studyapply-title{
-        font-size: 3.5rem;
+
         font-weight: bold;
         text-align: center;
     }
@@ -50,20 +50,7 @@
     textarea{
         width: 500px;
         height:100px;
-        /*overflow:auto;
 
-
-
-        padding:20px;*/
-
-  /*      border:1px solid #ececec
-    ;background:#fff;
-        font-family: 'NotoSansKR-DemiLight';
-        font-size:16px;
-        line-height:160%;
-        outline-style: none;
-        resize:none;
-        color:#000;*/
     }
     #submit-btn{
         width: 70px;
@@ -106,7 +93,7 @@
 
 <div class="apply-wrapper">
 <div class="studyapply-title-area">
-    <p id="studyapply-title">스터디 신청</p>
+    <h1 id="studyapply-title">스터디 신청</h1>
     <hr class="title-line">
 </div>
 

@@ -23,7 +23,7 @@
         margin: 0 auto;
     }
     #study-title{
-        font-size: 3.5rem;
+
         font-weight: bold;
         text-align: center;
     }
@@ -112,7 +112,7 @@
     <div class="main">
 
         <div class="study-top">
-            <p id="study-title">스터디 글작성</p>
+            <h1 id="study-title">스터디 글작성</h1>
             <hr class="underline">
         </div>
 
@@ -194,8 +194,8 @@
         var endDate = $( "input[name='enddate']" ).val();
         var endDateArr = endDate.split('-');
 
-        var startDateCompare = new Date(startDateArr[0], startDateArr[1], startDateArr[2]);
-        var endDateCompare = new Date(endDateArr[0], endDateArr[1], endDateArr[2]);
+        var startDateCompare = new Date(startDateArr[0], startDateArr[1] - 1, startDateArr[2]);
+        var endDateCompare = new Date(endDateArr[0], endDateArr[1] - 1, endDateArr[2]);
 
         if(startDateCompare.getTime() > endDateCompare.getTime()) {
 

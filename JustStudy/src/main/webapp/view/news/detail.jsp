@@ -34,7 +34,7 @@
     }
 
     #news-title{
-        font-size: 3.5rem;
+
         font-weight: bold;
         text-align: center;
     }
@@ -99,7 +99,7 @@
 
 
 <div class="news-title-area">
-    <p id="news-title">뉴스</p>
+    <h1 id="news-title">뉴스</h1>
     <hr class="news-line">
 </div>
 

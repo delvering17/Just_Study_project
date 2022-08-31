@@ -21,6 +21,7 @@
 
     .community-modify-bg {
         width: 1400px;
+        min-height: 80%;
         margin: 0 auto;
         min-height: 700px;
         height: fit-content;

@@ -11,7 +11,7 @@
 
     .apply-wrapper{
         width: 1400px;
-
+        min-height: 80%;
         margin: 0 auto;
         padding-bottom: 30px;
     }

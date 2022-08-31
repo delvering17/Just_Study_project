@@ -12,6 +12,7 @@
 <style>
     .main{
         width: 100%;
+        min-height: 80%;
     }
 
     .news-title-area{

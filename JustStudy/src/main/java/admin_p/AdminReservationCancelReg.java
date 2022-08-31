@@ -40,6 +40,9 @@ public class AdminReservationCancelReg implements AdminService{
         }
 
         MemberDTO memberDTO = new MemberDAO().detail(reservationDTO.getUserId());
+
+        reservationDTO.setCancelReason(request.getParameter("cancel-reason"));
+
         goCancelEmail(memberDTO.getMem_userid(),  reservationDTO);
 
         request.setAttribute("msg", msg);

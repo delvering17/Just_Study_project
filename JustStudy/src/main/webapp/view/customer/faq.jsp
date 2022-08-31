@@ -17,6 +17,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        min-height: 700px;
     }
 
     .customer-faq-bg > h1 {

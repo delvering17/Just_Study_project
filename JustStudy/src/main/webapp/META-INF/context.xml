@@ -5,7 +5,7 @@
             auth="Container"
             type="javax.sql.DataSource"
             driverClassName="org.mariadb.jdbc.Driver"
-            url="jdbc:mariadb://delvering.cafe24.com/delvering"
+            url="jdbc:mariadb://localhost:3306/delvering"
             username="delvering"
             password="CKSdnr12"
     />

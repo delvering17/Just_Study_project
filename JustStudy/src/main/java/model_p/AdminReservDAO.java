@@ -154,8 +154,8 @@ public class AdminReservDAO {
         ArrayList<AdminReservDTO> res = new ArrayList<AdminReservDTO>();
 
         sql = "select reservation.id, reservation.orderId, reservation.resDate, member.mem_userid, member" +
-                ".mem_realname, reservation.city, reservation.branch, reservation.room, reservation.useDate, " +
-                "reservation.time, reservation.headcount, reservation.pay, status from reservation left outer join member on " +
+                ".mem_realname, member.mem_nickname, reservation.city, reservation.branch, reservation.room, reservation.useDate, " +
+                "reservation.time, reservation.headcount, reservation.pay, status, cancel_reason from reservation left outer join member on " +
                 "reservation.userId = member.mem_id where city = ? and branch = ? and useDate = ?";
 
         try {
@@ -173,6 +173,7 @@ public class AdminReservDAO {
                 adminReservDTO.setResDate(rs.getTimestamp("resDate"));
                 adminReservDTO.setMem_userid(rs.getString("mem_userid"));
                 adminReservDTO.setMem_realname(rs.getString("mem_realname"));
+                adminReservDTO.setMem_nickname(rs.getString("mem_nickname"));
                 adminReservDTO.setCity(rs.getString("city"));
                 adminReservDTO.setBranch(rs.getString("branch"));
                 adminReservDTO.setRoom(rs.getString("room"));
@@ -181,6 +182,7 @@ public class AdminReservDAO {
                 adminReservDTO.setHeadcount(rs.getInt("headcount"));
                 adminReservDTO.setPay(rs.getInt("pay"));
                 adminReservDTO.setStatus(rs.getString("status"));
+                adminReservDTO.setCancelReason(rs.getString("cancel_reason"));
 
                 res.add(adminReservDTO);
             }

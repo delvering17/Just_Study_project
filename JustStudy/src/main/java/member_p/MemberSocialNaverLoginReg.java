@@ -4,6 +4,7 @@ package member_p;
 import memberNonView_p.MemberNonViewService;
 import member_p.MemberService;
 import model_p.MemberDAO;
+import model_p.MemberDTO;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -68,10 +69,11 @@ public class MemberSocialNaverLoginReg implements MemberService {
         String logintype = request.getParameter("logintype");
 
         if(mem_id != 0) {
+            MemberDTO memberDTO = new MemberDAO().detail(mem_id);
             // 이미 가입된 회원
 
             // 탈퇴한 회원
-            if(new MemberDAO().detail(mem_id).getMem_level() == 5) {
+            if(memberDTO.getMem_level() == 5) {
                 msg = "탈퇴한 회원입니다.";
                 mainUrl = "member/member_alert.jsp";
                 request.setAttribute("goUrl", "../board/MainPage");
@@ -79,7 +81,7 @@ public class MemberSocialNaverLoginReg implements MemberService {
                 HttpSession session = request.getSession();
                 session.setAttribute("login", mem_id);
                 session.setAttribute("logintype", "naver");
-
+                session.setAttribute("level", memberDTO.getMem_level());
                 msg = "로그인에 성공했습니다";
                 mainUrl = "member/member_alert.jsp";
                 request.setAttribute("goUrl", "../board/MainPage");

@@ -401,18 +401,11 @@
                     </ul>
                     <ul class="ul-header  ul-behind-wrapper">
                         <li><a href="../reservation/UsageInfo">이용안내</a></li>
-                        <c:choose>
-                            <c:when test="${sessionScope.mem_level == 3}">
-                                <li><a href="../member/MemberLevelAlert">스터디룸예약</a></li>
-                            </c:when>
-                            <c:otherwise>
-                                <li><a href="../reservation/Studyroom">스터디룸예약</a></li>
-                            </c:otherwise>
-                        </c:choose>
+                        <li><a href="../reservation/Studyroom">스터디룸예약</a></li>
                     </ul>
                     <ul class="ul-header ul-behind-wrapper">
                         <c:choose>
-                            <c:when test="${sessionScope.mem_level == 3}">
+                            <c:when test="${sessionScope.level == 3}">
                                 <li><a href="../member/MemberLevelAlert">스터디모집</a></li>
                             </c:when>
                             <c:otherwise>

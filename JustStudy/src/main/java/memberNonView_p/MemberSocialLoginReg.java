@@ -48,6 +48,8 @@ public class MemberSocialLoginReg implements MemberNonViewService {
                 } else {
                     HttpSession session = request.getSession();
                     session.setAttribute("login", mem_id);
+                    session.setAttribute("logintype", "kakao");
+                    session.setAttribute("level", memberDTO.getMem_level());
                     jj.put("loginResult", URLEncoder.encode("로그인 되었습니다.","UTF-8"));
                     jj.put("goUrl", "../board/MainPage");
                 }

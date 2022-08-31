@@ -39,7 +39,7 @@
 
 
     #notice-title{
-        font-size: 3.5rem;
+
         font-weight: bold;
         text-align: center;
     }
@@ -83,7 +83,7 @@
 </style>
 <div class="notice-detail-wrapper" >
 <div class="notice-title-area">
-    <p id="notice-title">공지사항</p>
+    <h1 id="notice-title">공지사항</h1>
     <hr class="title-line">
 </div>
 
@@ -105,7 +105,7 @@
     </div>
 </div>
 <script>
-    $(".notice-list").click(function () {
+    $(".notice-list-btn").click(function () {
         location.href = "NoticePage"
     })
 </script>

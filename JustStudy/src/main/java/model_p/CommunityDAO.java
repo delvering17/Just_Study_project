@@ -210,6 +210,23 @@ public class CommunityDAO {
         return 0;
     }
 
+    public int applyDelete(int id) {
+        sql = "delete from applystudy where as_id = ?";
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setInt(1, id);
+
+            return ptmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return 0;
+    }
+
     public ArrayList<CommunityDTO> makedList(int id){
 
         ArrayList<CommunityDTO> res = new ArrayList<CommunityDTO>();
@@ -350,8 +367,7 @@ public class CommunityDAO {
         }
 
         boolean isMaxPeople = false ;
-        System.out.println(nowPeople);
-        System.out.println(communityDTO.getPeople());
+
         if(communityDTO.getPeople() == nowPeople) {
             isMaxPeople = true;
         }

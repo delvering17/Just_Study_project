@@ -130,7 +130,7 @@
     </tr>
 
   </table>
-  <input id="submit-btn" type="submit" value="등록">
+
 </form>
 </div>
 <script type="text/javascript">

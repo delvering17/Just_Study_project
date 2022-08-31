@@ -37,7 +37,7 @@
     }
 
     #event-title{
-        font-size: 3.5rem;
+
         font-weight: bold;
         text-align: center;
     }
@@ -106,7 +106,7 @@
 </style>
 <div class="event-detail-wrapper">
     <div class="event-title-area">
-        <p id="event-title">이벤트</p>
+        <h1 id="event-title">이벤트</h1>
         <hr class="event-line">
     </div>
 

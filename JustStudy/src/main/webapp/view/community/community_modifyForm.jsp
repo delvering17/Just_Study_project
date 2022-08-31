@@ -229,8 +229,9 @@
     document.getElementById("startdate").setAttribute("min", today);
     document.getElementById("enddate").setAttribute("min", today);
 
+    function goModify() {
 
-    $("#modifybtn").click(function(){
+        const fff = document.frmJoin;
 
         var startDate = $( "input[name='startdate']" ).val();
         var startDateArr = startDate.split('-');
@@ -238,23 +239,8 @@
         var endDate = $( "input[name='enddate']" ).val();
         var endDateArr = endDate.split('-');
 
-        var startDateCompare = new Date(startDateArr[0], startDateArr[1], startDateArr[2]);
-        var endDateCompare = new Date(endDateArr[0], endDateArr[1], endDateArr[2]);
-
-        if(startDateCompare.getTime() > endDateCompare.getTime()) {
-
-            alert("시작날짜와 종료날짜를 확인해 주세요.");
-
-            return false;
-        }
-
-        $("#modifybtn").focus();
-    });
-
-
-    function goModify() {
-
-        const fff = document.frmJoin;
+        var startDateCompare = new Date(startDateArr[0], startDateArr[1] - 1, startDateArr[2]);
+        var endDateCompare = new Date(endDateArr[0], endDateArr[1] - 1, endDateArr[2]);
 
         if (fff.location.value == "") {
             alert("지점 선택을 해주세요.");
@@ -267,6 +253,9 @@
         } else if (fff.enddate.value == "") {
             alert("종료 기간을 입력해주세요.");
             fff.enddate.focus();
+            return false;
+        } else if(startDateCompare.getTime() > endDateCompare.getTime()) {
+            alert("시작날짜와 종료날짜를 확인해 주세요.");
             return false;
         } else if (fff.title.value.trim() == "") {
             alert("빈칸을 입력해주세요");

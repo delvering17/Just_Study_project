@@ -150,6 +150,21 @@
         cursor: pointer;
 
     }
+    a{
+        text-decoration: none;
+    }
+    a:link{
+        color: black;
+    }
+    a:visited{
+        color: black;
+    }
+    a:hover{
+        color: purple;
+    }
+    a:active{
+        color: black;
+    }
 
     .community-apply-detail-list{
         text-decoration: none;
@@ -219,7 +234,7 @@
         })
 
         $(".community-delete-btn").click(function (){
-            location.href="CommunityApplyDeleteForm?as_id=${applyStudyDTO.as_id}&as_mem_id=${applyStudyDTO.as_mem_id}"
+            location.href="CommunityApplyDeleteReg?as_id=${applyStudyDTO.as_id}&as_mem_id=${applyStudyDTO.as_mem_id}"
         })
 
 

@@ -267,8 +267,8 @@
         var endDate = $("input[name='event_enddate']").val();
         var endDateArr = endDate.split('-');
 
-        var startDateCompare = new Date(startDateArr[0], startDateArr[1], startDateArr[2]);
-        var endDateCompare = new Date(endDateArr[0], endDateArr[1], endDateArr[2]);
+        var startDateCompare = new Date(startDateArr[0], startDateArr[1] - 1, startDateArr[2]);
+        var endDateCompare = new Date(endDateArr[0], endDateArr[1] - 1, endDateArr[2]);
 
 
         if (f.title.value.trim() == "") {

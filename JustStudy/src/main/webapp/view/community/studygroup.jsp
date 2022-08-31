@@ -247,7 +247,7 @@
         <div class="commuity-bottom-selector">
             <div>
                 <select id="city" name="city">
-                    <option>전체</option>
+                    <option>지역선택</option>
                     <c:forTokens items="서울,경기,부산,대구,인천,광주,대전,울산,세종,강원,충북,충남,전북,전남,경북,경남,제주" var="city" delims=",">
                         <option>${city}</option>
                     </c:forTokens>
@@ -256,11 +256,9 @@
             </div>
             <div>
                 <select id="branch" name="branch">
-                    <option>전체</option>
+                    <option>지점선택</option>
                 </select>
-                <%--<select name="jijum">
-                    <option value="">지점 선택 👇</option>
-                </select>--%>
+
             </div>
             <form>
                 <input type="text" id="search" onkeyup="filter()" placeholder="제목을 입력하세요">
@@ -344,7 +342,7 @@
     <%ArrayList<BranchDTO> branchList = (ArrayList<BranchDTO>) request.getAttribute("branchList");%>
 
     $("select[name=city]").change(function (){
-        $("select[name=branch]").html("<option>전체</option>")
+        $("select[name=branch]").html("<option>지점선택</option>")
         <%for(BranchDTO branchDTO : branchList){%>
         if($("select[name=city]").val() == "<%=branchDTO.getCity()%>"){
             $("select[name=branch]").append("<option><%=branchDTO.getName()%></option>")

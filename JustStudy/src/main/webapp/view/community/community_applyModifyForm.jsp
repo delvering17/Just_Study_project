@@ -22,7 +22,7 @@
     .community-modify-bg {
         width: 1400px;
         margin: 0 auto;
-
+        min-height: 700px;
         height: fit-content;
     }
 

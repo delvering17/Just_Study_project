@@ -15,11 +15,14 @@
     }
 
     .noticebox {
-        width: 80%;
+        width: 1400px;
         height: 200px;
         margin: 0 auto;
         margin-bottom: 50px;
 
+    }
+    .noticebox >p:nth-of-type(1){
+        padding-top: 20px;
     }
 
     .noticebox-img {
@@ -27,7 +30,7 @@
         height: 150px;
         background: #001f4a;
         float: left;
-        margin-top: 25px;
+        margin-bottom: 10px;
         margin-left: 150px;
         margin-right: 100px;
         border-radius: 100px;

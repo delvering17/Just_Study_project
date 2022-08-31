@@ -21,8 +21,8 @@
     // goNaverLogin()
     // https://developers.naver.com/docs/login/profile/profile.md
     <%
-      String clientId = "SM6kP7n6zyadJ15rvs6z";//애플리케이션 클라이언트 아이디값";
-      String clientSecret = "r_YMa6PAQB";//애플리케이션 클라이언트 시크릿값";
+      String clientId = "NU3G77c1797Ux_A_cJgG";//애플리케이션 클라이언트 아이디값";
+      String clientSecret = "4QJBOslMRG";//애플리케이션 클라이언트 시크릿값";
       String code = request.getParameter("code");
       String state = request.getParameter("state");
       String redirectURI = URLEncoder.encode("http://delvering.cafe24.com", "UTF-8");

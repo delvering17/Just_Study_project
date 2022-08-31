@@ -51,7 +51,7 @@
         </div>
         <div class="btn-login">
             <%
-                String clientId = "SM6kP7n6zyadJ15rvs6z";//애플리케이션 클라이언트 아이디값";
+                String clientId = "NU3G77c1797Ux_A_cJgG";//애플리케이션 클라이언트 아이디값";
                 String redirectURI = URLEncoder.encode("http://delvering.cafe24.com/member/NaverLogin", "UTF-8");
                 SecureRandom random = new SecureRandom();
                 String state = new BigInteger(130, random).toString();
@@ -141,30 +141,6 @@
         }
     }
 
-    // if (!Kakao.Auth.getAccessToken()) {
-    //     console.log('Not logged in.');
-    // }
-    // Kakao.Auth.logout(function() {
-    //     console.log(Kakao.Auth.getAccessToken());
-    // });
-
-    // var naver_id_login = new naver_id_login("SM6kP7n6zyadJ15rvs6z", "http://localhost:8080/JustStudy_war_exploded2/member/MemberSocialNaverLoginReg");
-    // var state = naver_id_login.getUniqState();
-    // naver_id_login.setButton("white", 2,40);
-    // naver_id_login.setDomain("http://localhost:8080");
-    // naver_id_login.setState(state);
-    // naver_id_login.setPopup();
-    //
-    // naver_id_login.init_naver_id_login();
-
-
-    // const naverLogin = new naver.LoginWithNaverId(
-    //     {
-    //         clientId: "SM6kP7n6zyadJ15rvs6z",
-    //         callbackUrl: "http://localhost:8080/JustStudy_war_exploded2/member/MemberLoginForm",
-    //         loginButton: {color: "green", type: 2, height: 40}
-    //     }
-    // );
 
 
     function getUserInformation() {

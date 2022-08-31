@@ -268,7 +268,7 @@
                 <c:if test="${apply.as_mem_id == login && apply.as_state == 2}">
                     <tr>
                         <td>오픈채팅 URL</td>
-                        <td><a href="https://www.naver.com/" target="_blank">${communityDTO.openChatting}</a></td>
+                        <td><a href="https://open.kakao.com/o/guWls5xe" target="_blank">${communityDTO.openChatting}</a></td>
                     </tr>
                 </c:if>
             </c:forEach>

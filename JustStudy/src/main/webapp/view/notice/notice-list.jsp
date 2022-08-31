@@ -12,6 +12,7 @@
 <style>
     .main{
         width: 100%;
+        min-height: 80%;
     }
 
     .notice-title-area{
@@ -30,14 +31,12 @@
         height: 3px;
         margin: 10px auto;
         background: black;
-
     }
 
     .notice-area{
         width: 1100px;
         margin: 0px auto;
         padding-bottom: 100px;
-
     }
 
 

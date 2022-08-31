@@ -63,8 +63,8 @@
         <input type="hidden" name="id" value="${adminModifyDTO.mem_id}"/>
         <table border="" cellspacing="0" cellpadding="0" style="border-collapse:collapse">
             <tr>
-                <th>아이디</th>
-                <td><input type="text" name="userid" value="${adminModifyDTO.mem_userid}"/></td>
+                <th>이메일</th>
+                <td><input type="text" name="userid" value="${adminModifyDTO.mem_userid}" readonly/></td>
             </tr>
             <tr>
                 <th>이름</th>
@@ -72,7 +72,12 @@
             </tr>
             <tr>
                 <th>닉네임</th>
-                <td><input type="text" name="nickname" value="${adminModifyDTO.mem_nickname}"/></td>
+                <td>
+                    <input type="text" name="nickname" id="input-nickname" value="${adminModifyDTO.mem_nickname}"/>
+                    <input type="checkbox" id="isNicknamedoubleCheck" hidden/>
+                    <button type="button" onclick="goNicknamedoubleCheck()" class="btn-signin">중복체크</button>
+                </td>
+
             </tr>
             <tr>
                 <th>주소</th>
@@ -106,8 +111,54 @@
     }
 
     $(".admin-user-modify").click(function () {
-        $(".admin-user-modify-action").submit()
+        if($('#isNicknamedoubleCheck').is(":checked") === false) {
+            alert('닉네임 중복 확인을 해주세요.')
+        } else {
+            $(".admin-user-modify-action").submit()
+        }
     })
+
+
+    function goNicknamedoubleCheck() {
+        if($('#input-nickname').val() === '') {
+            alert('빈 칸을 입력해주세요')
+        } else if(!/^(?=[ㄱ-ㅎ|가-힣]).{2,8}$/.test($('#input-nickname').val())) {
+            alert('한글 2~6자리를 입력해주세요')
+            $('#notice-nickname').removeClass('hide')
+            $('#notice-nickname').addClass('show')
+        } else if(/\s/g.test($('#input-nickname').val())) {
+            alert('공백을 제거해 주세요')
+        } else {
+
+
+            let input_nickname = $('#input-nickname').val()
+            $.ajax({
+                url:'<c:url value="/memberNonView/MemberSigninDoubleCheck"/>',
+                type: 'GET',
+                data: 'input_nickname='+input_nickname,
+                async: false,
+                success:function (response){
+                    if(response === 'success') {
+                        $('#isNicknamedoubleCheck').attr("checked",true);
+                        $("#input-nickname").attr("readonly",true);
+                        $('#notice-nickname').removeClass('show')
+                        $('#notice-nickname').addClass('hide')
+                        alert('사용가능한 닉네임 입니다')
+
+                    } else if(response === 'regex'){
+                        alert('한글은 2~6자리를 입력해주세요')
+                    } else {
+                        alert('중복된 닉네임 입니다.')
+                    }
+
+                },
+                error:function(e){
+                    console.log(e.responseText)
+                }
+            });
+        }
+
+    }
 
 </script>
 

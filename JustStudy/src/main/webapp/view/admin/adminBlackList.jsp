@@ -62,6 +62,11 @@
         background: rgba(83, 104, 167, 0.856);
         color: #fff;
     }
+
+    .noBlack{
+        background: rgba(81, 88, 94, 0.73);
+    }
+
 </style>
 
 <div id="main">
@@ -72,19 +77,29 @@
             <th>사유</th>
             <th>관리</th>
         </tr>
+        <c:choose>
+            <c:when test="${blackSize==0}">
+                <tr class="noBlack">
+                    <td colspan="4">현재 블랙리스트는 없습니다</td>
+                </tr>
+            </c:when>
+            <c:otherwise>
+                <c:forEach items="${blackData}" var="i">
+                    <tr>
+                        <form action="" method="">
+                            <th><input type="hidden" name="user" value="${i.black_id}">${i.black_id}</th>
+                            <td>${i.mem_userid}</td>
+                            <td>${i.black_reason}</td>
+                            <td>
+                                <button formaction="AdminBlackListDelete" formmethod="get">삭제</button>
+                            </td>
+                        </form>
+                    </tr>
+                </c:forEach>
+            </c:otherwise>
+        </c:choose>
 
-        <c:forEach items="${blackData}" var="i">
-            <tr>
-                <form action="" method="">
-                    <th><input type="hidden" name="user" value="${i.black_id}">${i.black_id}</th>
-                    <td>${i.mem_userid}</td>
-                    <td>${i.black_reason}</td>
-                    <td>
-                        <button formaction="AdminBlackListDelete" formmethod="get">삭제</button>
-                    </td>
-                </form>
-            </tr>
-        </c:forEach>
+
 
     </table>
 </div>

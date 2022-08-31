@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -63,23 +64,22 @@ public class AdminSalesUserSearch implements AdminService {
         boolean dateCheck1 = user_startDate.before(user_endDate);
         boolean dateCheck2 = user_startDate.equals(user_endDate);
 
-        System.out.println("dateCheck:" + dateCheck1);
 
 
-        if(startDate.equals("")) {
+        if(!endDate.equals("") && startDate.equals("")) {
             String msg = "시작 날짜를 지정해야합니다";
             request.setAttribute("adminUrl", "alert.jsp");
             request.setAttribute("msg", msg);
             request.setAttribute("goUrl", "AdminSalesUser");
 
-        }else if (endDate.equals("")) {
+        }else if (!startDate.equals("") && endDate.equals("")) {
             String msg = "마지막 날짜를 지정해야합니다";
             request.setAttribute("adminUrl", "alert.jsp");
             request.setAttribute("msg", msg);
             request.setAttribute("goUrl", "AdminSalesUser");
 
         }else if (!dateCheck1 && !dateCheck2) {
-            String msg = "날짜 형식 오류";
+            String msg = "시작날짜와 종료날짜를 확인해주세요";
             request.setAttribute("adminUrl", "alert.jsp");
             request.setAttribute("msg", msg);
             request.setAttribute("goUrl", "AdminSalesUser");
@@ -92,6 +92,12 @@ public class AdminSalesUserSearch implements AdminService {
 
         }else if(userValue.contains(" ")){
             String msg = "공백을 포함하여 검색할 수 없습니다";
+            request.setAttribute("adminUrl", "alert.jsp");
+            request.setAttribute("msg", msg);
+            request.setAttribute("goUrl", "AdminSalesUser");
+
+        }else if (userTotalPay==0) {
+            String msg = "매출 정보가 없습니다";
             request.setAttribute("adminUrl", "alert.jsp");
             request.setAttribute("msg", msg);
             request.setAttribute("goUrl", "AdminSalesUser");

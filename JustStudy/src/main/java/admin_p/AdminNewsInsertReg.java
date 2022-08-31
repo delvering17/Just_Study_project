@@ -16,7 +16,7 @@ public class AdminNewsInsertReg implements AdminService{
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
 
-        String path = request.getRealPath("/img/event");
+        String path = request.getRealPath("/img/news");
 
         int size = 1024 * 1024 * 10;
 

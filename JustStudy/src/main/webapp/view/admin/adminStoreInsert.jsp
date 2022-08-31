@@ -349,6 +349,7 @@
                     } else {
                         if (!form_data[i].match(".*[.](jpeg|jpg|bmp|png|gif|pdf)")) {
                             alert("이미지 파일만 업로드 가능합니다.")
+                            nullCheck = false;
                             break big;
                         }
                     }

@@ -66,6 +66,10 @@
         width: 35%;
     }
 
+    .admin-faq-each:nth-of-type(2n+1){
+        background: rgba(227, 233, 240, 0.726);
+    }
+
 </style>
 
 <div class="admin-faq-list-main">
@@ -93,7 +97,7 @@
         <c:forEach items="${faqList}" varStatus="no" var="faq">
             <form action="AdminFAQModifyDelete" class="admin-faq-list-form">
                 <input type="hidden" name="faqId" value="${faq.id}"/>
-                <tr>
+                <tr class="admin-faq-each">
                     <td>${faq.id}</td>
                     <td>${faq.categoryKor}</td>
                     <td>${faq.question}</td>

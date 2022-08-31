@@ -32,10 +32,7 @@ public class NewsController extends HttpServlet {
             e.printStackTrace();
         }
 
-
-
         String service = request.getRequestURI().substring((request.getContextPath()+"/news/").length());
-        System.out.println(service);
 
         try {
             if(nonService.containsKey(service)){

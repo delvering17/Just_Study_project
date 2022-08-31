@@ -12,7 +12,6 @@ public class AdminNewsModifyForm implements AdminService {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
-        System.out.println(id);
 
         NewsDAO dao = new NewsDAO();
         NewsDTO dto = dao.detail(id);

@@ -26,8 +26,6 @@ public class NoticeInsertReg implements NoticeService {
             new NoticeDAO().insert(dto);
 
 
-            System.out.println(dto);
-
             request.setAttribute("mainUrl", "notice/alert.jsp");
             request.setAttribute("msg", "입력되었습니다.");
             request.setAttribute("goUrl", "NoticeDetail?id=" + dto.getId());

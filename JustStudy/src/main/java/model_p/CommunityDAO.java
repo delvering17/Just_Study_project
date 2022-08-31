@@ -378,8 +378,7 @@ public class CommunityDAO {
             isPassed = true;
         }
 
-        System.out.println(isMaxPeople);
-        System.out.println(isPassed);
+
         if(isMaxPeople || isPassed) {
             sql = "update applystudy set as_state = 3 where as_purpose = ? and as_state = 1";
             try {

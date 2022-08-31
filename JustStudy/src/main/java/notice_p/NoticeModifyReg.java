@@ -17,11 +17,9 @@ import java.text.SimpleDateFormat;
 public class NoticeModifyReg implements NoticeService {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("NoticeModifyForm 입장~");
 
 
         NoticeDTO dto = new NoticeDTO();
-
 
         try {
 

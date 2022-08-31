@@ -22,7 +22,6 @@ public class NoticeController extends HttpServlet {
     public NoticeController(){
         super();
         nonService.put("NoticeInsertForm", "notice/insertForm.jsp");
-        /*nonService.put("NoticeDeleteForm", "notice/deleteForm.jsp");*/
     }
 
     @Override

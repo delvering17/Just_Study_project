@@ -13,7 +13,7 @@ import java.io.IOException;
 public class AdminNewsImgDelete implements AdminService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("AdminImageDelete 들어왔다");
+
 
         String path = request.getRealPath("/img/news");
        /* path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\" +
@@ -35,7 +35,7 @@ public class AdminNewsImgDelete implements AdminService{
             dto.setNews_thumbnail_img(mr.getParameter("news_thumbnail_img"));
             dto.setNews_title(mr.getParameter("news_title"));
             dto.setNews_content(mr.getParameter("news_content"));
-            System.out.println(mr.getParameter("type"));
+
 
             String msg = "이미지 삭제 실패";
             if(new NewsDAO().imgDelete(dto,Integer.parseInt(mr.getParameter("news_id"))) > 0) {

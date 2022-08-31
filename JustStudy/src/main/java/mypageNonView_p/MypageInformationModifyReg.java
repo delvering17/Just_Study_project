@@ -23,13 +23,6 @@ public class MypageInformationModifyReg implements MypageNonViewService{
         String input_address1 = request.getParameter("input_address1");
         String input_address2 = request.getParameter("input_address2");
 
-
-        // TODO - 유효성 검사 필요
-
-
-
-
-        // 결과
         MemberDTO memberDTO = new MemberDTO();
         memberDTO.setMem_id(mem_id);
         memberDTO.setMem_realname(input_realname);

@@ -121,8 +121,7 @@ public class EmailCertificateDAO {
         sql = "select * from emailCertificate where certificate_email = ? and certificate_num = ? and certificate_date >= ?";
 
         Timestamp s = new Timestamp(dd.getTime());
-        System.out.println(dd);
-        System.out.println(s);
+
         try {
             ptmt = con.prepareStatement(sql);
             ptmt.setString(1, email);

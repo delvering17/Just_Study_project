@@ -7,7 +7,6 @@ public class MemberSocialSigninForm implements MemberService{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-        System.out.println(request.getAttribute("mainUrl")+"dsfa");
         request.setAttribute("mainUrl", request.getAttribute("mainUrl"));
     }
 }

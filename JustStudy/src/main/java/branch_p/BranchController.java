@@ -28,7 +28,6 @@ public class BranchController extends HttpServlet {
             IOException {
 
         String service = request.getRequestURI().substring((request.getContextPath()+"/branch/").length());
-        System.out.println(request.getRequestURI());
 
 
         try {

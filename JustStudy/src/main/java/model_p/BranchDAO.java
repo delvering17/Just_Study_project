@@ -96,7 +96,7 @@ public class BranchDAO {
         try {
             ptmt = con.prepareStatement(sql);
             ptmt.setString(1, "%"+word+"%");
-            System.out.println(ptmt);
+
             rs = ptmt.executeQuery();
 
             while (rs.next()) {

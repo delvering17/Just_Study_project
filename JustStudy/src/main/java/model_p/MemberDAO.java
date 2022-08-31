@@ -278,18 +278,16 @@ public class MemberDAO {
     }
 
     public void modifyInformation(MemberDTO memberDTO) {
-//        sql = "update member set mem_realname = ?, mem_nickname = ?, mem_phone = ?, mem_address1 = ?, mem_address2 = ? where mem_id = ?";
         sql = "update member set mem_realname = ?, mem_nickname = ?, mem_address1 = ?, mem_address2 = ? where mem_id = ?";
         try {
             ptmt = con.prepareStatement(sql);
             ptmt.setString(1, memberDTO.getMem_realname());
             ptmt.setString(2, memberDTO.getMem_nickname());
-//            ptmt.setString(3, memberDTO.getMem_phone());
+
             ptmt.setString(3, memberDTO.getMem_address1());
             ptmt.setString(4, memberDTO.getMem_address2());
             ptmt.setInt(5, memberDTO.getMem_id());
             int a = ptmt.executeUpdate();
-            System.out.println(a);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

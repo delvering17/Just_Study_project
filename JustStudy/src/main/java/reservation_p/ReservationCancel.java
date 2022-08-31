@@ -28,7 +28,6 @@ public class ReservationCancel implements ReservationService{
 
         if(iamportCancel.getPayment_response().getMessage() == null){
             msg = "취소하였습니다.";
-            System.out.println(reservationDTO.getId());
             new ReservationDAO().reservationCancelByUser(reservationDTO.getId());
         }
 

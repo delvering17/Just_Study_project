@@ -52,7 +52,7 @@ public class AdminEventImgDelete implements AdminService{
 
             if(new EventDAO().imgDelete(eventDTO) > 0){
                 new File(path + "\\" + eventDTO.getImg()).delete();
-                System.out.println(eventDTO.getImg());
+
                 msg = "이미지를 삭제했습니다.";
                 eventDTO.setImg(null);
             }

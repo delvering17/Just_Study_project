@@ -29,7 +29,6 @@ public class MemberSocialNaverLoginReg implements MemberService {
         String token = request.getParameter("access_token"); // 네이버 로그인 접근 토큰;
         String header = "Bearer " + token; // Bearer 다음에 공백 추가
 
-        System.out.println("토큰토큰 " + token);
         String apiURL = "https://openapi.naver.com/v1/nid/me";
 
 
@@ -38,31 +37,25 @@ public class MemberSocialNaverLoginReg implements MemberService {
         String responseBody = get(apiURL,requestHeaders);
 
 
-        System.out.println(responseBody);
         JSONObject obj = null;
         try {
             JSONParser jsonParser = new JSONParser();
             obj = (JSONObject) jsonParser.parse(responseBody);
 
             obj = (JSONObject) jsonParser.parse(obj.get("response").toString());
-            System.out.println(obj.get("name"));
-            System.out.println(obj.get("id"));
-            System.out.println(obj.get("email"));
+
 
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
 
 
-//
-//
+
         String social_email = obj.get("email").toString();
         String social_id = obj.get("id").toString();
         String realname = obj.get("name").toString();
-//        System.out.println(social_id);
+
         int mem_id = new MemberDAO().isSocialId(social_id);
-//
-        System.out.println(mem_id);
 
         String msg = "";
         String mainUrl = "";
@@ -96,20 +89,10 @@ public class MemberSocialNaverLoginReg implements MemberService {
             request.setAttribute("social_email",social_email);
             request.setAttribute("realname",realname);
         }
-//
-//        try {
-//
-//            response.getWriter().append(jj.toJSONString());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
-//
         request.setAttribute("member_msg", msg);
-//        request.setAttribute("mainUrl", mainUrl);
         request.setAttribute("mainUrl", mainUrl);
 
-//        request.setAttribute("mainUrl", mainUrl);
 
     }
 

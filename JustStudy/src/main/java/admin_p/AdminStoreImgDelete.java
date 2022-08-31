@@ -19,7 +19,6 @@ public class AdminStoreImgDelete implements AdminService{
         path = "C:\\Users\\dieun\\jieun\\coding\\GItHub\\Just_Study_project\\JustStudy\\src\\main\\webapp" +
                 "\\img\\branch";
 
-        //todo : 배포할땐 뒤에꺼 주석처리
 
         int size = 1024 * 1024 * 10;
 

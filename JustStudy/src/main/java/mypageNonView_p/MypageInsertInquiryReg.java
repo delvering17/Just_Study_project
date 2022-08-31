@@ -27,12 +27,6 @@ public class MypageInsertInquiryReg implements MypageNonViewService{
         String input_branch = request.getParameter("input_branch");
 
 
-        // TODO - 유효성 검사 필요
-
-
-
-
-        // 결과
         InquiryDTO inquiryDTO = new InquiryDTO();
         inquiryDTO.setInquiry_title(input_title);
         inquiryDTO.setInquiry_content(input_content);

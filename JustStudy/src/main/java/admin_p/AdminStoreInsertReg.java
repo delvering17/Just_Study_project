@@ -26,7 +26,6 @@ public class AdminStoreInsertReg implements AdminService{
         String path = request.getRealPath("/img/branch");
         path = "C:\\Users\\whgml\\juststudy_git\\JustStudy\\src\\main\\webapp\\img\\branch";
 
-        //todo : 배포할땐 뒤에꺼 주석처리
 
         int size = 1024 * 1024 * 10;
 

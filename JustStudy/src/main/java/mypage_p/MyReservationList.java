@@ -103,12 +103,9 @@ public class MyReservationList implements MypageService{
                 if(reservationDTO.getUseDate().after(startDate) && reservationDTO.getUseDate().before(endDate)){
                     myPickList.add(reservationDTO);
                 }
-                System.out.println(myPickList.toString());
             }
         }
 
-        System.out.println(startDate);
-        System.out.println(endDate);
 
         if(request.getParameter("period")!=null && request.getParameter("period").equals("mypick")){
             request.setAttribute("myReservation", myPickList);

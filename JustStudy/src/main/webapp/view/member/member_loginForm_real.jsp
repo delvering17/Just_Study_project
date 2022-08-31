@@ -52,7 +52,7 @@
         <div class="btn-login">
             <%
                 String clientId = "SM6kP7n6zyadJ15rvs6z";//애플리케이션 클라이언트 아이디값";
-                String redirectURI = URLEncoder.encode("http://localhost:8080/JustStudy/member/NaverLogin", "UTF-8");
+                String redirectURI = URLEncoder.encode("http://delvering.cafe24.com/member/NaverLogin", "UTF-8");
                 SecureRandom random = new SecureRandom();
                 String state = new BigInteger(130, random).toString();
                 String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";

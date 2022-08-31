@@ -63,12 +63,16 @@
         padding: 5px 5px 5px 5px;
     }
 
-    .isReserv td{
+    .isReserv > td{
         border: 1px solid rgb(97, 88, 88);
         text-align: center;
         font-size: 13px;
         height: 30px;
         padding: 5px 5px 5px 5px;
+    }
+
+    .isReserv > td:last-of-type{
+        text-align: right;
     }
 
     .admin-sales-store-table tr:nth-of-type(2n) {

@@ -40,7 +40,7 @@ public class AdminReservationCancelReg implements AdminService{
         }
 
         MemberDTO memberDTO = new MemberDAO().detail(reservationDTO.getUserId());
-
+        goCancelEmail(memberDTO.getMem_userid(),  reservationDTO);
 
         request.setAttribute("msg", msg);
         request.setAttribute("adminUrl", "alert.jsp");

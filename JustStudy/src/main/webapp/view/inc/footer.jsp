@@ -59,7 +59,7 @@
         <button class="footer-link" data-bs-toggle="modal" data-bs-target="#email-ban">이메일무단수집거부</button>
         <button class="footer-link customer-service" data-bs-toggle="modal" data-bs-target="#customer-service">고객센터</button>
         <button class="footer-link-dev" data-bs-toggle="modal" data-bs-target="#developer">개발자정보</button>
-        <c:if test="${sessionScope.mem_level == 2}">
+        <c:if test="${sessionScope.level == 2}">
             <button class="footer-link-dev"><a class="btn-footer-admin" href="../admin/AdminPage" >관리자 페이지</a></button>
         </c:if>
 

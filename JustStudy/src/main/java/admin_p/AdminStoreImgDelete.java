@@ -53,6 +53,7 @@ public class AdminStoreImgDelete implements AdminService{
             branchDTO.setOpen(Integer.parseInt(mr.getParameter("open")));
             branchDTO.setClose(Integer.parseInt(mr.getParameter("close")));
             branchDTO.setAddress(mr.getParameter("address"));
+            branchDTO.setAddressDetail(mr.getParameter("addressDetail"));
             branchDTO.setPhone(mr.getParameter("phone"));
             branchDTO.setImg(mr.getParameter("img"));
             branchDTO.setFacilities((mr.getParameterValues("facilities") != null ? String.join(",", mr.getParameterValues("facilities")) : null));

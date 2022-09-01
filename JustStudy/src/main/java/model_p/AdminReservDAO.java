@@ -368,6 +368,71 @@ public class AdminReservDAO {
         return null;
     }
 
+    public ArrayList<AdminReservDTO> salesStoreList2(String city, String branch, String period, java.util.Date startDate, Date endDate, String filter, String word){
+
+        ArrayList<AdminReservDTO> res = new ArrayList<AdminReservDTO>();
+
+        sql = "select id, orderId, resDate, ifnull(member.mem_userid, '회원정보없음') AS mem_userid, IFNULL(member.mem_nickname, '회원정보없음') " +
+                "AS mem_nickname, ifnull(member.mem_realname, '회원정보없음') AS mem_realname, reservation.city, " +
+                "reservation.branch, reservation.room, reservation.useDate, " +
+                "reservation.time, reservation.pay, reservation.headcount, reservation.status from reservation left outer join member on " +
+                "reservation.userId = member.mem_id where city = ? and branch = ?";
+
+        if(period!=null) {
+            sql += " and useDate >= ? and useDate < ?";
+        }
+
+        if(filter!=null){
+            sql += " and "+filter+" like ?";
+        }
+
+        try {
+            ptmt = con.prepareStatement(sql);
+            ptmt.setString(1, city);
+            ptmt.setString(2, branch);
+
+            if(period!=null){
+                ptmt.setDate(3, new java.sql.Date(startDate.getTime()));
+                ptmt.setDate(4, new java.sql.Date(endDate.getTime()));
+            }
+
+            if(period == null & filter!=null){
+                ptmt.setString(3,"%"+word+"%");
+            } else if(period != null & filter!=null){
+                ptmt.setString(5,"%"+word+"%");
+            }
+
+            rs = ptmt.executeQuery();
+            while(rs.next()){
+                AdminReservDTO adminReservDTO = new AdminReservDTO();
+                adminReservDTO.setId(rs.getInt("id"));
+                adminReservDTO.setOrderId(rs.getString("orderId"));
+                adminReservDTO.setResDate(rs.getDate("resDate"));
+                adminReservDTO.setMem_userid(rs.getString("mem_userid"));
+                adminReservDTO.setMem_realname(rs.getString("mem_realname"));
+                adminReservDTO.setMem_nickname(rs.getString("mem_nickname"));
+                adminReservDTO.setCity(rs.getString("city"));
+                adminReservDTO.setBranch(rs.getString("branch"));
+                adminReservDTO.setRoom(rs.getString("room"));
+                adminReservDTO.setUseDate(rs.getDate("useDate"));
+                adminReservDTO.setUseDate(rs.getDate("useDate"));
+                adminReservDTO.setTime(rs.getString("time"));
+                adminReservDTO.setHeadcount(rs.getInt("headcount"));
+                adminReservDTO.setPay(rs.getInt("pay"));
+                adminReservDTO.setStatus(rs.getString("status"));
+
+                res.add(adminReservDTO);
+            }
+
+            return res;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+
+        return null;
+    }
 
         public void close() {
         if (rs != null) try {rs.close();} catch (SQLException e) {}

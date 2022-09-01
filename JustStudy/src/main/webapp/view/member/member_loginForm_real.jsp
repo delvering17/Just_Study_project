@@ -26,7 +26,7 @@
     }
 
     .wrapper-login {
-        height: 528px;
+        min-height: 700px;
         background: #F5F5F5;
         position: relative;
     }

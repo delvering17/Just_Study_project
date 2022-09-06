@@ -1,3 +1,4 @@
+<%@ page import="model_p.APIKeyDAO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -16,7 +17,7 @@
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript">
 
-    var naver_id_login = new naver_id_login("NU3G77c1797Ux_A_cJgG", "");
+    var naver_id_login = new naver_id_login(<%=new APIKeyDAO().findKeybyName("naver_client_id")%>, "");
     // 접근 토큰 값 출력
     // alert(naver_id_login.oauthParams.access_token);
     // 네이버 사용자 프로필 조회

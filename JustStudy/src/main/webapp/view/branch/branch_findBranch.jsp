@@ -1,6 +1,7 @@
 <%@ page import="model_p.BranchDTO" %>
 <%@ page import="model_p.BranchDAO" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="model_p.APIKeyDAO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -123,7 +124,7 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	3c5da3fc6108feaa82c28a0b561cdb3e&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<%=new APIKeyDAO().findKeybyName("kakao_js_key")%>&libraries=services"></script>
 <script type="text/javascript">
 
     function goBranchInfo(i) {

@@ -1,6 +1,7 @@
 <%@ page import="java.net.URLEncoder" %>
 <%@ page import="java.security.SecureRandom" %>
 <%@ page import="java.math.BigInteger" %>
+<%@ page import="model_p.APIKeyDAO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -46,7 +47,7 @@
             </div>
             <div class="btn-login">
                 <%
-                    String clientId = "SM6kP7n6zyadJ15rvs6z";//애플리케이션 클라이언트 아이디값";
+                    String clientId = new APIKeyDAO().findKeybyName("naver_client_id");//애플리케이션 클라이언트 아이디값";
                     String redirectURI = URLEncoder.encode("http://localhost:8080/JustStudy/member/NaverLogin", "UTF-8");
                     SecureRandom random = new SecureRandom();
                     String state = new BigInteger(130, random).toString();
@@ -95,8 +96,8 @@
         })
     }
 
-    Kakao.init('ff02c77cc518953296a556a4691cd2f8'); //발급받은 키 중 javascript키를 사용해준다.
-    console.log(Kakao.isInitialized()); // sdk초기화여부판단
+    Kakao.init('<%=new APIKeyDAO().findKeybyName("kakao_js_key")%>'); //발급받은 키 중 javascript키를 사용해준다.
+
     //카카오로그인1
     function kakaoLogin() {
 

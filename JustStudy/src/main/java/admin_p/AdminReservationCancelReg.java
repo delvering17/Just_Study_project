@@ -1,9 +1,6 @@
 package admin_p;
 
-import model_p.MemberDAO;
-import model_p.MemberDTO;
-import model_p.ReservationDAO;
-import model_p.ReservationDTO;
+import model_p.*;
 import reservation_p.iamport.IamportCancel;
 
 import javax.mail.*;

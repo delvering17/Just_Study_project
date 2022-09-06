@@ -6,7 +6,8 @@
 <%@ page import="java.util.Calendar" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="model_p.MemberDTO" %>
-<%@ page import="java.text.SimpleDateFormat" %><%--
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="model_p.APIKeyDAO" %><%--
   Created by IntelliJ IDEA.
   User: dieun
   Date: 2022-08-11
@@ -1124,7 +1125,7 @@
         $("#studyroom-reserv-receipt .modal-body > button:nth-of-type(1)").click(function (){
 
             if($(".personalInfo").is(':checked')){
-                IMP.init('imp02841035');
+                IMP.init('<%=new APIKeyDAO().findKeybyName("import_discrimination")%>');
                 IMP.request_pay({
                     pg : document.querySelector('input[type=radio][name=paymentMethod]:checked').getAttribute("value"),
                     pay_method : 'card',

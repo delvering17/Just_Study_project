@@ -7,6 +7,7 @@
 <%@ page import="java.util.HashMap" %>
 <%@ page import="org.json.simple.JSONObject" %>
 <%@ page import="org.json.simple.parser.JSONParser" %>
+<%@ page import="model_p.APIKeyDAO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -21,8 +22,8 @@
     // goNaverLogin()
     // https://developers.naver.com/docs/login/profile/profile.md
     <%
-      String clientId = "NU3G77c1797Ux_A_cJgG";//애플리케이션 클라이언트 아이디값";
-      String clientSecret = "4QJBOslMRG";//애플리케이션 클라이언트 시크릿값";
+      String clientId = new APIKeyDAO().findKeybyName("naver_client_id");//애플리케이션 클라이언트 아이디값";
+      String clientSecret = new APIKeyDAO().findKeybyName("naver_client_secret");//애플리케이션 클라이언트 시크릿값";
       String code = request.getParameter("code");
       String state = request.getParameter("state");
       String redirectURI = URLEncoder.encode("http://juststudy1234.cafe24.com", "UTF-8");

@@ -1,6 +1,7 @@
 package reservation_p.iamport;
 
 
+import model_p.APIKeyDAO;
 import org.junit.Before;
 import org.junit.Test;
 import reservation_p.exception.IamportResponseException;
@@ -21,8 +22,9 @@ public class IamportCancel {
 
     @Before
     public void setup() {
-        String test_api_key = "5575207425720633";
-        String test_api_secret = "MS4qNv47HLCTCKCaggBzq6hgknc3EnVKwqYshagLJX5j3KNc3IHDhns8OoTSbqus6SodAX7CdqqQZ0TW";
+        String test_api_key = new APIKeyDAO().findKeybyName("import_key");
+        String test_api_secret = new APIKeyDAO().findKeybyName("import_secret");
+
         client = new IamportClient(test_api_key, test_api_secret);
     }
 
